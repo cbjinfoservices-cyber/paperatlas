@@ -1,4 +1,5 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { getMailConfig, sendMailMessage } from '../_shared/mail.ts';
 
 const CORS = {
   'Access-Control-Allow-Origin': '*',
@@ -239,9 +240,8 @@ Deno.serve(async (req) => {
   }
   if (!to) return reply({ code: 'OK', sent: false, reason: 'no-recipient' });
 
-  const apiKey = Deno.env.get('RESEND_API_KEY') ?? '';
-  const domain = (Deno.env.get('RESEND_FROM_DOMAIN') ?? '').trim().replace(/^@/, '');
-  if (!apiKey || !domain) return reply({ code: 'OK', sent: false, reason: 'email-not-configured' });
+  const mailCfg = getMailConfig();
+  if (!mailCfg.apiKey || !mailCfg.fromEmail) return reply({ code: 'OK', sent: false, reason: 'email-not-configured' });
 
   const site = (Deno.env.get('SITE_URL') ?? '').replace(/\/+$/, '');
   const copy = COPY[lang];
@@ -337,21 +337,16 @@ Deno.serve(async (req) => {
   ].filter(Boolean);
   const text = [`${copy.hello}${comma}`, '', ...corps].join('\n');
 
-  const response = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      from: `PaperAtlas <noreply@${domain}>`,
-      to: [to],
-      reply_to: candidature.candidat_email || undefined,
-      subject,
-      html,
-      text,
-    }),
+  const mailRes = await sendMailMessage({
+    to,
+    replyTo: candidature.candidat_email || undefined,
+    subject,
+    html,
+    text,
   });
 
-  if (!response.ok) {
-    const detail = await response.text();
+  if (!mailRes.ok) {
+    const detail = mailRes.detail ?? 'unknown';
     return reply({ code: 'EmailError', sent: false, message: detail.slice(0, 400) }, 502);
   }
 

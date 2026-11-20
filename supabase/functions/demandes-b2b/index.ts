@@ -1,4 +1,5 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { getMailConfig, sendMailMessage } from '../_shared/mail.ts';
 
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') || '';
 const ANON_KEY = Deno.env.get('SUPABASE_ANON_KEY') || '';
@@ -228,9 +229,8 @@ async function notifyWorkshops(
   who: Requester,
   pieces: Array<{ label: string; url: string }> = [],
 ): Promise<number> {
-  const apiKey = Deno.env.get('RESEND_API_KEY') ?? '';
-  const domain = (Deno.env.get('RESEND_FROM_DOMAIN') ?? '').trim();
-  if (!apiKey || !domain) return 0;
+  const mailCfg = getMailConfig();
+  if (!mailCfg.apiKey || !mailCfg.fromEmail) return 0;
 
   const destIds = Array.from(new Set(rows.map((row) => row.dest_id))).filter(Boolean);
   if (destIds.length === 0) return 0;
@@ -337,20 +337,14 @@ async function notifyWorkshops(
     .map(async (row) => {
       const to = inbox.get(row.dest_id) as string;
       const destName = String(row.dest_name ?? 'votre atelier');
-      const response = await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          from: `PaperAtlas <noreply@${domain}>`,
-          to: [to],
-          reply_to: who.email || undefined,
-          subject: `${tender ? 'Nouveau marché public' : 'Nouvelle demande B2B'} · ${destName} · ${ref}`,
-          html: buildHtml(destName),
-          text: buildText(destName),
-        }),
+      const res = await sendMailMessage({
+        to,
+        replyTo: who.email || undefined,
+        subject: `${tender ? 'Nouveau marché public' : 'Nouvelle demande B2B'} · ${destName} · ${ref}`,
+        html: buildHtml(destName),
+        text: buildText(destName),
       });
-      if (!response.ok) await response.text();
-      return response.ok;
+      return res.ok;
     });
 
   const settled = await Promise.allSettled(sends);
@@ -532,9 +526,8 @@ async function confirmRequester(
   who: Requester,
   pieces: Array<{ kind?: string; label: string; url: string }> = [],
 ): Promise<boolean> {
-  const apiKey = Deno.env.get('RESEND_API_KEY') ?? '';
-  const domain = (Deno.env.get('RESEND_FROM_DOMAIN') ?? '').trim();
-  if (!apiKey || !domain || !who.email) return false;
+  const mailCfg = getMailConfig();
+  if (!mailCfg.apiKey || !mailCfg.fromEmail || !who.email) return false;
 
   const workshops = rows.map((row) => String(row.dest_name ?? '')).filter(Boolean);
   const site = (Deno.env.get('SITE_URL') ?? '').replace(/\/+$/, '');
@@ -678,23 +671,13 @@ async function confirmRequester(
     .filter((line) => line !== '')
     .join('\n');
 
-  try {
-    const response = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        from: `PaperAtlas <noreply@${domain}>`,
-        to: [who.email],
-        subject: `${tender ? copy.subjectTender : copy.subjectRequest} · ${ref}`,
-        html,
-        text,
-      }),
-    });
-    if (!response.ok) await response.text();
-    return response.ok;
-  } catch {
-    return false;
-  }
+  const res = await sendMailMessage({
+    to: who.email,
+    subject: `${tender ? copy.subjectTender : copy.subjectRequest} · ${ref}`,
+    html,
+    text,
+  });
+  return res.ok;
 }
 
 /**

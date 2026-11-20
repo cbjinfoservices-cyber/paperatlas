@@ -1,4 +1,5 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { getMailConfig, sendMailMessage } from '../_shared/mail.ts';
 
 const CORS = {
   'Access-Control-Allow-Origin': '*',
@@ -111,12 +112,9 @@ Deno.serve(async (req) => {
   }
   if (!to) return reply({ code: 'OK', sent: false, reason: 'no-recipient' });
 
-  const apiKey = Deno.env.get('RESEND_API_KEY') ?? '';
-  const domain = (Deno.env.get('RESEND_FROM_DOMAIN') ?? '').trim().replace(/^@/, '');
-  if (!apiKey || !domain) return reply({ code: 'OK', sent: false, reason: 'email-not-configured' });
-  /* Une réponse à la confirmation ne doit pas se perdre : l'adresse de réponse
-     est posée à côté de l'expéditeur PaperAtlas, quand elle est configurée. */
-  const replyTo = (Deno.env.get('RESEND_REPLY_TO') ?? '').trim();
+  const mailCfg = getMailConfig();
+  if (!mailCfg.apiKey || !mailCfg.fromEmail) return reply({ code: 'OK', sent: false, reason: 'email-not-configured' });
+  const replyTo = mailCfg.replyTo;
 
   const site = (Deno.env.get('SITE_URL') ?? '').replace(/\/+$/, '');
   const word = WORDING[statut as Statut];
@@ -158,21 +156,16 @@ Deno.serve(async (req) => {
     site ? `${word.cta} : ${site}/compte#mes-candidatures` : '',
   ].filter(Boolean).join('\n');
 
-  const response = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      from: `PaperAtlas <noreply@${domain}>`,
-      to: [to],
-      ...(replyTo ? { reply_to: replyTo } : {}),
-      subject: `${word.subject} · ${candidature.offre_titre}`,
-      html,
-      text,
-    }),
+  const mailRes = await sendMailMessage({
+    to,
+    replyTo: replyTo || undefined,
+    subject: `${word.subject} · ${candidature.offre_titre}`,
+    html,
+    text,
   });
 
-  if (!response.ok) {
-    const detail = await response.text();
+  if (!mailRes.ok) {
+    const detail = mailRes.detail ?? 'unknown';
     return reply({ code: 'EmailError', sent: false, message: detail.slice(0, 400) }, 502);
   }
 

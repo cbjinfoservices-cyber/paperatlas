@@ -1,4 +1,5 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { getMailConfig, sendMailMessage, verifySenderDomain } from '../_shared/mail.ts';
 
 const CORS = {
   'Access-Control-Allow-Origin': '*',
@@ -29,16 +30,16 @@ const escapeHtml = (value: string) =>
     .replace(/"/g, '&quot;');
 
 const siteUrl = () => (Deno.env.get('SITE_URL') ?? '').replace(/\/+$/, '');
-const apiKey = () => (Deno.env.get('RESEND_API_KEY') ?? '').trim();
-const domain = () => (Deno.env.get('RESEND_FROM_DOMAIN') ?? '').trim().replace(/^@/, '');
+const apiKey = () => getMailConfig().apiKey;
+const domain = () => getMailConfig().domain;
 /** L'adresse de réponse, quand elle est posée séparément : les confirmations
  *  partent au nom de PaperAtlas, mais une réponse humaine atterrit dans la
  *  bonne boîte. */
-const replyTo = () => (Deno.env.get('RESEND_REPLY_TO') ?? '').trim();
+const replyTo = () => getMailConfig().replyTo;
 
 /** L'expéditeur commun à toutes les fonctions du site : le même nom, la même
  *  adresse, quelle que soit la confirmation envoyée. */
-const expediteur = () => (domain() ? `PaperAtlas <noreply@${domain()}>` : '');
+const expediteur = () => getMailConfig().fromHeader;
 
 type Body = Record<string, unknown>;
 
@@ -108,30 +109,16 @@ Deno.serve(async (req) => {
         depuis la console d’administration.</p>
     </div>`;
 
-    try {
-      const response = await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${apiKey()}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          from: expediteur(),
-          to: [to],
-          ...(replyTo() ? { reply_to: replyTo() } : {}),
-          subject,
-          html,
-          text: `PaperAtlas peut écrire depuis ${expediteur()}. Ce message confirme que le domaine d’envoi est vérifié.`,
-        }),
-      });
-      if (!response.ok) {
-        const detail = await response.text();
-        return json({ ok: true, sent: false, to, message: detail.slice(0, 300) });
-      }
-      return json({ ok: true, sent: true, to });
-    } catch (err) {
-      return json(
-        { ok: true, sent: false, to, message: err instanceof Error ? err.message : 'unknown' },
-        200,
-      );
+    const res = await sendMailMessage({
+      to,
+      subject,
+      html,
+      text: `PaperAtlas peut écrire depuis ${expediteur()}. Ce message confirme que le domaine d’envoi est vérifié.`,
+    });
+    if (!res.ok) {
+      return json({ ok: true, sent: false, to, message: (res.detail ?? 'unknown').slice(0, 300) });
     }
+    return json({ ok: true, sent: true, to });
   }
 
   /* Le test des e-mails d'authentification.
@@ -228,101 +215,40 @@ Deno.serve(async (req) => {
       .filter((line) => line !== '')
       .join('\n');
 
-    try {
-      const response = await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${apiKey()}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          from: expediteur(),
-          to: [to],
-          ...(replyTo() ? { reply_to: replyTo() } : {}),
-          subject,
-          html,
-          text,
-        }),
-      });
-      if (!response.ok) {
-        const detail = await response.text();
-        return json({ ok: true, sent: false, to, message: detail.slice(0, 300) });
-      }
-      return json({ ok: true, sent: true, to });
-    } catch (err) {
-      return json(
-        { ok: true, sent: false, to, message: err instanceof Error ? err.message : 'unknown' },
-        200,
-      );
+    const res = await sendMailMessage({
+      to,
+      subject,
+      html,
+      text,
+    });
+    if (!res.ok) {
+      return json({ ok: true, sent: false, to, message: (res.detail ?? 'unknown').slice(0, 300) });
     }
+    return json({ ok: true, sent: true, to });
   }
 
-  /* La vérification du domaine d'envoi, demandée à Resend lui-même.
-   *
-   * Jusqu'ici la console ne savait dire qu'une chose : un domaine est écrit
-   * dans les secrets. Ce n'est pas la même chose qu'un domaine vérifié. Ici
-   * on interroge la liste des domaines du compte Resend et on lit l'état de
-   * celui que les envois utilisent : c'est la seule réponse qui engage.
-   */
+  /* La vérification du domaine d'envoi, demandée au fournisseur (Brevo ou Resend). */
   if (action === 'verifier') {
-    if (!apiKey()) {
-      return json({ ok: true, checked: false, reason: 'no-key', domain: domain() });
-    }
-    if (!domain()) {
-      return json({ ok: true, checked: false, reason: 'no-domain', domain: '' });
-    }
-    try {
-      const response = await fetch('https://api.resend.com/domains', {
-        method: 'GET',
-        headers: { Authorization: `Bearer ${apiKey()}` },
-      });
-      if (!response.ok) {
-        const detail = await response.text();
-        /* Une clé limitée à l'envoi ne peut pas lister les domaines : c'est un
-           fait à dire, pas une panne de Resend. */
-        const portee = response.status === 401 || response.status === 403;
-        return json({
-          ok: true,
-          checked: false,
-          reason: portee ? 'key-scope' : 'api',
-          domain: domain(),
-          message: detail.slice(0, 300),
-        });
-      }
-      const payload = (await response.json()) as {
-        data?: Array<{ name?: string; status?: string; region?: string }>;
-      };
-      const wanted = domain().toLowerCase();
-      const trouve = (payload.data ?? []).find(
-        (row) => (row.name ?? '').trim().toLowerCase() === wanted,
-      );
-      if (!trouve) {
-        return json({
-          ok: true,
-          checked: true,
-          found: false,
-          verified: false,
-          domain: domain(),
-          status: 'absent',
-        });
-      }
-      const etat = String(trouve.status ?? '').toLowerCase();
-      return json({
-        ok: true,
-        checked: true,
-        found: true,
-        verified: etat === 'verified',
-        domain: domain(),
-        status: etat || 'unknown',
-        region: trouve.region ?? '',
-        checkedAt: new Date().toISOString(),
-      });
-    } catch (err) {
+    const check = await verifySenderDomain();
+    if (!check.checked) {
       return json({
         ok: true,
         checked: false,
-        reason: 'network',
-        domain: domain(),
-        message: err instanceof Error ? err.message : 'unknown',
+        reason: check.reason ?? 'api',
+        domain: check.domain,
+        ...(check.message ? { message: check.message } : {}),
       });
     }
+    return json({
+      ok: true,
+      checked: true,
+      found: check.found,
+      verified: check.verified,
+      domain: check.domain,
+      status: check.status,
+      ...(check.region ? { region: check.region } : {}),
+      checkedAt: new Date().toISOString(),
+    });
   }
 
   return json({ error: 'unknown-action' }, 400);

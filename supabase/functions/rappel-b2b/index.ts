@@ -1,4 +1,5 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { getMailConfig, sendMailMessage } from '../_shared/mail.ts';
 
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') || '';
 const SERVICE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || '';
@@ -132,9 +133,8 @@ Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: CORS });
   if (req.method !== 'POST') return json({ error: 'method' }, 405);
 
-  const apiKey = Deno.env.get('RESEND_API_KEY') ?? '';
-  const domain = (Deno.env.get('RESEND_FROM_DOMAIN') ?? '').trim();
-  if (!apiKey || !domain) return json({ ok: true, skipped: 'no-mail-config' });
+  const mailCfg = getMailConfig();
+  if (!mailCfg.apiKey || !mailCfg.fromEmail) return json({ ok: true, skipped: 'no-mail-config' });
 
   const admin = createClient(SUPABASE_URL, SERVICE_KEY);
   const cutoff = new Date(Date.now() - DELAY_HOURS * 3600 * 1000).toISOString();
@@ -226,27 +226,20 @@ Deno.serve(async (req) => {
     }
 
     const name = String(list[0].dest_name ?? 'votre atelier');
-    try {
-      const response = await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          from: `PaperAtlas <noreply@${domain}>`,
-          to: [to],
-          subject:
-            list.length === 1
-              ? `Rappel · demande B2B en attente · ${list[0].reference}`
-              : `Rappel · ${list.length} demandes B2B en attente`,
-          html: buildHtml(name, list, accountLink),
-          text: buildText(name, list, accountLink),
-        }),
-      });
-      if (response.ok) sent += 1;
-      else await response.text();
-    } catch {
+    const res = await sendMailMessage({
+      to,
+      subject:
+        list.length === 1
+          ? `Rappel · demande B2B en attente · ${list[0].reference}`
+          : `Rappel · ${list.length} demandes B2B en attente`,
+      html: buildHtml(name, list, accountLink),
+      text: buildText(name, list, accountLink),
+    });
+    if (!res.ok && res.detail === 'network') {
       /* Network hiccup: leave the rows unstamped so the next run retries them. */
       continue;
     }
+    if (res.ok) sent += 1;
     await stamp(ids);
   }
 

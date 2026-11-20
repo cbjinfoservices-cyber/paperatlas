@@ -1,4 +1,5 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { getMailConfig, sendMailMessage } from '../_shared/mail.ts';
 
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') || '';
 const ANON_KEY = Deno.env.get('SUPABASE_ANON_KEY') || '';
@@ -534,57 +535,35 @@ function buildStatutEmail(quote: Quote, siteUrl: string, statut: StatutMail) {
 }
 
 async function sendMail(quote: Quote, kind: MailKind): Promise<boolean> {
-  const apiKey = Deno.env.get('RESEND_API_KEY') ?? '';
-  const domain = (Deno.env.get('RESEND_FROM_DOMAIN') ?? '').trim();
-  if (!apiKey || !domain || !quote.email) return false;
+  const mailCfg = getMailConfig();
+  if (!mailCfg.apiKey || !mailCfg.fromEmail || !quote.email) return false;
 
   const site = (Deno.env.get('SITE_URL') ?? '').replace(/\/+$/, '');
   const mail = buildEmail(quote, site, kind);
 
-  try {
-    const response = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        from: `PaperAtlas <noreply@${domain}>`,
-        to: [quote.email],
-        subject: mail.subject,
-        html: mail.html,
-        text: mail.text,
-      }),
-    });
-    if (!response.ok) await response.text();
-    return response.ok;
-  } catch {
-    return false;
-  }
+  const res = await sendMailMessage({
+    to: quote.email,
+    subject: mail.subject,
+    html: mail.html,
+    text: mail.text,
+  });
+  return res.ok;
 }
 
 async function sendStatutMail(quote: Quote, statut: StatutMail): Promise<boolean> {
-  const apiKey = Deno.env.get('RESEND_API_KEY') ?? '';
-  const domain = (Deno.env.get('RESEND_FROM_DOMAIN') ?? '').trim();
-  if (!apiKey || !domain || !quote.email) return false;
+  const mailCfg = getMailConfig();
+  if (!mailCfg.apiKey || !mailCfg.fromEmail || !quote.email) return false;
 
   const site = (Deno.env.get('SITE_URL') ?? '').replace(/\/+$/, '');
   const mail = buildStatutEmail(quote, site, statut);
 
-  try {
-    const response = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        from: `PaperAtlas <noreply@${domain}>`,
-        to: [quote.email],
-        subject: mail.subject,
-        html: mail.html,
-        text: mail.text,
-      }),
-    });
-    if (!response.ok) await response.text();
-    return response.ok;
-  } catch {
-    return false;
-  }
+  const res = await sendMailMessage({
+    to: quote.email,
+    subject: mail.subject,
+    html: mail.html,
+    text: mail.text,
+  });
+  return res.ok;
 }
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -595,9 +574,8 @@ const DAY = 24 * 60 * 60 * 1000;
  * ten dossiers, instead of ten messages for one reader.
  */
 async function sendBulkMail(rows: Row[], to: string): Promise<boolean> {
-  const apiKey = Deno.env.get('RESEND_API_KEY') ?? '';
-  const domain = (Deno.env.get('RESEND_FROM_DOMAIN') ?? '').trim();
-  if (!apiKey || !domain || !to || !rows.length) return false;
+  const mailCfg = getMailConfig();
+  if (!mailCfg.apiKey || !mailCfg.fromEmail || !to || !rows.length) return false;
 
   const site = (Deno.env.get('SITE_URL') ?? '').replace(/\/+$/, '');
   const lang = LANG_OF(rows[0]?.lang);
@@ -690,23 +668,13 @@ async function sendBulkMail(rows: Row[], to: string): Promise<boolean> {
     lang === 'fr' ? 'dossiers' : lang === 'ar' ? 'ملفات' : 'files'
   }`;
 
-  try {
-    const response = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        from: `PaperAtlas <noreply@${domain}>`,
-        to: [to],
-        subject,
-        html,
-        text,
-      }),
-    });
-    if (!response.ok) await response.text();
-    return response.ok;
-  } catch {
-    return false;
-  }
+  const res = await sendMailMessage({
+    to,
+    subject,
+    html,
+    text,
+  });
+  return res.ok;
 }
 
 async function callerOf(req: Request) {

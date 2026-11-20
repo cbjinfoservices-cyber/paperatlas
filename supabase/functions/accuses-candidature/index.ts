@@ -1,4 +1,5 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { verifySenderDomain } from '../_shared/mail.ts';
 
 const CORS = {
   'Access-Control-Allow-Origin': '*',
@@ -70,49 +71,16 @@ async function callerEmail(req: Request): Promise<string | null> {
  * peut partir tant que ce domaine n'est pas vérifié.
  */
 async function etatEnvoi() {
-  const key = (Deno.env.get('RESEND_API_KEY') ?? '').trim();
-  const domaine = (Deno.env.get('RESEND_FROM_DOMAIN') ?? '').trim().replace(/^@/, '');
-  const base = {
-    configured: Boolean(key && domaine),
-    key: Boolean(key),
-    domain: domaine,
-    checked: false,
-    found: false,
-    verified: false,
-    status: '',
+  const check = await verifySenderDomain();
+  return {
+    configured: check.configured,
+    key: check.key,
+    domain: check.domain,
+    checked: check.checked,
+    found: check.found,
+    verified: check.verified,
+    status: check.status,
   };
-  if (!key || !domaine) return base;
-
-  try {
-    const response = await fetch('https://api.resend.com/domains', {
-      method: 'GET',
-      headers: { Authorization: `Bearer ${key}` },
-    });
-    if (!response.ok) {
-      return {
-        ...base,
-        status: response.status === 401 || response.status === 403 ? 'key-scope' : 'api',
-      };
-    }
-    const payload = (await response.json()) as {
-      data?: Array<{ name?: string; status?: string }>;
-    };
-    const wanted = domaine.toLowerCase();
-    const trouve = (payload.data ?? []).find(
-      (row) => (row.name ?? '').trim().toLowerCase() === wanted,
-    );
-    if (!trouve) return { ...base, checked: true, status: 'absent' };
-    const etat = String(trouve.status ?? '').toLowerCase();
-    return {
-      ...base,
-      checked: true,
-      found: true,
-      verified: etat === 'verified',
-      status: etat || 'unknown',
-    };
-  } catch {
-    return { ...base, status: 'network' };
-  }
 }
 
 /** Le début du jour courant, en UTC : les trois compteurs se lisent sur la
