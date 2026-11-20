@@ -25,7 +25,7 @@ export type Annonce = {
 
 export const annonceCats: AnnonceCat[] = ['materiel', 'papier', 'service', 'recherche'];
 
-export const annonces: Annonce[] = [
+const demoAnnonces: Annonce[] = [
   {
     id: 'ann-001',
     cat: 'materiel',
@@ -411,3 +411,6 @@ export const annonces: Annonce[] = [
     ],
   },
 ];
+
+/* Données de démonstration : développement seulement (voir ./demo.ts). */
+export const annonces: Annonce[] = import.meta.env.DEV ? demoAnnonces : [];

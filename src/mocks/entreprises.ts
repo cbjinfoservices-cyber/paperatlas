@@ -61,7 +61,11 @@ export type Etablissement = {
 
 export const trades: Trade[] = ['impression', 'edition', 'librairie', 'faconnage', 'communication', 'fournisseurs', 'bibliotheque', 'ecrivain'];
 
-export const entreprises: Entreprise[] = [...printing, ...editing, ...studios, ...marchesEntreprises, ...reading];
+/* Les fiches de démonstration n'existent qu'en développement (voir ./demo.ts) :
+   en production, l'annuaire ne montre que des fiches réellement inscrites. */
+export const entreprises: Entreprise[] = import.meta.env.DEV
+  ? [...printing, ...editing, ...studios, ...marchesEntreprises, ...reading]
+  : [];
 
 export const wilayas: string[] = Array.from(new Set(entreprises.map((e) => e.wilaya))).sort((a, b) => a.localeCompare(b, 'fr'));
 

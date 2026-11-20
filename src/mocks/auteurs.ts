@@ -43,7 +43,7 @@ export type Auteur = {
 
 export const genres: Genre[] = ['roman', 'poesie', 'essai', 'jeunesse', 'traduction', 'theatre', 'histoire'];
 
-export const auteurs: Auteur[] = [
+const demoAuteurs: Auteur[] = [
   {
     id: 'nadia-bensalem',
     name: 'Nadia Bensalem',
@@ -274,3 +274,6 @@ export const auteurs: Auteur[] = [
   },
   ...marchesAuteurs,
 ];
+
+/* Données de démonstration : développement seulement (voir ./demo.ts). */
+export const auteurs: Auteur[] = import.meta.env.DEV ? demoAuteurs : [];

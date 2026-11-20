@@ -23,7 +23,7 @@ export type Emploi = {
 
 export const contracts: Contract[] = ['cdi', 'cdd', 'stage', 'freelance'];
 
-export const emplois: Emploi[] = [
+const demoEmplois: Emploi[] = [
   {
     id: 'job-001',
     title: {
@@ -343,3 +343,6 @@ export const emplois: Emploi[] = [
     contact: 'studio@kairouan-design.tn',
   },
 ];
+
+/* Données de démonstration : développement seulement (voir ./demo.ts). */
+export const emplois: Emploi[] = import.meta.env.DEV ? demoEmplois : [];

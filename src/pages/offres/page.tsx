@@ -13,6 +13,7 @@ import WorldRecall from '@/components/feature/WorldRecall';
 import PoseRestante from '@/components/feature/PoseRestante';
 import DernierDevis from './components/DernierDevis';
 import Testimonials from './components/Testimonials';
+import { DEMO_DATA } from '@/mocks/demo';
 import { faqItems } from './components/plans';
 
 /* Le formulaire de contact vit sur l'accueil, à l'ancre « contact ». On y
@@ -150,18 +151,20 @@ export default function Offres() {
             </div>
             <CompareTable />
 
-            <div className="of-voices-block">
-              <div className="of-voices-head">
-                <p className="stamp">{t('oft.stamp')}</p>
-                <h3 className="of-voices-title">{t('oft.title')}</h3>
-                <p className="of-sec-sub">{t('oft.sub')}</p>
+            {DEMO_DATA && (
+              <div className="of-voices-block">
+                <div className="of-voices-head">
+                  <p className="stamp">{t('oft.stamp')}</p>
+                  <h3 className="of-voices-title">{t('oft.title')}</h3>
+                  <p className="of-sec-sub">{t('oft.sub')}</p>
+                </div>
+                <Testimonials />
+                <p className="of-voices-note">
+                  <i className="ri-information-line" aria-hidden="true"></i>
+                  <span>{t('oft.note')}</span>
+                </p>
               </div>
-              <Testimonials />
-              <p className="of-voices-note">
-                <i className="ri-information-line" aria-hidden="true"></i>
-                <span>{t('oft.note')}</span>
-              </p>
-            </div>
+            )}
           </div>
 
           <div className="of-sec">

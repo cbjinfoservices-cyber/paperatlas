@@ -11,7 +11,7 @@ export type EmploiDetail = {
   profile: Local;
 };
 
-export const emploiDetails: Record<string, EmploiDetail> = {
+const demoEmploiDetails: Record<string, EmploiDetail> = {
   'job-001': {
     ref: 'EMP-2026-1101',
     validThrough: '2026-12-15',
@@ -265,3 +265,6 @@ export const emploiDetails: Record<string, EmploiDetail> = {
     },
   },
 };
+
+/* Données de démonstration : développement seulement (voir ./demo.ts). */
+export const emploiDetails: Record<string, EmploiDetail> = import.meta.env.DEV ? demoEmploiDetails : {};

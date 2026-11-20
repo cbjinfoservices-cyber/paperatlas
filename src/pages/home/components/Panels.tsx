@@ -5,6 +5,7 @@ import MarchesChips from '@/components/feature/MarchesChips';
 import LatestBoard from './LatestBoard';
 import PlanCards from '@/pages/offres/components/PlanCards';
 import HomeVoices from '@/pages/offres/components/HomeVoices';
+import { DEMO_DATA } from '@/mocks/demo';
 import FaqTarifs from '@/pages/offres/components/FaqTarifs';
 
 export default function Panels() {
@@ -84,7 +85,7 @@ export default function Panels() {
           <h2 data-reveal dangerouslySetInnerHTML={{ __html: t('off.title') }} />
           <p className="sub" data-reveal>{t('ofp.lede')}</p>
           <PlanCards compact />
-          <HomeVoices />
+          {DEMO_DATA && <HomeVoices />}
           <div className="of-home-faq" data-reveal>
             <div className="of-home-faq-head">
               <h3>{t('ofp.faqTitle')}</h3>
