@@ -299,6 +299,10 @@
   .nav-links { gap: 0; }
 }
 @media (max-width: 1023px) { .nav-links, .nav-cta { display: none; } .nav-burger { display: flex; } }
+/* Sans le rang des portes, la barre n'a plus que deux colonnes : la marque et le
+   bloc de droite. Avec trois colonnes, ce bloc retombait dans celle du milieu et
+   recouvrait la marque. */
+@media (max-width: 1023px) { .nav { grid-template-columns: minmax(0, 1fr) auto; } .nav > .nav-logo { justify-self: stretch; } }
 /* « Devenir candidat »: the candidate door sits in the bar for visitors only —
    outlined, so it never competes with the main call to action. */
 .nav-cand { display: inline-flex; align-items: center; gap: 7px; padding: 8px 14px; border-radius: 999px;
