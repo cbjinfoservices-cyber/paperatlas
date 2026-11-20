@@ -6,6 +6,9 @@ dist/
 out/
 *.tsbuildinfo
 
+# Supabase CLI local state
+supabase/.temp/
+
 # Environment variables
 .env
 .env.local
