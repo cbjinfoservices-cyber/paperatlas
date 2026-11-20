@@ -1,0 +1,468 @@
+/* ---- les deux comptes de relecture de l'en-tête -------------------------
+   La pastille unique ne disait qu'un chiffre : celui de l'accord des deux
+   langues, qui ne bouge que lorsqu'une page est faite des deux côtés. Deux
+   pastilles, une par langue, montrent enfin de quel côté la relecture traîne.
+   Le style de base reste dans admin.css ; ici, seulement le groupe et la
+   marque de langue. */
+
+.admin-relire-duo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+/* La marque de langue : deux lettres, un fond tenu, pour que les deux
+   pastilles se lisent d'un coup d'œil sans qu'on confonde leurs chiffres. */
+.admin-relire-lang {
+  padding: 1px 5px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 9.5px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: .08em;
+}
+
+/* Le compte de la langue, puis le total en retrait : le chiffre du travail
+   fait, et sur quoi il se mesure. */
+.admin-relire-num {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 1px;
+  font-variant-numeric: tabular-nums;
+}
+
+.admin-relire-num em {
+  font-style: normal;
+  font-size: 9.5px;
+  font-weight: 500;
+  opacity: .6;
+}
+
+/* Une langue à jour : la marque s'éteint comme le reste de la pastille. */
+.admin-relire[data-zero='yes'] .admin-relire-lang {
+  background: color-mix(in srgb, var(--text) 10%, transparent);
+  color: color-mix(in srgb, var(--text) 56%, transparent);
+}
+
+/* Le compte du désaccord, troisième pastille du groupe : les pages cochées
+   d'un seul côté. Elle se lit à côté des deux langues, sans ouvrir le
+   panneau, et se tait en « Accord » quand les deux se rejoignent. */
+.admin-relire-ecart {
+  gap: 5px;
+  border-color: color-mix(in srgb, var(--text) 22%, transparent);
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  color: color-mix(in srgb, var(--text) 72%, transparent);
+  font-weight: 500;
+}
+
+.admin-relire-ecart:hover {
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 11%, transparent);
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+}
+
+/* Le mot qui accompagne le chiffre : bref, en petites capitales, pour que la
+   pastille ne se confonde pas avec celles des deux langues. */
+.admin-relire-tag {
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+/* Rien à reprendre : le mot s'efface avec la pastille. */
+.admin-relire-ecart[data-zero='yes'] .admin-relire-tag {
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+
+[dir='rtl'] .admin-relire-tag {
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 11px;
+}
+
+/* Le compte des clés en écart, quatrième pastille du groupe : les clés qu'une
+   langue nomme sans l'autre. Elle se lit à côté de la relecture, mais se
+   distingue par son trait interrompu — un texte manquant n'est pas une page
+   cochée, et les deux chiffres ne doivent pas se prendre l'un pour l'autre. */
+.admin-relire-cles {
+  gap: 5px;
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--accent2, var(--accent)) 36%, transparent);
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 8%, transparent);
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 88%, var(--text));
+  font-weight: 500;
+}
+
+.admin-relire-cles:hover {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2, var(--accent)) 58%, transparent);
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 16%, transparent);
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 96%, var(--text));
+}
+
+.admin-relire-cles[data-zero='yes'] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--text) 16%, transparent);
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+
+.admin-relire-cles[data-zero='no'] .admin-relire-num {
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .admin-relire-duo { gap: 4px; }
+  .admin-relire { padding: 6px 9px; gap: 5px; }
+}
+
+/* La note éphémère de la pastille de tournée : juste après le geste groupé de
+   la miniature, la pastille dit elle-même ce qu'il a fermé et le compte
+   atteint — sans qu'on ait à survoler la carte. Elle reprend la teinte
+   d'accent le temps de la note, puis rend son chiffre habituel. */
+.admin-relire-tournee[data-flash='yes'] {
+  border-color: color-mix(in srgb, var(--accent) 62%, transparent);
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: color-mix(in srgb, var(--accent) 94%, var(--text));
+}
+
+.admin-relire-tournee-flash {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 3px;
+  font-family: var(--font-label, inherit);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .02em;
+  white-space: nowrap;
+  animation: adminTourneeFlash .28s ease both;
+}
+
+@keyframes adminTourneeFlash {
+  from { opacity: 0; transform: translateY(-2px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-relire-tournee-flash { animation: none; }
+}
+
+/* ---- la frise en miniature, sous le survol d'une pastille de tournée ----
+   La pastille dit « 6 / 10 » ; la miniature dit lesquels. Elle reprend les dix
+   marques de la frise du panneau, dans le même dessin — pleine, teintée, vide —
+   et nomme le rang par lequel reprendre. Une marque se survole pour dire son
+   écran, et s'ouvre d'un clic dans un nouvel onglet : on quitte la page relue,
+   pas l'en-tête. */
+.admin-relire-mini-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Une bande transparente couvre l'écart entre la pastille et sa carte : sans
+   elle, la carte se refermerait avant que la souris ne l'atteigne, et les
+   marques ne pourraient pas se laisser survoler. */
+.admin-relire-mini-wrap::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  inset-inline: 0;
+  height: 10px;
+}
+
+.admin-relire-mini {
+  position: absolute;
+  top: calc(100% + 8px);
+  inset-inline-end: 0;
+  z-index: 40;
+  display: grid;
+  gap: 6px;
+  width: 212px;
+  max-width: calc(100vw - 32px);
+  padding: 9px 10px 8px;
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+  border-radius: 12px;
+  background: var(--bg);
+  box-shadow: 0 18px 34px -22px color-mix(in srgb, var(--text) 70%, transparent);
+  text-align: left;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity .16s ease, transform .16s ease, visibility .16s ease;
+}
+
+.admin-relire-mini-wrap:hover .admin-relire-mini,
+.admin-relire-mini-wrap:focus-within .admin-relire-mini {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.admin-relire-mini-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  font-family: var(--font-label, inherit);
+  font-size: 9.4px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+
+.admin-relire-mini-head b {
+  flex: none;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .02em;
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+}
+
+.admin-relire-mini-cells {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 3px;
+}
+
+.admin-relire-mini-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 18px;
+  border-radius: 4px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  background: color-mix(in srgb, var(--surface) 55%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 9px;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 56%, transparent);
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color .14s ease, background .14s ease, color .14s ease;
+}
+
+/* La marque est une porte : le survol l'annonce, le clic ouvre l'écran dans un
+   nouvel onglet. Elle garde le pas des dix marques — la carte ne bouge pas. */
+.admin-relire-mini-cell:hover,
+.admin-relire-mini-cell:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 66%, transparent);
+}
+
+.admin-relire-mini-cell:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+/* La marque sous la souris se détache d'un trait plein : la carte dit alors
+   l'écran qu'elle représente et son état du moment. */
+.admin-relire-mini-cell[data-survol='yes'] {
+  border-color: color-mix(in srgb, var(--accent) 74%, transparent);
+  color: color-mix(in srgb, var(--text) 92%, transparent);
+}
+
+.admin-relire-mini-cell[data-etat='deux'][data-survol='yes'] {
+  background: color-mix(in srgb, var(--accent) 94%, transparent);
+  color: color-mix(in srgb, var(--bg) 92%, transparent);
+}
+
+.admin-relire-mini-cell[data-etat='un'] {
+  border-color: color-mix(in srgb, var(--accent) 44%, transparent);
+  background: color-mix(in srgb, var(--accent) 24%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+}
+
+.admin-relire-mini-cell[data-etat='deux'] {
+  border-color: color-mix(in srgb, var(--accent) 76%, transparent);
+  background: color-mix(in srgb, var(--accent) 78%, transparent);
+  color: color-mix(in srgb, var(--bg) 88%, transparent);
+  font-weight: 700;
+}
+
+/* Le rang de reprise se détache d'un trait : c'est celui que la porte du
+   panneau ouvrira. */
+.admin-relire-mini-cell[data-open='yes'] {
+  outline: 1px dashed color-mix(in srgb, var(--accent) 72%, transparent);
+  outline-offset: 1px;
+}
+
+/* Le geste groupé de la miniature : il ferme les écrans restants de la tournée
+   sans ouvrir le panneau. Il prend le pas de la carte et ne déborde pas. */
+.admin-relire-mini-do {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+  min-width: 0;
+  padding: 4px 6px;
+  border-radius: 6px;
+  border: 1px solid color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 9.6px;
+  letter-spacing: .04em;
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+  cursor: pointer;
+  transition: background .14s ease, border-color .14s ease;
+}
+
+.admin-relire-mini-do:hover,
+.admin-relire-mini-do:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 76%, transparent);
+  background: color-mix(in srgb, var(--accent) 24%, transparent);
+}
+
+.admin-relire-mini-do:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.admin-relire-mini-do i {
+  flex: none;
+  font-size: 11px;
+}
+
+/* La note du geste : elle dit ce qui vient d'être fermé, puis s'efface. */
+.admin-relire-mini-flash {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 6px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 9.4px;
+  letter-spacing: .03em;
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+
+.admin-relire-mini-flash i {
+  flex: none;
+  font-size: 11px;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+}
+
+.admin-relire-mini-foot {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-top: 5px;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 14%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 9.6px;
+  letter-spacing: .04em;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+
+.admin-relire-mini-foot i {
+  flex: none;
+  font-size: 12px;
+  color: color-mix(in srgb, var(--accent) 80%, var(--text));
+}
+
+/* Le dire du survol : l'écran représenté et son état du moment. La ligne
+   garde sa hauteur quand rien n'est survolé — la carte ne doit pas sauter
+   sous la souris —, et rappelle alors le geste. */
+.admin-relire-mini-say {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  min-height: 26px;
+  padding: 4px 6px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 9.6px;
+  line-height: 1.4;
+  letter-spacing: .02em;
+  color: color-mix(in srgb, var(--text) 60%, transparent);
+  transition: background .14s ease, color .14s ease;
+}
+
+.admin-relire-mini-say i {
+  flex: none;
+  margin-top: 1px;
+  font-size: 11px;
+  line-height: 1.2;
+  color: color-mix(in srgb, var(--text) 46%, transparent);
+}
+
+.admin-relire-mini-say[data-on='yes'] {
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+
+.admin-relire-mini-say[data-on='yes'] i {
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+}
+
+[dir='rtl'] .admin-relire-mini-say {
+  letter-spacing: 0;
+  font-size: 10.6px;
+}
+
+/* Les rangs encore ouverts, nommés en fin de carte — l'arabe puis l'anglais.
+   Chaque ligne dit le côté et les écrans eux-mêmes, comme la feuille de
+   synthèse : « 02, 05, 07 ». Une fois un côté complet, la ligne le dit au lieu
+   de rester vide. */
+.admin-relire-mini-remains {
+  display: grid;
+  gap: 2px;
+  padding-top: 5px;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 14%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 9.6px;
+  line-height: 1.45;
+  letter-spacing: .03em;
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+}
+
+.admin-relire-mini-remains span {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  min-width: 0;
+}
+
+.admin-relire-mini-remains b {
+  flex: none;
+  padding: 0 4px;
+  border-radius: 3px;
+  font-size: 8.6px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  color: color-mix(in srgb, var(--bg) 88%, transparent);
+  background: color-mix(in srgb, var(--accent) 60%, transparent);
+}
+
+.admin-relire-mini-remains span[data-cote='en'] b {
+  background: color-mix(in srgb, var(--text) 32%, transparent);
+  color: color-mix(in srgb, var(--bg) 92%, transparent);
+}
+
+[dir='rtl'] .admin-relire-mini-remains {
+  letter-spacing: 0;
+  font-size: 10.6px;
+}
+
+[dir='rtl'] .admin-relire-mini {
+  text-align: right;
+}
+
+[dir='rtl'] .admin-relire-mini-head,
+[dir='rtl'] .admin-relire-mini-foot {
+  letter-spacing: 0;
+  font-size: 10.4px;
+}
+
+@media (max-width: 640px) {
+  .admin-relire-mini { width: 180px; }
+}

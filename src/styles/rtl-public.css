@@ -1,0 +1,340 @@
+/* ============ ARABIC PASS: THE PUBLIC PAGES ============ */
+/* The same verification the B2B request form received, carried to the three
+   public boards — the directory, the classifieds and the job offers. Arabic
+   script never carries tracking (it breaks the joins), Latin labels are not
+   shouted in Arabic, and every value that is written left to right (an e-mail,
+   a phone number, a counter, a workshop mark) is isolated so the page cannot
+   reorder it. Directional layout itself is already handled by the document's
+   `dir="rtl"` and the inline-start / inline-end properties of the boards. */
+
+/* 1. Tracking and shouting, on every small label of the three boards. */
+[dir="rtl"] .ad-hot,
+[dir="rtl"] .ad-cat,
+[dir="rtl"] .ad-meta,
+[dir="rtl"] .job-contract,
+[dir="rtl"] .jobd-facts dt,
+[dir="rtl"] .board-more-note,
+[dir="rtl"] .board-more-chip,
+[dir="rtl"] .filters-reset,
+[dir="rtl"] .share-btn,
+[dir="rtl"] .map-hint,
+[dir="rtl"] .fresh-toggle,
+[dir="rtl"] .fresh-hint,
+[dir="rtl"] .dir-recall-txt,
+[dir="rtl"] .quote-done-ref,
+[dir="rtl"] .apply-count { letter-spacing: 0; text-transform: none; }
+
+/* Arabic headings never take the negative tracking of the Latin ones. */
+[dir="rtl"] .apply-head h2,
+[dir="rtl"] .apply-h3,
+[dir="rtl"] .dir-quote h2,
+[dir="rtl"] .apply-sub { letter-spacing: 0; }
+
+/* 2. Values typed left to right, inside a box aligned on the right: an e-mail
+   and a phone number read the way they are written everywhere else. The rule
+   covers every public form (quote request, job application, sign-in), not only
+   the one that was checked first. */
+[dir="rtl"] .fld input[type="email"],
+[dir="rtl"] .fld input[type="tel"],
+[dir="rtl"] .fld input[type="url"],
+[dir="rtl"] .apply-body input[type="email"],
+[dir="rtl"] .apply-body input[type="tel"] {
+  direction: ltr;
+  text-align: right;
+  unicode-bidi: plaintext;
+}
+
+/* 3. Linked contacts stay one run: an address followed by a full stop must not
+   see that punctuation jump to its other end. */
+[dir="rtl"] a[href^="mailto:"],
+[dir="rtl"] a[href^="tel:"] { unicode-bidi: isolate; }
+
+/* 4. Figures that are not sentences: a character counter must never be read
+   « 500/0 », and a workshop mark (two initials) stays in one run. */
+[dir="rtl"] .apply-count {
+  display: block;
+  direction: ltr;
+  unicode-bidi: isolate;
+  text-align: start;
+  font-size: 11px;
+}
+[dir="rtl"] .logo-mark,
+[dir="rtl"] .watch-recent-mark,
+[dir="rtl"] .print-mark { direction: ltr; letter-spacing: 0; }
+
+/* 5. The boards' small plates keep their padding on the reading side. */
+[dir="rtl"] .share-btn,
+[dir="rtl"] .filters-reset,
+[dir="rtl"] .fresh-toggle,
+[dir="rtl"] .board-more-btn { padding-inline-start: 14px; padding-inline-end: 14px; }
+[dir="rtl"] .ad-btn { padding-inline-start: 13px; padding-inline-end: 13px; }
+[dir="rtl"] .fresh-toggle { padding-inline-start: 14px; }
+
+/* 6. The filter row of the classifieds keeps its icon beside the field, and the
+   search field keeps the room it needs for that icon. */
+[dir="rtl"] .board-filters .fld-inline input { padding-inline-start: 40px; padding-inline-end: 14px; }
+[dir="rtl"] .filters-reset { justify-content: center; }
+[dir="rtl"] .dir-meta-right { justify-content: flex-start; }
+
+/* 7. The job sheet's facts column: the label sat at a fixed width, which is fine
+   in both directions — only its tracking needed dropping (done above). The
+   values themselves keep the reading alignment. */
+[dir="rtl"] .jobd-facts dd { text-align: start; }
+[dir="rtl"] .apply-count { margin-inline-start: 0; }
+
+/* 8. Skip link and the results line: the first stop of the document lands on the
+   reading side in Arabic, as it does on the left in French. */
+[dir="rtl"] .skip-link { inset-inline-start: 16px; }
+
+/* 9. The quote sheet inside the directory: its prefilled chip and its figures
+   follow the same rules as the boards around them. */
+[dir="rtl"] .quote-prefill { padding: 9px 12px 9px 10px; }
+[dir="rtl"] .quote-partners li { text-align: start; }
+[dir="rtl"] .quote-ref strong { letter-spacing: 0; }
+
+/* 10. Cards: the seller line and the price sit on the reading side instead of
+   being pushed to a side that reads as the end. */
+[dir="rtl"] .ad-seller { text-align: start; }
+[dir="rtl"] .ad-foot { justify-content: space-between; }
+[dir="rtl"] .job-salary { letter-spacing: 0; }
+[dir="rtl"] .jobd-similar a { text-align: start; }
+
+/* 11. The application sheet's CV row: the link sits at the reading end, its
+   arrow pointing the way the eye travels. */
+[dir="rtl"] .apply-cv { direction: rtl; }
+[dir="rtl"] .apply-body .acct-actions { justify-content: flex-start; }
+
+/* ============ ARABIC PASS: THE COMPANY SHEET ============ */
+/* The same verification once more, on the atelier profile a visitor reaches
+   from the directory: same rules, one by one — no tracking on Arabic labels, no
+   negative tracking on Arabic headings, and every value written left to right
+   kept in a single run. */
+
+/* 12. Tracked, shouted Latin labels, once they speak Arabic. */
+[dir="rtl"] .pro-head .stamp,
+[dir="rtl"] .pro-joined,
+[dir="rtl"] .pro-note,
+[dir="rtl"] .cat-head,
+[dir="rtl"] .hours .hours-v,
+[dir="rtl"] .pro-new,
+[dir="rtl"] .pro-meta { letter-spacing: 0; text-transform: none; }
+
+/* 13. Arabic headings keep their joins: the sheet's title and its closing band. */
+[dir="rtl"] .pro-ident h1,
+[dir="rtl"] .dir-quote h2,
+[dir="rtl"] .pro-missing h1 { letter-spacing: 0; }
+
+/* 14. The workshop mark and the catalogue references are codes, not words: two
+   initials and a reference read left to right even on a right-to-left page. */
+[dir="rtl"] .pro-logo,
+[dir="rtl"] .cat-ref {
+  direction: ltr;
+  unicode-bidi: isolate;
+  letter-spacing: 0;
+}
+[dir="rtl"] .pro-logo { justify-content: center; }
+
+/* 15. Figures that are not sentences — a price, an opening time, a distance —
+   stay one run, so « 08:00–17:00 » can never be read backwards. */
+[dir="rtl"] .cat-price,
+[dir="rtl"] .hours .hours-v,
+[dir="rtl"] .pro-dist { direction: ltr; unicode-bidi: isolate; }
+[dir="rtl"] .hours .hours-v { text-align: start; }
+
+/* 16. The phone and the e-mail of the contact card: linked, therefore already
+   isolated, and read the way they are written everywhere else. */
+[dir="rtl"] .pro-contact a[href^="mailto:"],
+[dir="rtl"] .pro-contact a[href^="tel:"] {
+  direction: ltr;
+  unicode-bidi: isolate;
+  text-align: right;
+}
+
+/* 17. Lists and rows of the sheet keep the reading alignment, in both
+   directions: services, catalogue, hours, certificates, contact. */
+[dir="rtl"] .serv-list li,
+[dir="rtl"] .cat-row,
+[dir="rtl"] .hours li,
+[dir="rtl"] .certs li,
+[dir="rtl"] .pro-contact li,
+[dir="rtl"] .pro-text,
+[dir="rtl"] .pro-hero-cap p { text-align: start; }
+
+/* 18. The closing band of the profile: its call-to-action keeps a real height
+   and its arrow points the way the eye travels. */
+[dir="rtl"] .dir-quote .cta { margin-top: 0; }
+
+@media (max-width: 520px) {
+  [dir="rtl"] .pro-logo { letter-spacing: 0; }
+}
+
+@media (max-width: 720px) {
+  [dir="rtl"] .board-filters .fld-inline input { padding-inline-start: 38px; }
+}
+
+/* ============ ARABIC PASS: THE JOB SHEET AND THE DEPOSIT FORM ============ */
+/* The same verification, carried to the two pages a visitor reaches last: the
+   detailed job offer and the deposit form. Same rules, one by one — no tracking
+   on Arabic labels, no negative tracking on Arabic headings, and every code or
+   figure written left to right kept in a single run. */
+
+/* 19. Tracked, shouted Latin labels, once they speak Arabic. */
+[dir="rtl"] .pro-head .stamp,
+[dir="rtl"] .jobd-facts dt,
+[dir="rtl"] .jobd-code,
+[dir="rtl"] .deposit-form .fld label,
+[dir="rtl"] .dep-pre,
+[dir="rtl"] .dep-done-link,
+[dir="rtl"] .deposit-steps span { letter-spacing: 0; text-transform: none; }
+
+/* 20. Codes and amounts are not sentences: a reference like « REF-2026-118 », a
+   salary, a date read in the facts column, and the « 120/500 » counter all stay
+   in one run, in the order they are written everywhere else. */
+[dir="rtl"] .jobd-code,
+[dir="rtl"] .jobd-facts dd { unicode-bidi: isolate; }
+[dir="rtl"] .dep-count { display: inline-block; direction: ltr; unicode-bidi: isolate; }
+
+/* 21. Arabic headings keep their joins: the offer title, the sheet's small
+   headings, and the deposit page's own title. */
+[dir="rtl"] .pro-ident h1,
+[dir="rtl"] .pro-h,
+[dir="rtl"] .page-h1 { letter-spacing: 0; }
+
+/* 22. Lists and rows of the two pages read from the start side: missions,
+   similar offers, the facts column, the steps of the deposit note, and every
+   line of feedback under the form. */
+[dir="rtl"] .jobd-list li,
+[dir="rtl"] .jobd-similar a,
+[dir="rtl"] .jobd-facts dd,
+[dir="rtl"] .jobd-tags,
+[dir="rtl"] .pro-text,
+[dir="rtl"] .pro-note,
+[dir="rtl"] .deposit-steps p,
+[dir="rtl"] .deposit-links a > span,
+[dir="rtl"] .dep-pre,
+[dir="rtl"] .dep-done,
+[dir="rtl"] .deposit-form .form-msg { text-align: start; }
+
+/* 23. The deposit form's own fields: the hidden anti-spam field keeps its
+   off-screen place on the other side, and the e-mail and the phone are typed
+   left to right inside a box aligned on the reading side. */
+[dir="rtl"] .fld-aux { left: auto; right: -10000px; }
+[dir="rtl"] .deposit-form .fld input[type="email"],
+[dir="rtl"] .deposit-form .fld input[type="tel"] { direction: ltr; text-align: right; }
+
+/* 24. The sheet's head: once the actions move to the reading side, the share
+   door, the tag row and the small hand-over links keep their place instead of
+   drifting to a foreign edge. */
+[dir="rtl"] .pro-head-actions { justify-content: flex-start; }
+[dir="rtl"] .jobd-share,
+[dir="rtl"] .jobd-tags { justify-content: flex-start; }
+[dir="rtl"] .dep-done-link i { transform: scaleX(-1); }
+
+/* ============ ARABIC PASS: THE APPLY DIALOG AND THE DEPOSIT CONFIRMATION ============ */
+/* The same verification once more, on the two screens a visitor reaches with a
+   gesture that has a consequence: the sheet where a candidate sends an
+   application, and the plate that thanks him for a deposit. Same rules, one by
+   one — no tracking on Arabic labels, no crushed joins on Arabic headings, and
+   every value written left to right kept in a single run. The direction of the
+   document already carries the layout; only the details are set here. */
+
+/* 25. Tracked, shouted Latin labels, once they speak Arabic: the offer line of
+   the dialog, the notes, the CV row, the reference door and the confirmation
+   plate of the deposit. */
+[dir="rtl"] .apply-sub,
+[dir="rtl"] .apply-note,
+[dir="rtl"] .apply-body .auth-note,
+[dir="rtl"] .apply-body .form-msg,
+[dir="rtl"] .apply-cv span,
+[dir="rtl"] .apply-cv-link,
+[dir="rtl"] .jobd-refshare,
+[dir="rtl"] .jobd-shared,
+[dir="rtl"] .dep-done .form-msg { letter-spacing: 0; text-transform: none; }
+
+/* 26. Arabic headings keep their joins: the dialog's title, its small headings,
+   and the confirmation plate of the deposit. */
+[dir="rtl"] .apply-head h2,
+[dir="rtl"] .apply-h3,
+[dir="rtl"] .apply-body .auth-done h3 { letter-spacing: 0; }
+
+/* 27. Everything that is a sentence reads from the start side: the lede, the
+   notes, the error and success lines, and the two plates of the deposit. */
+[dir="rtl"] .apply-card,
+[dir="rtl"] .apply-note,
+[dir="rtl"] .apply-body .form-msg,
+[dir="rtl"] .apply-body .auth-note,
+[dir="rtl"] .apply-cv,
+[dir="rtl"] .dep-done,
+[dir="rtl"] .dep-done .form-msg,
+[dir="rtl"] .deposit-form .ct-signup > span { text-align: start; }
+
+/* 28. Figures that are not sentences: the character counter of the motivation
+   message and the reference written in the header keep one run, in the order
+   they are written everywhere else — « 500/0 » can never be read. */
+[dir="rtl"] .apply-count { margin-inline-start: 0; }
+[dir="rtl"] .jobd-shared span { unicode-bidi: plaintext; }
+
+/* 29. The confirmation plate of the deposit: the message takes the whole width
+   it is given, and its link sits on the reading side with an arrow that points
+   the way the eye travels. */
+[dir="rtl"] .dep-done { justify-items: start; }
+[dir="rtl"] .dep-done .form-msg { max-width: 100%; }
+[dir="rtl"] .dep-done-link { justify-content: flex-start; }
+
+/* 30. The reference door of an offer: its icon stays beside its label, and in
+   the facts column it breaks to its own line on the reading side. */
+[dir="rtl"] .jobd-refshare { direction: rtl; }
+[dir="rtl"] .jobd-facts .jobd-refshare { margin-inline-start: 0; }
+[dir="rtl"] .jobd-idrow { justify-content: flex-start; }
+
+/* 31. The application dialog's action row: the send button and the cancel door
+   start at the reading side, and the close door keeps its own corner. */
+[dir="rtl"] .apply-body .acct-actions { justify-content: flex-start; }
+[dir="rtl"] .apply-x { margin-inline-start: auto; }
+[dir="rtl"] .apply-x i { transform: none; }
+
+/* 32. The CV row of the dialog: its text stays grouped, the manage link keeps
+   its place at the reading end. */
+[dir="rtl"] .apply-cv { gap: 8px; }
+
+@media (max-width: 520px) {
+  [dir="rtl"] .jobd-shared { text-align: start; }
+}
+
+/* ============ ARABIC PASS: THE CLASSIFIED AND JOB SHEETS ============ */
+/* The country line is new on both detailed sheets, in three places that answer
+   each other: the stamp under the title, the meta row beside the city, and the
+   facts column just before the place. The same verification already carried to
+   the rest of the site is applied to that line, and to the two sheets as a
+   whole, so nothing had to be re-verified twice. */
+
+/* 33. The country is a name, not a code: it stays one run, and a long one —
+   « الإمارات العربية المتحدة » — may break inside the meta row instead of
+   pushing the commune out of the sheet. */
+[dir="rtl"] .pro-pays {
+  letter-spacing: 0;
+  unicode-bidi: isolate;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+[dir="rtl"] .pro-meta { row-gap: 6px; }
+
+/* 34. The stamp mixes an Arabic country with a Latin reference: the reference
+   keeps its own run, so reading right to left cannot split it mid-figure. */
+[dir="rtl"] .pro-ident .stamp {
+  letter-spacing: 0;
+  text-transform: none;
+}
+[dir="rtl"] .pro-ident .stamp .jobd-code {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* 35. The facts column: the country reads on the start side, right above the
+   place it belongs to, in both sheets. */
+[dir="rtl"] .pro-pays-cell { text-align: start; }
+
+/* 36. The classified sheet's call-to-action row and its contact list follow the
+   reading side, as the job sheet already does. */
+[dir="rtl"] .annd-cta { justify-content: flex-start; }
+[dir="rtl"] .pro-contact li { text-align: start; }

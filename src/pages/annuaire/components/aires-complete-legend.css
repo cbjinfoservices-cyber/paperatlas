@@ -1,0 +1,31 @@
+/* La légende discrète posée sous les deux rangées d'aires : elle explique une
+   seule fois ce que disent le trait affermi et la coche, avec un échantillon
+   de pastille complète plutôt qu'un dessin à part. */
+.aires-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 7px;
+  max-width: 100%; min-width: 0; margin: 6px 0 0; padding: 0;
+  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .04em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 46%, transparent); }
+
+.aires-legend-label { flex: 0 0 auto; color: color-mix(in srgb, var(--text) 64%, transparent); }
+
+/* L'échantillon : la pastille complète en petit, son trait affermi et sa
+   coche, tels que les deux rangées les portent. */
+.aires-legend-sample { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 3px;
+  padding: 1px 8px 1px 9px; border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 62%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  font-family: var(--font-body); font-size: 9px; letter-spacing: 0;
+  text-transform: none;
+  color: color-mix(in srgb, var(--text) 74%, transparent); }
+
+.aires-legend-sample > i { flex: 0 0 auto; font-size: 9px; color: var(--accent2); }
+
+/* La phrase : elle ne crie pas, elle explique ce que le signe veut dire. */
+.aires-legend-txt { flex: 1 1 180px; min-width: 0; letter-spacing: .01em;
+  text-transform: none; font-family: var(--font-body); font-size: 10.5px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 54%, transparent); }
+
+[dir="rtl"] .aires-legend { letter-spacing: 0; }
+[dir="rtl"] .aires-legend-txt { letter-spacing: 0; }

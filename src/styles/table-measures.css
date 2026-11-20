@@ -1,0 +1,214 @@
+/* ── La grille de comparaison, refermée sur la mesure du panneau ────────────
+   Le panneau de comparaison pose ses colonnes en deux mesures fixes : 140 px
+   pour l'intitulé de la ligne, puis 170 px de plancher par atelier ou par
+   plume. Ces deux valeurs se lisent bien au large, mais à 360 px le panneau ne
+   garde que 300 px de champ : deux profils et leur intitulé réclament 480 px,
+   et la grille sortait donc du cadre — le panneau défilait de côté, et sa
+   dernière colonne ne se lisait plus d'aplomb avec l'en-tête ni avec le bas de
+   la carte.
+
+   La grille se mesure désormais à son cadre, et non plus à ses colonnes : le
+   nombre de profils comparés est passé par la rangée elle-même, l'intitulé
+   garde ses 140 px tant qu'ils tiennent, et sous 620 px — la largeur où le
+   panneau s'ouvre à douze pixels des bords — l'intitulé se resserre et les
+   profils se partagent ce qui reste, à parts égales. La grille se referme donc
+   exactement sur la mesure du panneau, dans les deux sens de lecture, et
+   aucune colonne ne passe plus sous le bord.
+
+   Rien n'est retiré : les filets, le rembourrage et la hauteur des lignes
+   gardent leur forme, et c'est le texte seul qui se replie dans sa colonne. */
+.cmp-table .cmp-row {
+  grid-template-columns: 140px repeat(var(--cmp-cols, 2), minmax(170px, 1fr));
+}
+
+.cmp-modal .cmp-table .cmp-label,
+.cmp-modal .cmp-table .cmp-cell,
+.cmp-modal .cmp-table .cmp-colhead {
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.cmp-modal .cmp-table .cmp-cell,
+.cmp-modal .cmp-table .cmp-label {
+  overflow-wrap: break-word;
+}
+
+.cmp-modal .cmp-table .cmp-colhead a,
+.cmp-modal .cmp-table .cmp-where {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+
+/* ── Sous 620 px, la grille prend la mesure du panneau ─────────────────────
+   L'intitulé se resserre à 86 px — assez pour ses mots les plus longs, qui se
+   replient au lieu d'être coupés —, et chaque profil reçoit une part égale de
+   ce qui reste. Les rembourrages s'écrivent en logique : en arabe l'intitulé
+   ouvre la ligne et la première colonne se pose de l'autre côté, sans qu'aucune
+   règle soit retournée à la main. */
+@media (max-width: 620px) {
+  .cmp-modal .cmp-table .cmp-row {
+    grid-template-columns: minmax(0, var(--cmp-label, 86px)) repeat(var(--cmp-cols, 2), minmax(0, 1fr));
+  }
+
+  .cmp-modal .cmp-table .cmp-label {
+    padding-block: 10px;
+    padding-inline: 0 8px;
+    line-height: 1.35;
+  }
+
+  .cmp-modal .cmp-table .cmp-cell {
+    padding-block: 10px;
+    padding-inline: 8px;
+    line-height: 1.5;
+  }
+
+  .cmp-modal .cmp-table .cmp-colhead {
+    padding-block: 4px 10px;
+    padding-inline: 8px;
+  }
+
+  .cmp-modal .cmp-table .cmp-colhead a {
+    font-size: 14px;
+    line-height: 1.3;
+  }
+}
+
+/* ── La fenêtre de devis, ouverte sur la même mesure que le panneau ─────────
+   La fenêtre de devis coiffe ses champs du même en-tête que le panneau de
+   comparaison : un titre et le geste qui referme. Mais les règles de l'en-tête
+   ne parlaient qu'au bloc de titre du panneau — le titre de la fenêtre, posé
+   seul dans la même rangée, gardait donc sa largeur de contenu, et en arabe un
+   titre long poussait le bouton de fermeture hors du cadre au lieu de se
+   replier dans la largeur laissée par lui.
+
+   Le titre de la fenêtre prend la règle du panneau : il cède en largeur, se
+   replie dans sa propre boîte, et le geste de fermeture ne perd jamais sa
+   taille. Les deux surfaces s'ouvrent ainsi sur une seule mesure — la même
+   largeur, les mêmes douze pixels de bord, et rien qui dépasse. */
+.cmp-modal .cmp-panel-head > h2 {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  line-height: 1.15;
+}
+
+.cmp-modal .cmp-panel-head > .cmp-close {
+  flex: 0 0 auto;
+}
+
+/* ── La feuille imprimée, ouverte sur la mesure du panneau ──────────────────
+   La feuille de récapitulatif réunit en tête la marque, le titre, la marque de
+   la langue, la référence du dossier et la date. À 360 px en arabe, la
+   référence et la marque de la langue se disputaient la rangée : la référence
+   est une pastille tenue d'un seul tenant, et le « préparé par » du bas de
+   feuille, écrit en capitales et interlettré, ne se replie pas comme un texte
+   arabe — les deux sortaient du cadre au lieu de le tenir.
+
+   La feuille s'ouvre désormais à douze pixels des bords, comme le panneau, et
+   son rembourrage intérieur de dix-huit pixels retombe sur la même mesure que
+   celui du panneau : 300 px de champ à 360 px, des deux côtés. En dessous de
+   560 px, la tête se lit en deux temps — la marque, le titre et sa marque de
+   langue d'abord, la référence et la date ensuite —, chacun prenant la largeur
+   de la feuille. La référence s'écourte par sa fin plutôt que de sortir, la
+   marque de la langue ne cède jamais sa largeur, et la ligne « préparé par »
+   garde son emblème et son filet du côté où la lecture commence, le
+   rembourrage écrit en logique. Rien n'est retiré : les filets, la teinte du
+   papier et la hauteur des blocs gardent leur forme. */
+.print-head > div,
+.print-head > .print-meta,
+.print-headline,
+.print-sign-cell {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.print-sheet .print-meta {
+  flex: 0 1 auto;
+  overflow-wrap: break-word;
+}
+
+.print-sheet .print-headline {
+  align-items: center;
+}
+
+.print-sheet .print-title {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+/* La référence du dossier : d'un seul morceau, qui s'écourte par sa fin. */
+.print-ref {
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* La marque de la langue : deux ou trois lettres et son cadre, jamais comprimés. */
+.print-sheet .print-lang {
+  flex: 0 0 auto;
+}
+
+.print-sign-cell {
+  overflow-wrap: break-word;
+}
+
+.print-sign-cell span,
+.print-sign-cell strong {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* En arabe, ni capitales ni interlettrage : le trait couperait les jointures
+   de la référence, du libellé « préparé par » et de la date. */
+[dir="rtl"] .print-ref,
+[dir="rtl"] .print-meta,
+[dir="rtl"] .print-sign-label,
+[dir="rtl"] .print-foot-ref,
+[dir="rtl"] .print-lang {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+@media (max-width: 560px) {
+  /* La feuille et le panneau s'ouvrent au même bord : douze pixels. */
+  .print-modal[role="dialog"] {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .print-modal .print-actions {
+    width: 100%;
+  }
+
+  .print-sheet .print-head {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .print-sheet .print-head > div,
+  .print-sheet .print-head > .print-meta {
+    width: 100%;
+  }
+
+  .print-sheet .print-meta {
+    text-align: start;
+  }
+
+  .print-sheet .print-headline {
+    gap: 8px;
+  }
+
+  .print-sheet .print-lede {
+    max-width: 100%;
+  }
+
+  .print-sheet .print-sign-cell {
+    align-content: start;
+  }
+}

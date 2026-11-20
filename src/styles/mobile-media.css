@@ -1,0 +1,436 @@
+/* ============ CADRAGE DES PHOTOS SUR LE TÉLÉPHONE ============ */
+/* Sur un grand écran, les images pleine page respirent : la section fait la
+   hauteur de la fenêtre et l'image la déborde de 35 % en haut et en bas, ce qui
+   laisse la place au défilement parallaxe. Sur un téléphone, la même section
+   s'étire en hauteur pendant que l'écran reste étroit : garder les 170 %
+   revenait à agrandir la photo une fois et demie de plus et à n'en montrer
+   qu'un mince bandeau vertical — d'où les visages, les presses et les rayonnages
+   coupés, et l'impression d'une image étirée.
+   Ici, la photo remplit exactement la section (100 %) et le parallaxe se met en
+   repos : plus d'agrandissement inutile, et rien ne peut découvrir un bord vide.
+   Le recadrage restant suit le sujet de chaque photo, qui n'est pas au centre du
+   cadre : la ville et les palettes sont dans le tiers droit, l'atelier de
+   reliure dans le tiers gauche, les rayonnages dans la moitié haute. */
+
+@media (max-width: 900px) {
+  .panel[data-side] .panel-bg {
+    --py: 0px !important;
+    inset: 0;
+    height: 100%;
+    width: 100%;
+    object-position: 50% 50%;
+  }
+  .panel[data-side="left"] .panel-bg { object-position: 68% 50%; }
+  .panel[data-side="right"] .panel-bg { object-position: 32% 50%; }
+  .panel[data-side="bottom"] .panel-bg { object-position: 50% 34%; }
+}
+
+/* Le bandeau d'ouverture : sur téléphone il ne reçoit plus la photo large
+   mais une vue verticale, prise dans un cadre haut et non recadrée par la
+   feuille de style. Elle se centre donc simplement sur elle-même. */
+@media (max-width: 780px) {
+  .chapter .stage .plate { object-position: 50% 50%; }
+  .chapter .stage video { object-position: 50% 50%; }
+}
+
+/* Les photos de fiche (établissements, ateliers, annonces) : un cadrage un peu
+   plus haut garde l'enseigne et l'atelier plutôt que le sol. Les sélecteurs
+   reprennent le parent pour l'emporter sur les règles de base du site. */
+@media (max-width: 780px) {
+  .pro-wrap .pro-hero { height: clamp(240px, 62vw, 360px); }
+  .pro-wrap .pro-hero img { object-position: 50% 45%; }
+  .biz-card .biz-thumb { height: clamp(190px, 54vw, 240px); }
+  .biz-card .biz-thumb img { object-position: 50% 45%; }
+  .pro-card .gallery figure { aspect-ratio: 4 / 3; }
+  .pro-card .gallery img { object-position: 50% 50%; }
+}
+
+/* Les visages : on garde la tête dans le rond, jamais le menton coupé ni le
+   front rogné. Le cadrage se cale en haut du portrait, comme sur les vignettes
+   des maisons voisines. */
+@media (max-width: 900px) {
+  .author-top .author-portrait,
+  .auth-head .auth-portrait,
+  .cmp-colhead .cmp-portrait { object-fit: cover; object-position: 50% 22%; }
+}
+
+/* ============ FICHE D'ÉTABLISSEMENT SUR TÉLÉPHONE ============ */
+/* L'en-tête garde la marque à côté du nom au lieu de l'empiler au-dessus : sur
+   360 px, un logo seul sur sa ligne coûtait toute une hauteur d'écran avant
+   d'arriver au nom de l'atelier. Les deux portes de la fiche (écrire, demander
+   un devis) prennent ensuite la largeur entière, l'une sous l'autre, pour ne
+   jamais se serrer ni déborder. */
+@media (max-width: 620px) {
+  .pro-wrap .pro-head { grid-template-columns: auto minmax(0, 1fr); gap: 14px; align-items: start; }
+  .pro-wrap .pro-logo { width: 56px; height: 56px; border-radius: 15px; font-size: 19px; }
+  .pro-wrap .pro-ident { gap: 8px; min-width: 0; }
+  .pro-wrap .pro-ident h1 { font-size: clamp(24px, 7.4vw, 32px); overflow-wrap: anywhere; }
+  .pro-wrap .pro-head-side { grid-column: 1 / -1; }
+  .pro-wrap .pro-head-actions { width: 100%; gap: 8px; }
+  .pro-wrap .pro-head-actions .pro-write,
+  .pro-wrap .pro-head-actions .pro-head-cta { flex: 1 1 100%; justify-content: center; }
+  .pro-wrap .pro-meta { gap: 7px 12px; font-size: 12.5px; }
+  .pro-wrap .pro-name { gap: 7px 10px; }
+  .pro-wrap .pro-plan { font-size: 10px; padding: 4px 9px; }
+  .pro-wrap .pro-joined { font-size: 10.5px; }
+  .pro-wrap .pro-specs { font-size: 12px; }
+  .pro-wrap .pro-map-link { font-size: 11px; }
+}
+
+/* La photo de présentation garde sa légende entière : elle s'allège un peu en
+   hauteur, mais la phrase de capacité ne se coupe plus sous le bord. */
+@media (max-width: 620px) {
+  .pro-wrap .pro-hero { height: clamp(210px, 64vw, 300px); }
+  .pro-wrap .pro-hero-cap { padding: 14px 16px; gap: 4px; }
+  .pro-wrap .pro-hero-cap p { font-size: 13.5px; line-height: 1.45; max-width: none; }
+}
+
+/* La galerie devient une bande qui défile d'une photo à l'autre, avec arrêt
+   net sur chacune. Deux colonnes de 150 px ne montraient plus rien de
+   l'atelier ; ici chaque photo prend la largeur de la lecture, sans hachure. */
+@media (max-width: 620px) {
+  .pro-wrap .gallery {
+    display: grid;
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 82%;
+    gap: 10px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .pro-wrap .gallery figure { scroll-snap-align: start; aspect-ratio: 4 / 3; }
+  .pro-wrap .gallery figure:hover img { transform: none; }
+}
+
+/* Les coordonnées : l'adresse, le téléphone et l'adresse électronique se
+   replient sur la largeur du bloc au lieu de pousser la carte, et chaque
+   ligne d'ouverture laisse sa valeur à droite sans la rogner. */
+@media (max-width: 620px) {
+  .pro-wrap .pro-card { padding: 16px; border-radius: 16px; }
+  .pro-wrap .pro-side { gap: 14px; }
+  .pro-wrap .pro-contact li { grid-template-columns: 18px minmax(0, 1fr); gap: 7px; }
+  .pro-wrap .pro-contact a,
+  .pro-wrap .pro-contact span,
+  .pro-wrap .dist-address span { overflow-wrap: anywhere; }
+  .pro-wrap .hours li { gap: 10px; }
+  .pro-wrap .hours .hours-v { text-align: end; }
+  .pro-wrap .pro-etabcard-head { flex-wrap: wrap; gap: 6px 10px; }
+  .pro-wrap .pro-etabcard-count { white-space: normal; }
+  .pro-wrap .pro-etablist-name { overflow-wrap: anywhere; }
+  .pro-wrap .cat-price { font-size: 12.5px; }
+  /* Un bouton pleine largeur n'a plus à tenir sur une seule ligne : son mot
+     se replie plutôt que de sortir de la carte. */
+  .pro-wrap .cta--block { white-space: normal; text-align: center; }
+}
+
+/* ============ CARTES DE L'ANNUAIRE ET DES ANNONCES À 360 px ============ */
+/* 360 px de large, moins les marges de page et le rembourrage de la carte : il
+   reste environ 260 px de contenu. À cette largeur, un nom d'atelier ou un
+   titre d'annonce sans coupure possible poussait la carte hors de l'écran, et
+   les trois boutons du pied se disputaient la même ligne. */
+@media (max-width: 400px) {
+  .biz-card .biz-body { padding: 15px; gap: 10px; }
+  .biz-card .biz-top { gap: 10px; align-items: flex-start; }
+  .biz-card .biz-top > div { min-width: 0; }
+  .biz-card .biz-top h3 { font-size: 16.5px; overflow-wrap: anywhere; }
+  .biz-card .biz-place { font-size: 12px; line-height: 1.45; }
+  .biz-card .biz-serv li { font-size: 11.5px; padding: 4px 9px; }
+  .biz-card .biz-foot { gap: 8px; padding-top: 10px; }
+  .biz-card .biz-write { margin-inline-start: 0; }
+  .biz-card .biz-link { margin-inline-start: auto; }
+  .biz-card .biz-b2b { padding: 8px 11px; font-size: 12px; }
+  .biz-card .biz-thumb { height: 190px; }
+  .biz-card .biz-since { font-size: 11px; }
+  .biz-card .biz-gen { font-size: 9.5px; padding: 4px 8px; }
+
+  .biz-card.author-card { padding: 15px; }
+  .author-card .author-top { grid-template-columns: 52px minmax(0, 1fr) auto; gap: 10px; }
+  .author-card .author-portrait { width: 52px; height: 52px; }
+  .author-card .author-ident h3 { font-size: 16.5px; overflow-wrap: anywhere; }
+  .author-card .author-gen { font-size: 9.5px; padding: 4px 8px; }
+  .author-card .author-latest { flex-wrap: wrap; row-gap: 2px; }
+
+  .ad-card { padding: 15px; gap: 9px; }
+  .ad-card .ad-title { font-size: 16px; }
+  .ad-card .ad-body { font-size: 13px; }
+  .ad-card .ad-actions { gap: 7px; }
+  .ad-card .ad-btn { padding: 7px 11px; font-size: 11.5px; }
+  .ad-card .ad-seller { flex: 1 1 100%; text-align: start; }
+  .ad-card .ad-cat { font-size: 9px; }
+}
+
+/* ============ COMPTEUR DE LA GALERIE SUR TÉLÉPHONE ============ */
+/* La bande de photos laisse voir une photo à la fois : sans compteur, on
+   pouvait croire que l'atelier n'en avait montré qu'une. Le « 1 / 4 » se lit
+   juste sous la bande, discret, et suit le doigt pendant le défilement. */
+@media (max-width: 620px) {
+  .pro-wrap .gallery-count {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 5px;
+    margin: 0;
+    font-family: var(--font-label);
+    font-size: 10px;
+    letter-spacing: .12em;
+    color: var(--muted);
+  }
+  .pro-wrap .gallery-count-cur {
+    font-size: 13px;
+    letter-spacing: .04em;
+    color: var(--accent2);
+  }
+  .pro-wrap .gallery-count-sep { color: color-mix(in srgb, var(--text) 34%, transparent); }
+}
+[dir="rtl"] .pro-wrap .gallery-count { letter-spacing: 0; }
+
+/* ============ FICHE AUTEUR SUR TÉLÉPHONE ============ */
+/* Même geste que sur la fiche d'atelier : le portrait reste à côté du nom au
+   lieu de coûter une ligne entière, et les deux portes (écrire, proposer une
+   collaboration) prennent la largeur, l'une sous l'autre. */
+@media (max-width: 620px) {
+  .pro-wrap .auth-head { grid-template-columns: auto minmax(0, 1fr); gap: 14px; align-items: start; }
+  .pro-wrap .auth-head .auth-portrait { width: 66px; height: 66px; }
+  .pro-wrap .auth-head .pro-ident { gap: 8px; min-width: 0; }
+  .pro-wrap .auth-head .pro-ident h1 { font-size: clamp(23px, 7.2vw, 32px); overflow-wrap: anywhere; }
+  .pro-wrap .auth-head .pro-meta { gap: 7px 12px; font-size: 12.5px; }
+  .pro-wrap .auth-head .pro-head-side { grid-column: 1 / -1; justify-items: stretch; }
+  .pro-wrap .auth-head .pro-head-actions { width: 100%; gap: 8px; }
+  .pro-wrap .auth-head .pro-head-actions .pro-write,
+  .pro-wrap .auth-head .pro-head-actions .pro-head-cta { flex: 1 1 100%; justify-content: center; }
+  .pro-wrap .auth-head .chip-row span { font-size: 12px; padding: 6px 10px; }
+  .pro-wrap .auth-quote { padding: 22px 18px; }
+  .pro-wrap .auth-quote blockquote { margin: 10px 0 14px; max-width: none; }
+  .pro-wrap .auth-gtally { padding: 10px 11px; }
+  .pro-wrap .auth-gtally-chip { max-width: 100%; }
+}
+
+/* La bibliothèque, à 360 px : deux couvertures côte à côte gardent l'allure
+   d'une étagère, là où une seule couverture pleine largeur ressemblait à une
+   page d'accueil. Le titre de la couverture peut se couper. */
+@media (max-width: 400px) {
+  .pro-wrap .book-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .pro-wrap .book-cover { padding: 12px 11px 11px; gap: 6px; }
+  .pro-wrap .book-cover strong { font-size: 13.5px; overflow-wrap: anywhere; }
+  .pro-wrap .book-meta strong { font-size: 12.5px; overflow-wrap: anywhere; }
+  .pro-wrap .book-meta span { font-size: 11px; }
+  .pro-wrap .certs--lg li { font-size: 13px; }
+}
+
+/* ============ OFFRES D'EMPLOI SUR TÉLÉPHONE ============ */
+/* La carte garde son en-tête sur une seule ligne — marque, offre, urgence —
+   au lieu de renvoyer le sigle « urgent » sur une ligne à lui. Tout se
+   resserre d'un cran pour que le titre, le lieu et le salaire tiennent sans
+   être coupés, et le bouton de candidature prend la largeur du pied. */
+@media (max-width: 400px) {
+  .job-card { padding: 14px; gap: 9px; }
+  .job-card .job-top { grid-template-columns: 38px minmax(0, 1fr) auto; gap: 9px; }
+  .job-card .job-top .logo-mark { width: 38px; height: 38px; border-radius: 10px; font-size: 11.5px; }
+  .job-card .job-title { font-size: 15px; }
+  .job-card .job-co { font-size: 12px; }
+  .job-card .ad-hot { padding: 3px 7px; font-size: 8.5px; gap: 3px; }
+  .job-card .ad-hot i { font-size: 10px; }
+  .job-card .ad-body { font-size: 13px; line-height: 1.55; }
+  .job-card .ad-place { font-size: 11.5px; }
+  .job-card .job-tags li { font-size: 10.5px; padding: 4px 8px; }
+  .job-card .ad-foot { gap: 5px 10px; padding-top: 9px; }
+  .job-card .job-salary { font-size: 12.5px; }
+  .job-card .ad-actions { gap: 7px; }
+  .job-card .job-contract { font-size: 9px; padding: 4px 8px; letter-spacing: .1em; }
+  .job-card .ad-btn { padding: 7px 11px; font-size: 11.5px; }
+  .job-card .job-apply { flex: 1 1 100%; justify-content: center; }
+
+  /* La fiche d'une offre : la colonne des repères se resserre, et une valeur
+     longue (une raison sociale, une adresse) se replie au lieu de sortir. */
+  .pro-wrap .jobd-facts > div { grid-template-columns: 84px minmax(0, 1fr); gap: 8px; }
+  .pro-wrap .jobd-facts dd { overflow-wrap: anywhere; }
+  .pro-wrap .jobd-idrow { flex-wrap: wrap; gap: 8px; }
+  .pro-wrap .jobd-code { overflow-wrap: anywhere; }
+}
+
+/* ============ DEMANDE DE DEVIS À 360 px ============ */
+/* 360 px de large, moins les marges de page et le rembourrage de la carte : le
+   compositeur de devis et le montant doivent tenir dans environ 280 px. À cette
+   largeur, la formule, le pas des sites et le rythme se resserrent d'un cran,
+   et les montants passent à la ligne plutôt que de pousser la carte. */
+@media (max-width: 400px) {
+  .dv { gap: 12px; }
+  .dv-setup,
+  .dv-total,
+  .dv-form,
+  .dv-done { padding: 13px 12px; border-radius: 14px; }
+  .dv-setup { gap: 12px; }
+  .dv-plan { grid-template-columns: 24px minmax(0, 1fr) 16px; gap: 8px; padding: 8px 9px; }
+  .dv-plan-ico { width: 24px; height: 24px; border-radius: 7px; }
+  .dv-plan-ico i { font-size: 13px; }
+  .dv-plan-txt b { font-size: 12.5px; }
+  .dv-plan-txt em { font-size: 11px; }
+  .dv-plan > i { font-size: 15px; }
+  .dv-stepper { grid-template-columns: 34px minmax(0, 1fr) 34px; }
+  .dv-step-btn { min-height: 36px; }
+  .dv-step-input { font-size: 14px; }
+  .dv-select { font-size: 12.5px; padding: 8px 9px; }
+  .dv-bill-btn { font-size: 11.5px; padding: 7px 9px; }
+  /* Les montants et leurs libellés respirent sur deux lignes au lieu de se
+     disputer la largeur : le total reste lisible, la ligne aussi. */
+  .dv-total-figure { gap: 4px; }
+  .dv-total-figure strong { font-size: clamp(24px, 8vw, 30px); }
+  .dv-total-per { font-size: 11.5px; }
+  .dv-lines > div { gap: 3px 8px; }
+  .dv-lines dt { font-size: 11.5px; }
+  .dv-lines dd { font-size: 12.5px; white-space: normal; }
+  .dv-fields { gap: 8px; }
+  .dv-fld input,
+  .dv-fld textarea { font-size: 13px; }
+  .dv-send { padding: 11px 12px; font-size: 13px; }
+  .dv-note,
+  .dv-saving { font-size: 11px; }
+}
+
+/* ============ ESPACE COMPTE À 360 px ============ */
+/* L'en-tête du compte garde son avatar à côté du nom, puis les trois gestes
+   (enregistrer, voir sa fiche publique, se déconnecter) prennent la largeur
+   entière, l'un sous l'autre : sinon le dernier bouton sortait de la carte. */
+@media (max-width: 400px) {
+  .auth-grid { gap: 14px; }
+  .auth-card { padding: 15px 14px; }
+  .acct-head { gap: 10px; padding-bottom: 13px; }
+  .acct-id { gap: 10px; }
+  .acct-avatar { width: 40px; height: 40px; font-size: 17px; }
+  .acct-id h2 { font-size: 15.5px; }
+  .acct-id p { font-size: 12px; }
+  .acct-meta { font-size: 9.5px; letter-spacing: .06em; }
+  .acct-member-since time { font-size: 12px; }
+  .acct-actions { gap: 8px; }
+  .acct-actions > .cta,
+  .acct-actions > .ghost-btn { flex: 1 1 100%; justify-content: center; white-space: normal; }
+  /* La carte de la formule se replie en deux temps : le rappel d'abord, le lien
+     vers la fiche du plan ensuite, en pleine largeur. */
+  .of-plan-banner { grid-template-columns: 30px minmax(0, 1fr); gap: 10px; padding: 12px; }
+  .of-plan-banner-actions { grid-column: 1 / -1; width: 100%; }
+  .of-plan-banner-link { white-space: normal; }
+  .of-plan-change-head { gap: 4px 8px; }
+  .of-plan-change-head h3 { font-size: 12.5px; }
+  /* Les deux colonnes de champs du profil passent l'une sous l'autre, et la
+     pastille d'état du profil candidat s'aligne sous son texte. */
+  .auth-card .form-grid { grid-template-columns: 1fr; }
+  .cand-teaser-top { flex-wrap: wrap; gap: 8px; }
+  .cand-teaser-state { margin-inline-start: 0; }
+  .cand-teaser-cta { width: 100%; justify-content: center; }
+  .acct-hero-name { flex-wrap: wrap; gap: 10px; }
+  .acct-hero-name .page-h1 { overflow-wrap: anywhere; }
+}
+
+/* ============ MESSAGES À 360 px ============ */
+/* Sur téléphone la boîte ne montre qu'une colonne à la fois : la liste des
+   fils, puis la conversation. À 360 px, les sept pastilles de tri et de filtre,
+   les compteurs et la barre du fil se disputaient la largeur. Ici chaque
+   pastille garde sa ligne, la liste respire sur toute sa hauteur, et la
+   conversation prend l'écran sans plafond de hauteur. */
+@media (max-width: 400px) {
+  .msg-layout { gap: 12px; min-height: 0; }
+  .msg-side { padding: 12px; border-radius: 15px; gap: 10px; }
+  .msg-side-top { gap: 8px; }
+  .msg-side-top .pro-h { font-size: 15px; gap: 6px; }
+  .msg-badge { height: 18px; min-width: 18px; padding: 0 5px; font-size: 9.5px; }
+  .msg-badge--sleep i { font-size: 10px; }
+  .msg-kinds { gap: 5px; }
+  .msg-kind { padding: 3px 8px; font-size: 10.5px; gap: 4px; }
+  .msg-kind i { font-size: 11px; }
+  /* Le tri et le filtre prennent la largeur, et leurs mots restent courts :
+     aucun bouton ne sort plus du cadre ni ne coupe son libellé. */
+  .msg-sort { width: 100%; justify-self: stretch; justify-content: space-between; }
+  .msg-sort-btn { flex: 1 1 auto; justify-content: center; padding: 5px 6px;
+    font-size: 10px; gap: 3px; }
+  .msg-sort-btn i { font-size: 11px; }
+  .msg-sort-count { min-width: 14px; height: 14px; font-size: 9px; }
+  .msg-sort-hint { font-size: 10px; }
+  /* La liste n'a plus de plafond : elle se lit d'un bout à l'autre sous le
+     pouce, au lieu de s'enfermer dans une fenêtre de 520 px. */
+  .msg-threads { max-height: none; gap: 3px; }
+  .msg-thread { grid-template-columns: 32px minmax(0, 1fr); gap: 8px; padding: 9px 8px; }
+  .msg-avatar { width: 32px; height: 32px; font-size: 12px; }
+  .msg-thread-top b { font-size: 13px; }
+  .msg-thread-top time { font-size: 10px; }
+  .msg-thread-last { font-size: 12px; }
+  .msg-thread-pace { font-size: 9.5px; }
+  .msg-threads > li { grid-template-columns: minmax(0, 1fr) 24px; }
+  .msg-unread-btn { width: 24px; height: 24px; }
+
+  /* La conversation ouverte : en-tête compact, bulles lisibles, champ et
+     bouton d'envoi l'un sous l'autre, sans hauteur bloquée. */
+  .msg-pane { min-height: 420px; max-height: none; border-radius: 15px; }
+  .msg-head { padding: 10px 12px; gap: 9px; }
+  .msg-head-id b { font-size: 14px; }
+  .msg-head-seal { width: 20px; height: 20px; }
+  .msg-head-meta { gap: 5px; }
+  .msg-pill { font-size: 9.5px; padding: 2px 7px; }
+  .msg-pill i { font-size: 11px; }
+  .msg-stream { padding: 14px 12px; gap: 10px; }
+  .msg-bubble { max-width: 94%; padding: 9px 12px; }
+  .msg-bubble p { font-size: 13.5px; }
+  .msg-composer { padding: 10px 12px; gap: 8px; }
+  .msg-input { font-size: 14px; padding: 9px 11px; }
+  .msg-pane-empty { min-height: 300px; padding: 28px 18px; border-radius: 15px; }
+  .msg-pane-empty h2 { font-size: 16px; }
+  .msg-pane-empty p { font-size: 12.5px; }
+  .msg-members li { grid-template-columns: 32px minmax(0, 1fr) auto; gap: 8px; }
+  .msg-member-id b { font-size: 12.5px; }
+  .msg-member-id small { font-size: 10.5px; }
+}
+
+/* ============ SUIVI DE DOSSIER À 360 px ============ */
+/* Une seule colonne sur téléphone : le champ de référence, puis la fiche. À
+   360 px, la référence, le montant et les deux boutons de pied doivent tenir
+   dans environ 300 px de lecture ; les valeurs longues se replient au lieu de
+   sortir de la carte. */
+@media (max-width: 400px) {
+  .sv { gap: 10px; }
+  .sv-form,
+  .sv-card,
+  .sv-help { padding: 13px 12px; border-radius: 15px; gap: 9px; }
+  .sv-stamp { font-size: 9px; }
+  .sv-sub { font-size: 11px; }
+  .sv-field > span:first-child { font-size: 11px; }
+  .sv-input-wrap { padding: 0 9px; gap: 6px; }
+  .sv-input-wrap i { font-size: 14px; }
+  .sv-input-wrap input { padding: 9px 0; font-size: 15px; letter-spacing: .02em; }
+  .sv-input-wrap input::placeholder { font-size: 11.5px; }
+  .sv-cta { padding: 10px 13px; font-size: 13px; }
+  .sv-card-head { gap: 6px; }
+  .sv-kind { font-size: 9.5px; }
+  .sv-badge { font-size: 9px; padding: 3px 8px; }
+  .sv-ref { font-size: clamp(16px, 5.6vw, 20px); overflow-wrap: anywhere; }
+  .sv-figure { gap: 5px; }
+  .sv-figure strong { font-size: clamp(22px, 7.4vw, 28px); }
+  .sv-figure span { font-size: 11.5px; }
+  .sv-facts,
+  .sv-attn-facts { gap: 7px 12px; }
+  .sv-facts dt,
+  .sv-attn-facts dt { font-size: 9px; }
+  .sv-facts dd,
+  .sv-attn-facts dd { font-size: 12px; }
+  .sv-attn { padding: 9px 10px; }
+  /* Les recours du pied prennent la largeur, l'un sous l'autre : deux
+     pastilles côte à côte finissaient par déborder du cadre. */
+  .sv-actions,
+  .sv-help-links { gap: 7px; }
+  .sv-actions > *,
+  .sv-help-links > * { flex: 1 1 100%; justify-content: center;
+    white-space: normal; text-align: center; }
+  .sv-ghost { padding: 8px 11px; font-size: 12px; }
+  .sv-steps li { grid-template-columns: 20px minmax(0, 1fr); gap: 8px; }
+  .sv-dot { width: 20px; height: 20px; }
+  .sv-step-txt b { font-size: 12px; }
+  .sv-step-txt small { font-size: 10.5px; }
+  .sv-note,
+  .sv-privacy { font-size: 11px; }
+  .sv-help-card { grid-template-columns: 30px minmax(0, 1fr); padding: 10px; gap: 8px; }
+  .sv-help-ico { width: 30px; height: 30px; border-radius: 8px; }
+  .sv-help-ico i { font-size: 14px; }
+  .sv-help-card b { font-size: 13px; }
+  .sv-help-card p { font-size: 11px; }
+}

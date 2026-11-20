@@ -1,0 +1,157 @@
+/* ============ HOME: « VOUS CHERCHEZ UN POSTE ? » ============ */
+/* The candidate door sits between the film and the panels: a visitor who came
+   for a job reads it before anything else about the platform. */
+.cand-band { position: relative; overflow: hidden; padding: clamp(44px, 5.4vw, 82px) clamp(20px, 7vw, 120px);
+  background: linear-gradient(148deg,
+    color-mix(in srgb, var(--surface) 92%, var(--bg)) 0%,
+    color-mix(in srgb, var(--bg) 88%, var(--surface)) 62%,
+    color-mix(in srgb, var(--bg) 94%, #000) 100%);
+  border-top: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 12%, transparent); }
+.cand-band::before { content: ""; position: absolute; inset-inline-start: -10%; top: -45%; width: 46%; height: 190%;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--accent) 20%, transparent) 0%, transparent 66%); }
+.cand-band-inner { position: relative; z-index: 1; max-width: 1400px; margin: 0 auto;
+  display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, .85fr);
+  gap: clamp(22px, 4vw, 60px); align-items: center; }
+
+.cand-band-copy { display: grid; gap: 12px; min-width: 0; }
+.cand-band-title { margin: 0; font-size: clamp(28px, 4vw, 52px); line-height: 1.04; letter-spacing: -.035em; font-weight: 600; }
+.cand-band-text { margin: 0; max-width: 60ch; font-size: clamp(14px, 1.15vw, 17px); line-height: 1.65;
+  color: color-mix(in srgb, var(--text) 82%, transparent); }
+.cand-band-chips { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.cand-band-chips li { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px;
+  white-space: nowrap; font-size: 12.5px; color: color-mix(in srgb, var(--text) 88%, transparent);
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 13%, transparent); }
+.cand-band-chips i { font-size: 14px; color: var(--accent); }
+
+.cand-band-side { display: grid; gap: 10px; justify-items: start; align-content: center;
+  padding: clamp(18px, 2.2vw, 26px); border-radius: 18px;
+  background: color-mix(in srgb, var(--bg) 46%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--accent) 34%, transparent); }
+.cand-band-cta { margin-top: 0; }
+.cand-band-alt { width: 100%; justify-content: center; box-sizing: border-box; }
+.cand-band-hint { margin: 2px 0 0; display: flex; align-items: flex-start; gap: 6px;
+  font-size: 11.5px; line-height: 1.5; color: color-mix(in srgb, var(--muted) 62%, var(--text)); }
+.cand-band-hint i { color: var(--accent); font-size: 13px; margin-top: 1px; flex: 0 0 auto; }
+.cand-band .cand-band-side .cta { width: 100%; justify-content: center; box-sizing: border-box; }
+
+@media (max-width: 900px) {
+  .cand-band-inner { grid-template-columns: 1fr; }
+  .cand-band-side { justify-items: stretch; }
+  .cand-band-hint { justify-content: flex-start; }
+}
+@media (max-width: 560px) {
+  .cand-band-chips li { font-size: 12px; padding: 5px 10px; }
+}
+[dir="rtl"] .cand-band-cta i,
+[dir="rtl"] .cand-band-alt i { transform: scaleX(-1); }
+
+/* ============ ACCOUNT: CANDIDATE PROFILE TEASER ============ */
+/* The candidate details moved to their own page: the account keeps one clear
+   line on what is filled in, and the way to finish it. */
+.cand-teaser { gap: 14px; }
+.cand-teaser-top { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 10px 12px; }
+.cand-teaser-icon { width: 36px; height: 36px; flex: 0 0 auto; border-radius: 11px; display: flex;
+  align-items: center; justify-content: center; color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 32%, transparent); }
+.cand-teaser-icon i { font-size: 17px; }
+.cand-teaser-txt { flex: 1 1 220px; min-width: 0; display: grid; gap: 3px; }
+.cand-teaser-txt strong { font-family: var(--font-label); font-size: 10px; font-weight: 400; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--accent2); }
+.cand-teaser-txt p { margin: 0; font-size: 13px; line-height: 1.6;
+  color: color-mix(in srgb, var(--text) 78%, transparent); }
+.cand-teaser-state { padding: 4px 10px; border-radius: 999px; white-space: nowrap;
+  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase;
+  border: 1px solid transparent; }
+.cand-teaser-state[data-done="yes"] { color: var(--bg); background: var(--accent); border-color: var(--accent); }
+.cand-teaser-state[data-done="no"] { color: var(--muted); background: transparent;
+  border-color: color-mix(in srgb, var(--text) 24%, transparent); border-style: dashed; }
+.cand-teaser-cta { margin-top: 0; }
+[dir="rtl"] .cand-teaser-txt strong,
+[dir="rtl"] .cand-teaser-state { letter-spacing: 0; text-transform: none; font-size: 11px; }
+
+/* ============ CANDIDATE PROFILE PAGE ============ */
+.cprof-gate { display: grid; gap: 14px; justify-items: start; }
+.cprof-meter-top { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; }
+.cprof-meter-top .pro-h { margin-bottom: 0; }
+.cprof-meter-pct { font-family: var(--font-heading); font-size: 22px; font-weight: 600;
+  letter-spacing: -.03em; color: var(--accent2); }
+.cprof-meter-bar { display: block; height: 6px; margin: 10px 0 14px; border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 12%, transparent); overflow: hidden; }
+.cprof-meter-bar i { display: block; height: 100%; border-radius: 999px; background: var(--accent);
+  transition: width .45s cubic-bezier(.2,.7,.2,1); }
+.cprof-checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; }
+.cprof-checks li { display: flex; align-items: center; gap: 8px; font-size: 13px; line-height: 1.4;
+  color: color-mix(in srgb, var(--text) 88%, transparent); }
+.cprof-checks i { font-size: 15px; flex: 0 0 auto; }
+.cprof-checks li[data-done="yes"] i { color: var(--accent); }
+.cprof-checks li[data-done="no"] i { color: color-mix(in srgb, var(--text) 32%, transparent); }
+.cprof-checks li[data-done="no"] span { color: var(--muted); }
+.cprof-meter-note { margin-top: 12px; }
+/* The same person may also hold a business account: name it, so the absence of
+   their listings on this page never looks like a bug. */
+.cprof-twin { border-color: color-mix(in srgb, var(--accent) 32%, transparent);
+  background: color-mix(in srgb, var(--accent) 5%, transparent); }
+.cprof-twin .pro-h { display: flex; align-items: center; gap: 8px; }
+.cprof-twin .pro-h i { font-size: 16px; color: var(--accent); }
+.cprof-twin .auth-note strong { color: var(--text); }
+.cprof-twin .ghost-link { margin-top: 10px; }
+@media (prefers-reduced-motion: reduce) { .cprof-meter-bar i { transition: none; } }
+
+/* ============ CV FIELD (private PDF) ============ */
+.cvf { display: grid; gap: 12px; }
+.cvf-top { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px;
+  padding: 12px; border-radius: 13px;
+  background: color-mix(in srgb, var(--bg) 34%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent); }
+.cvf-icon { width: 38px; height: 38px; flex: 0 0 auto; border-radius: 11px; display: flex;
+  align-items: center; justify-content: center; color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); }
+.cvf-icon i { font-size: 19px; }
+.cvf-txt { flex: 1 1 140px; min-width: 0; display: grid; gap: 2px; }
+.cvf-txt strong { font-size: 13.5px; font-weight: 600; overflow-wrap: anywhere; }
+.cvf-txt em { font-style: normal; font-size: 11.5px; color: color-mix(in srgb, var(--muted) 62%, var(--text));
+  overflow-wrap: anywhere; }
+.cvf-badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; border-radius: 999px;
+  white-space: nowrap; font-family: var(--font-label); font-size: 9px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--bg); background: var(--accent); }
+.cvf-badge i { font-size: 11px; }
+.cvf-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.cvf-actions .cta { margin-top: 0; }
+.cvf-actions .ghost-btn { padding: 10px 15px; font-size: 13px; }
+.cvf-main { min-width: 0; }
+.cvf-file { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
+.cvf-hint { margin: 0; display: flex; align-items: flex-start; gap: 6px; font-size: 11.5px; line-height: 1.55;
+  color: color-mix(in srgb, var(--muted) 64%, var(--text)); }
+.cvf-hint i { color: var(--accent); font-size: 13px; margin-top: 1px; flex: 0 0 auto; }
+.cvf .form-msg { margin: 0; font-size: 12.5px; }
+@media (max-width: 520px) {
+  .cvf-actions { flex-direction: column; align-items: stretch; }
+  .cvf-actions .cta, .cvf-actions .ghost-btn { width: 100%; justify-content: center; }
+}
+[dir="rtl"] .cvf-badge { letter-spacing: 0; text-transform: none; font-size: 10.5px; }
+
+/* The CV block inside the apply dialog, next to the phone field. */
+.apply-cv { display: grid; gap: 6px; padding: 10px 12px; border-radius: 12px; box-sizing: border-box;
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  font-size: 12.5px; line-height: 1.5; color: color-mix(in srgb, var(--text) 82%, transparent); }
+.apply-cv > i { font-size: 16px; color: var(--accent); }
+.apply-cv[data-ready="no"] > i { color: color-mix(in srgb, var(--accent) 62%, var(--text)); }
+.apply-cv-link { display: inline-flex; align-items: center; gap: 5px; width: fit-content;
+  color: var(--accent2); text-decoration: none; font-size: 12px; white-space: nowrap; }
+.apply-cv-link:hover { color: var(--text); }
+.apply-cv-link i { font-size: 13px; transition: transform .2s ease-out; }
+.apply-cv-link:hover i { transform: translateX(3px); }
+[dir="rtl"] .apply-cv-link i { transform: scaleX(-1); }
+[dir="rtl"] .apply-cv-link:hover i { transform: scaleX(-1) translateX(3px); }
+
+/* The CV link on an application row, opened through a signed URL. */
+.capp-cv-btn { padding: 0; border: 0; background: none; color: inherit; font: inherit; font-size: inherit;
+  cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+.capp-cv-btn:hover { color: var(--accent2); }

@@ -1,0 +1,2274 @@
+/* Top bar: opaque, tinted a hair above the page background so it reads as the
+   same brown family as the lighter page, without a visible step. */
+/* La barre se lit en trois colonnes : la marque, les portes, le bloc de droite.
+   Les deux colonnes extérieures sont égales, si bien que le rang des portes
+   reste sur l'axe de la barre — quel que soit le contenu de droite. */
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center;
+  padding: 18px clamp(20px, 4vw, 56px); background: color-mix(in srgb, var(--bg) 86%, var(--surface) 14%);
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 11%, transparent);
+  transition: transform .5s cubic-bezier(.2,.7,.2,1), opacity .32s ease, box-shadow .4s ease; }
+/* On the home page the bar steps aside a few seconds after arrival so the film
+   gets the top of the screen, then comes back on hover, on a pointer move near
+   the top edge, or on any scroll. Subpages keep it in place. */
+.nav.is-hidden { transform: translateY(-100%); opacity: 0; pointer-events: none; }
+.nav.is-solid { box-shadow: 0 12px 34px color-mix(in srgb, #000 34%, transparent); }
+.nav-logo { position: relative; font-weight: 600; letter-spacing: -.02em; font-size: 20px; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+.nav-logo i { color: var(--accent); }
+/* The seal that answers the browser tab, set beside the name: the same square
+   mark, small enough to sit on the baseline without crowding the wordmark. */
+.nav-logo-mark { width: 32px; height: 32px; flex: 0 0 auto; display: block; border-radius: 10px;
+  object-fit: cover; box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 34%, transparent);
+  transition: box-shadow .25s ease, transform .25s ease; }
+.nav-logo:hover .nav-logo-mark {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 68%, transparent);
+  transform: rotate(-3deg); }
+@media (prefers-reduced-motion: reduce) {
+  .nav-logo-mark, .nav-logo:hover .nav-logo-mark { transition: none; transform: none; }
+}
+/* La seconde marque du réseau, posée à droite du nom du site sur l'accueil :
+   un filet la sépare du lettrage PaperAtlas, l'emblème garde la taille du
+   sceau, et les deux lectures du nom — arabe puis latine — tiennent sur deux
+   lignes serrées, comme un cachet à deux faces. */
+.nav-logo-partner { display: inline-flex; align-items: center; gap: 7px; flex: 0 1 auto; min-width: 0;
+  margin-inline-start: 2px; padding-inline-start: 11px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--accent) 32%, transparent); }
+.nav-logo-partner-mark { width: 28px; height: 28px; flex: 0 0 auto; display: block; border-radius: 9px;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 26%, transparent);
+  transition: box-shadow .25s ease, transform .25s ease; }
+.nav-logo:hover .nav-logo-partner-mark {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 58%, transparent);
+  transform: rotate(3deg); }
+.nav-logo-partner-txt { display: flex; flex-direction: column; justify-content: center; min-width: 0;
+  line-height: 1.08; }
+.nav-logo-partner-txt b { font-family: var(--font-heading); font-size: 12.5px; font-weight: 650;
+  letter-spacing: .01em; color: var(--text); white-space: nowrap; }
+.nav-logo-partner-txt small { font-family: var(--font-label); font-size: 9px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase; white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 58%, transparent); }
+@media (prefers-reduced-motion: reduce) {
+  .nav-logo-partner-mark, .nav-logo:hover .nav-logo-partner-mark { transition: none; transform: none; }
+}
+/* La barre se resserre : c'est le second lettrage qui cède d'abord, l'emblème
+   reste — deux marques doivent continuer de tenir sur la même ligne. Le mot
+   arabe, lui, tient sur toutes les pages : il ne s'efface qu'au téléphone,
+   quand la barre n'a plus la place que pour les deux sceaux. */
+@media (max-width: 1400px) {
+  .nav-logo-partner-txt small { display: none; }
+}
+@media (max-width: 1180px) {
+  .nav-logo-partner { padding-inline-start: 9px; gap: 6px; }
+  .nav-logo-partner-mark { width: 26px; height: 26px; border-radius: 8px; }
+  .nav-logo-partner-txt b { font-size: 11.5px; }
+}
+@media (max-width: 560px) {
+  .nav-logo-partner-txt { display: none; }
+}
+
+/* ── Les deux marques, en arabe, sur un écran moyen ─────────────────────────
+   Le couple s'écrit dans l'ordre du document : en arabe, le cachet passe à
+   droite, « PaperAtlas » au milieu, l'emblème et son lettrage à gauche. Le
+   filet, lui, reste entre les deux noms — il est écrit en propriété logique,
+   il n'a donc rien à retourner.
+
+   Ce qui change vraiment, c'est la largeur : à corps égal, le lettrage arabe
+   occupe plus de place que le latin. Entre 1024 et 1439 px, la barre ne porte
+   plus que ses marques et le panneau « Plus » : le couple garde donc son
+   emblème et son mot entier, et c'est le nom latin du site — qui se répète
+   aussi dans le pied de page et dans le titre — qui cède un cran le premier.
+   Aucune porte ne se replie, aucune marque ne passe à la ligne. */
+@media (min-width: 1024px) and (max-width: 1439px) {
+  [dir="rtl"] .nav-logo { gap: 9px; }
+  [dir="rtl"] .nav-logo-partner { margin-inline-start: 0; padding-inline-start: 9px; gap: 6px; }
+  [dir="rtl"] .nav-logo-partner-mark { width: 26px; height: 26px; border-radius: 8px; }
+  [dir="rtl"] .nav-logo-partner-txt b { font-size: 11.5px; }
+  [dir="rtl"] .nav-logo-txt { max-width: 104px; }
+}
+@media (min-width: 1024px) and (max-width: 1199px) {
+  [dir="rtl"] .nav-logo-txt { max-width: 84px; }
+  [dir="rtl"] .nav-logo-partner-txt b { font-size: 11px; }
+}
+
+/* Entre 561 et 1023 px, la rangée a laissé la place au menu : les deux marques
+   restent seules à gauche de la barre, avec la langue et le compte de l'autre
+   côté. Le mot arabe garde sa taille lisible, le nom latin se resserre. */
+@media (min-width: 561px) and (max-width: 1023px) {
+  [dir="rtl"] .nav-logo { gap: 8px; }
+  [dir="rtl"] .nav-logo-partner { margin-inline-start: 0; padding-inline-start: 8px; gap: 5px; }
+  [dir="rtl"] .nav-logo-partner-txt b { font-size: 11px; }
+  [dir="rtl"] .nav-logo-txt { max-width: 76px; }
+}
+
+/* La marque ne quitte jamais sa ligne : c'est elle qui est complète, le nom du
+   site peut s'écourter par des points de suspension plutôt que de la pousser
+   hors de la barre. Le nom ne prend jamais la place libre — s'il la prenait,
+   en arabe il pousserait l'emblème au bout de la barre et les deux marques ne
+   se liraient plus comme un couple. Il cède quand il manque de la place, et
+   rien de plus. */
+[dir="rtl"] .nav-logo-partner { flex: 0 0 auto; }
+[dir="rtl"] .nav-logo-txt { flex: 0 1 auto; min-width: 0; }
+.nav-links { display: flex; gap: 28px; }
+/* Every door in the row carries its own small mark before the label: the bar
+   reads at a glance, without the visitor having to spell each word out. The
+   mark only serves the row itself — the panel behind « Plus » has its own. */
+.nav-links > a { display: inline-flex; align-items: center; gap: 6px; }
+.nav-links > a > i { font-size: 15px; line-height: 1; flex: none;
+  color: color-mix(in srgb, var(--accent) 78%, var(--text));
+  transition: color .2s ease, transform .2s ease; }
+.nav-links > a:hover > i { color: var(--accent2); }
+.nav-links > a.is-current > i { color: var(--accent); }
+@media (max-width: 1440px) {
+  .nav-links > a { gap: 4px; }
+  .nav-links > a > i { font-size: 13.5px; }
+}
+.nav-links a { position: relative; text-decoration: none; font-size: 14px; font-weight: 500; color: var(--text); white-space: nowrap;
+  transition: color .2s ease; }
+.nav-links a:hover { color: var(--accent2); }
+.nav-links a::after { content: ""; position: absolute; left: 0; bottom: -4px; height: 1px; width: 100%; background: var(--accent);
+  transform: scaleX(0); transform-origin: left; transition: transform .3s ease-out; }
+.nav-links a:hover::after { transform: scaleX(1); }
+/* The row says where you stand: the page under your feet takes the accent and
+   keeps its underline drawn, so the bar is never colourless about location. */
+.nav-links a.is-current { color: var(--accent); font-weight: 600; }
+.nav-links a.is-current:hover { color: var(--accent); }
+.nav-links a.is-current::after { transform: scaleX(1); background: var(--accent); }
+.nav-links a.is-current:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+/* The mark arrives rather than simply appearing: a short rise and a soft fade,
+   while the underline sweeps across from the left on its own transition. */
+@keyframes nav-current-in { from { opacity: .3; transform: translateY(-3px); } to { opacity: 1; transform: none; } }
+.nav-links a.is-current { animation: nav-current-in .32s cubic-bezier(.2,.7,.2,1) both; }
+/* « Demandes » is a section of the page, not only a door: when it has just been
+   read, its label carries the same named pill as the panel and the phone sheet,
+   so the three sections of the chapter answer with one voice everywhere. */
+.nav-links a.nav-link-tick-host { display: inline-flex; align-items: center; gap: 6px; }
+.nav-link-tick { display: inline-flex; align-items: center; gap: 4px; flex: none;
+  padding: 1px 7px 1px 5px; border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--accent); font-family: var(--font-label); font-size: 9px;
+  line-height: 1.35; letter-spacing: .04em; white-space: nowrap;
+  animation: nav-dot-in .26s cubic-bezier(.2,.7,.2,1) both; }
+.nav-link-tick i { font-size: 10px; line-height: 1; color: var(--accent); }
+[dir="rtl"] .nav-link-tick { letter-spacing: 0; font-size: 10.5px; }
+@media (prefers-reduced-motion: reduce) {
+  .nav-link-tick { animation: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-links a.is-current { animation: none; }
+  .nav-links a.is-current::after { transition: none; }
+}
+.nav-cta { padding: 10px 18px; border-radius: 999px; background: var(--accent); color: var(--bg); font-weight: 600; font-size: 14px;
+  text-decoration: none; white-space: nowrap; transition: background .25s; }
+.nav-cta:hover { background: color-mix(in srgb, var(--accent) 80%, var(--bg)); }
+.nav-burger { display: none; position: relative; width: 40px; height: 40px; align-items: center; justify-content: center; font-size: 22px; background: none; border: 0; color: var(--text); cursor: pointer; }
+/* The chapter's count rides the burger while the sheet is shut, so the phone
+   keeps the same bearings as the panel without having to open anything. */
+.nav-burger-count { position: absolute; top: 1px; inset-inline-end: 0; display: inline-flex;
+  align-items: center; justify-content: center; min-width: 17px; height: 17px; padding: 0 4px;
+  border-radius: 999px; background: var(--accent); color: var(--bg);
+  font-family: var(--font-label); font-size: 9px; line-height: 1; letter-spacing: 0;
+  animation: nav-dot-in .26s cubic-bezier(.2,.7,.2,1) both; }
+/* Before the first section is entered there is nothing to count: the badge
+   steps back to the plain dot « Plus » already uses, so the burger never shows
+   a « 0/3 » that would look like a score to beat. */
+.nav-burger-dot { position: absolute; top: 7px; inset-inline-end: 7px; width: 6px; height: 6px;
+  border-radius: 50%; background: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
+  animation: nav-dot-in .26s cubic-bezier(.2,.7,.2,1) both; }
+.nav-mobile { position: fixed; top: 72px; left: 8px; right: 8px; z-index: 49; padding: 20px; border-radius: 16px; display: grid; gap: 14px;
+  /* La feuille du téléphone se borne elle aussi à l'écran : rien ne déborde
+     sous la ligne du bas, le reste défile dans la feuille. */
+  max-height: calc(100vh - 84px); overflow-y: auto; overscroll-behavior: contain;
+  background: var(--surface); border: 1px solid color-mix(in srgb, var(--text) 20%, transparent);
+  box-shadow: 0 30px 64px rgba(0, 0, 0, .62), 0 0 0 1px color-mix(in srgb, #000 22%, transparent);
+  animation: nav-sheet-in .22s cubic-bezier(.2,.7,.2,1) both; }
+/* The sheet answers the tap instead of simply materialising: a short drop from
+   under the bar, the same gesture the two desktop panels make. */
+@keyframes nav-sheet-in {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-mobile { animation: none; }
+}
+/* Le premier groupe de la feuille garde la même tenue que le bloc collé du
+   panneau « Plus » : « Devis », « Suivi » et le chapitre restent sous le bord
+   haut pendant que le reste défile — au pouce non plus on ne perd jamais les
+   deux portes. Il prend la place du rembourrage de la feuille, pour que les
+   entrées qui défilent passent derrière lui sans laisser de liseré. */
+.nav-mobile-pinned {
+  position: sticky;
+  top: -20px;
+  z-index: 3;
+  display: grid;
+  gap: 14px;
+  margin: -20px -20px 0;
+  padding: 20px 20px 6px;
+  border-radius: 15px 15px 0 0;
+  background: var(--surface);
+  /* Le liseré qui ferme le bloc : à peine visible tant que rien n'a défilé,
+     il s'accuse dès qu'une entrée passe derrière. */
+  border-bottom: 1px solid transparent;
+  box-shadow: 0 10px 14px -14px color-mix(in srgb, #000 62%, transparent);
+  transition: border-color .26s ease, box-shadow .26s ease;
+}
+.nav-mobile-pinned.is-scrolled {
+  border-bottom-color: color-mix(in srgb, var(--text) 22%, transparent);
+  box-shadow: 0 14px 18px -14px color-mix(in srgb, #000 72%, transparent);
+}
+.nav-mobile a { text-decoration: none; font-size: 16px; transition: color .22s ease; }
+/* A plain door in the phone sheet keeps the same mark as its twin in the bar:
+   one icon before the label, aligned with the counted doors below it. */
+/* Une porte sans explication garde exactement le corps et l'interligne des
+   portes du panneau : les deux listes se déroulent au même pas. */
+.nav-mobile a.nav-mobile-plain { display: flex; align-items: center; gap: 10px;
+  font-size: 15px; line-height: 1.28; }
+.nav-mobile-plain > i { font-size: 17px; line-height: 1.3; flex: none;
+  color: color-mix(in srgb, var(--accent) 86%, var(--text));
+  transition: color .22s ease; }
+.nav-mobile > a.nav-mobile-plain.is-current > i { color: var(--accent); }
+/* The phone sheet tells the same story as the bar: the four secondary doors
+   carry the same counted line under their label. */
+.nav-mobile a.nav-mobile-item { display: flex; align-items: flex-start; gap: 11px; }
+.nav-mobile-item i { font-size: 17px; line-height: 1.3; color: color-mix(in srgb, var(--accent) 86%, var(--text));
+  transition: color .22s ease; }
+/* Les deux surfaces lisent le même couple : 15 px / interligne 1,28 pour le
+   nom, 12,5 px / 1,34 pour la ligne d'explication. C'est ce couple — et non
+   un réglage propre à chaque surface — qui donne le pas de défilement. */
+.nav-mobile-txt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.nav-mobile-txt > span { font-size: 15px; line-height: 1.28; }
+.nav-mobile-txt small { font-family: var(--font-label); font-size: 12.5px; line-height: 1.34;
+  color: color-mix(in srgb, var(--text) 52%, transparent); transition: color .22s ease; }
+/* A section that has just been read says so on its own entry: a small tick in
+   the accent, at the far end of the line — read, noted, no need to ask. */
+.nav-mobile-tick { display: inline-flex; align-items: center; justify-content: center; flex: none;
+  margin-inline-start: auto; width: 18px; height: 18px; border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 20%, transparent); color: var(--accent);
+  animation: nav-dot-in .26s cubic-bezier(.2,.7,.2,1) both; }
+.nav-mobile-tick i { font-size: 12px; line-height: 1; color: var(--accent); }
+/* The tick names the section it just saw: same accent, same circle family, but
+   wide enough to carry the label — a bare check would leave the reader guessing
+   which of the two doors it answered. */
+.nav-mobile-tick--named { width: auto; height: auto; min-height: 18px; gap: 4px;
+  padding: 2px 8px 2px 6px; border-radius: 999px; font-family: var(--font-label);
+  font-size: 9.5px; line-height: 1.3; letter-spacing: .04em; white-space: nowrap;
+  color: var(--accent); }
+.nav-mobile-tick--named i { font-size: 11px; }
+[dir="rtl"] .nav-mobile-tick--named { letter-spacing: 0; font-size: 10.5px; }
+.nav-mobile a.nav-mobile-item:hover .nav-mobile-txt small { color: color-mix(in srgb, var(--accent) 82%, transparent); }
+/* The page you are already standing on, said plainly in the sheet too. */
+.nav-mobile > a.is-current { color: var(--accent); font-weight: 600; }
+.nav-mobile > a.is-current i, .nav-mobile a.nav-mobile-item.is-current i { color: var(--accent); }
+.nav-mobile a.nav-mobile-item.is-current .nav-mobile-txt small { color: color-mix(in srgb, var(--accent) 78%, transparent); }
+.nav-mobile > a.is-current, .nav-mobile a.nav-mobile-item.is-current { margin-inline: -11px; padding: 8px 11px;
+  border-radius: 10px; background: color-mix(in srgb, var(--accent) 13%, transparent); }
+/* The sheet marks the door the same way the row does: the current entry is the
+   one that arrives, a short rise and a soft fade when the page changes. */
+.nav-mobile > a.is-current, .nav-mobile a.nav-mobile-item.is-current { animation: nav-current-in .32s cubic-bezier(.2,.7,.2,1) both; }
+@media (prefers-reduced-motion: reduce) {
+  .nav-mobile > a.is-current, .nav-mobile a.nav-mobile-item.is-current { animation: none; }
+}
+.nav-mobile-out { display: flex; align-items: center; gap: 9px; padding: 10px 12px; border-radius: 12px;
+  border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent); background: transparent;
+  color: color-mix(in srgb, var(--text) 68%, var(--muted)); font: inherit; font-size: 15px; text-align: start; cursor: pointer;
+  transition: border-color .2s ease, color .2s ease, background .2s ease; }
+.nav-mobile-out i { font-size: 16px; color: var(--accent); }
+.nav-mobile-out:hover { border-style: solid; border-color: var(--accent); color: var(--accent); }
+.nav-mobile-out[disabled] { opacity: .6; cursor: wait; }
+/* « Nouveaux profils »: the live shortcut to this month's arrivals, tinted so
+   it reads as a running entry, not a second « Candidats ». */
+.nav-links a.nav-new { color: var(--accent); display: inline-flex; align-items: center; gap: 6px; }
+.nav-links a.nav-new::after { background: var(--accent); }
+.nav-links a.nav-new:hover { color: color-mix(in srgb, var(--accent) 78%, var(--text)); }
+/* The week's arrivals, counted right on the link: the bar tells you whether the
+   pool is moving without a single click. */
+.nav-new-count { display: inline-flex; align-items: center; justify-content: center;
+  min-width: 17px; height: 17px; padding: 0 5px; border-radius: 999px;
+  background: var(--accent); color: var(--bg);
+  font-family: var(--font-label); font-size: 9.5px; line-height: 1; letter-spacing: 0; }
+/* Seven public links now: the row tightens before it ever pushes the account
+   block out of the bar. */
+@media (max-width: 1440px) { .nav-links { gap: 14px; } .nav-links a { font-size: 12.5px; } }
+/* Le panneau « Plus » descend jusqu'à 1024 px. Entre 1024 et 1299 px, le rang
+   ne garde que lui : ses quatre portes principales passent dans le panneau,
+   qui les reprend sous leur propre intitulé (voir .nav-more-compact). En
+   dessous de 1024 px, la barre cède la place au bouton menu et à la feuille
+   du téléphone — la feuille reste donc la surface du téléphone. */
+@media (min-width: 1024px) and (max-width: 1299px) {
+  .nav-links > a { display: none; }
+  .nav-links { gap: 0; }
+}
+@media (max-width: 1023px) { .nav-links, .nav-cta { display: none; } .nav-burger { display: flex; } }
+/* « Devenir candidat »: the candidate door sits in the bar for visitors only —
+   outlined, so it never competes with the main call to action. */
+.nav-cand { display: inline-flex; align-items: center; gap: 7px; padding: 8px 14px; border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 52%, transparent); background: transparent;
+  color: var(--accent); font-size: 13.5px; font-weight: 600; text-decoration: none; white-space: nowrap;
+  transition: background .25s ease, color .25s ease, border-color .25s ease; }
+.nav-cand i { font-size: 15px; }
+.nav-cand:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+@media (max-width: 1240px) { .nav-cand { padding: 8px 10px; } .nav-cand-txt { display: none; } }
+@media (max-width: 900px) { .nav-cand { display: none; } }
+
+/* Same door in the mobile sheet, spelled out and tinted. */
+.nav-mobile a.nav-mobile-cand { display: flex; align-items: center; gap: 9px; padding: 11px 14px;
+  border-radius: 12px; border: 1px solid color-mix(in srgb, var(--accent) 52%, transparent);
+  color: var(--accent); font-weight: 600; }
+.nav-mobile a.nav-mobile-cand i { font-size: 17px; }
+
+/* ── The bar never overflows ────────────────────────────────────────────────
+   The right-hand block keeps its full width; the links row gives way first, so
+   the call to action can never be pushed past the edge of the screen. */
+.nav { gap: 16px; }
+/* Le bouton « Nous contacter » a quitté le haut de la barre : le bloc de droite
+   a donc rétréci, et un rang centré sur l'espace restant aurait glissé vers la
+   droite. Les portes se tiennent maintenant au milieu exact de la barre, et la
+   marque comme le bloc de droite occupent chacun leur moitié. */
+.nav-logo { justify-self: start; min-width: 0; }
+.nav-links { justify-self: center; min-width: 0; align-items: center; }
+.nav-right { justify-self: end; }
+
+/* ── « Plus »: the four secondary doors, one panel ─────────────────────────── */
+.nav-more { position: relative; display: inline-flex; align-items: center; }
+.nav-more-btn { display: inline-flex; align-items: center; gap: 5px; padding: 0; border: 0; background: none;
+  color: var(--text); font: inherit; font-family: var(--font-body); font-size: 14px; font-weight: 500;
+  white-space: nowrap; cursor: pointer; transition: color .2s ease; }
+.nav-more-btn i { font-size: 16px; color: color-mix(in srgb, var(--accent) 82%, transparent);
+  transition: transform .25s ease, color .2s ease; }
+.nav-more-btn:hover { color: var(--accent2); }
+.nav-more-btn:hover i { color: var(--accent2); }
+.nav-more-btn.is-open { color: var(--accent); }
+.nav-more-btn.is-open i { color: var(--accent); }
+/* Only the caret turns when the panel opens: the mark in front of the word
+   stays upright, it names the panel, it does not point at it. */
+.nav-more-btn.is-open .nav-more-caret { transform: rotate(180deg); }
+/* A section of the page is being read: the closed panel keeps a small witness
+   beside its label, so the mark is never lost behind the button. */
+.nav-more-dot { width: 6px; height: 6px; flex: none; margin-inline-start: 1px; border-radius: 50%;
+  background: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
+  animation: nav-dot-in .26s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes nav-dot-in { from { opacity: 0; transform: scale(.4); } to { opacity: 1; transform: none; } }
+/* Panel open: the same witness, now counting the sections already read. */
+.nav-more-count { display: inline-flex; align-items: center; justify-content: center; flex: none;
+  min-width: 16px; height: 16px; padding: 0 4px; margin-inline-start: 2px; border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 20%, transparent); color: var(--accent);
+  font-family: var(--font-label); font-size: 9.5px; line-height: 1; letter-spacing: 0;
+  animation: nav-dot-in .26s cubic-bezier(.2,.7,.2,1) both; }
+.nav-more-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; border-radius: 4px; }
+.nav-more-menu { position: absolute; top: calc(100% + 16px); inset-inline-start: -14px; z-index: 60;
+  width: 400px; max-width: calc(100vw - 32px);
+  display: grid; gap: 2px; padding: 8px; border-radius: 14px;
+  /* La fenêtre ne dépasse jamais le bas de l'écran : elle se borne à la place
+     qui reste sous la barre et défile à l'intérieur, pour que la dernière
+     entrée (« Demandes B2B ») reste atteignable sur un écran court. */
+  max-height: calc(100vh - 110px); overflow-y: auto; overscroll-behavior: contain;
+  background: color-mix(in srgb, var(--surface) 96%, var(--text) 4%);
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  box-shadow: 0 24px 52px color-mix(in srgb, #000 52%, transparent), 0 0 0 1px color-mix(in srgb, #000 16%, transparent);
+  animation: nav-more-in .18s ease-out both; }
+/* La barre de défilement reste discrète : elle sert, elle ne se remarque pas. */
+.nav-more-menu::-webkit-scrollbar { width: 6px; }
+.nav-more-menu::-webkit-scrollbar-thumb {
+  border-radius: 999px; background: color-mix(in srgb, var(--text) 22%, transparent); }
+.nav-more-menu { scrollbar-width: thin; }
+@keyframes nav-more-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+/* Le premier groupe du panneau — Devis, Suivi, le chapitre — reste collé en
+   haut pendant qu'on parcourt le reste : la lecture ne perd jamais ses deux
+   portes. Il prend la place du rembourrage du panneau, pour que les entrées
+   qui défilent passent derrière lui sans laisser de liseré. */
+.nav-more-pinned {
+  position: sticky;
+  top: -8px;
+  z-index: 3;
+  display: grid;
+  gap: 2px;
+  margin: -8px -8px 0;
+  padding: 8px 8px 2px;
+  background: color-mix(in srgb, var(--surface) 96%, var(--text) 4%);
+  /* Le même liseré que la feuille du téléphone : discret quand on vient
+     d'ouvrir, franc dès que les portes qui défilent sont passées derrière. */
+  border-bottom: 1px solid transparent;
+  box-shadow: 0 6px 12px -10px color-mix(in srgb, #000 60%, transparent);
+  transition: border-color .26s ease, box-shadow .26s ease;
+}
+.nav-more-pinned.is-scrolled {
+  border-bottom-color: color-mix(in srgb, var(--text) 24%, transparent);
+  box-shadow: 0 12px 16px -12px color-mix(in srgb, #000 74%, transparent);
+}
+/* The panel headings: one group for this page, one for the rest of the network. */
+.nav-more-head { margin: 0; padding: 8px 11px 5px; font-family: var(--font-label); font-size: 10px;
+  letter-spacing: .12em; text-transform: uppercase; color: color-mix(in srgb, var(--text) 48%, transparent);
+  display: flex; align-items: center; gap: 7px; }
+[dir="rtl"] .nav-more-head { letter-spacing: 0; text-transform: none; font-size: 11px; }
+/* Une rubrique du panneau et ses portes, dans un même bloc : le compte de
+   l'intitulé se relève sur ce bloc, pas sur le panneau entier — il dit ce que
+   la rubrique tient, et rien d'autre. La grille garde le pas du menu. */
+.nav-more-group { display: grid; gap: 2px; min-width: 0; }
+/* Le compte d'une rubrique, à côté de son nom : un chiffre en pastille, d'un
+   cran plus petit que les portes, qui ne déplace pas le mot quand il paraît.
+   Il annule l'interlettrage et les capitales de l'intitulé, comme la flèche
+   des types — un chiffre ne s'écrit pas en petites capitales. */
+.nav-grp-count {
+  flex: none;
+  padding: 2px 5px;
+  border-radius: 999px;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: none;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent) 78%, var(--text) 22%);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+[dir="rtl"] .nav-grp-count { font-size: 10px; }
+/* L'intitulé de la feuille qui porte un compte devient une rangée : le mot
+   d'abord, le chiffre ensuite, du côté où la lecture commence. La pastille ne
+   se comprime pas et ne passe pas à la ligne — le chiffre se lit d'un bloc,
+   même à 360 px et en arabe, où le mot de la rubrique est plus large. */
+.nav-mobile-group:has(.nav-grp-count) {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.nav-mobile-group:has(.nav-grp-count) .nav-grp-count { white-space: nowrap; }
+[dir="rtl"] .nav-mobile-group:has(.nav-grp-count) { letter-spacing: 0; }
+/* Le panneau mesure ses rubriques sur leur bloc : la grille garde le pas du
+   menu, l'intitulé et ses portes ne peuvent donc pas se séparer. */
+.nav-more-group > .nav-more-head { min-width: 0; }
+.nav-more-rule { display: block; height: 1px; margin: 5px 8px;
+  background: color-mix(in srgb, var(--text) 13%, transparent); }
+/* Le filet de la famille, dans le panneau : les deux tableaux ferment la
+   parenté de l'annuaire, puis les autres lieux du réseau reprennent. Un cran
+   plus bas que le filet des rubriques, et resserré : il coud, il ne coupe pas. */
+.nav-more-rule--soft {
+  margin: 6px 12px 3px;
+  background: color-mix(in srgb, var(--text) 9%, transparent);
+}
+/* Sous le filet de la famille, le même mot de couture que le pied de page et la
+   feuille : le trait ne se lit plus comme une simple séparation, mais comme le
+   pas vers la suite du réseau. Il est plus petit que les portes, sans
+   capitales criardes, et se range du côté où la lecture commence — en arabe il
+   passe donc à droite, sans paire gauche/droite à désunir. Ce n'est pas une
+   entrée du menu : il ne prend la place d'aucune porte et n'entre dans aucun
+   compte. */
+.nav-more-seam {
+  display: block;
+  /* La marge est écrite en propriétés logiques : elle vaut des deux côtés à
+     la fois, donc le mot se pose sur la même jointure que le filet qui le
+     précède — en arabe comme en latin, sans paire gauche/droite à désunir. */
+  margin-block: 0 3px;
+  margin-inline: 12px;
+  padding: 0;
+  /* Le mot commence du côté où la lecture commence : à droite en arabe. */
+  text-align: start;
+  font-family: var(--font-label);
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 42%, transparent);
+}
+[dir="rtl"] .nav-more-seam {
+  font-size: 10px;
+  letter-spacing: 0;
+  /* L'arabe se lit un cran plus haut que le latin à taille égale, et sans
+     capitales pour le porter : le mot gagne un peu d'interligne. */
+  line-height: 1.45;
+  text-transform: none;
+}
+/* ── Le mot de couture dans la recherche des deux tableaux ─────────────────
+   Pendant une recherche, les deux tableaux rendent leurs portes l'un après
+   l'autre. Le mot de couture reprend ici sa tenue des trois autres surfaces,
+   mais il nomme la famille qui suit — « Annonces », « Emplois » —, si bien
+   qu'un pays trouvé dit à quelle famille il appartient au lieu de flotter
+   entre deux. Ce n'est pas une porte : il ne prend la place d'aucune et
+   n'entre dans aucun compte. Sa marge suit celle des pastilles qu'il
+   introduit, et il commence du côté où la lecture commence. */
+.nav-door-seam {
+  display: block;
+  margin: 7px 11px 2px;
+  margin-inline-start: 30px;
+  padding: 0;
+  text-align: start;
+  font-family: var(--font-label);
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 42%, transparent);
+}
+[dir="rtl"] .nav-door-seam {
+  font-size: 10px;
+  letter-spacing: 0;
+  line-height: 1.45;
+  text-transform: none;
+}
+/* Le nom de la famille trouvée ne s'écourte jamais : il est court, et c'est lui
+   qui dit à quelle famille appartient le pays en dessous. Il se replie plutôt
+   que de sortir du panneau si une langue l'allonge — mais il se replie entre
+   ses mots, jamais à l'intérieur d'un mot : un nom coupé en deux ne dirait
+   plus de quelle famille parle le pays qui suit. */
+.nav-door-seam--panel {
+  max-width: 100%;
+  overflow-wrap: normal;
+  word-break: normal;
+  white-space: normal;
+}
+/* ── Le nom de la famille trouvée, dans le panneau « Plus » ───────────────
+   Pendant une recherche, chaque famille répondante est nommée au-dessus de ses
+   pastilles. Dans le panneau, le mot se pose au pas du filet de famille qu'il
+   prolonge — les mêmes 12 px que .nav-more-rule--soft —, et non sur le retrait
+   des pastilles : il se lit donc comme une jointure, pas comme une porte de
+   plus. Les pastilles gardent, elles, leur retrait de 30 px. */
+.nav-door-seam--panel {
+  /* Le pas du mot de famille et de son trait pointillé, écrit une fois pour
+     toutes : 9 px au-dessus du mot, 9 px sous le trait. Il ne vit plus dans
+     la seule règle de 1024 px — le panneau large lisait jusque-là un 8 px
+     écrit à la main, à côté du 9 px du panneau compact. Une langue ne règle
+     donc plus que son interligne et l'air sous le mot ; le pas, lui, vaut
+     pour les trois langues et pour toutes les largeurs. */
+  --nav-seam-step: 9px;
+  margin-block: var(--nav-seam-step) 4px;
+  margin-inline: 12px;
+}
+/* La seconde famille commence sous les pastilles de la première : un petit
+   trait de couture la sépare, sinon son nom se colle aux pastilles d'avant et
+   se lit comme une ligne de plus dans la même liste. C'est le seul endroit où
+   les deux familles se touchent — le panneau ne montre qu'elles pendant une
+   recherche —, et le trait reprend la teinte du filet de famille. */
+.nav-door-item + .nav-door-item > .nav-door-seam--panel {
+  padding-block-start: var(--nav-seam-step);
+  border-block-start: 1px dashed color-mix(in srgb, var(--text) 12%, transparent);
+}
+/* Dans la feuille du téléphone, les pastilles se décalent d'un cran de plus :
+   le mot suit la même mesure, sans retrait propre à la surface. */
+.nav-door-seam--sheet {
+  margin: 6px 0 2px;
+  margin-inline-start: 34px;
+  font-size: 9.5px;
+}
+[dir="rtl"] .nav-door-seam--sheet { font-size: 10.5px; }
+/* ── Le mot de couture et les huit types, panneau compact en arabe ──────────
+   À 1024 px, le panneau ne fait plus que 372 px de large, et l'arabe allonge
+   chaque pastille d'un cran. Les huit types dépliés mangent donc la hauteur,
+   et le mot de couture — posé juste sous le filet de famille — se retrouve
+   collé aux premières pastilles : il ne se lit plus comme un mot posé sur la
+   jointure, mais comme une ligne de plus dans la liste.
+
+   Le mot garde exactement la marge du filet qu'il prolonge — 12 px, la même
+   des deux côtés, écrite en propriétés logiques —, et prend sous lui la
+   respiration qui le sépare des pastilles. Les huit types resserrent leur
+   gouttière et leur rembourrage pour tenir deux par rang dans la largeur du
+   panneau, et leur libellé peut s'écourter plutôt que de pousser une voisine
+   hors du cadre. Rien n'est retiré : le panneau défile comme avant, et les
+   huit pastilles restent dans le compte des portes, qui se relit sur la
+   géométrie réelle. */
+@media (min-width: 1024px) and (max-width: 1299px) {
+  [dir="rtl"] .nav-more-seam { margin-block: 1px 5px; line-height: 1.5; }
+  /* Le nom de chaque famille répondante, à la largeur où le panneau ne garde
+     que 372 px : quelle que soit la langue, il se pose sur la jointure du
+     filet avec un peu plus de respiration au-dessus de lui, et le trait
+     pointillé de la seconde famille s'écarte des pastilles de la première.
+     En anglais les deux noms sont courts — « Listings », « Jobs » —, mais le
+     pas vaut pour les trois langues : les deux familles se lisent l'une après
+     l'autre au lieu de se toucher, et le nom ne s'écourte jamais pour tenir.
+     Rien n'est retiré aux pastilles, qui gardent leur compte et leur largeur. */
+  /* Le pas du mot de famille et de son trait pointillé n'est plus réécrit ici :
+     il est posé à la source, sur .nav-door-seam--panel, et vaut à toutes les
+     largeurs. À 1024 px, le français tombe donc sur les mêmes 9 px que
+     l'anglais et l'arabe — la boucle des trois langues se ferme sur une seule
+     valeur, et le panneau large ne lit plus un pas différent du compact. */
+  /* Le panneau ne garde que 372 px à cette largeur, et l'arabe allonge chaque
+     mot : le nom se donne un peu plus d'air sous lui et au-dessus du trait de
+     couture, et l'interligne de la langue. Le pas, lui, ne bouge pas. */
+  [dir="rtl"] .nav-door-seam--panel {
+    margin-block: var(--nav-seam-step) 5px;
+    line-height: 1.5;
+  }
+  [dir="rtl"] .nav-door-item + .nav-door-item > .nav-door-seam--panel {
+    padding-block-start: var(--nav-seam-step);
+  }
+  [dir="rtl"] .nav-dir-types { gap: 5px; padding-bottom: 9px; }
+  [dir="rtl"] .nav-more-menu a.nav-dir-type {
+    padding: 5px 9px 5px 7px;
+    font-size: 12px;
+    min-width: 0;
+  }
+  [dir="rtl"] .nav-more-menu a.nav-dir-type > span:not(.nav-sub-count) {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+/* Where the chapter stands, right under the two doors of this page: a hairline
+   track that fills with the sections already read, and the count beside it. */
+.nav-more-progress { display: grid; grid-template-columns: 1fr auto; align-items: center;
+  gap: 6px 8px; padding: 7px 11px 9px; }
+.nav-more-progress-lbl { font-family: var(--font-label); font-size: 9.5px; letter-spacing: .12em;
+  text-transform: uppercase; color: color-mix(in srgb, var(--text) 48%, transparent); }
+.nav-more-progress-num { font-family: var(--font-label); font-size: 10px; letter-spacing: .04em;
+  color: var(--accent); }
+.nav-more-progress-track { display: block; height: 3px; border-radius: 999px; overflow: hidden;
+  background: color-mix(in srgb, var(--text) 16%, transparent);
+  transition: background .2s ease; }
+.nav-more-progress-track i { display: block; height: 100%; border-radius: inherit;
+  background: var(--accent); transition: width .34s cubic-bezier(.2,.7,.2,1); }
+/* The line is a door too: a padded strip over the hairline track, so the whole
+   width of the bar answers a click and walks to the next unread section. */
+.nav-more-next { grid-column: 1 / -1; display: block; width: 100%; padding: 8px 0; margin: -8px 0;
+  border: 0; background: none; text-align: start; cursor: pointer; }
+.nav-more-next:hover .nav-more-progress-track { background: color-mix(in srgb, var(--accent) 30%, transparent); }
+.nav-more-next:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-radius: 8px; }
+/* The count can be taken back: a discreet door under the line, never a loud
+   call to action — clearing a chapter is a housekeeping gesture. */
+.nav-more-reset { grid-column: 1 / -1; display: inline-flex; align-items: center; gap: 6px;
+  justify-self: start; margin-top: 6px; padding: 4px 8px 4px 6px; border: 0; border-radius: 8px;
+  background: none; color: color-mix(in srgb, var(--text) 76%, transparent);
+  font: inherit; font-family: var(--font-label); font-size: 10.5px; letter-spacing: .05em;
+  line-height: 1.2; white-space: nowrap; cursor: pointer;
+  transition: background .18s ease, color .18s ease; }
+.nav-more-reset i { font-size: 13px; line-height: 1; }
+.nav-more-reset:hover { color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent); }
+.nav-more-reset:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+/* The confirmation appears under the button and keeps its own line, so the
+   panel never jumps when it arrives or leaves. */
+/* The whole chapter walked: a small accented line, under the track, says it in
+   words — « 3/3 » alone reads like a gauge, not like an achievement. */
+.nav-more-done { grid-column: 1 / -1; display: inline-flex; align-items: center; gap: 5px;
+  justify-self: start; margin: 2px 0 0; padding: 3px 9px 3px 7px; border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--accent); font-family: var(--font-label); font-size: 9.5px;
+  letter-spacing: .05em; line-height: 1.2; white-space: nowrap;
+  animation: nav-dot-in .26s cubic-bezier(.2,.7,.2,1) both; }
+.nav-more-done i { font-size: 12px; line-height: 1; }
+[dir="rtl"] .nav-more-done { letter-spacing: 0; font-size: 11px; }
+/* The places of the row read beside the chapter: they are not beats of the
+   film, so they get their own quiet line — never mixed into the 3/3. */
+.nav-more-places { grid-column: 1 / -1; display: inline-flex; align-items: center;
+  gap: 5px; margin: 2px 0 0; font-family: var(--font-label); font-size: 9.5px;
+  line-height: 1.35; letter-spacing: .04em;
+  color: color-mix(in srgb, var(--text) 52%, transparent); }
+.nav-more-places i { font-size: 12px; line-height: 1;
+  color: color-mix(in srgb, var(--accent) 82%, transparent); }
+[dir="rtl"] .nav-more-places { letter-spacing: 0; font-size: 11px; }
+/* The confirmation and its « Annuler » share one line, so the panel never jumps
+   when the way back appears or folds. */
+.nav-more-reset-undo { grid-column: 1 / -1; display: flex; align-items: center;
+  gap: 8px; flex-wrap: wrap; margin-top: 1px; }
+.nav-more-reset-undo:not(:has(button)) { margin-top: 0; }
+.nav-more-reset-note { min-height: 0; margin: 0;
+  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .05em;
+  color: color-mix(in srgb, var(--accent) 86%, transparent); }
+.nav-more-reset-note:empty { display: none; }
+/* A mis-click is not a lost chapter: the way back stays open five seconds, and
+   the thin line under the label drains while the door is still there. */
+.nav-more-reset-back { position: relative; display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 9px 4px 7px; border: 1px solid color-mix(in srgb, var(--accent) 46%, transparent);
+  border-radius: 999px; background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: var(--accent); font: inherit; font-family: var(--font-label); font-size: 9.5px;
+  letter-spacing: .05em; line-height: 1.2; white-space: nowrap; cursor: pointer;
+  overflow: hidden; transition: background .18s ease, border-color .18s ease; }
+.nav-more-reset-back i { font-size: 12px; line-height: 1; }
+.nav-more-reset-back::after { content: ""; position: absolute; left: 0; bottom: 0; height: 1px;
+  width: 100%; background: var(--accent); transform-origin: left;
+  animation: nav-undo-count 5s linear both; }
+@keyframes nav-undo-count { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+.nav-more-reset-back:hover { background: color-mix(in srgb, var(--accent) 22%, transparent);
+  border-color: var(--accent); }
+.nav-more-reset-back:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+[dir="rtl"] .nav-more-reset, [dir="rtl"] .nav-more-reset-note,
+[dir="rtl"] .nav-more-reset-back { letter-spacing: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .nav-more-done, .nav-more-reset-back::after { animation: none; }
+  .nav-more-reset-back::after { display: none; }
+}
+[dir="rtl"] .nav-more-progress-lbl { letter-spacing: 0; text-transform: none; font-size: 11px; }
+@media (prefers-reduced-motion: reduce) {
+  .nav-more-progress-track i { transition: none; }
+}
+/* Each entry says what waits behind it, so the choice is made without opening it. */
+.nav-links .nav-more-item { display: flex; align-items: flex-start; gap: 11px; padding: 10px 11px; border-radius: 10px;
+  text-decoration: none; color: var(--text); transition: background .18s ease, color .18s ease; }
+.nav-links .nav-more-item::after { display: none; }
+.nav-links .nav-more-item i { font-size: 17px; margin-top: 1px; color: color-mix(in srgb, var(--accent) 86%, var(--text));
+  transition: color .18s ease; }
+.nav-links .nav-more-item:hover { background: color-mix(in srgb, var(--accent) 15%, transparent); color: var(--accent); }
+.nav-links .nav-more-item:hover i { color: var(--accent); }
+.nav-more-txt { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1 1 auto; }
+.nav-more-label { font-size: 15px; font-weight: 500; line-height: 1.28; letter-spacing: -.005em; }
+.nav-more-txt small { font-size: 12.5px; line-height: 1.34; white-space: normal;
+  color: color-mix(in srgb, var(--text) 55%, transparent); transition: color .18s ease; }
+.nav-links .nav-more-item:hover .nav-more-txt small { color: color-mix(in srgb, var(--accent) 82%, transparent); }
+/* The named tick reaches the panel doors too. It keeps the same pill as in the
+   phone sheet, and the row may wrap rather than pushing it out of the menu. */
+.nav-links .nav-more-item { flex-wrap: wrap; }
+.nav-links .nav-more-item .nav-mobile-tick--named { margin-top: 1px; font-size: 9px;
+  padding: 1px 7px 1px 5px; }
+.nav-links .nav-more-item .nav-mobile-tick--named i { margin-top: 0; font-size: 10px; }
+/* The section already under the eyes: the panel door carries the same mark as
+   a door in the row, so « Devis » or « Suivi » never read as an invitation. */
+.nav-links .nav-more-item.is-current { background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: var(--accent); }
+.nav-links .nav-more-item.is-current .nav-more-label { font-weight: 600; }
+.nav-links .nav-more-item.is-current i { color: var(--accent); }
+.nav-links .nav-more-item.is-current .nav-more-txt small { color: color-mix(in srgb, var(--accent) 78%, transparent); }
+
+/* Reached with the arrows: the same tint as a hover, plus a visible ring so a
+   keyboard walk never loses its place. */
+.nav-links .nav-more-item:focus-visible { outline: 2px solid var(--accent); outline-offset: -1px;
+  background: color-mix(in srgb, var(--accent) 15%, transparent); color: var(--accent); }
+.nav-links .nav-more-item:focus-visible i { color: var(--accent); }
+.nav-links .nav-more-item:focus-visible .nav-more-txt small { color: color-mix(in srgb, var(--accent) 82%, transparent); }
+
+/* ── The account menu: B2B, messages, sign-out behind the member's name ───── */
+.nav-acct { position: relative; display: inline-flex; }
+.nav-acct > button.nav-account.nav-member { font: inherit; cursor: pointer; text-align: start; }
+.nav-acct > button.nav-account.nav-member i.ri-arrow-down-s-line,
+.nav-acct > button.nav-account.nav-member i.ri-arrow-up-s-line { font-size: 15px;
+  color: color-mix(in srgb, var(--text) 52%, transparent); }
+.nav-account.nav-member.is-open { border-color: var(--accent); }
+/* The alert count rides the little user icon, not the chevron at the far end. */
+.nav-acct .nav-badge { top: -4px; inset-inline-start: -5px; inset-inline-end: auto; font-family: var(--font-label); }
+.nav-acct-menu { position: absolute; top: calc(100% + 12px); inset-inline-end: 0; z-index: 60;
+  min-width: 262px; display: grid; gap: 2px; padding: 8px; border-radius: 14px;
+  background: color-mix(in srgb, var(--surface) 96%, var(--text) 4%);
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  box-shadow: 0 24px 52px color-mix(in srgb, #000 52%, transparent), 0 0 0 1px color-mix(in srgb, #000 16%, transparent);
+  animation: nav-more-in .18s ease-out both; }
+.nav-acct-head { display: flex; flex-direction: column; gap: 2px; padding: 6px 11px 9px;
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 11%, transparent); margin-bottom: 4px; }
+.nav-acct-head b { font-size: 13.5px; font-weight: 600; letter-spacing: -.01em; overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap; }
+.nav-acct-head small { font-family: var(--font-label); font-size: 10.5px; letter-spacing: .04em; overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap; color: color-mix(in srgb, var(--text) 55%, transparent); }
+.nav-acct-menu a, .nav-acct-out { display: flex; align-items: center; gap: 10px; padding: 9px 11px;
+  border-radius: 10px; border: 0; background: none; text-decoration: none; color: var(--text);
+  font: inherit; font-size: 13.5px; font-weight: 500; text-align: start; cursor: pointer; white-space: nowrap;
+  transition: background .18s ease, color .18s ease; }
+.nav-acct-menu a i, .nav-acct-out i { font-size: 16px; color: color-mix(in srgb, var(--accent) 86%, var(--text)); }
+.nav-acct-menu a:hover, .nav-acct-out:hover { background: color-mix(in srgb, var(--accent) 15%, transparent); color: var(--accent); }
+.nav-acct-menu a:hover i, .nav-acct-out:hover i { color: var(--accent); }
+.nav-acct-out { color: color-mix(in srgb, var(--text) 66%, transparent); }
+.nav-acct-out[disabled] { opacity: .55; cursor: wait; }
+.nav-acct-count { margin-inline-start: auto; display: inline-flex; align-items: center; justify-content: center;
+  min-width: 19px; height: 19px; padding: 0 5px; border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 20%, transparent); color: var(--accent);
+  font-family: var(--font-label); font-size: 10px; line-height: 1; letter-spacing: 0; }
+.nav-acct-count:empty { display: none; }
+/* The door we are already standing behind: tinted, accented, never a dead
+   invitation to open the page you are on. */
+.nav-acct-menu a.is-current { background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--accent); font-weight: 600; }
+.nav-acct-menu a.is-current i { color: var(--accent); }
+.nav-acct-menu a.is-current .nav-acct-count { background: color-mix(in srgb, var(--accent) 26%, transparent); }
+/* Reached with the arrows: the same tint as a hover, so a keyboard walk always
+   shows which door the focus is on. */
+.nav-acct-menu a:focus-visible, .nav-acct-out:focus-visible { outline: 2px solid var(--accent);
+  outline-offset: -1px; background: color-mix(in srgb, var(--accent) 15%, transparent); color: var(--accent); }
+.nav-acct-menu a:focus-visible i, .nav-acct-out:focus-visible i { color: var(--accent); }
+
+/* A request that has been waiting for days is said once, under its own door:
+   a thin line with a clock, never a second badge competing with the count.
+   It is a door as well — it opens the inbox that can settle it. */
+/* Le rappel lit désormais le couple des seconds accès de la feuille — 13,5 px /
+   1,32 pour le mot, 11 px / 1,36 pour la phrase dessous — au lieu de son
+   ancien 10 px : le panneau et la feuille avancent au même pas jusqu'en bas. */
+.nav-links .nav-more-late { display: flex; align-items: flex-start; gap: 8px;
+  padding: 5px 11px 7px; margin-top: -4px; border-radius: 9px;
+  text-decoration: none; color: color-mix(in srgb, var(--accent) 84%, var(--text));
+  font-family: var(--font-body); font-size: 13.5px; line-height: 1.32;
+  letter-spacing: 0; transition: background .18s ease, color .18s ease; }
+.nav-links .nav-more-late::after { display: none; }
+.nav-links .nav-more-late i { font-size: 14.5px; line-height: 1.3; margin-top: 1px;
+  flex: none; color: color-mix(in srgb, var(--accent) 90%, transparent); }
+.nav-links .nav-more-late:hover { background: color-mix(in srgb, var(--accent) 13%, transparent);
+  color: var(--accent); }
+.nav-links .nav-more-late:focus-visible { outline: 2px solid var(--accent); outline-offset: -1px; }
+/* The arrow at the far end says the line is a door, not a caption. */
+.nav-links .nav-more-late i:last-child { margin-inline-start: auto; font-size: 14px;
+  margin-top: 3px; opacity: .72; transition: opacity .18s ease, transform .18s ease; }
+.nav-links .nav-more-late:hover i:last-child { opacity: 1; transform: translateX(2px); }
+[dir="rtl"] .nav-links .nav-more-late { letter-spacing: 0; font-size: 13px; line-height: 1.34; }
+/* Under the sentence, the day the oldest waiting request dates from: the count
+   gains a face, and the reminder stops being abstract. Quieter than the line it
+   completes, never a second badge. */
+.nav-links .nav-more-late-txt { display: flex; flex-direction: column; gap: 2px;
+  min-width: 0; }
+.nav-links .nav-more-late-txt > span { font-size: 13.5px; line-height: 1.32; }
+.nav-links .nav-more-late-txt small { font-size: 11px; line-height: 1.36;
+  letter-spacing: .02em; color: color-mix(in srgb, var(--text) 48%, transparent);
+  transition: color .18s ease; }
+.nav-links .nav-more-late:hover .nav-more-late-txt small {
+  color: color-mix(in srgb, var(--accent) 70%, transparent); }
+[dir="rtl"] .nav-links .nav-more-late-txt > span { font-size: 13px; line-height: 1.34; }
+[dir="rtl"] .nav-links .nav-more-late-txt small { letter-spacing: 0; font-size: 11px; line-height: 1.4; }
+/* The age in days, right after the date: « depuis 6 jours » answers the
+   question the date alone leaves open, without a calendar. */
+.nav-more-late-days { color: color-mix(in srgb, var(--accent) 78%, transparent); }
+
+/* The same reminder on the phone sheet, tucked under the inbox door: a thin
+   line, indented like a sub-entry, that is itself the door to the late ones. */
+.nav-mobile a.nav-mobile-late { display: flex; align-items: center; gap: 7px;
+  margin-top: -10px; margin-inline-start: 26px; padding: 5px 8px 5px 4px;
+  border-radius: 9px; text-decoration: none;
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+  font-family: var(--font-label); font-size: 10.5px; line-height: 1.35;
+  letter-spacing: .03em; transition: background .18s ease, color .18s ease; }
+.nav-mobile a.nav-mobile-late i { font-size: 12.5px; line-height: 1;
+  color: color-mix(in srgb, var(--accent) 90%, transparent); }
+.nav-mobile a.nav-mobile-late i:last-child { margin-inline-start: auto; font-size: 14px; opacity: .7; }
+.nav-mobile a.nav-mobile-late:hover { background: color-mix(in srgb, var(--accent) 13%, transparent);
+  color: var(--accent); }
+.nav-mobile a.nav-mobile-late:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+[dir="rtl"] .nav-mobile a.nav-mobile-late { letter-spacing: 0; font-size: 11.5px; }
+/* Same second line on the phone: which day the oldest waiting request dates
+   from, under the same sentence as in the panel. */
+.nav-mobile-late-txt { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.nav-mobile-late-txt small { font-size: 9.5px; line-height: 1.3; letter-spacing: .03em;
+  color: color-mix(in srgb, var(--text) 48%, transparent); transition: color .18s ease; }
+.nav-mobile a.nav-mobile-late:hover .nav-mobile-late-txt small {
+  color: color-mix(in srgb, var(--accent) 70%, transparent); }
+[dir="rtl"] .nav-mobile-late-txt small { letter-spacing: 0; font-size: 10.5px; }
+.nav-mobile-late-days { color: color-mix(in srgb, var(--accent) 78%, transparent); }
+
+/* ── Waiting is not urgency ─────────────────────────────────────────────────
+   Past a whole week the delay changes nature, so the reminder says the
+   second threshold under the first count. Same line, same voice, no badge. */
+.nav-links .nav-more-late-week,
+.nav-mobile-late-week { font-weight: 600;
+  color: color-mix(in srgb, var(--accent) 92%, transparent); }
+[dir="rtl"] .nav-links .nav-more-late-week,
+[dir="rtl"] .nav-mobile-late-week { letter-spacing: 0; }
+/* ── Has the shortcut ever served? ─────────────────────────────────────────
+   The very last opening from the reminder, and the request it opened on:
+   fainter than the delay, on its own line, on both surfaces. */
+.nav-links .nav-more-late-txt small.nav-more-late-recall,
+.nav-mobile-late-txt small.nav-mobile-late-recall { font-style: italic;
+  color: color-mix(in srgb, var(--text) 44%, transparent); }
+
+/* Which door was taken, right before the trace: the inbox chip, a counter of
+   the account strip, or the reminder itself. A pictogram, not a sentence — the
+   line already says when, and this one says how. */
+.nav-late-recall-src { display: inline-flex; align-items: center;
+  justify-content: center; width: 12px; height: 12px; margin-inline-end: 4px;
+  font-style: normal; vertical-align: -1px;
+  color: color-mix(in srgb, var(--accent) 70%, transparent); }
+.nav-late-recall-src i { font-size: 11px; line-height: 1; }
+
+/* ── Hushing the reminder for the day ──────────────────────────────────────
+   The reminder can be silenced until tomorrow, from the panel as well as from
+   the sheet. While it holds, the train of the deferral is written in its place:
+   when it was asked, until when — silence never reads as « nothing waiting ». */
+.nav-late-mute { display: inline-flex; align-items: center; gap: 5px;
+  margin: 2px 0 4px; padding: 3px 10px 3px 8px; border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--text) 24%, transparent);
+  background: transparent; cursor: pointer;
+  font-family: var(--font-label); font-size: 9.5px; line-height: 1.3;
+  letter-spacing: .03em; white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 56%, transparent);
+  transition: color .18s ease, border-color .18s ease, background .18s ease; }
+.nav-late-mute i { font-size: 11px; line-height: 1; }
+.nav-late-mute:hover { color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent); }
+.nav-late-mute:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+[dir="rtl"] .nav-late-mute { letter-spacing: 0; font-size: 10.5px; }
+/* The panel indents it under the door it belongs to; the sheet lines it up with
+   the sub-entry above, so the two surfaces read the same. */
+.nav-late-mute--panel { margin-inline-start: 27px; }
+.nav-late-mute--sheet { margin: -8px 0 6px; margin-inline-start: 26px; }
+
+.nav-late-mute-wrap { display: flex; align-items: baseline; flex-wrap: wrap;
+  gap: 4px 8px; margin: 1px 0 5px; }
+.nav-late-mute-wrap--panel { margin-inline-start: 27px; }
+.nav-late-mute-wrap--sheet { margin: -8px 0 6px; margin-inline-start: 26px; }
+.nav-late-mute-note { display: inline-flex; align-items: baseline; gap: 5px;
+  margin: 0; font-family: var(--font-label); font-size: 9.5px; line-height: 1.35;
+  letter-spacing: .03em; font-style: italic;
+  color: color-mix(in srgb, var(--text) 50%, transparent); }
+.nav-late-mute-note i { font-size: 11px; font-style: normal;
+  color: color-mix(in srgb, var(--accent) 78%, transparent); }
+.nav-late-mute-since { color: color-mix(in srgb, var(--text) 40%, transparent); }
+.nav-late-mute-undo { display: inline-flex; align-items: center; gap: 4px;
+  margin: 0; padding: 1px 7px 2px; border-radius: 999px; cursor: pointer;
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+  background: transparent; font-family: var(--font-label); font-size: 9px;
+  letter-spacing: .04em; white-space: nowrap;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  transition: background .18s ease, border-color .18s ease; }
+.nav-late-mute-undo:hover { background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 56%, transparent); }
+.nav-late-mute-undo:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+[dir="rtl"] .nav-late-mute-note,
+[dir="rtl"] .nav-late-mute-undo { letter-spacing: 0; font-size: 10.5px; }
+/* While the silence holds, the reminder keeps its door but lowers its voice:
+   the count stays, the accent steps back. */
+.nav-links .nav-more-late.is-muted,
+.nav-mobile a.nav-mobile-late.is-muted {
+  color: color-mix(in srgb, var(--text) 62%, transparent); }
+.nav-links .nav-more-late.is-muted i,
+.nav-mobile a.nav-mobile-late.is-muted i {
+  color: color-mix(in srgb, var(--text) 42%, transparent); }
+.nav-links .nav-more-late.is-muted .nav-more-late-week,
+.nav-mobile a.nav-mobile-late.is-muted .nav-mobile-late-week {
+  color: color-mix(in srgb, var(--text) 62%, transparent); }
+
+/* ── The named pill reaches the phone sheet ────────────────────────────────
+   The row and the panel already answer « Lu · Offres », « Lu · Annuaire »;
+   the sheet carries the very same pill, on the same two doors. */
+.nav-mobile a.nav-mobile-tick-host { display: inline-flex; align-items: center;
+  gap: 8px; flex-wrap: wrap; }
+.nav-mobile a.nav-mobile-tick-host .nav-link-tick { margin-inline-start: 0;
+  font-size: 10px; padding: 2px 8px 2px 6px; }
+.nav-mobile a.nav-mobile-tick-host .nav-link-tick i { font-size: 11px; }
+
+/* ── The chapter, on the phone ─────────────────────────────────────────────
+   The count, the line that fills, and the way back — the same housekeeping the
+   panel offers, in the sheet, so the phone is never the poorer surface. */
+.nav-mobile-chapter { display: flex; flex-direction: column; gap: 7px;
+  padding: 11px 12px 9px; border-radius: 12px;
+  background: color-mix(in srgb, var(--text) 5%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 9%, transparent); }
+.nav-mobile-chapter-line { display: flex; align-items: center;
+  justify-content: space-between; gap: 8px; }
+/* La feuille du téléphone découpe ses portes comme le panneau : un intitulé
+   court, puis les portes du même propos. */
+.nav-mobile-group { margin: 4px 0 -6px; padding: 0 2px;
+  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .12em;
+  text-transform: uppercase; color: color-mix(in srgb, var(--text) 46%, transparent); }
+[dir="rtl"] .nav-mobile-group { letter-spacing: 0; text-transform: none; font-size: 11px; }
+.nav-mobile-chapter-lbl { font-family: var(--font-label); font-size: 9.5px;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 48%, transparent); }
+.nav-mobile-chapter-num { font-family: var(--font-label); font-size: 10.5px;
+  letter-spacing: .04em; color: var(--accent); }
+.nav-mobile-chapter-track { display: block; height: 3px; border-radius: 999px;
+  overflow: hidden; background: color-mix(in srgb, var(--text) 16%, transparent); }
+.nav-mobile-chapter-track i { display: block; height: 100%; border-radius: inherit;
+  background: var(--accent); transition: width .34s cubic-bezier(.2,.7,.2,1); }
+/* The places read, on the phone too: the same quiet line as in the panel, and
+   the same reset clears them in the same gesture. */
+.nav-mobile-places { display: inline-flex; align-items: center; gap: 5px; margin: 0;
+  font-family: var(--font-label); font-size: 10px; line-height: 1.35;
+  letter-spacing: .04em; color: color-mix(in srgb, var(--text) 52%, transparent); }
+.nav-mobile-places i { font-size: 12px; line-height: 1; color: var(--accent); }
+[dir="rtl"] .nav-mobile-places { letter-spacing: 0; font-size: 11px; }
+/* The whole chapter walked: the same accented pill as in the panel. */
+.nav-mobile-done { display: inline-flex; align-items: center; gap: 5px;
+  align-self: flex-start; margin: 0; padding: 3px 9px 3px 7px; border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 18%, transparent); color: var(--accent);
+  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .05em;
+  line-height: 1.2; white-space: nowrap;
+  animation: nav-dot-in .26s cubic-bezier(.2,.7,.2,1) both; }
+.nav-mobile-done i { font-size: 12px; line-height: 1; }
+.nav-mobile-reset { align-self: flex-start; display: inline-flex; align-items: center;
+  gap: 6px; margin-top: 1px; padding: 4px 9px 4px 6px; border: 0; border-radius: 8px;
+  background: none; color: color-mix(in srgb, var(--text) 74%, transparent);
+  font: inherit; font-family: var(--font-label); font-size: 10.5px; letter-spacing: .05em;
+  line-height: 1.3; white-space: nowrap; cursor: pointer;
+  transition: background .18s ease, color .18s ease; }
+.nav-mobile-reset i { font-size: 13px; line-height: 1; }
+.nav-mobile-reset:hover { color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent); }
+.nav-mobile-reset:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+/* The confirmation and its « Annuler » share one line: the block never jumps
+   when the way back arrives, nor when it folds away five seconds later. */
+.nav-mobile-reset-undo { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.nav-mobile-reset-note { margin: 0; font-family: var(--font-label); font-size: 10px;
+  letter-spacing: .05em; color: color-mix(in srgb, var(--accent) 86%, transparent); }
+.nav-mobile-reset-note:empty { display: none; }
+.nav-mobile-reset-back { position: relative; display: inline-flex; align-items: center;
+  gap: 5px; padding: 3px 9px 4px 7px;
+  border: 1px solid color-mix(in srgb, var(--accent) 46%, transparent);
+  border-radius: 999px; background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: var(--accent); font: inherit; font-family: var(--font-label); font-size: 10px;
+  letter-spacing: .05em; line-height: 1.2; white-space: nowrap; cursor: pointer;
+  overflow: hidden; transition: background .18s ease, border-color .18s ease; }
+.nav-mobile-reset-back i { font-size: 12px; line-height: 1; }
+/* The thin line drains while the door is still open: the five seconds are read,
+   not guessed. */
+.nav-mobile-reset-back::after { content: ""; position: absolute; left: 0; bottom: 0;
+  height: 1px; width: 100%; background: var(--accent); transform-origin: left;
+  animation: nav-undo-count 5s linear both; }
+.nav-mobile-reset-back:hover { background: color-mix(in srgb, var(--accent) 22%, transparent);
+  border-color: var(--accent); }
+.nav-mobile-reset-back:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+[dir="rtl"] .nav-mobile-chapter-lbl { letter-spacing: 0; text-transform: none;
+  font-size: 11px; }
+[dir="rtl"] .nav-mobile-reset, [dir="rtl"] .nav-mobile-reset-note,
+[dir="rtl"] .nav-mobile-reset-back { letter-spacing: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .nav-mobile-done { animation: none; }
+  .nav-mobile-chapter-track i { transition: none; }
+  .nav-mobile-reset-back::after { display: none; }
+}
+
+/* ── The mark leaves on a short fade ───────────────────────────────────────
+   A chapter handover used to cut the accent off on the exact frame the beat
+   ended. Now the row door, the panel door and the sheet entry all drain over
+   a short beat, while the colour walks back on its own transition. */
+@keyframes nav-mark-out {
+  from { background-color: color-mix(in srgb, var(--accent) 14%, transparent); }
+  to { background-color: transparent; }
+}
+/* The row door holds its weight one beat longer, so only the colour and the
+   underline move on the way out — no blink, no crack. */
+.nav-links a.is-fading { font-weight: 600; }
+.nav-links .nav-more-item.is-fading { background: transparent; color: var(--text);
+  animation: nav-mark-out .26s ease-out both; }
+.nav-links .nav-more-item.is-fading .nav-more-label { font-weight: 600; }
+.nav-mobile > a.is-fading, .nav-mobile a.nav-mobile-item.is-fading { margin-inline: -11px;
+  padding: 8px 11px; border-radius: 10px; color: var(--text); font-weight: 600;
+  animation: nav-mark-out .26s ease-out both; }
+@media (prefers-reduced-motion: reduce) {
+  .nav-links .nav-more-item.is-fading, .nav-mobile > a.is-fading,
+  .nav-mobile a.nav-mobile-item.is-fading, .nav-more-dot, .nav-more-count,
+  .nav-burger-count, .nav-burger-dot, .nav-mobile-tick { animation: none; }
+}
+
+/* Between the wide desktop and the compact bar the whole row steps down a notch
+   before anything is ever cut. */
+@media (max-width: 1620px) {
+  .nav { padding: 16px clamp(16px, 2.4vw, 36px); gap: 14px; }
+  .nav-links { gap: 20px; }
+  .nav-cta { padding: 9px 15px; font-size: 13px; }
+  .nav-right { gap: 11px; }
+}
+@media (max-width: 1460px) {
+  .nav-logo { font-size: 18px; }
+  .nav-logo-mark { width: 28px; height: 28px; border-radius: 9px; }
+  .nav-links { gap: 15px; }
+  .nav-links a, .nav-more-btn { font-size: 12.5px; }
+  .nav-cand { padding: 7px 11px; font-size: 12.5px; }
+  .nav-account.nav-member { padding: 5px 11px 5px 8px; }
+  .nav-member-txt b, .nav-member-txt small { max-width: 96px; }
+  .nav-more-menu { width: 372px; }
+  .nav-more-label { font-size: 14px; }
+  .nav-more-txt small { font-size: 12px; white-space: normal; }
+}
+
+/* ── Le panneau compact : la seule barre entre 1024 et 1299 px ─────────────
+   Là, le rang s'est effacé et quatre portes sont venues se ranger dans le
+   panneau — la plateforme, le guichet des demandes, l'annuaire et ses huit
+   types. Le panneau n'est donc plus un tiroir d'appoint mais la barre
+   elle-même : ses noms reprennent le corps plein (15 px) et les explications
+   leur 12,5 px, le couple exact de la feuille du téléphone et du panneau
+   large. Les 372 px de large le tiennent sans qu'un nom se replie ; pour le
+   reste — la hauteur — le panneau défile, et aucune porte ne s'écourte. */
+@media (min-width: 1024px) and (max-width: 1299px) {
+  .nav-more-label { font-size: 15px; line-height: 1.28; }
+  .nav-more-txt small { font-size: 12.5px; line-height: 1.34; }
+}
+
+/* ── Le sceau et le nom, à l'étroit ──────────────────────────────────────────
+   Sur un écran serré, c'est le lettrage qui cède, jamais le tampon : le sceau
+   garde sa taille pleine et son cadre, le nom de la marque se raccourcit, et
+   un nom de membre long ne peut plus comprimer la marque ni pousser le menu
+   hors de la barre. */
+.nav-logo { flex-shrink: 1; min-width: 0; }
+.nav-logo-txt { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nav-logo-mark { flex: 0 0 auto; }
+/* Entre le poste large et la barre compacte, le nom du membre s'efface le
+   premier : le tampon, lui, ne bouge pas d'un pixel. */
+@media (min-width: 901px) and (max-width: 1180px) {
+  .nav-member-txt b, .nav-member-txt small { max-width: 76px; }
+}
+@media (max-width: 620px) {
+  /* La barre se resserre sur les côtés sans changer de hauteur : la feuille du
+     téléphone garde exactement la même place sous elle. */
+  .nav { padding-left: clamp(14px, 4.2vw, 20px); padding-right: clamp(14px, 4.2vw, 20px); gap: 10px; }
+  .nav-logo { font-size: 17px; gap: 8px; }
+  .nav-logo-mark { width: 30px; height: 30px; border-radius: 9px; }
+  .nav-right { gap: 8px; }
+}
+@media (max-width: 400px) {
+  .nav-logo { font-size: 15.5px; gap: 7px; }
+}
+
+/* ── La barre au téléphone ──────────────────────────────────────────────────
+   Le bloc de droite doit tenir sur une seule ligne : la langue se resserre
+   d'abord, puis c'est le nom du membre qui s'efface — le cachet, le compte et
+   le menu restent, eux, toujours à leur place. */
+@media (max-width: 560px) {
+  .nav { gap: 8px; }
+  .nav-right { gap: 6px; }
+  .lang-switch { padding: 2px; }
+  .lang-switch button { min-width: 26px; padding: 3px 7px; font-size: 10px; }
+  .nav-account.is-plain { padding: 7px 10px; font-size: 12.5px; }
+}
+@media (max-width: 430px) {
+  .nav-member-txt { display: none; }
+  .nav-account.nav-member { padding: 6px 8px; }
+  .nav-acct > button.nav-account.nav-member > i.ri-arrow-down-s-line,
+  .nav-acct > button.nav-account.nav-member > i.ri-arrow-up-s-line { display: none; }
+}
+
+/* The page you already stand behind, opened from the phone sheet: the seal
+   walks in front of the member's name — the same mark as the bar and the
+   account header, so the sheet names its own with one stamp. */
+.nav-mobile a.nav-sheet-member-link { display: flex; align-items: center; gap: 11px; }
+.nav-sheet-seal { display: block; flex: 0 0 auto; width: 30px; height: 30px;
+  border-radius: 9px; object-fit: cover;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 34%, transparent); }
+.nav-mobile a.nav-sheet-member-link .nav-mobile-member { min-width: 0; }
+.nav-mobile a.nav-sheet-member-link .nav-mobile-member b,
+.nav-mobile a.nav-sheet-member-link .nav-mobile-member small { max-width: 100%;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* ── Le second accès d'un lieu ─────────────────────────────────────────────
+   Sous une porte qui mène à un lieu de la page, une seconde ligne ouvre ce
+   même lieu sur une seule de ses faces — ici l'annuaire déjà filtré sur le
+   façonnage. Décalée d'un cran, plus basse d'un ton : elle prolonge la porte,
+   elle ne prend pas sa place. */
+.nav-links a.nav-more-sub {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 3px 6px;
+  margin: -5px 0 3px; margin-inline-start: 27px;
+  padding: 4px 9px 5px 4px; border-radius: 8px;
+  text-decoration: none; white-space: normal;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  font-family: var(--font-label); font-size: 10.5px; line-height: 1.3;
+  letter-spacing: .03em;
+  transition: background .18s ease, color .18s ease; }
+.nav-links a.nav-more-sub::after { display: none; }
+.nav-links a.nav-more-sub i { font-size: 12.5px; line-height: 1; margin-top: 0; flex: none;
+  color: color-mix(in srgb, var(--accent) 78%, transparent);
+  transition: color .18s ease; }
+.nav-links a.nav-more-sub small { font-size: 9.5px; line-height: 1.3;
+  letter-spacing: .03em; white-space: normal;
+  color: color-mix(in srgb, var(--text) 44%, transparent);
+  transition: color .18s ease; }
+.nav-links a.nav-more-sub:hover { background: color-mix(in srgb, var(--accent) 13%, transparent);
+  color: var(--accent); }
+.nav-links a.nav-more-sub:hover i,
+.nav-links a.nav-more-sub:hover small { color: color-mix(in srgb, var(--accent) 78%, transparent); }
+.nav-links a.nav-more-sub:focus-visible { outline: 2px solid var(--accent); outline-offset: -1px; }
+[dir="rtl"] .nav-links a.nav-more-sub,
+[dir="rtl"] .nav-links a.nav-more-sub small { letter-spacing: 0; }
+[dir="rtl"] .nav-links a.nav-more-sub { font-size: 11.5px; }
+[dir="rtl"] .nav-links a.nav-more-sub small { font-size: 10.5px; }
+
+/* Le compte d'ateliers, écrit une seule fois et lu partout de la même façon :
+   une petite pastille au bout du libellé, dans la porte elle-même. Le chiffre
+   n'est jamais un témoin muet posé à côté d'une ligne : il appartient au
+   raccourci qui ouvre l'annuaire déjà filtré, donc il y mène aussi. */
+.nav-sub-count {
+  display: inline-flex; align-items: center; justify-content: center;
+  flex: none; box-sizing: border-box;
+  min-width: 16px; height: 15px; padding: 0 5px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+  font-family: var(--font-label); font-size: 9.5px; font-weight: 500;
+  line-height: 1; letter-spacing: 0;
+  transition: background .18s ease, color .18s ease; }
+.nav-links a.nav-more-sub:hover .nav-sub-count {
+  background: color-mix(in srgb, var(--accent) 28%, transparent);
+  color: var(--accent); }
+.nav-mobile a.nav-mobile-sub .nav-sub-count {
+  min-width: 19px; height: 17px; font-size: 10.5px; }
+
+/* La pastille « Lu » n'est plus un simple repère : quand un lieu vient d'être
+   lu, elle prend la place du second accès et ouvre elle-même l'annuaire déjà
+   filtré sur le façonnage. Une seule ligne, donc, pour un seul endroit : lire
+   la section débouche directement sur le geste qu'elle appelle, au lieu de
+   laisser une marque à côté d'une porte qui répétait la même adresse. */
+.nav-links a.nav-more-read {
+  display: inline-flex; align-items: center; gap: 5px;
+  max-width: calc(100% - 27px); justify-self: start;
+  margin: -5px 0 3px; margin-inline-start: 27px;
+  padding: 3px 8px 4px 6px; border-radius: 999px;
+  text-decoration: none; white-space: nowrap;
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--accent);
+  font-family: var(--font-label); font-size: 10px; line-height: 1.3;
+  letter-spacing: .04em;
+  animation: nav-dot-in .26s cubic-bezier(.2,.7,.2,1) both;
+  transition: background .18s ease, color .18s ease; }
+.nav-links a.nav-more-read::after { display: none; }
+.nav-links a.nav-more-read i { font-size: 11px; line-height: 1; flex: none; margin-top: 0;
+  color: var(--accent); }
+.nav-links a.nav-more-read span { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.nav-links a.nav-more-read i:last-child { opacity: .7;
+  transition: opacity .18s ease, transform .18s ease; }
+.nav-links a.nav-more-read:hover { background: color-mix(in srgb, var(--accent) 27%, transparent);
+  color: var(--accent); }
+.nav-links a.nav-more-read:hover i:last-child { opacity: 1; transform: translateX(2px); }
+.nav-links a.nav-more-read:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+[dir="rtl"] .nav-links a.nav-more-read { letter-spacing: 0; font-size: 11px; }
+@media (prefers-reduced-motion: reduce) {
+  .nav-links a.nav-more-read { animation: none; }
+}
+
+/* La même ligne, dans la feuille du téléphone : même retrait, même voix. */
+.nav-mobile a.nav-mobile-sub {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 3px 7px;
+  margin-top: -8px; margin-inline-start: 26px;
+  padding: 5px 8px 5px 4px; border-radius: 9px; text-decoration: none;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  font-size: 13px; line-height: 1.3;
+  transition: background .18s ease, color .18s ease; }
+.nav-mobile a.nav-mobile-sub i { font-size: 13.5px; line-height: 1; flex: none;
+  color: color-mix(in srgb, var(--accent) 82%, transparent); }
+.nav-mobile a.nav-mobile-sub small { font-family: var(--font-label); font-size: 10px;
+  line-height: 1.3; letter-spacing: .03em;
+  color: color-mix(in srgb, var(--text) 44%, transparent); }
+.nav-mobile a.nav-mobile-sub:hover { background: color-mix(in srgb, var(--accent) 13%, transparent);
+  color: var(--accent); }
+.nav-mobile a.nav-mobile-sub:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+[dir="rtl"] .nav-mobile a.nav-mobile-sub,
+[dir="rtl"] .nav-mobile a.nav-mobile-sub small { letter-spacing: 0; }
+
+/* ── Le quatrième cran : les régions d'un pays ────────────────────────────
+   Sous la rangée des pays, un second filet — plus discret — ouvre les régions
+   du pays choisi, la plus active d'abord. On choisit donc là où le métier bat
+   avant d'ouvrir la page du type. */
+.nav-door-regions { display: flex; flex-wrap: wrap; align-items: center; gap: 5px;
+  flex: 1 1 100%; min-width: 0; margin-top: 4px; padding-top: 6px;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 11%, transparent); }
+.nav-door-regions .nav-door-countries-lab i { color: color-mix(in srgb, var(--accent) 82%, transparent); }
+/* La porte du pays entier ouvre la rangée des régions : elle garde le trait
+   pointillé des portes « Tout », et prend la teinte de la lecture pour ne pas
+   se confondre avec une région de plus. */
+.nav-door-regions .nav-door-chip.is-all {
+  color: color-mix(in srgb, var(--accent) 78%, var(--text));
+  border-color: color-mix(in srgb, var(--accent) 30%, transparent); }
+.nav-door-regions .nav-door-chip.is-all:hover,
+.nav-door-regions .nav-door-chip.is-all:focus-visible {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 48%, transparent); }
+/* Le pays déjà lu : la pastille s'accuse et gagne un point devant son nom,
+   exactement comme la région lue sous lui. */
+.nav-links a.nav-door-chip.is-current,
+.nav-mobile a.nav-door-chip.is-current {
+  color: var(--accent); font-weight: 600;
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  background: color-mix(in srgb, var(--accent) 13%, transparent); }
+.nav-links a.nav-door-chip.is-current::before,
+.nav-mobile a.nav-door-chip.is-current::before {
+  content: ''; flex: none; width: 5px; height: 5px; border-radius: 50%;
+  background: var(--accent); }
+.nav-doorlist--sheet .nav-door-regions { gap: 6px; }
+
+/* La même pastille-porte dans la feuille du téléphone : la marque de lecture
+   garde sa place sous la porte du lieu, et c'est elle qui ouvre le façonnage. */
+.nav-mobile a.nav-mobile-read {
+  display: inline-flex; align-items: center; gap: 6px;
+  width: fit-content; max-width: calc(100% - 26px);
+  margin-top: -8px; margin-inline-start: 26px;
+  padding: 4px 10px 5px 7px; border-radius: 999px;
+  text-decoration: none; white-space: nowrap;
+  background: color-mix(in srgb, var(--accent) 17%, transparent);
+  color: var(--accent);
+  font-family: var(--font-label); font-size: 12px; line-height: 1.3;
+  animation: nav-dot-in .26s cubic-bezier(.2,.7,.2,1) both;
+  transition: background .18s ease, color .18s ease; }
+.nav-mobile a.nav-mobile-read i { font-size: 12.5px; line-height: 1; flex: none;
+  color: var(--accent); }
+.nav-mobile a.nav-mobile-read span { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.nav-mobile a.nav-mobile-read i:last-child { opacity: .7; }
+.nav-mobile a.nav-mobile-read:hover { background: color-mix(in srgb, var(--accent) 26%, transparent);
+  color: var(--accent); }
+.nav-mobile a.nav-mobile-read:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+[dir="rtl"] .nav-mobile a.nav-mobile-read { letter-spacing: 0; font-size: 12.5px; }
+@media (prefers-reduced-motion: reduce) {
+  .nav-mobile a.nav-mobile-read { animation: none; }
+}
+
+/* ── Le raccourci du façonnage, dans le rang ────────────────────────────────
+   Le même second accès que sous la porte « Sous-traitance » du panneau :
+   l'annuaire déjà filtré sur le façonnage. Il se pose juste après
+   « Annuaire », et se lit comme son prolongement — une pastille fine, un cran
+   plus basse, un ciseau devant, plutôt qu'une septième porte au même poids. */
+.nav-links > a.nav-fac {
+  padding-block: 3px;
+  /* Padding logique : en arabe, la pastille garde son ciseau du côté où
+     commence la lecture, et sa respiration de l'autre côté. */
+  padding-inline: 7px 9px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 15%, transparent);
+  font-size: 12px;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--text) 72%, transparent);
+  transition: color .2s ease, border-color .2s ease, background .2s ease;
+}
+.nav-links > a.nav-fac > i {
+  font-size: 12.5px;
+  color: color-mix(in srgb, var(--accent) 74%, var(--text));
+  transition: color .2s ease;
+}
+.nav-links > a.nav-fac::after { display: none; }
+.nav-links > a.nav-fac:hover {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 48%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+.nav-links > a.nav-fac:hover > i { color: var(--accent); }
+.nav-links > a.nav-fac:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+/* L'annuaire déjà filtré sur le façonnage est la page sous les pieds : la
+   pastille s'accuse comme les autres portes, sans prendre leur soulignement. */
+.nav-links > a.nav-fac.is-current {
+  color: var(--accent);
+  font-weight: 600;
+  border-color: color-mix(in srgb, var(--accent) 48%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+.nav-links > a.nav-fac.is-current > i { color: var(--accent); }
+/* Le périmètre ne tient aucun façonnier : la pastille le dit avant qu'on
+   l'ouvre. Même écriture que les puces de l'annuaire à zéro — le trait passe
+   en pointillés et le jeton s'éteint, au lieu d'annoncer un « 0 » en vain. */
+.nav-links > a.nav-fac.is-zero {
+  outline: 1px dashed color-mix(in srgb, var(--text) 26%, transparent);
+  outline-offset: -1px;
+  color: color-mix(in srgb, var(--muted) 88%, transparent);
+}
+.nav-links > a.nav-fac.is-zero > i { color: color-mix(in srgb, var(--muted) 88%, transparent); }
+.nav-links > a.nav-fac.is-zero .nav-fac-count {
+  background: color-mix(in srgb, var(--text) 7%, transparent);
+  color: color-mix(in srgb, var(--muted) 92%, transparent);
+}
+.nav-links > a.nav-fac.is-zero:hover {
+  outline-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  color: var(--accent);
+}
+.nav-links > a.nav-fac.is-zero:hover > i { color: var(--accent); }
+/* Le même compte, cette fois dans la pastille du rang : le chiffre se pose en
+   jeton au bout du libellé, et c'est la pastille entière — chiffre compris —
+   qui ouvre l'annuaire filtré sur les ateliers en activité. Il n'y a donc pas
+   deux portes pour une seule adresse. */
+.nav-fac-count {
+  display: inline-flex; align-items: center; justify-content: center;
+  flex: none; box-sizing: border-box;
+  min-width: 17px; height: 16px; padding: 0 5px; margin-inline-start: 1px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+  font-family: var(--font-label); font-size: 10px; font-weight: 500;
+  line-height: 1; letter-spacing: 0;
+  transition: background .2s ease, color .2s ease; }
+.nav-links > a.nav-fac:hover .nav-fac-count,
+.nav-links > a.nav-fac.is-current .nav-fac-count {
+  background: color-mix(in srgb, var(--accent) 28%, transparent);
+  color: var(--accent); }
+@media (max-width: 1460px) {
+  .nav-fac-count { min-width: 16px; height: 15px; font-size: 9.5px; padding: 0 4px; }
+}
+@media (max-width: 1460px) {
+  .nav-links > a.nav-fac { font-size: 11px; padding-block: 2px; padding-inline: 6px 8px; }
+  .nav-links > a.nav-fac > i { font-size: 12px; }
+}
+
+/* ── Les portes principales, repliées dans le panneau ──────────────────────
+   Entre 1024 et 1299 px, le rang ne garde que « Plus ». Le panneau reprend
+   alors l'annuaire (avec son second accès façonnage), les candidats, les
+   offres, et sur l'accueil ses deux premiers temps. Sur un écran large, ce
+   bloc ne paraît pas : les mêmes portes sont déjà dans le rang. */
+.nav-more-compact { display: none; }
+@media (min-width: 1024px) and (max-width: 1299px) {
+  .nav-more-compact { display: block; }
+}
+
+/* ── Le rang revient à 1300 px, avec la pastille du façonnage en plus ──────
+   C'est exactement la largeur où la barre quitte le panneau pour retrouver
+   ses portes : la pastille ajoutée sous « Annuaire » ne doit pas être ce qui
+   fait déborder la ligne. Entre 1300 et 1439 px, la rangée resserre donc ses
+   gouttières de cinq pixels et la pastille perd un peu de sa respiration —
+   toutes les portes restent, aucune ne se replie, et le bloc de droite (langue,
+   candidat, compte, appel à l'action) garde sa largeur pleine. Passé 1440 px,
+   tout reprend ses cotes. */
+@media (min-width: 1300px) and (max-width: 1439px) {
+  .nav-links { gap: 10px; }
+  .nav-links > a.nav-fac { padding-inline: 5px 7px; font-size: 11.5px; }
+  .nav-links > a.nav-fac > i { font-size: 12px; }
+}
+
+/* ── Cinq portes à 1300 px : « Offres » entre dans le rang ────────────────
+   À 1300 px, la barre quitte le panneau et retrouve ses portes d'un coup —
+   désormais « Plateforme, Demandes, Offres, Annuaire, Plus ». C'est la
+   largeur la plus juste de tout le site : la rangée resserre donc d'un cran
+   sa gouttière, ses libellés et ses signes, et le bloc de droite se tient un
+   peu plus court. Aucune porte ne se replie, aucun mot ne se coupe, et la
+   nouvelle porte ne touche jamais ses voisines. Passé 1440 px, tout reprend
+   ses cotes. */
+@media (min-width: 1300px) and (max-width: 1439px) {
+  .nav-links { gap: 8px; }
+  .nav-links > a { gap: 5px; }
+  .nav-links a,
+  .nav-more-btn { font-size: 12px; }
+  .nav-links > a > i,
+  .nav-more-btn i { font-size: 13px; }
+  .nav-right { gap: 8px; }
+}
+
+/* ── La pastille du façonnage, au plus serré ───────────────────────────────
+   1300 px est la largeur la plus juste : c'est là que le rang retrouve ses
+   portes, avec le jeton du façonnage en plus à côté de « Candidats ». Pour
+   que la pastille ne soit jamais ce qui touche la porte suivante, elle rend
+   ici ses marges une à une, sans perdre un mot : la respiration intérieure
+   d'abord, puis le jeton, puis l'écart au ciseau. Rien n'est masqué, aucune
+   porte ne se replie, et passé 1366 px la pastille retrouve ses cotes. */
+@media (min-width: 1300px) and (max-width: 1365px) {
+  .nav-links > a.nav-fac {
+    gap: 3px;
+    padding-inline: 4px 6px;
+  }
+  .nav-links > a.nav-fac > i { font-size: 11.5px; }
+  .nav-fac-count {
+    min-width: 14px; height: 14px; padding: 0 3px;
+    margin-inline-start: 0; font-size: 9px;
+  }
+}
+
+/* ── La même rangée, en arabe ───────────────────────────────────────────────
+   « وحدات التجهيز » tient sensiblement plus de place que « Façonniers » à
+   taille égale : entre 1300 et 1439 px, la pastille rend donc un cran de plus
+   qu'en lecture latine, et le rang resserre ses gouttières d'autant. Aucune
+   porte ne se replie, le libellé reste entier, le jeton reste lisible — et
+   passé 1440 px tout reprend ses cotes, exactement comme en français. */
+@media (min-width: 1300px) and (max-width: 1439px) {
+  /* L'arabe écrit « الشبابيك » et « الصيغ والأسعار » : deux mots qui pèsent
+     plus que leurs voisins latins à corps égal. Le pas du rang, la gouttière
+     du signe et le corps des libellés descendent donc d'un cran de plus qu'en
+     français, pour que cinq portes — dont la nouvelle — ne se frôlent jamais.
+     Rien n'est masqué, aucun mot n'est coupé, et le bloc de droite garde sa
+     largeur pleine. */
+  [dir="rtl"] .nav-links { gap: 6px; }
+  [dir="rtl"] .nav-links > a { gap: 4px; }
+  [dir="rtl"] .nav-links a,
+  [dir="rtl"] .nav-more-btn { font-size: 11.5px; }
+  [dir="rtl"] .nav-links > a > i,
+  [dir="rtl"] .nav-more-btn i { font-size: 12.5px; }
+  [dir="rtl"] .nav-right { gap: 7px; }
+  [dir="rtl"] .nav-links > a.nav-fac {
+    gap: 3px;
+    padding-inline: 4px 5px;
+    font-size: 11px;
+  }
+  [dir="rtl"] .nav-links > a.nav-fac > i { font-size: 11px; }
+  [dir="rtl"] .nav-fac-count {
+    min-width: 14px; height: 14px; padding: 0 3px;
+    margin-inline-start: 0; font-size: 9px;
+  }
+}
+
+/* ── La largeur la plus juste, en arabe ──────────────────────────────────
+   Entre 1300 et 1379 px, la barre retrouve ses cinq portes avec le jeton du
+   façonnage en plus, et l'arabe y pèse le plus lourd. Le pas du rang rend
+   encore un cran, le corps des libellés avec lui, et le bloc de droite se
+   tient un peu plus court : si proches soient-elles, deux portes gardent
+   toujours leur gouttière. Dès 1380 px, tout reprend les cotes de la plage
+   1300–1439 px, et passé 1440 px celles du site entier. */
+@media (min-width: 1300px) and (max-width: 1379px) {
+  [dir="rtl"] .nav-links { gap: 5px; }
+  [dir="rtl"] .nav-links a,
+  [dir="rtl"] .nav-more-btn { font-size: 11px; }
+  [dir="rtl"] .nav-links > a > i,
+  [dir="rtl"] .nav-more-btn i { font-size: 12px; }
+  [dir="rtl"] .nav-links > a.nav-fac { padding-inline: 3px 4px; }
+  [dir="rtl"] .nav-right { gap: 6px; }
+}
+
+/* ── Rien dans le périmètre choisi ────────────────────────────────────────
+   Les trois barres lisent le pays et la région écrits dans l'adresse. Quand
+   le périmètre n'en contient aucune ligne, la puce ne promet plus un chiffre
+   qu'on ne verra pas : le trait passe en pointillés et le compte s'éteint,
+   exactement comme la puce de façonnage de l'annuaire à zéro. */
+.nav-links .nav-more-item.is-zero,
+.nav-mobile a.nav-mobile-item.is-zero {
+  outline: 1px dashed color-mix(in srgb, var(--text) 26%, transparent);
+  outline-offset: -1px;
+}
+.nav-links .nav-more-item.is-zero > i,
+.nav-mobile a.nav-mobile-item.is-zero > i {
+  color: color-mix(in srgb, var(--muted) 88%, transparent);
+}
+.nav-links .nav-more-item.is-zero .nav-more-txt small,
+.nav-mobile a.nav-mobile-item.is-zero .nav-mobile-txt small {
+  color: color-mix(in srgb, var(--muted) 92%, transparent);
+  font-style: italic;
+}
+.nav-links .nav-more-item.is-zero:hover .nav-more-txt small,
+.nav-mobile a.nav-mobile-item.is-zero:hover .nav-mobile-txt small {
+  color: color-mix(in srgb, var(--accent) 68%, transparent);
+  font-style: italic;
+}
+.nav-links .nav-more-item.is-zero:hover,
+.nav-mobile a.nav-mobile-item.is-zero:hover {
+  outline-color: color-mix(in srgb, var(--accent) 46%, transparent);
+}
+/* Au clavier, le repère reprend le dessus sur les pointillés. */
+.nav-links .nav-more-item.is-zero:focus-visible,
+.nav-mobile a.nav-mobile-item.is-zero:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+}
+
+/* ── La porte « Annuaire » et son menu de types ────────────────────────────
+   La porte du rang déplie les huit types d'établissement : chacune des lignes
+   ouvre la page du type, c'est-à-dire l'annuaire déjà filtré. Le bouton garde
+   exactement la voix de « Plus » — même corps, même chevron qui se retourne,
+   même panneau derrière — pour que la barre ne parle pas deux langues. */
+.nav-dir { position: relative; display: inline-flex; align-items: center; }
+.nav-dir-btn { position: relative; }
+/* La page sous les pieds garde la marque des autres portes : l'accent et son
+   filet, comme un lien du rang. */
+.nav-dir-btn.is-current { color: var(--accent); font-weight: 600; }
+.nav-dir-btn.is-current .nav-more-caret { color: var(--accent); }
+.nav-dir-btn.is-current::after { content: ""; position: absolute; left: 0; bottom: -4px;
+  height: 1px; width: 100%; background: var(--accent); }
+.nav-dir-menu { top: calc(100% + 14px); inset-inline-start: -10px;
+  width: 400px; max-width: calc(100vw - 32px); }
+/* Entre 1024 et 1299 px le rang s'efface : la porte de l'annuaire aussi, et le
+   panneau « Plus » reprend les pastilles des types à sa place. */
+@media (min-width: 1024px) and (max-width: 1299px) {
+  .nav-dir { display: none; }
+}
+
+/* ── Les huit types, en pastilles ──────────────────────────────────────────
+   Dans le panneau compact et dans la feuille du téléphone, les types se
+   lisent d'un coup d'œil : une famille par pastille, son signe devant, son
+   compte au bout. Même adresse que le menu du rang, même chiffre. */
+.nav-dir-types { display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 11px 8px; }
+.nav-links a.nav-dir-type,
+.nav-mobile a.nav-dir-type {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 5px 10px 5px 8px; border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  background: transparent; text-decoration: none; white-space: nowrap;
+  font-family: var(--font-label); font-size: 12.5px; font-weight: 500;
+  line-height: 1.3; letter-spacing: .02em;
+  color: color-mix(in srgb, var(--text) 74%, transparent);
+  transition: color .18s ease, border-color .18s ease, background .18s ease;
+}
+.nav-links a.nav-dir-type::after { display: none; }
+.nav-links a.nav-dir-type > i,
+.nav-mobile a.nav-dir-type > i {
+  font-size: 13.5px; line-height: 1; flex: none;
+  color: color-mix(in srgb, var(--accent) 74%, var(--text));
+  transition: color .18s ease;
+}
+.nav-links a.nav-dir-type:hover,
+.nav-mobile a.nav-dir-type:hover {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+.nav-links a.nav-dir-type:hover > i,
+.nav-mobile a.nav-dir-type:hover > i { color: var(--accent); }
+/* Le type déjà lu : la pastille s'accuse comme une porte courante. */
+/* Le type que la recherche vient de nommer : il reste dans sa famille, mais
+   se lit un cran plus fort que ses sept voisines. */
+.nav-links a.nav-dir-type.is-hit,
+.nav-mobile a.nav-dir-type.is-hit {
+  color: var(--accent); font-weight: 600;
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+.nav-links a.nav-dir-type.is-hit > i,
+.nav-mobile a.nav-dir-type.is-hit > i { color: var(--accent); }
+.nav-links a.nav-dir-type.is-current,
+.nav-mobile a.nav-dir-type.is-current {
+  color: var(--accent); font-weight: 600;
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+}
+.nav-links a.nav-dir-type.is-current > i,
+.nav-mobile a.nav-dir-type.is-current > i { color: var(--accent); }
+.nav-links a.nav-dir-type:focus-visible,
+.nav-mobile a.nav-dir-type:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+/* Dans la feuille du téléphone, les huit pastilles se rangent sur deux
+   colonnes, sous la porte qu'elles prolongent : les huit types tiennent sur
+   quatre lignes, et la feuille élargie leur laisse toute sa largeur — plus de
+   retrait, plus de colonne perdue à droite. */
+.nav-dir-types--sheet {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  margin: -6px 0 2px;
+  margin-inline-start: 0;
+  padding: 0;
+}
+/* Chaque pastille tient sa colonne : le libellé le plus long s'écourte plutôt
+   que de pousser sa voisine hors de la feuille, et le compte reste au bout. */
+.nav-mobile .nav-dir-types--sheet a.nav-dir-type {
+  justify-content: flex-start;
+  min-width: 0;
+  max-width: 100%;
+}
+.nav-mobile .nav-dir-types--sheet a.nav-dir-type > span:not(.nav-sub-count) {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.nav-mobile .nav-dir-types--sheet .nav-sub-count { margin-inline-start: auto; }
+.nav-mobile a.nav-dir-type { font-size: 12.5px; padding: 6px 10px 6px 8px;
+  color: color-mix(in srgb, var(--text) 82%, transparent); }
+[dir="rtl"] .nav-links a.nav-dir-type,
+[dir="rtl"] .nav-mobile a.nav-dir-type { letter-spacing: 0; font-size: 12.5px; }
+
+/* ── La porte de l'annuaire et sa flèche ───────────────────────────────────
+   La ligne mène à l'annuaire entier ; la flèche déplie les huit types, repliés
+   d'office pour que la rubrique du réseau tienne dans la vue. Un seul geste,
+   la même porte que dans la feuille du téléphone. */
+.nav-more-typeshost { margin: 1px 0; }
+.nav-more-typeshost > a { border-radius: 10px; }
+.nav-more-typeshost .nav-door-toggle { margin: 4px 6px 4px 0; border-radius: 8px; }
+/* Une porte du panneau qui n'est pas un lien — la sortie de compte — garde le
+   dessin des autres lignes, sans en prendre la voix de lien. */
+.nav-links button.nav-more-item {
+  width: 100%;
+  border: 0;
+  background: none;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+.nav-links button.nav-more-item:disabled { opacity: .55; cursor: default; }
+
+/* ── Le pied du panneau ────────────────────────────────────────────────────
+   La langue en cours et la sortie de compte, d'un ton plus bas que les portes
+   et séparées par leur propre filet : un rappel posé au bas du panneau, pas
+   une quatrième rubrique. Le pied prend la place du rembourrage du panneau,
+   pour que sa teinte touche les deux coins du bas. */
+/* Le pied est le plancher du panneau : il ne défile plus avec les portes,
+   il les attend en bas. Collé au bord bas, il ne laisse donc plus le voile ni
+   la flèche se poser sur lui — la langue et la sortie de compte restent lisibles
+   à tout moment, et le voile s'arrête juste au-dessus de son filet. Sa teinte
+   est pleine : les portes qui passent derrière lui ne le traversent pas. */
+.nav-more-foot {
+  position: sticky;
+  bottom: 0;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 6px -8px -8px;
+  padding: 8px 11px 9px;
+  border-top: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  border-radius: 0 0 13px 13px;
+  background: color-mix(in srgb, var(--surface) 96%, var(--text) 4%);
+  box-shadow: 0 -10px 14px -13px color-mix(in srgb, #000 58%, transparent);
+  transition: border-color .26s ease, box-shadow .26s ease;
+}
+/* Le filet du plancher du panneau s'accuse au même signe que celui de la
+   feuille du téléphone : au repos, la séparation ne se devine qu'à peine ;
+   dès que des portes sont passées derrière le pied — le premier pixel de
+   défilement réel, le seuil du liseré du bloc collé en haut —, le trait se
+   lit franchement et son ombre s'appuie un peu plus. Sa teinte pleine ne
+   bouge pas : seuls le trait et son ombre glissent, donc la hauteur du
+   plancher ne change jamais et le voile n'a pas à se recaler à ce moment-là.
+   Les deux planchers — feuille et panneau, compact comme large — répondent
+   ainsi au même signe, au même seuil, dans les trois langues. */
+.nav-more-foot.is-scrolled {
+  border-top-color: color-mix(in srgb, var(--text) 22%, transparent);
+  box-shadow: 0 -14px 18px -13px color-mix(in srgb, #000 70%, transparent);
+}
+.nav-more-foot-lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  /* Le mot qui nomme la langue est un seul mot : il ne se replie jamais en
+     deux lignes à l'intérieur de son propre bloc. Si la place manque, c'est
+     la ligne du pied qui décide — et sa hauteur est relevée pour le voile. */
+  white-space: nowrap;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+}
+.nav-more-foot-lang i {
+  font-size: 13px;
+  line-height: 1;
+  color: color-mix(in srgb, var(--accent) 74%, var(--text));
+}
+[dir="rtl"] .nav-more-foot-lang { letter-spacing: 0; text-transform: none; font-size: 11px; }
+/* La bascule de langue garde son galbe de barre, un cran plus serrée : elle se
+   lit comme un rappel, à côté du mot qui la nomme. */
+.nav-more-foot .lang-switch.is-compact { margin-top: 0; align-self: center; padding: 2px; }
+.nav-more-foot .lang-switch.is-compact button { padding: 3px 7px; min-width: 26px; font-size: 10px; }
+.nav-more-foot-out {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-inline-start: auto;
+  padding: 4px 9px 4px 7px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .04em;
+  line-height: 1.3;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  transition: color .18s ease, border-color .18s ease, background .18s ease;
+}
+.nav-more-foot-out i { font-size: 12.5px; line-height: 1; color: color-mix(in srgb, var(--accent) 78%, transparent); }
+.nav-more-foot-out:hover {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: var(--accent);
+}
+.nav-more-foot-out:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.nav-more-foot-out[disabled] { opacity: .55; cursor: wait; }
+[dir="rtl"] .nav-more-foot-out { letter-spacing: 0; font-size: 11px; }
+/* ── La ligne de langue du panneau, relue en arabe ─────────────────────────
+   Le panneau ne prend pas la largeur de l'écran : 400 px, ramenés à 372 px
+   sous 1460 px — donc une seule et même largeur dès 1024 px, celle où il
+   devient la barre entière du site. En arabe, « اللغة » et « تسجيل الخروج »
+   s'écrivent plus long que « Langue » et « Se déconnecter » à corps égal :
+   c'est donc la lecture arabe qui doit tenir dans cette largeur-là.
+
+   Le pied resserre ses trois écarts, rend un demi-point sur le mot qui nomme
+   la langue et sur la sortie de compte, et la pastille garde son cadre (deux
+   pixels de rembourrage de moins, trois de largeur en moins). Rien n'est
+   retiré : les trois pastilles restent entières, chaque mot reste lisible, et
+   la ligne tient d'un seul tenant — donc le plancher ne prend jamais une
+   seconde ligne sous laquelle le voile et la flèche viendraient se poser. */
+[dir="rtl"] .nav-more-foot { column-gap: 6px; }
+[dir="rtl"] .nav-more-foot-lang { gap: 4px; font-size: 10.5px; }
+[dir="rtl"] .nav-more-foot-lang i { font-size: 12px; }
+[dir="rtl"] .nav-more-foot .lang-switch.is-compact { gap: 2px; padding: 2px; }
+[dir="rtl"] .nav-more-foot .lang-switch.is-compact button {
+  min-width: 22px;
+  padding: 3px 5px;
+  font-size: 9.5px;
+}
+[dir="rtl"] .nav-more-foot-out {
+  gap: 4px;
+  padding: 4px 7px 4px 6px;
+  font-size: 10px;
+}
+[dir="rtl"] .nav-more-foot-out i { font-size: 11.5px; }
+/* ── Le pied à deux lignes, en anglais ────────────────────────────────────
+   « Language · FR ع EN · Sign out » tient sur une ligne en français, et
+   déborde en anglais : les deux libellés y sont plus longs à corps égal. La
+   sortie de compte passe donc à la ligne, où elle reprend le bout de la
+   sienne — du côté où la lecture finit —, et la langue garde ses trois
+   pastilles ensemble sur la première. Ce n'est pas la hauteur du pied qui
+   décide où se pose le voile, c'est lui-même : elle est relevée sur lui
+   (--nav-foot), donc le dégradé se lève d'exactement deux lignes et la
+   flèche garde ses 12 px au-dessus du filet. Le repère de fin, dans le flux
+   juste au-dessus, n'est jamais traversé : dès qu'il entre dans la bande
+   visible, le voile et la flèche s'effacent. */
+[lang="en"] .nav-more-foot { row-gap: 7px; column-gap: 9px; }
+[lang="en"] .nav-more-foot-lang { flex: 0 0 auto; }
+[lang="en"] .nav-more-foot-out { margin-inline-start: auto; }
+
+/* ── Le pied anglais à 1300 px, tenu sur une seule ligne ──────────────────
+   À cette largeur, le panneau ne fait que 372 px — la même mesure qu'à
+   1024 px, puisqu'il ne reprend ses 400 px qu'à 1460 px. En anglais, le mot
+   qui nomme la langue, ses trois pastilles et la sortie de compte tiennent
+   pourtant ensemble dans les 350 px utiles : « Language » et son signe en
+   occupent ~71, les pastilles ~82, « Sign out » ~82, et les deux écarts 16 —
+   soit ~251 px. Le pied n'a donc plus de seconde ligne à préparer.
+
+   Le mot et ses pastilles restent voisins au début de la ligne, et la sortie
+   de compte la finit, à l'autre bout — comme en français et en arabe. Rien
+   n'est retiré : les trois pastilles gardent leur cadre, chaque mot reste
+   entier, et les pastilles rendent deux pixels de largeur pour que les trois
+   tiennent ensemble.
+
+   La hauteur du pied est relevée sur lui-même (--nav-foot) : qu'il tienne sur
+   une ligne, ou sur deux si une police rend un mot plus long, le voile et la
+   flèche du bas se lèvent d'exactement cette hauteur et rien ne se pose sur
+   le plancher. */
+@media (min-width: 1024px) and (max-width: 1459px) {
+  [lang="en"] .nav-more-foot {
+    justify-content: flex-start;
+    row-gap: 6px;
+    column-gap: 8px;
+  }
+  /* La sortie de compte garde son écart automatique : elle finit la ligne au
+     lieu de se coller aux pastilles, et le panneau ne fait pas deux dessins
+     du même pied selon la langue. */
+  [lang="en"] .nav-more-foot-out { margin-inline-start: auto; }
+  [lang="en"] .nav-more-foot .lang-switch.is-compact button {
+    min-width: 24px;
+    padding: 3px 6px;
+  }
+}
+
+/* ── Ce qui reste sous la ligne ────────────────────────────────────────────
+   Le panneau compact porte plus de portes que sa hauteur n'en montre : quand
+   il en reste sous le bord, un voile au bas du panneau et une petite flèche
+   le disent. La flèche est une porte de lecture à elle seule — elle fait
+   descendre la liste d'un écran — et dès que la fin est en vue, voile et
+   flèche s'effacent : ils n'ont plus rien à annoncer. */
+.nav-more-more {
+  /* Le voile du panneau et celui de la feuille sont le même voile : sa
+     hauteur et la levée de la flèche sont écrites une seule fois, en
+     variables, et reprises à l'identique par la feuille du téléphone. Le
+     dégradé couvre donc la même profondeur des deux côtés, et la flèche se
+     tient à la même distance du filet du plancher — 12 px —, que le pied
+     tienne sur une ligne ou sur deux.
+
+     La profondeur du voile, elle, n'est plus écrite ici : elle est relevée sur
+     la bande réellement visible et posée en `--nav-veil-h` par le panneau
+     lui-même (voir veilHeightIn). Sur un écran court, avec un pied anglais
+     replié sur deux lignes et la sourdine du rappel ouverte, le dégradé se
+     resserre au lieu de manger le repère de fin. Les 56 px restent la valeur
+     de repli, quand rien n'a encore été relevé. */
+  --nav-arrow-lift: 12px;
+  position: sticky;
+  /* Le voile se tient au-dessus du plancher, jamais dessus : sa hauteur est
+     relevée à l'ouverture (voir --nav-foot), et le panneau cesse donc de
+     superposer la flèche et la langue du bas. */
+  bottom: var(--nav-foot, 0px);
+  z-index: 5;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  /* La porte ne prend aucune place dans la liste : elle se pose sur le bas du
+     panneau. Sans cela, son arrivée pousserait les dernières portes de 38 px
+     à chaque fois qu'on atteint le fond. */
+  height: 0;
+  margin: 0 -8px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+  font: inherit;
+  cursor: pointer;
+  animation: nav-more-more-in .22s ease-out both;
+}
+/* Le voile : la même teinte que le panneau, du transparent vers le plein, pour
+   que la dernière porte lisible s'éteigne au lieu d'être coupée net. */
+.nav-more-more::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--nav-veil-h, 56px);
+  border-radius: 0;
+  background: linear-gradient(to bottom,
+    transparent,
+    color-mix(in srgb, var(--surface) 96%, var(--text) 4%) 58%);
+  pointer-events: none;
+}
+.nav-more-more > span {
+  position: relative;
+  bottom: var(--nav-arrow-lift, 12px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 22%, transparent);
+  background: color-mix(in srgb, var(--surface) 94%, var(--text) 6%);
+  transition: color .18s ease, border-color .18s ease, transform .18s ease;
+}
+.nav-more-more i { font-size: 15px; line-height: 1; }
+/* ── La flèche porte le compte des portes restantes ─────────────────────────
+   Elle disait « il y en a » ; elle dit maintenant combien. Le cercle s'ouvre
+   juste ce qu'il faut pour tenir un chiffre à côté du chevron, sans changer
+   d'axe : sa base reste à la même distance du filet du plancher, et le chiffre
+   se lit au milieu, là où l'œil cherche déjà la flèche. Un chiffre garde son
+   sens de lecture propre — il ne se retourne jamais en arabe. */
+.nav-more-more > span.has-n {
+  width: auto;
+  gap: 1px;
+  padding-inline: 3px 6px;
+}
+.nav-more-cue-n {
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0;
+  color: inherit;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+.nav-more-more:hover { color: var(--accent); }
+.nav-more-more:hover > span {
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  transform: translateY(2px);
+}
+.nav-more-more:focus-visible { outline: 2px solid var(--accent); outline-offset: -3px; }
+@keyframes nav-more-more-in { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .nav-more-more { animation: none; }
+  .nav-more-more > span { transition: none; }
+}
+
+/* ── La fin de la liste ────────────────────────────────────────────────────
+   Le voile et la flèche disent qu'il reste des portes ; une fois le fond
+   atteint, ils s'effacent et plus rien ne dit qu'on est arrivé au bout. Un
+   petit repère ferme donc la liste : deux filets et un mot, posés au-dessus
+   du plancher, à la manière d'un point final. Il ne paraît que si le panneau
+   défile vraiment — une liste qui tient tout entière n'a pas de bout à
+   annoncer — et il reste dans le flux : il ne prend la place de rien et ne
+   recouvre aucune porte. */
+.nav-more-end {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 7px 8px 2px;
+  font-family: var(--font-label);
+  font-size: 9px;
+  line-height: 1.3;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 42%, transparent);
+}
+.nav-more-end::before,
+.nav-more-end::after {
+  content: "";
+  flex: 1 1 auto;
+  min-width: 10px;
+  height: 1px;
+  background: color-mix(in srgb, var(--text) 12%, transparent);
+}
+.nav-more-end i {
+  flex: none;
+  font-size: 11px;
+  line-height: 1;
+  color: color-mix(in srgb, var(--accent) 62%, transparent);
+}
+.nav-more-end > span { flex: none; }
+[dir="rtl"] .nav-more-end {
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 10.5px;
+}
+/* ── Le mot du repère, dit une seule fois ──────────────────────────────────
+   Le repère visible est une marque pour l'œil : une phrase qui paraîtrait à
+   chaque remontée de la liste ferait croire à une nouvelle à chaque fois. Le
+   repère est donc muet, et c'est cette zone de statut qui parle — une fois par
+   ouverture, dans la langue lue. Elle ne prend ni place ni couleur. */
+.nav-end-said {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── Le second niveau des menus ────────────────────────────────────────────
+   Chaque porte de la barre peut ouvrir une suite : les pays d'un type, les
+   rubriques d'un tableau. La ligne garde sa porte intacte — elle mène à la
+   page du type ou du tableau —, et une flèche, à son bout, déplie la suite.
+   Un seul mécanisme pour les trois menus : la barre ne parle pas deux langues. */
+.nav-doorlist { display: grid; gap: 1px; }
+.nav-door-item { display: grid; gap: 1px; }
+/* La porte et sa flèche partagent une ligne : la première prend la place, la
+   seconde garde sa taille. */
+.nav-door-head { display: flex; align-items: stretch; gap: 2px; }
+.nav-door-head > a { flex: 1 1 auto; min-width: 0; }
+.nav-door-toggle { flex: none; align-self: stretch; width: 26px; padding: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 0; border-radius: 9px; background: transparent; cursor: pointer;
+  color: color-mix(in srgb, var(--text) 42%, transparent);
+  transition: color .18s ease, background .18s ease; }
+.nav-door-toggle i { font-size: 14px; line-height: 1; }
+.nav-door-toggle:hover { color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent); }
+.nav-door-toggle.is-open { color: var(--accent); }
+.nav-door-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: -1px; }
+/* La flèche qui garde un compte : les types se comptent avant de s'ouvrir,
+   comme les portes annoncent leur nombre de fiches. */
+.nav-door-toggle--count { width: auto; gap: 4px; padding: 0 5px; }
+.nav-door-toggle-n {
+  flex: none;
+  font-family: var(--font-label); font-size: 10px; font-weight: 500;
+  line-height: 1; letter-spacing: 0; color: inherit;
+}
+/* Les pastilles de la suite : un cran plus petites que les portes, décalées
+   sous celle qu'elles prolongent, pour que la hiérarchie se lise d'un coup. */
+.nav-door-subs { display: flex; flex-wrap: wrap; gap: 5px;
+  padding: 1px 11px 7px; padding-inline-start: 30px; }
+.nav-links a.nav-door-chip,
+.nav-mobile a.nav-door-chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 8px 3px 7px; border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  background: transparent; text-decoration: none; white-space: nowrap;
+  font-family: var(--font-label); font-size: 11px; font-weight: 500;
+  line-height: 1.35; letter-spacing: .02em;
+  color: color-mix(in srgb, var(--text) 72%, transparent);
+  transition: color .18s ease, border-color .18s ease, background .18s ease; }
+.nav-links a.nav-door-chip::after { display: none; }
+.nav-links a.nav-door-chip > i,
+.nav-mobile a.nav-door-chip > i { font-size: 11.5px; line-height: 1;
+  color: color-mix(in srgb, var(--accent) 74%, var(--text)); }
+.nav-door-chip-n { font-size: 9.5px; font-weight: 500; line-height: 1;
+  color: color-mix(in srgb, var(--text) 46%, transparent); }
+.nav-links a.nav-door-chip:hover,
+.nav-mobile a.nav-door-chip:hover { color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.nav-links a.nav-door-chip:hover .nav-door-chip-n,
+.nav-mobile a.nav-door-chip:hover .nav-door-chip-n {
+  color: color-mix(in srgb, var(--accent) 80%, transparent); }
+/* La porte « Tout » de la suite : elle garde le même galbe, sans chiffre. */
+.nav-links a.nav-door-chip.is-all,
+.nav-mobile a.nav-door-chip.is-all { border-style: dashed; }
+/* Le troisième cran : les pays d'une rubrique. La pastille garde son adresse
+   — la rubrique entière — et une petite flèche, à son bout, ouvre ses pays
+   au lieu de renoncer à l'une pour lire les autres. */
+.nav-door-subitem { display: inline-flex; align-items: center; gap: 2px; max-width: 100%; }
+.nav-door-subitem > a.nav-door-chip.is-open { color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.nav-door-more { display: inline-flex; align-items: center; justify-content: center; flex: none;
+  width: 20px; height: 20px; padding: 0; border-radius: 999px; cursor: pointer;
+  border: 1px dashed color-mix(in srgb, var(--text) 20%, transparent);
+  background: transparent; color: color-mix(in srgb, var(--text) 48%, transparent);
+  transition: color .18s ease, border-color .18s ease, background .18s ease; }
+.nav-door-more i { font-size: 11px; line-height: 1; }
+.nav-door-more:hover,
+.nav-door-more.is-open { color: var(--accent); border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.nav-door-more:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.nav-doorlist--sheet .nav-door-more { width: 26px; height: 26px; }
+.nav-doorlist--sheet .nav-door-more i { font-size: 13px; }
+/* ── Le tri du tableau, en tête de son dépliant ───────────────────────────
+   « Lire par : rubriques · pays ». Deux positions, une seule allumée : il ne
+   filtre rien, il change l'ordre de lecture des mêmes lignes. */
+.nav-door-sort { display: flex; align-items: center; flex-wrap: wrap; gap: 4px;
+  flex: 1 1 100%; min-width: 0;
+  padding: 1px 11px 6px; padding-inline-start: 30px; }
+.nav-door-sort-lab { margin-inline-end: 2px; white-space: nowrap;
+  font-family: var(--font-label); font-size: 9px; letter-spacing: .1em;
+  text-transform: uppercase; color: color-mix(in srgb, var(--text) 46%, transparent); }
+.nav-door-sort button { padding: 2px 9px; border-radius: 999px; cursor: pointer;
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  background: transparent; font: inherit; font-family: var(--font-label);
+  font-size: 10.5px; font-weight: 500; line-height: 1.4; letter-spacing: .02em;
+  white-space: nowrap; color: color-mix(in srgb, var(--text) 66%, transparent);
+  transition: color .18s ease, border-color .18s ease, background .18s ease; }
+.nav-door-sort button:hover { color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.nav-door-sort button.is-on { color: var(--accent); font-weight: 600;
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent); }
+.nav-door-sort button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+/* La petite croix au bout du tri : elle rend l'ordre habituel d'un seul geste,
+   sans reposer la rangée. Elle garde la taille d'un jeton et s'éteint quand il
+   n'y a rien à rendre — on ne propose pas de revenir là où l'on est déjà. */
+.nav-door-sort-clear {
+  display: inline-flex; align-items: center; justify-content: center; flex: none;
+  width: 19px; height: 19px; padding: 0; margin-inline-start: 1px;
+  border-radius: 999px; cursor: pointer;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  background: transparent; color: color-mix(in srgb, var(--text) 54%, transparent);
+  transition: color .18s ease, border-color .18s ease, background .18s ease, opacity .18s ease;
+}
+.nav-door-sort-clear i { font-size: 11px; line-height: 1; }
+.nav-door-sort-clear:hover { color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 48%, transparent);
+  background: color-mix(in srgb, var(--accent) 13%, transparent); }
+.nav-door-sort-clear:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.nav-door-sort-clear[disabled] { opacity: .34; cursor: default; }
+.nav-door-sort-clear[disabled]:hover {
+  color: color-mix(in srgb, var(--text) 54%, transparent);
+  border-color: color-mix(in srgb, var(--text) 16%, transparent);
+  background: transparent; }
+.nav-doorlist--sheet .nav-door-sort-clear { width: 24px; height: 24px; }
+.nav-doorlist--sheet .nav-door-sort-clear i { font-size: 13px; }
+.nav-doorlist--sheet .nav-door-sort { padding-inline-start: 34px; }
+.nav-doorlist--sheet .nav-door-sort button { font-size: 12px; padding: 4px 11px; }
+[dir="rtl"] .nav-door-sort-lab,
+[dir="rtl"] .nav-door-sort button { letter-spacing: 0; }
+[dir="rtl"] .nav-door-sort-lab { text-transform: none; font-size: 10px; }
+
+/* Le compteur de régions, dans la pastille du pays : « Algérie 41 · 12 rég. ».
+   Il ne prend pas la couleur du compte de fiches — c'est un second repère,
+   pas un second chiffre à additionner. */
+.nav-door-chip-reg { font-family: var(--font-label); font-size: 9px; line-height: 1;
+  white-space: nowrap; font-weight: 400;
+  color: color-mix(in srgb, var(--text) 40%, transparent); }
+.nav-links a.nav-door-chip:hover .nav-door-chip-reg,
+.nav-mobile a.nav-door-chip:hover .nav-door-chip-reg {
+  color: color-mix(in srgb, var(--accent) 62%, transparent); }
+
+/* La rangée des pays d'une rubrique : tout en bas de la suite, séparée par un
+   filet pointillé, et nommée par la rubrique qu'elle déplie. */
+.nav-door-countries { display: flex; flex-wrap: wrap; align-items: center; gap: 5px;
+  flex: 1 1 100%; min-width: 0; margin-top: 3px; padding-top: 6px;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 14%, transparent); }
+.nav-door-countries-lab { display: inline-flex; align-items: center; gap: 5px;
+  margin-inline-end: 3px; white-space: nowrap;
+  font-family: var(--font-label); font-size: 9px; letter-spacing: .1em;
+  text-transform: uppercase; color: color-mix(in srgb, var(--text) 52%, transparent); }
+.nav-door-countries-lab i { font-size: 12px; line-height: 1; color: var(--accent); }
+.nav-links a.nav-door-chip.is-country,
+.nav-mobile a.nav-door-chip.is-country { border-radius: 999px; }
+[dir="rtl"] .nav-door-countries-lab { letter-spacing: 0; font-size: 10px; }
+.nav-links a.nav-door-chip:focus-visible,
+.nav-mobile a.nav-door-chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+/* Dans la feuille du téléphone, la suite se lit au doigt : un cran plus grand,
+   et décalée sous la porte qu'elle prolonge. */
+.nav-mobile a.nav-door-chip { font-size: 12px; padding: 5px 10px 5px 8px; }
+.nav-mobile .nav-door-subs { padding-inline-start: 34px; }
+.nav-mobile .nav-door-head { gap: 4px; }
+.nav-doorlist--sheet .nav-door-toggle { width: 30px; }
+.nav-doorlist--sheet .nav-door-toggle i { font-size: 15px; }
+[dir="rtl"] .nav-links a.nav-door-chip,
+[dir="rtl"] .nav-mobile a.nav-door-chip { letter-spacing: 0; }
+
+/* ── Une pastille trouvée, tenue sur une seule ligne ───────────────────────
+   Le panneau ne garde que 372 px à partir de 1460 px — et la même largeur
+   jusqu'à 1024 px —, si bien qu'à 1440 px comme à 1024 px une recherche y
+   rend deux familles l'une après l'autre. Un pays au nom long — « Émirats
+   arabes unis », « United Arab Emirates » — ne doit donc pas se replier sous
+   sa pastille ni déborder du panneau : le nom garde une seule ligne, prend la
+   place qui reste et s'écourte au besoin, tandis que le compte et le repère de
+   régions restent d'un seul morceau au bout de la ligne, du côté où la lecture
+   finit. La règle ne vaut plus pour le seul panneau compact : elle accompagne
+   le panneau à toutes ses largeurs, et rien n'est retiré — les deux familles
+   restent nommées, chaque pastille garde son chiffre et sa largeur. */
+@media (min-width: 1024px) {
+  /* La pastille trouvée ne se replie jamais sur deux lignes : à 1440 px, un
+     pays en trois mots — « United Arab Emirates », « Émirats arabes unis » —
+     tient le nom d'un seul morceau, puis s'écourte par la fin. La pastille
+     reste donc une seule rangée (flex-wrap: nowrap), le nom est le seul à
+     pouvoir céder (flex: 0 1 auto), et le compte comme le repère de régions
+     gardent leur place à la fin de la ligne, du côté où la lecture finit.
+     Le chiffre ne se sépare jamais du bout de la pastille qu'il ferme. */
+  .nav-more-menu a.nav-door-chip {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    max-width: 100%;
+    min-width: 0;
+  }
+  .nav-more-menu a.nav-door-chip > span {
+    flex: 0 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .nav-more-menu a.nav-door-chip .nav-door-chip-n,
+  .nav-more-menu a.nav-door-chip .nav-door-chip-reg,
+  .nav-more-menu a.nav-door-chip > i {
+    flex: none;
+    white-space: nowrap;
+  }
+  /* ── Un nom de pays composé, à 1440 px en français ───────────────────────
+     « Guinée-Bissau », « Timor-Leste », « Sao-Tomé-et-Principe » : le trait
+     d'union d'un nom composé reste dans le nom. La pastille ne se coupe donc
+     jamais sur ce trait — pas de césure, pas de repli autorisé au milieu d'un
+     mot —, elle s'écourte par la fin, comme un nom simple. Le trait d'union et
+     l'écourtement tiennent donc ensemble : le nom se reconnaît encore quand il
+     raccourcit, et le compte garde son morceau au bout de la ligne. */
+  .nav-more-menu a.nav-door-chip > span {
+    hyphens: none;
+    word-break: normal;
+    overflow-wrap: normal;
+  }
+}
+
+/* ── La même pastille trouvée, relue en arabe à 1440 px ────────────────────
+   À cette largeur le panneau ne garde que 372 px, et l'arabe allonge chaque
+   mot : un pays au nom long s'y écourte exactement comme l'anglais — le nom
+   tient sur une seule ligne et cède le premier, tandis que son compte et son
+   repère de régions restent d'un seul morceau au bout de la ligne, du côté où
+   la lecture finit (à gauche en arabe). Le chiffre est isolé de la lecture
+   arabe : un nombre ne se retourne plus contre le nom qu'il termine, et la
+   pastille arabe se lit comme la pastille anglaise. Rien n'est retiré :
+   chaque pastille garde son chiffre et sa largeur. */
+[dir="rtl"] .nav-more-menu a.nav-door-chip > span {
+  text-overflow: ellipsis;
+}
+[dir="rtl"] .nav-more-menu a.nav-door-chip .nav-door-chip-n {
+  flex: none;
+  direction: ltr;
+  unicode-bidi: isolate;
+  white-space: nowrap;
+}
+
+/* ── La recherche du menu ──────────────────────────────────────────────────
+   Le champ ne paraît que lorsque la liste s'allonge vraiment : un menu de
+   deux portes n'a rien à chercher, un annuaire de huit types avec leurs pays
+   en a besoin. Il se lit comme un champ de la page, en plus calme. */
+.nav-door-search { display: flex; align-items: center; gap: 7px;
+  margin: 1px 8px 6px; padding: 6px 9px 6px 8px; border-radius: 9px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  background: color-mix(in srgb, var(--text) 5%, transparent);
+  transition: border-color .18s ease, background .18s ease; }
+.nav-door-search:focus-within { border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  background: color-mix(in srgb, var(--accent) 7%, transparent); }
+.nav-door-search > i { font-size: 13px; line-height: 1; flex: none;
+  color: color-mix(in srgb, var(--text) 44%, transparent); }
+.nav-door-search input { flex: 1 1 auto; min-width: 0; border: 0; background: transparent;
+  color: var(--text); font-family: var(--font-body); font-size: 12.5px; line-height: 1.3;
+  padding: 0; outline: none; }
+.nav-door-search input::placeholder { color: color-mix(in srgb, var(--text) 40%, transparent); }
+.nav-door-search input::-webkit-search-cancel-button { display: none; }
+.nav-door-clear { flex: none; display: inline-flex; align-items: center; justify-content: center;
+  width: 18px; height: 18px; padding: 0; border: 0; border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 10%, transparent); cursor: pointer;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  transition: background .18s ease, color .18s ease; }
+.nav-door-clear i { font-size: 12px; line-height: 1; }
+.nav-door-clear:hover { background: color-mix(in srgb, var(--accent) 22%, transparent); color: var(--accent); }
+.nav-door-clear:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+/* Aucun type, aucun pays ne répond : la phrase le dit, au lieu d'un vide. */
+.nav-door-empty { display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+  margin: 2px 11px 9px; font-family: var(--font-label); font-size: 10.5px;
+  line-height: 1.4; letter-spacing: .02em; font-style: italic;
+  color: color-mix(in srgb, var(--text) 52%, transparent); }
+.nav-door-empty i { font-size: 12px; line-height: 1; font-style: normal;
+  color: color-mix(in srgb, var(--accent) 72%, transparent); }
+[dir="rtl"] .nav-door-empty { letter-spacing: 0; font-size: 11.5px; }
+/* Dans la feuille du téléphone le champ suit les portes : même galbe, un cran
+   plus grand pour rester tapable. */
+.nav-doorlist--sheet .nav-door-search { margin: 0 0 2px; padding: 8px 11px 8px 10px; }
+.nav-doorlist--sheet .nav-door-search input { font-size: 14px; }
+.nav-doorlist--sheet .nav-door-empty { font-size: 12px; margin: 2px 2px 6px; }
+
+/* ── 1440 px en arabe : juste au-dessus du pas resserré ──────────────────
+   À 1439 px, la lecture arabe tient encore la plage serrée 1300–1439 ; à
+   1440 px elle change de plage d'un seul pixel, et la gouttière du rang
+   remonte d'un coup de 6 à 15 px pendant que les libellés reprennent leur
+   corps. C'est exactement là que les cinq portes — avec le jeton du
+   façonnage en plus — risquent de se frôler, avant que la barre n'ait
+   retrouvé sa largeur pleine.
+
+   Jusqu'à 1460 px, l'arabe garde donc un pas intermédiaire : plus large que
+   la plage serrée, plus court que la barre large. Les deux extrémités du
+   passage sont ainsi écrites — 1439 px d'un côté, 1461 px de l'autre —, et
+   aucun pixel ne fait sauter la rangée. Rien n'est masqué, aucun mot n'est
+   coupé, le jeton du façonnage garde son chiffre ; dès 1461 px, la barre
+   reprend ses cotes, exactement comme en français. */
+@media (min-width: 1440px) and (max-width: 1460px) {
+  [dir="rtl"] .nav-links { gap: 9px; }
+  [dir="rtl"] .nav-links > a { gap: 4px; }
+  [dir="rtl"] .nav-links a,
+  [dir="rtl"] .nav-more-btn { font-size: 12px; }
+  [dir="rtl"] .nav-links > a > i,
+  [dir="rtl"] .nav-more-btn i { font-size: 13px; }
+  [dir="rtl"] .nav-right { gap: 8px; }
+  [dir="rtl"] .nav-links > a.nav-fac {
+    gap: 3px;
+    padding-inline: 4px 6px;
+    font-size: 11px;
+  }
+  [dir="rtl"] .nav-links > a.nav-fac > i { font-size: 11.5px; }
+  [dir="rtl"] .nav-fac-count {
+    min-width: 15px; height: 15px; padding: 0 4px;
+    margin-inline-start: 0; font-size: 9px;
+  }
+}

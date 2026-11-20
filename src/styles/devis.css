@@ -1,0 +1,3614 @@
+/* ============ DEVIS D'ABONNEMENT — THE ONLINE QUOTE ============ */
+/* Shared by the « Offres » page, the Institutions card door and « Mon compte »:
+   one composer on the left, one amount and one request on the right. Every
+   colour is read from the theme variables, so the block follows the mode. */
+
+.dv {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: start;
+}
+
+/* ---- the composer ---- */
+.dv-setup {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+  box-sizing: border-box;
+  padding: 18px 18px 16px;
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+}
+.dv-field { display: grid; gap: 6px; min-width: 0; }
+.dv-label {
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.dv-hint {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.dv-hint i { flex: 0 0 auto; margin-top: 1px; font-size: 12px; color: var(--accent); }
+
+/* the three formulas, as one choice */
+.dv-plans { display: grid; gap: 6px; }
+.dv-plan {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) 18px;
+  gap: 9px;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 9px 11px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  color: var(--text);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition: border-color .2s ease, background .2s ease;
+}
+.dv-plan:hover { border-color: color-mix(in srgb, var(--accent) 46%, transparent); }
+.dv-plan:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.dv-plan.is-on {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+}
+.dv-plan-ico {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+  color: var(--accent);
+}
+.dv-plan-ico i { font-size: 15px; color: inherit; }
+.dv-plan-txt { min-width: 0; display: grid; gap: 1px; }
+.dv-plan-txt b {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dv-plan-txt em {
+  font-style: normal;
+  font-family: var(--font-heading);
+  font-size: 11.5px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dv-plan.is-on .dv-plan-txt b { color: var(--accent2); }
+.dv-plan > i { font-size: 16px; color: color-mix(in srgb, var(--text) 26%, transparent); }
+.dv-plan.is-on > i { color: var(--accent); }
+
+/* the number of establishments */
+.dv-stepper {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) 36px;
+  align-items: stretch;
+  border-radius: 11px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  background: color-mix(in srgb, var(--surface) 96%, transparent);
+}
+.dv-step-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  border: 0;
+  background: color-mix(in srgb, var(--text) 5%, transparent);
+  color: var(--accent2);
+  cursor: pointer;
+  transition: background .18s ease, color .18s ease;
+}
+.dv-step-btn i { font-size: 16px; color: inherit; }
+.dv-step-btn:hover:not(:disabled) { background: color-mix(in srgb, var(--accent) 16%, transparent); }
+.dv-step-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.dv-step-btn:disabled { opacity: .4; cursor: not-allowed; }
+.dv-step-input {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 8px 4px;
+  border: 0;
+  border-inline: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+.dv-step-input:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+.dv-select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  font-size: 13px;
+  font-family: var(--font-body);
+  color: var(--text);
+  background: color-mix(in srgb, var(--surface) 96%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.dv-select:hover { border-color: color-mix(in srgb, var(--accent) 46%, transparent); }
+.dv-select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.dv-bill { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+.dv-bill-btn {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  color: var(--muted);
+  font: inherit;
+  font-size: 12px;
+  line-height: 1.3;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.dv-bill-btn i { font-size: 13px; color: inherit; }
+.dv-bill-btn em {
+  font-style: normal;
+  font-family: var(--font-label);
+  font-size: 9px;
+  letter-spacing: .02em;
+  color: color-mix(in srgb, var(--accent) 76%, var(--muted));
+}
+.dv-bill-btn:hover { border-color: color-mix(in srgb, var(--accent) 46%, transparent); }
+.dv-bill-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.dv-bill-btn.is-on {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, var(--surface));
+  color: var(--accent2);
+}
+
+/* ---- the amount, then the request ---- */
+.dv-panel {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+  min-width: 0;
+}
+.dv-total {
+  display: grid;
+  gap: 6px;
+  box-sizing: border-box;
+  padding: 18px 18px 16px;
+  border-radius: 18px;
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  background: linear-gradient(150deg,
+    color-mix(in srgb, var(--accent) 13%, transparent) 0%,
+    color-mix(in srgb, var(--surface) 92%, transparent) 62%);
+}
+.dv-total-stamp {
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent2);
+}
+.dv-total-figure {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+  margin: 0;
+}
+.dv-total-figure strong {
+  font-family: var(--font-heading);
+  font-size: clamp(26px, 3vw, 36px);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -.03em;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+.dv-total-per { font-size: 12.5px; color: var(--muted); }
+.dv-total-origine { margin: 0; font-size: 11.5px; color: var(--muted); }
+.dv-total-origine b { font-variant-numeric: tabular-nums; color: color-mix(in srgb, var(--text) 76%, transparent); }
+
+.dv-lines {
+  display: grid;
+  gap: 0;
+  margin: 8px 0 0;
+  padding-top: 10px;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 16%, transparent);
+}
+.dv-lines > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 10px;
+  padding: 6px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
+}
+.dv-lines > div:last-child { border-bottom: 0; }
+.dv-lines dt {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+}
+.dv-lines dt em {
+  font-style: normal;
+  font-family: var(--font-label);
+  font-size: 9px;
+  letter-spacing: .04em;
+  color: var(--muted);
+}
+.dv-lines dd {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--text);
+}
+.dv-lines dd .dv-line-was {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  text-align: end;
+  color: var(--muted);
+  text-decoration: line-through;
+}
+.dv-lines .is-strong dt { font-weight: 600; color: var(--text); }
+.dv-lines .is-strong dd { color: var(--accent2); }
+.dv-line-offer {
+  padding: 0 6px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 48%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent2) !important;
+}
+
+.dv-saving,
+.dv-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.dv-saving i { flex: 0 0 auto; margin-top: 1px; font-size: 13px; color: var(--accent); }
+.dv-saving b { font-variant-numeric: tabular-nums; color: var(--accent2); }
+.dv-note i { flex: 0 0 auto; margin-top: 1px; font-size: 12px; color: var(--accent); }
+
+/* ---- the request that leaves with the amount ---- */
+.dv-form {
+  display: grid;
+  gap: 10px;
+  box-sizing: border-box;
+  padding: 18px 18px 16px;
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+}
+.dv-form-stamp {
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent2);
+}
+.dv-form-title {
+  margin: -4px 0 2px;
+  font-family: var(--font-heading);
+  font-size: clamp(16px, 1.5vw, 19px);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -.02em;
+  color: var(--text);
+}
+.dv-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+}
+.dv-fld { display: grid; gap: 4px; min-width: 0; }
+.dv-fld label {
+  font-size: 11.5px;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--text) 74%, transparent);
+}
+.dv-fld label em { font-style: normal; font-family: var(--font-label); font-size: 9.5px; color: var(--muted); }
+.dv-fld input,
+.dv-fld textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--text);
+  background: color-mix(in srgb, var(--bg) 60%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  border-radius: 9px;
+}
+.dv-fld textarea { resize: vertical; min-height: 74px; }
+.dv-fld input:focus-visible,
+.dv-fld textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+}
+.dv-fld input::placeholder,
+.dv-fld textarea::placeholder { color: color-mix(in srgb, var(--text) 42%, transparent); }
+
+/* The field no visitor ever sees: never inline, never obvious by name. */
+.dv-alt {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.dv-send {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--bg);
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease;
+}
+.dv-send i { font-size: 15px; color: inherit; transition: transform .2s ease-out; }
+.dv-send:hover:not(:disabled) { background: color-mix(in srgb, var(--accent) 82%, var(--bg)); border-color: transparent; }
+.dv-send:hover:not(:disabled) i { transform: translateX(3px); }
+.dv-send:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.dv-send:disabled { opacity: .7; cursor: progress; }
+
+.dv-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 0;
+  padding: 8px 10px;
+  border-radius: 9px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent2) 34%, transparent);
+}
+.dv-error i { flex: 0 0 auto; margin-top: 1px; font-size: 13px; color: inherit; }
+
+/* ---- what the request leaves behind ---- */
+.dv-done {
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+  box-sizing: border-box;
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px solid color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface));
+}
+.dv-done > i { font-size: 24px; color: var(--accent); }
+.dv-done-text { margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--text); }
+.dv-done-ref { margin: 0; font-family: var(--font-label); font-size: 11.5px; color: var(--muted); }
+.dv-done-ref strong {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  letter-spacing: .04em;
+  color: var(--accent2);
+}
+.dv-reset {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
+  background: transparent;
+  color: var(--accent2);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background .18s ease;
+}
+.dv-reset i { font-size: 13px; color: inherit; }
+.dv-reset:hover { background: color-mix(in srgb, var(--accent) 16%, transparent); }
+.dv-reset:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---- the quotes already sent, read back in « Mon compte » ---- */
+.dvl { scroll-margin-top: 100px; }
+.dvl-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.dvl-head .auth-note { margin: 2px 0 0; }
+.dvl-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  letter-spacing: .04em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.dvl-count i { font-size: 12px; color: var(--accent); }
+/* Les deux compteurs de l'en-tête se lisent côte à côte : les devis de la
+   liste, puis ceux qui circulent déjà. */
+.dvl-head-counts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+.dvl-count-shares i { color: var(--accent2); }
+/* La date du dernier partage, dans la même pastille que le compteur : le nombre
+   dit combien, la date dit quand — sans ouvrir une seule ligne. */
+.dvl-count-when {
+  font-style: normal;
+  margin-inline-start: 2px;
+  padding-inline-start: 7px;
+  border-inline-start: 1px dashed color-mix(in srgb, var(--accent2) 44%, transparent);
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent2) 82%, var(--text));
+}
+/* Le rappel des marques retirées, dans l'en-tête : la même bulle que sur la
+   bande des Offres, avec « Rétablir » sous la main. */
+.dvl-count-forgot {
+  border-style: dashed;
+  padding-inline-end: 3px;
+}
+.dvl-count-forgot > i { color: color-mix(in srgb, var(--text) 52%, transparent); }
+.dvl-count-restore {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent2) 46%, transparent);
+  background: transparent;
+  font: inherit;
+  font-size: 9.5px;
+  letter-spacing: .05em;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--accent2) 86%, var(--text));
+  white-space: nowrap;
+  cursor: pointer;
+}
+.dvl-count-restore i { font-size: 10.5px; color: inherit; }
+.dvl-count-restore:hover {
+  background: color-mix(in srgb, var(--accent2) 16%, transparent);
+  border-color: var(--accent2);
+  color: var(--accent2);
+}
+.dvl-count-restore:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* La bulle de l'en-tête s'ouvre sous elle-même : chaque marque retirée y porte
+   le jour de son retrait et le délai écoulé, la même lecture que sur la bande
+   des Offres. */
+.dvl-count-marks {
+  flex-wrap: wrap;
+  align-items: center;
+  white-space: normal;
+  border-radius: 13px;
+  padding: 3px 8px 4px;
+  max-width: 100%;
+}
+.dvl-count-forgot-head {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+.dvl-count-mark-rows {
+  width: 100%;
+  border-top-color: color-mix(in srgb, var(--text) 16%, transparent);
+}
+
+/* The five counters at the head of the list: received, under review,
+   confirmed, expired — and the files left unanswered for a week. */
+.dvl-summary {
+  display: grid;
+  gap: 6px;
+  margin: 0 0 12px;
+  padding: 11px 13px;
+  border-radius: 13px;
+  border: 1px solid color-mix(in srgb, var(--text) 11%, transparent);
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+}
+.dvl-summary-stamp {
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.dvl-summary-grid {
+  display: grid;
+  /* Sept compteurs, parfois huit : la grille s'ouvre d'elle-même, pour que
+     chaque pastille garde sa lisibilité sans laisser une ligne orpheline. */
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 7px;
+}
+/* seven counters need room: four, then three, then two, as the card narrows */
+@media (max-width: 1180px) {
+  .dvl-summary-grid { grid-template-columns: repeat(auto-fit, minmax(92px, 1fr)); }
+}
+@media (max-width: 980px) {
+  .dvl-summary-grid { grid-template-columns: repeat(auto-fit, minmax(86px, 1fr)); }
+}
+/* La date du dernier envoi groupé, sous les cinq compteurs : une ligne discrète,
+   alignée sur la pastille des lignes qu’elle résume. */
+.dvl-summary-bulk {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 7px 0 0;
+  padding-top: 6px;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 12%, transparent);
+  font-size: 10.5px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+.dvl-summary-bulk i { font-size: 12px; line-height: 1; flex: 0 0 auto; }
+.dvl-summary-bulk span { min-width: 0; }
+/* La bulle des marques retirées de la Synthèse s'ouvre dossier par dossier,
+   exactement comme celle de l'en-tête : le compte et « Rétablir » sur une
+   ligne, puis un filet pointillé qui nomme chaque marque. */
+.dvl-summary-bulk.dvl-summary-marks {
+  flex-wrap: wrap;
+  align-items: center;
+  row-gap: 3px;
+}
+.dvl-summary-marks-head {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-width: 0;
+}
+.dvl-summary-marks-head > span:first-child { min-width: 0; }
+.dvl-summary-marks .dvl-count-mark-rows { margin-top: 1px; }
+/* Les deux gestes du lot sur une seule ligne : ce qui a été retiré, ce qui est
+   revenu, et ce qui reste à rendre. Un peu plus d'encre que la ligne du dernier
+   groupé, sans devenir un compteur de plus. */
+.dvl-summary-bulk.dvl-marks-compare {
+  flex-wrap: wrap;
+  color: color-mix(in srgb, var(--accent2) 52%, var(--text));
+}
+.dvl-marks-compare span {
+  font-variant-numeric: tabular-nums;
+  min-width: 0;
+}
+/* Le jour du dernier rétablissement, dans la même ligne que la comparaison :
+   plus discret que la phrase, mais lisible, et il ne casse jamais la ligne. */
+.dvl-marks-restored-on {
+  font-family: var(--font-label);
+  font-size: 11px;
+  font-style: normal;
+  letter-spacing: .01em;
+  white-space: nowrap;
+  padding-inline-start: 7px;
+  margin-inline-start: 1px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--text) 20%, transparent);
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  font-variant-numeric: tabular-nums;
+}
+/* La même date, devenue une porte : elle ouvre les dossiers rendus. Le trait
+   qui la séparait de la comparaison reste, le curseur et l'encre disent qu'on
+   peut la presser. */
+.dvl-marks-restored-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  border: 0;
+  border-inline-start: 1px solid color-mix(in srgb, var(--text) 20%, transparent);
+  border-radius: 0 999px 999px 0;
+  background: transparent;
+  font: inherit;
+  font-family: var(--font-label);
+  font-size: 11px;
+  font-style: normal;
+  letter-spacing: .01em;
+  line-height: 1.7;
+  white-space: nowrap;
+  cursor: pointer;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  transition: color .18s ease, background .18s ease;
+}
+.dvl-marks-restored-btn i { font-size: 11px; color: inherit; }
+.dvl-marks-restored-btn:hover {
+  color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 12%, transparent);
+}
+.dvl-marks-restored-btn[aria-expanded="true"] {
+  color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 10%, transparent);
+}
+.dvl-marks-restored-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* La bulle des dossiers rendus, ouverte par cette date : même tenue que celle
+   des marques retirées, pour que les deux gestes se lisent pareil. */
+.dvl-summary-bulk.dvl-marks-restored {
+  flex-wrap: wrap;
+  align-items: center;
+  row-gap: 3px;
+  border-top-style: solid;
+  border-top-color: color-mix(in srgb, var(--accent2) 26%, transparent);
+}
+/* Passé quelques lignes, la bulle de l'en-tête se replie : ce bouton ouvre le
+   reste des marques, et le referme du même geste. */
+.dvl-mark-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-top: 2px;
+  padding: 1px 8px 2px 6px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--text) 26%, transparent);
+  background: transparent;
+  font: inherit;
+  font-size: 9px;
+  letter-spacing: .05em;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+.dvl-mark-more i { font-size: 10.5px; color: inherit; }
+.dvl-mark-more:hover {
+  background: color-mix(in srgb, var(--accent2) 14%, transparent);
+  border-color: var(--accent2);
+  color: var(--accent2);
+}
+.dvl-mark-more:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+[dir="rtl"] .dvl-mark-more { letter-spacing: 0; }
+/* Le septième compteur, le pendant du « jamais repris » : les devis déjà partis
+   dans un groupé. Un trait pointillé dans la teinte de l’accent, plein une fois
+   choisi — les deux faces se lisent ainsi du même geste. */
+.dvl-summary-cell[data-state="groupe"] {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--accent) 38%, transparent);
+  background: color-mix(in srgb, var(--accent) 7%, var(--surface));
+}
+.dvl-summary-cell[data-state="groupe"] .dvl-summary-n { color: var(--accent2); }
+.dvl-summary-cell[data-state="groupe"] .dvl-summary-l i { color: var(--accent); }
+.dvl-summary-cell[data-state="groupe"][aria-pressed="true"] {
+  border-style: solid;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 16%, var(--surface));
+}
+.dvl-summary-cell {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+  padding: 7px 9px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+  background: color-mix(in srgb, var(--bg) 42%, var(--surface));
+}
+/* the overdue counter is the only cell one can press: it opens that reading */
+button.dvl-summary-cell {
+  font: inherit;
+  text-align: start;
+  color: inherit;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease;
+}
+button.dvl-summary-cell:hover {
+  border-color: color-mix(in srgb, var(--accent2) 52%, transparent);
+}
+button.dvl-summary-cell:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.dvl-summary-cell[data-state="en_etude"] {
+  border-color: color-mix(in srgb, var(--accent) 34%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, var(--surface));
+}
+.dvl-summary-cell[data-state="confirme"] {
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 13%, var(--surface));
+}
+/* an expired file is closed, not burning: a dashed edge, no tint */
+.dvl-summary-cell[data-state="expire"] {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--text) 20%, transparent);
+}
+.dvl-summary-cell[data-state="expire"] .dvl-summary-n {
+  color: color-mix(in srgb, var(--text) 64%, transparent);
+}
+.dvl-summary-cell[data-state="expire"] .dvl-summary-l i {
+  color: color-mix(in srgb, var(--text) 38%, transparent);
+}
+/* the overdue counter: an urgency, so a dashed edge while it is only read —
+   a solid one once it is the reading */
+.dvl-summary-cell[data-state="retard"] {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--accent2) 38%, transparent);
+  background: color-mix(in srgb, var(--accent2) 8%, var(--surface));
+}
+.dvl-summary-cell[data-state="retard"] .dvl-summary-n { color: var(--accent2); }
+.dvl-summary-cell[data-state="retard"] .dvl-summary-l i { color: var(--accent2); }
+.dvl-summary-cell[data-state="retard"][aria-pressed="true"] {
+  border-style: solid;
+  border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 18%, var(--surface));
+}
+/* Le sixième compteur, le pendant du retard : l’absence d’envoi groupé, pas une
+   alerte — un trait pointillé dans la teinte du texte, plein une fois choisi. */
+.dvl-summary-cell[data-state="jamais"] {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--text) 24%, transparent);
+  background: color-mix(in srgb, var(--text) 5%, var(--surface));
+}
+.dvl-summary-cell[data-state="jamais"] .dvl-summary-l i {
+  color: color-mix(in srgb, var(--text) 55%, transparent);
+}
+.dvl-summary-cell[data-state="jamais"][aria-pressed="true"] {
+  border-style: solid;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 13%, var(--surface));
+}
+.dvl-summary-cell[data-state="jamais"][aria-pressed="true"] .dvl-summary-l i {
+  color: var(--accent2);
+}
+.dvl-summary-n {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+.dvl-summary-l {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10.5px;
+  line-height: 1.35;
+  color: var(--muted);
+}
+.dvl-summary-l i { font-size: 12px; color: var(--accent); }
+/* La pastille des dossiers seulement adressés, dans la Synthèse : la cellule
+   elle-même est un lien, donc elle donne sa lecture d'un seul clic, sans
+   repasser par les pastilles de la liste. */
+a.dvl-summary-cell {
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease;
+}
+a.dvl-summary-cell[data-state="adresses"] {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--text) 26%, transparent);
+  background: color-mix(in srgb, var(--text) 5%, var(--surface));
+}
+a.dvl-summary-cell[data-state="adresses"] .dvl-summary-l i {
+  color: color-mix(in srgb, var(--text) 55%, transparent);
+}
+a.dvl-summary-cell[data-state="adresses"]:hover {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--text) 48%, transparent);
+  background: color-mix(in srgb, var(--text) 10%, var(--surface));
+}
+a.dvl-summary-cell:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* La flèche dit que la cellule s'ouvre : discrète, elle ne prend pas la place
+   du compteur qu'elle accompagne. */
+.dvl-summary-arrow {
+  position: absolute;
+  top: 5px;
+  inset-inline-end: 6px;
+  font-size: 11px;
+  color: color-mix(in srgb, var(--text) 40%, transparent);
+}
+a.dvl-summary-cell:hover .dvl-summary-arrow {
+  color: color-mix(in srgb, var(--text) 72%, transparent);
+}
+
+/* The four states as filters above the list: one row of chips, each carrying
+   its own count, so the list can be narrowed without reading every line. */
+.dvl-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 12px;
+}
+.dvl-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 15%, transparent);
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  color: var(--muted);
+  font: inherit;
+  font-size: 11.5px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.dvl-filter-btn i { font-size: 12px; color: inherit; }
+.dvl-filter-btn b {
+  font-family: var(--font-heading);
+  font-size: 11.5px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+.dvl-filter-btn:hover { border-color: color-mix(in srgb, var(--accent) 46%, transparent); color: var(--accent2); }
+.dvl-filter-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.dvl-filter-btn[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 15%, var(--surface));
+  color: var(--accent2);
+}
+.dvl-filter-btn[aria-pressed="true"] i,
+.dvl-filter-btn[aria-pressed="true"] b { color: var(--accent2); }
+.dvl-filter-btn[data-state="confirme"][aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--bg);
+}
+.dvl-filter-btn[data-state="confirme"][aria-pressed="true"] i,
+.dvl-filter-btn[data-state="confirme"][aria-pressed="true"] b { color: var(--bg); }
+.dvl-filter-btn[data-state="tous"][aria-pressed="true"] b { color: var(--accent2); }
+/* the fifth chip is an urgency, not a state: dashed while quiet, solid when on */
+.dvl-filter-btn[data-state="retard"] { border-style: dashed; }
+.dvl-filter-btn[data-state="retard"][aria-pressed="true"] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 62%, transparent);
+  background: color-mix(in srgb, var(--accent2) 16%, var(--surface));
+  color: var(--accent2);
+}
+
+/* The chips and the export share one line: what is read is what is written out. */
+.dvl-filterbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin: 0 0 12px;
+}
+.dvl-filterbar .dvl-filter { margin: 0; flex: 1 1 auto; }
+.dvl-filterbar > .ghost-btn { margin-inline-start: auto; }
+/* Share and export stand together at the end of the bar, one reading behind both. */
+.dvl-filterbar-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-inline-start: auto;
+}
+.dvl-filterbar-tools > .ghost-btn { margin: 0; }
+/* Le compteur du bouton d'export : combien de devis sont affichés, donc combien
+   de lignes le classeur emportera. Une pastille à part, qui reste lisible une
+   fois le fichier téléchargé. */
+.dir-export-n {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 3px;
+  margin-inline-start: 2px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .02em;
+  color: var(--accent2);
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  background: color-mix(in srgb, var(--accent) 11%, transparent);
+}
+.dir-export-n em {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 9px;
+  letter-spacing: .02em;
+  opacity: .85;
+  color: inherit;
+}
+[dir="rtl"] .dir-export-n,
+[dir="rtl"] .dir-export-n em { letter-spacing: 0; }
+/* la sixième pastille : les dossiers déjà confiés à un collègue */
+.dvl-filter-btn[data-state="partages"] { border-style: dashed; }
+.dvl-filter-btn[data-state="partages"][aria-pressed="true"] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 62%, transparent);
+  background: color-mix(in srgb, var(--accent2) 16%, var(--surface));
+  color: var(--accent2);
+}
+/* la septième pastille : les dossiers revenus après un retrait, juste à côté
+   des dossiers déjà partagés — un trait pointillé tant qu’elle ne trie rien,
+   plein une fois choisie. */
+.dvl-filter-btn[data-state="restaures"] { border-style: dashed; }
+.dvl-filter-btn[data-state="restaures"] i {
+  color: color-mix(in srgb, var(--accent2) 70%, var(--muted));
+}
+.dvl-filter-btn[data-state="restaures"][aria-pressed="true"] {
+  border-style: solid;
+  border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 16%, var(--surface));
+  color: var(--accent2);
+}
+.dvl-filter-btn[data-state="restaures"][aria-pressed="true"] i,
+.dvl-filter-btn[data-state="restaures"][aria-pressed="true"] b { color: var(--accent2); }
+/* La huitième pastille : les dossiers seulement adressés, à la suite des deux
+   lectures voisines — un trait pointillé tant qu’elle ne trie rien, plein une
+   fois choisie. Une encre plus discrète que les partages, comme la pastille
+   qu’elle reprend sur la bande des Offres. */
+.dvl-filter-btn[data-state="adresses"] { border-style: dashed; }
+.dvl-filter-btn[data-state="adresses"] i {
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+.dvl-filter-btn[data-state="adresses"][aria-pressed="true"] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--text) 46%, transparent);
+  background: color-mix(in srgb, var(--text) 12%, var(--surface));
+  color: var(--text);
+}
+.dvl-filter-btn[data-state="adresses"][aria-pressed="true"] i,
+.dvl-filter-btn[data-state="adresses"][aria-pressed="true"] b { color: var(--text); }
+/* La pastille des dossiers qui dorment : seulement adressés depuis plus d'une
+   semaine — un trait pointillé tant qu'elle ne trie rien, plein une fois
+   choisie, dans la teinte du rappel qu'elle nomme. */
+.dvl-filter-btn[data-state="endormis"] { border-style: dashed; }
+.dvl-filter-btn[data-state="endormis"] i {
+  color: color-mix(in srgb, var(--accent2) 62%, var(--muted));
+}
+.dvl-filter-btn[data-state="endormis"][aria-pressed="true"] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 62%, transparent);
+  background: color-mix(in srgb, var(--accent2) 14%, var(--surface));
+  color: var(--accent2);
+}
+.dvl-filter-btn[data-state="endormis"][aria-pressed="true"] i,
+.dvl-filter-btn[data-state="endormis"][aria-pressed="true"] b { color: var(--accent2); }
+/* La pastille des endormis confirmés, à côté de celle des endormis : un trait
+   pointillé tant qu'elle ne trie rien, plein une fois choisie. Elle prend
+   l'encre du devis confirmé — le devis est prêt, c'est l'envoi qui manque. */
+.dvl-filter-btn[data-state="endormis-confirmes"] { border-style: dashed; }
+.dvl-filter-btn[data-state="endormis-confirmes"] i {
+  color: color-mix(in srgb, var(--accent) 72%, var(--muted));
+}
+.dvl-filter-btn[data-state="endormis-confirmes"][aria-pressed="true"] {
+  border-style: solid;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 15%, var(--surface));
+  color: var(--accent2);
+}
+.dvl-filter-btn[data-state="endormis-confirmes"][aria-pressed="true"] i,
+.dvl-filter-btn[data-state="endormis-confirmes"][aria-pressed="true"] b { color: var(--accent2); }
+/* La pastille des dossiers sans durée : ceux ouverts avant que la durée retenue
+   soit conservée. Un trait pointillé tant qu'elle ne trie rien, plein une fois
+   choisie — la porte que le compteur de la bande des Offres ouvre. */
+.dvl-filter-btn[data-state="sans-duree"] { border-style: dashed; }
+.dvl-filter-btn[data-state="sans-duree"] i {
+  color: color-mix(in srgb, var(--text) 54%, transparent);
+}
+.dvl-filter-btn[data-state="sans-duree"][aria-pressed="true"] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--text) 46%, transparent);
+  background: color-mix(in srgb, var(--text) 12%, var(--surface));
+  color: var(--text);
+}
+.dvl-filter-btn[data-state="sans-duree"][aria-pressed="true"] i,
+.dvl-filter-btn[data-state="sans-duree"][aria-pressed="true"] b { color: var(--text); }
+/* La pastille d’ordre « partagé récemment » : un tri, pas une lecture. Un trait
+   pointillé tant qu’elle n’ordonne rien, plein une fois choisie. */
+.dvl-filter-btn[data-state="recents"] { border-style: dashed; }
+.dvl-filter-btn[data-state="recents"] i { color: color-mix(in srgb, var(--accent) 70%, var(--muted)); }
+.dvl-filter-btn[data-state="recents"][aria-pressed="true"] {
+  border-style: solid;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 15%, var(--surface));
+  color: var(--accent2);
+}
+.dvl-filter-btn[data-state="recents"][aria-pressed="true"] i { color: var(--accent2); }
+
+/* ---- effacer les marques de partage : une question, pas un effacement muet ---- */
+/* Le bouton ne fait rien d'autre que d’ouvrir la question posée juste dessous. */
+.dvl-forget-btn { white-space: nowrap; }
+.dvl-forget {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  box-sizing: border-box;
+  margin: 0 0 12px;
+  padding: 8px 11px;
+  border-radius: 11px;
+  border: 1px dashed color-mix(in srgb, var(--accent2) 44%, transparent);
+  background: color-mix(in srgb, var(--accent2) 7%, var(--surface));
+}
+.dvl-forget > i { flex: 0 0 auto; font-size: 13px; color: var(--accent2); }
+.dvl-forget p {
+  flex: 1 1 240px;
+  min-width: 0;
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+}
+.dvl-forget-yes {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--accent2);
+  background: var(--accent2);
+  color: var(--bg);
+  font: inherit;
+  font-size: 11.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: opacity .18s ease;
+}
+.dvl-forget-yes i { font-size: 12px; color: inherit; }
+.dvl-forget-yes:hover { opacity: .86; }
+.dvl-forget-yes:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* Ce qui reste après l’effacement : une ligne, pas une fenêtre. */
+.dvl-forget-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  margin: 0 0 12px;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--accent) 78%, var(--text));
+}
+.dvl-forget-note i { flex: 0 0 auto; margin-top: 1px; font-size: 12px; color: inherit; }
+
+/* ---- la pastille d’une ligne déjà transmise ---- */
+/* Même famille que la pastille de groupé, un trait pointillé : le dossier
+   circule, on ne l’a pas renvoyé. */
+.dvl-shared {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  width: fit-content;
+  margin-top: 2px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--accent2) 42%, transparent);
+  background: color-mix(in srgb, var(--accent2) 8%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .05em;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent2) 82%, var(--text));
+  white-space: nowrap;
+}
+.dvl-shared i { font-size: 11px; color: inherit; }
+/* Le petit « oublier » de la pastille : il n'efface que ce dossier-là. */
+.dvl-shared-x {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-inline-start: 2px;
+  padding: 1px 4px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 10px;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background .18s ease, color .18s ease;
+}
+.dvl-shared-x i { font-size: 10px; color: inherit; }
+.dvl-shared-x:hover {
+  background: color-mix(in srgb, var(--accent2) 16%, transparent);
+  color: var(--accent2);
+}
+.dvl-shared-x:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+/* ---- rétablir une marque effacée : la trace du retrait la rend, à sa date ---- */
+/* Le bouton vit dans la ligne concernée : il ne rétablit que ce dossier-là. */
+.dvl-restore {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-inline-start: 4px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--accent2) 44%, transparent);
+  background: transparent;
+  font: inherit;
+  font-size: 10.5px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--accent2) 84%, var(--text));
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+.dvl-restore i { font-size: 11px; color: inherit; }
+.dvl-restore:hover {
+  background: color-mix(in srgb, var(--accent2) 14%, transparent);
+  border-color: var(--accent2);
+  color: var(--accent2);
+}
+.dvl-restore:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* Le même geste pour toutes les marques du compte, depuis la barre de la liste. */
+.dvl-restore-btn { white-space: nowrap; }
+
+/* ---- la lecture partagée dit ce qu'elle montre ---- */
+/* Un lien ouvert par un collègue porte sa lecture : la ligne nomme le partage et
+   compte les devis affichés, pour qu'il sache ce qu'il regarde sans refaire les
+   clics. */
+.dvl-share-note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  box-sizing: border-box;
+  margin: 0 0 12px;
+  padding: 7px 11px;
+  border-radius: 10px;
+  border: 1px dashed color-mix(in srgb, var(--accent2) 45%, transparent);
+  background: color-mix(in srgb, var(--accent2) 7%, var(--surface));
+  font-family: var(--font-label);
+  font-size: 11px;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--accent2) 85%, var(--text));
+}
+.dvl-share-note > i { font-size: 12px; flex: 0 0 auto; color: inherit; }
+.dvl-share-note span { flex: 1 1 auto; min-width: 0; }
+.dvl-share-note-x {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  background: none;
+  border: 0;
+  border-radius: 999px;
+  color: inherit;
+  cursor: pointer;
+  opacity: .7;
+}
+.dvl-share-note-x i { font-size: 13px; }
+.dvl-share-note-x:hover { opacity: 1; background: color-mix(in srgb, var(--accent2) 14%, transparent); }
+
+/* ---- the grouped recap: one e-mail for the ticked overdue files ---- */
+.dvl-bulk {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  box-sizing: border-box;
+  margin: 0 0 12px;
+  padding: 9px 12px;
+  border-radius: 12px;
+  border: 1px dashed color-mix(in srgb, var(--accent2) 42%, transparent);
+  background: color-mix(in srgb, var(--accent2) 7%, var(--surface));
+}
+.dvl-bulk-ico {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--accent2) 14%, transparent);
+  color: var(--accent2);
+}
+.dvl-bulk-ico i { font-size: 14px; color: inherit; }
+.dvl-bulk-txt { display: grid; gap: 1px; min-width: 0; flex: 1 1 200px; }
+.dvl-bulk-txt b {
+  font-family: var(--font-heading);
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text);
+}
+.dvl-bulk-txt span { font-size: 11px; line-height: 1.45; color: var(--muted); }
+/* Le compteur « jamais repris » a ouvert cette barre : la ligne dit de quoi
+   elle parle, pour que les cases cochées ne soient jamais un mystère. */
+.dvl-bulk-txt .dvl-bulk-never {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10.5px;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--accent2) 82%, var(--text));
+}
+.dvl-bulk-txt .dvl-bulk-never i { font-size: 11px; color: inherit; flex: 0 0 auto; }
+.dvl-bulk-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  color: var(--muted);
+  white-space: nowrap;
+  cursor: pointer;
+}
+.dvl-bulk-count {
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  letter-spacing: .04em;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+.dvl-bulk-send {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--accent2);
+  background: var(--accent2);
+  color: var(--bg);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease, opacity .18s ease;
+}
+.dvl-bulk-send i { font-size: 13px; color: inherit; }
+.dvl-bulk-send:hover:not(:disabled) { opacity: .86; }
+.dvl-bulk-send:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.dvl-bulk-send:disabled { opacity: .45; cursor: not-allowed; }
+.dvl-bulk .dvl-resend-note { flex: 1 1 100%; }
+/* Juste après l’envoi groupé : le classeur de ce qui vient de partir, offert
+   là où le message de confirmation s’affiche. */
+.dvl-bulk .dvl-bulk-trace {
+  flex: 1 1 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+}
+.dvl-bulk-trace-note {
+  margin: 0;
+  font-size: 10.5px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+/* the tick of a late file, so it can join the grouped recap */
+.dvl-pick {
+  display: flex;
+  align-items: flex-start;
+  flex: 0 0 auto;
+  padding-top: 2px;
+  cursor: pointer;
+}
+.dvl-pick input,
+.dvl-bulk-all input {
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  accent-color: var(--accent2);
+  cursor: pointer;
+}
+.dvl-pick input:focus-visible,
+.dvl-bulk-all input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---- a file still « Reçu » after a week ---- */
+/* the remark is also the door: one click opens the very file it talks about */
+.dvl-remind {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  margin: 5px 0 0;
+  padding: 6px 9px;
+  border-radius: 9px;
+  border: 1px dashed color-mix(in srgb, var(--accent2) 44%, transparent);
+  background: color-mix(in srgb, var(--accent2) 7%, transparent);
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--accent2) 72%, var(--text));
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.dvl-remind:hover {
+  border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 13%, transparent);
+  color: var(--accent2);
+}
+.dvl-remind:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.dvl-remind i { flex: 0 0 auto; margin-top: 1px; font-size: 12px; color: inherit; }
+.dvl-remind-go {
+  margin-inline-start: auto;
+  opacity: .7;
+  transition: transform .18s ease, opacity .18s ease;
+}
+.dvl-remind:hover .dvl-remind-go { transform: translateX(2px); opacity: 1; }
+[dir="rtl"] .dvl-remind:hover .dvl-remind-go { transform: translateX(-2px); }
+/* a reminder already left: quieter, the file is not forgotten, just reminded */
+.dvl-remind[data-sent="yes"] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 34%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  color: color-mix(in srgb, var(--text) 72%, transparent);
+}
+.dvl-remind[data-sent="yes"] i { color: var(--accent); }
+.dvl-remind[data-sent="yes"]:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+  color: var(--accent2);
+}
+
+/* The reference is the door: one click opens its tracking page. */
+.dvl-ref-link {
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: color .18s ease, background .18s ease;
+}
+.dvl-ref-link:hover { color: var(--accent2); background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.dvl-ref-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.dvl-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+/* La liste des devis prend le focus, le devis mis en avant prend le liseré
+   d'accent, et la phrase sous la liste rappelle le geste — comme les autres
+   listes du site. */
+.dvl-list:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 16px; }
+.dvl-row.is-keyed { border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent); }
+.dvl-row.is-keyed:hover { border-color: var(--accent); }
+.dvl-keyhint { margin-top: 10px; }
+/* Le dossier que le compteur des fiches parcourues vient de rouvrir : ramené au
+   centre, il est désigné quelques secondes puis redevient une ligne ordinaire. */
+.dvl-row.is-focus { border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 55%, transparent);
+  animation: dvl-focus-in .34s cubic-bezier(.2,.7,.2,1) both; }
+.dvl-row.is-focus .dvl-ref { color: var(--accent); font-weight: 600; }
+@keyframes dvl-focus-in {
+  from { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 20%, transparent); }
+  to { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 55%, transparent); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dvl-row.is-focus { animation: none; }
+}
+/* Les devis parcourus au clavier : même pas que le rappel des flèches, mais un
+   compteur à part, qui dit ce que la visite a vraiment traversé — et qui
+   rouvre, d'un clic, la dernière fiche mise en avant. */
+.dvl-walked { appearance: none; width: fit-content; border: 0; padding: 0;
+  background: none; font: inherit; text-align: start; cursor: pointer;
+  color: var(--accent2); transition: color .18s ease; }
+.dvl-walked i { color: var(--accent2); }
+.dvl-walked > span { flex: 1 1 auto; min-width: 0; }
+.dvl-walked:hover { color: var(--accent); }
+.dvl-walked:hover i { color: var(--accent); }
+.dvl-walked-go { opacity: .7; transition: opacity .18s ease, transform .18s ease; }
+.dvl-walked:hover .dvl-walked-go { opacity: 1; transform: translateX(2px); }
+.dvl-walked:focus-visible { outline: 2px solid var(--accent2); outline-offset: 3px; border-radius: 6px; }
+/* Combien de dossiers ont été ouverts depuis la fiche rappelée : même pas que
+   le rappel des flèches, mais un constat — rien à cliquer, le geste est déjà
+   passé. */
+.dvl-opened { color: color-mix(in srgb, var(--text) 66%, transparent); }
+.dvl-opened i { color: var(--accent2); }
+/* La ligne du compteur et sa copie tiennent ensemble : le compte des dossiers
+   ouverts depuis la fiche rappelée se joint à un message d'un clic. */
+.dvl-opened-wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px;
+  margin-top: 10px; }
+.dvl-opened-wrap .dvl-opened { margin-top: 0; }
+.dvl-opened-copy { display: inline-flex; align-items: center; gap: 4px; flex: 0 0 auto;
+  appearance: none; border: 0; padding: 0; background: none; cursor: pointer;
+  font: inherit; color: var(--accent2); transition: color .18s ease; }
+.dvl-opened-copy i { font-size: 12px; }
+.dvl-opened-copy:hover { color: var(--accent); }
+.dvl-opened-copy.is-ok { color: var(--accent); }
+/* L'ordre « ouverture récente » se copie depuis la barre des filtres : même
+   pas qu'un bouton discret, l'icône d'historique rappelant l'ordre copié. */
+.dvl-opened-order-copy i { color: var(--accent2); }
+.dvl-opened-order-copy.is-ok i { color: var(--accent); }
+.dvl-opened-copy:focus-visible { outline: 2px solid var(--accent2); outline-offset: 3px;
+  border-radius: 6px; }
+.dvl-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px 16px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--text) 13%, transparent);
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+}
+.dvl-row[data-state="confirme"] {
+  border-color: color-mix(in srgb, var(--accent) 44%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+}
+.dvl-row-main { min-width: 0; flex: 1 1 220px; display: grid; gap: 3px; }
+.dvl-ref {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  letter-spacing: .06em;
+  color: var(--muted);
+}
+.dvl-ref i { font-size: 11px; color: inherit; }
+/* l’état et le partage se lisent sur une seule ligne, qui se replie au besoin */
+.dvl-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+}
+.dvl-tags .dvl-badge,
+.dvl-tags .dvl-shared { margin-top: 0; }
+/* La pastille du retour, à côté de celle du partage : même forme, mais un trait
+   plein et le mot du jour, pour que les deux gestes d'une même ligne se lisent
+   d'un coup d'œil — « partagé le … » puis « rendu le … ». */
+.dvl-tags .dvl-restored {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+[dir="rtl"] .dvl-tags .dvl-restored i { transform: scaleX(-1); }
+/* La dernière visite d'un dossier, à voix basse à côté de ses autres repères :
+   pas de pastille, seulement le mot et le jour — un repère, pas un état. */
+.dvl-opened-on {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+  font-family: var(--font-label);
+  font-size: 9px;
+  letter-spacing: .05em;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  white-space: nowrap;
+}
+.dvl-opened-on i { font-size: 11px; color: color-mix(in srgb, var(--accent2) 70%, transparent); }
+.dvl-tags .dvl-opened-on { margin-top: 0; }
+[dir="rtl"] .dvl-opened-on { letter-spacing: 0; }
+.dvl-badge {
+  justify-self: start;
+  margin-top: 2px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.dvl-badge[data-state="en_etude"] {
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+  color: var(--accent2);
+}
+.dvl-badge[data-state="confirme"] {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--bg);
+}
+.dvl-badge[data-state="expire"] {
+  border-style: dashed;
+  color: color-mix(in srgb, var(--text) 48%, transparent);
+}
+.dvl-plan {
+  margin: 3px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text);
+}
+.dvl-plan em {
+  font-style: normal;
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  font-weight: 400;
+  color: var(--muted);
+}
+.dvl-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  margin: 2px 0 0;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.dvl-meta span { display: inline-flex; align-items: center; gap: 4px; }
+.dvl-meta i { font-size: 12px; color: color-mix(in srgb, var(--accent) 70%, var(--muted)); }
+/* Le rythme exact qui a produit une durée héritée, posé dans son propre jeton
+   juste après la durée : la ligne dit combien de mois ont été écrits, sans
+   ouvrir le dossier ni le classeur. */
+.dvl-rythme-herite {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-inline-start: 2px;
+  padding: 0 6px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 34%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  font-style: normal;
+  line-height: 1.6;
+  letter-spacing: .03em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+}
+.dvl-rythme-herite i { font-size: 10px; color: inherit; }
+[dir="rtl"] .dvl-rythme-herite { letter-spacing: 0; }
+/* Le jeton « héritée · 6 mois » est une porte : un clic ouvre la liste réduite
+   aux dossiers écrits sur cette durée-là. Le trait pointillé se referme au
+   survol, et le jeton garde sa teinte une fois la lecture retenue. */
+.dvl-rythme-herite-door {
+  appearance: none;
+  cursor: pointer;
+  font-family: var(--font-label);
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+.dvl-rythme-herite-door:hover {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 62%, transparent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--accent);
+}
+.dvl-rythme-herite-door[aria-pressed="true"] {
+  border-style: solid;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--accent);
+}
+.dvl-rythme-herite-door:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+/* La pastille de la durée exacte : elle reprend la teinte de son jeton, en
+   plein, puisqu’elle nomme une lecture tenue. */
+.dvl-filter-btn[data-state="duree-exacte"] {
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  color: var(--accent);
+}
+.dvl-filter-btn[data-state="duree-exacte"] i,
+.dvl-filter-btn[data-state="duree-exacte"] b { color: var(--accent); }
+/* ---- what the requester has already received ---- */
+.dvl-notified { font-variant-numeric: tabular-nums; }
+.dvl-notified[data-had="yes"] { color: color-mix(in srgb, var(--text) 68%, transparent); }
+.dvl-notified[data-had="yes"] i { color: var(--accent); }
+.dvl-notified[data-had="no"] i { color: color-mix(in srgb, var(--text) 32%, transparent); }
+/* ---- the grouped recap that already carried this file ---- */
+.dvl-recap {
+  padding: 1px 8px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent2) 34%, transparent);
+  background: color-mix(in srgb, var(--accent2) 9%, transparent);
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent2) 82%, var(--text));
+}
+.dvl-recap i { color: var(--accent2) !important; }
+.dvl-amount {
+  display: grid;
+  gap: 1px;
+  justify-items: end;
+  min-width: 0;
+  text-align: end;
+}
+.dvl-amount span {
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.dvl-amount strong {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  white-space: nowrap;
+}
+.dvl-amount em {
+  font-style: normal;
+  font-size: 10.5px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.dvl-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+  margin-top: 10px;
+}
+.dvl-foot-notes { display: grid; gap: 3px; min-width: 0; }
+.dvl-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.dvl-note i { flex: 0 0 auto; margin-top: 1px; font-size: 12px; color: var(--accent); }
+
+/* ---- the recap, sent again from its own line ---- */
+.dvl-row-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  width: 100%;
+  padding-top: 8px;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 12%, transparent);
+}
+.dvl-resend {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
+  background: transparent;
+  color: var(--accent2);
+  font: inherit;
+  font-size: 11.5px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease;
+}
+.dvl-resend i { font-size: 13px; color: inherit; }
+.dvl-resend:hover:not(:disabled) { background: color-mix(in srgb, var(--accent) 15%, transparent); }
+.dvl-resend:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.dvl-resend:disabled { opacity: .65; cursor: progress; }
+/* the tracking door, next to the resend: same shape, a quieter fill */
+.dvl-follow {
+  text-decoration: none;
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+.dvl-follow:hover { background: color-mix(in srgb, var(--accent) 20%, transparent); }
+/* One single dossier handed to a colleague: the same pill, a dotted edge — the
+   button does not act on the file, it passes it on. */
+.dvl-resend.dvl-share-row {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--accent2) 40%, transparent);
+}
+.dvl-resend.dvl-share-row i { color: var(--accent2); }
+.dvl-resend.dvl-share-row:hover {
+  background: color-mix(in srgb, var(--accent2) 13%, transparent);
+  border-color: color-mix(in srgb, var(--accent2) 62%, transparent);
+}
+.dvl-resend.dvl-share-row.is-ok {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 62%, transparent);
+  background: color-mix(in srgb, var(--accent2) 14%, transparent);
+  color: var(--accent2);
+}
+.dvl-resend-note {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 5px;
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.dvl-resend-note i { flex: 0 0 auto; margin-top: 1px; font-size: 12px; color: inherit; }
+.dvl-resend-note[data-ok="yes"] { color: color-mix(in srgb, var(--accent) 78%, var(--text)); }
+.dvl-resend-note[data-ok="no"] { color: var(--accent2); }
+
+/* ---- the strip at the top of « Offres »: the latest file, in one line ---- */
+.dvl-last {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  box-sizing: border-box;
+  margin: 0 0 20px;
+  padding: 8px 12px 8px 8px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  background: color-mix(in srgb, var(--accent) 7%, var(--surface));
+}
+/* the strip itself is the door: the whole width opens the tracking page */
+.dvl-last-hit {
+  display: flex;
+  flex: 1 1 260px;
+  align-items: center;
+  gap: 10px 12px;
+  min-width: 0;
+  padding: 5px 6px;
+  border-radius: 10px;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .18s ease;
+}
+.dvl-last-hit:hover { background: color-mix(in srgb, var(--accent) 12%, transparent); }
+/* La carte n'ouvre plus le suivi d'un seul bloc : ce sont la référence et la
+   flèche qui sont les portes, et la pastille des retours a la sienne. Le fond
+   au survol reste, comme un cadre qui s'allume. */
+.dvl-last-hit { cursor: default; }
+.dvl-last-ref-link {
+  color: var(--text);
+  text-decoration: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.dvl-last-ref-link:hover { color: var(--accent); text-decoration: underline; }
+.dvl-last-ref-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.dvl-last-go { text-decoration: none; }
+.dvl-last-go {
+  flex: 0 0 auto;
+  margin-inline-start: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+  color: var(--accent2);
+}
+.dvl-last-go i { font-size: 13px; color: inherit; }
+.dvl-last-hit:hover .dvl-last-go { background: var(--accent); color: var(--bg); }
+.dvl-last-ico {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: var(--accent);
+}
+.dvl-last-ico i { font-size: 15px; color: inherit; }
+.dvl-last-main { min-width: 0; display: grid; gap: 3px; }
+
+/* ---- the state filter inside the strip: the same readings, smaller ---- */
+.dvl-last-filter {
+  flex: 1 1 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 0 2px;
+}
+.dvl-last-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+  color: var(--muted);
+  font: inherit;
+  font-size: 11px;
+  line-height: 1.5;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.dvl-last-chip b {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+.dvl-last-chip:hover { border-color: color-mix(in srgb, var(--accent) 46%, transparent); color: var(--accent2); }
+.dvl-last-chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.dvl-last-chip[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 16%, var(--surface));
+  color: var(--accent2);
+}
+.dvl-last-chip[aria-pressed="true"] b { color: var(--accent2); }
+.dvl-last-chip[data-state="confirme"][aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--bg);
+}
+.dvl-last-chip[data-state="confirme"][aria-pressed="true"] b { color: var(--bg); }
+
+/* a state holding nothing: said plainly, with the way back to « Tous » */
+.dvl-last-none {
+  flex: 1 1 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  min-width: 0;
+  padding: 4px 4px 4px 8px;
+}
+.dvl-last-none p {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  margin: 0;
+  min-width: 0;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.dvl-last-none i { flex: 0 0 auto; margin-top: 1px; font-size: 12px; color: var(--accent); }
+.dvl-last-none .dvl-last-link { margin-inline-start: auto; }
+.dvl-last-stamp {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 5px;
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.dvl-last-stamp em {
+  font-style: normal;
+  letter-spacing: normal;
+  text-transform: none;
+  color: color-mix(in srgb, var(--text) 46%, transparent);
+}
+/* the reminder already sent, as a small badge beside the date */
+.dvl-last-relance {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 38%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  font-size: 10px;
+  line-height: 1.6;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--accent2);
+  white-space: nowrap;
+}
+.dvl-last-relance i { font-size: 11px; color: inherit; }
+/* Le compte des dossiers de la bande qui n'ont pas écrit leur durée : une
+   pastille discrète, du côté du texte, pour qu'un ancien dossier se repère
+   d'un seul regard. */
+.dvl-last-noduree {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--text) 26%, transparent);
+  background: color-mix(in srgb, var(--text) 5%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  line-height: 1.6;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 72%, transparent);
+  white-space: nowrap;
+}
+.dvl-last-noduree i {
+  font-size: 11px;
+  color: color-mix(in srgb, var(--accent2) 60%, var(--muted));
+}
+/* Le compteur « sans durée » est une porte : même gélule, mais le trait se
+   referme au survol, pour que le clic s'annonce. */
+.dvl-last-noduree-filter {
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease;
+}
+.dvl-last-noduree-filter:hover {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 62%, transparent);
+  background: color-mix(in srgb, var(--accent2) 13%, transparent);
+}
+.dvl-last-noduree-filter:focus-visible {
+  outline: 2px solid var(--accent2);
+  outline-offset: 2px;
+}
+/* Le compteur des durées héritées : une gélule pleine, d'une encre discrète,
+   posée à côté de celui des durées manquantes — il ne filtre pas, il signale
+   ce qui vient d'un réglage plus ancien. */
+.dvl-last-rhydiff {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  line-height: 1.6;
+  letter-spacing: .04em;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  white-space: nowrap;
+}
+.dvl-last-rhydiff i {
+  font-size: 10px;
+  color: inherit;
+}
+/* Le compteur des durées héritées est une porte : le trait plein se referme au
+   survol, pour que le clic s’annonce — même geste que celui des durées
+   manquantes, posé juste avant lui. */
+.dvl-last-rhydiff-filter {
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+.dvl-last-rhydiff-filter:hover {
+  border-color: color-mix(in srgb, var(--accent) 58%, transparent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--accent);
+}
+.dvl-last-rhydiff-filter:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+/* La lecture « sans durée » se copie depuis son compteur : même gélule que
+   celle du hors-fourchette, en pointillé, pour ne pas se confondre avec la
+   porte qui, elle, filtre. */
+.dvl-last-noduree-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
+  background: transparent;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  line-height: 1.6;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.dvl-last-noduree-copy i {
+  font-size: 10px;
+  color: inherit;
+}
+.dvl-last-noduree-copy:hover {
+  border-color: color-mix(in srgb, var(--accent2) 58%, transparent);
+  background: color-mix(in srgb, var(--accent2) 9%, transparent);
+  color: color-mix(in srgb, var(--accent2) 88%, var(--text));
+}
+.dvl-last-noduree-copy:focus-visible {
+  outline: 2px solid var(--accent2);
+  outline-offset: 2px;
+}
+.dvl-last-noduree-copy.is-ok {
+  border-style: solid;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+[dir="rtl"] .dvl-last-noduree-copy { letter-spacing: 0; }
+[dir="rtl"] .dvl-last-rhydiff { letter-spacing: 0; }
+[dir="rtl"] .dvl-last-noduree { letter-spacing: 0; }
+.dvl-last-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  margin: 0;
+}
+.dvl-last-ref {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .03em;
+  color: var(--text);
+}
+.dvl-last-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 11.5px;
+  color: var(--muted);
+}
+.dvl-last-meta i { font-size: 11px; color: inherit; }
+.dvl-last-amount {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent2);
+}
+/* La durée retenue, posée dans la ligne du récapitulatif, juste après
+   « Votre dernier devis » et sa date : la bande dit sur quelle longueur le
+   devis a été composé, avant même le montant. Une pastille discrète, sur la
+   même ligne, pour que la bande reste un coup d'œil. */
+.dvl-last-stamp-rhy {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--accent2);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+}
+.dvl-last-stamp-rhy i { font-size: 10px; color: inherit; }
+/* Une durée absente sur un ancien dossier n'est pas un blanc : la pastille le
+   dit, en pointillé et dans l'encre du texte, sans rien inventer. */
+.dvl-last-stamp-rhy.is-missing {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--text) 28%, transparent);
+  background: color-mix(in srgb, var(--text) 5%, transparent);
+  color: color-mix(in srgb, var(--text) 68%, transparent);
+}
+.dvl-last-stamp-rhy.is-missing i {
+  color: color-mix(in srgb, var(--accent2) 66%, var(--muted));
+}
+[dir="rtl"] .dvl-last-stamp-rhy { letter-spacing: 0; }
+@media (max-width: 400px) {
+  .dvl-last-stamp-rhy { font-size: 9px; padding: 1px 7px; }
+}
+/* Le rappel des dossiers déjà confiés à un collègue, posé à côté du dernier
+   devis : la bande et la liste comptent la même chose, sans ouvrir de feuille. */
+.dvl-last-shared {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--accent2) 42%, transparent);
+  background: color-mix(in srgb, var(--accent2) 8%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .05em;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent2);
+  white-space: nowrap;
+}
+.dvl-last-shared i { font-size: 11px; color: inherit; }
+/* Le rappel des dossiers rendus, dans la bande des Offres : la même pastille
+   que celle des partages, mais du côté du retour — le nombre, puis la date du
+   dernier rétablissement. */
+.dvl-last-restored {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  border: 1px dotted color-mix(in srgb, var(--accent2) 52%, transparent);
+  background: color-mix(in srgb, var(--accent2) 9%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .05em;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent2) 88%, var(--text));
+  white-space: nowrap;
+}
+.dvl-last-restored i { font-size: 11px; color: inherit; }
+/* La pastille des retours est une porte : même gélule, mais un trait qui se
+   referme au survol, pour que le clic s'annonce. */
+.dvl-last-restored-filter {
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease;
+}
+.dvl-last-restored-filter:hover {
+  border-style: solid;
+  border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 17%, transparent);
+}
+.dvl-last-restored-filter:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
+/* Le troisième compte de la bande : les dossiers seulement adressés, ni
+   partagés ni rendus. Une gélule plus discrète, sans couleur d'accent, pour ne
+   pas disputer la vedette aux deux autres. */
+.dvl-last-addressed {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  background: color-mix(in srgb, var(--text) 5%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .05em;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 72%, transparent);
+  white-space: nowrap;
+}
+.dvl-last-addressed i { font-size: 11px; color: inherit; }
+/* La troisième pastille est une porte, comme celle des retours : même gélule,
+   mais le trait se referme et le fond s'éclaire au survol, et la date du
+   dernier dossier adressé s'ajoute au compteur. */
+.dvl-last-addressed-filter {
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+.dvl-last-addressed-filter:hover {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--text) 46%, transparent);
+  background: color-mix(in srgb, var(--text) 10%, transparent);
+  color: var(--text);
+}
+.dvl-last-addressed-filter:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* Sa date reste dans la teinte du texte, plus discrète que celle des partages :
+   elle ne dispute pas la vedette aux deux autres lectures. */
+.dvl-last-addressed .dvl-last-when {
+  border-inline-start-color: color-mix(in srgb, var(--text) 24%, transparent);
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+/* Le jour du dernier partage, dans la même pastille que le compteur : un trait
+   pointillé sépare le nombre de la date, pour qu'on ne les confonde pas. */
+.dvl-last-when {
+  font-style: normal;
+  margin-inline-start: 2px;
+  padding-inline-start: 6px;
+  border-inline-start: 1px dashed color-mix(in srgb, var(--accent2) 46%, transparent);
+  letter-spacing: normal;
+  color: color-mix(in srgb, var(--accent2) 84%, var(--text));
+}
+/* Le rappel des marques retirées : une pastille à part, posée juste à côté du
+   compteur des partages, avec son bouton « Rétablir » dans la même bulle. */
+.dvl-last-forgot {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 3px 1px 8px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--text) 26%, transparent);
+  background: color-mix(in srgb, var(--text) 5%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .05em;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+  white-space: nowrap;
+}
+.dvl-last-forgot > i { font-size: 11px; color: inherit; }
+.dvl-last-restore {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent2) 46%, transparent);
+  background: transparent;
+  font: inherit;
+  font-size: 9.5px;
+  letter-spacing: .05em;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--accent2) 86%, var(--text));
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+.dvl-last-restore i { font-size: 10.5px; color: inherit; }
+.dvl-last-restore:hover {
+  background: color-mix(in srgb, var(--accent2) 16%, transparent);
+  border-color: var(--accent2);
+  color: var(--accent2);
+}
+.dvl-last-restore:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* Le délai moyen depuis le retour, à côté du jour du dernier : même filet
+   pointillé, une encre un cran plus discrète que celle des retours. */
+.dvl-count-avg {
+  border-inline-start-color: color-mix(in srgb, var(--accent) 34%, transparent);
+  color: color-mix(in srgb, var(--accent) 72%, var(--text));
+}
+/* La pastille « seulement adressés » de l'en-tête : même tenue que celle de la
+   bande des Offres — un trait pointillé, une encre de texte, et c'est une porte
+   qui garde la liste réduite à sa propre lecture. */
+.dvl-count-addressed {
+  flex-wrap: wrap;
+  align-items: center;
+  row-gap: 3px;
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--text) 26%, transparent);
+  background: color-mix(in srgb, var(--text) 5%, transparent);
+  color: color-mix(in srgb, var(--text) 74%, transparent);
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+/* Le lien des dossiers endormis se pose dans la pastille, en pointillé et d'une
+   encre plus discrète : il accompagne le compteur sans le disputer. */
+.dvl-count-addressed-copy {
+  white-space: nowrap;
+  border-color: color-mix(in srgb, var(--text) 32%, transparent);
+  color: color-mix(in srgb, var(--text) 72%, transparent);
+}
+.dvl-count-addressed-copy i { color: inherit; }
+.dvl-count-addressed-copy:hover {
+  background: color-mix(in srgb, var(--text) 12%, transparent);
+  border-color: color-mix(in srgb, var(--text) 52%, transparent);
+  color: var(--text);
+}
+.dvl-count-addressed-copy.is-ok {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--text) 52%, transparent);
+  color: var(--text);
+}
+.dvl-count-addressed i { color: color-mix(in srgb, var(--text) 52%, transparent); }
+.dvl-count-addressed:hover {
+  border-color: color-mix(in srgb, var(--text) 48%, transparent);
+  background: color-mix(in srgb, var(--text) 10%, transparent);
+  color: var(--text);
+}
+.dvl-count-addressed[data-on="yes"] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--text) 52%, transparent);
+  background: color-mix(in srgb, var(--text) 12%, transparent);
+  color: var(--text);
+}
+.dvl-count-addressed[data-on="yes"] i { color: var(--text); }
+.dvl-count-addressed-main {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.dvl-count-addressed-main:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* La pastille « rétablies » de l'en-tête : même tenue que le compteur des
+   partages, mais c'est une porte — un clic garde ces dossiers seuls. */
+.dvl-count-restored {
+  flex-wrap: wrap;
+  align-items: center;
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--accent2) 34%, transparent);
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  letter-spacing: .04em;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--accent2) 84%, var(--text));
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+/* Le compteur et sa date restent la porte de la lecture : seul le petit
+   chevron, à côté, ouvre la liste des retours. */
+.dvl-count-restored-main {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+.dvl-count-restored-main > i { color: color-mix(in srgb, var(--accent2) 74%, var(--muted)); }
+/* Ouverte sur la liste des retours, la pastille prend la forme d'une bulle :
+   les lignes tiennent alors dans un cadre arrondi, jamais dans une gélule. */
+.dvl-count-restored[data-fold="yes"] {
+  border-radius: 13px;
+  padding: 3px 8px 4px;
+  max-width: 100%;
+  white-space: normal;
+}
+.dvl-count-restored .dvl-count-when {
+  border-inline-start-color: color-mix(in srgb, var(--accent2) 40%, transparent);
+  color: color-mix(in srgb, var(--accent2) 82%, var(--text));
+}
+.dvl-count-restored:hover {
+  border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 12%, transparent);
+  color: var(--accent2);
+}
+.dvl-count-restored-main:focus-visible,
+.dvl-count-restored-fold:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.dvl-count-restored[data-on="yes"] {
+  border-style: solid;
+  border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 15%, transparent);
+  color: var(--accent2);
+}
+.dvl-count-restored[data-on="yes"] .dvl-count-restored-main > i { color: var(--accent2); }
+/* Le chevron du repli : discret, il ne prend que sa place — il n'apparaît que
+   quand les dossiers rendus dépassent une dizaine. */
+.dvl-count-restored-fold {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 0 5px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  font: inherit;
+  font-size: 9px;
+  letter-spacing: .04em;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--accent2) 78%, var(--text));
+  cursor: pointer;
+  transition: background .18s ease, color .18s ease;
+}
+.dvl-count-restored-fold i { font-size: 10.5px; color: inherit; }
+.dvl-count-restored-fold:hover {
+  background: color-mix(in srgb, var(--accent2) 16%, transparent);
+  color: var(--accent2);
+}
+/* Le lien des dossiers rendus se copie depuis la pastille, comme celui des
+   partages depuis la bande des Offres : la même pastille pointillée, pour que
+   le collègue ouvre ces lignes-là et pas une autre lecture. */
+.dvl-count-restored-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 0 7px 1px;
+  border: 1px dashed color-mix(in srgb, var(--accent2) 44%, transparent);
+  border-radius: 999px;
+  background: transparent;
+  font: inherit;
+  font-size: 9px;
+  letter-spacing: .04em;
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--accent2) 80%, var(--text));
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+.dvl-count-restored-copy i { font-size: 10.5px; color: inherit; }
+.dvl-count-restored-copy:hover {
+  background: color-mix(in srgb, var(--accent2) 16%, transparent);
+  border-color: var(--accent2);
+  color: var(--accent2);
+}
+.dvl-count-restored-copy.is-ok {
+  border-style: solid;
+  border-color: var(--accent2);
+  color: var(--accent2);
+}
+.dvl-count-restored-copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* La pastille de la ligne rendue : le lien de suivi du dossier et le bouton
+   qui copie la même adresse tiennent sur une seule ligne, sans se confondre. */
+.dvl-last-mark-row { gap: 2px; }
+.dvl-last-mark-row .dvl-last-mark-link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+}
+/* Le bouton de copie de la ligne : discret, il ne prend que ce qu'il faut. */
+.dvl-mark-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 0 5px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  font-family: var(--font-label);
+  font-size: 9px;
+  letter-spacing: .04em;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--text) 46%, transparent);
+  cursor: pointer;
+  transition: background .18s ease, color .18s ease;
+}
+.dvl-mark-copy i { font-size: 10px; color: inherit; }
+.dvl-mark-copy:hover {
+  background: color-mix(in srgb, var(--accent2) 14%, transparent);
+  color: var(--accent2);
+}
+.dvl-mark-copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.dvl-mark-copy.is-ok { color: var(--accent2); }
+
+/* Le geste inverse de « Rétablir » : même bulle, encre plus discrète — il
+   enlève, il ne rend pas. */
+.dvl-last-eraser {
+  border-color: color-mix(in srgb, var(--text) 28%, transparent);
+  color: color-mix(in srgb, var(--text) 68%, transparent);
+}
+.dvl-last-eraser:hover {
+  background: color-mix(in srgb, var(--text) 10%, transparent);
+  border-color: color-mix(in srgb, var(--text) 52%, transparent);
+  color: var(--text);
+}
+/* La bulle des marques retirées nomme chaque dossier : elle s'ouvre donc en
+   deux temps — le compte et « Rétablir » en tête, puis le jour de chaque
+   retrait et le délai écoulé depuis, dossier par dossier. */
+.dvl-last-forgot-marks {
+  flex-wrap: wrap;
+  white-space: normal;
+  border-radius: 13px;
+  padding: 3px 6px 4px 8px;
+  max-width: 100%;
+}
+.dvl-last-forgot-head {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+.dvl-last-forgot-head > i {
+  font-size: 11px;
+  color: inherit;
+}
+.dvl-last-mark-rows {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 10px;
+  width: 100%;
+  margin-top: 2px;
+  padding-top: 3px;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 14%, transparent);
+}
+.dvl-last-mark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  font-size: 9px;
+  letter-spacing: .04em;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  white-space: nowrap;
+}
+.dvl-last-mark b {
+  font-size: 9.5px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 80%, transparent);
+}
+.dvl-last-mark-when { font-style: normal; }
+.dvl-last-mark-ago {
+  font-style: normal;
+  padding-inline-start: 5px;
+  border-inline-start: 1px dotted color-mix(in srgb, var(--text) 24%, transparent);
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent2) 78%, var(--text));
+}
+/* Chaque dossier rendu est une porte : la ligne ouvre la page de suivi de ce
+   dossier, avec sa référence déjà remplie. Le trait reste discret, c'est la
+   ligne entière qui se presse. */
+.dvl-last-mark-link {
+  padding: 0 2px;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .18s ease, color .18s ease;
+}
+.dvl-last-mark-link:hover { background: color-mix(in srgb, var(--accent2) 12%, transparent); }
+.dvl-last-mark-link:hover b { color: var(--accent2); }
+.dvl-last-mark-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.dvl-last-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-inline-start: auto;
+}
+/* The « déjà repris » door sits beside the account one: same pill, lighter ink. */
+.dvl-last-group {
+  border-color: color-mix(in srgb, var(--accent2) 38%, transparent);
+  color: var(--accent2);
+}
+.dvl-last-group i { font-size: 11.5px; color: inherit; }
+/* La lecture « déjà partagés » se copie depuis la bande : un trait pointillé,
+   comme la pastille qu'elle emmène. */
+.dvl-last-link.dvl-last-shared-copy {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--accent2) 42%, transparent);
+  color: var(--accent2);
+}
+.dvl-last-link.dvl-last-shared-copy:hover {
+  border-style: dashed;
+  border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 13%, transparent);
+}
+.dvl-last-link.dvl-last-shared-copy.is-ok {
+  border-style: solid;
+  border-color: var(--accent2);
+}
+/* Le lien des dossiers rendus se copie depuis la bande, comme celui des
+   partages : même pastille pointillée, posée juste après la porte
+   « Voir les dossiers rendus ». */
+.dvl-last-link.dvl-last-restored-copy {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--accent) 44%, transparent);
+  color: color-mix(in srgb, var(--accent) 86%, var(--text));
+}
+.dvl-last-link.dvl-last-restored-copy:hover {
+  border-style: dashed;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+.dvl-last-link.dvl-last-restored-copy.is-ok {
+  border-style: solid;
+  border-color: var(--accent);
+}
+/* La troisième lecture de la ventilation se copie de la même façon : un trait
+   pointillé, une encre plus discrète — elle emmène les dossiers qui n’ont
+   jamais circulé, sans disputer la vedette aux deux autres. */
+.dvl-last-link.dvl-last-addressed-copy {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--text) 34%, transparent);
+  color: color-mix(in srgb, var(--text) 74%, transparent);
+}
+.dvl-last-link.dvl-last-addressed-copy:hover {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--text) 58%, transparent);
+  background: color-mix(in srgb, var(--text) 10%, transparent);
+  color: var(--text);
+}
+.dvl-last-link.dvl-last-addressed-copy.is-ok {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--text) 58%, transparent);
+  color: var(--text);
+}
+/* Un seul dossier s'envoie depuis la bande : même pastille que les autres
+   portes, mais un trait pointillé pour ne pas la confondre avec une action
+   sur la fiche elle-même. */
+.dvl-last-link.dvl-last-share-one {
+  background: none;
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--accent) 38%, transparent);
+  font-family: var(--font-label);
+  color: var(--accent2);
+}
+.dvl-last-link.dvl-last-share-one:hover {
+  border-style: dashed;
+  border-color: var(--accent);
+}
+.dvl-last-link.dvl-last-share-one.is-ok {
+  border-color: var(--accent2);
+  color: var(--accent2);
+}
+/* L'ordre « partagé récemment » se règle depuis la bande : un trait pointillé
+   tant qu'il n'ordonne rien, plein une fois choisi. La liste de « Mon compte »
+   lit la même mémoire, donc les deux s'ouvrent dans le même sens. */
+.dvl-last-link.dvl-last-sort {
+  background: none;
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--accent) 38%, transparent);
+  font-family: var(--font-label);
+}
+.dvl-last-link.dvl-last-sort:hover {
+  border-style: dashed;
+  border-color: var(--accent);
+}
+.dvl-last-link.dvl-last-sort[data-on="yes"] {
+  border-style: solid;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+}
+.dvl-last-link.dvl-last-sort[data-on="yes"] i { color: var(--accent2); }
+.dvl-last-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  color: var(--accent2);
+  font-size: 11.5px;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease;
+}
+.dvl-last-link i { font-size: 12px; color: inherit; }
+.dvl-last-link:hover { background: color-mix(in srgb, var(--accent) 16%, transparent); border-color: var(--accent); }
+.dvl-last-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.dvl-last-account {
+  border-color: color-mix(in srgb, var(--text) 18%, transparent);
+  color: var(--muted);
+}
+.dvl-last-account:hover {
+  border-color: color-mix(in srgb, var(--accent) 44%, transparent);
+  color: var(--accent2);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+.dvl-last-hide {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background .18s ease, color .18s ease;
+}
+.dvl-last-hide i { font-size: 14px; color: inherit; }
+.dvl-last-hide:hover { background: color-mix(in srgb, var(--text) 8%, transparent); color: var(--text); }
+.dvl-last-hide:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---- the grouped recap, offered from the strip itself ---- */
+.dvl-last-bulk {
+  flex: 1 1 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px 10px;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  border-radius: 11px;
+  border: 1px dashed color-mix(in srgb, var(--accent2) 46%, transparent);
+  background: color-mix(in srgb, var(--accent2) 7%, var(--surface));
+}
+.dvl-last-bulk-ico {
+  width: 26px;
+  height: 26px;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--accent2) 15%, transparent);
+  color: var(--accent2);
+}
+.dvl-last-bulk-ico i { font-size: 13px; color: inherit; }
+.dvl-last-bulk-txt {
+  display: grid;
+  gap: 1px;
+  flex: 1 1 200px;
+  min-width: 0;
+  margin: 0;
+}
+.dvl-last-bulk-txt b {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text);
+}
+.dvl-last-bulk-txt span { font-size: 10.5px; line-height: 1.45; color: var(--muted); }
+/* A recap already sent for these very files: said in the accent of the note, a
+   step above the sentence it follows. */
+.dvl-last-bulk-txt .dvl-last-bulk-when {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+  font-size: 10.5px;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--accent2) 80%, var(--text));
+}
+.dvl-last-bulk-txt .dvl-last-bulk-when i { font-size: 11px; color: inherit; flex: 0 0 auto; }
+/* Un retard que personne n’a jamais rassemblé : plus fort que la ligne du
+   dernier envoi, parce qu’il reste quelque chose à faire. */
+.dvl-last-bulk-txt .dvl-last-bulk-when.dvl-last-bulk-never {
+  color: color-mix(in srgb, var(--accent2) 88%, var(--text));
+}
+/* Les deux faces du même compteur, côte à côte : ce qu'aucun groupé n'a jamais
+   rassemblé, et ce qu'un récapitulatif a déjà emporté. */
+.dvl-last-bulk-txt .dvl-last-bulk-faces {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 3px 12px;
+  margin-top: 2px;
+}
+.dvl-last-bulk-txt .dvl-last-bulk-faces .dvl-last-bulk-when { margin-top: 0; }
+/* Une face qui compte zéro s'efface : elle dit « rien de ce côté », pas une alerte. */
+.dvl-last-bulk-txt .dvl-last-bulk-when[data-on="no"] { opacity: .62; }
+/* La face « déjà repris » reste la plus discrète : de ce côté, il n'y a rien à faire. */
+.dvl-last-bulk-txt .dvl-last-bulk-done {
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+}
+.dvl-last-bulk-txt .dvl-last-bulk-done[data-on="yes"] { color: var(--muted); }
+/* La bande des Offres est aussi une porte : la liste des devis s'ouvre déjà
+   filtrée sur ceux qu'aucun groupé n'a repris. */
+.dvl-last-bulk-txt .dvl-last-bulk-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  width: fit-content;
+  margin-top: 3px;
+  font-size: 10.5px;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--accent2) 86%, var(--text));
+  text-decoration: none;
+  border-bottom: 1px dashed color-mix(in srgb, var(--accent2) 45%, transparent);
+  cursor: pointer;
+  transition: color .18s ease, border-color .18s ease;
+}
+.dvl-last-bulk-txt .dvl-last-bulk-more i { font-size: 11px; color: inherit; flex: 0 0 auto; }
+.dvl-last-bulk-txt .dvl-last-bulk-more span { font-size: 10.5px; color: inherit; }
+.dvl-last-bulk-txt .dvl-last-bulk-more:hover {
+  color: var(--accent2);
+  border-bottom-color: var(--accent2);
+}
+.dvl-last-bulk-txt .dvl-last-bulk-more:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+/* La face « jamais repris » se partage comme elle s'ouvre : l'adresse de cette
+   lecture, copiée d'un clic, juste sous le raccourci qui l'ouvre ici. */
+.dvl-last-bulk-txt .dvl-last-bulk-share {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  width: fit-content;
+  margin-top: 2px;
+  padding: 0;
+  background: none;
+  border: 0;
+  border-bottom: 1px dashed color-mix(in srgb, var(--accent2) 45%, transparent);
+  border-radius: 0;
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--accent2) 86%, var(--text));
+  cursor: pointer;
+}
+.dvl-last-bulk-txt .dvl-last-bulk-share i { font-size: 11px; color: inherit; flex: 0 0 auto; }
+.dvl-last-bulk-txt .dvl-last-bulk-share span { font-size: 10.5px; color: inherit; }
+.dvl-last-bulk-txt .dvl-last-bulk-share:hover {
+  color: var(--accent2);
+  border-bottom-color: var(--accent2);
+}
+.dvl-last-bulk-txt .dvl-last-bulk-share.is-ok {
+  color: var(--accent2);
+  border-bottom-color: var(--accent2);
+}
+.dvl-last-bulk-txt .dvl-last-bulk-share:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.dvl-last-bulk-send {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--accent2);
+  background: var(--accent2);
+  color: var(--bg);
+  font: inherit;
+  font-size: 11.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: opacity .18s ease;
+}
+.dvl-last-bulk-send i { font-size: 12px; color: inherit; }
+.dvl-last-bulk-send:hover:not(:disabled) { opacity: .86; }
+.dvl-last-bulk-send:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.dvl-last-bulk-send:disabled { opacity: .45; cursor: not-allowed; }
+.dvl-last-bulk-note {
+  flex: 1 1 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.dvl-last-bulk-note i { flex: 0 0 auto; margin-top: 1px; font-size: 12px; color: inherit; }
+.dvl-last-bulk-note[data-ok="yes"] { color: color-mix(in srgb, var(--accent) 78%, var(--text)); }
+.dvl-last-bulk-note[data-ok="no"] { color: var(--accent2); }
+
+[dir="rtl"] .dvl-last-stamp,
+[dir="rtl"] .dvl-last-ref { letter-spacing: 0; text-transform: none; }
+[dir="rtl"] .dvl-last-link i,
+[dir="rtl"] .dvl-last-go i { transform: scaleX(-1); }
+
+@media (max-width: 640px) {
+  .dvl-row { padding: 11px 12px; }
+  .dvl-amount { justify-items: start; text-align: start; }
+  .dvl-summary { padding: 10px 11px; }
+  .dvl-filter { gap: 5px; }
+  .dvl-filterbar { gap: 7px; }
+  .dvl-filterbar > .ghost-btn { margin-inline-start: 0; }
+  .dvl-filterbar-tools { margin-inline-start: 0; width: 100%; }
+  .dvl-forget-yes { width: 100%; justify-content: center; }
+  .dvl-filter-btn { padding: 5px 9px; font-size: 11px; }
+  /* La pastille des dossiers rendus emporte son lien : sur un écran étroit elle
+     s'ouvre en deux temps plutôt que de dépasser le cadre. */
+  .dvl-count-restored { max-width: 100%; white-space: normal; }
+  .dvl-count-restored-copy { max-width: 100%; }
+  .dvl-summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+  .dvl-summary-cell { padding: 6px 7px; }
+  .dvl-summary-n { font-size: 18px; }
+  .dvl-summary-l { font-size: 10px; }
+  .dvl-last { padding: 8px 10px; }
+  .dvl-last-hit { flex: 1 1 100%; }
+  .dvl-last-chip { padding: 3px 8px; font-size: 10.5px; }
+  .dvl-last-none .dvl-last-link { margin-inline-start: 0; }
+  .dvl-last-actions { margin-inline-start: 0; width: 100%; justify-content: space-between; }
+  .dvl-last-bulk-send { width: 100%; justify-content: center; }
+  .dvl-last-bulk-txt { flex: 1 1 100%; }
+  .dvl-bulk { padding: 8px 10px; gap: 7px 10px; }
+  .dvl-bulk-txt { flex: 1 1 100%; }
+  .dvl-bulk-send { width: 100%; justify-content: center; }
+  .dvl-bulk-count { margin-inline-start: auto; }
+}
+
+[dir="rtl"] .dvl-ref,
+[dir="rtl"] .dvl-amount span,
+[dir="rtl"] .dvl-shared,
+[dir="rtl"] .dvl-badge { letter-spacing: 0; }
+[dir="rtl"] .dvl-shared i { transform: scaleX(-1); }
+[dir="rtl"] .dvl-last-shared { letter-spacing: 0; }
+[dir="rtl"] .dvl-last-shared i { transform: scaleX(-1); }
+[dir="rtl"] .dvl-last-when,
+[dir="rtl"] .dvl-last-forgot,
+[dir="rtl"] .dvl-last-restore,
+[dir="rtl"] .dvl-last-mark { letter-spacing: 0; }
+[dir="rtl"] .dvl-filter-btn[data-state="restaures"] i { transform: scaleX(-1); }
+[dir="rtl"] .dvl-last-addressed-copy i { transform: none; }
+[dir="rtl"] .dvl-last-restore i { transform: scaleX(-1); }
+[dir="rtl"] .dvl-count-forgot,
+[dir="rtl"] .dvl-count-restore { letter-spacing: 0; }
+[dir="rtl"] .dvl-count-restored,
+[dir="rtl"] .dvl-count-restored-copy,
+[dir="rtl"] .dvl-mark-copy { letter-spacing: 0; }
+[dir="rtl"] .dvl-count-restored-main > i,
+[dir="rtl"] .dvl-last-restored > i { transform: scaleX(-1); }
+[dir="rtl"] .dvl-count-restore i { transform: scaleX(-1); }
+
+/* La date du plus ancien dossier endormi, posée à côté du lien copié dans
+   l'en-tête : plus discrète que le compteur, pour ne pas disputer la pastille. */
+.dvl-count-dormant-oldest {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding-inline-start: 7px;
+  border-inline-start: 1px dashed color-mix(in srgb, var(--text) 24%, transparent);
+  font-style: normal;
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .03em;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 60%, transparent);
+  /* La date est une porte : elle se souligne au survol, comme un lien. */
+  text-decoration: none;
+  cursor: pointer;
+  transition: color .16s ease, border-color .16s ease;
+}
+.dvl-count-dormant-oldest:hover {
+  color: color-mix(in srgb, var(--accent2) 88%, var(--text));
+  border-inline-start-color: color-mix(in srgb, var(--accent2) 46%, transparent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.dvl-count-dormant-oldest:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent2) 60%, transparent);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+.dvl-count-dormant-oldest i { font-size: 11px; line-height: 1; opacity: .75; }
+
+/* La ligne des dossiers qui dorment, dans la Synthèse à l'écran : elle est
+   aussi une porte — un clic ouvre la liste réduite à ces seuls dossiers, et
+   son lien se copie depuis la ligne elle-même. */
+.dvl-summary-bulk.dvl-summary-dormant {
+  flex-wrap: wrap;
+  row-gap: 4px;
+}
+.dvl-summary-dormant-main {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex: 1 1 auto;
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color .16s ease;
+}
+.dvl-summary-dormant-main:hover {
+  color: var(--accent2);
+}
+/* Parmi les dossiers qui dorment, ceux dont le devis est déjà confirmé : un
+   trait pointillé le sépare du total, comme la date du plus ancien. */
+.dvl-summary-dormant-confirmed {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-style: normal;
+  margin-inline-start: 2px;
+  padding-inline-start: 6px;
+  border-inline-start: 1px dashed color-mix(in srgb, var(--text) 24%, transparent);
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .03em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent2) 62%, var(--text));
+}
+.dvl-summary-dormant-confirmed i { font-size: 10px; line-height: 1; opacity: .85; }
+.dvl-summary-dormant .dvl-summary-go {
+  margin-inline-start: auto;
+  opacity: .55;
+  transition: transform .16s ease, opacity .16s ease;
+}
+.dvl-summary-dormant-main:hover .dvl-summary-go { opacity: 1; transform: translateX(2px); }
+[dir="rtl"] .dvl-summary-dormant-main:hover .dvl-summary-go { transform: translateX(-2px); }
+/* Le bouton qui copie l'adresse de la lecture, à côté de la ligne : même
+   discrétion que celui de l'en-tête, pour ne pas disputer la vedette au
+   compteur. */
+.dvl-summary-dormant-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 7px;
+  border: 1px dashed color-mix(in srgb, var(--text) 24%, transparent);
+  border-radius: 999px;
+  background: transparent;
+  font-family: var(--font-label);
+  font-size: 10px;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  cursor: pointer;
+  transition: color .16s ease, border-color .16s ease, background .16s ease;
+}
+.dvl-summary-dormant-copy:hover {
+  color: color-mix(in srgb, var(--accent2) 90%, var(--text));
+  border-color: color-mix(in srgb, var(--accent2) 52%, transparent);
+  background: color-mix(in srgb, var(--accent2) 10%, transparent);
+}
+.dvl-summary-dormant-copy.is-ok {
+  color: color-mix(in srgb, var(--accent2) 90%, var(--text));
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 52%, transparent);
+}
+.dvl-summary-dormant-copy i { font-size: 11px; line-height: 1; }
+
+/* Le lien des endormis de la bande garde la discrétion de celui des adressés. */
+.dvl-last-link.dvl-last-dormant-copy { border-style: dashed; }
+
+/* La pastille des dossiers endormis, dans la bande : la même gélule que celle
+   des seulement adressés, mais un trait pointillé et une lune — elle compte
+   ces dossiers et ouvre leur lecture d'un seul clic. */
+.dvl-last-dormant {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--text) 24%, transparent);
+}
+.dvl-last-dormant:hover {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 52%, transparent);
+  background: color-mix(in srgb, var(--accent2) 12%, transparent);
+  color: color-mix(in srgb, var(--accent2) 88%, var(--text));
+}
+.dvl-last-dormant .dvl-last-when {
+  border-inline-start-color: color-mix(in srgb, var(--text) 22%, transparent);
+  color: color-mix(in srgb, var(--text) 60%, transparent);
+}
+.dvl-last-dormant:hover .dvl-last-when { color: inherit; }
+
+/* La pastille des endormis confirmés, juste à côté de celle des endormis : la
+   même gélule, mais une coche et une teinte d’accent — le devis est prêt, seule
+   la transmission manque. */
+.dvl-last-dormant-confirmed {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--accent2) 32%, transparent);
+  color: color-mix(in srgb, var(--accent2) 82%, var(--text));
+}
+.dvl-last-dormant-confirmed:hover {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 62%, transparent);
+  background: color-mix(in srgb, var(--accent2) 14%, transparent);
+  color: color-mix(in srgb, var(--accent2) 92%, var(--text));
+}
+/* Son lien se copie dans la même foulée que celui des endormis. */
+.dvl-last-link.dvl-last-dormant-confirmed-copy { border-style: dashed; }
+
+/* La pastille des endormis confirmés et son lien de copie forment une seule
+   paire : le compteur, son délai moyen, puis le geste qui envoie cette lecture
+   à un collègue — côte à côte, sans qu'une porte s'ouvre dans une autre. */
+.dvl-last-pill-pair {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.dvl-last-link.dvl-last-pill-copy,
+.dvl-last-pill-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--text) 26%, transparent);
+  background: color-mix(in srgb, var(--text) 5%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .05em;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+.dvl-last-pill-copy i { font-size: 11px; color: inherit; }
+.dvl-last-pill-copy:hover {
+  border-color: color-mix(in srgb, var(--accent2) 56%, transparent);
+  background: color-mix(in srgb, var(--accent2) 12%, transparent);
+  color: color-mix(in srgb, var(--accent2) 88%, var(--text));
+}
+.dvl-last-pill-copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* Le geste de copie de la pastille des endormis confirmés reste dans sa teinte
+   d'accent : il parle du même lot qu'elle. */
+.dvl-last-dormant-confirmed-inline {
+  border-color: color-mix(in srgb, var(--accent2) 32%, transparent);
+  color: color-mix(in srgb, var(--accent2) 78%, var(--text));
+}
+.dvl-last-dormant-confirmed-inline.is-ok {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 62%, transparent);
+  color: color-mix(in srgb, var(--accent2) 92%, var(--text));
+}
+[dir="rtl"] .dvl-last-pill-copy { letter-spacing: 0; }
+
+/* Le nombre des endormis confirmés, dans la Synthèse à l’écran, n’est pas un
+   simple chiffre : c’est une porte. Même filet pointillé, mais le trait
+   s’éclaire au survol et une petite flèche dit qu’il s’ouvre. */
+.dvl-summary-dormant-confirmed-link {
+  text-decoration: none;
+  cursor: pointer;
+  transition: color .16s ease, border-color .16s ease, background .16s ease;
+  /* La comparaison des montants s'ajoute au compteur : la pastille accepte de
+     se replier plutôt que de déborder de la Synthèse sur un écran étroit. */
+  flex-wrap: wrap;
+  white-space: normal;
+}
+/* Le montant des confirmés rapporté à celui de tous les endormis, dans la même
+   pastille : la comparaison se lit d'un coup, sans quitter le compteur. */
+.dvl-summary-dormant-confirmed-link .dvl-summary-dormant-amount {
+  white-space: normal;
+}
+.dvl-summary-dormant-confirmed-link:hover {
+  color: color-mix(in srgb, var(--accent2) 92%, var(--text));
+  border-inline-start-color: color-mix(in srgb, var(--accent2) 58%, transparent);
+}
+.dvl-summary-dormant-confirmed-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.dvl-summary-dormant-confirmed-go {
+  font-size: 9px;
+  line-height: 1;
+  opacity: .65;
+  transition: transform .16s ease, opacity .16s ease;
+}
+.dvl-summary-dormant-confirmed-link:hover .dvl-summary-dormant-confirmed-go {
+  opacity: 1;
+  transform: translate(1px, -1px);
+}
+[dir="rtl"] .dvl-summary-dormant-confirmed-go { transform: scaleX(-1); }
+[dir="rtl"] .dvl-summary-dormant-confirmed-link:hover .dvl-summary-dormant-confirmed-go {
+  transform: scaleX(-1) translate(1px, -1px);
+}
+
+/* La tête de la Synthèse : son intitulé à gauche, le lien de la Synthèse
+   entière à droite — discret, pour ne pas disputer la vedette aux compteurs. */
+.dvl-summary-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+}
+.dvl-summary-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 8px 2px 7px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--text) 26%, transparent);
+  background: transparent;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .05em;
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+  cursor: pointer;
+  transition: border-color .18s ease, color .18s ease, background .18s ease;
+}
+.dvl-summary-copy i { font-size: 11px; line-height: 1; }
+.dvl-summary-copy:hover {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--text) 48%, transparent);
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  color: var(--text);
+}
+.dvl-summary-copy.is-ok {
+  border-style: solid;
+  border-color: var(--accent2);
+  color: var(--accent2);
+}
+.dvl-summary-copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Depuis quand le plus ancien dossier endormi attend, dans la ligne de la
+   Synthèse : un trait pointillé sépare la date du nombre qu'elle prolonge. */
+.dvl-summary-dormant-oldest {
+  font-style: normal;
+  margin-inline-start: 2px;
+  padding-inline-start: 6px;
+  border-inline-start: 1px dashed color-mix(in srgb, var(--text) 24%, transparent);
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .03em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 60%, transparent);
+}
+.dvl-summary-dormant-main:hover .dvl-summary-dormant-oldest {
+  border-inline-start-color: color-mix(in srgb, var(--accent2) 44%, transparent);
+  color: color-mix(in srgb, var(--accent2) 78%, var(--text));
+}
+[dir="rtl"] .dvl-summary-copy,
+[dir="rtl"] .dvl-summary-dormant-oldest { letter-spacing: 0; }
+
+/* Le montant cumulé des devis encore endormis, posé à côté de leur compteur —
+   dans l'en-tête, dans la Synthèse et sur la bande. Même encre discrète que la
+   date du plus ancien, mais des chiffres alignés : le nombre dit combien dort,
+   le montant dit ce que cela pèse. */
+.dvl-count-amount,
+.dvl-summary-dormant-amount,
+.dvl-last-amount-cumul {
+  font-style: normal;
+  margin-inline-start: 2px;
+  padding-inline-start: 6px;
+  border-inline-start: 1px dashed color-mix(in srgb, var(--text) 24%, transparent);
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .03em;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent2) 60%, var(--text));
+}
+.dvl-count-dormant[data-on="yes"] .dvl-count-amount { color: var(--accent2); }
+.dvl-summary-dormant-main:hover .dvl-summary-dormant-amount {
+  border-inline-start-color: color-mix(in srgb, var(--accent2) 44%, transparent);
+  color: color-mix(in srgb, var(--accent2) 82%, var(--text));
+}
+
+/* La pastille des endormis confirmés : la jumelle de celle des endormis, avec
+   la même forme et une coche au lieu de la lune — elle ne se distingue pas par
+   la couleur seule. */
+/* La pastille des endormis confirmés : la jumelle de celle des endormis, avec
+   la même forme et une coche au lieu de la lune — elle ne se distingue pas par
+   la couleur seule. */
+.dvl-count-dormant {
+  border-color: color-mix(in srgb, var(--accent2) 28%, transparent);
+}
+.dvl-count-dormant .dvl-count-addressed-main i {
+  color: color-mix(in srgb, var(--accent2) 60%, transparent);
+}
+.dvl-count-dormant:hover {
+  border-color: color-mix(in srgb, var(--accent2) 44%, transparent);
+}
+.dvl-count-dormant[data-on="yes"] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 52%, transparent);
+  background: color-mix(in srgb, var(--accent2) 10%, transparent);
+  color: color-mix(in srgb, var(--accent2) 88%, var(--text));
+}
+.dvl-count-dormant-ok {
+  border-color: color-mix(in srgb, var(--accent2) 30%, transparent);
+}
+.dvl-count-dormant-ok .dvl-count-addressed-main i {
+  color: color-mix(in srgb, var(--accent2) 64%, transparent);
+}
+.dvl-count-dormant-ok:hover {
+  border-color: color-mix(in srgb, var(--accent2) 46%, transparent);
+}
+.dvl-count-dormant-ok[data-on="yes"] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 54%, transparent);
+  background: color-mix(in srgb, var(--accent2) 10%, transparent);
+  color: color-mix(in srgb, var(--accent2) 88%, var(--text));
+}
+.dvl-count-dormant-ok[data-on="yes"] .dvl-count-addressed-main i { color: var(--accent2); }
+/* Le montant cumulé des endormis confirmés porte le même filet que celui des
+   endormis, dans la teinte de sa pastille : les deux se lisent côte à côte. */
+.dvl-count-dormant-ok .dvl-count-amount {
+  border-inline-start-color: color-mix(in srgb, var(--accent2) 30%, transparent);
+  color: color-mix(in srgb, var(--accent2) 78%, var(--text));
+}
+
+/* La part du montant, en pourcentage : un jeton à part, sans trait pointillé,
+   pour qu'elle ne se lise pas comme un second montant. Elle vit dans la
+   pastille de l'en-tête comme dans la Synthèse, et prend la teinte de l'accent
+   des endormis confirmés — la même que la comparaison qu'elle résume. */
+.dvl-count-share,
+.dvl-summary-dormant-share {
+  font-style: normal;
+  margin-inline-start: 4px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent2) 13%, transparent);
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .03em;
+  line-height: 1.6;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent2) 80%, var(--text));
+}
+.dvl-count-dormant-ok[data-on="yes"] .dvl-count-share {
+  background: color-mix(in srgb, var(--accent2) 24%, transparent);
+  color: var(--accent2);
+}
+
+/* La comparaison des deux délais moyens, sous celle des montants dans la ligne
+   des endormis confirmés : le même filet pointillé que les montants voisins,
+   mais des jours — « 18 j sur 24 j » ne se lit pas comme une somme. */
+.dvl-summary-dormant-avg {
+  font-style: normal;
+  margin-inline-start: 2px;
+  padding-inline-start: 6px;
+  border-inline-start: 1px dashed color-mix(in srgb, var(--accent2) 26%, transparent);
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .03em;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent2) 72%, var(--text));
+}
+.dvl-summary-dormant-confirmed-link:hover .dvl-summary-dormant-avg {
+  color: color-mix(in srgb, var(--accent2) 92%, var(--text));
+}
+/* La ligne des endormis porte elle aussi son délai moyen rapporté à celui de
+   toute la liste : le survol l’éclaire comme les deux moyennes du lot confirmé. */
+.dvl-summary-dormant-main:hover .dvl-summary-dormant-avg {
+  color: color-mix(in srgb, var(--accent2) 92%, var(--text));
+}
+
+/* La comparaison de montants portée par la pastille des endormis confirmés de
+   la bande des Offres : le même trait pointillé que les montants voisins, dans
+   la teinte de la pastille, juste après leur délai moyen. */
+.dvl-last-dormant-confirmed .dvl-last-dormant-confirmed-compare {
+  border-inline-start-color: color-mix(in srgb, var(--accent2) 30%, transparent);
+  color: color-mix(in srgb, var(--accent2) 78%, var(--text));
+}
+
+/* Le pourcentage de l'attente que portent les endormis simples : le même jeton
+   que leurs voisins confirmés, mais posé dans la teinte discrète de leur propre
+   pastille — deux parts voisines ne se lisent pas comme une seule. */
+.dvl-count-share-dormant {
+  background: color-mix(in srgb, var(--text) 9%, transparent);
+  color: color-mix(in srgb, var(--accent2) 70%, var(--text));
+}
+.dvl-count-dormant[data-on="yes"] .dvl-count-share-dormant {
+  background: color-mix(in srgb, var(--accent2) 24%, transparent);
+  color: var(--accent2);
+}
+
+/* La part que le montant des endormis tient dans l'ensemble des devis, sur la
+   bande des Offres : le même jeton que dans l'en-tête, pour que les deux écrans
+   lisent la même proportion, sans qu'elle se prenne pour un second montant. */
+.dvl-last-share {
+  font-style: normal;
+  margin-inline-start: 4px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 9%, transparent);
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .03em;
+  line-height: 1.6;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent2) 70%, var(--text));
+}
+
+/* Le nombre de marchés que le lot endormi mêle, nommé dans la Synthèse juste
+   avant sa répartition : la feuille du classeur le dit déjà, la ligne à l'écran
+   le dit au même endroit, dans la même teinte discrète. */
+.dvl-summary-dormant-markets {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  flex: 1 1 100%;
+  margin: 0;
+  margin-inline-start: 2px;
+  padding-inline-start: 6px;
+  border-inline-start: 1px dashed color-mix(in srgb, var(--text) 24%, transparent);
+  font-family: var(--font-label);
+  font-size: 10px;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+.dvl-summary-dormant-markets > i { font-size: 10px; line-height: 1; opacity: .8; }
+.dvl-summary-dormant-markets em {
+  font-style: normal;
+  padding: 1px 6px;
+  border: 1px dashed color-mix(in srgb, var(--text) 24%, transparent);
+  border-radius: 999px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent2) 70%, var(--text));
+}
+
+/* La répartition par devise, dans la Synthèse à l'écran : un jeton par marché,
+   jamais additionné à un autre — chaque devise garde son total et sa part,
+   comptée en dossiers. */
+.dvl-summary-dormant-devises {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  flex: 1 1 100%;
+  margin-inline-start: 2px;
+  padding-inline-start: 6px;
+  border-inline-start: 1px dashed color-mix(in srgb, var(--text) 24%, transparent);
+  font-family: var(--font-label);
+  font-size: 10px;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+.dvl-summary-dormant-devises > i { font-size: 10px; line-height: 1; opacity: .8; }
+/* La part déjà prête de chaque marché, sous la ligne des endormis confirmés :
+   la même famille de jetons, teintée comme la pastille dont elle parle. */
+.dvl-summary-dormant-confirmed-devises {
+  margin-inline-start: 18px;
+  border-inline-start-color: color-mix(in srgb, var(--accent2) 30%, transparent);
+}
+.dvl-summary-dormant-confirmed-devises .dvl-summary-dormant-devise {
+  background: color-mix(in srgb, var(--accent2) 12%, transparent);
+  border-color: color-mix(in srgb, var(--accent2) 22%, transparent);
+}
+
+/* La même répartition, portée par la bande des Offres : elle prend sa propre
+   ligne sous la pastille des endormis confirmés, sans filet ni retrait latéral
+   — la pastille, elle, reste une porte d'un seul tenant. */
+.dvl-last-pill-pair .dvl-last-devise-split {
+  flex: 1 1 100%;
+  margin-inline-start: 0;
+  padding-inline-start: 0;
+  border-inline-start: 0;
+  padding-block-start: 2px;
+}
+.dvl-last-devise-split .dvl-summary-dormant-devise { font-size: 9px; }
+
+/* Le nombre de marchés que mêle la pastille des endormis de l'en-tête : un jeton
+   de la même famille que la part voisine, mais en pointillé — il annonce une
+   répartition, pas une proportion, et ne se confond donc pas avec elle. */
+.dvl-count-devises {
+  font-style: normal;
+  margin-inline-start: 3px;
+  padding: 1px 5px;
+  border: 1px dashed color-mix(in srgb, var(--text) 24%, transparent);
+  border-radius: 999px;
+  font-family: var(--font-label);
+  font-size: 9px;
+  letter-spacing: .03em;
+  line-height: 1.6;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+.dvl-count-dormant[data-on="yes"] .dvl-count-devises {
+  border-color: color-mix(in srgb, var(--accent2) 44%, transparent);
+  color: color-mix(in srgb, var(--accent2) 78%, var(--text));
+}
+.dvl-summary-dormant-devise {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 1px 7px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent2) 8%, transparent);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.dvl-summary-dormant-devise b { font-weight: 700; letter-spacing: .04em; }
+.dvl-summary-dormant-devise em { font-style: normal; }
+.dvl-summary-dormant-devise-amount {
+  color: color-mix(in srgb, var(--text) 74%, transparent);
+}
+.dvl-summary-dormant-devise-part {
+  padding-inline-start: 5px;
+  border-inline-start: 1px dashed color-mix(in srgb, var(--text) 24%, transparent);
+  color: color-mix(in srgb, var(--accent2) 78%, var(--text));
+}
+/* Le délai moyen du marché, à côté de sa part : un jeton de la même famille,
+   posé après un second filet — le marché se lit en dossiers puis en temps. */
+.dvl-summary-dormant-devise-avg {
+  padding-inline-start: 5px;
+  border-inline-start: 1px dashed color-mix(in srgb, var(--text) 18%, transparent);
+  color: color-mix(in srgb, var(--text) 64%, transparent);
+  font-variant-numeric: tabular-nums;
+}
+/* Le nombre de devis que ce marché tient, entre le montant et la part : le jeton
+   dit combien de dossiers, et non seulement ce qu’ils pèsent. */
+.dvl-summary-dormant-devise-count {
+  padding-inline-start: 5px;
+  border-inline-start: 1px dashed color-mix(in srgb, var(--text) 18%, transparent);
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Le détail du marché se copie depuis son propre jeton : une petite commande
+   discrète, dans la même famille que les autres commandes de la Synthèse. */
+.dvl-devise-copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 13px;
+  height: 13px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 4px;
+  background: none;
+  font-size: 10px;
+  line-height: 1;
+  color: color-mix(in srgb, var(--text) 42%, transparent);
+  cursor: pointer;
+  transition: color .15s ease, background .15s ease;
+}
+.dvl-devise-copy:hover { color: color-mix(in srgb, var(--accent2) 80%, var(--text)); background: color-mix(in srgb, var(--accent2) 14%, transparent); }
+.dvl-devise-copy.is-ok { color: color-mix(in srgb, var(--accent2) 90%, var(--text)); }
+.dvl-devise-copy > i { font-size: 10px; line-height: 1; }
+
+/* L’ordre des jetons : par montant, ou par délai moyen croissant. Un seul
+   bouton, qui annonce l’ordre où le lecteur se trouve. */
+.dvl-devise-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 6px;
+  border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
+  border-radius: 999px;
+  background: none;
+  font-family: var(--font-label);
+  font-size: 9px;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--text) 60%, transparent);
+  cursor: pointer;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+.dvl-devise-sort > i { font-size: 9px; line-height: 1; }
+.dvl-devise-sort:hover {
+  color: color-mix(in srgb, var(--accent2) 80%, var(--text));
+  border-color: color-mix(in srgb, var(--accent2) 40%, transparent);
+}
+.dvl-devise-sort[data-on="yes"] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 34%, transparent);
+  background: color-mix(in srgb, var(--accent2) 12%, transparent);
+  color: color-mix(in srgb, var(--accent2) 82%, var(--text));
+}
+
+/* Tous les marchés d’un seul geste : la même discrétion que la copie d’un
+   jeton, mais avec son libellé — le geste porte sur la ligne entière, pas sur
+   un seul marché. */
+.dvl-devise-copy-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 6px;
+  margin: 0;
+  border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
+  border-radius: 999px;
+  background: none;
+  font-family: var(--font-label);
+  font-size: 9px;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--text) 60%, transparent);
+  cursor: pointer;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+.dvl-devise-copy-all > i { font-size: 9px; line-height: 1; }
+.dvl-devise-copy-all:hover {
+  color: color-mix(in srgb, var(--accent2) 80%, var(--text));
+  border-color: color-mix(in srgb, var(--accent2) 40%, transparent);
+}
+.dvl-devise-copy-all.is-ok {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 34%, transparent);
+  background: color-mix(in srgb, var(--accent2) 12%, transparent);
+  color: color-mix(in srgb, var(--accent2) 88%, var(--text));
+}
+
+/* Le marché qui attend le plus longtemps, posé à côté du délai moyen du lot :
+   le même jeton que sa voisine, une teinte à peine plus marquée, pour qu’il se
+   repère sans effacer le temps du lot entier. */
+.dvl-last-longest { color: color-mix(in srgb, var(--accent2) 78%, var(--text)); }
+
+/* ---- breakpoints ---- */
+#devis-abonnement { scroll-margin-top: 100px; }
+
+@media (max-width: 1020px) {
+  .dv { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .dv-setup,
+  .dv-total,
+  .dv-form,
+  .dv-done { padding: 14px 13px; border-radius: 15px; }
+  .dv-fields { grid-template-columns: 1fr; }
+  .dv-bill { grid-template-columns: 1fr; }
+  .dv-bill-btn { justify-content: flex-start; }
+}
+
+/* ---- Arabic: no tracking on short labels, and the arrows follow the reading ---- */
+[dir="rtl"] .dv-label,
+[dir="rtl"] .dv-total-stamp,
+[dir="rtl"] .dv-form-stamp,
+[dir="rtl"] .dv-plan-txt b,
+[dir="rtl"] .dv-lines dt em { letter-spacing: 0; text-transform: none; }
+[dir="rtl"] .dv-send i { transform: scaleX(-1); }
+[dir="rtl"] .dv-send:hover:not(:disabled) i { transform: scaleX(-1) translateX(3px); }
+[dir="rtl"] .dv-lines dd .dv-line-was { text-align: start; }

@@ -1,0 +1,224 @@
+/* Le geste d'écriture sur une fiche d'atelier.
+   Les deux actions de l'en-tête tiennent dans une seule colonne : le bouton
+   d'écriture en creux, la demande B2B pleine. L'ordre dit la hiérarchie sans
+   qu'aucun des deux ne crie plus fort que l'autre. */
+/* Le geste court de l'aire, sous le lien de la carte du pays : deux lignes
+   seulement, dans le pas discret des autres copies de la carte du monde. */
+.pro-aire-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 72%, transparent);
+  background: color-mix(in srgb, var(--accent2) 8%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--accent2) 42%, transparent);
+  transition: border-color .2s ease, background .2s ease, color .2s ease;
+}
+.pro-aire-copy i { flex: 0 0 auto; font-size: 12px; color: var(--accent2); }
+.pro-aire-copy:hover {
+  border-style: solid;
+  border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 16%, transparent);
+  color: var(--text);
+}
+.pro-aire-copy.is-ok { border-style: solid; border-color: var(--accent2); color: var(--accent2); }
+.pro-aire-copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+[dir="rtl"] .pro-aire-copy { letter-spacing: 0; }
+
+/* Le geste et son petit compte sur une même ligne : le compte reprend le pas
+   du geste, sans le dépasser — il se lit comme un constat, pas comme un
+   bouton. Il n'apparaît qu'une fois l'aire réellement copiée. */
+.pro-aire-row { display: flex; flex-wrap: wrap; align-items: center;
+  gap: 6px 8px; margin-top: 8px; }
+.pro-aire-row .pro-aire-copy { margin-top: 0; }
+.pro-aire-count { display: inline-flex; flex-wrap: wrap; align-items: center;
+  gap: 3px 5px; padding: 3px 9px; border-radius: 999px; min-width: 0;
+  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .05em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  border: 1px dotted color-mix(in srgb, var(--accent2) 30%, transparent); }
+.pro-aire-count > i { flex: 0 0 auto; font-size: 10px; color: var(--accent2); }
+.pro-aire-count b { flex: 0 0 auto; font-family: var(--font-body); font-size: 10px;
+  font-weight: 600; letter-spacing: 0; color: var(--accent2); }
+.pro-aire-count-lab { flex: 0 1 auto; min-width: 0; overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap; }
+.pro-aire-count-last { flex: 0 0 auto; font-style: normal;
+  font-family: var(--font-body); font-size: 8.5px; letter-spacing: 0;
+  text-transform: none; white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 44%, transparent); }
+[dir="rtl"] .pro-aire-count { letter-spacing: 0; }
+
+/* Le compte est une porte : un appui rouvre la note des aires du monde
+   resserrée sur cette aire. Il prend le geste de la souris, se souligne d'un
+trait plein au survol et pousse sa flèche — il se lit comme un bouton, pas
+   comme un simple constat. */
+.pro-aire-count--door { text-decoration: none; cursor: pointer;
+  transition: border-color .2s ease, background .2s ease, color .2s ease; }
+.pro-aire-count--door:hover { border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 58%, transparent);
+  background: color-mix(in srgb, var(--accent2) 12%, transparent);
+  color: var(--text); }
+.pro-aire-count--door:focus-visible { outline: 2px solid var(--accent);
+  outline-offset: 2px; }
+.pro-aire-count-go { flex: 0 0 auto; font-size: 10px; color: var(--accent2);
+  opacity: .55; transition: opacity .2s ease, transform .2s ease-out; }
+.pro-aire-count--door:hover .pro-aire-count-go { opacity: 1;
+  transform: translate(2px, -2px); }
+
+/* La petite gomme du seul compte d'aire : elle n'efface que ce chiffre, sans
+   toucher au carnet des aires. Le premier appui l'arme, le second efface. */
+.pro-aire-count-erase { display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 7px; border-radius: 999px; appearance: none; cursor: pointer;
+  background: none; font-family: var(--font-label); font-size: 8.5px;
+  letter-spacing: .05em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 46%, transparent);
+  border: 1px dotted color-mix(in srgb, var(--text) 22%, transparent);
+  transition: background .2s ease, border-color .2s ease, color .2s ease; }
+.pro-aire-count-erase i { font-size: 10px; color: inherit; }
+.pro-aire-count-erase:hover { color: color-mix(in srgb, var(--accent) 78%, var(--text));
+  border-color: color-mix(in srgb, var(--accent) 44%, transparent); }
+.pro-aire-count-erase.is-armed { border-style: solid;
+  border-color: var(--accent); color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent); }
+.pro-aire-count-erase:focus-visible { outline: 2px solid var(--accent);
+  outline-offset: 2px; }
+[dir="rtl"] .pro-aire-count-erase { letter-spacing: 0; }
+
+.pro-head-side { display: grid; gap: 8px; justify-items: end; }
+
+.pro-write {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  padding: 11px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  font: inherit;
+  font-size: 14px;
+  color: var(--text);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 46%, transparent);
+  transition: background .2s ease, border-color .2s ease, color .2s ease;
+}
+
+.pro-write i { font-size: 16px; color: var(--accent2); transition: color .2s ease; }
+.pro-write:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  border-color: var(--accent);
+  color: var(--accent2);
+}
+.pro-write:hover:not(:disabled) i { color: var(--accent); }
+.pro-write:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.pro-write[disabled] { opacity: .7; cursor: wait; }
+
+/* Une phrase, pas un bouton : elle explique pourquoi le fil ne s'ouvre pas. */
+.pro-write-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 0;
+  max-width: 34ch;
+  text-align: end;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.pro-write-note i { flex: 0 0 auto; margin-top: 1px; font-size: 14px; color: var(--accent); }
+.pro-write-note.is-err { color: color-mix(in srgb, var(--accent) 62%, var(--text)); }
+
+[dir="rtl"] .pro-write-note { text-align: start; }
+[dir="rtl"] .pro-head-side { justify-items: start; }
+
+@media (max-width: 900px) {
+  /* L'en-tête passe sur deux colonnes : la colonne des actions prend toute la
+     largeur sous le nom, au lieu de rester coincée dans la première colonne. */
+  .pro-head-side { grid-column: 1 / -1; justify-items: start; }
+  .pro-write-note { text-align: start; }
+}
+
+@media (max-width: 520px) {
+  .pro-head-side { justify-items: stretch; }
+  .pro-head-actions { width: 100%; }
+  .pro-write,
+  .pro-head-side .cta { flex: 1 1 auto; justify-content: center; }
+}
+
+/* ============ LE MÉTIER D'OÙ L'ON VIENT ============ */
+/* Le rappel du type lu dans l'annuaire, posé sous la porte de retour : une
+   seule ligne, la porte à sa droite. Sa teinte est plus sourde que celle de
+   l'en-tête — c'est un point de lecture, pas un périmètre. */
+.pro-from {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin: 2px 0 6px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 86%, transparent);
+  background: color-mix(in srgb, var(--accent2) 8%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--accent2) 34%, transparent);
+}
+.pro-from > i { flex: 0 0 auto; font-size: 15px; color: color-mix(in srgb, var(--accent2) 82%, transparent); }
+/* La région lue : un lieu, pas une rubrique — teinte de l'accent, celle des
+   pastilles de lieu de l'annuaire. */
+.pro-from-region {
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 32%, transparent);
+}
+.pro-from-region > i { color: color-mix(in srgb, var(--accent) 84%, transparent); }
+/* Le pays lu : un cran plus sourd que la région — c'est un cadre, pas le
+   point précis où l'on se tenait. */
+.pro-from-pays {
+  background: color-mix(in srgb, var(--text) 5%, transparent);
+  border-color: color-mix(in srgb, var(--text) 24%, transparent);
+}
+.pro-from-pays > i { color: color-mix(in srgb, var(--text) 68%, transparent); }
+.pro-from > span { min-width: 0; }
+.pro-from .board-trip-go { margin-left: auto; }
+/* La région d'où l'on vient : sa porte rend la liste resserrée, celle d'à côté
+   le pays entier — la première se cale à droite, la seconde la suit. */
+.pro-from .board-trip-go--all { margin-left: 0; }
+[dir="rtl"] .pro-from .board-trip-go { margin-left: 0; margin-right: auto; }
+@media (max-width: 640px) {
+  .pro-from .board-trip-go { margin-left: 0; }
+}
+
+/* Les régions parcourues sous le plan sont stylées avec leur composant
+   (src/components/feature/region-walk.css), pour paraître à l'identique sur la
+   fiche d'un atelier et sur celle d'un candidat. */
+
+/* ============ LE JETON « MÉTIER CONCENTRÉ » ============ */
+/* Dans la ligne d'identité, à côté du pays : un métier tenu dans une seule
+   région du pays se repère avant de lire la fiche. Trait pointillé et teinte
+   d'accent secondaire — le même signe que la carte du pays emploie. */
+.pro-meta .pro-solo {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  white-space: nowrap;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--accent2) 82%, var(--text));
+  background: color-mix(in srgb, var(--accent2) 9%, transparent);
+  border: 1px dotted color-mix(in srgb, var(--accent2) 46%, transparent);
+}
+.pro-meta .pro-solo i { font-size: 11px; color: color-mix(in srgb, var(--accent2) 84%, var(--text)); }
+[dir="rtl"] .pro-meta .pro-solo { letter-spacing: 0; }

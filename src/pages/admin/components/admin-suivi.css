@@ -1,0 +1,2686 @@
+/* ============ CONSOLE · SUIVI DU PROJET ============ */
+/* Le fichier de pilotage lu sur place : un chiffre qui se calcule, les
+   modules qui le composent, les phases et ce qui bloque encore. Le contenu du
+   plan reste en français — c'est la langue du document — et se lit de gauche à
+   droite, même quand la console autour est en arabe. */
+
+.admin-suivi { display: grid; gap: 16px; }
+
+.suivi-meta {
+  font-size: 11.5px;
+  white-space: nowrap;
+}
+
+/* La date de version et le bouton d'archive se lisent sur la même ligne, et
+   passent l'un sous l'autre quand la console se resserre. */
+.suivi-head-tools {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+/* La date du dernier téléchargement, à côté du bouton : une note calme, qui
+   dit quand la pièce est partie la dernière fois sans ouvrir le fichier. */
+.suivi-last {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .04em;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 54%, transparent);
+  cursor: help;
+}
+.suivi-last i { font-size: 12px; }
+
+[dir='rtl'] .suivi-last { letter-spacing: 0; font-size: 11px; }
+
+/* La petite gomme, posée à côté de la date : elle n'efface rien d'un seul
+   geste. Un premier appui l'arme — le libellé le dit —, un second efface ;
+   sans confirmation, elle se désarme d'elle-même. */
+.suivi-gomme {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: transparent;
+  font-family: var(--font-label);
+  font-size: 9.8px;
+  line-height: 1.6;
+  letter-spacing: .04em;
+  cursor: pointer;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 44%, transparent);
+  transition: color .16s ease, border-color .16s ease, background .16s ease;
+}
+.suivi-gomme i { font-size: 12px; }
+.suivi-gomme:hover,
+.suivi-gomme:focus-visible {
+  border-color: color-mix(in srgb, var(--text) 20%, transparent);
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  color: color-mix(in srgb, var(--text) 70%, transparent);
+}
+.suivi-gomme:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 2px;
+}
+
+/* La gomme armée se lit comme un geste à confirmer : la teinte d'accent et le
+   double trait disent que le second appui exécute. */
+.suivi-gomme[data-arme='yes'] {
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+}
+
+[dir='rtl'] .suivi-gomme { letter-spacing: 0; font-size: 11px; }
+
+/* Dans la ligne du resserrement, la date de l'archive du chantier est portée
+   par sa propre gomme : la pastille garde le pas de la ligne, et le geste
+   n'efface que cette pièce-là. */
+.suivi-gomme[data-part='yes'] {
+  padding: 1px 8px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--text) 20%, transparent);
+  background: color-mix(in srgb, var(--text) 5%, transparent);
+  font-size: 9.8px;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+
+.suivi-gomme[data-part='yes']:hover,
+.suivi-gomme[data-part='yes']:focus-visible {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+}
+
+/* Armée, la gomme d'une archive garde la teinte d'accent de la ligne entière :
+   le second appui est un effacement, il se voit comme tel. */
+.suivi-gomme[data-part='yes'][data-arme='yes'] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: color-mix(in srgb, var(--accent) 94%, var(--text));
+}
+
+[dir='rtl'] .suivi-gomme[data-part='yes'] { letter-spacing: 0; font-size: 11px; }
+
+/* ---- le chiffre officiel ---- */
+.suivi-score {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, auto);
+  gap: 18px;
+  align-items: center;
+  padding: 18px 20px;
+  border-radius: 16px;
+  border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 10%, transparent), transparent 62%),
+    color-mix(in srgb, var(--surface) 46%, transparent);
+}
+
+.suivi-score-main { display: grid; gap: 6px; min-width: 0; }
+
+.suivi-score-num {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  font-family: var(--font-heading);
+  font-size: 52px;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: -.03em;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+.suivi-score-num small {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+}
+
+.suivi-score-lbl {
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+
+[dir='rtl'] .suivi-score-lbl { letter-spacing: 0; text-transform: none; font-size: 12px; }
+
+.suivi-score-track {
+  display: block;
+  height: 8px;
+  margin-top: 4px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--text) 12%, transparent);
+  max-width: 420px;
+}
+.suivi-score-track i {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--accent);
+  transition: width .3s ease;
+}
+
+.suivi-score-facts {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding-inline-start: 18px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+}
+.suivi-score-facts > div { display: grid; gap: 1px; min-width: 132px; }
+.suivi-score-facts dt {
+  font-size: 10.5px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+.suivi-score-facts dd {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 90%, transparent);
+}
+
+[dir='rtl'] .suivi-score-facts dt { letter-spacing: 0; text-transform: none; font-size: 11.5px; }
+
+/* ---- la part restante, posée sous la barre ---- */
+.suivi-part {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 8px;
+  margin-top: 4px;
+  padding-top: 14px;
+  border-top: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+}
+
+.suivi-part-head {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+.suivi-part-num {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -.02em;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 88%, transparent);
+}
+.suivi-part-lbl {
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 60%, transparent);
+}
+
+/* Le compte des archives encore à joindre, posé dans le rappel : une note
+   calme, au pas des lignes du chantier, qui se lit sans remonter à l'en-tête.
+   Teintée tant qu'il reste des pièces, apaisée quand tout est parti. */
+.suivi-part-archives {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  width: fit-content;
+  padding: 2px 9px 2px 7px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--text) 18%, transparent);
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .04em;
+  line-height: 1.6;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  cursor: help;
+}
+.suivi-part-archives i { font-size: 12px; }
+.suivi-part-archives[data-etat='reste'] {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--accent) 34%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+.suivi-part-archives[data-etat='ok'] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--text) 14%, transparent);
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+}
+/* La pastille porte aussi le jour de la dernière archive partie : le texte
+   peut donc passer à la ligne, la capsule s'élargit sans déborder. */
+.suivi-part-archives {
+  flex-wrap: wrap;
+  border-radius: 12px;
+  white-space: normal;
+  max-width: 100%;
+}
+.suivi-part-archives-date {
+  font-size: 9.5px;
+  letter-spacing: .02em;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 48%, transparent);
+}
+.suivi-part-archives[data-etat='reste'] .suivi-part-archives-date {
+  color: color-mix(in srgb, var(--accent) 58%, var(--text));
+}
+.suivi-part-archives-more {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  height: 15px;
+  padding: 0;
+  margin-inline-start: 1px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.suivi-part-archives-more:hover,
+.suivi-part-archives-more:focus-visible {
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  outline: none;
+}
+/* Les pièces encore à joindre, numérotées dans l'ordre où elles partent :
+   la première ligne est celle à emporter d'abord. */
+.suivi-part-archives-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 3px 18px;
+}
+.suivi-part-archives-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  min-width: 0;
+  font-size: 10.5px;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+}
+.suivi-part-archives-num {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  font-size: 9px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+}
+.suivi-part-archives-name {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+/* Chaque ligne numérotée est le geste : un appui emporte l'archive de ce
+   chantier. Le nom garde son pointillé, la flèche dit le téléchargement. */
+.suivi-part-archives-line {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  width: 100%;
+  min-width: 0;
+  padding: 1px 4px;
+  margin: -1px -4px;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition: background .16s ease;
+}
+.suivi-part-archives-line:hover,
+.suivi-part-archives-line:focus-visible {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  outline: none;
+}
+.suivi-part-archives-line:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 2px;
+}
+.suivi-part-archives-line .suivi-part-archives-name {
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+.suivi-part-archives-line i {
+  flex: none;
+  font-size: 12px;
+  color: color-mix(in srgb, var(--accent) 72%, var(--text));
+}
+/* La réponse du geste, sous la liste : la pièce emportée s'annonce, puis la
+   liste se resserre d'elle-même puisque l'archive est partie. */
+.suivi-part-archives-flash {
+  margin: 5px 0 0;
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  font-size: 10.5px;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+.suivi-part-archives-flash i { font-size: 12px; }
+@media (max-width: 700px) {
+  .suivi-part-archives-list { grid-template-columns: minmax(0, 1fr); }
+}
+[dir='rtl'] .suivi-part-archives { letter-spacing: 0; font-size: 11px; }
+/* La ligne des archives, atteinte par l'ancre du compteur du cap, garde le
+   même repère que les lignes du tableau : on voit où l'on a été déposé. */
+.suivi-part-archives:target {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+  box-shadow: inset 3px 0 0 color-mix(in srgb, var(--accent) 78%, transparent);
+}
+.suivi-part-archives { scroll-margin-top: 96px; }
+
+.suivi-part-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 22px;
+}
+
+.suivi-part-list li {
+  display: grid;
+  gap: 4px;
+  padding: 9px 11px;
+  border-radius: 10px;
+  text-align: left;
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  border: 1px solid transparent;
+}
+.suivi-part-list li[data-lourd='yes'] {
+  border-color: color-mix(in srgb, var(--accent) 28%, transparent);
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+}
+
+.suivi-part-top {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+/* Le cap 95 % : une petite bande dans le rappel, ses deux chiffres en tête et
+   ses deux portes sous la phrase. */
+.suivi-cap {
+  margin: 10px 0 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.suivi-cap[data-atteint='yes'] {
+  border-color: color-mix(in srgb, var(--text) 14%, transparent);
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+}
+.suivi-cap-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.suivi-cap-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+.suivi-cap-num {
+  margin-inline-start: auto;
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 90%, transparent);
+  white-space: nowrap;
+}
+.suivi-cap-num em {
+  margin-inline-start: 5px;
+  font-style: normal;
+  font-size: 10.5px;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+.suivi-cap-txt,
+.suivi-cap-after {
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 72%, transparent);
+}
+.suivi-cap-after {
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+.suivi-cap-doors {
+  margin-top: 2px;
+}
+/* Le survol du bloc dit la liste des modules qui restent avant le cap ; au
+   téléphone, où le survol n'existe pas, la tête du bloc s'ouvre d'un appui. */
+.suivi-cap {
+  cursor: default;
+}
+.suivi-cap-head {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+.suivi-cap-head:hover .suivi-cap-tag {
+  color: color-mix(in srgb, var(--accent) 96%, var(--text));
+}
+.suivi-cap-head:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 60%, transparent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+.suivi-cap-caret {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  font-size: 14px;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+/* La liste dépliée sous les chiffres : celle que le survol dit déjà, mais
+   lisible au doigt, module par module, du plus lourd au plus léger. */
+.suivi-cap-list {
+  margin: 4px 0 0;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
+  background: color-mix(in srgb, var(--background) 60%, transparent);
+}
+.suivi-cap-list-head,
+.suivi-cap-list-foot {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+}
+.suivi-cap-list-foot {
+  margin-top: 4px;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+}
+/* Le petit compteur des modules déjà descendus depuis cet appareil, posé sous
+   la tête de la liste : discret, il se lit sans quitter le bloc. */
+.suivi-cap-desc {
+  margin: 5px 0 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  width: fit-content;
+  padding: 1px 8px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--text) 18%, transparent);
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.8px;
+  letter-spacing: .03em;
+  line-height: 1.6;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  cursor: help;
+  color: color-mix(in srgb, var(--text) 56%, transparent);
+}
+.suivi-cap-desc i { font-size: 11px; }
+/* Le compteur du cap descend lui-même jusqu'à la ligne des archives : le
+   texte garde le pas de la pastille, le pointillé dit le geste. */
+.suivi-cap-desc-jump {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 999px;
+}
+.suivi-cap-desc-jump > span {
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+}
+.suivi-cap-desc-jump:hover,
+.suivi-cap-desc-jump:focus-visible {
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+  outline: none;
+}
+.suivi-cap-desc-jump:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 60%, transparent);
+  outline-offset: 2px;
+}
+.suivi-cap-desc-gomme {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  height: 15px;
+  margin-left: 1px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  opacity: .62;
+  cursor: pointer;
+  transition: opacity .18s ease, color .18s ease, background .18s ease;
+}
+.suivi-cap-desc-gomme i { font-size: 10.5px; }
+.suivi-cap-desc-gomme:hover { opacity: 1; background: color-mix(in srgb, var(--text) 8%, transparent); }
+.suivi-cap-desc-gomme[data-arme='yes'] {
+  opacity: 1;
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+.suivi-cap-desc[data-etat='vu'] .suivi-cap-desc-gomme:hover {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+}
+.suivi-cap-desc[data-etat='vu'] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 34%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  color: color-mix(in srgb, var(--accent) 86%, var(--text));
+}
+[dir='rtl'] .suivi-cap-desc { letter-spacing: 0; font-size: 11px; }
+.suivi-cap-list-ul {
+  margin: 5px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.suivi-cap-list-ul li {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+  font-size: 11.5px;
+  line-height: 1.45;
+}
+.suivi-cap-list-name {
+  flex: 1 1 auto;
+  min-width: 0;
+  color: color-mix(in srgb, var(--text) 84%, transparent);
+  overflow-wrap: anywhere;
+}
+.suivi-cap-list-pt {
+  flex: 0 0 auto;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  white-space: nowrap;
+}
+/* Chaque ligne de la liste descend jusqu'à son module d'un appui : le nom
+   garde son pointillé, le survol annonce le tableau où la ligne mène. */
+.suivi-cap-list-jump {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 1px 3px;
+  margin: -1px -3px;
+}
+.suivi-cap-list-jump:hover,
+.suivi-cap-list-jump:focus-visible {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  outline: none;
+}
+.suivi-cap-list-jump .suivi-cap-list-name {
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+/* La petite gomme du repère daté : un premier appui l'arme, un second oublie
+   la date sur cet appareil. Le plan et son archive ne bougent pas. */
+.suivi-cap-gum {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-inline-start: 6px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  background: color-mix(in srgb, var(--background) 70%, transparent);
+  font: inherit;
+  font-size: 10px;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  cursor: pointer;
+}
+.suivi-cap-gum i {
+  font-size: 12px;
+}
+.suivi-cap-gum:hover {
+  color: color-mix(in srgb, var(--accent) 80%, var(--text));
+  border-color: color-mix(in srgb, var(--accent) 44%, transparent);
+}
+.suivi-cap-gum[data-arme='yes'] {
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+  border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+.suivi-cap-gum:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 60%, transparent);
+  outline-offset: 2px;
+}
+/* Le repère daté du franchissement : discret, il se lit sous les chiffres et
+   garde le jour où le seuil est passé sur cet appareil. */
+.suivi-cap-reached {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin: 2px 0 0;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+}
+.suivi-cap-reached i {
+  font-size: 12px;
+  color: color-mix(in srgb, var(--accent) 74%, var(--text));
+}
+
+/* Le nom du chantier descend jusqu'à la ligne de son module le plus lourd :
+   soulignement discret, jamais confondu avec un simple texte. */
+.suivi-part-jump {
+  cursor: pointer;
+  text-decoration: none;
+  border-bottom: 1px dotted color-mix(in srgb, var(--text) 32%, transparent);
+}
+.suivi-part-jump:hover {
+  color: color-mix(in srgb, var(--accent) 76%, var(--text));
+  border-bottom-color: color-mix(in srgb, var(--accent) 60%, transparent);
+}
+.suivi-part-jump:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 60%, transparent);
+  outline-offset: 2px;
+}
+
+.suivi-part-name {
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: color-mix(in srgb, var(--text) 90%, transparent);
+  overflow-wrap: anywhere;
+}
+.suivi-part-pts {
+  font-size: 12.5px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent) 86%, var(--text));
+}
+
+/* Le nom du chantier et son repère, groupés pour que le chiffre des points
+   garde son bord droit. */
+.suivi-part-id {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+/* Le chantier qui pèse le plus, marqué comme le fichier le plus creusé du
+   relevé de parité : une pastille, lue avant les chiffres. Elle n'est pas
+   qu'une marque : pressée, elle resserre le rappel sur ce seul chantier, comme
+   la porte du guide — et un second appui rend les quatre. */
+.suivi-part-tag {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-family: var(--font-label);
+  font-size: 9.8px;
+  line-height: 1.6;
+  letter-spacing: .04em;
+  white-space: nowrap;
+  cursor: pointer;
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 32%, transparent);
+  transition: background .16s ease, border-color .16s ease;
+}
+.suivi-part-tag i { font-size: 11px; }
+.suivi-part-tag:hover,
+.suivi-part-tag:focus-visible {
+  background: color-mix(in srgb, var(--accent) 24%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+}
+.suivi-part-tag:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 2px;
+}
+/* Le repère qui a déjà resserré le rappel se lit comme enfoncé : on sait que
+   le second appui le relâchera. */
+.suivi-part-tag[data-actif='yes'] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 62%, transparent);
+  background: color-mix(in srgb, var(--accent) 30%, transparent);
+  color: color-mix(in srgb, var(--accent) 96%, var(--text));
+}
+
+[dir='rtl'] .suivi-part-tag {
+  letter-spacing: 0;
+  font-size: 11px;
+}
+
+/* Le resserrement reçu d'une porte : il se dit sur une ligne, et se retire
+   d'un bouton posé dans l'en-tête du rappel. */
+.suivi-part-focus {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  row-gap: 4px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  width: fit-content;
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .04em;
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--accent) 34%, transparent);
+}
+.suivi-part-focus i { font-size: 12px; }
+
+[dir='rtl'] .suivi-part-focus { letter-spacing: 0; font-size: 11px; }
+
+/* L'archive du seul chantier resserré, posée dans la ligne qui dit le
+   resserrement : une porte discrète, au même pas que la pastille. */
+.suivi-part-archive {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .04em;
+  line-height: 1.6;
+  cursor: pointer;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+  transition: background .16s ease, border-color .16s ease;
+}
+.suivi-part-archive i { font-size: 11px; }
+.suivi-part-archive:hover,
+.suivi-part-archive:focus-visible {
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 56%, transparent);
+}
+.suivi-part-archive:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 2px;
+}
+
+[dir='rtl'] .suivi-part-archive {
+  letter-spacing: 0;
+  font-size: 11px;
+}
+
+.suivi-part-widen {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  background: none;
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .04em;
+  cursor: pointer;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  transition: color .16s ease, border-color .16s ease, background .16s ease;
+}
+.suivi-part-widen i { font-size: 12px; }
+.suivi-part-widen:hover,
+.suivi-part-widen:focus-visible {
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+}
+
+[dir='rtl'] .suivi-part-widen { letter-spacing: 0; font-size: 11px; }
+
+/* Un seul chantier retenu : sa carte prend la largeur du rappel, au lieu de
+   rester seule dans une moitié de grille. */
+.suivi-part-list[data-seul='yes'] { grid-template-columns: minmax(0, 1fr); }
+
+.suivi-part-track {
+  display: block;
+  height: 5px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--text) 11%, transparent);
+}
+.suivi-part-track i {
+  display: block;
+  height: 100%;
+  min-width: 3px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 72%, transparent);
+  transition: width .3s ease;
+}
+
+/* Le poids du chantier, dit en points et en part de la part restante : la
+   ligne se glisse entre la barre et la phrase, un cran plus bas que les deux
+   chiffres du titre. */
+.suivi-part-share {
+  margin: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  line-height: 1.45;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+}
+.suivi-part-share i {
+  flex: none;
+  font-size: 12px;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--accent) 74%, var(--text));
+}
+
+/* En arabe, l'interlettrage et les capitales latines se retirent. */
+[dir='rtl'] .suivi-part-share {
+  letter-spacing: 0;
+  font-size: 11.5px;
+}
+
+.suivi-part-reste {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+
+/* Le compte des livrables encore ouverts, lu dans les phases du plan : posé
+   sous la phrase du chantier, un cran plus bas qu'elle. */
+.suivi-part-ouv {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10.8px;
+  line-height: 1.45;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 54%, transparent);
+}
+.suivi-part-ouv i { font-size: 12px; }
+.suivi-part-ouv[data-zero='yes'] { color: color-mix(in srgb, var(--text) 38%, transparent); }
+
+/* La porte d'un chantier qui se lance d'un clic : au pied de sa carte, sans
+   quitter le rappel. */
+.suivi-part-go {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+  padding: 5px 9px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-decoration: none;
+  cursor: pointer;
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, transparent);
+  transition: background .16s ease, border-color .16s ease;
+}
+.suivi-part-go i { font-size: 12px; }
+.suivi-part-go i:last-child { margin-inline-start: auto; }
+.suivi-part-go:hover {
+  background: color-mix(in srgb, var(--accent) 17%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 42%, transparent);
+}
+.suivi-part-go:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 2px;
+}
+
+/* Posée directement sous le nom du chantier, la porte garde un peu d'air
+   au-dessus du filet de progression, et ne prend pas la couleur d'un bouton
+   d'action principal. */
+.suivi-part-go {
+  margin-bottom: 2px;
+}
+
+/* ---- le détail des points manquants, module par module ---- */
+.suivi-manque {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.suivi-manque-row {
+  display: grid;
+  gap: 5px;
+  padding: 9px 12px;
+  border-radius: 10px;
+  text-align: left;
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+}
+.suivi-manque-row:nth-child(even) { background: color-mix(in srgb, var(--text) 2.5%, transparent); }
+.suivi-manque-row[data-lourd='yes'] {
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, transparent);
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+}
+
+.suivi-manque-top {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.suivi-manque-name {
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--text) 90%, transparent);
+  overflow-wrap: anywhere;
+}
+/* Le nom d'un module manquant descend jusqu'à sa ligne du tableau, comme les
+   lignes de la liste du cap : le pointillé le dit, le survol annonce le
+   tableau où la ligne mène. */
+.suivi-manque-jump {
+  display: inline-flex;
+  align-items: baseline;
+  min-width: 0;
+  border-radius: 6px;
+  padding: 0 3px;
+  margin: 0 -3px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+.suivi-manque-jump .suivi-manque-name {
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+.suivi-manque-jump:hover,
+.suivi-manque-jump:focus-visible {
+  background: color-mix(in srgb, var(--accent) 11%, transparent);
+  outline: none;
+}
+.suivi-manque-jump:hover .suivi-manque-name,
+.suivi-manque-jump:focus-visible .suivi-manque-name {
+  color: color-mix(in srgb, var(--accent) 76%, var(--text));
+}
+.suivi-manque-jump:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 60%, transparent);
+  outline-offset: 2px;
+}
+.suivi-manque-tag {
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 10px;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
+}
+.suivi-manque-pct {
+  margin-inline-start: auto;
+  font-size: 11.5px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 56%, transparent);
+}
+.suivi-manque-pts {
+  font-size: 12.5px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  min-width: 52px;
+  text-align: right;
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+}
+
+.suivi-manque-track {
+  display: block;
+  height: 5px;
+  max-width: 100%;
+  border-radius: 999px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--text) 10%, transparent);
+}
+.suivi-manque-track i {
+  display: block;
+  height: 100%;
+  min-width: 3px;
+  border-radius: 999px;
+  background: repeating-linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--text) 34%, transparent) 0 5px,
+    color-mix(in srgb, var(--text) 18%, transparent) 5px 10px
+  );
+}
+
+.suivi-manque-txt {
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--text) 64%, transparent);
+}
+
+/* ---- un bloc du plan ---- */
+.suivi-block { display: grid; gap: 10px; }
+
+.suivi-block-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.suivi-block-title {
+  margin: 0;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  color: color-mix(in srgb, var(--text) 92%, transparent);
+}
+
+.suivi-block-note { font-size: 11px; }
+
+/* ---- les modules ---- */
+.suivi-mods {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.suivi-mod {
+  position: relative;
+  scroll-margin-top: 88px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 38px minmax(90px, 200px) 46px 52px;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 12px;
+  border-radius: 10px;
+  text-align: left;
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+}
+.suivi-mod:nth-child(even) { background: color-mix(in srgb, var(--text) 2.5%, transparent); }
+/* La ligne atteinte par une ancre — liste du cap, points manquants, chantier
+   du rappel — garde son repère : on voit d'où l'on vient quand on remonte
+   le tableau, même après plusieurs écrans de défilement. */
+.suivi-mod:target {
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 42%, transparent);
+}
+.suivi-mod:target::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 3px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 78%, transparent);
+}
+/* Une ligne déjà descendue depuis cet appareil garde sa teinte, pour que le
+   chemin parcouru se lise d'un coup d'œil quand on remonte le tableau. */
+.suivi-mod[data-vu='yes'] {
+  background: color-mix(in srgb, var(--accent) 5%, transparent);
+}
+.suivi-mod[data-vu='yes']:nth-child(even) {
+  background: color-mix(in srgb, var(--accent) 3.5%, transparent);
+}
+/* Le petit repère posé dans le titre : une épingle à la teinte d'accent, dont
+   le survol dit le jour où la ligne a été atteinte. */
+.suivi-mod-vu {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 13px;
+  height: 13px;
+  margin-inline-start: 5px;
+  vertical-align: -2px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: color-mix(in srgb, var(--accent) 80%, var(--text));
+  cursor: help;
+}
+.suivi-mod-vu i { font-size: 9px; }
+/* Le jour de la dernière archive partie pour le chantier de la ligne, posé à
+   côté de l'épingle de descente : la pièce et le parcours se lisent d'un même
+   regard, sans quitter le poids des modules. */
+.suivi-mod-archive {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-inline-start: 5px;
+  padding: 0 6px;
+  height: 15px;
+  vertical-align: -3px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--text) 18%, transparent);
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.2px;
+  letter-spacing: .02em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 56%, transparent);
+  cursor: help;
+}
+.suivi-mod-archive i { font-size: 9.5px; }
+/* Le repère est le geste : un appui descend jusqu'à la ligne des archives,
+   dans le rappel. Le lien garde le pas de la pastille, et son survol se
+   teinte un peu pour dire qu'il mène quelque part. */
+a.suivi-mod-archive {
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color .16s ease, color .16s ease, background .16s ease;
+}
+a.suivi-mod-archive:hover,
+a.suivi-mod-archive:focus-visible {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 44%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+  outline: none;
+}
+a.suivi-mod-archive:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 2px;
+}
+.suivi-mod-archive-date { font-size: 9.2px; }
+[dir='rtl'] .suivi-mod-archive {
+  letter-spacing: 0;
+  font-size: 10px;
+}
+[dir='rtl'] .suivi-mod-archive-date { font-size: 10px; }
+/* La petite gomme d'une seule ligne atteinte : posée à côté de l'épingle, elle
+   n'oublie que ce module-là. Elle se voit sans crier, et s'arme en accent au
+   premier appui, comme les autres gommes de l'onglet. */
+.suivi-mod-gomme {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  margin-inline-start: 3px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 48%, transparent);
+  cursor: pointer;
+  vertical-align: -2px;
+  transition: color .18s ease, background .18s ease, opacity .18s ease;
+}
+.suivi-mod-gomme i { font-size: 9.5px; }
+.suivi-mod-gomme:hover {
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+.suivi-mod-gomme:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 1px;
+}
+.suivi-mod-gomme[data-arme='yes'] {
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+.suivi-mod-name {
+  font-size: 13px;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--text) 90%, transparent);
+  overflow-wrap: anywhere;
+}
+
+.suivi-mod-weight {
+  font-size: 11.5px;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  color: color-mix(in srgb, var(--text) 54%, transparent);
+}
+
+.suivi-mod-track {
+  display: block;
+  height: 7px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--text) 11%, transparent);
+}
+.suivi-mod-track i {
+  display: block;
+  height: 100%;
+  min-width: 3px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 80%, transparent);
+}
+.suivi-mod[data-plein='yes'] .suivi-mod-track i {
+  background: color-mix(in srgb, var(--text) 62%, transparent);
+}
+
+.suivi-mod-pct {
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  color: color-mix(in srgb, var(--text) 88%, transparent);
+}
+
+.suivi-mod-pts {
+  font-size: 11.5px;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+}
+
+.suivi-total {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px 0;
+  border-top: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+.suivi-total b {
+  font-family: var(--font-heading);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+/* Le compte des lignes jamais descendues, posé juste à côté du total : une
+   note calme, qui ne prend pas la couleur du chiffre. */
+.suivi-total { flex-wrap: wrap; row-gap: 4px; }
+.suivi-total-jamais {
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .04em;
+  text-transform: none;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  cursor: help;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+}
+.suivi-total-jamais[data-vide='yes'] {
+  color: color-mix(in srgb, var(--text) 48%, transparent);
+}
+[dir='rtl'] .suivi-total-jamais { letter-spacing: 0; font-size: 11px; }
+
+/* ---- ce qui reste ---- */
+.suivi-reste {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+.suivi-reste li {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  align-items: start;
+  gap: 8px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 84%, transparent);
+}
+.suivi-reste li i { font-size: 15px; line-height: 1.35; }
+.suivi-reste li[data-fait='yes'] i { color: color-mix(in srgb, var(--accent) 80%, var(--text)); }
+.suivi-reste li[data-fait='no'] i { color: color-mix(in srgb, var(--text) 40%, transparent); }
+.suivi-reste li[data-fait='yes'] span {
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  text-decoration: line-through;
+  text-decoration-color: color-mix(in srgb, var(--text) 26%, transparent);
+}
+
+/* ---- les phases ---- */
+.suivi-phases {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+
+.suivi-phase {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 12px;
+  padding-bottom: 14px;
+  position: relative;
+}
+.suivi-phase:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 14px;
+  top: 30px;
+  bottom: 0;
+  width: 1px;
+  background: color-mix(in srgb, var(--text) 14%, transparent);
+}
+
+.suivi-phase-dot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  font-size: 14px;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+.suivi-phase[data-etat='fait'] .suivi-phase-dot {
+  border-color: color-mix(in srgb, var(--accent) 44%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+.suivi-phase[data-etat='encours'] .suivi-phase-dot {
+  border-color: color-mix(in srgb, var(--accent) 58%, transparent);
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+}
+
+.suivi-phase-body { display: grid; gap: 4px; min-width: 0; text-align: left; }
+
+.suivi-phase-head {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 13px;
+}
+.suivi-phase-n {
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 48%, transparent);
+  white-space: nowrap;
+}
+.suivi-phase-head b { font-weight: 600; color: color-mix(in srgb, var(--text) 92%, transparent); }
+
+.suivi-phase-etat {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 10.5px;
+  white-space: nowrap;
+}
+.suivi-phase-etat[data-etat='fait'] {
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+}
+.suivi-phase-etat[data-etat='encours'] {
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 32%, transparent);
+}
+.suivi-phase-etat[data-etat='avenir'] {
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
+}
+
+.suivi-phase-goal {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+}
+
+.suivi-phase-livs {
+  list-style: none;
+  margin: 3px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 2px;
+}
+.suivi-phase-livs li {
+  display: grid;
+  grid-template-columns: 14px minmax(0, 1fr);
+  align-items: start;
+  gap: 6px;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 72%, transparent);
+}
+.suivi-phase-livs li i { font-size: 12px; line-height: 1.5; }
+.suivi-phase-livs li[data-fait='yes'] i { color: color-mix(in srgb, var(--accent) 76%, var(--text)); }
+.suivi-phase-livs li[data-fait='no'] i { color: color-mix(in srgb, var(--text) 34%, transparent); }
+.suivi-phase-livs li[data-fait='no'] { color: color-mix(in srgb, var(--text) 84%, transparent); }
+
+/* ---- ce qui bloque ---- */
+.suivi-blocages {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.suivi-blocage {
+  display: grid;
+  gap: 4px;
+  padding: 11px 13px;
+  border-radius: 12px;
+  text-align: left;
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+}
+.suivi-blocage[data-etat='ouvert'] {
+  border-color: color-mix(in srgb, var(--accent) 26%, transparent);
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+}
+.suivi-blocage-head {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+  font-size: 12.5px;
+}
+.suivi-blocage-head i { font-size: 14px; }
+.suivi-blocage[data-etat='ouvert'] .suivi-blocage-head i { color: color-mix(in srgb, var(--accent) 86%, var(--text)); }
+.suivi-blocage[data-etat='attente'] .suivi-blocage-head i { color: color-mix(in srgb, var(--text) 56%, transparent); }
+.suivi-blocage[data-etat='leve'] .suivi-blocage-head i { color: color-mix(in srgb, var(--accent) 70%, var(--text)); }
+.suivi-blocage-head b { font-weight: 600; color: color-mix(in srgb, var(--text) 92%, transparent); }
+.suivi-blocage-etat {
+  margin-inline-start: auto;
+  font-size: 10.5px;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+.suivi-blocage-txt {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--text) 70%, transparent);
+}
+
+/* ---- la liste de relecture arabe et anglaise ---- */
+/* Trente écrans, une case par langue : la ligne garde son contenu à gauche et
+   ses deux cases au bout, et les cases descendent sous le texte quand la
+   console se resserre, pour ne jamais pousser la ligne hors du cadre. */
+.suivi-rl-jauges {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 18px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  text-align: left;
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+}
+
+.suivi-rl-jauge { display: grid; gap: 3px; min-width: 0; }
+
+.suivi-rl-jauge-top {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+.suivi-rl-jauge-name {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--text) 86%, transparent);
+}
+.suivi-rl-jauge-num {
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 56%, transparent);
+}
+
+.suivi-rl-track {
+  display: block;
+  height: 5px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--text) 11%, transparent);
+}
+.suivi-rl-track i {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 74%, transparent);
+  transition: width .25s ease;
+}
+
+.suivi-rl-deux {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 10.8px;
+  line-height: 1.45;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 54%, transparent);
+}
+
+/* ---- le vocabulaire figé du §11.2 ---- */
+/* Trois colonnes, trois langues : le français ouvre la ligne, l'arabe porte son
+   propre sens de lecture dans sa cellule, l'anglais ferme. Les mots restent
+   groupés et ne se coupent jamais en deux au milieu d'un terme. */
+.suivi-rl-termes {
+  display: grid;
+  gap: 7px;
+  padding: 10px 12px 12px;
+  border-radius: 10px;
+  text-align: left;
+  background: color-mix(in srgb, var(--text) 3.5%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 9%, transparent);
+}
+
+.suivi-rl-termes-head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.suivi-rl-termes-title {
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  color: color-mix(in srgb, var(--text) 90%, transparent);
+}
+
+.suivi-rl-termes-note { font-size: 10.8px; line-height: 1.45; }
+
+.suivi-rl-termes-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11.5px;
+}
+
+.suivi-rl-termes-table th {
+  padding: 4px 8px;
+  text-align: left;
+  font-family: var(--font-label);
+  font-size: 9.8px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 48%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+}
+
+.suivi-rl-termes-table td {
+  padding: 5px 8px;
+  vertical-align: baseline;
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 7%, transparent);
+}
+
+.suivi-rl-termes-table tr:last-child td { border-bottom: 0; }
+
+.suivi-rl-terme-fr { color: color-mix(in srgb, var(--text) 84%, transparent); }
+
+.suivi-rl-terme-ar {
+  font-size: 13px;
+  line-height: 1.9;
+  color: color-mix(in srgb, var(--text) 90%, transparent);
+}
+
+.suivi-rl-terme-en {
+  color: color-mix(in srgb, var(--text) 70%, transparent);
+  font-variant-numeric: tabular-nums;
+}
+
+.suivi-rl {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.suivi-rl-row {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 10px;
+  padding: 8px 11px;
+  border-radius: 9px;
+  text-align: left;
+  background: color-mix(in srgb, var(--text) 3.5%, transparent);
+}
+.suivi-rl-row:nth-child(even) { background: color-mix(in srgb, var(--text) 2%, transparent); }
+.suivi-rl-row[data-deux='yes'] { background: color-mix(in srgb, var(--accent) 7%, transparent); }
+
+.suivi-rl-n {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 44%, transparent);
+}
+
+.suivi-rl-body { display: grid; gap: 1px; min-width: 0; }
+
+.suivi-rl-page {
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--text) 90%, transparent);
+  overflow-wrap: anywhere;
+}
+
+.suivi-rl-path {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-wrap: wrap;
+  font-size: 10.8px;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+.suivi-rl-addr { font-variant-numeric: tabular-nums; }
+.suivi-rl-sep { color: color-mix(in srgb, var(--text) 30%, transparent); }
+.suivi-rl-src { overflow-wrap: anywhere; }
+
+.suivi-rl-watch {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+
+.suivi-rl-boxes {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.suivi-rl-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px 3px 6px;
+  border-radius: 999px;
+  cursor: pointer;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  background: color-mix(in srgb, var(--surface) 60%, transparent);
+  transition: border-color .16s ease, background .16s ease;
+}
+.suivi-rl-box:hover { border-color: color-mix(in srgb, var(--accent) 40%, transparent); }
+.suivi-rl-box[data-on='yes'] {
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+.suivi-rl-box:focus-within {
+  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 2px;
+}
+
+/* La case elle-même reste atteignable au clavier : elle est le vrai contrôle,
+   la pastille autour d'elle n'est qu'un cadre. */
+.suivi-rl-check {
+  width: 13px;
+  height: 13px;
+  margin: 0;
+  accent-color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  cursor: pointer;
+}
+
+.suivi-rl-etiq {
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .06em;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+.suivi-rl-box[data-on='yes'] .suivi-rl-etiq {
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+}
+
+@media (max-width: 700px) {
+  .suivi-rl-jauges { grid-template-columns: 1fr; }
+  /* Sur un écran étroit, l'en-tête de colonne arabe perd son interlettrage :
+     les capitales latines n'ont pas d'équivalent en arabe, et le mot se
+     couperait au milieu. */
+  .suivi-rl-termes-table th { font-size: 9.2px; padding: 4px 6px; }
+  .suivi-rl-termes-table td { padding: 5px 6px; }
+  .suivi-rl-terme-ar { font-size: 12px; }
+  .suivi-rl-row {
+    grid-template-columns: 22px minmax(0, 1fr);
+    grid-template-areas:
+      'n body'
+      'n boxes';
+    row-gap: 6px;
+  }
+  .suivi-rl-n { grid-area: n; }
+  .suivi-rl-body { grid-area: body; }
+  .suivi-rl-boxes { grid-area: boxes; justify-content: flex-start; }
+}
+
+@media (max-width: 900px) {
+  .suivi-score { grid-template-columns: 1fr; gap: 14px; }
+  .suivi-score-facts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding-inline-start: 0;
+    border-inline-start: 0;
+    padding-top: 12px;
+    border-top: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  }
+  .suivi-score-facts > div { min-width: 0; }
+}
+
+@media (max-width: 700px) {
+  .suivi-score-num { font-size: 42px; }
+  .suivi-mod {
+    grid-template-columns: minmax(0, 1fr) 42px;
+    grid-template-areas:
+      'name pct'
+      'track weight';
+    row-gap: 6px;
+    column-gap: 10px;
+  }
+  .suivi-mod-name { grid-area: name; }
+  .suivi-mod-pct { grid-area: pct; }
+  .suivi-mod-track { grid-area: track; }
+  .suivi-mod-weight { grid-area: weight; text-align: right; font-size: 10.5px; }
+  .suivi-mod-pts { display: none; }
+  .suivi-score-facts { grid-template-columns: 1fr 1fr; }
+  .suivi-phase { grid-template-columns: 24px minmax(0, 1fr); gap: 9px; }
+  .suivi-phase-dot { width: 24px; height: 24px; font-size: 12px; }
+  .suivi-phase:not(:last-child)::before { inset-inline-start: 11px; top: 26px; }
+}
+
+/* ---- la porte de chaque ligne de relecture -----------------------------
+   Le relecteur ne retape plus « /entreprise/… » dans un autre onglet : la
+   ligne porte son adresse. Le lien s'ouvre à part, pour que la liste reste
+   en place derrière lui — on revient cocher la case qu'on vient de lire. */
+.suivi-rl-open-line { margin: 3px 0 0; }
+
+.suivi-rl-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px 3px 7px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  font-size: 10.5px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-decoration: none;
+  cursor: pointer;
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+  transition: background .16s ease, border-color .16s ease;
+}
+.suivi-rl-open i { font-size: 12px; }
+.suivi-rl-open:hover {
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 44%, transparent);
+}
+.suivi-rl-open:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 2px;
+}
+
+/* L'adresse dans le lien : elle dit où l'on va avant d'y aller, et se retire
+   sur un écran étroit — la ligne du dessus la porte déjà. */
+.suivi-rl-open-addr {
+  font-family: var(--font-label);
+  font-size: 9.8px;
+  font-weight: 500;
+  opacity: .68;
+  overflow-wrap: anywhere;
+}
+
+/* La ligne qui n'a pas d'écran à ouvrir — les e-mails des fonctions serveur :
+   une marque, pas un lien mort. */
+.suivi-rl-offsite {
+  margin: 3px 0 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px 3px 7px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
+  font-size: 10.5px;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+.suivi-rl-offsite i { font-size: 12px; }
+
+/* ---- l'égalité des clés entre les trois langues ------------------------
+   Un panneau de relevé : les trois chiffres en tête, puis un fichier par
+   ligne, avec les noms exacts des clés qui manquent. Le nom se copie, c'est
+   la seule forme utilisable dans un fichier de textes. */
+.suivi-par {
+  display: grid;
+  gap: 8px;
+  padding: 10px 12px 12px;
+  border-radius: 10px;
+  text-align: left;
+  background: color-mix(in srgb, var(--text) 3.5%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 9%, transparent);
+}
+
+.suivi-par-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.suivi-par-head-txt { display: grid; gap: 2px; min-width: 0; }
+
+.suivi-par-title {
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  color: color-mix(in srgb, var(--text) 90%, transparent);
+}
+
+.suivi-par-note {
+  margin: 0;
+  max-width: 68ch;
+  font-size: 10.8px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 56%, transparent);
+}
+
+.suivi-par-tally {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.suivi-par-cell {
+  margin: 0;
+  display: grid;
+  gap: 1px;
+  padding: 7px 9px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  border: 1px solid transparent;
+}
+.suivi-par-cell[data-etat='ecart'] {
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 24%, transparent);
+}
+
+.suivi-par-cell b {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 90%, transparent);
+}
+.suivi-par-cell[data-etat='ecart'] b {
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+}
+
+.suivi-par-cell-lang {
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+}
+
+.suivi-par-cell-lbl {
+  font-size: 10px;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+
+.suivi-par-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.suivi-par-row {
+  display: grid;
+  gap: 3px;
+  padding: 8px 10px;
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--text) 3.5%, transparent);
+}
+.suivi-par-row[data-etat='ecart'] {
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+.suivi-par-top {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.suivi-par-file {
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--text) 88%, transparent);
+  overflow-wrap: anywhere;
+}
+
+.suivi-par-counts {
+  margin: 0;
+  margin-inline-start: auto;
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  font-size: 10.2px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 54%, transparent);
+}
+.suivi-par-counts span[data-lang='ar'] { color: color-mix(in srgb, var(--accent) 82%, var(--text)); }
+.suivi-par-counts span[data-lang='en'] { color: color-mix(in srgb, var(--text) 70%, transparent); }
+
+.suivi-par-ok {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10.8px;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--text) 56%, transparent);
+}
+.suivi-par-ok i { font-size: 12px; color: color-mix(in srgb, var(--accent) 70%, var(--text)); }
+
+.suivi-par-cle-line {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.suivi-par-cle-titre {
+  flex-shrink: 0;
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+.suivi-par-cle-titre[data-lang='ar'] {
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+}
+
+.suivi-par-cles {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+/* Le nom de la clé, exactement tel qu'il s'écrit dans le fichier : c'est la
+   seule forme sous laquelle il peut servir. */
+.suivi-par-cle {
+  padding: 1px 5px;
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+  overflow-wrap: anywhere;
+}
+
+.suivi-par-plus {
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+}
+
+.suivi-par-cle-vide {
+  font-size: 10.5px;
+  color: color-mix(in srgb, var(--text) 40%, transparent);
+}
+
+[dir='rtl'] .suivi-par-cle-titre { letter-spacing: 0; text-transform: none; font-size: 11.5px; }
+
+@media (max-width: 520px) {
+  /* L'adresse se retire du lien : la ligne du dessus la porte déjà, et les
+     deux ensemble pousseraient la rangée hors du cadre. */
+  .suivi-rl-open-addr { display: none; }
+}
+
+@media (max-width: 700px) {
+  .suivi-par-tally { grid-template-columns: 1fr; }
+  .suivi-par-counts { margin-inline-start: 0; }
+}
+
+/* ---- les deux resserrements du panneau de relecture ---------------------
+   Le jeton « cochées d'un seul côté » isole les pages où l'arabe et l'anglais
+   ne s'accordent pas ; la pastille de langue, ouverte depuis l'en-tête de la
+   console, garde les pages encore à cocher de ce côté. Les deux se composent,
+   et un second clic sur chacun rend les trente pages. */
+.suivi-rl-filtres {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  text-align: left;
+}
+
+.suivi-rl-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
+  border-radius: 999px;
+  background: none;
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  cursor: pointer;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+
+.suivi-rl-chip i { font-size: 12px; }
+
+/* Le compte des pages en désaccord reste lisible même quand le jeton
+   s'éteint : c'est le chiffre qui dit s'il y a quelque chose à reprendre. */
+.suivi-rl-chip b {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent) 86%, var(--text));
+}
+
+.suivi-rl-chip:hover,
+.suivi-rl-chip:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  color: var(--text);
+}
+
+.suivi-rl-chip[data-on='yes'] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+}
+
+/* La langue de la pastille d'en-tête, reprise telle quelle dans son jeton. */
+.suivi-rl-chip-lang {
+  padding: 1px 5px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+
+.suivi-rl-filtres-count {
+  font-size: 10.8px;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+
+/* La liste resserrée qui ne tient plus rien le dit calmement, au lieu de
+   laisser un cadre vide sous les jauges. */
+.suivi-rl-vide {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 12px 13px;
+  border-radius: 9px;
+  border: 1px dashed color-mix(in srgb, var(--text) 20%, transparent);
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+
+.suivi-rl-vide i {
+  font-size: 15px;
+  color: color-mix(in srgb, var(--accent) 66%, transparent);
+}
+
+/* En arabe, l'interlettrage des capitales latines se retire, comme partout
+   dans la console. */
+[dir='rtl'] .suivi-rl-chip {
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 11.5px;
+}
+
+@media (max-width: 700px) {
+  .suivi-rl-filtres { gap: 5px; }
+  .suivi-rl-filtres-count { font-size: 10.2px; }
+}
+
+/* ---- le relevé revenu du relecteur -------------------------------------
+   Le CSV rempli rentre par une pastille, et la console le relit ici : chaque
+   clé rendue, son fichier, sa langue et la traduction écrite en face. Les
+   clés laissées vides restent nommées, pour qu'aucune ne passe inaperçue. */
+.suivi-par-import-btn {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.suivi-par-import-btn:focus-within {
+  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 2px;
+}
+
+/* Le champ est le vrai contrôle : il reste dans la page et au clavier, mais
+   la pastille autour de lui est le geste visible. */
+.suivi-par-import-input {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  width: 1px;
+  height: 1px;
+  border: 0;
+  padding: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.suivi-par-retour {
+  display: grid;
+  gap: 7px;
+  padding: 9px 11px 11px;
+  border-radius: 9px;
+  border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+}
+
+.suivi-par-retour-head {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+.suivi-par-retour-note {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 0;
+  margin-inline-end: auto;
+  font-size: 11px;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+}
+
+.suivi-par-retour-note i {
+  font-size: 13px;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+}
+
+.suivi-par-retour-file {
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-style: normal;
+  letter-spacing: .04em;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+  overflow-wrap: anywhere;
+}
+
+.suivi-par-retour-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 2px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.suivi-par-retour-row {
+  display: flex;
+  align-items: baseline;
+  gap: 3px 8px;
+  flex-wrap: wrap;
+  min-width: 0;
+  padding: 4px 7px;
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--text) 3%, transparent);
+}
+
+.suivi-par-retour-row:nth-child(even) {
+  background: color-mix(in srgb, var(--text) 1.5%, transparent);
+}
+
+/* ---- l’en-tête de chaque fichier dans le relevé importé ----------------
+   Les lignes se groupent par fichier, et le groupe s’ouvre sur son nom et ce
+   qu’il lui reste à compléter. L’en-tête reste collé en haut de la liste
+   pendant le défilement : on ne perd jamais de quel fichier on lit les clés. */
+.suivi-par-retour-group {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--surface) 84%, var(--accent) 10%);
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+.suivi-par-retour-group-file {
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: color-mix(in srgb, var(--text) 86%, transparent);
+  overflow-wrap: anywhere;
+}
+
+.suivi-par-retour-group-n {
+  margin-inline-start: auto;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-family: var(--font-label);
+  font-size: 9.8px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .03em;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 60%, transparent);
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+  cursor: help;
+}
+
+[dir='rtl'] .suivi-par-retour-group-file,
+[dir='rtl'] .suivi-par-retour-group-n { letter-spacing: 0; }
+
+/* La recherche du relevé importé garde la forme du champ du panneau, sans
+   prendre toute la largeur du cadre. */
+.suivi-par-cherche--retour { max-width: 420px; }
+
+.suivi-par-retour-fic {
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .03em;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+  overflow-wrap: anywhere;
+}
+
+.suivi-par-retour-lang {
+  flex: none;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+
+.suivi-par-retour-val {
+  flex: 1 1 200px;
+  min-width: 0;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 84%, transparent);
+  overflow-wrap: anywhere;
+}
+
+/* La gomme de la ligne : efface une seule traduction déjà recopiée, sans
+   emporter le fichier entier ni les autres lignes du relevé. */
+.suivi-par-retour-gomme {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 44%, transparent);
+  cursor: pointer;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+
+.suivi-par-retour-gomme i {
+  font-size: 13px;
+}
+
+.suivi-par-retour-gomme:hover,
+.suivi-par-retour-gomme:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 34%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+
+/* Le jour qui a servi au rangement, quand le relevé se lit par date de pose :
+   un ordre sans sa date ne se vérifie pas. La ligne reste calme — le repère
+   accompagne la traduction, il ne prend pas sa place. */
+.suivi-par-retour-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-style: normal;
+  letter-spacing: .04em;
+  color: color-mix(in srgb, var(--text) 54%, transparent);
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  cursor: help;
+}
+
+.suivi-par-retour-date i {
+  font-size: 11px;
+  color: color-mix(in srgb, var(--text) 44%, transparent);
+}
+
+[dir='rtl'] .suivi-par-retour-date {
+  letter-spacing: 0;
+  font-family: inherit;
+  font-size: 11px;
+}
+
+/* Une clé encore vide ne disparaît pas : elle se dit, un cran plus bas. */
+.suivi-par-retour-row[data-vide='yes'] .suivi-par-retour-val {
+  font-style: italic;
+  color: color-mix(in srgb, var(--text) 46%, transparent);
+}
+
+/* Le compte des lignes gommées pendant la visite, et le geste qui les
+   rappelle : un effacement trop rapide se rattrape sans réimporter le
+   fichier. La ligne reste calme — c'est un relevé de travail, pas une alerte. */
+.suivi-par-gommees {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.suivi-par-gommees-count {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .05em;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  cursor: help;
+}
+
+.suivi-par-gommees-count i {
+  font-size: 13px;
+  color: color-mix(in srgb, var(--text) 48%, transparent);
+}
+
+[dir='rtl'] .suivi-par-gommees-count {
+  letter-spacing: 0;
+  font-family: inherit;
+  font-size: 11px;
+}
+
+/* Le compte des clés déjà posées depuis, à côté du nom du fichier : le
+   relevé dit d'un coup d'œil ce qui est sorti du travail. */
+.suivi-par-retour-posees {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-style: normal;
+  letter-spacing: .04em;
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+  white-space: nowrap;
+}
+
+/* L’âge de la plus ancienne pose, porté par le jeton « À revoir en premier » :
+   les capitales du jeton se retirent pour que le chiffre et son mot restent
+   lisibles, et le tout garde la taille d’une note, pas d’un bouton. */
+.suivi-par-tri-age {
+  padding: 1px 6px;
+  border-radius: 999px;
+  font-family: var(--font-label);
+  font-size: 9.8px;
+  font-style: normal;
+  letter-spacing: .02em;
+  text-transform: none;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  background: color-mix(in srgb, var(--text) 7%, transparent);
+}
+
+[dir='rtl'] .suivi-par-tri-age { letter-spacing: 0; font-size: 10.8px; }
+
+.suivi-par-retour-posees i {
+  font-size: 11px;
+}
+
+/* Une clé déjà posée sort du travail restant : la ligne s'efface, la clé se
+   barre, et la valeur dit « déjà posée » à la place de la traduction. */
+.suivi-par-retour-row[data-posee='yes'] {
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+}
+
+.suivi-par-retour-row[data-posee='yes'] .suivi-par-cle {
+  text-decoration: line-through;
+  color: color-mix(in srgb, var(--text) 46%, transparent);
+}
+
+.suivi-par-retour-row[data-posee='yes'] .suivi-par-retour-val {
+  font-style: normal;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+}
+
+/* ---- la recherche par nom de fichier ------------------------------
+   Un champ, pas un filtre de plus : le relecteur qui cherche un fichier le
+   nomme (« legal », « offres ») et le relevé se réduit à ce qu'il trouve.
+   Le champ se compose avec le resserrement reçu d'une pastille. */
+.suivi-par-cherche {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  background: color-mix(in srgb, var(--surface) 55%, transparent);
+  transition: border-color .16s ease;
+}
+
+.suivi-par-cherche:focus-within {
+  border-color: color-mix(in srgb, var(--accent) 48%, transparent);
+}
+
+.suivi-par-cherche > i {
+  flex: 0 0 auto;
+  font-size: 13px;
+  color: color-mix(in srgb, var(--text) 46%, transparent);
+}
+
+.suivi-par-cherche-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: 0;
+  background: none;
+  outline: none;
+  font-family: var(--font-label);
+  font-size: 11px;
+  letter-spacing: .02em;
+  color: color-mix(in srgb, var(--text) 88%, transparent);
+}
+
+.suivi-par-cherche-input::placeholder {
+  color: color-mix(in srgb, var(--text) 44%, transparent);
+}
+
+/* Le navigateur garde son bouton d'effacement natif : le nôtre le remplace,
+   pour que le geste ait le même visage dans les trois langues. */
+.suivi-par-cherche-input::-webkit-search-cancel-button { display: none; }
+
+.suivi-par-cherche-clear {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: color-mix(in srgb, var(--text) 44%, transparent);
+  cursor: pointer;
+  transition: color .15s ease;
+}
+.suivi-par-cherche-clear i { font-size: 13px; }
+.suivi-par-cherche-clear:hover,
+.suivi-par-cherche-clear:focus-visible {
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+
+.suivi-par-cherche-n {
+  flex: 0 0 auto;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-family: var(--font-label);
+  font-size: 9.8px;
+  letter-spacing: .04em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  background: color-mix(in srgb, var(--text) 7%, transparent);
+}
+
+[dir='rtl'] .suivi-par-cherche-input,
+[dir='rtl'] .suivi-par-cherche-n { letter-spacing: 0; }
+
+/* Le lien d'un fichier, posé sur sa ligne : une icône seule, pour que le nom
+   du fichier garde la place. Il mène au relevé resserré sur ce fichier-là. */
+.suivi-par-lien {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 44%, transparent);
+  cursor: pointer;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+.suivi-par-lien i { font-size: 12px; }
+.suivi-par-lien:hover,
+.suivi-par-lien:focus-visible,
+.suivi-par-lien.is-ok {
+  border-color: color-mix(in srgb, var(--accent) 34%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+
+/* Le compteur des trois preuves, en tête du suivi : un lien, mais qui se lit
+   comme les autres compteurs de la barre — sans soulignement. */
+.suivi-preuves {
+  text-decoration: none;
+}

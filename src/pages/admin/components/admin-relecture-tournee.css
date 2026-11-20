@@ -1,0 +1,1722 @@
+/* ============ LA TOURNÉE DES DIX PREMIERS ÉCRANS ============ */
+/* Le jeton resserre la liste ; cette ligne dit l'ordre à suivre — l'arabe
+   d'abord, puis les mêmes écrans en anglais — et où en est chaque côté. Elle
+   prend la largeur de la rangée de resserrements, sous les jetons, et garde le
+   pas d'une note : c'est un repère de travail. */
+.suivi-rl-tournee {
+  flex: 1 1 100%;
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 4px 6px;
+  flex-wrap: wrap;
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 30%, transparent);
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  font-size: 10.8px;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 72%, transparent);
+}
+
+.suivi-rl-tournee i {
+  flex: none;
+  font-size: 12px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--accent) 76%, var(--text));
+}
+
+/* Le chiffre d'accord ferme la ligne, au bord droit : c'est celui qui dit que
+   la tournée est finie des deux côtés. */
+.suivi-rl-tournee b {
+  margin-inline-start: auto;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+
+[dir='rtl'] .suivi-rl-tournee { font-size: 11.5px; }
+
+/* La porte de reprise : le premier écran encore non coché de la tournée. Elle
+   se tient à côté du geste de cochage, mais d'un trait plus discret — on y
+   entre, on n'y coche rien. */
+.suivi-rl-resume {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--text) 26%, transparent);
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.suivi-rl-resume i {
+  font-size: 12px;
+  line-height: 1;
+  color: color-mix(in srgb, var(--accent) 78%, var(--text));
+}
+
+.suivi-rl-resume:hover {
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  color: color-mix(in srgb, var(--text) 92%, transparent);
+}
+
+.suivi-rl-resume:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+[dir='rtl'] .suivi-rl-resume { letter-spacing: 0; font-size: 11px; }
+
+/* Le geste qui coche les dix écrans du côté où la tournée se tient. Il prend
+   la teinte d'accent et le trait plein d'un bouton tenu, pour se distinguer
+   du repère de lecture posé à sa gauche. */
+.suivi-rl-mark {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 44%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.suivi-rl-mark i { font-size: 12px; line-height: 1; }
+
+.suivi-rl-mark:hover {
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 62%, transparent);
+}
+
+.suivi-rl-mark:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Une fois les deux côtés faits, le geste cède la place à une simple marque :
+   il n'y a plus rien à cocher, et le dire vaut mieux qu'un bouton inerte. */
+.suivi-rl-marked {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+}
+
+.suivi-rl-marked i { font-size: 12px; line-height: 1; }
+
+[dir='rtl'] .suivi-rl-marked,
+[dir='rtl'] .suivi-rl-mark { letter-spacing: 0; font-size: 11px; }
+
+/* ============ LA FRISE DES TRENTE ÉCRANS ============ */
+/* Une marque par écran, rangée en tranches — les deux tournées, puis le reste
+   du plan. Elle prend la largeur de la rangée de resserrements, sous les
+   jetons, et se lit sans compter les cases de la liste. */
+.suivi-rl-frise {
+  flex: 1 1 100%;
+  display: grid;
+  gap: 7px;
+  padding: 9px 11px 10px;
+  border-radius: 10px;
+  text-align: left;
+  background: color-mix(in srgb, var(--text) 3.5%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
+}
+
+.suivi-rl-frise-head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.suivi-rl-frise-title {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: color-mix(in srgb, var(--text) 90%, transparent);
+}
+
+.suivi-rl-frise-title i {
+  font-size: 13px;
+  line-height: 1;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+}
+
+.suivi-rl-frise-note { font-size: 10.4px; line-height: 1.45; }
+
+/* Ce que le carnet des gestes retient : combien, et depuis quel jour le plus
+   ancien. Il se lit avant la porte d'oubli, pour savoir ce qu'elle emporterait. */
+.suivi-rl-frise-book {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-label);
+  font-size: 9.4px;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+
+.suivi-rl-frise-book i {
+  font-size: 11px;
+  line-height: 1;
+  color: color-mix(in srgb, var(--text) 44%, transparent);
+}
+
+[dir='rtl'] .suivi-rl-frise-book {
+  letter-spacing: 0;
+  font-size: 10.4px;
+}
+
+/* La porte d'oubli du carnet des gestes : au bout de la tête de frise, elle
+   se tient discrète tant qu'on ne la cherche pas, et demande un second clic
+   avant d'effacer — on ne repart pas d'un carnet vierge par mégarde. */
+.suivi-rl-frise-forget {
+  flex: none;
+  margin-inline-start: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--text) 24%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 9.4px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color .2s ease, background .2s ease, color .2s ease;
+}
+
+.suivi-rl-frise-forget i { font-size: 11px; line-height: 1; }
+
+.suivi-rl-frise-forget:hover,
+.suivi-rl-frise-forget:focus-visible {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 48%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+}
+
+.suivi-rl-frise-forget:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Le second clic : la porte prend l'alerte, le temps de confirmer. */
+.suivi-rl-frise-forget[data-on='yes'] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 62%, transparent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: color-mix(in srgb, var(--accent) 94%, var(--text));
+}
+
+[dir='rtl'] .suivi-rl-frise-forget { letter-spacing: 0; text-transform: none; font-size: 10.4px; }
+
+/* La clé des trois états : trois pastilles, jamais une couleur sans mot. */
+.suivi-rl-frise-key {
+  display: flex;
+  align-items: center;
+  gap: 4px 12px;
+  flex-wrap: wrap;
+  font-family: var(--font-label);
+  font-size: 9.6px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 54%, transparent);
+}
+
+.suivi-rl-frise-key span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.suivi-rl-frise-key i {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 3px;
+  border: 1px solid color-mix(in srgb, var(--text) 26%, transparent);
+  background: transparent;
+}
+
+.suivi-rl-frise-key i[data-etat='un'] {
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.suivi-rl-frise-key i[data-etat='deux'] {
+  border-color: color-mix(in srgb, var(--accent) 70%, transparent);
+  background: color-mix(in srgb, var(--accent) 72%, transparent);
+}
+
+.suivi-rl-frise-bandes { display: grid; gap: 7px; }
+
+/* Le dernier geste de tranche, rappelé sous la clé : sa date, sa tranche et ce
+   qu'il a fait, puis la porte qui rouvre cette tournée. Une ligne discrète —
+   c'est un repère de reprise, pas un compte à tenir. */
+.suivi-rl-frise-last {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px 8px;
+  flex-wrap: wrap;
+  padding: 4px 7px;
+  border-radius: 7px;
+  border: 1px dashed color-mix(in srgb, var(--text) 18%, transparent);
+  background: color-mix(in srgb, var(--text) 3%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.4px;
+  line-height: 1.45;
+  letter-spacing: 0.05em;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+
+.suivi-rl-frise-last > i {
+  flex: none;
+  font-size: 12px;
+  line-height: 1;
+  color: color-mix(in srgb, var(--text) 46%, transparent);
+}
+
+.suivi-rl-frise-last > span { flex: 1 1 auto; min-width: 0; }
+
+/* Un geste qui a fermé prend la teinte d'accent ; un geste qui a rouvert reste
+   discret, puisqu'il retire au lieu d'ajouter. */
+.suivi-rl-frise-last[data-sens='ferme'] > i {
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+}
+
+.suivi-rl-frise-last[data-sens='ferme'] {
+  border-color: color-mix(in srgb, var(--accent) 32%, transparent);
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+  color: color-mix(in srgb, var(--text) 74%, transparent);
+}
+
+/* La porte « Retrouver » : elle ouvre le resserrement sur la tournée du geste,
+   pour retomber sur ce qu'il a fermé d'un trait. */
+.suivi-rl-frise-last-go {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+  font-family: var(--font-label);
+  font-size: 9.2px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.suivi-rl-frise-last-go i { font-size: 11px; line-height: 1; }
+
+.suivi-rl-frise-last-go:hover {
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+}
+
+.suivi-rl-frise-last-go:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* La porte « Carte datée » : plus discrète que « Retrouver », puisqu'elle
+   reste dans la frise au lieu de resserrer la liste. */
+.suivi-rl-frise-last-go[data-variant='carte'] {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--text) 26%, transparent);
+  color: color-mix(in srgb, var(--text) 76%, transparent);
+}
+
+.suivi-rl-frise-last-go[data-variant='carte']:hover {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+}
+
+[dir='rtl'] .suivi-rl-frise-last,
+[dir='rtl'] .suivi-rl-frise-last-go {
+  letter-spacing: 0;
+  font-size: 10.4px;
+}
+
+/* Les tranches encore ouvertes, comptées par le sens de leur dernier geste :
+   une note de la tête, à côté des trois pastilles, pour savoir ce qui reste. */
+.suivi-rl-frise-ouvertes {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-label);
+  font-size: 9.4px;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  color: color-mix(in srgb, var(--accent) 74%, var(--text));
+}
+
+.suivi-rl-frise-ouvertes i {
+  font-size: 11px;
+  line-height: 1;
+  color: color-mix(in srgb, var(--accent) 68%, var(--text));
+}
+
+[dir='rtl'] .suivi-rl-frise-ouvertes {
+  letter-spacing: 0;
+  font-size: 10.4px;
+}
+
+/* Ce que ces tranches gardent encore ouvert : un compte d'écrans, à côté de la
+   porte qui les emporte. Il prend le chiffre en tête, puisqu'il se lit d'un
+   coup d'œil avant le fichier. */
+.suivi-rl-frise-ouverts {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-label);
+  font-size: 9.4px;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent) 72%, var(--text));
+}
+
+.suivi-rl-frise-ouverts i {
+  font-size: 10px;
+  line-height: 1;
+  color: color-mix(in srgb, var(--accent) 60%, var(--text));
+}
+
+[dir='rtl'] .suivi-rl-frise-ouverts {
+  letter-spacing: 0;
+  font-size: 10.4px;
+}
+
+/* La porte de réouverture des tranches ouvertes : elle retire des cases
+   cochées, aussi se tient-elle d'un trait discret et demande-t-elle un second
+   clic — le premier change son mot et prend l'alerte. */
+.suivi-rl-frise-reopen {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--text) 24%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 64%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 9.4px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.suivi-rl-frise-reopen i {
+  font-size: 11px;
+  line-height: 1;
+}
+
+.suivi-rl-frise-reopen:hover,
+.suivi-rl-frise-reopen:focus-visible {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+}
+
+.suivi-rl-frise-reopen:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Le second clic : la porte prend l'alerte, le temps de confirmer. */
+.suivi-rl-frise-reopen[data-on='yes'] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 62%, transparent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: color-mix(in srgb, var(--accent) 94%, var(--text));
+}
+
+/* Le geste est passé : la porte répond un instant, puis reprend son mot. */
+.suivi-rl-frise-reopen[data-fait='yes'] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 48%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+}
+
+[dir='rtl'] .suivi-rl-frise-reopen {
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 10.4px;
+}
+
+/* La porte de réouverture et ce qu'elle retirerait : le compte se lit sous la
+   porte, une fois armée, avant que le second clic ne tombe. */
+.suivi-rl-frise-reopen-bloc {
+  flex: none;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.suivi-rl-frise-reopen-cases {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding-inline-start: 4px;
+  font-family: var(--font-label, inherit);
+  font-size: 8.8px;
+  line-height: 1.3;
+  letter-spacing: 0.03em;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent) 80%, var(--text));
+}
+
+.suivi-rl-frise-reopen-cases i {
+  font-size: 10px;
+  line-height: 1;
+}
+
+[dir='rtl'] .suivi-rl-frise-reopen-cases {
+  letter-spacing: 0;
+  font-size: 9.8px;
+}
+
+/* Le sens du dernier geste de chaque tranche encore ouverte : une pastille par
+   tranche, nommée et lue par son sens — les deux chiffres de la tête disent
+   combien, ces pastilles disent lesquelles et de quel côté elles attendent. */
+.suivi-rl-frise-ouvertes-sens {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex-wrap: wrap;
+}
+
+.suivi-rl-frise-sens-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 3px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 8.8px;
+  letter-spacing: 0.03em;
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+  white-space: nowrap;
+}
+
+.suivi-rl-frise-sens-chip b {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 82%, transparent);
+}
+
+.suivi-rl-frise-sens-chip[data-sens='ferme'] {
+  border-color: color-mix(in srgb, var(--accent) 34%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  color: color-mix(in srgb, var(--accent) 86%, var(--text));
+}
+
+.suivi-rl-frise-sens-chip[data-sens='rouvert'] {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+  color: color-mix(in srgb, var(--accent) 74%, var(--text));
+}
+
+.suivi-rl-frise-sens-chip[data-sens='aucun'] {
+  border-style: dotted;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+
+/* La pastille est une porte : elle ouvre la carte datée de sa tranche, déjà
+   rangée sur son sens. Le curseur et le soulignement au survol le disent avant
+   le clic, sans ajouter de mot à la ligne. */
+button.suivi-rl-frise-sens-chip {
+  background: transparent;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease;
+}
+
+button.suivi-rl-frise-sens-chip:hover {
+  border-color: color-mix(in srgb, var(--accent) 58%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+}
+
+button.suivi-rl-frise-sens-chip:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 64%, transparent);
+  outline-offset: 1px;
+}
+
+button.suivi-rl-frise-sens-chip[data-carte='yes'] {
+  border-color: color-mix(in srgb, var(--accent) 62%, transparent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+}
+
+[dir='rtl'] .suivi-rl-frise-sens-chip {
+  letter-spacing: 0;
+  font-size: 9.8px;
+}
+
+.suivi-rl-frise-bande {
+  display: grid;
+  gap: 3px;
+  transition: opacity 0.2s ease;
+}
+
+/* Une tournée ouverte efface les autres tranches, sans les retirer : la frise
+   garde ses trente marques sous les yeux. */
+.suivi-rl-frise-bande[data-veille='yes'] { opacity: 0.4; }
+
+.suivi-rl-frise-legende {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px 8px;
+  font-family: var(--font-label);
+  font-size: 9.4px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 46%, transparent);
+}
+
+.suivi-rl-frise-legende > span { flex: 1 1 auto; min-width: 0; }
+
+.suivi-rl-frise-legende b {
+  flex: none;
+  margin-inline-start: auto;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent) 80%, var(--text));
+}
+
+/* La date du dernier geste de la tranche elle-même : chaque tranche nomme le
+   sien, au lieu de laisser toute la frise dépendre du dernier geste global.
+   Elle prend la teinte d'accent quand le geste a fermé, et reste grise quand
+   il a rouvert — il retire au lieu d'ajouter. */
+.suivi-rl-frise-bande-last {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-inline-start: 2px;
+  padding: 1px 6px;
+  appearance: none;
+  font-family: var(--font-label);
+  font-size: inherit;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  font-style: normal;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .02em;
+  text-transform: none;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 60%, transparent);
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+/* La carte est ouverte : la date reste allumée, pour qu'on sache d'où elle
+   vient et où la refermer. */
+.suivi-rl-frise-bande-last[data-carte='yes'] {
+  border-color: color-mix(in srgb, var(--accent) 56%, transparent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+}
+
+.suivi-rl-frise-bande-last:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.suivi-rl-frise-bande-last i { font-size: 10.5px; line-height: 1; }
+
+/* Le délai écoulé depuis le geste, à côté de sa date : un filet le sépare du
+   mot, et il reste plus discret que la date — c'est un âge, pas un événement. */
+.suivi-rl-frise-bande-last-delai {
+  padding-inline-start: 5px;
+  margin-inline-start: 1px;
+  border-inline-start: 1px solid color-mix(in srgb, currentColor 34%, transparent);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  opacity: 0.76;
+}
+
+/* Ce que la réouverture a défait : le temps que la fermeture précédente a tenu,
+   lu à côté de la date de la tranche, plus discret qu'elle. */
+.suivi-rl-frise-bande-reouvert {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 30%, transparent);
+  background: color-mix(in srgb, var(--accent) 4%, transparent);
+  font-family: var(--font-label);
+  font-size: inherit;
+  font-style: normal;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent) 72%, var(--text));
+}
+
+.suivi-rl-frise-bande-reouvert i {
+  flex: none;
+  font-size: 10.5px;
+  line-height: 1;
+  opacity: 0.82;
+}
+
+[dir='rtl'] .suivi-rl-frise-bande-reouvert { font-size: 10.4px; }
+
+.suivi-rl-frise-bande-last[data-sens='ferme'] {
+  border-color: color-mix(in srgb, var(--accent) 38%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  color: color-mix(in srgb, var(--accent) 86%, var(--text));
+}
+
+[dir='rtl'] .suivi-rl-frise-bande-last { font-size: 10.4px; }
+
+/* ---- la carte des gestes d'une tranche ---- */
+/* Ouverte par le clic sur la date, elle déplie les clics de cette tranche-là,
+   datés, avec le compte atteint de chacun — le survol d'un chiffre ne suffisait
+   pas à lire plusieurs gestes d'affilée. */
+.suivi-rl-frise-gestes {
+  display: grid;
+  gap: 3px;
+  margin: 3px 0 1px;
+  padding: 6px 8px 7px;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
+  background: color-mix(in srgb, var(--accent) 5%, transparent);
+  animation: suiviRlCarte 0.24s ease both;
+}
+
+.suivi-rl-frise-gestes-head {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-label);
+  font-size: 9.2px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+
+.suivi-rl-frise-gestes-head i { font-size: 11px; line-height: 1; }
+
+.suivi-rl-frise-gestes-head b {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.suivi-rl-frise-gestes-close {
+  flex: none;
+  margin-inline-start: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  appearance: none;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.suivi-rl-frise-gestes-close:hover,
+.suivi-rl-frise-gestes-close:focus-visible {
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+  color: color-mix(in srgb, var(--text) 88%, transparent);
+}
+
+.suivi-rl-frise-gestes ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.suivi-rl-frise-gestes li {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 2px 7px;
+  padding: 2px 0;
+  font-family: var(--font-label);
+  font-size: 9.8px;
+  line-height: 1.45;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 68%, transparent);
+  border-top: 1px dashed color-mix(in srgb, var(--text) 10%, transparent);
+}
+
+.suivi-rl-frise-gestes li:first-child { border-top: none; }
+
+.suivi-rl-frise-gestes li i {
+  flex: none;
+  font-size: 11px;
+  line-height: 1;
+  color: color-mix(in srgb, var(--text) 44%, transparent);
+}
+
+.suivi-rl-frise-gestes li[data-sens='ferme'] i {
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+}
+
+.suivi-rl-frise-geste-date {
+  font-weight: 600;
+  color: color-mix(in srgb, var(--text) 84%, transparent);
+  white-space: nowrap;
+}
+
+.suivi-rl-frise-geste-sens { white-space: nowrap; }
+
+.suivi-rl-frise-geste-n {
+  white-space: normal;
+  min-width: 0;
+}
+
+/* Le compte atteint ferme la ligne, au bord droit : c'est lui qui dit où le
+   geste a laissé la relecture, et non seulement ce qu'il a remué. */
+.suivi-rl-frise-geste-apres {
+  margin-inline-start: auto;
+  white-space: nowrap;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+}
+
+/* Les autres tranches emportées par le même clic : la ligne passe sous le
+   geste, en pleine largeur, pour ne pas se lire comme un écran de plus. */
+.suivi-rl-frise-geste-autres {
+  flex-basis: 100%;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  padding-inline-start: 18px;
+  font-style: italic;
+  color: color-mix(in srgb, var(--accent) 76%, var(--text));
+}
+
+.suivi-rl-frise-geste-autres i {
+  flex: none;
+  font-size: 10px;
+  line-height: 1;
+  color: color-mix(in srgb, var(--accent) 62%, var(--text));
+}
+
+/* Le total d'un même clic, tranche par tranche : la somme en tête et le
+   détail qui suit — la carte dit l'étendue du geste en une ligne. */
+.suivi-rl-frise-geste-clic {
+  flex-basis: 100%;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  padding-inline-start: 18px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+}
+
+.suivi-rl-frise-geste-clic i {
+  flex: none;
+  font-size: 10px;
+  line-height: 1;
+  opacity: 0.76;
+}
+
+/* La porte d'un seul clic, dans la carte datée : une pastille discrète posée
+   au bout de la ligne du geste, qui n'emporte que ce clic-là. */
+.suivi-rl-frise-geste-copier {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-inline-start: auto;
+  padding: 1px 6px;
+  border-radius: 999px;
+  border: 1px dotted color-mix(in srgb, var(--text) 24%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 8.6px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.suivi-rl-frise-geste-copier i {
+  flex: none;
+  font-size: 10px;
+  line-height: 1;
+}
+
+.suivi-rl-frise-geste-copier:hover {
+  border-color: color-mix(in srgb, var(--text) 46%, transparent);
+  color: color-mix(in srgb, var(--text) 88%, transparent);
+}
+
+.suivi-rl-frise-geste-copier[data-fait='yes'] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  color: color-mix(in srgb, var(--accent) 86%, var(--text));
+}
+
+[dir='rtl'] .suivi-rl-frise-geste-copier {
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 10px;
+}
+
+/* La tranche encore ouverte la plus ancienne du carnet : une pastille mate à
+   côté du dernier geste, qui dit ce qui attend depuis le plus longtemps. */
+.suivi-rl-frise-ancienne {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 8.8px;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+
+.suivi-rl-frise-ancienne i {
+  flex: none;
+  font-size: 10px;
+  line-height: 1;
+  opacity: 0.8;
+}
+
+.suivi-rl-frise-ancienne-delai {
+  padding-inline-start: 5px;
+  border-inline-start: 1px dotted color-mix(in srgb, var(--text) 30%, transparent);
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+}
+
+[dir='rtl'] .suivi-rl-frise-ancienne {
+  letter-spacing: 0;
+  font-size: 9.8px;
+}
+
+[dir='rtl'] .suivi-rl-frise-geste-clic { font-size: 10.8px; }
+
+[dir='rtl'] .suivi-rl-frise-gestes li { font-size: 10.8px; }
+
+@keyframes suiviRlCarte {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---- la réponse à l'oubli, sous la frise ---- */
+.suivi-rl-frise-reset {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 7px;
+  border-radius: 7px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 34%, transparent);
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.4px;
+  letter-spacing: 0.05em;
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+  animation: suiviRlGeste 0.3s ease both;
+}
+
+.suivi-rl-frise-reset i {
+  flex: none;
+  font-size: 11px;
+  line-height: 1;
+}
+
+[dir='rtl'] .suivi-rl-frise-reset {
+  letter-spacing: 0;
+  font-size: 10.4px;
+}
+
+/* Le geste groupé d'une tranche : fermer d'un coup les écrans encore ouverts,
+   ou rouvrir les dix. Il prend le trait plein quand il ferme, et le trait
+   discret quand la tranche est faite — le clic n'a plus rien à cocher. */
+.suivi-rl-frise-bulk {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+  font-family: var(--font-label);
+  font-size: 9.4px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.suivi-rl-frise-bulk i { font-size: 11px; line-height: 1; }
+
+.suivi-rl-frise-bulk:hover {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+}
+
+.suivi-rl-frise-bulk:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.suivi-rl-frise-bulk[data-fait='yes'] {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--text) 24%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+
+[dir='rtl'] .suivi-rl-frise-bulk { letter-spacing: 0; font-size: 10.4px; }
+
+.suivi-rl-frise-cells {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  gap: 3px;
+}
+
+.suivi-rl-frise-cells li { min-width: 0; }
+
+.suivi-rl-frise-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 20px;
+  padding: 0;
+  appearance: none;
+  border-radius: 4px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  background: color-mix(in srgb, var(--surface) 55%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.2px;
+  font-variant-numeric: tabular-nums;
+  text-decoration: none;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  cursor: pointer;
+  transition: background 0.16s ease, border-color 0.16s ease, color 0.16s ease;
+}
+
+/* Cohé d'un seul côté : la marque se teinte sans se remplir — il reste un
+   passage à faire. */
+.suivi-rl-frise-cell[data-etat='un'] {
+  border-color: color-mix(in srgb, var(--accent) 44%, transparent);
+  background: color-mix(in srgb, var(--accent) 24%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+}
+
+/* Fermé des deux côtés : la marque est pleine, et son rang repasse sur le
+   fond de la page. */
+.suivi-rl-frise-cell[data-etat='deux'] {
+  border-color: color-mix(in srgb, var(--accent) 76%, transparent);
+  background: color-mix(in srgb, var(--accent) 78%, transparent);
+  color: color-mix(in srgb, var(--bg) 88%, transparent);
+  font-weight: 700;
+}
+
+.suivi-rl-frise-cell:hover,
+.suivi-rl-frise-cell:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 66%, transparent);
+  color: color-mix(in srgb, var(--text) 94%, transparent);
+}
+
+.suivi-rl-frise-cell[data-etat='deux']:hover,
+.suivi-rl-frise-cell[data-etat='deux']:focus-visible {
+  color: color-mix(in srgb, var(--bg) 88%, transparent);
+  background: color-mix(in srgb, var(--accent) 92%, transparent);
+}
+
+.suivi-rl-frise-cell:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+/* Une marque déjà fermée s'ouvre au clic : le curseur l'annonce, et le survol
+   laisse voir le geste sans changer son état. */
+.suivi-rl-frise-cell[data-etat='deux']:active,
+.suivi-rl-frise-cell:active {
+  transform: translateY(1px);
+}
+
+[dir='rtl'] .suivi-rl-frise-key,
+[dir='rtl'] .suivi-rl-frise-legende { letter-spacing: 0; font-size: 10.4px; }
+
+/* Ce que le geste de tranche vient de faire : un compte bref, posé sous les
+   marques de la tranche cliquée, qui s'efface de lui-même. Il apparaît un
+   instant après le clic — le temps que les marques changent de teinte —, et
+   ne déplace rien : la note reste sur sa propre ligne. */
+.suivi-rl-frise-flash {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: -1px 0 1px;
+  font-family: var(--font-label);
+  font-size: 9.4px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+  animation: suiviRlGeste 0.34s ease 0.12s both;
+}
+
+.suivi-rl-frise-flash i {
+  flex: none;
+  font-size: 12px;
+  line-height: 1;
+}
+
+/* Une tranche rouverte prend le ton discret : elle retire, elle n'ajoute pas. */
+.suivi-rl-frise-flash[data-sens='rouvert'] {
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+}
+
+[dir='rtl'] .suivi-rl-frise-flash {
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 10.6px;
+}
+
+@keyframes suiviRlGeste {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .suivi-rl-frise-flash { animation: none; }
+  .suivi-rl-frise-gestes,
+  .suivi-rl-frise-reset { animation: none; }
+}
+
+@media (max-width: 640px) {
+  .suivi-rl-frise-cells { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .suivi-rl-frise-note { font-size: 10px; }
+}
+
+/* ============ LA PORTE « ÉCRAN SUIVANT » ============ */
+/* Elle se pose à côté de la porte d'ouverture, sur la même ligne, et n'ouvre
+   pas la même chose : celle-ci avance d'un cran dans la liste, pour enchaîner
+   la relecture sans revenir chercher le rang suivant. */
+.suivi-rl-open-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+}
+
+.suivi-rl-next {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px 3px 9px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--text) 20%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.suivi-rl-next i {
+  font-size: 11px;
+  line-height: 1;
+}
+
+/* L'écran est coché : la porte prend la teinte d'accent et un trait plein —
+   c'est maintenant qu'on avance. */
+.suivi-rl-next[data-avance='yes'] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+}
+
+.suivi-rl-next:hover {
+  border-color: color-mix(in srgb, var(--accent) 56%, transparent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: color-mix(in srgb, var(--text) 92%, transparent);
+}
+
+.suivi-rl-next:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Le reste du passage, dans la porte elle-même : « encore 4 » dit l'effort
+   qu'il reste après cet écran, sans ouvrir la liste. */
+.suivi-rl-next-rest {
+  padding-inline-start: 5px;
+  margin-inline-start: 1px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  font-variant-numeric: tabular-nums;
+  opacity: 0.82;
+}
+
+.suivi-rl-next[data-avance='yes'] .suivi-rl-next-rest {
+  border-inline-start-color: color-mix(in srgb, var(--accent) 38%, transparent);
+  opacity: 0.92;
+}
+
+[dir='rtl'] .suivi-rl-next { letter-spacing: 0; font-size: 11px; }
+[dir='rtl'] .suivi-rl-next i { transform: scaleX(-1); }
+
+/* ---- la porte du CSV d'une tranche ---- */
+/* Elle n'emporte que la tranche affichée : ses écrans, leurs cases et ses
+   gestes datés. Elle se tient à côté de la porte d'oubli, au bout de la tête,
+   et ne paraît que lorsqu'une tournée resserre la frise. */
+.suivi-rl-frise-slice {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 34%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+  font-family: var(--font-label, inherit);
+  font-size: 9.4px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.suivi-rl-frise-slice i { font-size: 11px; line-height: 1; }
+
+.suivi-rl-frise-slice:hover,
+.suivi-rl-frise-slice:focus-visible {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 56%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: color-mix(in srgb, var(--accent) 94%, var(--text));
+}
+
+.suivi-rl-frise-slice:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Le fichier est parti : la porte le dit un instant, puis reprend son mot. */
+.suivi-rl-frise-slice[data-fait='yes'] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+[dir='rtl'] .suivi-rl-frise-slice {
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 10.4px;
+}
+
+/* La porte des tranches ouvertes se distingue de celle d'une seule tranche :
+   elle emporte plusieurs tranches à la fois, et prend pour cela un trait plein
+   plus neutre, l'accent restant réservé à la tranche affichée. */
+.suivi-rl-frise-slice[data-variant='ouvertes'] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--text) 20%, transparent);
+  color: color-mix(in srgb, var(--text) 72%, transparent);
+}
+
+/* La porte qui copie les rangs restants : même famille que les portes de la
+   feuille, mais sans accent — elle ne sort aucun fichier, elle prépare un
+   message. */
+.suivi-rl-frise-copy {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--text) 26%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 9.4px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.suivi-rl-frise-copy i {
+  font-size: 11px;
+  line-height: 1;
+}
+
+.suivi-rl-frise-copy:hover {
+  border-color: color-mix(in srgb, var(--text) 44%, transparent);
+  color: color-mix(in srgb, var(--text) 88%, transparent);
+}
+
+.suivi-rl-frise-copy[data-fait='yes'] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  color: color-mix(in srgb, var(--accent) 86%, var(--text));
+}
+
+/* La porte du tableau : même famille que celle des lignes courtes, mais un
+   trait pointillé plus serré et une teinte plus mate disent qu’elle rend des
+   colonnes, pas une phrase. */
+.suivi-rl-frise-copy[data-variant='tableau'] {
+  border-style: dotted;
+  border-color: color-mix(in srgb, var(--accent) 34%, transparent);
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+
+.suivi-rl-frise-copy[data-variant='tableau']:hover {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  color: color-mix(in srgb, var(--text) 88%, transparent);
+}
+
+/* La porte du tableau daté : même famille que le tableau simple, mais un trait
+   plein et une teinte plus mate disent qu'elle ajoute la colonne des dates. */
+.suivi-rl-frise-copy[data-variant='tableau-date'] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+
+.suivi-rl-frise-copy[data-variant='tableau-date']:hover {
+  border-color: color-mix(in srgb, var(--accent) 56%, transparent);
+  color: color-mix(in srgb, var(--text) 90%, transparent);
+}
+
+/* La porte de la tranche la plus ancienne : elle ne prépare pas toute la
+   liste, mais une seule tranche — un pointillé plus espacé et une teinte plus
+   mate le disent, sans lui donner l'accent des portes de la feuille. */
+.suivi-rl-frise-copy[data-variant='ancienne'] {
+  border-style: dotted;
+  border-color: color-mix(in srgb, var(--accent) 26%, transparent);
+  color: color-mix(in srgb, var(--text) 60%, transparent);
+}
+
+.suivi-rl-frise-copy[data-variant='ancienne']:hover {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+  color: color-mix(in srgb, var(--text) 88%, transparent);
+}
+
+/* La porte symétrique : même famille, mais une teinte qui regarde vers le
+   présent — la tranche qui vient de bouger, et non celle qui attend. */
+.suivi-rl-frise-copy[data-variant='recente'] {
+  border-style: dotted;
+  border-color: color-mix(in srgb, var(--accent) 34%, transparent);
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+
+.suivi-rl-frise-copy[data-variant='recente']:hover {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 58%, transparent);
+  color: color-mix(in srgb, var(--text) 90%, transparent);
+}
+
+/* La porte des deux extrêmes : elle tient les deux bords du carnet à la fois,
+   le retard et le mouvement — un tracé en tirets et l'accent franc le disent,
+   sans prendre la couleur pleine des portes de la feuille. */
+.suivi-rl-frise-copy[data-variant='extremes'] {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--accent) 48%, transparent);
+  color: color-mix(in srgb, var(--text) 76%, transparent);
+}
+
+.suivi-rl-frise-copy[data-variant='extremes']:hover {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 68%, transparent);
+  color: color-mix(in srgb, var(--text) 94%, transparent);
+}
+
+[dir='rtl'] .suivi-rl-frise-copy {
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 10.4px;
+}
+
+/* Ce que le dernier clic a emporté : combien de tranches une réouverture
+   groupée a remuées d'un même geste, lu à côté de la ligne du dernier geste. */
+.suivi-rl-frise-last-tranches {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 40%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 8.8px;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+}
+
+.suivi-rl-frise-last-tranches i {
+  font-size: 10px;
+  line-height: 1;
+}
+
+/* Depuis quand ce clic a eu lieu : le délai se détache du nombre de tranches
+   par un trait, pour que les deux lectures ne se confondent pas. */
+.suivi-rl-frise-last-tranches-delai {
+  padding-inline-start: 5px;
+  border-inline-start: 1px dotted color-mix(in srgb, var(--accent) 40%, transparent);
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent) 68%, var(--text));
+}
+
+[dir='rtl'] .suivi-rl-frise-last-tranches {
+  letter-spacing: 0;
+  font-size: 9.8px;
+}
+
+/* ---- le tri par sens, dans la carte des gestes ---- */
+/* Trois pastilles, chacune avec son compte : la carte range les gestes d'une
+   tranche agitée par ce qu'ils ont fait, au lieu de suivre l'ordre des clics. */
+.suivi-rl-frise-gestes-tri {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-inline-start: 4px;
+}
+
+.suivi-rl-frise-gestes-sens {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 6px;
+  appearance: none;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  font-family: var(--font-label);
+  font-size: 8.8px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.suivi-rl-frise-gestes-sens b {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.suivi-rl-frise-gestes-sens:hover,
+.suivi-rl-frise-gestes-sens:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+
+.suivi-rl-frise-gestes-sens:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* La pastille tenue : la carte ne montre que ce sens-là. */
+.suivi-rl-frise-gestes-sens[data-on='yes'] {
+  border-color: color-mix(in srgb, var(--accent) 58%, transparent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: color-mix(in srgb, var(--accent) 94%, var(--text));
+}
+
+[dir='rtl'] .suivi-rl-frise-gestes-sens {
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 10px;
+}
+
+/* Un sens absent de la tranche : la carte le dit, au lieu de rester vide. */
+.suivi-rl-frise-gestes-vide {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 0;
+  font-family: var(--font-label);
+  font-size: 9.4px;
+  letter-spacing: 0.04em;
+  color: color-mix(in srgb, var(--text) 56%, transparent);
+}
+
+.suivi-rl-frise-gestes-vide i {
+  flex: none;
+  font-size: 11px;
+  line-height: 1;
+}
+
+[dir='rtl'] .suivi-rl-frise-gestes-vide {
+  letter-spacing: 0;
+  font-size: 10.4px;
+}
+
+/* Ce que ce sens a réellement touché : la somme des écrans de ses gestes,
+   sous la liste triée — le nombre de gestes ne dit pas l'ampleur du passage. */
+.suivi-rl-frise-gestes-reel {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 0;
+  border-top: 1px dashed color-mix(in srgb, var(--accent) 22%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.2px;
+  line-height: 1.45;
+  letter-spacing: 0.04em;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+}
+
+.suivi-rl-frise-gestes-reel i {
+  flex: none;
+  font-size: 11px;
+  line-height: 1;
+}
+
+[dir='rtl'] .suivi-rl-frise-gestes-reel {
+  letter-spacing: 0;
+  font-size: 10.2px;
+}
+
+/* ---- le tri par sens de la tête de frise ---- */
+/* Il se tient devant la porte d'oubli, sur la même ligne : la ligne du dernier
+   geste se relit par fermetures ou par réouvertures, sans quitter la tête. */
+.suivi-rl-frise-head-tri {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex-wrap: wrap;
+}
+
+/* La petite gomme du tri : elle ne range rien, elle défait le rangement — un
+   seul clic et l'ordre des tranches ouvertes revient à celui du plan. Elle se
+   tient au bout des deux pastilles, d'un trait plus fin qu'elles, et ne paraît
+   que lorsqu'il y a un ordre à effacer. */
+.suivi-rl-frise-tri-gomme {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 6px;
+  appearance: none;
+  border-radius: 999px;
+  border: 1px dotted color-mix(in srgb, var(--text) 30%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 54%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 8.6px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.suivi-rl-frise-tri-gomme i {
+  font-size: 10px;
+  line-height: 1;
+}
+
+.suivi-rl-frise-tri-gomme:hover,
+.suivi-rl-frise-tri-gomme:focus-visible {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+}
+
+.suivi-rl-frise-tri-gomme:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+[dir='rtl'] .suivi-rl-frise-tri-gomme {
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 10px;
+}
+
+/* Le poids du rangement : combien de tranches le tri a réellement déplacées.
+   Il se tient au bout des deux pastilles, d'un trait plus fin qu'elles, sans
+   appel au clic — il ne range rien, il dit ce que le rangement a remué. Une
+   couleur d'accent quand quelque chose a bougé, un gris franc quand rien ne
+   l'a fait : un ordre déjà conforme n'appelle pas de lecture appuyée. */
+.suivi-rl-frise-tri-poids {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  border: 1px dotted color-mix(in srgb, var(--text) 24%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 8.6px;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+}
+
+.suivi-rl-frise-tri-poids i {
+  font-size: 10px;
+  line-height: 1;
+  opacity: 0.8;
+}
+
+.suivi-rl-frise-tri-poids[data-on='yes'] {
+  border-color: color-mix(in srgb, var(--accent) 38%, transparent);
+  border-style: dashed;
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+}
+
+.suivi-rl-frise-tri-poids[data-on='yes'] i {
+  color: color-mix(in srgb, var(--accent) 72%, var(--text));
+  opacity: 1;
+}
+
+[dir='rtl'] .suivi-rl-frise-tri-poids {
+  letter-spacing: 0;
+  font-size: 9.8px;
+}
+
+/* La tranche que le tri en cours a déplacée le plus récemment : elle se pose
+   dans la ligne du dernier geste, à côté de la plus ancienne ouverte, pour que
+   le rangement dise laquelle de ses tranches il a remuée en dernier. */
+.suivi-rl-frise-deplacee {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  border: 1px dotted color-mix(in srgb, var(--text) 20%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 8.8px;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 56%, transparent);
+}
+
+.suivi-rl-frise-deplacee i {
+  flex: none;
+  font-size: 10px;
+  line-height: 1;
+  opacity: 0.8;
+}
+
+.suivi-rl-frise-deplacee[data-on='yes'] {
+  border-color: color-mix(in srgb, var(--accent) 34%, transparent);
+  color: color-mix(in srgb, var(--accent) 76%, var(--text));
+}
+
+.suivi-rl-frise-deplacee[data-on='yes'] i {
+  color: color-mix(in srgb, var(--accent) 66%, var(--text));
+  opacity: 1;
+}
+
+/* Depuis quand cette tranche a bougé : le délai se détache du nom par un
+   trait, comme celui de la plus ancienne ouverte. */
+.suivi-rl-frise-deplacee-delai {
+  padding-inline-start: 5px;
+  border-inline-start: 1px dotted color-mix(in srgb, var(--accent) 34%, transparent);
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent) 62%, var(--text));
+}
+
+[dir='rtl'] .suivi-rl-frise-deplacee {
+  letter-spacing: 0;
+  font-size: 9.8px;
+}

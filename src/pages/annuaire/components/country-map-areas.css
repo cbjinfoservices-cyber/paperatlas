@@ -1,0 +1,831 @@
+/* ============ LE CADRE D'AIRE DE LA CARTE D'UN PAYS ============ */
+/* Posé en tête de la colonne de droite, au-dessus du compteur des pays et de
+   la légende des régions : la carte du pays se relit à l'échelle d'une aire du
+   monde, ses régions apparaissant dans le voisinage de leurs pays. Le panneau
+   reprend la tenue des deux autres, et la colonne garde ses trois rangées. */
+/* Le panneau d'aire a gagné la barre de part et le compteur : la colonne
+   laisse alors défiler ses trois rangées entières, plutôt que de pousser la
+   légende sous la carte quand la toile est courte. */
+.map-side { grid-template-rows: auto auto auto; overflow-y: auto;
+  scrollbar-width: thin; padding-bottom: 2px; }
+@media (max-width: 780px) { .map-side { overflow-y: visible; } }
+
+.map-areas { display: grid; gap: 7px; padding: 10px 11px 11px; border-radius: 14px;
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  backdrop-filter: blur(12px);
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  box-shadow: 0 18px 40px -16px color-mix(in srgb, #000 48%, transparent);
+  min-width: 0; }
+.map-areas-label { display: flex; align-items: center; gap: 6px; margin: 0;
+  font-family: var(--font-label); font-size: 9px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--accent2); }
+.map-areas-label i { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
+.map-areas-label span { flex: 0 1 auto; min-width: 0; overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap; }
+[dir="rtl"] .map-areas-label { letter-spacing: 0; }
+
+/* Les cinq aires, sur deux colonnes : la rangée se lit d'un regard et laisse
+   le panneau étroit de la colonne tenir sans déborder. */
+.map-areas-list { list-style: none; margin: 0; padding: 0; display: flex;
+  flex-wrap: wrap; gap: 4px; min-width: 0; }
+.map-area-item { display: flex; flex-direction: column; align-items: flex-start;
+  gap: 2px; min-width: 0; max-width: 100%; }
+.map-area-chip { display: inline-flex; align-items: center; gap: 4px; min-width: 0;
+  max-width: 100%; padding: 3px 8px; border-radius: 999px; appearance: none;
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  color: color-mix(in srgb, var(--text) 76%, transparent);
+  transition: border-color .2s ease, background .2s ease, color .2s ease; }
+/* Le corps de la pastille se presse : le nom, le compte et la part du monde.
+   La date a sa propre porte à côté, si bien que les deux gestes ne se
+   disputent pas la même surface. */
+.map-area-main { display: inline-flex; align-items: center; gap: 4px; min-width: 0;
+  max-width: 100%; padding: 0; border: 0; background: none; appearance: none;
+  font: inherit; color: inherit; cursor: pointer; }
+.map-area-chip i { flex: 0 0 auto; font-size: 10px; color: var(--accent2); }
+.map-area-name { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis;
+  white-space: nowrap; font-size: 10.5px; }
+.map-area-chip b { flex: 0 0 auto; font-family: var(--font-body); font-size: 10px;
+  font-weight: 600; letter-spacing: 0; color: var(--accent2); }
+/* L'aire du pays : un trait pointillé dit qu'elle est son voisinage immédiat,
+   sans la presser pour autant. */
+.map-area-chip.is-home { border-style: dashed;
+  border-color: color-mix(in srgb, var(--accent) 42%, transparent); }
+.map-area-chip:hover { color: var(--text);
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  background: color-mix(in srgb, var(--accent) 11%, transparent); }
+.map-area-chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* L'aire pressée : la pastille se lit comme enfoncée, et son cadre s'affermit. */
+.map-area-chip.is-on { border-style: solid; border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 22%, transparent); color: var(--text); }
+.map-area-chip.is-on .map-area-name { color: var(--text); }
+.map-area-home { flex: 0 0 auto; font-style: normal; font-family: var(--font-label);
+  font-size: 7.5px; letter-spacing: .06em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text)); }
+[dir="rtl"] .map-area-home { letter-spacing: 0; }
+/* L'aire du pays que le tri de poids a fait descendre : son trait pointillé
+   demeure, mais la pastille s'entoure d'un anneau et son épingle se voit —
+   on la retrouve d'un regard sans lire son nom ni chercher son rang. */
+.map-area-chip.is-moved { border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 62%, transparent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 22%, transparent); }
+/* L'aire dont tous les pays ont déjà été copiés seuls : la pastille garde sa
+   forme, mais son trait s'affermit et son repère se voit — on la retrouve
+   d'un regard, sans lire son nom ni ouvrir une copie. */
+.map-area-chip.is-complete { border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 58%, transparent); }
+.map-area-complete { display: inline-flex; align-items: center; gap: 3px;
+  flex: 0 0 auto; font-family: var(--font-label); font-size: 7.5px;
+  letter-spacing: .06em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--accent2) 84%, var(--text)); }
+.map-area-complete > i { flex: 0 0 auto; font-size: 9px; color: var(--accent2); }
+.map-area-chip.is-on .map-area-complete { color: var(--text); }
+[dir="rtl"] .map-area-complete { letter-spacing: 0; }
+.map-area-home.is-moved { display: inline-flex; align-items: center; gap: 3px;
+  color: var(--accent); }
+.map-area-home.is-moved i { flex: 0 0 auto; font-size: 8px; color: var(--accent); }
+/* La part de l'aire dans les pays du monde : la même échelle que la note des
+   aires, lue sur la pastille elle-même au lieu du seul survol. */
+.map-area-world { flex: 0 0 auto; font-family: var(--font-label); font-size: 9px;
+  letter-spacing: .02em; color: color-mix(in srgb, var(--text) 55%, transparent); }
+.map-area-chip.is-on .map-area-world { color: color-mix(in srgb, var(--text) 74%, transparent); }
+[dir="rtl"] .map-area-world { letter-spacing: 0; }
+/* Le jour de la dernière copie, posé sur la pastille elle-même : il dit
+   quand l'aire est partie la dernière fois, sans qu'on ait à survoler la
+   pastille. Un filet pointillé le sépare du compte, pour qu'il se lise comme
+   un rappel et non comme un second chiffre de l'aire. */
+.map-area-date { display: inline-flex; align-items: center; gap: 2px;
+  flex: 0 0 auto; padding: 0; padding-inline-start: 5px; white-space: nowrap;
+  appearance: none; background: transparent; cursor: pointer; border: 0;
+  border-inline-start: 1px dotted color-mix(in srgb, var(--text) 24%, transparent);
+  font-family: var(--font-body); font-size: 8.5px; letter-spacing: 0;
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+  transition: color .2s ease; }
+.map-area-date:hover, .map-area-date:focus-visible {
+  color: color-mix(in srgb, var(--accent) 88%, var(--text)); }
+/* La flèche de la porte ne paraît qu'au survol ou au clavier : la pastille
+   garde sa ligne calme tant qu'on ne la presse pas. */
+.map-area-date-go { font-size: 8px; opacity: 0; transition: opacity .18s ease; }
+.map-area-date:hover .map-area-date-go, .map-area-date:focus-visible .map-area-date-go {
+  opacity: .75; }
+.map-area-date > i { flex: 0 0 auto; font-size: 8px;
+  color: color-mix(in srgb, var(--accent2) 70%, var(--text)); }
+.map-area-chip.is-on .map-area-date { color: color-mix(in srgb, var(--text) 72%, transparent); }
+/* La petite barre de part de la note, reprise par pastille : chaque aire du
+   pays y montre son poids dans les fiches de ses aires, si bien que la plus
+   lourde se repère d'un regard, sans lire un seul chiffre. */
+.map-area-share { flex: 0 0 auto; display: inline-flex; align-items: center;
+  width: 24px; height: 4px; border-radius: 999px; overflow: hidden;
+  background: color-mix(in srgb, var(--text) 14%, transparent); }
+.map-area-share-fill { display: block; height: 100%; border-radius: 999px;
+  background: color-mix(in srgb, var(--accent2) 82%, var(--text));
+  transition: width .25s ease, background .2s ease; }
+.map-area-chip.is-on .map-area-share-fill { background: var(--accent); }
+
+/* Le geste d'aire seule, posé sous chaque pastille de la rangée : le même
+   petit bouton que la note des aires du monde — il n'emporte que cette aire,
+   son nom, sa place parmi les aires du monde et son poids, sans une autre. */
+.map-area-alone { display: inline-flex; align-items: center; gap: 3px;
+  align-self: flex-start; max-width: 100%; margin-inline-start: 4px;
+  padding: 1px 8px; border-radius: 999px; appearance: none; cursor: pointer;
+  background: transparent;
+  border: 1px dotted color-mix(in srgb, var(--accent2) 30%, transparent);
+  font-family: var(--font-label); font-size: 7.5px; letter-spacing: .05em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 56%, transparent);
+  transition: border-color .2s ease, background .2s ease, color .2s ease; }
+.map-area-alone > i { flex: 0 0 auto; font-size: 9px; color: var(--accent2); }
+.map-area-alone > span { flex: 0 1 auto; min-width: 0; overflow: hidden;
+  text-overflow: ellipsis; }
+.map-area-alone:hover { color: var(--text); border-style: solid;
+  border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 12%, transparent); }
+.map-area-alone.is-ok { border-style: solid; border-color: var(--accent2);
+  color: var(--accent2); }
+.map-area-alone:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+[dir="rtl"] .map-area-alone { letter-spacing: 0; }
+
+/* La part des aires de ce pays dans les fiches du monde : posée sous la
+   rangée, elle situe le voisinage du pays à l'échelle du monde, et sa petite
+   barre la dessine comme l'échelle de la tournée. */
+.map-areas-world { display: flex; flex-wrap: wrap; align-items: center; gap: 3px 6px;
+  margin: 0; padding: 5px 9px; border-radius: 10px; min-width: 0;
+  background: color-mix(in srgb, var(--accent2) 8%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--accent2) 34%, transparent);
+  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .06em;
+  text-transform: uppercase; color: color-mix(in srgb, var(--text) 66%, transparent); }
+.map-areas-world > i { flex: 0 0 auto; font-size: 11px; color: var(--accent2); }
+.map-areas-world-label { flex: 0 1 auto; min-width: 0; overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap; }
+.map-areas-world b { flex: 0 0 auto; font-family: var(--font-body); font-size: 11px;
+  font-weight: 600; letter-spacing: 0; unicode-bidi: isolate; color: var(--accent2); }
+.map-areas-world-unit { flex: 0 0 auto; font-family: var(--font-body); font-size: 8.5px;
+  letter-spacing: 0; text-transform: none;
+  color: color-mix(in srgb, var(--text) 46%, transparent); }
+.map-areas-world-bar { flex: 1 1 60px; min-width: 0; display: block; height: 5px;
+  border-radius: 999px; overflow: hidden;
+  background: color-mix(in srgb, var(--text) 14%, transparent); }
+.map-areas-world-bar-fill { display: block; height: 100%; border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 82%, var(--text));
+  transition: width .25s ease; }
+.map-areas-world em { flex: 0 0 auto; font-style: normal; font-family: var(--font-body);
+  font-size: 9.5px; letter-spacing: 0; text-transform: none; unicode-bidi: isolate;
+  color: color-mix(in srgb, var(--text) 58%, transparent); }
+[dir="rtl"] .map-areas-world { letter-spacing: 0; }
+
+/* La plus lourde des aires du pays, posée sous le compteur du monde : le
+   total a sa tête de liste sans passer par le survol, dans la même tenue
+   discrète que le compteur qu'elle explique. */
+.map-areas-world-top { display: flex; flex-wrap: wrap; align-items: center;
+  gap: 2px 6px; margin: -3px 0 0; padding: 3px 9px; border-radius: 9px;
+  min-width: 0; background: none;
+  font-family: var(--font-label); font-size: 8px; letter-spacing: .05em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 52%, transparent); }
+.map-areas-world-top > i { flex: 0 0 auto; font-size: 10px; color: var(--accent2); }
+.map-areas-world-top-label { flex: 0 1 auto; min-width: 0; overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap; }
+.map-areas-world-top b { flex: 0 0 auto; font-family: var(--font-body);
+  font-size: 10px; font-weight: 600; letter-spacing: 0; unicode-bidi: isolate;
+  color: color-mix(in srgb, var(--accent2) 88%, var(--text)); }
+.map-areas-world-top-files { flex: 0 0 auto; font-family: var(--font-body);
+  font-size: 9px; letter-spacing: 0; text-transform: none;
+  unicode-bidi: isolate;
+  color: color-mix(in srgb, var(--text) 48%, transparent); }
+[dir="rtl"] .map-areas-world-top { letter-spacing: 0; }
+
+/* Le geste du compteur du monde : posé juste sous la part des aires du pays
+   dans le monde, il emporte le chiffre, sa barre et ses aires dans l'ordre de
+   la rangée — un relevé d'un seul tenant, prêt à envoyer. */
+.map-areas-copy--world { justify-self: stretch; padding: 2px 9px;
+  font-size: 8px; border-style: dotted;
+  border-color: color-mix(in srgb, var(--accent2) 32%, transparent); }
+.map-areas-copy--world > i { color: var(--accent2); }
+.map-areas-copy--world:hover { border-style: solid; border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 12%, transparent); }
+.map-areas-copy--world.is-ok { border-style: solid; border-color: var(--accent2);
+  color: var(--accent2); }
+
+/* La ligne du cadre : ce qui est montré, et la porte du retour au pays. */
+.map-areas-note { display: flex; flex-wrap: wrap; align-items: center; gap: 5px 7px;
+  margin: 0; padding: 6px 8px; border-radius: 10px; min-width: 0;
+  background: color-mix(in srgb, var(--accent2) 10%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--accent2) 40%, transparent);
+  font-size: 10.5px; line-height: 1.5; color: color-mix(in srgb, var(--text) 80%, transparent); }
+.map-areas-note > i { flex: 0 0 auto; font-size: 12px; color: var(--accent2); }
+.map-areas-note > span { flex: 1 1 120px; min-width: 0; }
+.map-areas-clear { display: inline-flex; align-items: center; gap: 4px; flex: 0 0 auto;
+  padding: 3px 9px; border-radius: 999px; appearance: none; cursor: pointer;
+  background: none; border: 1px solid color-mix(in srgb, var(--accent) 48%, transparent);
+  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .05em;
+  text-transform: uppercase; color: var(--accent);
+  transition: background .2s ease, border-color .2s ease; }
+.map-areas-clear i { font-size: 10px; }
+.map-areas-clear:hover { background: color-mix(in srgb, var(--accent) 14%, transparent);
+  border-color: var(--accent); }
+.map-areas-clear:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+[dir="rtl"] .map-areas-clear { letter-spacing: 0; }
+
+/* Sous la carte cadrée, la part du pays dans les fiches de son aire : un
+   compteur d'un seul tenant, la part en tête, le rapport et son mot après. */
+.map-areas-share { display: flex; flex-wrap: wrap; align-items: center; gap: 3px 6px;
+  margin: 0; padding: 6px 9px; border-radius: 10px; min-width: 0;
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .06em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 70%, transparent); }
+.map-areas-share > i { flex: 0 0 auto; font-size: 11px; color: var(--accent2); }
+.map-areas-share-label { flex: 0 1 auto; min-width: 0; overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap; }
+.map-areas-share b { flex: 0 0 auto; font-family: var(--font-body); font-size: 14px;
+  font-weight: 600; letter-spacing: 0; unicode-bidi: isolate; color: var(--accent); }
+.map-areas-share-num { flex: 0 0 auto; font-family: var(--font-body); font-size: 10px;
+  letter-spacing: 0; unicode-bidi: isolate;
+  color: color-mix(in srgb, var(--text) 66%, transparent); }
+.map-areas-share-unit { flex: 0 0 auto; font-family: var(--font-body); font-size: 9px;
+  letter-spacing: 0; text-transform: none;
+  color: color-mix(in srgb, var(--text) 48%, transparent); }
+[dir="rtl"] .map-areas-share { letter-spacing: 0; }
+
+/* Le geste de copie, sous la part : la ligne part en texte avec son pays et
+   son aire, prête à se joindre à un point d'étape. */
+.map-areas-copy { display: inline-flex; align-items: center; justify-content: center;
+  gap: 4px; justify-self: start; min-width: 0; max-width: 100%;
+  padding: 3px 10px; border-radius: 999px; appearance: none; cursor: pointer;
+  background: transparent; white-space: nowrap;
+  border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
+  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .05em;
+  text-transform: uppercase; color: var(--muted);
+  transition: background .2s ease, border-color .2s ease, color .2s ease; }
+.map-areas-copy > i { flex: 0 0 auto; font-size: 11px; color: var(--accent2); }
+.map-areas-copy > span { flex: 0 1 auto; min-width: 0; overflow: hidden;
+  text-overflow: ellipsis; }
+.map-areas-copy:hover { color: var(--text); border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.map-areas-copy.is-ok { border-style: solid; border-color: var(--accent);
+  color: var(--accent2); }
+.map-areas-copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+[dir="rtl"] .map-areas-copy { letter-spacing: 0; }
+
+/* La tournée des aires cadrées : même pas que la copie de la part, mais un
+   trait plein — c'est un relevé de noms et de comptes, non un lien. */
+.map-areas-copy--tour { border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 34%, transparent);
+  color: color-mix(in srgb, var(--text) 68%, transparent); }
+.map-areas-copy--tour > i { color: var(--accent2); }
+.map-areas-copy--tour:hover { border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 14%, transparent); }
+.map-areas-copy--tour.is-ok { border-color: var(--accent2); color: var(--accent2); }
+
+/* L'échelle seule : sous la tournée, un trait pointu et un pas plus petit —
+   la ligne ne porte que le total, sans énumérer une seule aire. */
+.map-areas-copy--scale { padding: 2px 9px; font-size: 8px;
+  border-style: dotted;
+  border-color: color-mix(in srgb, var(--text) 20%, transparent); }
+.map-areas-copy--scale > i { color: color-mix(in srgb, var(--accent2) 70%, var(--text)); }
+.map-areas-copy--scale:hover { border-color: var(--accent2); }
+
+/* La tournée du seul pays ouvert : posée sous la rangée des deux copies, un
+   trait pointillé plus fin — elle n'emporte que les aires de ce pays-là, sans
+   les autres aires cadrées sur l'appareil. */
+.map-areas-copy--country { justify-self: stretch; padding: 2px 9px;
+  font-size: 8px; border-style: dotted;
+  border-color: color-mix(in srgb, var(--text) 18%, transparent); }
+.map-areas-copy--country > i { color: var(--accent); }
+.map-areas-copy--country:hover { border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent); }
+
+/* L'aire du pays seule : posée juste sous la rangée, un trait pointillé plus
+   fin encore — elle n'emporte que son nom, sa place et son poids, sans la
+   moindre autre aire. */
+.map-areas-copy--home { justify-self: start; padding: 2px 9px;
+  font-size: 8px; border-style: dotted;
+  border-color: color-mix(in srgb, var(--accent2) 28%, transparent);
+  color: color-mix(in srgb, var(--text) 64%, transparent); }
+.map-areas-copy--home > i { color: var(--accent2); }
+.map-areas-copy--home:hover { border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 12%, transparent); }
+.map-areas-copy--home.is-ok { border-color: var(--accent2); color: var(--accent2); }
+
+/* Sous la tournée du pays, la petite barre de sa part : le pays rapporté aux
+   fiches des aires que cette copie emporte, dessinée comme celle des deux
+   autres copies — les trois se comparent d'un regard. */
+.map-areas-country { display: grid; gap: 4px; min-width: 0; }
+.map-areas-country-share { display: flex; align-items: center; gap: 6px;
+  min-width: 0; padding: 0 2px; font-family: var(--font-label); font-size: 8px;
+  letter-spacing: .05em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 52%, transparent); }
+.map-areas-country-scale { flex: 0 1 auto; min-width: 0; overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap; }
+.map-areas-country-bar { flex: 1 1 auto; min-width: 0; display: block; height: 4px;
+  border-radius: 999px; overflow: hidden;
+  background: color-mix(in srgb, var(--text) 14%, transparent); }
+.map-areas-country-bar-fill { display: block; height: 100%; border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 78%, var(--text));
+  transition: width .25s ease; }
+.map-areas-country-share em { flex: 0 0 auto; font-style: normal;
+  font-family: var(--font-body); font-size: 9px; letter-spacing: 0;
+  text-transform: none; unicode-bidi: isolate;
+  color: color-mix(in srgb, var(--text) 58%, transparent); }
+[dir="rtl"] .map-areas-country-share { letter-spacing: 0; }
+
+@media (max-width: 780px) {
+  .map-areas { padding: 10px; }
+  .map-area-chip { padding: 5px 9px; }
+  .map-area-chip .map-area-name { font-size: 11px; }
+}
+
+/* La ligne de tête des aires menées, sous la rangée d'un pays : les aires où
+   le pays pèse le plus lourd, comptées et nommées. Un appui resserre la carte
+   du monde sur ces aires seules, un second appui rend les vingt-deux pays. */
+.map-areas-mene { display: flex; flex-wrap: wrap; align-items: center; gap: 3px 6px;
+  width: 100%; min-width: 0; margin: 0; padding: 5px 9px; border-radius: 10px;
+  appearance: none; cursor: pointer; text-align: start; font: inherit;
+  background: color-mix(in srgb, var(--accent2) 8%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--accent2) 38%, transparent);
+  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .05em;
+  text-transform: uppercase; color: color-mix(in srgb, var(--text) 68%, transparent);
+  transition: border-color .2s ease, background .2s ease, color .2s ease; }
+.map-areas-mene > i { flex: 0 0 auto; font-size: 11px; color: var(--accent2); }
+.map-areas-mene-label { flex: 0 1 auto; min-width: 0; overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap; }
+.map-areas-mene b { flex: 0 0 auto; font-family: var(--font-body); font-size: 11px;
+  font-weight: 600; letter-spacing: 0; unicode-bidi: isolate; color: var(--accent2); }
+.map-areas-mene em { flex: 0 0 auto; font-style: normal; font-family: var(--font-body);
+  font-size: 9px; letter-spacing: 0; text-transform: none; unicode-bidi: isolate;
+  color: color-mix(in srgb, var(--text) 48%, transparent); }
+.map-areas-mene-names { flex: 1 1 100%; min-width: 0; font-family: var(--font-body);
+  font-size: 10px; letter-spacing: 0; text-transform: none;
+  color: color-mix(in srgb, var(--text) 74%, transparent);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.map-areas-mene:hover { color: var(--text); border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 66%, transparent);
+  background: color-mix(in srgb, var(--accent2) 14%, transparent); }
+.map-areas-mene.is-on { border-style: solid; border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--accent); }
+.map-areas-mene.is-on > i { color: var(--accent); }
+.map-areas-mene.is-on .map-areas-mene-names { color: var(--text); }
+.map-areas-mene:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+[dir="rtl"] .map-areas-mene { letter-spacing: 0; }
+
+/* La même petite barre de part que la note des aires, sous les chiffres :
+   elle prend la largeur du panneau, si bien que la part se voit avant d'être
+   lue, et le texte copié la reprend case par case. */
+.map-areas-sharebar { flex: 1 1 100%; min-width: 0; display: block; height: 5px;
+  border-radius: 999px; overflow: hidden;
+  background: color-mix(in srgb, var(--text) 14%, transparent); }
+.map-areas-sharebar-fill { display: block; height: 100%; border-radius: 999px;
+  background: color-mix(in srgb, var(--accent2) 82%, var(--text));
+  transition: width .25s ease; }
+
+/* Le compteur des aires cadrées : posé sous la carte, il dit combien d'aires
+   ont été lues depuis cet appareil, et la dernière pressée se rouvre d'un
+   seul geste — c'est une porte, pas un simple constat. */
+.map-areas-count { display: flex; flex-wrap: wrap; align-items: center; gap: 3px 6px;
+  width: 100%; min-width: 0; margin: 0; padding: 6px 9px; border-radius: 10px;
+  appearance: none; cursor: pointer; text-align: start; font: inherit;
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--accent) 40%, transparent);
+  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .06em;
+  text-transform: uppercase; color: color-mix(in srgb, var(--text) 72%, transparent);
+  transition: border-color .2s ease, background .2s ease, color .2s ease; }
+.map-areas-count > i:first-child { flex: 0 0 auto; font-size: 11px; color: var(--accent); }
+.map-areas-count-label { flex: 0 1 auto; min-width: 0; overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap; }
+.map-areas-count b { flex: 0 0 auto; font-family: var(--font-body); font-size: 12px;
+  font-weight: 600; letter-spacing: 0; unicode-bidi: isolate; color: var(--accent); }
+.map-areas-count-total { flex: 0 0 auto; font-style: normal; font-family: var(--font-body);
+  font-size: 9.5px; letter-spacing: 0; unicode-bidi: isolate;
+  color: color-mix(in srgb, var(--text) 50%, transparent); }
+/* La dernière aire pressée, nommée à côté du compte : le geste s'annonce
+   avant d'être pressé. */
+.map-areas-count-last { flex: 1 1 100%; min-width: 0; font-family: var(--font-body);
+  font-size: 10px; letter-spacing: 0; text-transform: none;
+  color: color-mix(in srgb, var(--text) 76%, transparent);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.map-areas-count-last.is-quiet { color: color-mix(in srgb, var(--text) 46%, transparent); }
+.map-areas-count-go { flex: 0 0 auto; font-size: 11px; color: var(--accent); }
+.map-areas-count:hover { border-style: solid; border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent); color: var(--text); }
+.map-areas-count:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* Aucune aire cadrée encore : le compteur se lit comme un constat, sans
+   promettre un geste qui n'aurait rien à rouvrir. */
+.map-areas-count.is-empty { cursor: default;
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  border-color: color-mix(in srgb, var(--text) 18%, transparent); }
+.map-areas-count.is-empty > i:first-child { color: var(--accent2); }
+.map-areas-count.is-empty b { color: color-mix(in srgb, var(--text) 46%, transparent); }
+[dir="rtl"] .map-areas-count { letter-spacing: 0; }
+
+/* Le compteur, le compte des tournées et la gomme sur une seule rangée : le
+   constat et les gestes se lisent ensemble, sans remonter jusqu'à la note. */
+.map-areas-done { display: flex; flex-wrap: wrap; align-items: stretch; gap: 6px;
+  min-width: 0; }
+.map-areas-done .map-areas-count { flex: 1 1 160px; width: auto; min-width: 0; }
+
+/* La gomme du cadrage, posée dans la rangée : un trait pointillé au repos, et
+   le mot n'apparaît qu'une fois le geste armé. */
+.map-areas-erase { flex: 0 0 auto; display: inline-flex; align-items: center;
+  justify-content: center; gap: 4px; padding: 4px 9px; border-radius: 999px;
+  appearance: none; cursor: pointer; background: transparent;
+  border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
+  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .05em;
+  text-transform: uppercase; color: var(--muted);
+  transition: border-color .2s ease, background .2s ease, color .2s ease; }
+.map-areas-erase > i { flex: 0 0 auto; font-size: 11px; color: var(--accent2); }
+.map-areas-erase:hover { color: var(--text); border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.map-areas-erase.is-armed { border-style: solid; border-color: var(--accent);
+  color: var(--accent2); background: color-mix(in srgb, var(--accent) 16%, transparent);
+  padding-inline: 10px; }
+.map-areas-erase:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+[dir="rtl"] .map-areas-erase { letter-spacing: 0; }
+
+/* Combien de tournées sont parties de cet appareil, et le jour de la dernière :
+   un compte discret posé à côté des aires cadrées. */
+.map-areas-tours { flex: 0 0 auto; display: inline-flex; flex-wrap: wrap;
+  align-items: center; gap: 3px 5px; padding: 4px 9px; border-radius: 10px;
+  min-width: 0; background: color-mix(in srgb, var(--text) 4%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .06em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 68%, transparent); }
+.map-areas-tours > i { flex: 0 0 auto; font-size: 11px; color: var(--accent2); }
+.map-areas-tours b { flex: 0 0 auto; font-family: var(--font-body); font-size: 12px;
+  font-weight: 600; letter-spacing: 0; unicode-bidi: isolate; color: var(--accent); }
+.map-areas-tours-label { flex: 0 1 auto; min-width: 0; overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap; }
+.map-areas-tours-last { flex: 1 1 100%; min-width: 0; font-style: normal;
+  font-family: var(--font-body); font-size: 9.5px; letter-spacing: 0;
+  text-transform: none; overflow: hidden; text-overflow: ellipsis;
+  white-space: nowrap; color: color-mix(in srgb, var(--text) 56%, transparent); }
+[dir="rtl"] .map-areas-tours { letter-spacing: 0; }
+
+/* Le compteur des tournées est devenu une porte quand une aire complète est
+   déjà partie : un clic ouvre la note des aires resserrée sur ces aires-là.
+   Il garde sa pastille, s'allume au survol et porte une petite flèche. */
+button.map-areas-tours { appearance: none; cursor: pointer; text-align: start;
+  font-family: var(--font-label);
+  transition: border-color .2s ease, background .2s ease, color .2s ease; }
+button.map-areas-tours:hover { border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 56%, transparent);
+  background: color-mix(in srgb, var(--accent2) 10%, transparent);
+  color: var(--text); }
+button.map-areas-tours:focus-visible { outline: 2px solid var(--accent);
+  outline-offset: 2px; }
+.map-areas-tours-go { flex: 0 0 auto; margin-inline-start: auto; font-size: 10px;
+  color: color-mix(in srgb, var(--accent2) 72%, transparent);
+  transition: transform .2s ease, color .2s ease; }
+button.map-areas-tours:hover .map-areas-tours-go { color: var(--accent2);
+  transform: translate(1px, -1px); }
+
+/* Combien d'aires ont été copiées seules depuis cet appareil : même pas que
+   le compte des tournées, posé juste à côté — les deux copies se lisent
+   ensemble, sans remonter jusqu'à la note des aires. */
+.map-areas-seules { flex: 0 0 auto; display: inline-flex; flex-wrap: wrap;
+  align-items: center; gap: 3px 5px; padding: 4px 9px; border-radius: 10px;
+  min-width: 0; background: color-mix(in srgb, var(--text) 4%, transparent);
+  border: 1px dotted color-mix(in srgb, var(--accent2) 34%, transparent);
+  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .06em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 68%, transparent); }
+.map-areas-seules > i { flex: 0 0 auto; font-size: 11px; color: var(--accent2); }
+.map-areas-seules b { flex: 0 0 auto; font-family: var(--font-body); font-size: 12px;
+  font-weight: 600; letter-spacing: 0; unicode-bidi: isolate; color: var(--accent2); }
+.map-areas-seules-label { flex: 0 1 auto; min-width: 0; overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap; }
+.map-areas-seules-last { flex: 1 1 100%; min-width: 0; font-style: normal;
+  font-family: var(--font-body); font-size: 9.5px; letter-spacing: 0;
+  text-transform: none; overflow: hidden; text-overflow: ellipsis;
+  white-space: nowrap; color: color-mix(in srgb, var(--text) 56%, transparent); }
+/* Les pays de la rangée jamais copiés seuls, posés à côté du compte des
+   aires : le même chiffre en trait pointillé que la pastille ajoutée de la
+   note, pour que les deux notes disent ensemble ce qui reste à envoyer. */
+.map-areas-seules-never { flex: 0 0 auto; display: inline-flex; align-items: center;
+  gap: 2px; padding: 1px 5px; border-radius: 999px; font-style: normal;
+  font-family: var(--font-body); font-size: 9.5px; letter-spacing: 0;
+  unicode-bidi: isolate; white-space: nowrap;
+  border: 1px dotted color-mix(in srgb, var(--accent2) 48%, transparent);
+  background: color-mix(in srgb, var(--accent2) 9%, transparent);
+  color: color-mix(in srgb, var(--accent2) 88%, var(--text)); }
+.map-areas-seules-never > i { flex: 0 0 auto; font-size: 9px; }
+[dir="rtl"] .map-areas-seules-never { letter-spacing: 0; }
+
+[dir="rtl"] .map-areas-seules { letter-spacing: 0; }
+
+/* Le compteur des aires copiées seules est devenu une porte : un clic ouvre
+   la note des aires resserrée sur la rangée de ce pays. Il garde sa tenue de
+   pastille, et s'allume au survol pour dire qu'il s'ouvre. */
+button.map-areas-seules { appearance: none; cursor: pointer; text-align: start;
+  font-family: var(--font-label);
+  transition: border-color .2s ease, background .2s ease, color .2s ease; }
+button.map-areas-seules:hover { border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 56%, transparent);
+  background: color-mix(in srgb, var(--accent2) 10%, transparent);
+  color: var(--text); }
+button.map-areas-seules:focus-visible { outline: 2px solid var(--accent);
+  outline-offset: 2px; }
+.map-areas-seules-go { flex: 0 0 auto; margin-inline-start: auto; font-size: 10px;
+  color: color-mix(in srgb, var(--accent2) 72%, transparent);
+  transition: transform .2s ease, color .2s ease; }
+button.map-areas-seules:hover .map-areas-seules-go { color: var(--accent2);
+  transform: translate(1px, -1px); }
+
+/* La petite gomme du seul compte des aires copiées seules : posée juste à
+   côté du chiffre, elle n'efface pas le cadrage — le compte repart de zéro,
+   les aires restent cadrées. Le premier appui l'arme, le mot n'apparaît
+   qu'une fois le geste armé, comme la gomme du cadrage. */
+.map-areas-seules-erase { flex: 0 0 auto; display: inline-flex;
+  align-items: center; gap: 4px; align-self: stretch; padding: 4px 9px;
+  border-radius: 999px; appearance: none; cursor: pointer; background: none;
+  border: 1px dashed color-mix(in srgb, var(--text) 18%, transparent);
+  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .05em;
+  text-transform: uppercase; color: var(--muted);
+  transition: border-color .2s ease, background .2s ease, color .2s ease; }
+.map-areas-seules-erase > i { flex: 0 0 auto; font-size: 11px;
+  color: var(--accent2); }
+.map-areas-seules-erase:hover { color: var(--text); border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 52%, transparent);
+  background: color-mix(in srgb, var(--accent2) 12%, transparent); }
+.map-areas-seules-erase.is-armed { border-style: solid;
+  border-color: var(--accent2);
+  color: color-mix(in srgb, var(--accent2) 88%, var(--text));
+  background: color-mix(in srgb, var(--accent2) 16%, transparent); }
+.map-areas-seules-erase.is-armed > i { color: var(--accent2); }
+.map-areas-seules-erase:focus-visible { outline: 2px solid var(--accent);
+  outline-offset: 2px; }
+[dir="rtl"] .map-areas-seules-erase { letter-spacing: 0; }
+
+/* Les aires complètes de la rangée qui ne sont jamais parties seules : un
+   chiffre en trait plein, comme le compteur de la note des aires — ce qui
+   est complet mais jamais envoyé se lit d'un regard. */
+.map-areas-completes { flex: 0 0 auto; display: inline-flex; align-items: center;
+  gap: 4px; padding: 4px 10px; border-radius: 999px; min-width: 0;
+  appearance: none; cursor: pointer; text-align: start;
+  border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  font-family: var(--font-label); font-size: 9px; letter-spacing: .04em;
+  text-transform: uppercase; color: color-mix(in srgb, var(--text) 70%, transparent);
+  transition: border-color .2s ease, background .2s ease, color .2s ease; }
+.map-areas-completes:hover { color: var(--text);
+  border-color: color-mix(in srgb, var(--accent) 72%, transparent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent); }
+.map-areas-completes:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* La petite flèche posée au bout du compteur : elle dit que le geste emmène
+   quelque part, même quand le libellé est écourté par la colonne étroite. */
+.map-areas-completes > .map-areas-completes-go { flex: 0 0 auto; font-size: 11px;
+  color: var(--accent); transition: transform .2s ease; }
+.map-areas-completes:hover > .map-areas-completes-go { transform: translate(1px, -1px); }
+[dir="rtl"] .map-areas-completes:hover > .map-areas-completes-go { transform: translate(-1px, -1px); }
+.map-areas-completes > i { flex: 0 0 auto; font-size: 11px; color: var(--accent); }
+.map-areas-completes > b { flex: 0 0 auto; font-family: var(--font-body); font-size: 12px;
+  font-weight: 600; letter-spacing: 0; unicode-bidi: isolate; color: var(--accent); }
+.map-areas-completes-label { flex: 0 1 auto; min-width: 0; overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap; }
+.map-areas-completes > em { flex: 0 0 auto; font-style: normal;
+  font-family: var(--font-body); font-size: 9px; letter-spacing: 0;
+  unicode-bidi: isolate; color: color-mix(in srgb, var(--text) 50%, transparent); }
+[dir="rtl"] .map-areas-completes { letter-spacing: 0; }
+
+/* Sous la rangée, le rappel de la même porte : le compteur de l'en-tête de la
+   carte du monde tient ces aires complètes, et un clic y mène en resserrant
+   la note dessus. Une ligne discrète, en retrait du compteur, pour que la note
+   et la rangée se rejoignent d'un seul geste sans crier. */
+.map-areas-headdoor { display: inline-flex; align-items: center; gap: 4px;
+  align-self: flex-start; max-width: 100%; min-width: 0;
+  padding: 2px 9px 2px 7px; border-radius: 999px; appearance: none;
+  cursor: pointer; background: none; text-align: start;
+  border: 1px dotted color-mix(in srgb, var(--accent) 34%, transparent);
+  font-family: var(--font-label); font-size: 8px; letter-spacing: .05em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 56%, transparent);
+  transition: border-color .2s ease, background .2s ease, color .2s ease; }
+.map-areas-headdoor > i:first-child { flex: 0 0 auto; font-size: 10px;
+  color: color-mix(in srgb, var(--accent) 76%, var(--text)); }
+.map-areas-headdoor-label { flex: 0 1 auto; min-width: 0; overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap; }
+.map-areas-headdoor b { flex: 0 0 auto; font-family: var(--font-body);
+  font-size: 10px; font-weight: 600; letter-spacing: 0; unicode-bidi: isolate;
+  color: var(--accent); }
+.map-areas-headdoor em { flex: 0 0 auto; font-style: normal;
+  font-family: var(--font-body); font-size: 8.5px; letter-spacing: 0;
+  unicode-bidi: isolate;
+  color: color-mix(in srgb, var(--text) 44%, transparent); }
+.map-areas-headdoor-go { flex: 0 0 auto; font-size: 9px;
+  color: color-mix(in srgb, var(--accent) 66%, transparent);
+  transition: transform .2s ease, color .2s ease; }
+.map-areas-headdoor:hover { color: var(--text); border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 62%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent); }
+.map-areas-headdoor:hover .map-areas-headdoor-go { color: var(--accent);
+  transform: translate(1px, -1px); }
+.map-areas-headdoor:focus-visible { outline: 2px solid var(--accent);
+  outline-offset: 2px; }
+[dir="rtl"] .map-areas-headdoor { letter-spacing: 0; }
+[dir="rtl"] .map-areas-headdoor:hover .map-areas-headdoor-go {
+  transform: translate(-1px, -1px); }
+
+/* La porte et le geste de copie posés côte à côte, sous la rangée : les deux
+   se lisent d'un même mouvement, sans descendre jusqu'à la note. */
+.map-areas-doors { display: flex; flex-wrap: wrap; align-items: center; gap: 5px;
+  min-width: 0; }
+
+/* La note est déjà resserrée sur ces mêmes aires : la porte se lit comme
+   ouverte, enfoncée d'une ombre intérieure — elle dit d'un œil qu'elle est
+   déjà passée par là, sans qu'on ait à la presser pour le savoir. */
+.map-areas-headdoor.is-on { border-style: solid; border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--text);
+  box-shadow: inset 0 1px 2px color-mix(in srgb, var(--accent) 34%, transparent); }
+.map-areas-headdoor.is-on > i:first-child { color: var(--accent); }
+.map-areas-headdoor.is-on b { color: var(--accent); }
+.map-areas-headdoor.is-on .map-areas-headdoor-go { color: var(--accent);
+  transform: translate(1px, -1px); }
+[dir="rtl"] .map-areas-headdoor.is-on .map-areas-headdoor-go {
+  transform: translate(-1px, -1px); }
+
+/* Le geste de copie groupé des aires complètes de la rangée : un trait
+   plein de l'accent, un cran sous la porte — il emporte ce que la rangée
+   tient de complet et jamais parti. */
+.map-areas-copy--completes { justify-self: start; padding: 2px 9px;
+  font-size: 8px; border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 36%, transparent);
+  color: color-mix(in srgb, var(--text) 66%, transparent); }
+.map-areas-copy--completes > i { color: var(--accent); }
+.map-areas-copy--completes:hover { border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.map-areas-copy--completes.is-ok { border-color: var(--accent);
+  color: var(--accent); }
+
+/* Le geste court posé à côté : il n’emporte que les noms et les fiches, sans
+   rang ni adresse — un trait en pointillé le distingue de la copie entière
+   qui le précède, et les deux se lisent d’un même mouvement. */
+.map-areas-copy--names { border-style: dashed; }
+.map-areas-copy--names:hover { border-style: solid; }
+
+/* Combien de fois la copie courte a servi depuis cet appareil, et le jour de
+   la dernière : un petit constat posé sous la rangée, à côté des portes — le
+   même pas que le compte des aires complètes de l'en-tête, pour que les deux
+   chiffres se lisent d'un même oeil. */
+.map-areas-courtes { flex: 0 0 auto; display: inline-flex; flex-wrap: wrap;
+  align-items: center; gap: 3px 5px; padding: 3px 9px; border-radius: 999px;
+  min-width: 0; background: none; appearance: none; cursor: pointer;
+  text-align: start;
+  border: 1px dotted color-mix(in srgb, var(--accent2) 34%, transparent);
+  font-family: var(--font-label); font-size: 8px; letter-spacing: .05em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  transition: border-color .2s ease, background .2s ease, color .2s ease; }
+.map-areas-courtes:hover { color: var(--text); border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 60%, transparent);
+  background: color-mix(in srgb, var(--accent2) 10%, transparent); }
+.map-areas-courtes:focus-visible { outline: 2px solid var(--accent);
+  outline-offset: 2px; }
+/* La note est déjà resserrée sur ces mêmes aires : le compte se lit enfoncé,
+   comme la porte de l'en-tête, au lieu de promettre un geste déjà fait. */
+.map-areas-courtes.is-on { border-style: solid; border-color: var(--accent2);
+  color: var(--text);
+  background: color-mix(in srgb, var(--accent2) 14%, transparent);
+  box-shadow: inset 0 1px 2px color-mix(in srgb, var(--accent2) 32%, transparent); }
+.map-areas-courtes.is-on > i:first-child { color: var(--accent2); }
+.map-areas-courtes.is-still { cursor: default; }
+.map-areas-courtes-go { flex: 0 0 auto; font-size: 10px; color: var(--accent2);
+  transform: translate(1px, -1px); }
+[dir="rtl"] .map-areas-courtes-go { transform: translate(-1px, -1px); }
+
+/* La petite gomme du seul compte des copies courtes : elle efface ce chiffre
+   et rien d'autre — le carnet des aires reste intact. */
+.map-areas-courtes-erase { flex: 0 0 auto; display: inline-flex;
+  align-items: center; gap: 4px; align-self: stretch; padding: 3px 8px;
+  border-radius: 999px; appearance: none; cursor: pointer; background: none;
+  border: 1px dashed color-mix(in srgb, var(--text) 18%, transparent);
+  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .05em;
+  text-transform: uppercase; color: var(--muted);
+  transition: border-color .2s ease, background .2s ease, color .2s ease; }
+.map-areas-courtes-erase > i { flex: 0 0 auto; font-size: 11px;
+  color: var(--accent2); }
+.map-areas-courtes-erase:hover { color: var(--text); border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 52%, transparent);
+  background: color-mix(in srgb, var(--accent2) 12%, transparent); }
+.map-areas-courtes-erase.is-armed { border-style: solid;
+  border-color: var(--accent2);
+  color: color-mix(in srgb, var(--accent2) 88%, var(--text));
+  background: color-mix(in srgb, var(--accent2) 16%, transparent); }
+.map-areas-courtes-erase:focus-visible { outline: 2px solid var(--accent);
+  outline-offset: 2px; }
+[dir="rtl"] .map-areas-courtes-erase { letter-spacing: 0; }
+.map-areas-courtes > i { flex: 0 0 auto; font-size: 10px; color: var(--accent2); }
+.map-areas-courtes b { flex: 0 0 auto; font-family: var(--font-body); font-size: 10px;
+  font-weight: 600; letter-spacing: 0; unicode-bidi: isolate; color: var(--accent2); }
+.map-areas-courtes-label { flex: 0 1 auto; min-width: 0; overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap; }
+.map-areas-courtes-last { flex: 0 0 auto; font-style: normal;
+  font-family: var(--font-body); font-size: 8.5px; letter-spacing: 0;
+  text-transform: none; white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 44%, transparent); }
+[dir="rtl"] .map-areas-courtes { letter-spacing: 0; }
+
+/* Le compte des aires parties depuis les cartes de l'annuaire, posé à côté de
+   celui des copies courtes : il distingue les gestes partis d'une carte de
+   ceux partis d'une fiche, avec le jour de la dernière copie. */
+.map-areas-cartes { flex: 0 0 auto; display: inline-flex; flex-wrap: wrap;
+  align-items: center; gap: 3px 5px; padding: 3px 9px; border-radius: 999px;
+  min-width: 0; background: none;
+  border: 1px dotted color-mix(in srgb, var(--accent2) 34%, transparent);
+  font-family: var(--font-label); font-size: 8px; letter-spacing: .05em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 58%, transparent); }
+.map-areas-cartes > i:first-child { flex: 0 0 auto; font-size: 10px;
+  color: var(--accent2); }
+.map-areas-cartes b { flex: 0 0 auto; font-family: var(--font-body);
+  font-size: 10.5px; font-weight: 600; letter-spacing: 0; unicode-bidi: isolate;
+  color: var(--accent2); }
+.map-areas-cartes-label { flex: 0 1 auto; min-width: 0; }
+.map-areas-cartes-last { flex: 0 0 auto; font-style: normal;
+  font-family: var(--font-body); font-size: 8.5px; letter-spacing: 0;
+  text-transform: none; white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 44%, transparent); }
+[dir="rtl"] .map-areas-cartes { letter-spacing: 0; }
+
+/* Le même compte, devenu porte : un appui rouvre la note des aires resserrée
+   sur celles que les cartes ont emportées. Il prend la main et le trait d'un
+   bouton, sans quitter la tenue discrète de la rangée. */
+.map-areas-cartes.is-door { appearance: none; cursor: pointer; text-align: start;
+  font: inherit; font-family: var(--font-label); font-size: 8px;
+  letter-spacing: .05em; text-transform: uppercase;
+  transition: background .2s ease, border-color .2s ease, color .2s ease; }
+.map-areas-cartes.is-door:hover { color: var(--text); border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 58%, transparent);
+  background: color-mix(in srgb, var(--accent2) 12%, transparent); }
+.map-areas-cartes.is-door:focus-visible { outline: 2px solid var(--accent);
+  outline-offset: 2px; }
+.map-areas-cartes.is-on { border-style: solid; border-color: var(--accent2);
+  color: var(--text);
+  background: color-mix(in srgb, var(--accent2) 14%, transparent);
+  box-shadow: inset 0 1px 2px color-mix(in srgb, var(--accent2) 32%, transparent); }
+.map-areas-cartes.is-still { cursor: default; }
+.map-areas-cartes-go { flex: 0 0 auto; font-size: 10px; color: var(--accent2);
+  transform: translate(1px, -1px); }
+[dir="rtl"] .map-areas-cartes-go { transform: translate(-1px, -1px); }
+
+/* La petite gomme du seul compte des aires copiées des cartes : elle repart de
+   zéro sans toucher au carnet des aires ni aux autres comptes. Le premier
+   appui l'arme, le second efface — comme celle des copies courtes. */
+.map-areas-cartes-erase { flex: 0 0 auto; display: inline-flex;
+  align-items: center; gap: 4px; align-self: stretch; padding: 3px 8px;
+  border-radius: 999px; appearance: none; cursor: pointer; background: none;
+  border: 1px dashed color-mix(in srgb, var(--text) 18%, transparent);
+  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .05em;
+  text-transform: uppercase; color: var(--muted);
+  transition: border-color .2s ease, background .2s ease, color .2s ease; }
+.map-areas-cartes-erase > i { flex: 0 0 auto; font-size: 11px;
+  color: var(--accent2); }
+.map-areas-cartes-erase:hover { color: var(--text); border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 52%, transparent);
+  background: color-mix(in srgb, var(--accent2) 12%, transparent); }
+.map-areas-cartes-erase.is-armed { border-style: solid;
+  border-color: var(--accent2);
+  color: color-mix(in srgb, var(--accent2) 88%, var(--text));
+  background: color-mix(in srgb, var(--accent2) 16%, transparent); }
+.map-areas-cartes-erase:focus-visible { outline: 2px solid var(--accent);
+  outline-offset: 2px; }
+[dir="rtl"] .map-areas-cartes-erase { letter-spacing: 0; }
+
+/* Les deux copies de la tournée dans une même petite barre : le rang que
+   l'une emporte, l'échelle que l'autre emporte, et la part des aires cadrées
+   dans le monde dessinée dessous — les deux copies se comparent à l'œil. */
+.map-areas-copies { display: flex; flex-wrap: wrap; align-items: center;
+  gap: 5px 7px; padding: 6px 8px; border-radius: 11px; min-width: 0;
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--text) 18%, transparent); }
+.map-areas-copies-rank, .map-areas-copies-scale { display: inline-flex;
+  align-items: center; gap: 4px; flex: 0 0 auto; min-width: 0;
+  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .05em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 62%, transparent); }
+.map-areas-copies-rank > i, .map-areas-copies-scale > i { flex: 0 0 auto;
+  font-size: 11px; color: var(--accent2); }
+.map-areas-copies-scale b { flex: 0 0 auto; font-family: var(--font-body);
+  font-size: 11px; font-weight: 600; letter-spacing: 0; unicode-bidi: isolate;
+  color: var(--accent); }
+.map-areas-copies-scale > span { flex: 0 0 auto; font-family: var(--font-body);
+  font-size: 9px; letter-spacing: 0; text-transform: none;
+  color: color-mix(in srgb, var(--text) 48%, transparent); }
+/* La part des aires cadrées dans les fiches du monde, sous les deux copies. */
+.map-areas-copies-share { flex: 1 1 100%; display: flex; align-items: center;
+  gap: 6px; min-width: 0; }
+.map-areas-copies-bar { flex: 1 1 auto; min-width: 0; display: block; height: 5px;
+  border-radius: 999px; overflow: hidden;
+  background: color-mix(in srgb, var(--text) 14%, transparent); }
+.map-areas-copies-bar-fill { display: block; height: 100%; border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 82%, var(--text));
+  transition: width .25s ease; }
+.map-areas-copies-share em { flex: 0 0 auto; font-style: normal;
+  font-family: var(--font-body); font-size: 9.5px; letter-spacing: 0;
+  unicode-bidi: isolate;
+  color: color-mix(in srgb, var(--text) 58%, transparent); }
+[dir="rtl"] .map-areas-copies-rank, [dir="rtl"] .map-areas-copies-scale {
+  letter-spacing: 0; }

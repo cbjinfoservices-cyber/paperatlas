@@ -1,0 +1,944 @@
+/* ── Le montant et le téléphone du dépôt, d'une seule largeur de chiffre ────
+   Les deux champs changent de pays : le libellé du montant porte le code de la
+   devise, celui du téléphone son indicatif, et la liste des exemples de numéro
+   suit le pays choisi. En chiffres proportionnels, « 9 » et « 10 », « +213 » et
+   « +212 » n'occupent pas la même largeur : changer de pays faisait glisser le
+   texte sous le doigt et le champ semblait bouger.
+
+   Les deux champs prennent donc les chiffres tabulaires — chaque nombre y
+   garde la même avance —, et leurs libellés comme leurs exemples suivent la
+   même règle. Le champ garde sa largeur : c'est la valeur qui se replie dedans,
+   jamais le champ qui s'élargit. */
+.deposit-form #dep-budget,
+.deposit-form #dep-phone,
+.deposit-form label[for="dep-budget"],
+.deposit-form label[for="dep-phone"],
+.deposit-form #dep-budget::placeholder,
+.deposit-form #dep-phone::placeholder {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+.deposit-form #dep-budget,
+.deposit-form #dep-phone {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.35;
+}
+
+/* ── Les listes de lieu, tenues dans leur cadre ─────────────────────────────
+   Une liste de pays, de région ou de devise affiche son libellé à côté de la
+   flèche du navigateur. Quand le libellé est plus long que le champ — une
+   région arabe à 320 px, « United Arab Emirates » à 360 px —, c'est lui qui
+   s'écourte : un rembourrage logique réserve la place de la flèche, du côté où
+   elle se pose dans la langue lue, et le libellé ne passe jamais dessous. Le
+   champ garde sa largeur, sa hauteur et son filet, en arabe comme en latin. */
+.deposit-form #dep-pays,
+.deposit-form #dep-wilaya,
+.of-price-pays #of-price-pays,
+.of-price-pays-select {
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  padding-inline-end: 30px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+.deposit-form #dep-pays option,
+.deposit-form #dep-wilaya option,
+.deposit-form #dep-pays optgroup,
+.deposit-form #dep-wilaya optgroup,
+.of-price-pays #of-price-pays option,
+.of-price-pays-select option {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* ── Le sélecteur de pays des tarifs, au même régime que le dépôt ───────────
+   À 360 px, la rangée du sélecteur se replie : le libellé prend sa propre
+   ligne, le champ s'écourte par la fin plutôt que de pousser la flèche, et ses
+   chiffres gardent une avance stable — un pays qui passe d'un chiffre à deux
+   ne décale plus le champ. */
+@media (max-width: 640px) {
+  .of-price-pays-row {
+    row-gap: 8px;
+  }
+  .of-price-pays-label {
+    flex: 1 1 100%;
+  }
+  /* À 320 px en arabe, le mot de la devise et le champ partagent la même
+     rangée : le champ cède la place qui lui reste — sans jamais descendre sous
+     120 px ni passer sous la flèche —, et le mot de la devise reste d'un seul
+     morceau, sur son propre fond, du côté où la lecture finit. La plaque ne se
+     replie donc plus en deux lignes dont la seconde ne porterait qu'un mot. */
+  .of-price-pays #of-price-pays,
+  .of-price-pays-select {
+    flex: 1 1 120px;
+    width: auto;
+    min-width: 0;
+    max-width: 100%;
+  }
+  .of-price-pays-money {
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: 46%;
+    padding: 3px 9px;
+    border-radius: 999px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
+  }
+}
+
+/* ── Le compteur de caractères du dépôt, tenu dans une seule largeur ────────
+   Le libellé de la description porte le compte de ce qui est déjà écrit :
+   « 9/500 », puis « 10/500 ». En chiffres proportionnels — et à plus forte
+   raison quand le compte gagne un chiffre —, la boîte s'élargit d'un cran et
+   le mot posé devant elle glisse à chaque frappe.
+
+   Le compteur garde donc une seule largeur : celle du compte le plus long,
+   « 500/500 ». Ses chiffres prennent la même avance, et le nombre reste isolé
+   du sens de lecture de la phrase qui le porte, pour qu'en arabe il ne se
+   retourne jamais contre le mot. Le libellé ne bouge plus d'un pixel. */
+.deposit-form .dep-count {
+  display: inline-block;
+  min-width: 7ch;
+  box-sizing: border-box;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  direction: ltr;
+  unicode-bidi: isolate;
+  text-align: start;
+  white-space: nowrap;
+}
+
+/* ── Les filtres de lieu de l'annuaire, tenus dans leur cadre ──────────────
+   À 320 px, le pays et la région du dépliant affichent leur libellé à côté de
+   la flèche du navigateur. Quand le libellé est plus long que le champ — un
+   nom de pays en trois mots, une région arabe —, c'est lui qui s'écourte : un
+   rembourrage logique réserve la place de la flèche, du côté où elle se pose
+   dans la langue lue, et le libellé ne passe jamais dessous. Le champ garde sa
+   largeur, sa hauteur et son filet, en arabe comme en latin, et ses chiffres
+   gardent une avance stable — même régime que les champs de lieu du dépôt. */
+.filters-panel #dir-pays,
+.filters-panel #dir-wilaya {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  padding-inline-end: 30px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+.filters-panel #dir-pays option,
+.filters-panel #dir-wilaya option,
+.filters-panel #dir-pays optgroup,
+.filters-panel #dir-wilaya optgroup {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* ── Le type et la rubrique du dépôt, tenus dans leur cadre ─────────────────
+   Les deux listes du dépôt portent les libellés les plus longs de la page —
+   en arabe surtout, où le nom d'une rubrique s'écrit d'un seul tenant et n'a
+   nulle part où se replier. À 320 px, le libellé venait sous la flèche du
+   navigateur, et le champ semblait changer de forme d'un choix à l'autre.
+
+   Les deux champs prennent donc le même régime que ceux de lieu : un
+   rembourrage logique réserve la place de la flèche, du côté où elle se pose
+   dans la langue lue, et c'est le libellé qui s'écourte par sa fin. Le champ
+   garde sa largeur, sa hauteur et son filet, ses chiffres une avance stable,
+   et la liste ouverte suit le même couple. */
+.deposit-form #dep-type,
+.deposit-form #dep-rubrique {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  padding-inline-end: 30px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.35;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+.deposit-form #dep-type option,
+.deposit-form #dep-rubrique option,
+.deposit-form #dep-rubrique optgroup {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* ── Les quatre listes du dépôt tenues à la même hauteur ────────────────────
+   Sous 640 px, la grille du dépôt ne garde qu'une colonne : le type, la
+   rubrique, le pays et la région se suivent, chacun sur la largeur entière du
+   cadre. Ils prennent bien cette largeur, mais ils ne se mesuraient pas
+   pareil : les deux listes de lieu héritaient de l'interligne du navigateur
+   quand le type et la rubrique portaient 1,35, si bien que la colonne
+   ondulait d'un demi-millimètre d'un champ à l'autre.
+
+   Les quatre listes reçoivent donc une seule hauteur minimale et un seul
+   interligne, et le montant comme le téléphone s'y rangent aussi. La place de
+   la flèche reste réservée du côté où elle se pose dans la langue lue, les
+   chiffres gardent leur avance : à 360 px en anglais, la liste s'aligne
+   exactement sur celle d'à côté, et la colonne se lit d'un seul trait. */
+.deposit-form #dep-type,
+.deposit-form #dep-rubrique,
+.deposit-form #dep-pays,
+.deposit-form #dep-wilaya,
+.deposit-form #dep-budget,
+.deposit-form #dep-phone {
+  box-sizing: border-box;
+  min-height: 44px;
+  line-height: 1.35;
+}
+
+/* ── Le tri de l'annuaire, tenu dans son cadre ──────────────────────────────
+   Le champ du tri affiche un libellé qui peut être long — « Temps de trajet
+   depuis ma position », « Plus grand parc d'établissements » — et il partage
+   sa ligne avec le repère de partage. À 320 px en arabe, le libellé glissait
+   sous la flèche, et le champ semblait changer de largeur d'un ordre à
+   l'autre.
+
+   Il reçoit donc le traitement des champs de lieu : la place de la flèche est
+   réservée par un rembourrage logique, le libellé s'écourte par sa fin, et
+   ses chiffres gardent une avance stable. La case garde par ailleurs son
+   rembourrage de départ — celui qui laisse passer la petite icône du tri —,
+   donc l'icône et le libellé ne se marchent jamais dessus. */
+.filters-panel #dir-sort,
+.filters-panel #auth-sort,
+.dir-sort select {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  padding-inline-end: 30px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.35;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+.filters-panel #dir-sort option,
+.filters-panel #auth-sort option {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* À 320 px, la rangée du tri ne garde qu'une colonne : le champ prend la
+   largeur entière de sa plaque au lieu de rester borné à ses 220 px, et le
+   repère de partage descend sous lui. Le champ garde ainsi sa longueur d'un
+   ordre à l'autre. */
+@media (max-width: 620px) {
+  .filters-panel .dir-sortbar {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .filters-panel .dir-sort {
+    min-width: 0;
+    max-width: none;
+  }
+}
+
+/* ── La phrase sous la rubrique du dépôt ─────────────────────────────────
+   La liste des rubriques ne montre que celles de ce que l'on dépose ; la
+   phrase le dit sous le champ, sans le faire passer pour une erreur. Elle se
+   replie dans la largeur du champ plutôt que de déborder. */
+.deposit-form .fld .dep-rubrique-hint {
+  display: block;
+  margin-top: 6px;
+  min-width: 0;
+  max-width: 100%;
+  font-size: 12px;
+  line-height: 1.45;
+  opacity: 0.72;
+  overflow-wrap: break-word;
+}
+
+/* ── Les rubriques du tableau d'annonces, tenues dans leur pastille ────────
+   Les quatre rubriques ne portent pas le même nombre de mots : « Machines &
+   matériel » et « آلات ومعدات » sont les plus longs de la rangée. En pastille
+   d'un seul tenant, le nom le plus long s'allongeait jusqu'à pousser ses
+   voisines hors de leur colonne, et à 320 px il pouvait dépasser la largeur
+   de la rangée.
+
+   La pastille garde donc son cadre : elle ne prend jamais plus que la largeur
+   de la rangée, sa boîte est mesurée au cadre, et c'est le nom qui cède — il
+   se replie sur ses espaces dans sa propre largeur, la césure restant
+   interdite pour qu'un nom composé ne se coupe jamais au milieu d'un mot.
+   L'emblème de « Toutes les rubriques » ne cède pas, lui : il garde sa taille
+   et son écart, comme le compte d'une pastille de pays. Les chiffres gardent
+   leur avance, donc une pastille ne s'élargit pas d'un cran en passant de 9
+   à 10. */
+main .board-cats button {
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  align-items: center;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+main .board-cats button i {
+  flex: 0 0 auto;
+}
+
+/* Sous 620 px, la pastille accepte de replier son nom plutôt que de le
+   laisser filer sous le bord : elle grandit en hauteur, jamais en largeur, et
+   la rangée des rubriques garde sa mesure dans les trois langues. */
+@media (max-width: 620px) {
+  main .board-cats button {
+    padding-block: 9px;
+    padding-inline: 12px;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: normal;
+    hyphens: none;
+    line-height: 1.25;
+    text-align: center;
+  }
+}
+
+/* ── Les contrats du tableau d'emplois, tenus comme les rubriques ──────────
+   Le tableau d'emplois ouvre sur cinq pastilles — « Tous les contrats » et ses
+   quatre contrats — là où celui des annonces en tient quatre. À 320 px, les
+   deux rangées doivent se mesurer pareil : l'emblème de la première pastille
+   ne cède pas, il garde sa largeur et son écart, et c'est le nom qui se replie
+   dans sa propre boîte. En arabe surtout, où « كل العقود » s'écrit d'un seul
+   tenant à côté de son icône.
+
+   La pastille ne prend donc jamais plus que la rangée, elle accepte de céder
+   en largeur (`flex: 0 1 auto`) au lieu de pousser ses voisines, et les cinq
+   gardent une seule hauteur minimale — la rangée ne se met plus à onduler
+   d'une pastille à l'autre. Les chiffres gardent leur avance, comme ailleurs. */
+main .board-cats button {
+  flex: 0 1 auto;
+}
+
+main .board-cats button > i {
+  flex: 0 0 auto;
+  width: 18px;
+  text-align: center;
+}
+
+@media (max-width: 400px) {
+  main .board-cats button {
+    min-height: 40px;
+    padding-block: 8px;
+    padding-inline: 10px;
+    gap: 6px;
+    box-sizing: border-box;
+  }
+
+  /* L'emblème de « Tous les contrats » reste d'un seul morceau quand le nom,
+     lui, descend sur deux lignes : la pastille grandit en hauteur, jamais en
+     largeur, et son icône ne se sépare pas du mot qu'elle ouvre. */
+  main .board-cats button > i {
+    width: 16px;
+    height: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+  }
+}
+
+/* ── La description du dépôt et son bouton, à la mesure des champs ─────────
+   À 360 px, la grille du dépôt ne garde qu'une colonne : le type, la rubrique,
+   le pays et la région se suivent à la largeur entière du cadre. La description
+   prenait bien cette largeur, mais le bouton d'envoi, lui, gardait sa largeur
+   de contenu (`fit-content`) : la colonne se fermait sur deux mesures, et le
+   dernier geste du formulaire ne s'alignait sur rien.
+
+   La description garde donc son cadre — la valeur se replie dedans, le champ
+   ne s'élargit pas —, et le bouton prend exactement la même mesure que les
+   champs qui le précèdent : son bord tombe sur le leur, dans les trois langues
+   et dans les deux sens de lecture. Rien n'est retiré : le geste garde sa
+   hauteur, son libellé et sa flèche. */
+@media (max-width: 640px) {
+  .deposit-form .fld textarea,
+  .deposit-form #dep-desc {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .deposit-form > button[type="submit"] {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    justify-content: center;
+    margin-top: 2px;
+  }
+
+  .deposit-form > button[type="submit"] i {
+    flex: 0 0 auto;
+  }
+}
+
+/* ── Le compteur posé sur la carte, mesuré comme celui du tableau ──────────
+   À 360 px en arabe, la pastille du compteur posée sur la carte gardait un
+   rembourrage et un écart hérités de la colonne étroite (`3px 5px 3px 9px`,
+   un écart de 5 px), quand celle du tableau portait les siens : deux pastilles
+   du même composant ne se mesuraient donc pas pareil, et un nom de pays en
+   deux mots ne se repliait pas au même endroit de part et d'autre.
+
+   La pastille de la carte reprend donc la mesure du tableau — même corps, même
+   rembourrage logique, même écart, même hauteur de ligne —, et seul le nom
+   cède dans sa propre largeur. Le compte reste d'un seul morceau au bout de la
+   ligne, du côté où la lecture finit, avec des chiffres d'une avance stable :
+   une pastille arabe repliée se compare à sa voisine du tableau sans un pixel
+   de plus. */
+@media (max-width: 400px) {
+  .map-side .pays-tally .pays-tally-chip {
+    padding-block: 5px;
+    padding-inline: 11px 6px;
+    gap: 6px;
+    font-size: 12.5px;
+    line-height: 1.25;
+  }
+
+  .map-side .pays-tally .pays-tally-chip b {
+    min-width: 20px;
+    padding: 2px 6px;
+    font-size: 10.5px;
+    line-height: 1.25;
+  }
+}
+
+/* ── Les ateliers choisis dans la barre de comparaison, tenus dans leur pastille
+   La barre de comparaison réunit les ateliers retenus en pastilles d'un seul
+   tenant : le nom, puis la croix qui le retire. À 320 px en arabe, un nom
+   d'atelier s'écrit d'un seul trait et n'a nulle part où se replier — la
+   pastille s'allongeait donc jusqu'à sortir de la barre, poussant ses voisines
+   et la croix hors du cadre.
+
+   Le nom devient une boîte à part, comme celui d'une pastille de pays ou d'une
+   rubrique : c'est lui qui cède, en se repliant sur ses espaces dans sa propre
+   largeur, la césure restant interdite pour qu'un nom composé ne se coupe
+   jamais au milieu d'un mot. La croix garde sa taille et ne se sépare pas de
+   ce qu'elle retire, les chiffres gardent leur avance, et la pastille grandit
+   en hauteur — jamais en largeur : la barre garde sa mesure dans les trois
+   langues et les deux sens de lecture. */
+.cmp-bar .cmp-chips .cmp-chip {
+  box-sizing: border-box;
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  align-items: center;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+.cmp-bar .cmp-chips .cmp-chip > button {
+  flex: 0 0 auto;
+  box-sizing: border-box;
+}
+
+.cmp-bar .cmp-chips .cmp-chip-name {
+  flex: 0 1 auto;
+  min-width: 0;
+  line-height: 1.25;
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: none;
+}
+
+/* Sous 620 px, la barre prend toute la largeur de l'écran : la pastille ne
+   prend jamais plus que sa rangée, et son nom se replie au lieu de filer sous
+   le bord. Le rembourrage s'écrit une fois, en logique, pour qu'en arabe le nom
+   prenne la marge forte et la croix se pose de l'autre côté. */
+@media (max-width: 620px) {
+  .cmp-bar .cmp-chips {
+    min-width: 0;
+    max-width: 100%;
+  }
+  .cmp-bar .cmp-chips .cmp-chip {
+    white-space: normal;
+    padding-block: 5px;
+    padding-inline: 10px 5px;
+    font-size: 12.5px;
+  }
+}
+
+/* ── Les deux lignes de retour du dépôt, à la mesure des champs ─────────────
+   Le formulaire de dépôt répond de deux façons : la ligne d'échec, posée
+   directement dans la grille du cadre, et la ligne de réussite, posée dans sa
+   plaque verte avec la porte du compte. À 360 px, les champs se suivent à la
+   largeur entière du cadre, mais la ligne de réussite se mesurait à son
+   contenu — elle se fermait donc sur une autre mesure que la ligne d'échec,
+   juste sous les champs.
+
+   Les deux lignes prennent désormais la largeur des champs : le texte se
+   replie dedans plutôt que de déborder, dans les trois langues et les deux sens
+   de lecture, la porte du compte restant au début de sa ligne. Rien n'est
+   retiré : la plaque, sa teinte et son filet gardent leur forme. */
+.deposit-form .dep-done {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  justify-items: stretch;
+}
+
+.deposit-form .dep-done .form-msg,
+.deposit-form > .form-msg {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  line-height: 1.55;
+}
+
+.deposit-form .dep-done .dep-done-link {
+  justify-self: start;
+  max-width: 100%;
+}
+
+/* ── Le compteur de pays des portes de l'annuaire, mesuré comme celui d'un
+   tableau ────────────────────────────────────────────────────────────────
+   Sous la bande des types, chaque porte d'un pays porte son nom et le nombre
+   d'ateliers qu'il tient. À 360 px, une porte d'un seul tenant ne pouvait que
+   s'allonger — un nom de pays en trois mots, une région arabe — jusqu'à sortir
+   de sa rangée.
+
+   La porte reprend donc la mesure de la pastille de pays d'un tableau : elle ne
+   prend jamais plus que sa rangée, c'est le nom qui cède en se repliant sur ses
+   espaces dans sa propre largeur — la césure restant interdite —, et le compte
+   garde son cadre, d'un seul morceau, au bout de la ligne, du côté où la
+   lecture finit. Le rembourrage s'écrit en logique : en arabe le nom prend la
+   marge forte et le compte se pose de l'autre côté, sans qu'aucune règle soit
+   retournée à la main. */
+.dir-countrypages .dir-tp {
+  box-sizing: border-box;
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  align-items: center;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+.dir-countrypages .dir-tp .dir-tp-name {
+  flex: 0 1 auto;
+  min-width: 0;
+  line-height: 1.25;
+}
+
+.dir-countrypages .dir-tp .dir-tp-count {
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  min-width: 18px;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* ── Les trois gestes de la barre de comparaison, tenus dans leur cadre ────
+   La barre réunit trois gestes — comparer, demander un devis, effacer — sous
+   la rangée des pastilles. Quand les pastilles prennent deux lignes, les trois
+   gestes restent seuls sur la leur : à 320 px en arabe, « Demander un devis »
+   et « Tout effacer » n'y tenaient qu'en se pressant l'un contre l'autre, et
+   le plus long cédait son rembourrage avant son libellé — le cadre des trois
+   ne se mesurait plus pareil d'un mot à l'autre.
+
+   Les trois prennent donc une seule mesure : une même hauteur minimale, un
+   même rembourrage, un libellé centré, et une icône qui ne cède jamais sa
+   largeur. Le geste cède en largeur plutôt que de pousser son voisin, et le
+   libellé se replie dans son propre cadre au lieu d'en sortir. */
+.cmp-bar .cmp-acts {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.cmp-bar .cmp-go,
+.cmp-bar .cmp-quote,
+.cmp-bar .cmp-reset {
+  box-sizing: border-box;
+  flex: 0 1 auto;
+  min-width: 0;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.25;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+.cmp-bar .cmp-go > i,
+.cmp-bar .cmp-quote > i,
+.cmp-bar .cmp-reset > i {
+  flex: 0 0 auto;
+  line-height: 1;
+}
+
+.cmp-bar .cmp-reset > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Les trois gestes sur une rangée à eux, à la mesure de la barre ───────
+   À 360 px en anglais, deux pastilles suffisent à remplir la première
+   rangée : les trois gestes n'y tenaient que deux par deux, le troisième
+   descendant seul sous eux — la rangée qu'ils partagent n'était donc pas la
+   même des deux côtés de la lecture, et l'arabe, aux libellés plus longs,
+   n'en montrait pas la même image que l'anglais.
+
+   Les gestes quittent la rangée des pastilles et se partagent une rangée à
+   eux, en colonnes égales : chacun reçoit exactement un tiers de la largeur,
+   quelle que soit la longueur de son libellé, et tous trois prennent la même
+   hauteur — c'est la plus haute qui la donne, par l'étirement de la grille.
+   La barre se replie donc en deux temps dans les trois langues : les
+   pastilles d'abord, puis les gestes, et le cadre des trois se mesure à
+   l'identique en anglais comme en arabe. Quand la comparaison ne porte pas de
+   devis, deux gestes se partagent la même rangée, en deux colonnes égales. */
+@media (max-width: 620px) {
+  .cmp-bar .cmp-acts {
+    flex: 1 1 100%;
+    min-width: 0;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .cmp-bar .cmp-go,
+  .cmp-bar .cmp-quote,
+  .cmp-bar .cmp-reset {
+    width: 100%;
+    padding-block: 9px;
+    padding-inline: 12px;
+    gap: 6px;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: normal;
+    hyphens: none;
+  }
+
+  .cmp-bar .cmp-reset > span {
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+  }
+}
+
+/* À 320 px, la barre resserre son écart et son rembourrage : les gestes
+   gardent leur rangée et leur mesure, la barre grandit en hauteur. */
+@media (max-width: 400px) {
+  .cmp-bar {
+    gap: 8px;
+    padding: 9px;
+  }
+}
+
+/* ── Les repères de la colonne de droite du dépôt, à la mesure du formulaire
+   Le cadre du dépôt porte deux colonnes sur grand écran : le formulaire, puis
+   la colonne de droite qui tient les trois étapes numérotées et les portes de
+   lecture. À 360 px, la grille ne garde qu'une colonne et les deux se suivent
+   — mais les cartes de droite gardaient leur rembourrage propre (18 px) quand
+   le formulaire porte le sien (20 px) : leurs blocs se fermaient donc sur une
+   autre mesure que les champs, deux pixels plus larges de chaque côté, et les
+   deux colonnes ne se lisaient pas d'aplomb.
+
+   La colonne de droite prend donc la mesure du formulaire : même rembourrage,
+   boîte mesurée au cadre, et chaque bloc qu'elle porte — le titre, les trois
+   étapes, les portes de lecture, la note de confiance — tient dans cette
+   largeur. Les textes se replient dedans plutôt que de déborder, les numéros
+   et les emblèmes gardent leur colonne et leur écart, et le rembourrage des
+   portes s'écrit en logique : en arabe l'emblème ouvre la ligne et la flèche
+   la ferme, du côté où la lecture finit, sans aucune règle retournée à la
+   main. Rien n'est retiré : les plaques, leurs teintes et leurs filets gardent
+   leur forme. */
+/* ── La même respiration au-dessus de la marche, quand les deux colonnes se
+   tiennent côte à côte ─────────────────────────────────────────────────────
+   Le cadre du dépôt garde deux colonnes au-delà de 960 px : le formulaire,
+   puis la colonne de droite. Le rembourrage fluide du formulaire ne s'arrête
+   pas à la marche — il vaut à toute largeur —, tandis que les cartes de
+   droite ne prenaient la mesure du formulaire que sous 960 px : au-dessus,
+   elles retombaient sur leur propre valeur, plus courte d'un cran, et les
+   deux colonnes ne se lisaient plus d'aplomb dès qu'elles se tenaient côte à
+   côte.
+
+   Les cartes de droite prennent donc le rembourrage du formulaire à toute
+   largeur, ainsi que l'écart de la grille, et chaque bloc qu'elles portent
+   tient dans cette largeur. La mesure est la même des deux côtés de la
+   marche — et non d'un seul. */
+.deposit-grid .deposit-side {
+  gap: 20px;
+}
+
+.deposit-side .pro-card {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  padding: clamp(20px, 2.4vw, 32px);
+}
+
+.deposit-side .pro-h,
+.deposit-side .deposit-steps,
+.deposit-side .deposit-links,
+.deposit-side .pro-note {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+@media (max-width: 960px) {
+  .deposit-side {
+    min-width: 0;
+  }
+
+  /* Le passage à une seule colonne se fait à cette largeur même, et le
+     formulaire y garde son rembourrage fluide — vingt-trois pixels à 960 px,
+     et non vingt. Une valeur fixe ne tombait juste qu’au bas de l’échelle
+     (360 px) et laissait la colonne de droite deux à trois pixels plus large
+     de chaque côté dès la marche, c’est-à-dire là où les deux colonnes se
+     rejoignent en une. Les deux prennent donc la même respiration, et l’écart
+     entre les deux cartes de droite suit celui de la grille. */
+  .deposit-grid .deposit-side {
+    gap: 20px;
+  }
+
+  .deposit-side .pro-card {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    padding: clamp(20px, 2.4vw, 32px);
+  }
+
+  .deposit-side .pro-h,
+  .deposit-side .deposit-steps,
+  .deposit-side .deposit-links,
+  .deposit-side .pro-note {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .deposit-side .deposit-steps p {
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+
+  .deposit-side .deposit-steps span {
+    flex: 0 0 auto;
+  }
+
+  .deposit-side .deposit-links a {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    padding-block: 10px;
+    padding-inline: 12px;
+    grid-template-columns: 18px minmax(0, 1fr) 16px;
+  }
+
+  .deposit-side .deposit-links a > span {
+    min-width: 0;
+    overflow-wrap: break-word;
+    line-height: 1.4;
+  }
+
+  .deposit-side .deposit-links a > i {
+    flex: 0 0 auto;
+  }
+
+  .deposit-side .pro-note {
+    align-items: flex-start;
+    overflow-wrap: break-word;
+    line-height: 1.55;
+  }
+
+  .deposit-side .pro-note > i {
+    flex: 0 0 auto;
+  }
+}
+
+/* ── La note de pré-remplissage et l'invitation à créer un compte, à la
+   mesure des champs ──────────────────────────────────────────────────────
+   Le cadre du dépôt porte deux blocs qui ne sont pas des champs : la note qui
+   dit d'où viennent les quatre coordonnées, en tête, et l'invitation à créer
+   un compte, en bas quand le visiteur n'en a pas. À 360 px, les champs se
+   suivent bien à la largeur entière du cadre, mais l'invitation, mesurée sur
+   son contenu et sur un bouton qui refuse de se replier, se fermait sur une
+   autre mesure que la note et les champs posés au-dessus d'elle.
+
+   Les deux blocs prennent donc la mesure des champs — largeur entière du
+   cadre, boîte mesurée au cadre —, leur texte se replie dedans plutôt que de
+   déborder, et l'emblème de chacun garde sa taille et son écart. Le bouton de
+   l'invitation cède en largeur au lieu de sortir du cadre, son libellé se
+   repliant à son tour quand la place manque, et sa flèche restant d'un seul
+   morceau. Rien n'est retiré : la plaque, sa teinte pointillée et sa hauteur
+   gardent leur forme. */
+.deposit-form .dep-pre,
+.deposit-form .ct-signup {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  align-items: flex-start;
+  text-align: start;
+  overflow-wrap: break-word;
+  line-height: 1.55;
+}
+
+.deposit-form .dep-pre > i,
+.deposit-form .ct-signup > i {
+  flex: 0 0 auto;
+  margin-top: 1px;
+}
+
+.deposit-form .ct-signup > span {
+  flex: 1 1 200px;
+  min-width: 0;
+}
+
+.deposit-form .ct-signup .ct-signup-link {
+  box-sizing: border-box;
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.deposit-form .ct-signup .ct-signup-link > i {
+  flex: 0 0 auto;
+}
+
+.deposit-form .ct-signup .ct-signup-hint {
+  flex: 1 1 100%;
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+@media (max-width: 400px) {
+  .deposit-form .dep-pre,
+  .deposit-form .ct-signup {
+    padding: 10px 12px;
+  }
+
+  .deposit-form .ct-signup .ct-signup-link {
+    flex: 1 1 auto;
+    justify-content: center;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: normal;
+    hyphens: none;
+    line-height: 1.25;
+    text-align: center;
+  }
+}
+
+/* ── Les portes d'un pays, mesurées comme la pastille d'un tableau ─────────
+   Sous la bande des types, chaque porte d'un pays porte son nom et le nombre
+   d'ateliers qu'il tient. La règle du repli ne valait qu'à 400 px et sous :
+   juste au-dessus, la porte revenait au libellé d'un seul tenant, si bien
+   qu'un nom de pays en trois mots — « United Arab Emirates » en anglais comme
+   son voisin arabe — se repliait à gauche de cette marche et s'écourtait à
+   droite. Le compte gardait par ailleurs 18 px là où la pastille du tableau en
+   garde 20 : la place laissée au nom n'était donc pas la même des deux côtés,
+   et les deux noms ne se repliaient pas au même point.
+
+   Le repli couvre désormais toute la largeur où la rangée se resserre (520
+   px), et la porte reprend le cadre exact de la pastille de pays : même
+   hauteur de ligne, même rembourrage logique, même écart, compte à 20 px. Le
+   nom seul cède, dans sa propre largeur, et le compte reste d'un seul morceau
+   au bout de la ligne, du côté où la lecture finit. */
+@media (max-width: 520px) {
+  .dir-countrypages .dir-tp {
+    white-space: normal;
+    gap: 6px;
+    padding-block: 5px;
+    padding-inline: 11px 6px;
+    font-size: 12.5px;
+    line-height: 1.25;
+  }
+
+  .dir-countrypages .dir-tp .dir-tp-name {
+    flex: 1 1 auto;
+    overflow: visible;
+    text-overflow: clip;
+    overflow-wrap: break-word;
+    word-break: normal;
+    hyphens: none;
+    line-height: 1.25;
+    text-align: start;
+  }
+
+  /* ── Le cadre du compte, tenu comme celui d'une pastille de tableau ────────
+     À 400 px, la porte arabe et la porte anglaise portaient le même rembourrage
+     logique, mais le compte était tenu par une largeur fixe **sans rembourrage
+     intérieur** : un chiffre s'y tenait à l'aise, deux chiffres le remplissaient
+     sans la moindre marge, et un compte plus long le débordait au lieu de
+     l'ouvrir — la place du nom n'était donc pas la même selon le nombre lu. La
+     pastille d'un tableau, elle, garde vingt pixels de plancher et six pixels
+     de marge de chaque côté : un compte à deux chiffres y occupe la même
+     largeur qu'ailleurs, et c'est à ce compte-là que la porte se compare.
+
+     Le compte de la porte reprend donc ce cadre exact : un plancher de vingt
+     pixels, la marge intérieure de la pastille, et une boîte mesurée au cadre.
+     Un chiffre se lit dans vingt pixels, deux chiffres prennent la même largeur
+     qu'un compte de tableau, et le nombre reste isolé du sens de lecture avec
+     des chiffres d'une avance stable : la boîte se mesure à l'identique en
+     arabe comme en anglais, seule la place restante du nom change de côté. */
+  /* ── Le cadre du compte ouvert au-delà de deux chiffres ───────────────────
+     Le compte est tenu par un plancher de vingt pixels et une marge de six de
+     chaque côté : un ou deux chiffres s'y lisent dans le cadre d'une pastille
+     de tableau. À trois chiffres, le nombre ne tient plus dans ce plancher —
+     c'est donc là que le cadre doit s'ouvrir, et non se serrer.
+
+     La boîte est mesurée à son contenu (`width: max-content`) : elle ne prend
+     jamais moins que le plancher, jamais plus que la place laissée au nom, et
+     dès que les chiffres dépassent le plancher c'est le cadre qui s'ouvre,
+     d'exactement la largeur de la marge de la pastille. Le nombre reste d'un
+     seul morceau — il ne descend jamais sur deux lignes —, du côté où la
+     lecture finit, et seule la place laissée au nom change de côté. */
+  .dir-countrypages .dir-tp .dir-tp-count {
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    width: max-content;
+    min-width: 20px;
+    max-width: 100%;
+    padding: 2px 6px;
+    letter-spacing: 0;
+    font-size: 10.5px;
+    line-height: 1.25;
+    white-space: nowrap;
+    text-align: center;
+    direction: ltr;
+    unicode-bidi: isolate;
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+  }
+}

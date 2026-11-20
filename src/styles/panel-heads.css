@@ -1,0 +1,150 @@
+/* ── L'en-tête du panneau de comparaison, ouvert sur une seule mesure ───────
+   Le panneau — celui que la barre de comparaison ouvre — coiffe ses colonnes
+   d'un en-tête qui réunit le titre, la référence du dossier, la marque de la
+   langue et la ligne « préparé par ». Cet en-tête se tenait sur une seule
+   rangée, en deux blocs que le navigateur se partageait sans jamais les
+   replier : à 360 px, le titre et ses pastilles d'un côté, les trois gestes de
+   l'autre, chacun cédant à tour de rôle. En arabe, où « préparé par » et le nom
+   de l'auteur s'écrivent plus longs, le bloc de gauche poussait la référence
+   hors du cadre — une pastille tenue d'un seul tenant ne peut que déborder.
+
+   L'en-tête se replie donc : chaque bloc mesure ce qu'il lui faut, et le
+   second descend sous le premier quand la place manque. Sous 560 px, les deux
+   prennent chacun leur rangée, et la pastille « préparé par » prend la sienne,
+   la plus longue des quatre — si bien que le panneau s'ouvre sur la même
+   mesure que la barre : une seule largeur, celle du panneau, et rien qui la
+   dépasse.
+
+   Chaque pièce garde sa forme : la référence se lit d'un seul tenant et
+   s'écourte par sa fin plutôt que de sortir du cadre, la marque de la langue
+   ne cède jamais sa largeur, et la ligne « préparé par » porte son emblème du
+   côté où la lecture commence — le rembourrage s'écrit en logique, l'arabe n'a
+   aucune règle retournée à la main. Le libellé reste d'une pièce avec son
+   point, et le nom de l'auteur se replie dans la largeur qui reste. */
+.cmp-modal .cmp-panel-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  margin-bottom: 16px;
+  min-width: 0;
+}
+
+.cmp-modal .cmp-head-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 12px;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.cmp-modal .cmp-head-title > h2 {
+  min-width: 0;
+  margin: 0;
+}
+
+/* La référence du dossier : un seul morceau, qui s'écourte par sa fin au lieu
+   de déborder du panneau. */
+.cmp-modal .cmp-ref {
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* La marque de la langue : deux lettres et son cadre, jamais comprimées. */
+.cmp-modal .cmp-lang {
+  flex: 0 0 auto;
+}
+
+/* La ligne « préparé par » : l'emblème ouvre la pastille du côté où la lecture
+   commence, le libellé et son point restent d'une pièce, et le nom de l'auteur
+   cède en se repliant dans sa propre largeur. */
+.cmp-modal .cmp-prepared {
+  flex: 0 1 auto;
+  flex-wrap: wrap;
+  align-items: center;
+  row-gap: 2px;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding-block: 3px;
+  padding-inline: 7px 10px;
+  line-height: 1.45;
+  overflow-wrap: break-word;
+}
+
+.cmp-modal .cmp-prepared > i {
+  flex: 0 0 auto;
+  font-size: 12px;
+}
+
+.cmp-modal .cmp-prepared-label {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+/* Les trois gestes de l'en-tête se replient aussi plutôt que de sortir. */
+.cmp-modal .cmp-head-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  min-width: 0;
+}
+
+[dir="rtl"] .cmp-modal .cmp-prepared-label,
+[dir="rtl"] .cmp-modal .cmp-ref {
+  letter-spacing: 0;
+}
+
+/* Sous 560 px — le panneau ne garde alors que la largeur d'un téléphone —,
+   l'en-tête se lit en deux temps : le titre et ses deux pastilles d'abord, la
+   ligne « préparé par » sur sa propre rangée ensuite, puis les gestes. Chaque
+   bloc prend la mesure du panneau, et rien ne se partage plus la largeur au
+   détriment de l'autre. */
+@media (max-width: 560px) {
+  /* Le panneau s'ouvre à douze pixels des bords, comme la barre qui l'ouvre :
+     les deux se lisent sur la même mesure. */
+  .cmp-modal[role="dialog"] {
+    padding: 12px;
+  }
+
+  .cmp-modal .cmp-panel-head {
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .cmp-modal .cmp-head-title,
+  .cmp-modal .cmp-head-actions {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+
+  .cmp-modal .cmp-head-title {
+    align-items: center;
+  }
+
+  .cmp-modal .cmp-head-actions {
+    justify-content: space-between;
+  }
+
+  /* La ligne « préparé par » est la plus longue des quatre : elle prend sa
+     rangée au lieu de disputer la place au titre et à la référence. */
+  .cmp-modal .cmp-prepared {
+    flex: 1 1 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cmp-modal .cmp-head-title,
+  .cmp-modal .cmp-head-actions {
+    transition: none;
+  }
+}

@@ -1,0 +1,3741 @@
+/* ---- La console d'administration ------------------------------------------
+   Un espace de travail, pas une vitrine : fond plein, densité d'information
+   assumée, mais les mêmes couleurs et la même typographie que le site. */
+
+.admin {
+  min-height: 100vh;
+  padding: 0 0 56px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body, inherit);
+}
+
+.admin-solo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 24px;
+}
+
+/* ---- l'en-tête ---- */
+.admin-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 14px 28px;
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+}
+
+.admin-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+/* Le même cachet que la barre et le pied de page : une image, donc plus de
+   fond teinté ni de glyphe — la marque se reconnaît d'un espace à l'autre. */
+.admin-brand-mark {
+  display: block;
+  flex: 0 0 auto;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  object-fit: cover;
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  box-shadow: 0 1px 0 color-mix(in srgb, #fff 10%, transparent) inset;
+}
+
+.admin-brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.admin-brand-text em {
+  font-style: normal;
+  font-family: var(--font-label, inherit);
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+
+.admin-brand-text strong {
+  font-family: var(--font-heading, inherit);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* La seconde marque du réseau, à droite du nom : un filet la sépare, le mot
+   arabe garde sa propre lecture, et la ligne latine l'accompagne dessous —
+   exactement le couple de la barre du site. */
+.admin-brand-world {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+  margin-inline-start: 4px;
+  padding-inline-start: 12px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--accent) 32%, transparent);
+  line-height: 1.1;
+  min-width: 0;
+}
+
+.admin-brand-world b {
+  font-family: var(--font-heading, inherit);
+  font-size: 12.5px;
+  font-weight: 650;
+  letter-spacing: .01em;
+  white-space: nowrap;
+}
+
+.admin-brand-world small {
+  font-family: var(--font-label, inherit);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+
+@media (max-width: 640px) {
+  .admin-brand-world small { display: none; }
+}
+
+.admin-top-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.admin-who {
+  max-width: 260px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+
+.admin-who b { color: var(--text); font-weight: 600; }
+
+/* La relecture arabe et anglaise comptée dans l'en-tête : ce qui reste à relire
+   des deux côtés, lu sur le carnet de l'appareil. Le geste ouvre le panneau qui
+   porte les cases, au lieu de laisser un chiffre sans porte. */
+.admin-relire {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+  font-family: var(--font-label, inherit);
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background .16s ease, border-color .16s ease, color .16s ease;
+}
+.admin-relire i { font-size: 13px; }
+.admin-relire:hover {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 48%, transparent);
+}
+.admin-relire:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 2px;
+}
+
+/* Plus rien à relire : la pastille se tait au lieu de crier un zéro. */
+.admin-relire[data-zero='yes'] {
+  border-color: color-mix(in srgb, var(--text) 16%, transparent);
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  font-weight: 500;
+}
+
+/* La pastille des accusés de réception : une porte de plus dans l'en-tête,
+   qui s'allume quand un accusé attend depuis plus d'un jour. */
+.admin-accuses {
+  position: relative;
+}
+
+.admin-accuses[data-alert='yes'] {
+  border-color: color-mix(in srgb, var(--accent) 58%, transparent);
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  color: color-mix(in srgb, var(--accent) 94%, var(--text));
+  font-weight: 700;
+}
+
+/* L'envoi ne peut pas partir : la pastille le dit d'un signe, visible depuis
+   n'importe quel onglet — l'attente ne se lira pas comme une panne de renvoi. */
+.admin-accuses[data-gate='blocked'][data-alert='no'] {
+  border-color: color-mix(in srgb, var(--text) 34%, transparent);
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+  color: color-mix(in srgb, var(--text) 76%, transparent);
+}
+
+.admin-accuses[data-gate='blocked'][data-alert='no'] .admin-relire-tag {
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+}
+
+/* Le petit bouclier barré, à côté du compte : la porte fermée se lit sans
+   dérouler le survol. */
+.admin-accuses-gate {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  font-size: 12px;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+}
+
+.admin-accuses-dot {
+  position: absolute;
+  top: 4px;
+  inset-inline-end: 6px;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 24%, transparent);
+}
+
+.admin-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  border-radius: 999px;
+  background: none;
+  color: color-mix(in srgb, var(--text) 76%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+
+.admin-ghost:hover {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+/* ---- les onglets ---- */
+/* La barre des sections ferme la console comme l'en-tête d'une conversation :
+   le trait qui la sépare du corps reprend l'orange du cachet, à la même force
+   que dans la messagerie et l'espace compte.
+   Le trait n'est pas la bordure de la barre mais un filet posé à l'intérieur :
+   il commence et finit sur la même marge que les liserés des blocs, pour que
+   la console se lise d'une seule ligne d'un panneau à l'autre. */
+/* La barre des onglets reste collée en haut de la fenêtre : dans une longue
+   liste d'annonces ou de comptes, on change de section sans remonter. Le fond
+   opaque du site la détache des lignes qui passent dessous, et le liseré
+   orange ferme la barre exactement comme avant. */
+.admin-tabs {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--bg);
+  box-shadow: 0 12px 18px -20px color-mix(in srgb, var(--text) 60%, transparent);
+  display: flex;
+  align-items: stretch;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 14px 28px 0;
+}
+
+.admin-tabs::after {
+  content: "";
+  position: absolute;
+  inset-inline: 28px;
+  bottom: 0;
+  height: 1px;
+  background: color-mix(in srgb, var(--accent) 55%, transparent);
+  pointer-events: none;
+}
+
+.admin-tab {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 13px;
+  cursor: pointer;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+
+.admin-tab b {
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 12%, transparent);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.admin-tab:hover { color: var(--text); }
+
+.admin-tab[data-on="yes"] {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+}
+
+.admin-tab[data-on="yes"] b {
+  background: color-mix(in srgb, var(--accent) 24%, transparent);
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+}
+
+/* ---- le corps ---- */
+.admin-body {
+  padding: 22px 28px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.admin-loading {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 40px 0;
+  font-size: 14px;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+
+/* ---- la porte fermée ---- */
+.admin-gate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  max-width: 520px;
+  padding: 40px 32px;
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--surface) 60%, transparent);
+  text-align: center;
+}
+
+.admin-gate-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--accent);
+  font-size: 24px;
+}
+
+.admin-gate h1 {
+  margin: 0;
+  font-family: var(--font-heading, inherit);
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.admin-gate p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.65;
+  color: color-mix(in srgb, var(--text) 68%, transparent);
+}
+
+.admin-gate-mail {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border: 1px dashed color-mix(in srgb, var(--text) 24%, transparent);
+  border-radius: 999px;
+  font-family: var(--font-label, inherit);
+  font-size: 12px;
+}
+
+.admin-gate-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 6px;
+}
+
+/* ---- les compteurs ---- */
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+.admin-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 16px;
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--surface) 55%, transparent);
+}
+
+.admin-stat b {
+  font-family: var(--font-heading, inherit);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.admin-stat span {
+  font-family: var(--font-label, inherit);
+  font-size: 11px;
+  letter-spacing: .06em;
+  color: color-mix(in srgb, var(--text) 56%, transparent);
+}
+
+.admin-stat[data-tone="ok"] b { color: color-mix(in srgb, var(--accent2) 70%, var(--text)); }
+.admin-stat[data-tone="soft"] b { color: color-mix(in srgb, var(--text) 80%, transparent); }
+.admin-stat[data-tone="accent"] b { color: var(--accent); }
+
+/* Un compteur qui se clique : il garde l'allure d'une carte, mais le curseur
+   et l'état allumé disent qu'il filtre les listes d'un seul geste. */
+.admin-stat-btn {
+  align-items: flex-start;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition: border-color .15s ease, background .15s ease, box-shadow .15s ease;
+}
+
+.admin-stat-btn span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.admin-stat-btn span i { font-size: 11px; opacity: .55; }
+
+.admin-stat-btn:hover,
+.admin-stat-btn:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.admin-stat-btn[data-on="yes"] {
+  border-color: color-mix(in srgb, var(--accent) 58%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 26%, transparent);
+}
+
+.admin-stat-btn[data-on="yes"] span i { opacity: .95; color: var(--accent); }
+
+/* ---- les cartes ---- */
+.admin-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px 22px;
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--surface) 48%, transparent);
+}
+
+/* L'en-tête d'un bloc porte le même liseré que la barre des onglets : dans la
+   console, chaque section s'ouvre sur le trait du cachet, jamais sur un gris
+   anonyme. Le trait est ramené aux bords de la carte (les marges négatives
+   reprennent le rembourrage) : il commence donc à la même distance du bord que
+   celui de la barre, et les panneaux s'empilent sans décalage.
+   L'espace sous le titre laisse le liseré respirer. */
+.admin-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-inline: -22px;
+  padding: 0 22px 12px;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
+}
+
+.admin-stamp {
+  margin: 0;
+  font-family: var(--font-label, inherit);
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+}
+
+.admin-sub {
+  margin: 4px 0 0;
+  max-width: 74ch;
+  font-size: 13px;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+
+.admin-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.admin-search {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 12px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--bg) 46%, transparent);
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+
+.admin-search i { font-size: 14px; }
+
+.admin-search input {
+  width: 210px;
+  max-width: 100%;
+  border: 0;
+  background: none;
+  color: var(--text);
+  font-family: inherit;
+  outline: none;
+}
+
+.admin-search input::placeholder { color: color-mix(in srgb, var(--text) 42%, transparent); }
+
+.admin-select {
+  padding: 8px 12px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--bg) 46%, transparent);
+  color: var(--text);
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* ---- la table ---- */
+.admin-table-wrap {
+  overflow-x: auto;
+  border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+  border-radius: 14px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.admin-table thead th {
+  padding: 10px 14px;
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  background: color-mix(in srgb, var(--bg) 38%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  text-align: start;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 56%, transparent);
+}
+
+.admin-table tbody td {
+  padding: 11px 14px;
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
+  vertical-align: top;
+}
+
+.admin-table tbody tr:last-child td { border-bottom: 0; }
+.admin-table tbody tr:hover td { background: color-mix(in srgb, var(--accent) 5%, transparent); }
+
+.admin-strong {
+  display: block;
+  font-weight: 600;
+}
+
+.admin-mail {
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  color: color-mix(in srgb, var(--text) 64%, transparent);
+  word-break: break-all;
+}
+
+/* Le repère d'un compte qui peut ouvrir la console : posé sous le nom, il se
+   voit d'un coup d'œil dans les deux tables, sans ouvrir la fiche. */
+.admin-admin-mark {
+  display: inline-flex;
+  margin-top: 4px;
+}
+
+.admin-muted {
+  display: block;
+  margin-top: 2px;
+  font-size: 11px;
+  color: color-mix(in srgb, var(--text) 48%, transparent);
+}
+
+/* La pastille de sommeil d'une ligne du tableau : sa propre colonne, donc
+   rien à décaler sous l'adresse du compte. */
+.admin-row-sleep {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.admin-row-sleep i {
+  font-size: 11px;
+}
+
+.admin-num {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* ---- les pastilles et les commandes ---- */
+.admin-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 9px;
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  border-radius: 999px;
+  font-family: var(--font-label, inherit);
+  font-size: 10px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 72%, transparent);
+}
+
+.admin-badge[data-tone="ok"] {
+  border-color: color-mix(in srgb, var(--accent2) 34%, transparent);
+  background: color-mix(in srgb, var(--accent2) 12%, transparent);
+  color: color-mix(in srgb, var(--accent2) 82%, var(--text));
+}
+
+.admin-badge[data-tone="soft"] {
+  border-style: dashed;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+
+.admin-badge[data-tone="accent"] {
+  border-color: color-mix(in srgb, var(--accent) 36%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+
+.admin-badge i {
+  margin-inline-end: 4px;
+  font-size: 12px;
+}
+
+.admin-badge[data-tone="off"] {
+  border-color: color-mix(in srgb, var(--text) 20%, transparent);
+  color: color-mix(in srgb, var(--text) 42%, transparent);
+  text-decoration: line-through;
+}
+
+/* Une relecture qui traîne : la même écriture que l'échéance proche, pour
+   que l'œil la reconnaisse sans apprendre un troisième code. */
+.admin-badge[data-tone="warn"] {
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: color-mix(in srgb, var(--accent) 86%, var(--text));
+}
+
+/* Les compteurs de la boîte de réception, côte à côte : le nombre de fils
+   dormants et le total, jamais empilés. */
+.admin-inbox-tags {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* La colonne de gauche de la messagerie : la note de filtre au-dessus de la
+   liste, jamais à la place d'un fil. */
+.admin-inbox-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.admin-inbox-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-label, inherit);
+  font-size: 10.5px;
+  letter-spacing: .04em;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+}
+
+.admin-inbox-note i {
+  font-size: 12px;
+}
+
+/* Le compteur des fils en sommeil devient un jeton : un clic réduit la liste
+   à ces seuls fils, un second la rouvre en entier. */
+.admin-sleep-btn {
+  cursor: pointer;
+}
+
+/* Les fils en sommeil d'un compte, en tête de sa fiche. */
+.admin-fiche-fils {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-fiche-fil {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  flex: 1;
+  min-width: 0;
+  padding: 8px 10px;
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  color: var(--text);
+  text-align: start;
+  cursor: pointer;
+  transition: border-color .15s ease, background .15s ease;
+}
+
+.admin-fiche-fil:hover,
+.admin-fiche-fil:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 56%, transparent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+.admin-fiche-fil > i {
+  font-size: 14px;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  flex: none;
+}
+
+/* Un fil actif, quand la fiche ouvre sa liste à tous les fils : la ligne garde
+   le même geste et la même porte, mais elle ne prend pas la teinte des
+   dormants — l'attente n'est pas la même, et la mesure se lit sans confusion. */
+.admin-fiche-fil[data-dormant='no'] {
+  border-color: color-mix(in srgb, var(--text) 16%, transparent);
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+}
+
+.admin-fiche-fil[data-dormant='no'] > i {
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+
+.admin-fiche-fil-pace[data-dormant='no'] {
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+}
+
+/* Un fil dormant, et sa porte : la ligne ouvre le fil dans la console, le
+   lien à côté l'ouvre tel que le compte le voit, dans un autre onglet. */
+.admin-fiche-fil-item {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.admin-fiche-fil-line {
+  display: flex;
+  align-items: stretch;
+  gap: 6px;
+  min-width: 0;
+}
+
+/* L'aire du compte sous le nom : le geste de copie se tient dans le pas de la
+   ligne, sans pousser les noms ni la porte du fil public. */
+.admin-fiche-fil-aire {
+  padding-inline-start: 26px;
+}
+
+.admin-fiche-fil-aire .pro-aire-row {
+  margin-top: 0;
+  gap: 3px 6px;
+}
+
+.admin-fiche-fil-aire .pro-aire-copy {
+  padding: 2px 8px;
+  gap: 4px;
+  font-size: 8.5px;
+}
+
+.admin-fiche-fil-aire .pro-aire-copy i {
+  font-size: 10px;
+}
+
+.admin-fiche-fil-aire .pro-aire-count {
+  padding: 2px 6px;
+  gap: 3px;
+  font-size: 8px;
+}
+
+.admin-fiche-fil-aire .pro-aire-count-lab,
+.admin-fiche-fil-aire .pro-aire-count-last {
+  display: none;
+}
+
+.admin-fiche-fil-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: none;
+  padding: 0 8px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  border-radius: 8px;
+  font-family: var(--font-label, inherit);
+  font-size: 10px;
+  letter-spacing: .03em;
+  text-decoration: none;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  cursor: pointer;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+
+.admin-fiche-fil-open i {
+  font-size: 12px;
+}
+
+.admin-fiche-fil-open:hover,
+.admin-fiche-fil-open:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+}
+
+/* Sur un écran étroit, la porte garde son icône et son survol : le libellé
+   prendrait la place du nom du fil. */
+@media (max-width: 520px) {
+  .admin-fiche-fil-open span {
+    display: none;
+  }
+}
+
+.admin-fiche-fil-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  flex: 1;
+}
+
+.admin-fiche-fil-main b {
+  font-size: 12.5px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-fiche-fil-main em {
+  font-family: var(--font-label, inherit);
+  font-size: 10.5px;
+  font-style: normal;
+  letter-spacing: .03em;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-fiche-fil-pace {
+  font-family: var(--font-label, inherit);
+  font-size: 10.5px;
+  letter-spacing: .04em;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  white-space: nowrap;
+  flex: none;
+}
+
+/* Les compteurs de dépôts d'une ligne : deux pastilles côte à côte, jamais
+   l'une sous l'autre dans une colonne étroite. */
+.admin-depots {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+/* Une pastille qui ouvre une fiche : elle garde l'allure d'une étiquette,
+   mais se comporte comme un bouton. */
+.admin-badge-btn {
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color .15s ease, background .15s ease, color .15s ease;
+}
+
+.admin-badge-btn:hover,
+.admin-badge-btn:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  color: var(--text);
+}
+
+.admin-chips {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.admin-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  border: 1px dashed color-mix(in srgb, var(--text) 20%, transparent);
+  border-radius: 999px;
+  background: none;
+  color: color-mix(in srgb, var(--text) 64%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 11px;
+  cursor: pointer;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+
+.admin-chip b { font-variant-numeric: tabular-nums; opacity: .8; }
+
+/* La correction d'une rubrique hors type, ouverte sous un dépôt : une
+   étiquette, puis les rubriques de sa propre famille. Le geste reste dans la
+   liste, à côté du repère qui l'a demandé. */
+.admin-rubrique-fix {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+  padding: 7px 10px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 40%, transparent);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+}
+
+.admin-rubrique-fix-lab {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-inline-end: 2px;
+  font-family: var(--font-label, inherit);
+  font-size: 10.5px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+}
+
+.admin-rubrique-fix-lab i { font-size: 12px; }
+
+.admin-rubrique-fix .admin-chip {
+  padding: 3px 10px;
+  font-size: 10.5px;
+}
+
+.admin-rubrique-fix .admin-chip:disabled { opacity: .5; cursor: progress; }
+
+.admin-chip:hover { color: var(--text); border-color: color-mix(in srgb, var(--accent) 42%, transparent); }
+
+.admin-chip[data-on="yes"] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 48%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--text);
+}
+
+.admin-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 13px;
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  border-radius: 999px;
+  background: none;
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+
+.admin-btn:hover {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.admin-btn:disabled { opacity: .55; cursor: progress; }
+
+.admin-btn[data-tone="ok"] { border-color: color-mix(in srgb, var(--accent2) 36%, transparent); }
+.admin-btn[data-tone="off"] { color: color-mix(in srgb, var(--text) 54%, transparent); }
+.admin-btn[data-tone="accent"] {
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--text);
+}
+
+.admin-empty {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 26px 4px;
+  font-size: 13px;
+  color: color-mix(in srgb, var(--text) 54%, transparent);
+}
+
+.admin-empty i { font-size: 16px; }
+
+.admin-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  margin: 0;
+  padding: 10px 13px;
+  border: 1px dashed color-mix(in srgb, var(--text) 18%, transparent);
+  border-radius: 12px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+
+.admin-note[data-ok="no"] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+}
+
+/* ---- la liste des annonces ---- */
+.admin-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 14px 16px;
+  border: 1px solid color-mix(in srgb, var(--text) 11%, transparent);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--bg) 34%, transparent);
+}
+
+.admin-row[data-state="publie"] { border-inline-start: 3px solid color-mix(in srgb, var(--accent2) 60%, transparent); }
+.admin-row[data-state="refuse"] { border-inline-start: 3px solid color-mix(in srgb, var(--text) 26%, transparent); }
+
+/* Un dépôt dont le compte arrive à échéance passe devant l'état de relecture :
+   c'est l'abonnement qu'il faut relancer, pas l'annonce qu'il faut relire. */
+.admin-row[data-soon="yes"] {
+  border-inline-start: 3px solid color-mix(in srgb, var(--accent) 62%, transparent);
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+}
+
+/* Un dépôt qui attend une réponse depuis plus de sept jours : le liseré
+   suffit à le distinguer d'un dépôt fraîchement arrivé. */
+.admin-row[data-soon="no"][data-late="yes"] {
+  border-inline-start: 3px solid color-mix(in srgb, var(--text) 30%, transparent);
+}
+
+.admin-row-main { flex: 1 1 380px; min-width: 0; }
+
+.admin-row-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 0 0 4px;
+}
+
+.admin-kind {
+  font-family: var(--font-label, inherit);
+  font-size: 10px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+}
+
+.admin-row-title {
+  margin: 0;
+  font-family: var(--font-heading, inherit);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.admin-row-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 5px 0 0;
+  font-size: 12px;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+
+.admin-row-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.admin-row-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* ---- la messagerie ---- */
+.admin-inbox-grid {
+  display: grid;
+  grid-template-columns: minmax(240px, 320px) 1fr;
+  gap: 14px;
+  align-items: start;
+}
+
+.admin-threads {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 620px;
+  overflow-y: auto;
+}
+
+.admin-thread {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--bg) 30%, transparent);
+  color: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition: border-color .15s ease, background .15s ease;
+}
+
+.admin-thread:hover { border-color: color-mix(in srgb, var(--accent) 40%, transparent); }
+
+.admin-thread[data-on="yes"] {
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.admin-thread-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.admin-thread-top b {
+  font-size: 12px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-thread-top em {
+  flex: none;
+  font-style: normal;
+  font-size: 10px;
+  color: color-mix(in srgb, var(--text) 46%, transparent);
+}
+
+.admin-thread-subject {
+  font-size: 11px;
+  color: color-mix(in srgb, var(--accent) 74%, var(--text));
+}
+
+.admin-thread-last {
+  font-size: 11px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* Un fil qui dort : la même lune que dans la messagerie du site, sous le
+   dernier message — la mesure reste une note, pas une parole. */
+.admin-thread-sleep {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+  font-family: var(--font-label, inherit);
+  font-size: 10px;
+  letter-spacing: .04em;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  white-space: nowrap;
+}
+
+.admin-thread-sleep i { font-size: 11px; }
+
+/* Un fil dormant déjà ouvert pendant la visite : le repère de revue se pose
+   sous la lune, et la mesure s'efface pour laisser lire ce qui reste à voir. */
+.admin-thread-revu {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+  font-family: var(--font-label, inherit);
+  font-size: 10px;
+  letter-spacing: .04em;
+  color: color-mix(in srgb, var(--accent2) 84%, var(--text));
+  white-space: nowrap;
+}
+
+.admin-thread-revu i { font-size: 11px; }
+
+/* La pastille de l'aire d'un fil : le nom de l'aire du monde, posé sous le
+   dernier message pour situer la ligne sans remonter au compte du groupe. */
+.admin-thread-aire {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  align-self: flex-start;
+  max-width: 100%;
+  margin-top: 2px;
+  padding: 1px 7px;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 9.5px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* La pastille d'aire d'un fil est une porte : un appui resserre la boîte sur
+   cette seule aire, sans repasser par le titre du groupe. Elle se lit
+   enfoncée quand la boîte la montre déjà. */
+.admin-thread-aire-btn {
+  cursor: pointer;
+  /* L'appui long emporte le relevé : le texte de la pastille ne se sélectionne
+     pas sous le doigt, et le menu du navigateur ne s'ouvre pas par-dessus. */
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  touch-action: manipulation;
+  transition: background .15s ease, border-color .15s ease, color .15s ease;
+}
+
+/* La copie faite : la pastille dit un instant que le relevé est prêt à coller,
+   dans la teinte des gestes aboutis. */
+.admin-thread-aire-btn[data-copie="yes"] {
+  border-color: color-mix(in srgb, var(--accent2) 58%, transparent);
+  background: color-mix(in srgb, var(--accent2) 18%, transparent);
+  color: color-mix(in srgb, var(--accent2) 82%, var(--text));
+}
+
+.admin-thread-aire-btn[data-copie="err"] {
+  border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+}
+
+.admin-thread-aire-btn:hover,
+.admin-thread-aire-btn:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 58%, transparent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+}
+
+.admin-thread-aire-btn[data-on="yes"] {
+  border-color: color-mix(in srgb, var(--accent) 70%, transparent);
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  color: color-mix(in srgb, var(--accent) 95%, var(--text));
+}
+
+/* Le pied de la ligne : la pastille de l'aire à gauche, la porte du fil à
+   droite. Les deux gestes vivent hors du bouton de la ligne, pour qu'aucun
+   ne vole le clic de l'autre. */
+.admin-thread-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+  padding-inline: 2px;
+}
+
+.admin-thread-foot .admin-thread-open { margin-inline-start: auto; }
+
+.admin-thread-aire i { flex: none; font-size: 10px; }
+
+/* Le compte du relevé de toutes les aires, posé à côté du geste : combien de
+   fois il est parti et le jour de la dernière fois. */
+.admin-releves-tally {
+  gap: 4px;
+  font-family: var(--font-label, inherit);
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+
+.admin-releves-tally b { font-size: 11px; font-variant-numeric: tabular-nums; }
+
+.admin-releves-tally-word { font-size: 10px; }
+
+.admin-releves-tally-last {
+  font-style: normal;
+  font-size: 10px;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+
+/* Les aires distinctes déjà relevées, séparées du nombre de gestes par un
+   filet : l'en-tête dit combien d'aires ont quitté la boîte au moins une fois. */
+.admin-releves-tally-aires {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-inline-start: 1px;
+  padding-inline-start: 6px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+
+.admin-releves-tally-aires i { font-size: 10px; }
+
+/* Les aires de la boîte qu'aucun relevé n'a encore emportées : le chiffre et
+   son mot se lisent ensemble, et le survol les nomme une à une. */
+.admin-aires-jamais {
+  gap: 4px;
+  font-family: var(--font-label, inherit);
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+
+.admin-aires-jamais b { font-size: 11px; font-variant-numeric: tabular-nums; }
+
+.admin-aires-jamais-word { font-size: 10px; }
+
+.admin-aires-jamais i { font-size: 11px; }
+
+/* La pastille des aires jamais relevées est une porte : chaque appui resserre
+   la boîte sur l'aire qui vient, appui après appui. Elle garde la tenue d'une
+   étiquette, mais le curseur et l'état enfoncé disent qu'elle agit. */
+.admin-aires-jamais-btn {
+  font: inherit;
+  font-family: var(--font-label, inherit);
+  font-size: 10px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color .16s ease, background .16s ease, color .16s ease;
+}
+
+.admin-aires-jamais-btn:hover,
+.admin-aires-jamais-btn:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 62%, transparent);
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  color: var(--text);
+}
+
+.admin-aires-jamais-btn[data-on="yes"] {
+  border-color: color-mix(in srgb, var(--accent) 70%, transparent);
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  color: var(--text);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 26%, transparent);
+}
+
+/* L'aire que la porte ouvrira, nommée dans la pastille : le geste se lit
+   avant le clic, sans attendre le survol. */
+.admin-aires-jamais-next {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  max-width: 130px;
+  padding-inline-start: 6px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+  font-size: 10px;
+  letter-spacing: 0;
+  text-transform: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: color-mix(in srgb, var(--text) 60%, transparent);
+}
+
+.admin-aires-jamais-next i { font-size: 11px; }
+
+/* Les deux chemins d'un relevé d'aire, séparés du compte des aires par un
+   filet : les relevés partis d'un en-tête de groupe et ceux emportés d'un
+   appui long sur la pastille d'un fil. */
+.admin-releves-tally-chemins {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-inline-start: 1px;
+  padding-inline-start: 6px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+
+.admin-releves-tally-chemin {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  white-space: nowrap;
+}
+
+.admin-releves-tally-chemin i { font-size: 10px; }
+
+/* La gomme des deux chemins : une petite touche au bout du compte, qui dit au
+   survol ce qu’elle efface — les gestes, jamais les dates des groupes. */
+.admin-releves-tally-chemins .admin-revue-clear {
+  width: 14px;
+  height: 14px;
+  margin-inline-start: 0;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+
+.admin-releves-tally-chemins .admin-revue-clear:hover,
+.admin-releves-tally-chemins .admin-revue-clear:focus-visible {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+
+/* La ligne de rappel sous la barre de tri : l'appui long emporte le relevé,
+   l'appui court resserre la boîte. Elle reste une note, jamais un ordre. */
+.admin-inbox-hold {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0;
+  padding: 0 2px;
+  font-family: var(--font-label, inherit);
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: .02em;
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+}
+
+.admin-inbox-hold i {
+  flex: none;
+  font-size: 12px;
+  color: color-mix(in srgb, var(--accent) 70%, var(--text));
+}
+
+/* Sous le tri « relevé le plus récent », la ligne compte les aires jamais
+   relevées qui ferment la liste : elle reste une note discrète, jamais un
+   ordre, et se calme quand tout est déjà parti. */
+.admin-inbox-jamais {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  margin: 0;
+  padding: 0 2px;
+  font-family: var(--font-label, inherit);
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: .02em;
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+}
+
+.admin-inbox-jamais i {
+  flex: none;
+  margin-top: 1px;
+  font-size: 12px;
+  color: color-mix(in srgb, var(--accent) 70%, var(--text));
+}
+
+.admin-inbox-jamais span { min-width: 0; }
+
+.admin-inbox-jamais[data-zero='yes'] i {
+  color: color-mix(in srgb, var(--accent2) 78%, var(--text));
+}
+
+/* La petite gomme de la ligne se tient au bout de la phrase : elle rend la
+   liste entière d'un geste, sans couper le texte ni le pousser. */
+.admin-inbox-jamais .admin-inbox-jamais-clear {
+  flex: none;
+  align-self: center;
+  margin-inline-start: auto;
+}
+
+/* La gomme des deux chemins dit, juste après le clic, ce qu'elle vient
+   d'effacer : le compte de l'en-tête retombe à zéro, la phrase garde le
+   chiffre quelques secondes. */
+.admin-releves-cleared {
+  gap: 4px;
+  font-family: var(--font-label, inherit);
+  letter-spacing: .04em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Le compte des gommes qui ont rendu des aires vierges : il se tient au bout
+   de la pastille des aires relevées aujourd'hui, séparé d'un filet discret,
+   avec le jour du dernier geste. */
+.admin-gommes-tally {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-inline-start: 1px;
+  padding-inline-start: 6px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  font-size: 10px;
+  letter-spacing: 0;
+  text-transform: none;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 54%, transparent);
+  white-space: nowrap;
+}
+
+.admin-gommes-tally i { font-size: 10px; opacity: .8; }
+
+/* Le partage des aires rendues par la dernière gomme, posé sur la pastille :
+   celles qui se tiennent encore dans la boîte, puis celles qui en sont
+   parties. Les deux chiffres se lisent sans survol. */
+.admin-gommes-split {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-inline-start: 1px;
+  padding-inline-start: 6px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.admin-gommes-split-part {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 10px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: color-mix(in srgb, var(--text) 54%, transparent);
+}
+
+.admin-gommes-split-encore {
+  color: color-mix(in srgb, var(--accent) 68%, var(--text));
+}
+
+.admin-gommes-split-parties[data-zero='no'] {
+  color: color-mix(in srgb, var(--text) 74%, transparent);
+}
+
+.admin-gommes-split-parties[data-zero='yes'] {
+  opacity: .68;
+}
+
+/* Les deux bouts du partage, nommés sous les deux chiffres : l’aire effacée
+   en dernier et celle qui est partie le plus anciennement, chacune avec le
+   jour de son geste. La ligne reste discrète pour ne pas peser sur la
+   pastille, mais se lit sans survol. */
+.admin-gommes-split-bouts {
+  display: inline-flex;
+  align-items: center;
+  max-width: 34ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 10px;
+  letter-spacing: 0;
+  text-transform: none;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 56%, transparent);
+}
+
+/* La copie des aires parties, posée au bout de leur ligne : un geste discret,
+   qui n'ouvre rien et n'écrit rien d'autre que la liste elle-même. */
+.admin-gomme-hors-copy {
+  flex: none;
+  align-self: center;
+  margin-inline-start: auto;
+}
+
+/* Le sens de la ligne des aires parties, posé juste après la copie : un clic
+   retourne les départs, du plus frais au plus ancien, puis l'inverse. */
+.admin-gomme-hors-sort {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: .25rem;
+  margin-inline-start: .4rem;
+  padding: .12rem .5rem;
+  border: 1px solid oklch(var(--foreground-300) / .35);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font-family: var(--font-label, inherit);
+  font-size: .68rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  opacity: .7;
+}
+
+.admin-gomme-hors-sort:hover {
+  opacity: 1;
+}
+
+.admin-gomme-hors-sort[data-on='yes'] {
+  opacity: 1;
+  border-color: oklch(var(--accent-500) / .55);
+  color: oklch(var(--accent-600));
+}
+
+/* La pastille qui reste quand celle des aires du jour a disparu : le geste
+   d'effacement ne s'oublie pas avec la pastille qu'il a vidée. */
+.admin-gommes-pill {
+  font-family: var(--font-label, inherit);
+  letter-spacing: .04em;
+  cursor: default;
+}
+
+/* La jauge posée sous la ligne des fils, quand le tri « relevé le plus ancien
+   d'abord » est posé : l'écart se lit sans survol. */
+.admin-ancien-jauge {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  margin: 0;
+  padding: 0 2px;
+  font-family: var(--font-label, inherit);
+  font-size: 10px;
+  letter-spacing: .02em;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+
+.admin-ancien-jauge-head {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: none;
+  color: color-mix(in srgb, var(--accent) 78%, var(--text));
+}
+
+.admin-ancien-jauge-head i { font-size: 12px; }
+
+.admin-ancien-jauge-track {
+  display: inline-flex;
+  align-items: stretch;
+  width: 90px;
+  height: 4px;
+  flex: none;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 14%, transparent);
+  overflow: hidden;
+}
+
+.admin-ancien-jauge-fill {
+  display: block;
+  min-width: 0;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 74%, var(--text));
+  transition: width .25s ease;
+}
+
+.admin-ancien-jauge-span {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .admin-gommes-tally {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .admin-ancien-jauge-track { width: 56px; }
+}
+
+@media (max-width: 640px) {
+  .admin-aires-jamais-next { max-width: 84px; }
+  .admin-releves-tally-chemins { gap: 4px; }
+}
+
+
+.admin-thread[data-revu="yes"] .admin-thread-sleep { opacity: .55; }
+
+/* La porte du fil : la conversation telle que le compte la voit s'ouvre dans
+   un autre onglet. La ligne reste un bouton — la porte se pose dessous, au
+   bout de la rangée, pour que les deux gestes ne se volent pas le clic. */
+.admin-thread-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.admin-thread-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  align-self: flex-end;
+  max-width: 100%;
+  padding: 2px 9px;
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  border-radius: 999px;
+  background: none;
+  font-family: var(--font-label, inherit);
+  font-size: 10.5px;
+  letter-spacing: .03em;
+  text-decoration: none;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  cursor: pointer;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+
+.admin-thread-open i { font-size: 12px; }
+
+.admin-thread-open:hover,
+.admin-thread-open:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+}
+
+/* Le compteur des fils dormants déjà relus : un repère de revue, avec son
+   geste d'effacement — la liste et le filtre, eux, ne bougent pas. */
+.admin-revue-badge { gap: 4px; }
+
+.admin-revue-clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  margin-inline-start: 2px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.admin-revue-clear:hover,
+.admin-revue-clear:focus-visible {
+  background: color-mix(in srgb, var(--text) 16%, transparent);
+}
+
+.admin-revue-clear i { margin: 0; font-size: 11px; }
+
+/* La jauge de revue : « 3 / 8 fils dormants relus ». Le chiffre se lit d'un
+   coup d'œil, la barre dit où en est la visite sans ajouter une phrase. */
+.admin-revue-count {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  letter-spacing: .02em;
+  white-space: nowrap;
+}
+
+.admin-revue-words {
+  font-size: 10.5px;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  white-space: nowrap;
+}
+
+.admin-revue-track {
+  display: inline-flex;
+  align-items: stretch;
+  width: 44px;
+  height: 4px;
+  margin-inline-start: 3px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 14%, transparent);
+  overflow: hidden;
+}
+
+.admin-revue-fill {
+  display: block;
+  min-width: 0;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent2) 82%, var(--text));
+  transition: width .25s ease;
+}
+
+/* Le jeton « restant à relire » : même geste que celui du sommeil, un cran
+   plus loin dans la revue. */
+.admin-restant-btn {
+  cursor: pointer;
+}
+
+.admin-restant-done {
+  opacity: .78;
+}
+
+.admin-thread-pane {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 260px;
+  padding: 14px 16px;
+  border: 1px solid color-mix(in srgb, var(--text) 11%, transparent);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--bg) 30%, transparent);
+}
+
+.admin-thread-members {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed color-mix(in srgb, var(--text) 14%, transparent);
+  font-size: 12px;
+}
+
+.admin-member {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  border-radius: 999px;
+  color: color-mix(in srgb, var(--text) 74%, transparent);
+  text-decoration: none;
+}
+
+.admin-member:hover { border-color: color-mix(in srgb, var(--accent) 44%, transparent); color: var(--text); }
+
+/* Depuis le fil ouvert, la fiche du compte : le lien complète les
+   participants, il ne les remplace pas. */
+.admin-thread-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.admin-member-btn {
+  font: inherit;
+  cursor: pointer;
+  background: transparent;
+}
+
+.admin-thread-links .admin-member-btn {
+  border-style: dashed;
+}
+
+.admin-thread-links .admin-member-btn:hover {
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.admin-bubbles {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.admin-bubble {
+  padding: 9px 12px;
+  border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--surface) 46%, transparent);
+}
+
+.admin-bubble-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 11px;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+
+.admin-bubble-head b { color: var(--text); font-weight: 600; }
+.admin-bubble-head em { font-style: normal; }
+
+.admin-bubble-body {
+  margin: 4px 0 0;
+  font-size: 13px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.admin-reply {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 14%, transparent);
+}
+
+.admin-reply-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--text) 54%, transparent);
+}
+
+.admin-reply-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* ---- les réglages ---- */
+.admin-defs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+  margin: 0;
+}
+
+.admin-def {
+  padding: 12px 14px;
+  border: 1px solid color-mix(in srgb, var(--text) 11%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--bg) 32%, transparent);
+}
+
+.admin-def dt {
+  font-family: var(--font-label, inherit);
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+}
+
+.admin-def dd {
+  margin: 4px 0 0;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  word-break: break-word;
+}
+
+/* ---- la fiche d'un compte, ouverte sur le côté ---- */
+.admin-row-click { cursor: pointer; }
+
+.admin-table tbody tr.admin-row-click:hover td {
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.admin-table tbody tr.admin-row-click[data-soon="yes"] td:first-child {
+  box-shadow: inset 3px 0 0 color-mix(in srgb, var(--accent) 62%, transparent);
+}
+
+.admin-due {
+  display: block;
+  margin-top: 3px;
+  font-family: var(--font-label, inherit);
+  font-size: 10px;
+  letter-spacing: .04em;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+}
+
+.admin-due[data-late="yes"] {
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  font-style: italic;
+}
+
+.admin-row-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  border-radius: 999px;
+  background: none;
+  color: color-mix(in srgb, var(--text) 72%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 11px;
+  cursor: pointer;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+
+.admin-row-open:hover {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--accent) 48%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.admin-row-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.admin-row-mail {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  border-radius: 999px;
+  background: none;
+  color: color-mix(in srgb, var(--text) 72%, transparent);
+  font-size: 13px;
+  cursor: pointer;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+
+.admin-row-mail:hover:not(:disabled),
+.admin-row-mail:focus-visible:not(:disabled) {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+.admin-row-mail:disabled {
+  opacity: .32;
+  cursor: not-allowed;
+}
+
+.admin-row-mail[data-recent="yes"] {
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--text);
+}
+
+/* Le récapitulatif copié depuis la ligne : le même gabarit que le bouton de
+   relance, pour que les commandes d'une même ligne se lisent d'un geste.
+   Le libellé reste vide tant que rien n'est copié ; il n'apparaît qu'après,
+   pour confirmer sans élargir la colonne au repos. */
+.admin-row-copy {
+  display: inline-flex;
+  align-items: center;
+}
+
+.admin-row-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 26px;
+  padding: 0 7px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  border-radius: 999px;
+  background: none;
+  color: color-mix(in srgb, var(--text) 72%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 11px;
+  cursor: pointer;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+
+.admin-row-copy-btn i { font-size: 13px; }
+
+.admin-row-copy-btn span:empty { display: none; }
+
+.admin-row-copy-btn:hover,
+.admin-row-copy-btn:focus-visible {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+.admin-row-copy-btn.is-ok {
+  border-color: color-mix(in srgb, var(--accent2) 52%, transparent);
+  background: color-mix(in srgb, var(--accent2) 14%, transparent);
+  color: var(--text);
+}
+
+.admin-relance-ago {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin: 6px 0 0;
+  padding: 3px 9px;
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  border-radius: 999px;
+  font-family: var(--font-label, inherit);
+  font-size: 11px;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+
+.admin-relance-ago i { font-size: 12px; opacity: .8; }
+
+.admin-relance-ago b { font-weight: 600; }
+
+.admin-relance-ago[data-recent="yes"] {
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--text);
+}
+
+.admin-chip[data-tone="warn"][data-on="yes"] {
+  border-color: color-mix(in srgb, var(--accent) 62%, transparent);
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+/* Un jeton qui rappelle un état sans rien filtrer : il garde l'allure d'une
+   pastille allumée, sans inviter au clic. */
+.admin-chip[data-static="yes"] { cursor: default; }
+
+/* Le rang dans le compteur des dépôts après relance : un second chiffre, lu
+   sur la même mesure, séparé par un filet discret. */
+.admin-count .admin-after-rank {
+  padding-inline-start: 6px;
+  margin-inline-start: 2px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--text) 22%, transparent);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+}
+
+.admin-sheet-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.admin-sheet-backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  padding: 0;
+  background: color-mix(in srgb, var(--text) 42%, transparent);
+  cursor: pointer;
+}
+
+.admin-sheet {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(620px, 100%);
+  height: 100%;
+  border-inline-start: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  background: var(--bg);
+  box-shadow: -24px 0 60px color-mix(in srgb, var(--text) 18%, transparent);
+  animation: admin-sheet-in .22s ease-out;
+}
+
+@keyframes admin-sheet-in {
+  from { transform: translateX(28px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.admin-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+  transition: color .15s ease;
+}
+
+.admin-sort i { font-size: 12px; opacity: .7; }
+
+.admin-sort:hover { color: var(--text); }
+
+.admin-sort[data-on="yes"] {
+  color: color-mix(in srgb, var(--accent) 86%, var(--text));
+}
+
+.admin-sort[data-on="yes"] i { opacity: 1; }
+
+.admin-sheet-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.admin-sheet-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 18px 22px;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
+  background: color-mix(in srgb, var(--surface) 60%, transparent);
+}
+
+.admin-sheet-title {
+  margin: 4px 0 0;
+  font-family: var(--font-heading, inherit);
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.3;
+  word-break: break-word;
+}
+
+.admin-sheet-mail {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin: 5px 0 0;
+  font-size: 12px;
+  color: color-mix(in srgb, var(--text) 60%, transparent);
+  word-break: break-all;
+}
+
+.admin-sheet-body {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 18px 22px 40px;
+  overflow-y: auto;
+}
+
+/* La barre d'onglets de la console, reprise dans la fiche : les sections
+   restent lisibles et atteignables pendant que la fiche est ouverte, au lieu
+   de disparaître sous le voile. Un filet discret la sépare du titre, sans
+   concurrencer le trait orange de l'en-tête. */
+.admin-sheet-tabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+  padding: 9px 18px;
+  background: color-mix(in srgb, var(--surface) 42%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+}
+.admin-sheet-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 11px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: color-mix(in srgb, var(--text) 56%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 11.5px;
+  letter-spacing: .03em;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color .16s ease, background .16s ease, box-shadow .16s ease;
+}
+.admin-sheet-tab i { font-size: 14px; opacity: .85; }
+.admin-sheet-tab b {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  opacity: .72;
+}
+.admin-sheet-tab:hover {
+  color: var(--text);
+  background: color-mix(in srgb, var(--text) 7%, transparent);
+}
+.admin-sheet-tab[data-on="yes"] {
+  color: color-mix(in srgb, var(--accent2) 82%, var(--text));
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 42%, transparent);
+}
+.admin-sheet-tab[data-on="yes"] i { color: var(--accent2); opacity: 1; }
+.admin-sheet-tab:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 60%, transparent);
+  outline-offset: 1px;
+}
+
+.admin-sheet-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-sheet-block .admin-empty { padding: 14px 2px; }
+
+/* La pastille « À relire » ouvre la fiche sur la ligne de rôle : le bloc visé
+   se détache un instant, pour que l'œil tombe sur la promotion qu'on venait
+   relire. La marge haute garde le titre du bloc sous le bord de la zone de
+   lecture, au lieu de le coller dessous. */
+.admin-sheet-block[data-focus="yes"] {
+  scroll-margin-top: 10px;
+  padding: 10px 12px;
+  border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+}
+
+/* L'en-tête d'un bloc de la fiche : le compte des dépôts à gauche, ce qu'ils
+   pèsent à droite — lisible d'un seul regard. */
+.admin-sheet-block-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Le lien de la fiche vers les relectures longues : un bouton discret qui
+   mène directement à la liste de travail, sans quitter des yeux la fiche. */
+.admin-fiche-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 8px 0 4px;
+  padding: 6px 12px;
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: var(--text);
+  font-family: var(--font-label, inherit);
+  font-size: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color .15s ease, background .15s ease, color .15s ease;
+}
+
+.admin-fiche-link i { font-size: 13px; opacity: .8; }
+
+.admin-fiche-link:hover,
+.admin-fiche-link:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 62%, transparent);
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+.admin-fiche-link:hover i:last-child { transform: translateX(2px); }
+
+.admin-fiche-link i:last-child { transition: transform .15s ease; }
+
+/* Le lien vers les relectures et le compte des dépôts postérieurs se lisent
+   côte à côte : deux façons de nommer la même attente, sans ouvrir la liste. */
+/* Le compteur d'exports de la semaine, sous la fiche du compte : la même
+   mémoire d'appareil que l'écran « Paiements », reprise telle quelle. Un
+   export dans la semaine allume le trait d'accent ; une semaine vide laisse
+   la ligne en retrait, pour que le tableau dormant se repère sans lire. */
+.admin-fiche-week {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  width: 100%;
+  margin: 4px 0 0;
+  padding: 8px 12px;
+  border: 1px dashed color-mix(in srgb, var(--text) 16%, transparent);
+  border-radius: 12px;
+  background: none;
+  font-family: var(--font-label, inherit);
+  font-size: 11px;
+  letter-spacing: .02em;
+  text-align: start;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  cursor: pointer;
+  transition: border-color .18s ease, color .18s ease;
+}
+
+.admin-fiche-week:hover,
+.admin-fiche-week:focus-visible {
+  border-color: color-mix(in srgb, var(--text) 32%, transparent);
+  color: color-mix(in srgb, var(--text) 76%, transparent);
+}
+
+/* La flèche n'apparaît qu'au survol : le compteur reste une ligne de lecture,
+   et le geste se découvre quand on s'en approche. */
+.admin-fiche-week .admin-fiche-week-go {
+  margin-inline-start: auto;
+  opacity: 0;
+  transition: opacity .18s ease;
+}
+
+.admin-fiche-week:hover .admin-fiche-week-go,
+.admin-fiche-week:focus-visible .admin-fiche-week-go {
+  opacity: 1;
+}
+
+.admin-fiche-week i {
+  font-size: 14px;
+  color: color-mix(in srgb, var(--text) 42%, transparent);
+}
+
+.admin-fiche-week b {
+  padding: 0 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 9%, transparent);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--text) 82%, transparent);
+}
+
+.admin-fiche-week em {
+  font-style: normal;
+  opacity: .84;
+}
+
+.admin-fiche-week[data-state="yes"] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2, var(--accent)) 30%, transparent);
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 6%, transparent);
+}
+
+.admin-fiche-week[data-state="yes"] i {
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 76%, var(--text));
+}
+
+.admin-fiche-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Les exports de la semaine relus sur le seul périmètre d'un compte : une
+   ligne par fichier, sa date, ses lignes et son montant, chacune ouvrant
+   l'écran « Paiements » resserré sur ce compte. */
+.admin-scope-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.admin-scope-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+  padding: 6px 10px;
+  border: 1px dashed color-mix(in srgb, var(--text) 16%, transparent);
+  border-radius: 9px;
+  background: none;
+  font: inherit;
+  font-size: 12px;
+  text-align: start;
+  color: color-mix(in srgb, var(--text) 76%, transparent);
+  cursor: pointer;
+  transition: border-color .16s ease, background .16s ease, color .16s ease;
+}
+
+.admin-scope-row > i {
+  flex: none;
+  font-size: 13px;
+  color: color-mix(in srgb, var(--text) 42%, transparent);
+}
+
+.admin-scope-row > i:last-child {
+  opacity: 0;
+  transition: opacity .16s ease;
+}
+
+.admin-scope-row:hover,
+.admin-scope-row:focus-visible {
+  border-color: color-mix(in srgb, var(--accent2, var(--accent)) 44%, transparent);
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 7%, transparent);
+  color: color-mix(in srgb, var(--text) 88%, transparent);
+}
+
+.admin-scope-row:hover > i:last-child,
+.admin-scope-row:focus-visible > i:last-child {
+  opacity: .8;
+}
+
+.admin-scope-main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 8px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.admin-scope-main b {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.admin-scope-main em {
+  font-family: var(--font-label, inherit);
+  font-size: 10.5px;
+  font-style: normal;
+  letter-spacing: .03em;
+  color: color-mix(in srgb, var(--text) 56%, transparent);
+}
+
+.admin-scope-amount {
+  flex: none;
+  padding: 0 7px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+}
+
+/* La comparaison de deux exports portée dans la fiche : les deux points côte
+   à côte et l'écart de montant des seules lignes du compte. */
+.admin-scope-cmp {
+  margin-top: 8px;
+  padding: 8px 10px;
+  border: 1px dashed color-mix(in srgb, var(--text) 16%, transparent);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--text) 3%, transparent);
+}
+
+.admin-scope-cmp-head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  margin: 0 0 6px;
+  font-family: var(--font-label, inherit);
+  font-size: 11px;
+  letter-spacing: .02em;
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+}
+
+.admin-scope-cmp-head > i {
+  font-size: 13px;
+  color: color-mix(in srgb, var(--text) 44%, transparent);
+}
+
+.admin-scope-cmp-head b {
+  font-weight: 600;
+  color: color-mix(in srgb, var(--text) 82%, transparent);
+}
+
+.admin-scope-cmp-gap {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-inline-start: auto;
+  padding: 1px 8px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  border-radius: 999px;
+  background: none;
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 76%, transparent);
+  cursor: pointer;
+  transition: border-color .16s ease, background .16s ease, color .16s ease;
+}
+
+.admin-scope-cmp-gap i {
+  font-size: 11px;
+  color: inherit;
+}
+
+.admin-scope-cmp-gap[data-tone='up'] {
+  border-color: color-mix(in srgb, var(--ok, var(--accent)) 36%, transparent);
+  color: color-mix(in srgb, var(--ok, var(--accent)) 86%, var(--text));
+}
+
+.admin-scope-cmp-gap[data-tone='down'] {
+  border-color: color-mix(in srgb, var(--accent) 36%, transparent);
+  color: color-mix(in srgb, var(--accent) 86%, var(--text));
+}
+
+.admin-scope-cmp-gap:hover,
+.admin-scope-cmp-gap:focus-visible {
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 8%, transparent);
+}
+
+/* Ce que les lignes parties ont retiré au périmètre : un second chiffre à
+   côté de l'écart, sans prendre la marge automatique du premier. */
+.admin-scope-cmp-parties {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 8px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 34%, transparent);
+  border-radius: 999px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+}
+
+.admin-scope-cmp-parties i {
+  font-size: 11px;
+  color: inherit;
+}
+
+/* Les lignes parties, nommées une à une sous le montant qu'elles ont retiré :
+   la fiche se relit ligne à ligne, sans ouvrir le classeur. */
+.admin-scope-cmp-parties-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 2px;
+  padding: 6px 9px;
+  border: 1px dashed color-mix(in srgb, var(--text) 16%, transparent);
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--text) 3%, transparent);
+  min-width: 0;
+}
+
+.admin-scope-cmp-parties-head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 3px 8px;
+  margin: 0;
+  font-size: 11.5px;
+}
+
+.admin-scope-cmp-parties-head i {
+  font-size: 12px;
+  color: color-mix(in srgb, var(--accent) 78%, var(--text));
+}
+
+.admin-scope-cmp-parties-head b {
+  font-weight: 600;
+  color: color-mix(in srgb, var(--text) 84%, transparent);
+}
+
+.admin-scope-cmp-parties-head em {
+  font-style: normal;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent) 86%, var(--text));
+}
+
+/* Sous la liste, ce qu'elle pèse : combien de lignes portent à elles seules
+   plus de la moitié du retrait. Le trait la sépare du détail ligne à ligne. */
+.admin-scope-cmp-parties-major {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  margin: 2px 0 0;
+  padding-top: 4px;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 14%, transparent);
+  font-size: 11px;
+  line-height: 1.45;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 64%, transparent);
+}
+
+.admin-scope-cmp-parties-major i {
+  font-size: 12px;
+  flex: none;
+  color: color-mix(in srgb, var(--accent) 80%, var(--text));
+}
+
+/* La note des lignes majoritaires est un jeton : un clic resserre la liste sur
+   ces seules lignes, un second la rend entière. Le geste ne change pas le
+   total, il change ce qu'on en lit. */
+button.admin-scope-cmp-parties-major {
+  width: 100%;
+  border: 0;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 14%, transparent);
+  background: none;
+  font: inherit;
+  font-size: 11px;
+  line-height: 1.45;
+  font-variant-numeric: tabular-nums;
+  text-align: start;
+  cursor: pointer;
+  transition: color .16s ease, background .16s ease;
+}
+
+button.admin-scope-cmp-parties-major:hover,
+button.admin-scope-cmp-parties-major:focus-visible {
+  color: var(--text);
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+}
+
+button.admin-scope-cmp-parties-major[data-on="yes"] {
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+
+/* Les deux jetons des lignes parties, côte à côte : celui des majoritaires et
+   celui des lignes qui se partagent le retrait. Le trait qui les sépare de la
+   liste reste sur le groupe, pas sur chaque jeton. */
+.admin-scope-cmp-parties-tokens {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+  margin: 2px 0 0;
+  padding-top: 4px;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 14%, transparent);
+}
+
+.admin-scope-cmp-parties-tokens > p.admin-scope-cmp-parties-major {
+  flex: 1 1 100%;
+  margin: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.admin-scope-cmp-parties-tokens > button.admin-scope-cmp-parties-major,
+.admin-scope-cmp-parties-tokens > button.admin-scope-cmp-parties-share {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  width: auto;
+  margin: 0;
+  padding: 2px 9px;
+  border: 1px solid color-mix(in srgb, var(--accent) 32%, transparent);
+  border-radius: 999px;
+  background: none;
+  font: inherit;
+  font-size: 11px;
+  line-height: 1.45;
+  letter-spacing: .02em;
+  font-variant-numeric: tabular-nums;
+  text-align: start;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  cursor: pointer;
+  transition: border-color .16s ease, background .16s ease, color .16s ease;
+}
+
+.admin-scope-cmp-parties-tokens > button.admin-scope-cmp-parties-major:hover,
+.admin-scope-cmp-parties-tokens > button.admin-scope-cmp-parties-major:focus-visible,
+.admin-scope-cmp-parties-tokens > button.admin-scope-cmp-parties-share:hover,
+.admin-scope-cmp-parties-tokens > button.admin-scope-cmp-parties-share:focus-visible {
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+}
+
+.admin-scope-cmp-parties-tokens > button.admin-scope-cmp-parties-major[data-on="yes"] {
+  border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+/* Le jeton du partage : teinté autrement, pour ne pas se confondre avec celui
+   des lignes majoritaires qu’il accompagne. */
+.admin-scope-cmp-parties-tokens > button.admin-scope-cmp-parties-share {
+  border-color: color-mix(in srgb, var(--accent2, var(--accent)) 34%, transparent);
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 82%, var(--text));
+}
+
+.admin-scope-cmp-parties-tokens > button.admin-scope-cmp-parties-share:hover,
+.admin-scope-cmp-parties-tokens > button.admin-scope-cmp-parties-share:focus-visible {
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 10%, transparent);
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 92%, var(--text));
+}
+
+.admin-scope-cmp-parties-tokens > button.admin-scope-cmp-parties-share[data-on="yes"] {
+  border-color: color-mix(in srgb, var(--accent2, var(--accent)) 60%, transparent);
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 14%, transparent);
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 94%, var(--text));
+}
+
+.admin-scope-cmp-parties-tokens i {
+  font-size: 12px;
+  flex: none;
+}
+
+.admin-scope-cmp-parties-list ul {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  min-width: 0;
+}
+
+.admin-scope-cmp-parties-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  min-width: 0;
+  padding: 2px 0;
+  font-size: 11.5px;
+  font-variant-numeric: tabular-nums;
+}
+
+.admin-scope-cmp-parties-list li > i {
+  font-size: 11px;
+  color: color-mix(in srgb, var(--text) 34%, transparent);
+}
+
+.admin-scope-cmp-parties-name {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.admin-scope-cmp-parties-name b {
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 82%, transparent);
+}
+
+.admin-scope-cmp-parties-name em {
+  font-style: normal;
+  font-size: 10.5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+
+.admin-scope-cmp-parties-amount {
+  margin-inline-start: auto;
+  font-weight: 600;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+}
+
+.admin-scope-cmp-parties-amount[data-empty="yes"] {
+  font-weight: 400;
+  color: color-mix(in srgb, var(--text) 48%, transparent);
+}
+
+/* La part que se partagent les lignes non majoritaires, dite sous la liste :
+   leur somme rapportée au montant retiré, en pourcentage. Elle se lit sans
+   additionner la colonne ni ouvrir le classeur. */
+.admin-scope-cmp-parties-share-note {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 3px 6px;
+  margin: 3px 0 0;
+  padding-top: 4px;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 14%, transparent);
+  font-size: 11px;
+  line-height: 1.45;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 82%, var(--text));
+}
+
+.admin-scope-cmp-parties-share-note i {
+  font-size: 12px;
+  flex: none;
+  color: inherit;
+}
+
+/* La même ligne, devenue un jeton : un clic resserre la liste des lignes
+   parties sur celles qui se partagent le retrait, un second la rend entière.
+   Le geste ne se confond pas avec celui des majoritaires — les deux jetons
+   s’effacent l’un l’autre. */
+button.admin-scope-cmp-parties-share-note {
+  width: 100%;
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  text-align: start;
+  background: none;
+  border: 0;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 14%, transparent);
+  cursor: pointer;
+  transition: color 120ms ease, border-color 120ms ease;
+}
+
+button.admin-scope-cmp-parties-share-note:hover {
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+  border-top-color: color-mix(in srgb, var(--accent) 46%, transparent);
+}
+
+button.admin-scope-cmp-parties-share-note:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 62%, transparent);
+  outline-offset: 2px;
+}
+
+button.admin-scope-cmp-parties-share-note[data-on="yes"] {
+  color: color-mix(in srgb, var(--accent) 96%, var(--text));
+  font-weight: 600;
+  border-top-color: color-mix(in srgb, var(--accent) 62%, transparent);
+}
+
+/* La ligne qui pèse à elle seule plus de la moitié du retrait : un liseré à
+   gauche et un repère dans la ligne, pour que le retrait qui tient à peu de
+   lignes se voie dans la liste elle-même. */
+.admin-scope-cmp-parties-list li[data-major="yes"] {
+  padding-inline-start: 5px;
+  border-inline-start: 2px solid color-mix(in srgb, var(--accent) 54%, transparent);
+}
+
+.admin-scope-cmp-parties-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: none;
+  padding: 0 6px;
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 9.5px;
+  letter-spacing: .03em;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+}
+
+.admin-scope-cmp-parties-mark i {
+  font-size: 11px;
+  color: inherit;
+}
+
+/* La ligne de synthèse des majoritaires : elle dit combien de lignes portent
+   plus de la moitié du retrait et ouvre le CSV réduit à ces seules lignes, sans
+   resserrer la liste à l'écran. */
+.admin-scope-cmp-parties-major-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  align-self: flex-start;
+  margin-top: 2px;
+  padding: 4px 10px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 40%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+  font: inherit;
+  font-size: 11px;
+  letter-spacing: .02em;
+  font-variant-numeric: tabular-nums;
+  text-align: start;
+  color: color-mix(in srgb, var(--accent) 86%, var(--text));
+  cursor: pointer;
+  transition: border-color .16s ease, background .16s ease, color .16s ease;
+}
+
+.admin-scope-cmp-parties-major-line i {
+  font-size: 12px;
+  color: inherit;
+}
+
+.admin-scope-cmp-parties-major-line:hover,
+.admin-scope-cmp-parties-major-line:focus-visible {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 62%, transparent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: color-mix(in srgb, var(--accent) 94%, var(--text));
+}
+
+.admin-scope-cmp-points {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.admin-scope-cmp-points > i {
+  align-self: center;
+  font-size: 13px;
+  color: color-mix(in srgb, var(--text) 36%, transparent);
+}
+
+.admin-scope-cmp-point {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1 1 160px;
+  min-width: 0;
+  padding: 5px 9px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--text) 5%, transparent);
+  font-size: 11.5px;
+  font-variant-numeric: tabular-nums;
+}
+
+.admin-scope-cmp-point em {
+  font-family: var(--font-label, inherit);
+  font-size: 10px;
+  font-style: normal;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 48%, transparent);
+}
+
+.admin-scope-cmp-point b {
+  font-weight: 600;
+  color: color-mix(in srgb, var(--text) 84%, transparent);
+}
+
+.admin-scope-cmp-point span {
+  color: color-mix(in srgb, var(--text) 60%, transparent);
+}
+
+.admin-scope-cmp-note {
+  margin: 6px 0 0;
+  font-size: 10.5px;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+
+/* Le classeur de la comparaison d'un compte : la même pièce que le bouton de
+   la comparaison de l'écran « Paiements », posée sous le bloc. */
+.admin-scope-cmp-sheet {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 8px;
+  padding: 4px 10px;
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  border-radius: 999px;
+  background: none;
+  font-family: var(--font-label, inherit);
+  font-size: 11px;
+  letter-spacing: .02em;
+  color: color-mix(in srgb, var(--text) 70%, transparent);
+  cursor: pointer;
+  transition: border-color .16s ease, background .16s ease, color .16s ease;
+}
+
+.admin-scope-cmp-sheet i {
+  font-size: 12px;
+  color: inherit;
+}
+
+.admin-scope-cmp-sheet:hover,
+.admin-scope-cmp-sheet:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+
+/* Le CSV des lignes parties se pose à côté du classeur, sans le remplacer :
+   deux pièces jointes, deux gestes. */
+.admin-scope-cmp-sheet.admin-scope-cmp-csv {
+  margin-inline-start: 6px;
+}
+
+/* L'ordre de lecture d'une liste de la fiche, dit sous son en-tête : les
+   demandes B2B se lisent dans l'ordre où elles attendent, et la fiche le
+   rappelle au lieu de le laisser deviner. */
+.admin-fiche-order {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 54%, transparent);
+}
+.admin-fiche-order i { font-size: 13px; flex: none; }
+
+.admin-count[data-tone="accent"] {
+  border-color: color-mix(in srgb, var(--accent) 44%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: color-mix(in srgb, var(--text) 82%, transparent);
+}
+
+.admin-count[data-tone="accent"] i {
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+}
+
+.admin-after-relance { cursor: help; }
+
+/* Les dépôts nommés sous le compteur : le compteur dit combien, la liste dit
+   lesquels — sans ouvrir la liste des annonces. */
+.admin-fiche-apres {
+  list-style: none;
+  margin: 8px 0 4px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.admin-fiche-apres li {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  min-width: 0;
+  padding: 5px 10px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 34%, transparent);
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+  font-size: 12px;
+}
+
+.admin-fiche-apres i {
+  flex: none;
+  font-size: 12px;
+  opacity: .7;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+}
+
+.admin-fiche-apres-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: var(--text);
+}
+
+.admin-fiche-apres-date {
+  flex: none;
+  font-family: var(--font-label, inherit);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+
+/* Le titre du dépôt ouvre la ligne dans l'onglet « Annonces » : le bouton
+   garde la taille du texte et ne prend que la place du titre, pour que la
+   date reste alignée à droite comme sur les autres lignes. */
+.admin-fiche-apres-open {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  text-align: start;
+  color: inherit;
+  cursor: pointer;
+}
+
+.admin-fiche-apres-open .admin-fiche-apres-title {
+  border-bottom: 1px dashed color-mix(in srgb, var(--accent) 42%, transparent);
+}
+
+.admin-fiche-apres-open i {
+  font-size: 12px;
+  opacity: 0;
+  transform: translateX(-2px);
+  transition: opacity .15s ease, transform .15s ease;
+}
+
+.admin-fiche-apres-open:hover i,
+.admin-fiche-apres-open:focus-visible i {
+  opacity: .8;
+  transform: translateX(0);
+}
+
+.admin-fiche-apres-open:hover .admin-fiche-apres-title,
+.admin-fiche-apres-open:focus-visible .admin-fiche-apres-title {
+  border-bottom-color: color-mix(in srgb, var(--accent) 78%, transparent);
+}
+
+/* La ligne du dépôt ouvert depuis la fiche : elle se détache du reste, parce
+   que la liste ne montre qu'elle et qu'on doit voir pourquoi. */
+.admin-row[data-target="yes"] {
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  box-shadow: inset 3px 0 0 color-mix(in srgb, var(--accent) 62%, transparent);
+}
+
+.admin-counts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.admin-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  border-radius: 999px;
+  font-family: var(--font-label, inherit);
+  font-size: 11px;
+  letter-spacing: .03em;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+
+.admin-count b {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+.admin-count[data-tone="ok"] {
+  border-color: color-mix(in srgb, var(--accent2) 34%, transparent);
+  background: color-mix(in srgb, var(--accent2) 12%, transparent);
+}
+
+.admin-count[data-tone="ok"] b { color: color-mix(in srgb, var(--accent2) 80%, var(--text)); }
+
+.admin-count[data-tone="off"] { border-style: dashed; }
+
+/* Les dépôts arrivés après la relance qui attendent déjà depuis trop
+   longtemps : la même teinte que la pastille de relecture longue. */
+.admin-count[data-tone="warn"] {
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: color-mix(in srgb, var(--accent) 86%, var(--text));
+}
+
+.admin-count[data-tone="warn"] i {
+  color: color-mix(in srgb, var(--accent) 86%, var(--text));
+}
+
+.admin-count[data-tone="soft"] {
+  border-style: dashed;
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+}
+
+/* Le compteur « dont relecture longue » devient un jeton : un clic resserre
+   la liste des dépôts arrivés après la relance sur ceux qui attendent déjà,
+   un second la rouvre en entier. */
+.admin-count-btn {
+  cursor: pointer;
+  border-style: solid;
+  transition: border-color .15s ease, background .15s ease, color .15s ease;
+}
+
+.admin-count-btn:hover,
+.admin-count-btn:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 66%, transparent);
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--text);
+}
+
+.admin-count-btn[data-on="yes"] {
+  border-color: color-mix(in srgb, var(--accent) 72%, transparent);
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  color: var(--text);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 28%, transparent);
+}
+
+/* Le compte des fils que le jeton des sept jours laisse dans la liste : il se
+   lit à côté de celui des aires, séparé d'un filet discret, ses chiffres d'une
+   avance stable pour que la pastille ne danse pas au passage de 9 à 10. */
+.admin-vieilles-fils {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding-inline-start: 7px;
+  margin-inline-start: 2px;
+  border-inline-start: 1px solid color-mix(in srgb, currentColor 26%, transparent);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Le bandeau du compte dont on lit les relectures : il nomme le compte, et
+   son bouton rend la liste entière d'un clic. */
+.admin-focus {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 9px 12px;
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  font-size: 12px;
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+}
+
+.admin-focus > i {
+  font-size: 14px;
+  color: color-mix(in srgb, var(--accent) 80%, var(--text));
+}
+
+.admin-focus > span {
+  min-width: 0;
+  word-break: break-all;
+}
+
+.admin-focus .admin-chip { margin-inline-start: auto; }
+
+/* Le rappel d'une relance déjà partie : il prend sa propre ligne sous le nom
+   du compte, pour que l'attente se lise même quand la barre est étroite. */
+.admin-focus-note,
+.admin-focus > .admin-focus-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex-basis: 100%;
+  padding-top: 7px;
+  border-top: 1px dashed color-mix(in srgb, var(--accent) 26%, transparent);
+  font-size: 11px;
+  line-height: 1.45;
+  word-break: normal;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+
+.admin-focus-note i {
+  font-size: 12px;
+  opacity: .85;
+}
+
+.admin-focus-note[data-recent="yes"] {
+  color: color-mix(in srgb, var(--text) 80%, transparent);
+}
+
+.admin-focus-note[data-recent="yes"] i {
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+}
+
+/* Les dépôts entrés après le message : le chiffre prolonge la note de relance,
+   sans ouvrir une seconde ligne dans le bandeau. */
+.admin-focus-after {
+  font-style: normal;
+  font-weight: 500;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+
+.admin-focus-after[data-tone="yes"] {
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+}
+
+/* Le compte des dépôts postérieurs, dans le bouton de tri du bandeau : le
+   chiffre dit combien de lignes la tête de liste réunira. */
+.admin-focus-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+  color: color-mix(in srgb, var(--accent) 78%, var(--text));
+}
+
+/* La date de relance posée sur chaque dépôt du compte lu : elle dit de quand
+   date le message, et si le dépôt l'a précédée ou suivi. */
+.admin-relance-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 8px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 34%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+  font-size: 11px;
+  line-height: 1.7;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 70%, transparent);
+}
+
+.admin-relance-mark i {
+  font-size: 12px;
+  color: color-mix(in srgb, var(--accent) 78%, var(--text));
+}
+
+.admin-relance-mark em {
+  font-style: normal;
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+}
+
+.admin-relance-mark[data-recent="yes"] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  color: color-mix(in srgb, var(--text) 84%, transparent);
+}
+
+.admin-relance-mark[data-recent="yes"] em {
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+
+/* ---- la relance pré-remplie, posée au-dessus de la fiche ---- */
+.admin-relance-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.admin-relance {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: min(640px, 100%);
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 20px 22px;
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  border-radius: 20px;
+  background: var(--bg);
+  box-shadow: 0 30px 70px color-mix(in srgb, var(--text) 22%, transparent);
+  animation: admin-relance-in .2s ease-out;
+}
+
+@keyframes admin-relance-in {
+  from { transform: translateY(14px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.admin-relance-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.admin-relance-title {
+  margin: 4px 0 0;
+  font-family: var(--font-heading, inherit);
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.admin-relance-to {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin: 5px 0 0;
+  font-size: 12px;
+  color: color-mix(in srgb, var(--text) 60%, transparent);
+  word-break: break-all;
+}
+
+.admin-relance-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.admin-relance-field > span {
+  font-family: var(--font-label, inherit);
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+
+.admin-relance-field textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 280px;
+  padding: 12px 14px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--bg) 46%, transparent);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.7;
+  resize: vertical;
+  outline: none;
+}
+
+.admin-relance-field textarea:focus {
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+}
+
+.admin-relance-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.admin-relance-count {
+  margin-inline-end: auto;
+  min-width: 0;
+  font-size: 11px;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+  word-break: break-word;
+}
+
+/* ---- l'ordre « par aire » de la messagerie ---- */
+/* Le nom d'une aire, une fois, au-dessus de ses fils : la liste se lit comme
+   les aires du monde, et son titre est une porte — un appui resserre la boîte
+   sur cette seule aire, un second la rend entière. */
+.admin-threads > li.admin-aire-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  margin-top: 6px;
+  padding: 5px 9px;
+  border-radius: 9px;
+  border-inline-start: 2px solid color-mix(in srgb, var(--accent) 50%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.admin-threads > li.admin-aire-group:first-child { margin-top: 0; }
+
+.admin-aire-group-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: var(--font-label, inherit);
+  font-size: 10.5px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  text-align: start;
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+  cursor: pointer;
+  transition: color .16s ease;
+}
+
+.admin-aire-group-title i { flex: none; font-size: 12px; }
+
+.admin-aire-group-title b {
+  min-width: 0;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-aire-group-title:hover,
+.admin-aire-group-title:focus-visible { color: var(--text); }
+
+.admin-aire-group-title:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 60%, transparent);
+  outline-offset: 3px;
+  border-radius: 5px;
+}
+
+.admin-aire-group-title[data-on='yes'] { color: var(--text); }
+
+/* Le groupe des interlocuteurs sans aire connue n'est pas une porte : il
+   garde la même tenue, sans curseur ni invitation au clic. */
+.admin-aire-group-title[data-static='yes'] {
+  cursor: default;
+  color: color-mix(in srgb, var(--text) 54%, transparent);
+}
+
+.admin-aire-group-title[data-static='yes']:hover {
+  color: color-mix(in srgb, var(--text) 54%, transparent);
+}
+
+.admin-aire-group-title[data-on='yes'] b {
+  border-bottom: 1px dashed color-mix(in srgb, var(--accent) 62%, transparent);
+}
+
+/* Le compte de l'aire et le jour de son dernier relevé : deux mesures lues
+   d'un même regard, à droite du titre. */
+.admin-aire-group-count {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 2px 6px;
+  margin-inline-start: auto;
+  font-family: var(--font-label, inherit);
+  font-size: 10px;
+  letter-spacing: .03em;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+  white-space: nowrap;
+}
+
+.admin-aire-group-last {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-style: normal;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 44%, transparent);
+}
+
+.admin-aire-group-last i { font-size: 11px; }
+
+/* Le geste du relevé, dans l'en-tête : il copie les fils de l'aire et date le
+   dernier départ, sans jamais resserrer la liste — la porte reste au titre. */
+.admin-aire-group-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  border-radius: 999px;
+  background: none;
+  font-family: var(--font-label, inherit);
+  font-size: 9.5px;
+  letter-spacing: .03em;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 54%, transparent);
+  cursor: pointer;
+  transition: color .16s ease, border-color .16s ease, background .16s ease;
+}
+
+.admin-aire-group-copy i { font-size: 11px; }
+
+.admin-aire-group-copy:hover,
+.admin-aire-group-copy:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+
+.admin-aire-group-copy.is-ok {
+  border-color: color-mix(in srgb, var(--accent2) 50%, transparent);
+  color: color-mix(in srgb, var(--accent2) 86%, var(--text));
+}
+
+/* Le geste de l'en-tête emporte tous les relevés : il reprend la pastille du
+   relevé d'un groupe, sans le compte des fils qui n'aurait plus de sens ici. */
+.admin-releves-all {
+  padding: 3px 10px;
+  font-size: 10px;
+}
+
+.admin-releves-all span { letter-spacing: .02em; }
+
+/* La pastille de l'aire retenue : elle nomme l'aire, son compte de fils, et
+   le geste qui rend toute la boîte. */
+.admin-aire-tray {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+  margin: 0;
+  padding: 5px 9px;
+  border-radius: 11px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 38%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.admin-aire-tray-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  font-family: var(--font-label, inherit);
+  font-size: 10.5px;
+  letter-spacing: .04em;
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+
+.admin-aire-tray-pill i { flex: none; font-size: 12px; }
+
+.admin-aire-tray-pill b {
+  font-family: var(--font-body, inherit);
+  font-weight: 600;
+  letter-spacing: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-aire-tray-pill span {
+  font-size: 10px;
+  letter-spacing: 0;
+  color: color-mix(in srgb, var(--text) 54%, transparent);
+  white-space: nowrap;
+}
+
+/* L'étendue de l'aire retenue, séparée du compte des fils par un filet : les
+   pays et les fiches se lisent à côté des fils, dans la même pastille. */
+.admin-aire-tray-pill .admin-aire-tray-span {
+  margin-inline-start: 2px;
+  padding-inline-start: 7px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Les aires nommées dans la pastille, une à une : chacune garde son dernier
+   relevé au survol, et les points les séparent sans coller au texte. */
+.admin-aire-tray-pill .admin-aire-tray-names {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0;
+  min-width: 0;
+  white-space: normal;
+}
+
+.admin-aire-tray-pill .admin-aire-tray-name {
+  white-space: nowrap;
+  cursor: help;
+}
+
+.admin-aire-tray-name + .admin-aire-tray-name::before {
+  content: '·';
+  margin-inline: 4px;
+  opacity: .55;
+}
+
+.admin-aire-tray .admin-chip { padding: 3px 9px; font-size: 10px; }
+
+[dir='rtl'] .admin-aire-group-title { letter-spacing: 0; }
+
+/* ---- l'adaptation aux petits écrans ---- */
+@media (max-width: 900px) {
+  .admin-top { padding: 12px 16px; }
+  .admin-tabs { padding: 12px 16px 0; }
+  .admin-tabs::after { inset-inline: 16px; }
+  .admin-body { padding: 18px 16px 0; }
+  .admin-card { padding: 18px 16px; }
+  /* Le liseré du bloc suit le rembourrage réduit : il garde exactement la même
+     marge que la barre des onglets, quel que soit l'écran. */
+  .admin-card-head { margin-inline: -16px; padding-inline: 16px; }
+  .admin-inbox-grid { grid-template-columns: 1fr; }
+  .admin-threads { max-height: 280px; }
+  .admin-who { max-width: 100%; }
+  .admin-search input { width: 160px; }
+  .admin-sheet-head { padding: 14px 16px; }
+  .admin-sheet-body { padding: 16px 16px 36px; }
+  .admin-sheet-tabs { padding: 8px 12px; gap: 2px; }
+  .admin-sheet-tab { padding: 6px 9px; font-size: 11px; }
+}
+
+/* Sous 820 px, les quatre onglets ne tiennent plus sur une ligne. Le trait
+   d'un onglet allumé resterait alors au milieu de la barre, coupé de son
+   liseré : la sélection devient donc une pastille pleine, et le seul trait
+   horizontal de la barre est celui qui la ferme — aligné avec les blocs. */
+@media (max-width: 820px) {
+  .admin-tabs { align-items: center; gap: 6px; padding: 10px 16px 12px; }
+  .admin-tabs::after { inset-inline: 16px; bottom: 0; }
+  .admin-tab {
+    padding: 8px 12px;
+    border-bottom: 0;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--text) 6%, transparent);
+    font-size: 12px;
+  }
+  .admin-tab[data-on="yes"] {
+    background: color-mix(in srgb, var(--accent) 16%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 44%, transparent);
+  }
+  .admin-tab[data-on="yes"] b {
+    background: color-mix(in srgb, var(--accent) 26%, transparent);
+  }
+}

@@ -1,0 +1,40 @@
+/* ── Les champs de lieu du dépôt, d'une seule largeur de chiffre ────────────
+   Le pays et la région du formulaire de dépôt portent des listes dont certains
+   libellés se terminent ou se distinguent par un numéro. En chiffres
+   proportionnels, « 9 » et « 10 » n'occupent pas la même largeur : changer de
+   sélection faisait glisser le texte dans le champ, et le bord comme la
+   flèche semblaient bouger sous le doigt.
+
+   Les deux champs prennent donc les chiffres tabulaires — chaque nombre y
+   garde la même avance —, si bien qu'une sélection qui passe d'un chiffre à
+   deux ne déplace plus rien. Le champ garde sa largeur : c'est le libellé qui
+   se replie dans le champ, jamais le champ qui s'élargit.
+
+   Cette feuille est lue après toutes les autres, comme celles des comptes :
+   aucune déclaration locale ne peut la défaire. Les libellés qui mêlent un
+   nombre et des mots gardent, eux, la phrase qui les porte. */
+.deposit-form #dep-pays,
+.deposit-form #dep-wilaya {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  text-overflow: ellipsis;
+}
+
+/* La liste ouverte reprend la même avance, et les deux champs se tiennent à
+   la même hauteur quelle que soit la sélection : rien ne saute d'une ligne
+   à l'autre quand on choisit un pays puis sa région. */
+.deposit-form #dep-pays option,
+.deposit-form #dep-wilaya option,
+.deposit-form #dep-pays optgroup,
+.deposit-form #dep-wilaya optgroup {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+.deposit-form #dep-pays,
+.deposit-form #dep-wilaya {
+  line-height: 1.35;
+}

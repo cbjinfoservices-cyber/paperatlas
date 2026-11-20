@@ -1,0 +1,1080 @@
+/* ============ DÉPÔT : DEUX FORMULAIRES ============ */
+/* Le dépôt ne se choisit plus dans une liste au milieu du formulaire : deux
+   onglets ouvrent chacun son formulaire, et chaque onglet nomme les rubriques
+   qu'il tient. La page garde une seule rangée sous le titre, dans le langage
+   des contrôles déjà présents sur le site. */
+.dep-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  padding: 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+}
+
+.dep-tab {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 12px 20px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+.dep-tab:hover:not(.is-on) { background: color-mix(in srgb, var(--text) 6%, transparent); }
+.dep-tab.is-on { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.dep-tab:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.dep-tab.is-on:focus-visible { outline-color: color-mix(in srgb, var(--text) 72%, transparent); }
+
+/* L'emblème garde sa forme carrée dans les deux états, et ne cède jamais. */
+.dep-tab-ico {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+.dep-tab-ico i { font-size: 18px; color: inherit; }
+.dep-tab.is-on .dep-tab-ico {
+  color: var(--bg);
+  background: color-mix(in srgb, var(--bg) 22%, transparent);
+}
+
+.dep-tab-txt { display: grid; gap: 2px; min-width: 0; }
+.dep-tab-txt strong {
+  font-size: 14.5px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dep-tab-txt small {
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dep-tab.is-on .dep-tab-txt small { color: color-mix(in srgb, var(--bg) 78%, transparent); }
+
+/* Le compte des lignes déjà publiées dans la famille de l'onglet : un jeton
+   discret, posé au bout de la rangée, qui situe le dépôt avant qu'on écrive. */
+.dep-tab-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex: 0 0 auto;
+  margin-inline-start: auto;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 7%, transparent);
+  color: var(--text);
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .04em;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.dep-tab-count i { font-size: 12px; color: var(--accent); }
+.dep-tab-count b { font-size: 12.5px; font-weight: 700; }
+.dep-tab-count.is-waiting { opacity: .6; }
+.dep-tab.is-on .dep-tab-count {
+  background: color-mix(in srgb, var(--bg) 20%, transparent);
+  color: var(--bg);
+}
+.dep-tab.is-on .dep-tab-count i { color: var(--bg); }
+
+/* Le point du brouillon : une pastille ronde, sans texte, qui dit seulement
+   qu'un texte attend dans cette famille — sans ouvrir l'onglet. */
+.dep-tab-draft {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--accent);
+}
+.dep-tab-draft i { font-size: 11px; color: inherit; }
+.dep-tab.is-on .dep-tab-draft {
+  background: color-mix(in srgb, var(--bg) 26%, transparent);
+  color: var(--bg);
+}
+[dir="rtl"] .dep-tab-txt small { letter-spacing: 0; text-transform: none; font-size: 11px; }
+
+/* Sous 900 px, la rangée se replie en deux blocs arrondis : un onglet pleine
+   largeur se lit mieux qu'une pilule écrasée. */
+@media (max-width: 900px) {
+  .dep-tabs { grid-template-columns: 1fr; border-radius: 22px; }
+  .dep-tab { border-radius: 16px; }
+}
+
+@media (max-width: 620px) {
+  .dep-tab { padding: 11px 14px; gap: 10px; }
+  .dep-tab-txt strong { font-size: 14px; white-space: normal; }
+  .dep-tab-txt small { display: none; }
+  .dep-tab-count span { display: none; }
+}
+
+/* ============ BROUILLON GARDÉ SUR L'APPAREIL ============ */
+/* La ligne dit où vit ce qu'on écrit, et laisse l'effacer quand un brouillon
+   a été retrouvé. Elle se replie dans la largeur des champs. */
+.dep-draft {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+  padding: 9px 12px;
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 72%, transparent);
+  overflow-wrap: break-word;
+}
+.dep-draft > i { flex: 0 0 auto; font-size: 15px; color: var(--accent); }
+.dep-draft > span { flex: 1 1 180px; min-width: 0; }
+.dep-draft.is-back {
+  border-color: color-mix(in srgb, var(--accent) 42%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  color: var(--text);
+}
+.dep-draft-clear {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex: 0 0 auto;
+  padding: 5px 10px;
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--accent);
+  font: inherit;
+  font-size: 11.5px;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.dep-draft-clear:hover { background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.dep-draft-clear i { font-size: 13px; }
+
+/* ============ APERÇU DE LA CARTE ============ */
+/* La carte du tableau, dessinée dans le formulaire avec ses propres classes :
+   ce qu'on voit ici est ce que le lecteur lira, ni plus ni moins. */
+.dep-preview {
+  box-sizing: border-box;
+  display: grid;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  margin-top: 2px;
+  padding-top: 16px;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 18%, transparent);
+}
+.dep-preview-head { display: grid; gap: 4px; min-width: 0; }
+.dep-preview-h {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  line-height: 1.3;
+}
+.dep-preview-h i { font-size: 16px; color: var(--accent); flex: 0 0 auto; }
+.dep-preview-note {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+  overflow-wrap: break-word;
+}
+.dep-preview-empty {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0;
+  padding: 14px 14px;
+  border: 1px dashed color-mix(in srgb, var(--text) 20%, transparent);
+  border-radius: 12px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+.dep-preview-empty i { flex: 0 0 auto; font-size: 15px; margin-top: 1px; }
+.dep-preview .dep-preview-card {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 460px;
+  margin: 0;
+  animation: none;
+}
+.dep-preview .ad-title,
+.dep-preview .job-title {
+  overflow-wrap: anywhere;
+}
+
+/* Les deux panneaux restent montés : passer d'un onglet à l'autre ne perd pas
+   ce qui était déjà tapé, et le panneau fermé ne prend ni place ni focus. */
+.dep-forms { display: grid; gap: 14px; min-width: 0; }
+.dep-panel { min-width: 0; }
+
+.dep-form-head { display: grid; gap: 6px; min-width: 0; }
+.dep-form-h {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0;
+  font-size: clamp(19px, 2vw, 23px);
+  font-weight: 600;
+  letter-spacing: -.02em;
+  line-height: 1.25;
+  min-width: 0;
+}
+.dep-form-h i { font-size: 19px; color: var(--accent); flex: 0 0 auto; }
+.dep-form-lede {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--text) 76%, transparent);
+  overflow-wrap: break-word;
+}
+
+/* Chaque formulaire porte ses propres champs : la même tenue dans le cadre que
+   les champs voisins du site — une seule largeur, un seul interligne, la place
+   de la flèche réservée du côté où elle se pose dans la langue lue, et des
+   chiffres d'une avance stable pour que la colonne ne bouge pas d'un pays à
+   l'autre. */
+.deposit-form .fld input,
+.deposit-form .fld select,
+.deposit-form .fld textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  line-height: 1.35;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+.deposit-form .fld input,
+.deposit-form .fld select { min-height: 44px; }
+
+.deposit-form .fld select {
+  padding-inline-end: 30px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.deposit-form .fld textarea { resize: vertical; }
+
+/* À 360 px, la colonne ne garde qu'une mesure : le geste d'envoi prend la même
+   largeur que les champs qui le précèdent, sans perdre sa hauteur ni sa flèche. */
+@media (max-width: 640px) {
+  .deposit-form > button[type="submit"] {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    justify-content: center;
+  }
+  .deposit-form > button[type="submit"] i { flex: 0 0 auto; }
+}
+
+/* La colonne de droite suit la même respiration que le formulaire, pour que
+   les deux se lisent d'aplomb quand elles se tiennent côte à côte. */
+.deposit-grid .deposit-side { gap: 20px; }
+.deposit-side .pro-card { box-sizing: border-box; min-width: 0; max-width: 100%; }
+.deposit-side .pro-h,
+.deposit-side .deposit-steps,
+.deposit-side .deposit-links,
+.deposit-side .pro-note { box-sizing: border-box; min-width: 0; max-width: 100%; }
+.deposit-side .deposit-steps p { overflow-wrap: break-word; }
+.deposit-side .deposit-links a > span { min-width: 0; overflow-wrap: break-word; line-height: 1.4; }
+.deposit-side .pro-note { align-items: flex-start; overflow-wrap: break-word; line-height: 1.55; }
+.deposit-side .pro-note > i { flex: 0 0 auto; }
+
+/* La note de pré-remplissage et l'invitation à créer un compte tiennent la
+   largeur des champs, et se replient dedans plutôt que de déborder. */
+.deposit-form .dep-pre,
+.deposit-form .ct-signup {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  align-items: flex-start;
+  text-align: start;
+  overflow-wrap: break-word;
+  line-height: 1.55;
+}
+.deposit-form .dep-pre > i,
+.deposit-form .ct-signup > i { flex: 0 0 auto; margin-top: 1px; }
+.deposit-form .ct-signup > span { flex: 1 1 200px; min-width: 0; }
+.deposit-form .ct-signup .ct-signup-link { box-sizing: border-box; flex: 0 1 auto; min-width: 0; max-width: 100%; }
+.deposit-form .ct-signup .ct-signup-link > i { flex: 0 0 auto; }
+.deposit-form .ct-signup .ct-signup-hint { flex: 1 1 100%; min-width: 0; overflow-wrap: break-word; }
+
+@media (max-width: 400px) {
+  .deposit-form .ct-signup .ct-signup-link {
+    flex: 1 1 auto;
+    justify-content: center;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: normal;
+    hyphens: none;
+    line-height: 1.25;
+    text-align: center;
+  }
+}
+
+/* Les deux retours du formulaire — la ligne d'échec et la plaque de réussite —
+   prennent la largeur des champs, l'une comme l'autre. */
+.deposit-form .dep-done {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  justify-items: stretch;
+}
+.deposit-form .dep-done .form-msg,
+.deposit-form > .form-msg {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  line-height: 1.55;
+}
+.deposit-form .dep-done .dep-done-link { justify-self: start; max-width: 100%; }
+
+/* ============ APERÇU REPLIABLE ============ */
+/* Un seul bouton dans l'en-tête : la carte s'efface pour garder le formulaire
+   court, la note reste — elle ne coûte rien et rappelle ce qu'on voit. */
+.dep-preview-head-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+.dep-preview-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex: 0 0 auto;
+  padding: 5px 11px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  border-radius: 999px;
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+  font: inherit;
+  font-size: 11.5px;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background .18s ease, color .18s ease;
+}
+.dep-preview-toggle:hover {
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  color: var(--text);
+}
+.dep-preview-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.dep-preview-toggle i { font-size: 14px; color: inherit; }
+.dep-preview-body { display: grid; gap: 12px; min-width: 0; }
+.dep-preview-body[hidden] { display: none; }
+
+/* ============ RUBRIQUE CHOISIE SOUS L'APERÇU ============ */
+/* Le compte des lignes déjà publiées dessous, et la porte qui ouvre le tableau
+   déjà resserré sur elle : on situe le dépôt avant de l'envoyer. */
+.dep-rubrique-line {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+  padding: 9px 12px;
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--text) 74%, transparent);
+}
+.dep-rubrique-line.is-idle {
+  align-items: flex-start;
+  border-style: dashed;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+.dep-rubrique-line.is-idle i { flex: 0 0 auto; font-size: 14px; margin-top: 1px; }
+.dep-rubrique-line-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex: 0 0 auto;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--text);
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.dep-rubrique-line-count i { font-size: 12px; color: var(--accent); }
+.dep-rubrique-line-count b { font-size: 12.5px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.dep-rubrique-line-name {
+  flex: 1 1 120px;
+  min-width: 0;
+  font-weight: 600;
+  color: var(--text);
+  overflow-wrap: break-word;
+}
+.dep-rubrique-line-door {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex: 0 0 auto;
+  margin-inline-start: auto;
+  padding: 6px 11px;
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  border-radius: 999px;
+  color: var(--accent);
+  font-size: 11.5px;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.dep-rubrique-line-door:hover { background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.dep-rubrique-line-door i { font-size: 13px; color: inherit; }
+
+/* La ligne de rubrique et son verdict de densité se suivent sans se
+   confondre : le compte d’un côté, ce qu’il signifie de l’autre. */
+.dep-rubrique-block {
+  box-sizing: border-box;
+  display: grid;
+  gap: 6px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+.dep-rubrique-verdict {
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 7px 12px;
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+}
+.dep-rubrique-verdict i { flex: 0 0 auto; font-size: 13px; margin-top: 1px; }
+.dep-rubrique-verdict span { min-width: 0; overflow-wrap: break-word; }
+.dep-rubrique-verdict.is-empty {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--accent) 36%, transparent);
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+  color: var(--accent2);
+}
+.dep-rubrique-verdict.is-empty i { color: var(--accent); }
+.dep-rubrique-verdict.is-few { border-color: color-mix(in srgb, var(--accent) 26%, transparent); }
+.dep-rubrique-verdict.is-few i { color: var(--accent); }
+.dep-rubrique-verdict.is-some { border-color: color-mix(in srgb, var(--text) 16%, transparent); }
+.dep-rubrique-verdict.is-some i { color: color-mix(in srgb, var(--accent) 78%, var(--text)); }
+.dep-rubrique-verdict.is-full i { color: color-mix(in srgb, var(--accent) 62%, var(--text)); }
+
+/* Le titre le plus court de la rubrique, sous le verdict : un repère
+   d'écriture en ton calme, qui ne demande rien et se tait quand la rubrique
+   n'a encore rien de publié. */
+.dep-rubrique-shortest {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 8px;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 2px 2px 0;
+  font-size: 11.5px;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+}
+.dep-rubrique-shortest > i { flex: 0 0 auto; font-size: 13px; color: color-mix(in srgb, var(--accent) 72%, var(--text)); }
+.dep-rubrique-shortest-label { flex: 0 0 auto; }
+.dep-rubrique-shortest-title {
+  min-width: 0;
+  font-family: var(--font-heading);
+  font-size: 12.5px;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+.dep-rubrique-shortest-len {
+  flex: 0 0 auto;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 7%, transparent);
+  font-size: 10.5px;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+
+/* Le repère d'écriture devient un point de départ : le bouton reprend le titre
+   le plus court dans le champ, déjà sélectionné. */
+.dep-rubrique-shortest-use {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex: 0 0 auto;
+  margin-inline-start: auto;
+  padding: 4px 11px;
+  border: 1px solid color-mix(in srgb, var(--accent) 38%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  font-family: var(--font-label);
+  font-size: 11px;
+  line-height: 1.3;
+  white-space: nowrap;
+  color: var(--accent2);
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease;
+}
+.dep-rubrique-shortest-use i { font-size: 12px; color: var(--accent); }
+.dep-rubrique-shortest-use:hover {
+  border-color: color-mix(in srgb, var(--accent) 64%, transparent);
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+}
+.dep-rubrique-shortest-use:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (max-width: 620px) {
+  .dep-rubrique-shortest-use { margin-inline-start: 0; }
+}
+/* Le champ du titre touché par le raccourci s'éclaire un instant, comme
+   lorsqu'on le rejoint depuis un manque de l'aperçu. */
+input.is-jumped {
+  border-color: color-mix(in srgb, var(--accent) 62%, transparent);
+  animation: depJumelage 1.8s ease;
+}
+
+/* La part de la rubrique dans son tableau : une petite barre et son
+   pourcentage, à côté du compte — de quoi voir le poids avant la porte. */
+.dep-rubrique-share {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  min-width: 0;
+}
+.dep-rubrique-bar {
+  width: 54px;
+  height: 6px;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 12%, transparent);
+  overflow: hidden;
+}
+.dep-rubrique-bar-fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+  transition: width .3s ease;
+}
+.dep-rubrique-bar-fill.is-waiting { background: color-mix(in srgb, var(--text) 30%, transparent); }
+.dep-rubrique-share-num {
+  font-size: 11.5px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  white-space: nowrap;
+}
+.dep-rubrique-share-label {
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .04em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+[dir="rtl"] .dep-rubrique-share-label { letter-spacing: 0; }
+@media (max-width: 520px) {
+  .dep-rubrique-share-label { display: none; }
+}
+/* ============ CANDIDATURES REÇUES SUR L'ONGLET ============ */
+/* Un second jeton, à côté des lignes publiées : la même tenue, sans prendre
+   la poussée du premier — c'est le compte publié qui garde le bord. */
+.dep-tab-count--cand {
+  margin-inline-start: 0;
+  background: color-mix(in srgb, var(--accent) 11%, transparent);
+}
+.dep-tab.is-on .dep-tab-count--cand {
+  background: color-mix(in srgb, var(--bg) 14%, transparent);
+}
+/* La rangée n'a pas la place de deux libellés à pleine largeur : le second
+   garde son chiffre et son icône, et se nomme au survol. */
+@media (max-width: 1180px) {
+  .dep-tab-count--cand > span:last-child { display: none; }
+}
+@media (max-width: 620px) {
+  .dep-tab-count--cand { padding: 4px 7px; }
+}
+
+/* ============ CHAMPS QUI RETIENNENT L'ENVOI ============ */
+/* Sous la carte, ce qui manque encore : chaque champ se nomme d'un jeton,
+   pour qu'on le retrouve dans le formulaire sans le chercher. */
+.dep-preview-missing {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+  padding: 9px 12px;
+  border: 1px solid color-mix(in srgb, var(--accent) 36%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--text);
+}
+.dep-preview-missing > i { flex: 0 0 auto; font-size: 14px; color: var(--accent); }
+.dep-preview-missing-label {
+  flex: 1 1 160px;
+  min-width: 0;
+  font-weight: 600;
+  overflow-wrap: break-word;
+}
+.dep-preview-miss {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  padding: 3px 9px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 52%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  color: var(--text);
+  font: inherit;
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  letter-spacing: .03em;
+  line-height: 1.3;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease;
+}
+.dep-preview-miss:hover {
+  border-style: solid;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+.dep-preview-miss:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Le champ rejoint d'un clic s'éclaire un instant : on voit où le curseur
+   vient de se poser, sans chercher des yeux dans le formulaire. */
+.fld.is-jumped {
+  border-radius: 12px;
+  animation: depJumelage 1.8s ease;
+}
+@keyframes depJumelage {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 0%, transparent); }
+  18% { box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 34%, transparent); }
+  100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 0%, transparent); }
+}
+
+/* Sous l'aperçu, la copie du dépôt en texte : un geste, rien de plus. */
+.dep-preview-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.dep-preview-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  border-radius: 999px;
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+  font-family: var(--font-label);
+  font-size: 11.5px;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+.dep-preview-copy i { font-size: 14px; color: inherit; }
+.dep-preview-copy:hover {
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 42%, transparent);
+  color: var(--text);
+}
+.dep-preview-copy.is-ok {
+  border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+  color: var(--text);
+}
+.dep-preview-copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Sous la carte, ce qui reste vide sans rien empêcher — le prix, la commune,
+   le téléphone. Un ton plus calme que la ligne des manques : ce n'est pas un
+   reproche, c'est une occasion de rendre la fiche plus lisible. */
+.dep-preview-extra {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+  padding: 8px 12px;
+  border: 1px dashed color-mix(in srgb, var(--text) 18%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--surface) 66%, transparent);
+  font-size: 12px;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--text) 74%, transparent);
+}
+.dep-preview-extra > i { flex: 0 0 auto; font-size: 13px; color: color-mix(in srgb, var(--text) 54%, transparent); }
+.dep-preview-extra-label {
+  flex: 1 1 150px;
+  min-width: 0;
+  font-weight: 500;
+  overflow-wrap: break-word;
+}
+
+/* Sous le prix laissé vide, la fourchette des dépôts de la rubrique : un
+   repère de lecture, pas un prix proposé — le champ reste à remplir. */
+.dep-preview-range {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+  padding: 8px 12px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 38%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+}
+.dep-preview-range > i { flex: 0 0 auto; font-size: 13px; color: var(--accent); }
+/* D'où viennent les prix : la base et le stock de référence, comptés à part.
+   La phrase reste calme, sous le repère, et ne prend jamais la place du prix.
+   Elle est aussi une porte : elle ouvre le tableau déjà filtré sur la rubrique
+   et sur le pays du dépôt. */
+.dep-preview-range-split {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  flex: 1 1 100%;
+  min-width: 0;
+  font-family: var(--font-label);
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: .04em;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  overflow-wrap: break-word;
+}
+[dir="rtl"] .dep-preview-range-split { letter-spacing: 0; }
+.dep-preview-range-split-txt { flex: 1 1 auto; min-width: 0; overflow-wrap: break-word; }
+.dep-preview-range-split-door {
+  text-decoration: none;
+  cursor: pointer;
+  transition: color .18s ease;
+}
+.dep-preview-range-split-door:hover { color: var(--accent2); }
+.dep-preview-range-split-door:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 8px; }
+.dep-preview-range-board {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: 0 0 auto;
+  padding: 1px 8px;
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 84%, transparent);
+  font-size: 9.5px;
+  letter-spacing: .03em;
+  line-height: 1.5;
+  white-space: nowrap;
+  color: var(--accent2);
+}
+.dep-preview-range-board i { font-size: 11px; color: var(--accent); }
+/* Le compte des dépôts publiés que le filtre ouvrira vraiment : discret,
+   tenu dans la porte, pour mesurer avant d'y entrer. */
+.dep-preview-range-board-n {
+  flex: 0 0 auto;
+  min-width: 15px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  color: var(--accent2);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  line-height: 1.7;
+  text-align: center;
+}
+[dir="rtl"] .dep-preview-range-board-n { letter-spacing: 0; }
+.dep-preview-range-split-door:hover .dep-preview-range-board {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+}
+[dir="rtl"] .dep-preview-range-board { letter-spacing: 0; }
+[dir="rtl"] .dep-preview-range-board i { transform: scaleX(-1); }
+/* Le compte des prix lisibles, à côté de celui des lignes : deux nombres
+   voisins, deux lectures différentes — on voit tout de suite ce qui se lit. */
+.dep-preview-range-priced {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: 0 0 auto;
+  padding: 1px 8px;
+  border: 1px dashed color-mix(in srgb, var(--text) 24%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 74%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .03em;
+  line-height: 1.5;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 70%, transparent);
+}
+.dep-preview-range-priced i { font-size: 11px; color: color-mix(in srgb, var(--accent) 82%, transparent); }
+[dir="rtl"] .dep-preview-range-priced { letter-spacing: 0; }
+/* Les lignes que le tableau ouvrira sans montant lisible : le jeton se tient
+   dans la porte, à côté du compte des prix, sans l'alourdir. */
+.dep-preview-range-unpriced {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: 0 0 auto;
+  padding: 1px 8px;
+  border: 1px dashed color-mix(in srgb, var(--text) 30%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 5%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .03em;
+  line-height: 1.5;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+}
+.dep-preview-range-unpriced i { font-size: 11px; color: color-mix(in srgb, var(--text) 58%, transparent); }
+[dir="rtl"] .dep-preview-range-unpriced { letter-spacing: 0; }
+/* La porte de correction : une ligne à part, après celle du tableau, pour que
+   le prix manquant se répare sans repasser par la recherche. */
+.dep-preview-range-fix {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex: 0 0 auto;
+  padding: 2px 10px;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 80%, transparent);
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .03em;
+  line-height: 1.6;
+  white-space: nowrap;
+  text-decoration: none;
+  color: var(--accent2);
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.dep-preview-range-fix i { font-size: 11px; color: var(--accent); }
+.dep-preview-range-fix:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+.dep-preview-range-fix:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+[dir="rtl"] .dep-preview-range-fix { letter-spacing: 0; }
+[dir="rtl"] .dep-preview-range-fix i:last-child { transform: scaleX(-1); }
+.dep-preview-range-label { flex: 1 1 150px; min-width: 0; overflow-wrap: break-word; }
+.dep-preview-range-use {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  padding: 3px 10px;
+  border: 1px solid color-mix(in srgb, var(--accent) 46%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 86%, transparent);
+  color: var(--text);
+  font: inherit;
+  font-family: var(--font-label);
+  font-size: 11px;
+  line-height: 1.3;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease;
+}
+.dep-preview-range-use b { font-weight: 700; font-variant-numeric: tabular-nums; }
+.dep-preview-range-use i { font-size: 12px; color: var(--accent); }
+.dep-preview-range-use:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+}
+.dep-preview-range-use:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.dep-preview-range-note {
+  flex: 0 1 auto;
+  min-width: 0;
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  letter-spacing: .03em;
+  color: color-mix(in srgb, var(--text) 56%, transparent);
+  overflow-wrap: break-word;
+}
+[dir="rtl"] .dep-preview-range-use,
+[dir="rtl"] .dep-preview-range-note { letter-spacing: 0; }
+[dir="rtl"] .dep-preview-range-use i { transform: scaleX(-1); }
+/* La fraîcheur de la fourchette : le jour du dépôt en base le plus récent,
+   sous sa provenance, dans le même ton calme — un repère daté, jamais un prix. */
+.dep-preview-range-fresh {
+  flex: 1 1 100%;
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-label);
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: .04em;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  overflow-wrap: break-word;
+}
+.dep-preview-range-fresh i { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
+/* L'âge du repère, à côté de sa date : plus discret que la date elle-même,
+   pour que l'ancienneté se lise sans reprendre le dessus sur la fourchette. */
+.dep-preview-range-age {
+  flex: 0 0 auto;
+  padding: 1px 7px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  font-size: 9.5px;
+  letter-spacing: .02em;
+  line-height: 1.5;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent) 74%, var(--text));
+}
+[dir="rtl"] .dep-preview-range-age { letter-spacing: 0; }
+[dir="rtl"] .dep-preview-range-fresh { letter-spacing: 0; }
+.dep-preview-gap {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  padding: 2px 9px;
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+  color: color-mix(in srgb, var(--text) 82%, transparent);
+  font: inherit;
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  letter-spacing: .03em;
+  line-height: 1.3;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.dep-preview-gap:hover {
+  border-color: color-mix(in srgb, var(--text) 42%, transparent);
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+  color: var(--text);
+}
+.dep-preview-gap:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* La porte du tableau, à côté de la copie : la rubrique choisie reste le
+   seul filtre, et l'aperçu dit lequel d'un mot. */
+.dep-preview-door {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 46%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+  color: var(--text);
+  font-family: var(--font-label);
+  font-size: 11.5px;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease;
+}
+.dep-preview-door i { font-size: 13px; color: var(--accent); }
+.dep-preview-door b { font-weight: 600; }
+.dep-preview-door:hover {
+  border-style: solid;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+.dep-preview-door:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.dep-preview-missing.is-ok {
+  border-color: color-mix(in srgb, var(--text) 14%, transparent);
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  color: color-mix(in srgb, var(--text) 74%, transparent);
+}
+.dep-preview-missing.is-ok > i { color: color-mix(in srgb, var(--text) 58%, transparent); }
+.dep-preview-missing.is-ok .dep-preview-missing-label { font-weight: 500; }
+[dir="rtl"] .dep-preview-miss { letter-spacing: 0; }
+[dir="rtl"] .dep-preview-copy { letter-spacing: 0; }
+[dir="rtl"] .dep-preview-gap { letter-spacing: 0; }
+[dir="rtl"] .dep-preview-door { letter-spacing: 0; }
+
+@media (max-width: 520px) {
+  .dep-rubrique-line-door { margin-inline-start: 0; }
+}

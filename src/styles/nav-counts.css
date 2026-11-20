@@ -1,0 +1,37 @@
+/* ── Les pastilles de compte, d'un seul chiffre ─────────────────────────────
+   Le menu compte partout : l'intitulé d'une rubrique, la flèche des types, le
+   shortcut du façonnage, la porte du membre, le chapitre, les arrivals de la
+   semaine, la flèche du bas. Chacune de ces pastilles ne porte qu'un nombre —
+   ou un couple de nombres, comme « 1/3 » du chapitre.
+
+   En arabe, un nombre écrit dans une phrase qui se lit de droite à gauche
+   prend le sens de la phrase : il peut se retrouver derrière le mot qu'il
+   termine, ou se retourner contre lui. Le chiffre garde donc son propre sens
+   de lecture, une fois pour toutes les pastilles du menu, et non plus au cas
+   par cas sur la seule pastille d'un pays.
+
+   L'isolation est posée en dernier — cette feuille est lue après nav.css et
+   nav-sheet.css —, si bien qu'aucune autre règle ne peut la défaire. Les
+   chiffres tabulaires, eux, donnent la même largeur à tous les nombres : un
+   compte qui passe de 9 à 10 ne fait pas sauter la pastille.
+
+   Ne sont pas concernés les éléments qui mêlent un nombre et des mots — le
+   repère de régions (« 12 rég. »), le total du nom du menu (« 34 portes en
+   tout »), le badge d'un compte non lu (« 3 messages ») : ceux-là doivent
+   suivre la phrase qui les porte, et non se retourner contre elle. */
+.nav-grp-count,
+.nav-door-chip-n,
+.nav-sub-count,
+.nav-door-toggle-n,
+.nav-fac-count,
+.nav-new-count,
+.nav-burger-count,
+.nav-more-count,
+.nav-more-cue-n,
+.nav-acct-count,
+.nav-sheet-chapter-num,
+.nav-more-progress-num {
+  direction: ltr;
+  unicode-bidi: isolate;
+  font-variant-numeric: tabular-nums;
+}

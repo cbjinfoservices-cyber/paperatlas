@@ -1,0 +1,58 @@
+/* ---- les deux ordres les plus lus, en pastilles ------------------------
+   Le menu garde tous les ordres ; ces deux-là se posent d'un clic, à côté de
+   lui, et disent sur leur propre pastille lequel est actif. */
+
+.dir-quick-sorts {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-inline-start: 10px;
+}
+
+.dir-quick-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
+  background: none;
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  letter-spacing: .04em;
+  line-height: 1.6;
+  white-space: nowrap;
+  cursor: pointer;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  transition: color .16s ease, border-color .16s ease, background .16s ease;
+}
+.dir-quick-sort i { font-size: 12px; }
+
+.dir-quick-sort:hover,
+.dir-quick-sort:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  color: var(--text);
+}
+.dir-quick-sort:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 2px;
+}
+
+/* L'ordre posé se lit comme enfoncé : le second clic le rendra à la
+   pertinence, et le survol le dit. */
+.dir-quick-sort[data-on='yes'] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+}
+
+[dir='rtl'] .dir-quick-sort {
+  letter-spacing: 0;
+  font-size: 11.5px;
+}
+
+@media (max-width: 620px) {
+  .dir-quick-sorts { margin-inline-start: 0; }
+}

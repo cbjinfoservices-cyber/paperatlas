@@ -1,0 +1,63 @@
+/* ============ SURFACE STEPS — CARDS & ACCOUNT SHEETS ============ */
+/* Loaded after index.css on purpose: it only raises the level of surfaces that
+   were sitting flush with the page, and it must win over their base rules.
+
+   Three clear steps instead of two: the page (--bg), the cards (--surface-2),
+   and the rows nested inside a sheet, which stay one shade quieter so the
+   hierarchy still reads inside a panel. Nothing here changes a layout, a border
+   or a text colour — only how far a plate lifts off the page. */
+
+/* Cards, sheets and dialogs that must detach from the page. */
+.card,
+.pro-card,
+.auth-card,
+.form-card,
+.deposit-form,
+.quote-block,
+.mine-edit,
+.doss-panel,
+.cmp-panel,
+.quote-panel,
+.board-error,
+.mine-empty {
+  background: color-mix(in srgb, var(--surface-2) 94%, transparent);
+}
+
+/* The listing cards of the directory and the public boards. */
+.biz-card,
+.ad-card,
+.job-card,
+.author-card {
+  background: color-mix(in srgb, var(--surface-2) 92%, transparent);
+}
+
+/* Filter bars, quote plates and the small panels of the home page. */
+.filters,
+.board-filters,
+.dir-quote,
+.auth-quote,
+.arrivals,
+.pulse,
+.watch,
+.latest-spark,
+.dir-map-strip,
+.dir-empty {
+  background: color-mix(in srgb, var(--surface-2) 88%, transparent);
+}
+
+/* Rows nested inside an account sheet: a third, quieter level so a list of
+   deposits never turns into one flat block. */
+.mine-row,
+.doss-item,
+.jobd-similar a,
+.pulse-stat,
+.quote-partners li {
+  background: color-mix(in srgb, var(--surface-2) 76%, transparent);
+}
+
+/* Fields inside these sheets keep their own level, a touch above the row. */
+.mine-edit .fld input,
+.mine-edit .fld select,
+.mine-edit .fld textarea {
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+}

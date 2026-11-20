@@ -1,0 +1,991 @@
+/* ============ ARABIC PASS: THE REMAINING PAGES ============ */
+/* The same verification the public boards and the account side already received,
+   carried to the pages that had not been through it yet: the legal notices, the
+   site map, the candidate pool, the tracking page and the console.
+
+   Two layers, in this order:
+   1. a guarantee that holds on EVERY page — Arabic never carries tracking, no
+      label is shouted in capitals, Arabic headings never take the negative
+      tracking of the Latin ones, and every value written left to right keeps
+      one run;
+   2. the details of the pages that had no pass of their own. */
+
+
+/* ============ 1 · THE SITEWIDE GUARANTEE ============ */
+
+/* 1.1 Tracking and capitals, on every text of the site. Arabic script is joined:
+   a positive track tears the letters apart, and capitals mean nothing to it. The
+   selector carries the document direction, so it wins over the label styles
+   written for the Latin page without touching them. */
+[dir="rtl"] :is(h1, h2, h3, h4, h5, h6, p, li, dt, dd, th, td, label, legend,
+  button, a, span, strong, em, small, b, i, time, figcaption, blockquote,
+  summary, option, input, select, textarea) {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* 1.2 The Arabic line breathes more than the Latin one at the same size: a
+   hair of extra leading keeps the diacritics from touching the line above. */
+[dir="rtl"] :is(p, li, dd, blockquote) { line-height: 1.8; }
+[dir="rtl"] :is(h1, h2) { line-height: 1.28; }
+[dir="rtl"] :is(h3, h4, h5, h6) { line-height: 1.4; }
+
+/* 1.3 Values typed left to right, inside a box aligned on the reading side: an
+   address, a phone number, a link. The rule is written on the input itself, so
+   it holds on any form of the site, including the ones added later. */
+[dir="rtl"] :is(input, select, textarea) { text-align: start; }
+[dir="rtl"] :is(input[type="email"], input[type="tel"], input[type="url"],
+  input[autocomplete="email"], input[autocomplete="tel"]) {
+  direction: ltr;
+  text-align: right;
+  unicode-bidi: isolate;
+}
+/* The same box, emptied: the placeholder follows the direction of the value it
+   announces, not the direction of the page. */
+[dir="rtl"] :is(input[type="email"], input[type="tel"], input[type="url"])::placeholder {
+  direction: ltr;
+  text-align: right;
+}
+
+/* 1.4 Linked contacts, and references that are codes rather than words, stay in
+   one run: a full stop can never jump to the other end of a mail address. */
+[dir="rtl"] :is(a[href^="mailto:"], a[href^="tel:"]) { unicode-bidi: isolate; }
+
+/* 1.5 Numbers read in columns keep their own run: a counter, a price, a time, a
+   percentage. The figure is written the way it is written everywhere else, and
+   only its alignment follows the page. */
+[dir="rtl"] :is(time, .is-num) { direction: ltr; unicode-bidi: isolate; }
+
+/* 1.6 A table read in Arabic starts on the right: the first column of every
+   table, sheet and comparison lands on the reading side. */
+[dir="rtl"] :is(table, thead, tbody, tfoot, tr) { direction: rtl; }
+[dir="rtl"] :is(th, td) { text-align: start; }
+
+/* 1.7 Headings that hold an emphasised word keep the Arabic typeface for it:
+   no Latin serif is borrowed in the middle of an Arabic sentence. */
+[dir="rtl"] :is(h1, h2, h3) :is(em, .accent) {
+  font-family: var(--font-heading);
+  font-style: normal;
+}
+
+
+/* ============ 2 · THE LEGAL NOTICES ============ */
+/* Two documents read from top to bottom: a numbered list of articles, then the
+   way to write to us. The numbering is a code, the articles are sentences. */
+
+/* 2.1 The article number (« 01 », « 02 ») is a code, not a word: it keeps one
+   run, and stays on the reading side of its title. */
+[dir="rtl"] .legal-sec-n {
+  direction: ltr;
+  unicode-bidi: isolate;
+  letter-spacing: 0;
+}
+
+/* 2.2 The article titles and the closing card read from the start side, at the
+   leading the Arabic line asks for. */
+[dir="rtl"] .legal-secs h2,
+[dir="rtl"] .legal-secs p,
+[dir="rtl"] .legal-note,
+[dir="rtl"] .legal-cta,
+[dir="rtl"] .legal-side,
+[dir="rtl"] .legal-updated { text-align: start; }
+[dir="rtl"] .legal-secs p { line-height: 1.85; }
+[dir="rtl"] .legal-secs > li { border-inline-start: 0; }
+
+/* 2.3 The address of the editor is Latin: it keeps its own run and never lets
+   the full stop of « .com » travel to the front of the line. */
+[dir="rtl"] .legal-cta-mail {
+  direction: ltr;
+  unicode-bidi: isolate;
+  text-align: start;
+  display: inline-block;
+  overflow-wrap: anywhere;
+}
+[dir="rtl"] .legal-cta-btn { direction: rtl; }
+[dir="rtl"] .legal-cta-btn i { transform: none; }
+
+/* 2.4 The two ways out of a document: the arrow of each row points the way the
+   eye travels, and the row keeps its mark on the reading side. */
+[dir="rtl"] .legal-side-link i:last-child,
+[dir="rtl"] .legal-side-back i { transform: scaleX(-1); }
+[dir="rtl"] .legal-side-link,
+[dir="rtl"] .legal-side-back { text-align: start; }
+
+
+/* ============ 3 · THE SITE MAP ============ */
+/* A map of pages: a count, a family, then its countries and its sheets. The
+   counts are figures, the names are words. */
+
+/* 3.1 The family count (« 12 صفحات بلد ») is a figure followed by a label: it
+   keeps the order it is written in, on the reading side of its line. */
+[dir="rtl"] .plan-fam-num {
+  direction: ltr;
+  unicode-bidi: isolate;
+  text-align: start;
+  font-size: 10.5px;
+}
+
+/* 3.2 Every line of the map reads from the start side, and a long country name
+   (« الإمارات العربية المتحدة ») may wrap inside its chip rather than pushing
+   the count out of the card. */
+[dir="rtl"] .plan-hint,
+[dir="rtl"] .plan-fam-name,
+[dir="rtl"] .plan-fam-more,
+[dir="rtl"] .plan-fiche { text-align: start; }
+[dir="rtl"] .plan-country { min-width: 0; }
+[dir="rtl"] .plan-country > span { overflow-wrap: anywhere; }
+
+/* 3.3 The chip of a country carries its count in a small figure: it stays one
+   run, and keeps its own side of the chip. */
+[dir="rtl"] .plan-country b {
+  direction: ltr;
+  unicode-bidi: isolate;
+  font-size: 11.5px;
+}
+
+/* 3.4 The arrow of « see this trade » follows the reading direction. */
+[dir="rtl"] .plan-fam-more i { transform: scaleX(-1); }
+
+/* 3.5 The sheet links of the map: the name first, the region after it, both on
+   the reading side — the year and the count, when they appear, keep their run. */
+[dir="rtl"] .plan-fiche span { text-align: start; }
+[dir="rtl"] .plan-fiche em {
+  text-align: start;
+  font-style: normal;
+}
+
+
+/* ============ 4 · THE CANDIDATE POOL ============ */
+/* Names, a trade, a city, the day a profile landed. The rules are the same as
+   the ones the directory already received, applied to the pool. */
+
+/* 4.1 The date a profile landed is built by Intl in the language being read:
+   it stays one run, so « 9 novembre 2026 » can never be reversed. */
+[dir="rtl"] .cand-since { text-align: start; }
+[dir="rtl"] .cand-since time { direction: ltr; unicode-bidi: isolate; }
+
+/* 4.2 The name, the trade and the short biography read from the start side; a
+   long name or a long bio wraps instead of widening the card. */
+[dir="rtl"] .cand-name,
+[dir="rtl"] .cand-role,
+[dir="rtl"] .cand-bio,
+[dir="rtl"] .cand-gate-note,
+[dir="rtl"] .cand-join-hint { text-align: start; }
+[dir="rtl"] .cand-bio { line-height: 1.8; }
+
+/* 4.3 The « nouveau » pill and the filters keep their own run and their own
+   side; the arrows of the pool point the way the eye travels. */
+[dir="rtl"] .cand-new { letter-spacing: 0; text-transform: none; font-size: 10.5px; }
+[dir="rtl"] .cand-fresh { text-align: start; }
+[dir="rtl"] .cand-fresh-x { margin-inline-start: 0; }
+
+/* 4.4 The member's public sheet, in the pool's own vocabulary: the avatar
+   initials are a mark, not a word. */
+[dir="rtl"] .cprof-avatar {
+  direction: ltr;
+  unicode-bidi: isolate;
+  letter-spacing: 0;
+}
+[dir="rtl"] .cprof-joined time,
+[dir="rtl"] .cprof-facts dd { unicode-bidi: isolate; }
+[dir="rtl"] .cprof-joined,
+[dir="rtl"] .cprof-headline,
+[dir="rtl"] .cprof-bio,
+[dir="rtl"] .cprof-facts dt,
+[dir="rtl"] .cprof-side-text,
+[dir="rtl"] .cprof-side-note { text-align: start; }
+[dir="rtl"] .cprof-bio { line-height: 1.85; }
+[dir="rtl"] .cprof-chips { justify-content: flex-start; }
+[dir="rtl"] .cprof-fact-link i { transform: scaleX(-1); }
+
+
+/* ============ 5 · THE TRACKING PAGE ============ */
+/* One reference opens one file. The reference is a code, the answers are
+   sentences. */
+
+/* 5.1 The stamp, the field label and the small notes read from the start side;
+   the reference typed in the field is a code and keeps one run. */
+[dir="rtl"] .sv-field,
+[dir="rtl"] .sv-error,
+[dir="rtl"] .sv-card,
+[dir="rtl"] .sv-kind,
+[dir="rtl"] .sv-sub { text-align: start; }
+[dir="rtl"] .sv-input-wrap input {
+  direction: ltr;
+  text-align: right;
+  unicode-bidi: isolate;
+}
+[dir="rtl"] .sv-input-wrap input::placeholder { direction: ltr; text-align: right; }
+
+/* 5.2 The countdown of a step and every date of the file stay one run. */
+[dir="rtl"] .sv-card :is(time, b, strong) { unicode-bidi: isolate; }
+
+/* 5.3 The arrow of the send button points the way the reading travels. */
+[dir="rtl"] .sv-cta i { transform: scaleX(-1); }
+[dir="rtl"] .sv-cta:hover:not(:disabled) i { transform: scaleX(-1) translateX(3px); }
+[dir="rtl"] .sv-cta:disabled i { transform: none; animation: sv-spin 1.1s linear infinite; }
+
+
+/* ============ 6 · THE HOME BANDS ============ */
+/* The film already reads the document direction through the rules of the top of
+   the page; the bands under it carry counts, names and dates. */
+
+/* 6.1 The newest registrations and the newcomer strip read from the start side,
+   and a name wraps instead of being cut. */
+[dir="rtl"] .newcomers,
+[dir="rtl"] .latest { text-align: start; }
+[dir="rtl"] .newcomers :is(h2, h3, p, li),
+[dir="rtl"] .latest :is(h2, h3, p, li) { text-align: start; }
+
+/* 6.2 A count followed by its label (« 24 ورشة جديدة ») is read in the order it
+   is written: the figure keeps one run. */
+[dir="rtl"] .newcomers :is(b, strong),
+[dir="rtl"] .latest :is(b, strong) { unicode-bidi: isolate; }
+
+/* 6.3 The arrows of the home doors follow the reading direction — the calls to
+   action are already covered site-wide, the small row links are not. */
+[dir="rtl"] .latest a > i:last-child,
+[dir="rtl"] .newcomers a > i:last-child { transform: scaleX(-1); }
+
+
+/* ============ 7 · THE CONSOLE ============ */
+/* The back office reads its dashboard in Arabic, except the project plan: that
+   document is written in French and keeps its own direction inside its own
+   cards — a French sentence is never laid out right to left. */
+
+/* 7.1 The console's tables start on the reading side, like every other table of
+   the site. */
+[dir="rtl"] .admin :is(th, td) { text-align: start; }
+[dir="rtl"] .admin :is(.admin-table, table) { direction: rtl; }
+
+/* 7.2 The sort header's separator sits between the word and the account it
+   names: in Arabic that separator belongs on the other side. */
+[dir="rtl"] .admin-inbox-sort .admin-sort-who {
+  padding-left: 0;
+  margin-left: 0;
+  border-left: 0;
+  padding-inline-start: 6px;
+  margin-inline-start: 2px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+}
+
+/* 7.3 The project plan keeps a French body: its cards are read left to right,
+   even when the console around them speaks Arabic. The titles that belong to
+   the console (the stamp, the block headings, the totals) still read from the
+   start side. */
+[dir="rtl"] .admin-suivi .suivi-mod,
+[dir="rtl"] .admin-suivi .suivi-phase-body,
+[dir="rtl"] .admin-suivi .suivi-blocage,
+[dir="rtl"] .admin-suivi .suivi-reste li { direction: ltr; text-align: left; }
+[dir="rtl"] .admin-suivi .suivi-block-head,
+[dir="rtl"] .admin-suivi .suivi-total,
+[dir="rtl"] .admin-suivi .suivi-score-main { text-align: start; }
+
+/* 7.4 The journal of the review: a thread name, a time, a count of minutes.
+   The figures keep one run; the names read from the start side. */
+[dir="rtl"] .admin-journal-table :is(time, .admin-num) {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+[dir="rtl"] .admin-journal-thread-name,
+[dir="rtl"] .admin-journal-compte { text-align: start; }
+[dir="rtl"] .admin-journal-thread i:first-child { transform: none; }
+
+/* 7.5 The arrows of the console's actions follow the reading direction, as they
+   do everywhere else. The ones already turned by their own component keep their
+   turn. */
+[dir="rtl"] .admin i[class*="arrow-right"]:not(.is-turn),
+[dir="rtl"] .admin i[class*="arrow-left"]:not(.is-turn) { transform: scaleX(-1); }
+
+
+/* ============ 8 · THE SMALL SHARED PIECES ============ */
+/* The pieces that live on more than one page: a share link, a copy button, a
+   download, a language switch. Their labels are already covered by the sitewide
+   guarantee; what is left is the direction of the marks they carry. */
+
+/* 8.1 The file marks of the export and copy buttons never flip: a sheet of paper
+   has no direction. */
+[dir="rtl"] :is(.csv-btn, .copy-btn, .share-btn, .print-btn) i.ri-file-text-line,
+[dir="rtl"] :is(.csv-btn, .copy-btn, .share-btn, .print-btn) i.ri-download-2-line {
+  transform: none;
+}
+
+/* 8.2 The tick of a copied link stays a tick, and the back arrow of a return
+   door flips like every other arrow. */
+[dir="rtl"] i.ri-check-line,
+[dir="rtl"] i.ri-check-double-line { transform: none; }
+
+/* 8.3 The language switch keeps its three pills in one row, in the order they
+   are written: FR, ع, EN. The direction of the page must not turn the reader's
+   own language choice around. */
+[dir="rtl"] .lang-switch { direction: ltr; }
+[dir="rtl"] .lang-switch button { letter-spacing: 0; }
+
+
+/* ============ 9 · THE CONSOLE, SCREEN BY SCREEN ============ */
+/* The back office is read in Arabic from the first block to the last: the
+   account sheet, its values, its tables. What follows is what the sitewide
+   guarantee could not settle on its own. */
+
+/* 9.1 The account sheet opens from the reading side: in Arabic the panel slides
+   in from the left, and its shadow falls on the page it covers. */
+[dir="rtl"] .admin-sheet {
+  border-inline-start: 0;
+  border-inline-end: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  box-shadow: 24px 0 60px color-mix(in srgb, var(--text) 18%, transparent);
+  animation: admin-sheet-in-rtl .22s ease-out both;
+}
+@keyframes admin-sheet-in-rtl {
+  from { transform: translateX(-28px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* 9.2 A value written left to right — an address, a reference, a total — keeps
+   one run inside the Arabic console: the full stop of a domain can never jump
+   to the front of the line. The label around it still reads from the start
+   side. */
+[dir="rtl"] .admin :is(.admin-mail, .admin-sheet-mail, .admin-who b,
+  .admin-relance-to, .admin-gate-mail, .admin-focus > span) {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+[dir="rtl"] .admin :is(.admin-mail, .admin-sheet-mail, .admin-relance-to,
+  .admin-gate-mail) { text-align: right; }
+[dir="rtl"] .admin .admin-relance-field textarea { text-align: start; }
+
+/* 9.3 A long name wraps inside its cell rather than widening the table past the
+   screen: the same rule on both sides of the console, in both directions. */
+[dir="rtl"] .admin :is(.admin-table th, .admin-table td) { overflow-wrap: anywhere; }
+[dir="rtl"] .admin :is(.admin-sheet-title, .admin-relance-title) { overflow-wrap: anywhere; }
+
+/* 9.4 The sort header of the inbox keeps its caret on the reading side of the
+   word, and the chevron of a return door points the way the eye travels. */
+[dir="rtl"] .admin .admin-sort i { transform: none; }
+[dir="rtl"] .admin .admin-fiche-link i:last-child,
+[dir="rtl"] .admin .admin-row-open i:last-child,
+[dir="rtl"] .admin .admin-fiche-apres-open i { transform: scaleX(-1); }
+
+/* 9.5 The console on a phone: a table scrolls inside its frame, a long address
+   breaks, the tab row slides instead of eating three lines of screen, and the
+   account sheet takes the whole width. */
+@media (max-width: 900px) {
+  .admin-card, .admin-body, .admin-sheet-body { min-width: 0; }
+  .admin-table-wrap {
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+  }
+  .admin-table :is(th, td) { padding: 9px 10px; font-size: 12.5px; }
+  .admin :is(.admin-mail, .admin-sheet-mail, .admin-who) {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+  .admin-who { max-width: 100%; }
+  .admin-tools { width: 100%; }
+  .admin-search { flex: 1 1 100%; }
+  .admin-search input { width: 100%; min-width: 0; }
+  .admin-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+  .admin-tab { flex: 0 0 auto; }
+  .admin-tab span { white-space: nowrap; }
+  .admin-tabs::-webkit-scrollbar { height: 4px; }
+  .admin-tabs::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--text) 22%, transparent);
+  }
+  .admin-sheet-layer { height: 100dvh; }
+  .admin-sheet { width: 100%; }
+  .admin-sheet-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .admin-sheet-tabs::-webkit-scrollbar { display: none; }
+  .admin-sheet-tab { flex: 0 0 auto; }
+}
+
+/* 9.6 The account sheet on a phone, in Arabic: the name of the account takes
+   the whole width of the head, and the three actions read under it instead of
+   squeezing it into a column of two letters. The tab row settles on whole tabs
+   and keeps its scroll inside itself, so a swipe never moves the page behind
+   the sheet. */
+@media (max-width: 640px) {
+  [dir="rtl"] .admin-sheet-head {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  [dir="rtl"] .admin-sheet-actions {
+    justify-content: flex-start;
+    gap: 6px;
+  }
+  [dir="rtl"] .admin-sheet-actions > .admin-btn,
+  [dir="rtl"] .admin-sheet-actions > .admin-ghost { max-width: 100%; }
+  [dir="rtl"] .admin-sheet-mail { font-size: 11.5px; }
+}
+
+@media (max-width: 900px) {
+  [dir="rtl"] .admin-sheet-tabs {
+    overscroll-behavior-x: contain;
+    scroll-padding-inline: 12px;
+    scroll-snap-type: x proximity;
+  }
+  [dir="rtl"] .admin-sheet-tab { scroll-snap-align: start; }
+}
+
+
+/* ============ 10 · THE PHONE SHEET, IN ARABIC ============ */
+/* The sheet under the bar carries the same doors as the panel. In Arabic a
+   label is a little longer: it gets the same one-notch-back body as the panel,
+   and a leading only just above the Latin one — enough for the diacritics,
+   never enough to make the two lists scroll at a different pace. */
+
+/* 10.1 The panel, in Arabic: the label returns half a point, so a long word
+   still holds one line, and the leading follows the panel's own measure. */
+[dir="rtl"] .nav-more-label { font-size: 14.5px; line-height: 1.35; }
+@media (max-width: 1460px) {
+  [dir="rtl"] .nav-more-label { font-size: 13.5px; }
+}
+/* 10.1 bis · Le panneau compact, seul surface entre 1024 et 1299 px : il y
+   porte quatre portes de plus, et ses noms y reprennent donc le corps plein.
+   L'arabe rend un demi-point de moins que le latin à hauteur égale pour tenir
+   sa ligne : 15 px y sont écrits avec un interligne de 1,4, et l'explication
+   sous lui suit à 12,5 px. Les dix-huit lignes du panneau défilent ; aucune
+   n'est écourtée. */
+@media (min-width: 1024px) and (max-width: 1299px) {
+  [dir="rtl"] .nav-more-label { font-size: 15px; line-height: 1.4; }
+  [dir="rtl"] .nav-more-txt small { font-size: 12.5px; line-height: 1.42; }
+}
+/* 10.1 ter · Le rappel B2B du panneau compact, en arabe.
+   À cette largeur le panneau n'a que 372 px, et la phrase arabe du rappel y
+   passait de deux à trois lignes : c'est justement la largeur où ce panneau
+   porte toutes les portes, et une ligne de plus mangeait une porte de la vue.
+   Le rappel rend donc ici — et seulement ici — un demi-point de corps, un
+   cheveu d'interligne et ses rembourrages intérieurs : la phrase revient à
+   deux lignes, la sous-ligne (le jour et l'ancienneté) reste lisible, et la
+   hauteur du panneau retrouve son pas. Le français et l'anglais gardent
+   leurs cotes, et passé 1299 px l'arabe reprend les siennes. */
+@media (min-width: 1024px) and (max-width: 1299px) {
+  [dir="rtl"] .nav-links .nav-more-late {
+    padding: 4px 9px 6px;
+    gap: 7px;
+    font-size: 12.5px;
+    line-height: 1.3;
+  }
+  [dir="rtl"] .nav-links .nav-more-late i { font-size: 14px; }
+  [dir="rtl"] .nav-links .nav-more-late-txt { gap: 1px; }
+  [dir="rtl"] .nav-links .nav-more-late-txt > span { font-size: 12.5px; line-height: 1.3; }
+  [dir="rtl"] .nav-links .nav-more-late-txt small { font-size: 10.5px; line-height: 1.34; }
+
+  /* 10.1 quater · La sourdine du rappel, au même pas.
+     La pastille qui met le rappel en sourdine restait à son corps de partout
+     (10,5 px, rembourrages pleins) alors que le rappel au-dessus d'elle venait
+     de rendre un demi-point : le bloc finissait sur une marche de plus. Elle
+     suit donc exactement le même resserrement — un demi-point de corps, un
+     peu moins de rembourrage et d'écart au signe — pour que le rappel et sa
+     sourdine se lisent comme une seule ligne, du premier mot au dernier. Ses
+     marges ne passent que par l'axe du bloc : le retrait de 27 px qui
+     l'aligne sur les accès de la feuille reste intact. */
+  [dir="rtl"] .nav-late-mute--panel {
+    margin-block: 1px 3px;
+    padding: 2px 8px 2px 7px;
+    gap: 4px;
+    font-size: 10px;
+    line-height: 1.3;
+  }
+  [dir="rtl"] .nav-late-mute--panel i { font-size: 10.5px; }
+  [dir="rtl"] .nav-late-mute-wrap--panel {
+    margin-block: 1px 3px;
+    gap: 3px 6px;
+  }
+  [dir="rtl"] .nav-late-mute-wrap--panel .nav-late-mute-note,
+  [dir="rtl"] .nav-late-mute-wrap--panel .nav-late-mute-undo {
+    font-size: 9.5px;
+    line-height: 1.32;
+  }
+}
+
+@media (max-width: 1023px) {
+  /* 10.2 The sheet keeps the panel's inner rhythm — 8 px outside, the same
+     padding on the pinned block — so the labels of both surfaces start on the
+     same vertical, in Arabic as in Latin. */
+  [dir="rtl"] .nav-mobile {
+    left: 8px;
+    right: 8px;
+    padding: 10px 8px 14px;
+  }
+  [dir="rtl"] .nav-mobile-pinned {
+    margin-left: -8px;
+    margin-right: -8px;
+    padding: 8px 8px 6px;
+  }
+  /* 10.3 The very same couple as the panel: 14,5 px / 1,35 for the name,
+     12 px / 1,4 for the line under it. */
+  [dir="rtl"] .nav-mobile a.nav-mobile-item { align-items: flex-start; }
+  [dir="rtl"] .nav-mobile a.nav-mobile-plain { font-size: 14.5px; line-height: 1.35; }
+  [dir="rtl"] .nav-mobile-txt > span { font-size: 14.5px; line-height: 1.35; }
+  [dir="rtl"] .nav-mobile-txt small {
+    font-size: 12px;
+    line-height: 1.4;
+    white-space: normal;
+  }
+  /* 10.4 The eight types, on their two columns: the Arabic names carry more
+     letters than the Latin ones. The pill gives back its inner spacing and a
+     hair of its body here — and only here — so each of the eight holds its own
+     column on a single line instead of folding or being cut short. */
+  [dir="rtl"] .nav-mobile .nav-dir-types--sheet a.nav-dir-type {
+    gap: 3px;
+    padding-block: 6px;
+    padding-inline: 5px 7px;
+    font-size: 12px;
+  }
+  [dir="rtl"] .nav-mobile .nav-dir-types--sheet a.nav-dir-type > i { font-size: 12px; }
+  [dir="rtl"] .nav-mobile .nav-dir-types--sheet .nav-sub-count {
+    min-width: 16px;
+    height: 16px;
+    padding: 0 3px;
+    font-size: 9.5px;
+  }
+  /* A long reminder wraps under its door rather than running off the sheet. */
+  [dir="rtl"] .nav-mobile-late-txt { min-width: 0; }
+  [dir="rtl"] .nav-mobile-late-txt > span { line-height: 1.5; }
+  /* The member's own name and its address keep their own run. */
+  [dir="rtl"] .nav-mobile-member small { direction: ltr; unicode-bidi: isolate; text-align: right; }
+  /* 10.5 Les seconds accès de la feuille — le façonnier, la marque de lecture,
+     le rappel B2B — lisent le même pas que les portes ci-dessus, donc un
+     demi-point de moins qu'en latin comme elles : 13 px / 1,34 pour le mot,
+     11 px / 1,4 pour la phrase dessous. Les trois lignes gardent ainsi leur
+     souffle arabe, sans que la feuille change de rythme d'une ligne à l'autre. */
+  [dir="rtl"] .nav-sheet a.nav-mobile-sub,
+  [dir="rtl"] .nav-sheet a.nav-mobile-read,
+  [dir="rtl"] .nav-sheet a.nav-mobile-late,
+  [dir="rtl"] .nav-sheet .nav-mobile-late-txt > span {
+    font-size: 13px;
+    line-height: 1.34;
+  }
+  [dir="rtl"] .nav-sheet a.nav-mobile-sub small,
+  [dir="rtl"] .nav-sheet .nav-mobile-late-txt small {
+    font-size: 11px;
+    line-height: 1.4;
+  }
+  [dir="rtl"] .nav-sheet .nav-sheet-subline-txt > span { font-size: 13px; line-height: 1.34; }
+  [dir="rtl"] .nav-sheet .nav-sheet-subline-txt small { font-size: 11px; line-height: 1.4; }
+}
+
+/* 10.6 · La feuille à 320 px, en arabe : une famille par ligne.
+   Sous 380 px, les huit types quittent leurs deux colonnes pour la largeur
+   entière. L'arabe y reprend alors le corps qu'il rendait aux deux colonnes
+   (12 px) et retrouve ses 13 px, puisque la place ne manque plus ; ses
+   rembourrages intérieurs reviennent aussi à leur valeur pleine. Le compte
+   reste au bout de sa ligne — le bout logique, donc à gauche en arabe — et un
+   nom très long se replie à l'intérieur de sa pastille plutôt que d'être
+   coupé par des points de suite ou de sortir de la feuille. La règle est
+   écrite ici, après celle des deux colonnes, pour qu'aucune ne la reprenne. */
+@media (max-width: 380px) {
+  [dir="rtl"] .nav-sheet .nav-dir-types--sheet {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  [dir="rtl"] .nav-mobile .nav-dir-types--sheet a.nav-dir-type {
+    gap: 6px;
+    padding-block: 8px;
+    padding-inline: 9px 10px;
+    font-size: 13px;
+    line-height: 1.4;
+    white-space: normal;
+  }
+  [dir="rtl"] .nav-mobile .nav-dir-types--sheet a.nav-dir-type > i { font-size: 14px; }
+  [dir="rtl"] .nav-mobile .nav-dir-types--sheet a.nav-dir-type > span:not(.nav-sub-count) {
+    min-width: 0;
+    overflow: visible;
+    text-overflow: clip;
+    overflow-wrap: anywhere;
+  }
+  [dir="rtl"] .nav-mobile .nav-dir-types--sheet .nav-sub-count {
+    flex: 0 0 auto;
+    min-width: 18px;
+    height: 17px;
+    padding: 0 4px;
+    font-size: 10px;
+    margin-inline-start: auto;
+  }
+}
+
+
+/* 10.7 · Le panneau large en arabe, au-delà de 1299 px : le plancher replié,
+   le repère de fin et la flèche ensemble.
+   Le contrôle a été refait à cette largeur, plancher sur deux lignes, et la
+   règle tient : la hauteur du pied est relevée sur le pied lui-même
+   (--nav-foot), donc un repli — « اللغة », ses trois pastilles puis « تسجيل
+   الخروج » qui ne tiennent plus côte à côte — se lit **avant** que le voile ne
+   se replace. Le voile se relève d'exactement cette hauteur et garde ses
+   56 px de dégradé, la flèche reste à 12 px du filet du plancher, et le repère
+   de fin, qui vit dans le flux juste au-dessus du pied, garde son air : aucune
+   des trois pièces ne se pose sur une autre, ni à 1300 px, ni à 1440 px, ni
+   au-delà.
+   Ce qui restait à écrire, c'est l'arabe du pied lui-même : à cette largeur le
+   panneau fait 372 puis 400 px, et le mot qui nomme la langue, ses pastilles et
+   la sortie de compte doivent se replier proprement plutôt que de se serrer
+   jusqu'à l'illisible. Le pied resserre donc ses écarts et ses rembourrages
+   latéraux, et la sortie de compte garde le bout de sa ligne — du côté où la
+   lecture finit, donc à gauche. */
+@media (min-width: 1300px) {
+  [dir="rtl"] .nav-more-foot {
+    gap: 6px 8px;
+    padding: 8px 10px 9px;
+  }
+  [dir="rtl"] .nav-more-foot-out {
+    margin-inline-start: auto;
+    padding: 4px 8px 4px 6px;
+  }
+  /* Le repère de fin, en arabe : ses deux filets gardent un minimum pour se
+     lire, et son mot respire un peu plus haut que le latin — la ligne arabe
+     demande ce cheveu d'interligne. */
+  [dir="rtl"] .nav-more-end {
+    font-size: 11px;
+    line-height: 1.5;
+  }
+  [dir="rtl"] .nav-more-end::before,
+  [dir="rtl"] .nav-more-end::after { min-width: 8px; }
+  /* La flèche et son compte suivent le même axe qu'en latin : le chiffre ne
+     change pas la distance au filet, il ouvre seulement le cercle. Les
+     rembourrages du cercle sont écrits en propriétés logiques — ils se
+     retournent donc d'eux-mêmes, et le chiffre garde sa respiration du côté
+     où il se lit. */
+  [dir="rtl"] .nav-more-more > span { bottom: var(--nav-arrow-lift, 12px); }
+}
+
+
+/* ============ 11 · THE CONSOLE ON A PHONE, IN ARABIC ============ */
+/* The tab row of the console, and the two sheets it opens over a page — the
+   follow-up of an account and the answer to a request. Both are read on a
+   phone as often as on a screen, and Arabic labels take more room than the
+   Latin ones: each block is given the height and the width it needs. */
+
+/* 11.1 The eight tabs, at once. The Arabic labels are written short (no
+   article, one word each), and the row becomes a four-column grid: every
+   section is reachable without sliding the bar, and the bar stops following
+   the page — on a small screen, a bar pinned over two rows would eat the
+   table underneath. */
+@media (max-width: 640px) {
+  [dir="rtl"] .admin-tabs {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
+    padding: 10px 12px 12px;
+  }
+  [dir="rtl"] .admin-tabs::after { inset-inline: 12px; bottom: 0; }
+  [dir="rtl"] .admin-tabs .admin-tab {
+    gap: 4px;
+    min-width: 0;
+    padding: 7px 6px;
+    font-size: 11px;
+    line-height: 1.35;
+    justify-content: center;
+  }
+  /* The sign of each section stays on the sheet of a single account; in the
+     row itself the word alone holds the column, so nothing is pushed out. */
+  [dir="rtl"] .admin-tabs .admin-tab > i { display: none; }
+  [dir="rtl"] .admin-tabs .admin-tab > span { white-space: nowrap; }
+  [dir="rtl"] .admin-tabs .admin-tab > b {
+    padding: 0 5px;
+    font-size: 10px;
+  }
+}
+
+/* 11.2 The follow-up of an account, and the answer to a request: over a phone
+   the sheet rises from the bottom edge, takes the whole width, and keeps its
+   own scroll. The head reads from the top, and the two commands share the last
+   row instead of running off the side. */
+@media (max-width: 640px) {
+  [dir="rtl"] .admin-relance-layer {
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0;
+  }
+  [dir="rtl"] .admin-relance {
+    width: 100%;
+    max-height: 92dvh;
+    gap: 10px;
+    padding: 16px 14px calc(16px + env(safe-area-inset-bottom, 0px));
+    border-radius: 18px 18px 0 0;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    animation: admin-relance-sheet-in .2s ease-out;
+  }
+  @keyframes admin-relance-sheet-in {
+    from { transform: translateY(26px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  [dir="rtl"] .admin-relance-head {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  [dir="rtl"] .admin-relance-head > div { min-width: 0; }
+  [dir="rtl"] .admin-relance-head > .admin-ghost {
+    align-self: flex-start;
+    padding: 6px 11px;
+  }
+  [dir="rtl"] .admin-relance-title { font-size: 17px; }
+  [dir="rtl"] .admin-relance-to {
+    margin-top: 3px;
+    font-size: 11.5px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+  [dir="rtl"] .admin-relance .admin-sub { font-size: 12.5px; }
+  [dir="rtl"] .admin-relance-field textarea {
+    min-height: 190px;
+    padding: 10px 12px;
+    font-size: 12.5px;
+    line-height: 1.75;
+  }
+  [dir="rtl"] .admin-relance-actions {
+    justify-content: stretch;
+    gap: 8px;
+  }
+  /* The subject line is a sentence, not a button: it takes its own row and may
+     wrap, so the two commands below stay whole. */
+  [dir="rtl"] .admin-relance-count {
+    flex: 1 1 100%;
+    margin-inline-end: 0;
+    text-align: start;
+    font-size: 10.5px;
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+  }
+  [dir="rtl"] .admin-relance-actions > .admin-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    justify-content: center;
+    padding: 9px 10px;
+    font-size: 11.5px;
+  }
+  [dir="rtl"] .admin-relance-actions > .admin-btn span { white-space: nowrap; }
+}
+
+
+/* ============ 12 · THE TWO PROFILE SHEETS ON A PHONE, IN ARABIC ============ */
+/* A workshop sheet and a pen's sheet are read on a phone as often as on a
+   screen. An Arabic name and an Arabic town take more room than the Latin
+   ones: the name takes the whole width, and every line that mixes a name, a
+   town and a distance is allowed to wrap instead of running past the card. */
+@media (max-width: 640px) {
+  [dir="rtl"] .pro-ident h1 {
+    font-size: clamp(25px, 7.4vw, 36px);
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+  }
+  [dir="rtl"] .pro-name { gap: 6px 9px; }
+  [dir="rtl"] .pro-name h1 { flex: 1 1 100%; min-width: 0; }
+  [dir="rtl"] .pro-ident .stamp { line-height: 1.75; overflow-wrap: anywhere; }
+  [dir="rtl"] .pro-meta { gap: 6px 12px; font-size: 12.5px; }
+  [dir="rtl"] .pro-meta > span,
+  [dir="rtl"] .pro-meta > a { min-width: 0; overflow-wrap: anywhere; }
+  /* The door to the country map: the name of the country wraps inside the
+     pill rather than being cut to its first letters. */
+  [dir="rtl"] .pro-map-link { width: 100%; }
+  [dir="rtl"] .pro-map-link-txt {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+  }
+  [dir="rtl"] .pro-head-actions { width: 100%; gap: 8px; }
+  [dir="rtl"] .pro-head-actions > * { flex: 1 1 auto; justify-content: center; min-width: 0; }
+  /* The sites of a structure: the town and its region read under the name and
+     wrap, instead of stopping at the edge of the list. */
+  [dir="rtl"] .pro-etablist-link,
+  [dir="rtl"] .pro-etablist-body { min-width: 0; }
+  [dir="rtl"] .pro-etablist-name {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    line-height: 1.45;
+  }
+  [dir="rtl"] .pro-etablist-where { flex-wrap: wrap; min-width: 0; line-height: 1.6; }
+  /* Neighbours: the name and the place take two lines rather than a stub. */
+  [dir="rtl"] .pro-hood-name,
+  [dir="rtl"] .pro-hood-meta,
+  [dir="rtl"] .pro-hood-where,
+  [dir="rtl"] .pro-hood-lab {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+  }
+  [dir="rtl"] .pro-hood-meta { line-height: 1.6; }
+  /* The catalogue: the title wraps, the price stays whole on its own side. */
+  [dir="rtl"] .cat-row { gap: 4px 10px; }
+  [dir="rtl"] .cat-title { overflow-wrap: anywhere; }
+  /* A cover holds a title in Arabic: it wraps inside its frame. */
+  [dir="rtl"] .book-cover { padding: 12px 11px; }
+  [dir="rtl"] .book-cover strong { overflow-wrap: anywhere; line-height: 1.4; }
+  /* The closing band: the sentence first, the command on its own row. */
+  [dir="rtl"] .dir-quote { gap: 14px; }
+  [dir="rtl"] .pro-quote-actions { width: 100%; }
+  [dir="rtl"] .dir-quote .cta { width: 100%; justify-content: center; }
+}
+
+
+/* ============ 13 · THE TWO CONSOLE TABLES, READ ON A PHONE ============ */
+/* The payments file and the requests file were the last two screens drawn for
+   a wide window. Over a phone each line becomes its own card: the column
+   label is written by the page itself (so it follows the language), the name
+   of the account opens the card, and everything else reads under it — never
+   sideways, never past the edge. */
+@media (max-width: 780px) {
+  .admin-table-cards { display: block; width: 100%; border-collapse: separate; }
+  .admin-table-cards thead { display: none; }
+  .admin-table-cards tbody { display: block; }
+  .admin-table-cards tbody tr {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 0 0 10px;
+    padding: 12px 13px;
+    border: 1px solid color-mix(in srgb, var(--text) 13%, transparent);
+    border-radius: 14px;
+    background: color-mix(in srgb, var(--surface) 40%, transparent);
+  }
+  .admin-table-cards tbody tr:last-child { margin-bottom: 0; }
+  .admin-table-cards tbody td {
+    display: block;
+    padding: 0;
+    border: 0;
+    font-size: 12.5px;
+    line-height: 1.6;
+  }
+  /* A labelled figure reads on one line: the label on the reading side, the
+     value right after it. */
+  .admin-table-cards tbody td[data-label] {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 2px 8px;
+  }
+  .admin-table-cards tbody td[data-label]::before {
+    content: attr(data-label);
+    flex: 0 0 auto;
+    min-width: 64px;
+    font-family: var(--font-label, inherit);
+    font-size: 10px;
+    letter-spacing: .03em;
+    color: color-mix(in srgb, var(--text) 46%, transparent);
+  }
+  .admin-table-cards tbody td:first-child { font-size: 13.5px; }
+  .admin-table-cards tbody td:last-child { margin-top: 3px; }
+  .admin-table-cards .admin-mail,
+  .admin-table-cards .admin-muted { white-space: normal; overflow-wrap: anywhere; }
+  .admin-table-cards .admin-demandes-msg {
+    max-width: none;
+    -webkit-line-clamp: 4;
+    padding-top: 1px;
+  }
+  /* The payments card: the account, then why it is blocked, then the figures. */
+  .pay-table tbody td:nth-child(1) { order: 1; }
+  .pay-table tbody td:nth-child(6) { order: 2; }
+  .pay-table tbody td:nth-child(2) { order: 3; }
+  .pay-table tbody td:nth-child(3) { order: 4; }
+  .pay-table tbody td:nth-child(4) { order: 5; }
+  .pay-table tbody td:nth-child(5) { order: 6; }
+  .pay-table tbody td:nth-child(7) { order: 7; }
+  .pay-table tbody td:last-child { display: flex; justify-content: flex-start; }
+  /* The requests card: the name, the day, the subject, the message, the state. */
+  .admin-demandes-table tbody td:nth-child(2) { order: 1; }
+  .admin-demandes-table tbody td:nth-child(1) { order: 2; }
+  .admin-demandes-table tbody td:nth-child(3) { order: 3; }
+  .admin-demandes-table tbody td:nth-child(4) { order: 4; }
+  /* The subscriber card: the account, then its state, then the figures. The
+     second table reads the same way, so the three consoles agree. */
+  .admin-clients-table tbody td:nth-child(1) { order: 1; }
+  .admin-clients-table tbody td:nth-child(3) { order: 2; }
+  .admin-clients-table tbody td:nth-child(4) { order: 3; }
+  .admin-clients-table tbody td:nth-child(5) { order: 4; }
+  .admin-clients-table tbody td:nth-child(2) { order: 5; }
+  .admin-clients-table tbody td:nth-child(6) { order: 6; }
+  .admin-clients-table tbody td:nth-child(7) { order: 7; }
+  .admin-clients-table tbody td:nth-child(8) { order: 8; }
+  .admin-clients-table tbody td:nth-child(9) { order: 9; }
+  .admin-clients-table tbody td:nth-child(10) { order: 10; }
+  .admin-clients-table tbody td:nth-child(11) { order: 11; }
+  .admin-comptes-table tbody td:nth-child(1) { order: 1; }
+  .admin-comptes-table tbody td:nth-child(2) { order: 2; }
+  .admin-comptes-table tbody td:nth-child(3) { order: 3; }
+  .admin-comptes-table tbody td:nth-child(4) { order: 4; }
+  .admin-comptes-table tbody td:nth-child(5) { order: 5; }
+  .admin-comptes-table tbody td:nth-child(6) { order: 6; }
+  .admin-comptes-table tbody td:nth-child(7) { order: 7; }
+  .admin-comptes-table tbody td:nth-child(8) { order: 8; }
+  .admin-comptes-table tbody td:nth-child(9) { order: 9; }
+  .admin-clients-table tbody td:last-child,
+  .admin-comptes-table tbody td:last-child { display: flex; justify-content: flex-start; }
+  /* A listing card names each of its figures with the same short labels: the
+     organisation, the city, the budget, the address and the day. */
+  .admin-row-meta span[data-card-label]::before,
+  .admin-row-head span[data-card-label]::before {
+    content: attr(data-card-label);
+    font-family: var(--font-label, inherit);
+    font-size: 10px;
+    letter-spacing: .03em;
+    color: color-mix(in srgb, var(--text) 46%, transparent);
+  }
+  [dir="rtl"] .admin-row-meta span[data-card-label]::before,
+  [dir="rtl"] .admin-row-head span[data-card-label]::before { letter-spacing: 0; }
+  /* The nature and the section of a listing now carry their own short label,
+     like the figures under them: the word stays beside its value, and neither
+     runs past the frame when the card gets narrow. */
+  .admin-row-head > span[data-card-label] {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 2px 6px;
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    text-transform: none;
+  }
+  .admin-row-head > span[data-card-label]::before { flex: 0 0 auto; }
+  .admin-demandes-table tbody td:nth-child(5) { order: 5; margin-top: 3px; padding-top: 7px;
+    border-top: 1px dashed color-mix(in srgb, var(--text) 14%, transparent); }
+  /* In Arabic the labels keep the reading side and never take a wide column
+     of their own on a narrow screen. */
+  [dir="rtl"] .admin-table-cards tbody td[data-label]::before { text-align: start; }
+  /* The card reads with the short label, not the column heading: « المبلغ / 
+     شهر » holds in a header, not in a 64 px chip — and its slash would cut the
+     sense in two. Each figure is announced by one word, the one its value
+     actually answers. */
+  .admin-table-cards tbody td[data-card-label]::before {
+    content: attr(data-card-label);
+  }
+  [dir="rtl"] .admin-table-cards tbody td[data-card-label]::before {
+    min-width: 0;
+    letter-spacing: 0;
+  }
+  /* A state is a phrase in Arabic (« بحاجة إلى تسوية », « بحاجة إلى مراجعة »):
+     the pill folds inside the card instead of pushing the line past the
+     frame. The rule holds in every language, a card having no wide column of
+     its own to lend. */
+  .admin-table-cards .admin-badge,
+  .admin-table-cards .admin-sujet-state {
+    white-space: normal;
+    line-height: 1.6;
+    max-width: 100%;
+  }
+  /* A name typed without a space — a workshop written as one word, a long
+     Latin address — breaks inside the card rather than widening it. */
+  .admin-table-cards .admin-strong { overflow-wrap: anywhere; }
+  /* The state and its two round commands share the card's width: they wrap
+     under the pill instead of leaving the frame. */
+  .admin-table-cards .admin-demandes-etat { flex-wrap: wrap; }
+  /* The amount and the due date are figures: they keep one run, on the value
+     side of their label. */
+  .admin-table-cards tbody td.admin-num { font-variant-numeric: tabular-nums; }
+}
+
+@media (max-width: 420px) {
+  .admin-table-cards tbody td[data-label]::before { min-width: 0; flex-basis: 100%; }
+}

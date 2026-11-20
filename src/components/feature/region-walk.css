@@ -1,0 +1,716 @@
+/* ============ LES RÉGIONS PARCOURUES, SOUS LE PLAN ============ */
+/* Le parcours de l'annuaire, rappelé sous le plan : combien de régions ont été
+   ouvertes, la porte qui rouvre la dernière, et, dessous, les régions elles-
+   mêmes en pastilles — chacune rendant sa liste resserrée. Un relevé discret,
+   mais ses portes se voient.
+
+   Le style vit avec le composant : la même ligne paraît sur la fiche d'un
+   atelier comme sur celle d'un candidat. */
+.dist-walk {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding: 9px 12px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 76%, transparent);
+  background: color-mix(in srgb, var(--text) 5%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--text) 20%, transparent);
+}
+/* Posé dans une fiche — annonce, offre, atelier —, le relevé respire sous le
+   lien de retour, avant l'en-tête du document. */
+.pro-wrap > .dist-walk { margin: 0 0 14px; }
+.dist-walk-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  margin: 0;
+}
+.dist-walk-line > i { flex: 0 0 auto; font-size: 14px; color: var(--accent); }
+.dist-walk-line > span { min-width: 0; }
+
+/* Chaque carnet se lit d'un bloc : la ligne du nombre, puis ses pastilles.
+   Les pays passent sous les régions, séparés d'un trait discret. */
+.dist-walk-set {
+  display: grid;
+  gap: 9px;
+}
+.dist-walk-set--pays {
+  padding-top: 9px;
+  border-top: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+}
+/* Le carnet des métiers ferme la série : même trait de séparation que les
+   pays, puisqu'il se lit comme eux, à part des lieux. */
+.dist-walk-set--trade {
+  padding-top: 9px;
+  border-top: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+}
+
+.dist-walk-go {
+  margin-inline-start: auto;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px 6px;
+  max-width: 100%;
+  padding: 5px 11px;
+  border-radius: 999px;
+  white-space: nowrap;
+  text-decoration: none;
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  letter-spacing: .04em;
+  color: var(--accent2);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease;
+}
+.dist-walk-go i { font-size: 12px; }
+.dist-walk-go:hover {
+  background: color-mix(in srgb, var(--accent) 24%, transparent);
+  color: var(--text);
+}
+.dist-walk-go:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Le chiffre de la dernière liste ouverte, à côté de son nom : la porte dit ce
+   qu'elle rouvre sans attendre le survol. Discret, en chiffres alignés. */
+.dist-walk-n {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-label);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  letter-spacing: .02em;
+  opacity: .84;
+}
+.dist-walk-n > span { min-width: 0; }
+.dist-walk-n em { font-style: normal; opacity: .55; }
+[dir="rtl"] .dist-walk-n { letter-spacing: 0; }
+
+/* Le pays se porte d'une teinte plus sourde que la région : c'est un cadre,
+   pas le point précis où l'on se tenait. */
+.dist-walk-go--pays {
+  color: color-mix(in srgb, var(--text) 80%, transparent);
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  border-color: color-mix(in srgb, var(--text) 22%, transparent);
+}
+.dist-walk-go--pays:hover {
+  background: color-mix(in srgb, var(--text) 12%, transparent);
+  color: var(--text);
+}
+/* Le métier se porte comme le pays : un cadre de lecture, plus sourd que la
+   région, et sans pastille de lieu. */
+.dist-walk-go--trade {
+  color: color-mix(in srgb, var(--text) 80%, transparent);
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  border-color: color-mix(in srgb, var(--text) 22%, transparent);
+}
+.dist-walk-go--trade:hover {
+  background: color-mix(in srgb, var(--text) 12%, transparent);
+  color: var(--text);
+}
+
+/* Une porte qui ne mène plus à aucune fiche le dit avant le clic : bordure
+   pointillée, aiguille d'alerte à la place de la flèche de retour, et compte
+   en clair. Elle reste cliquable — la liste vide a ses propres sorties — mais
+   elle ne promet plus ce qu'elle n'a pas. */
+.dist-walk-go--empty {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--text) 34%, transparent);
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  color: color-mix(in srgb, var(--text) 72%, transparent);
+}
+.dist-walk-go--empty > i { color: color-mix(in srgb, var(--text) 58%, transparent); }
+.dist-walk-go--empty:hover {
+  background: color-mix(in srgb, var(--text) 10%, transparent);
+  border-color: color-mix(in srgb, var(--text) 50%, transparent);
+  color: var(--text);
+}
+.dist-walk-go--empty .dist-walk-n { opacity: 1; }
+
+/* Les régions traversées, dans l'ordre du parcours le plus récent d'abord :
+   chaque pastille rouvre l'annuaire resserré sur son lieu. */
+.dist-walk-stops {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.dist-walk-stop {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px 3px 7px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 11px;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease, color .2s ease;
+}
+.dist-walk-stop i { font-size: 12px; color: color-mix(in srgb, var(--accent) 72%, transparent); }
+.dist-walk-stop:hover {
+  color: var(--text);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+}
+.dist-walk-stop:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* La dernière région traversée : celle que la porte rouvre. */
+.dist-walk-stop.is-on {
+  color: var(--accent2);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+}
+.dist-walk-stop--pays.is-on {
+  color: var(--text);
+  background: color-mix(in srgb, var(--text) 12%, transparent);
+  border-color: color-mix(in srgb, var(--text) 34%, transparent);
+}
+/* Le métier repris garde la teinte sourde du cadre, jamais celle de la région. */
+.dist-walk-stop--trade i { color: color-mix(in srgb, var(--text) 62%, transparent); }
+.dist-walk-stop--trade.is-on {
+  color: var(--text);
+  background: color-mix(in srgb, var(--text) 12%, transparent);
+  border-color: color-mix(in srgb, var(--text) 34%, transparent);
+}
+
+/* Le compte d'une pastille : chaque porte de lieu dit ce que sa liste tient,
+   sans attendre le survol. Il se lit séparé du nom par un filet plus clair,
+   en chiffres alignés, jamais en gras. */
+.dist-walk-stop-n {
+  display: inline-flex;
+  align-items: center;
+  padding-inline-start: 6px;
+  margin-inline-start: 1px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  font-family: var(--font-label);
+  font-variant-numeric: tabular-nums;
+  font-size: 10px;
+  letter-spacing: .02em;
+  opacity: .78;
+}
+/* Une liste qui ne tient plus rien garde sa porte : elle le dit simplement, un
+   peu plus bas, au lieu d'afficher un zéro. */
+.dist-walk-stop--empty { border-style: dashed; }
+.dist-walk-stop--empty .dist-walk-stop-n { opacity: .92; }
+.dist-walk-stop.is-on .dist-walk-stop-n {
+  border-inline-start-color: color-mix(in srgb, var(--text) 26%, transparent);
+  opacity: 1;
+}
+
+/* La gomme, sous les pastilles de son carnet : petite, discrète, et jamais au
+   milieu du parcours — on l'atteint sans viser. Chaque carnet porte la sienne,
+   et n'efface que lui. */
+.dist-walk-foot {
+  display: flex;
+  justify-content: flex-start;
+  margin: 0;
+}
+/* Le carnet des pays et celui des métiers portent une gomme plus sourde, comme
+   leurs portes : ce sont des cadres, pas le point précis où l'on se tenait. */
+.dist-walk-wipe--pays,
+.dist-walk-wipe--trade {
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+.dist-walk-wipe {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  margin-inline-start: -2px;
+  border-radius: 999px;
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  letter-spacing: .03em;
+  color: color-mix(in srgb, var(--text) 60%, transparent);
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: color .2s ease, background .2s ease, border-color .2s ease;
+}
+.dist-walk-wipe i { font-size: 12px; }
+.dist-walk-wipe:hover {
+  color: var(--text);
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+  border-color: color-mix(in srgb, var(--text) 22%, transparent);
+}
+.dist-walk-wipe:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* La question de la gomme, posée à la place du mot : le carnet reste intact
+   tant que le second geste n'est pas donné. */
+.dist-walk-ask {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px 8px;
+}
+.dist-walk-ask-txt {
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  letter-spacing: .03em;
+  color: color-mix(in srgb, var(--text) 76%, transparent);
+}
+.dist-walk-yes,
+.dist-walk-no {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  letter-spacing: .03em;
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+.dist-walk-yes {
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+}
+.dist-walk-yes:hover {
+  color: var(--text);
+  background: color-mix(in srgb, var(--accent) 24%, transparent);
+}
+.dist-walk-no {
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--text) 20%, transparent);
+}
+.dist-walk-no:hover {
+  color: var(--text);
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+}
+.dist-walk-yes:focus-visible,
+.dist-walk-no:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Sous le relevé, le chiffre qui ferme la ligne : combien de carnets parlent
+   encore, sur les trois. Discret — c'est un état, pas une commande. */
+.dist-walk-bottom {
+  display: grid;
+  gap: 3px;
+  padding-top: 9px;
+  border-top: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+}
+.dist-walk-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  letter-spacing: .03em;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+.dist-walk-left i { font-size: 13px; color: color-mix(in srgb, var(--accent) 66%, transparent); }
+.dist-walk-left span { min-width: 0; }
+
+/* Posé en tête du relevé — sur la page de suivi —, le chiffre ouvre la ligne
+   au lieu de la fermer : le trait passe dessous, et il se lit avant les
+   carnets eux-mêmes. */
+/* Le chiffre et le nom du carnet qui parle seul, sous un même trait : le
+   nombre est le premier mot du suivi, son nom le second. */
+.dist-walk-top {
+  display: grid;
+  gap: 3px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+}
+
+/* Sous le chiffre, le nom du carnet qui parle seul : quand un seul souvenir
+   reste, le nombre ne dit pas lequel — cette ligne le nomme. */
+.dist-walk-alone {
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  letter-spacing: .03em;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+
+/* Sous le chiffre des carnets, la petite ligne du suivi : combien des portes
+   rappelées ne mènent plus à aucune fiche. Elle reste discrète quand tout
+   mène encore quelque part, et prend l'aiguille d'alerte sinon. */
+.dist-walk-dead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 4px 6px;
+  margin: 0;
+  padding-bottom: 0;
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  letter-spacing: .03em;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 70%, transparent);
+}
+.dist-walk-dead i { flex: 0 0 auto; font-size: 13px; line-height: 1.2; color: color-mix(in srgb, var(--text) 58%, transparent); }
+.dist-walk-dead > span { flex: 1 1 200px; min-width: 0; overflow-wrap: break-word; }
+.dist-walk-dead.is-clear {
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+.dist-walk-dead.is-clear i { color: color-mix(in srgb, var(--accent) 66%, transparent); }
+/* L'arabe porte ses diacritiques : la ligne se donne un peu plus de corps que
+   le latin, sinon les points se touchent. */
+[dir="rtl"] .dist-walk-dead { letter-spacing: 0; font-size: 11.5px; line-height: 1.7; }
+/* Posée sous le relevé d'une fiche, la ligne ferme le bloc : le trait du
+   chiffre des carnets passe au-dessus, elle ne s'y colle pas. */
+.dist-walk-bottom + .dist-walk-dead { padding-top: 2px; }
+
+/* La même ligne se copie d'un geste, portes nommées et état compris : elle part
+   telle quelle dans un message, sans être réécrite à la main. Le geste se
+   range au bout de la ligne, et passe dessous quand la place manque. */
+.dist-walk-dead .dist-walk-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-inline-start: auto;
+  padding: 2px 9px;
+  border-radius: 999px;
+  white-space: nowrap;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .04em;
+  color: color-mix(in srgb, var(--text) 60%, transparent);
+  background: transparent;
+  border: 1px dashed color-mix(in srgb, var(--text) 24%, transparent);
+  cursor: pointer;
+  transition: border-color .2s ease, color .2s ease, background .2s ease;
+}
+.dist-walk-dead .dist-walk-copy i { font-size: 11.5px; line-height: 1; color: inherit; }
+.dist-walk-dead .dist-walk-copy:hover {
+  border-style: solid;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.dist-walk-dead .dist-walk-copy.is-ok {
+  border-style: solid;
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--bg);
+}
+.dist-walk-dead .dist-walk-copy.is-ok i { color: var(--bg); }
+.dist-walk-dead .dist-walk-copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+[dir="rtl"] .dist-walk-dead .dist-walk-copy { letter-spacing: 0; }
+
+/* Le jeton qui ne garde que les carnets dont une porte ne mène plus à rien :
+   il se lit avant d'ouvrir, et se défait du même clic. */
+.dist-walk-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0; }
+/* Sous le relevé d'une fiche, il suit la ligne des portes vides : il garde un
+   peu d'air sous elle plutôt que de s'y coller, et se range du côté où la
+   lecture commence. */
+.dist-walk-dead + .dist-walk-tags { margin-top: 1px; }
+.dist-walk-dead .dist-walk-dead-held { flex: 0 1 auto; font-variant-numeric: tabular-nums; }
+
+/* Le survol du jeton : un panneau posé sous la pastille, hors de la rangée.
+   Deux lignes — retenus, puis retirés — qui se replient dans le panneau et ne
+   poussent jamais le relevé, même en arabe sur téléphone. */
+.dist-walk-tags { position: relative; }
+.dist-walk-tag-hint {
+  position: absolute;
+  inset-inline-start: 0;
+  top: calc(100% + 4px);
+  z-index: 5;
+  display: none;
+  flex-direction: column;
+  gap: 3px;
+  box-sizing: border-box;
+  width: max-content;
+  max-width: min(100%, 320px);
+  padding: 7px 11px;
+  border-radius: 10px;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, .45);
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  line-height: 1.5;
+  color: var(--text);
+  /* Une plaque levée au-dessus de la carte : la fiche et le relevé partagent
+     déjà la teinte des feuilles, le panneau s'en détache donc par le haut. */
+  background: color-mix(in srgb, var(--surface-2) 86%, var(--text));
+  border: 1px solid color-mix(in srgb, var(--text) 34%, transparent);
+  pointer-events: none;
+}
+.dist-walk-tags:hover .dist-walk-tag-hint,
+.dist-walk-tags:focus-within .dist-walk-tag-hint { display: flex; }
+.dist-walk-tag-hint-row { min-width: 0; overflow-wrap: anywhere; text-align: start; }
+[dir="rtl"] .dist-walk-tag-hint { font-size: 11.5px; line-height: 1.7; letter-spacing: 0; }
+.dist-walk-bottom + .dist-walk-dead + .dist-walk-tags { margin-top: 2px; }
+.dist-walk-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  max-width: 100%;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .04em;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  background: transparent;
+  border: 1px dashed color-mix(in srgb, var(--text) 24%, transparent);
+  cursor: pointer;
+  transition: border-color .2s ease, color .2s ease, background .2s ease;
+}
+.dist-walk-tag i { flex: 0 0 auto; font-size: 12px; color: inherit; }
+/* Le compte et son mot ne font qu'une pièce : « 2 » ne se détache jamais de
+   « lisibles », même quand le nom du jeton se replie au-dessus d'eux. */
+.dist-walk-tag-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+.dist-walk-tag b {
+  flex: 0 0 auto;
+  min-width: 16px;
+  padding: 1px 5px;
+  border-radius: 999px;
+  text-align: center;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  font-weight: 400;
+  background: color-mix(in srgb, var(--text) 12%, transparent);
+  color: color-mix(in srgb, var(--text) 72%, transparent);
+}
+.dist-walk-tag:hover {
+  border-style: solid;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.dist-walk-tag:hover b { background: color-mix(in srgb, var(--accent) 20%, transparent); }
+.dist-walk-tag.is-on {
+  border-style: solid;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: var(--accent2);
+}
+.dist-walk-tag:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+[dir="rtl"] .dist-walk-tag { letter-spacing: 0; }
+[dir="rtl"] .dist-walk-tag-count { letter-spacing: 0; }
+
+/* Posé, le jeton garde son compte et le mot qui l'explique : le chiffre ne
+   s'efface pas au moment où il devient le plus utile — il dit alors combien
+   de carnets restent lisibles sous le relevé resserré. */
+.dist-walk-tag.is-on b {
+  background: color-mix(in srgb, var(--accent) 26%, transparent);
+  color: var(--accent2);
+}
+.dist-walk-tag-kept {
+  flex: 0 0 auto;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .04em;
+  white-space: nowrap;
+  opacity: .82;
+}
+[dir="rtl"] .dist-walk-tag-kept {
+  letter-spacing: 0;
+  font-size: 10.5px;
+}
+
+/* Le compte des profils à porte vide, posé à côté du jeton : une plaque
+   pointillée, plus sourde que le jeton — c'est un constat, pas une commande.
+   Elle passe à la ligne sous le jeton plutôt que de le pousser. */
+.dist-walk-tag-lost {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  max-width: 100%;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .04em;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+  background: color-mix(in srgb, var(--text) 5%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--text) 26%, transparent);
+  cursor: help;
+}
+.dist-walk-tag-lost { position: relative; }
+.dist-walk-lost-hint {
+  position: absolute;
+  inset-inline-start: 0;
+  top: calc(100% + 4px);
+  z-index: 5;
+  display: none;
+  flex-direction: column;
+  gap: 3px;
+  box-sizing: border-box;
+  width: max-content;
+  max-width: min(100%, 320px);
+  padding: 7px 11px;
+  border-radius: 10px;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, .45);
+  font-size: 10.5px;
+  letter-spacing: .02em;
+  line-height: 1.5;
+  color: var(--text);
+  background: color-mix(in srgb, var(--surface-2) 86%, var(--text));
+  border: 1px solid color-mix(in srgb, var(--text) 34%, transparent);
+  pointer-events: none;
+}
+.dist-walk-tag-lost:hover .dist-walk-lost-hint,
+.dist-walk-tag-lost:focus-visible .dist-walk-lost-hint,
+.dist-walk-tag-lost:focus-within .dist-walk-lost-hint { display: flex; }
+.dist-walk-tag-lost:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+[dir="rtl"] .dist-walk-lost-hint { font-size: 11.5px; line-height: 1.7; letter-spacing: 0; }
+@media (max-width: 640px) {
+  .dist-walk-lost-hint { width: 100%; max-width: 100%; font-size: 11.5px; }
+}
+.dist-walk-tag-lost i { flex: 0 0 auto; font-size: 12px; color: color-mix(in srgb, var(--text) 56%, transparent); }
+.dist-walk-tag-lost > span { min-width: 0; overflow-wrap: anywhere; }
+[dir="rtl"] .dist-walk-tag-lost { letter-spacing: 0; font-size: 10.5px; }
+@media (max-width: 640px) {
+  .dist-walk-tag-lost { flex: 1 1 100%; align-items: flex-start; font-size: 11px; }
+  .dist-walk-tag-lost i { margin-top: 1px; }
+  [dir="rtl"] .dist-walk-tag-lost { font-size: 11.5px; }
+}
+
+/* La région reprise, dite sans être vue : la porte change de page, la phrase
+   est donc posée dans la page quittée, juste avant le départ. */
+.dist-walk-said {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  white-space: nowrap;
+  border: 0;
+  clip-path: inset(50%);
+}
+
+[dir="rtl"] .dist-walk-go { margin-inline-start: 0; margin-inline-end: auto; letter-spacing: 0; }
+[dir="rtl"] .dist-walk-stop i { transform: scaleX(-1); }
+[dir="rtl"] .dist-walk-stop-n { letter-spacing: 0; }
+[dir="rtl"] .dist-walk-wipe { letter-spacing: 0; }
+[dir="rtl"] .dist-walk-left { letter-spacing: 0; }
+[dir="rtl"] .dist-walk-alone { letter-spacing: 0; }
+[dir="rtl"] .dist-walk-ask-txt,
+[dir="rtl"] .dist-walk-yes,
+[dir="rtl"] .dist-walk-no { letter-spacing: 0; }
+@media (max-width: 640px) {
+  .dist-walk-go { margin-inline-start: 0; }
+  /* Le relevé respire un peu moins sur téléphone, mais la ligne des portes
+     vides garde sa taille lisible : elle porte un compte, pas une note. */
+  .dist-walk { padding: 9px 10px 10px; }
+  .dist-walk-top { padding-bottom: 8px; }
+  .dist-walk-dead { font-size: 11.5px; line-height: 1.6; gap: 5px; }
+  .dist-walk-dead i { font-size: 14px; }
+  [dir="rtl"] .dist-walk-dead { font-size: 12px; line-height: 1.75; }
+  /* Sur téléphone, le geste de copie prend sa propre rangée sous la phrase :
+     la ligne garde le compte, le geste ne le pousse pas hors du cadre. */
+  .dist-walk-dead > span { flex: 1 1 100%; }
+  .dist-walk-dead .dist-walk-copy {
+    margin-inline-start: 0;
+    padding: 3px 10px;
+    font-size: 10px;
+  }
+  .dist-walk-tag { white-space: normal; row-gap: 1px; }
+  .dist-walk-tag > span:not(.dist-walk-tag-count) {
+    min-width: 0;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    text-align: start;
+  }
+  /* Sur téléphone, le jeton ne pousse jamais la rangée : son nom se replie
+     avant d'écraser son compte, et le compte reste entier à sa suite, du côté
+     où la lecture s'achève. */
+  .dist-walk-tags { min-width: 0; }
+  .dist-walk-tag-hint { width: 100%; max-width: 100%; font-size: 11.5px; }
+  .dist-walk-tag {
+    min-width: 0;
+    max-width: 100%;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding: 4px 10px;
+  }
+  .dist-walk-tag > i { margin-top: 1px; }
+  .dist-walk-tag > span:not(.dist-walk-tag-count) { flex: 1 1 auto; }
+  /* Sur téléphone, le compte posé reste d'un seul tenant : son chiffre et le
+     mot qui l'explique ne se séparent ni ne se coupent, côte à côte. */
+  .dist-walk-tag-count { flex: 0 0 auto; }
+  .dist-walk-tag b { flex: 0 0 auto; }
+  /* Le mot du compte posé reste entier sur sa ligne : il ne se coupe pas au
+     milieu d'un mot arabe. */
+  .dist-walk-tag-kept { white-space: nowrap; font-size: 10px; }
+  [dir="rtl"] .dist-walk-tag-kept { font-size: 11px; }
+  /* Le chiffre qui ferme le relevé d'une fiche se replie comme le reste : en
+     arabe, le nombre et son verbe ne tiennent pas toujours sur une ligne. */
+  .dist-walk-left { flex-wrap: wrap; align-items: flex-start; }
+  .dist-walk-left i { margin-top: 1px; }
+  .dist-walk-left > span { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
+  .dist-walk-alone { overflow-wrap: anywhere; }
+  [dir="rtl"] .dist-walk-tag > span:not(.dist-walk-tag-count) { text-align: start; }
+  [dir="rtl"] .dist-walk-tag-count { letter-spacing: 0; gap: 3px; }
+  /* Une pastille avec son compte ne dépasse jamais la rangée : elle passe à la
+     ligne entière, et son nom se replie avant d'écraser le chiffre. */
+  .dist-walk-stops { gap: 6px; }
+  .dist-walk-stops > li { min-width: 0; max-width: 100%; }
+  .dist-walk-stop { max-width: 100%; min-width: 0; flex-wrap: wrap; row-gap: 1px; }
+  .dist-walk-stop > span:not(.dist-walk-stop-n) {
+    min-width: 0; white-space: normal; overflow-wrap: anywhere; text-align: start;
+  }
+  .dist-walk-stop-n { flex: 0 0 auto; white-space: nowrap; }
+  .dist-walk-go { white-space: normal; text-align: start; }
+  /* Sur téléphone, la porte prend la rangée entière plutôt que de pousser le
+     compte hors du cadre : elle se replie sur deux lignes si son nom est long,
+     et le chiffre reste collé à son nom, jamais rejeté à l'extérieur. */
+  .dist-walk-line { row-gap: 7px; }
+  .dist-walk-line > span { flex: 1 1 auto; min-width: 0; }
+  .dist-walk-go {
+    flex: 1 1 100%;
+    min-width: 0;
+    max-width: 100%;
+    margin-inline: 0;
+    justify-content: flex-start;
+    align-items: flex-start;
+    row-gap: 2px;
+    padding: 6px 10px;
+  }
+  .dist-walk-go > i { flex: 0 0 auto; margin-top: 1px; }
+  .dist-walk-go > span:not(.dist-walk-n) {
+    min-width: 0;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    text-align: start;
+  }
+  .dist-walk-go .dist-walk-n {
+    flex: 0 0 auto;
+    max-width: 100%;
+    flex-wrap: wrap;
+    align-items: baseline;
+  }
+  /* L'arabe se lit de droite à gauche : le nom commence à droite, le compte
+     le suit vers la gauche, et rien ne déborde du cadre. */
+  [dir="rtl"] .dist-walk-go {
+    margin-inline: 0;
+    text-align: start;
+  }
+  [dir="rtl"] .dist-walk-go > span:not(.dist-walk-n) {
+    text-align: start;
+  }
+  [dir="rtl"] .dist-walk-n { gap: 2px; }
+  [dir="rtl"] .dist-walk-dead { letter-spacing: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dist-walk-go,
+  .dist-walk-stop,
+  .dist-walk-wipe,
+  .dist-walk-yes,
+  .dist-walk-no { transition: none; }
+}

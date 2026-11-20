@@ -1,0 +1,25 @@
+/* ============ PAPERATLAS-DZ — PALETTE ============ */
+/* The whole site reads its colours from these values and nothing else.
+   Change them here and every page follows: the film veils, the cards, the
+   tables, the account panels, the footer.
+
+   Current direction: warm ink charcoal. The page base dropped from a heavy
+   mid brown to a near-black with a warm cast, so the warm press-hall footage
+   and the orange of the paper accent carry the colour instead of the walls.
+   Three neutral levels, in three visible steps: the page (--bg), the cards
+   and plates that sit on it (--surface), and the sheets that must never be
+   confused with the page behind them — account panels, dialogs, nested cards
+   (--surface-2). */
+
+:root {
+  --bg: #1c1a18;
+  --surface: #332d29;
+  --surface-2: #3d3630;
+  --footer-bg: #241f1c;
+
+  --text: #f5ece1;
+  --muted: #c4b2a1;
+
+  --accent: #ef8b34;
+  --accent2: #f7d3a4;
+}

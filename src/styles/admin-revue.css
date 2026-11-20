@@ -1,0 +1,764 @@
+/* ---- la revue de la messagerie -------------------------------------------
+   Deux repères seulement : l'en-tête de tri « revue », qui remonte les fils
+   dormants jamais ouverts pendant la visite, et le bouton de reprise sur la
+   jauge, qui rouvre le premier fil restant. Le reste de la console garde son
+   style dans admin.css. */
+
+/* L'en-tête de tri au-dessus de la liste : un mot, un bouton, rien de plus —
+   il ne prend pas la place d'un fil. */
+.admin-inbox-sort {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 2px 2px 6px;
+  border-bottom: 1px dashed color-mix(in srgb, var(--text) 12%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+
+.admin-inbox-sort .admin-muted {
+  margin: 0;
+}
+
+.admin-inbox-sort .admin-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  border: 1px dashed color-mix(in srgb, var(--text) 20%, transparent);
+  border-radius: 999px;
+  background: none;
+  font-family: var(--font-label, inherit);
+  font-size: 10.5px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  cursor: pointer;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+
+.admin-inbox-sort .admin-sort:hover {
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  color: var(--text);
+}
+
+.admin-inbox-sort .admin-sort[data-on="yes"] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: color-mix(in srgb, var(--accent) 86%, var(--text));
+}
+
+.admin-inbox-sort .admin-sort b {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  opacity: .9;
+}
+
+/* Le compte qui ouvre la marche du tri « après relance » : il se lit dans le
+   bouton, comme la reprise nomme le premier fil restant. Le nom s'efface en
+   premier quand la barre est étroite, jamais le geste. */
+.admin-inbox-sort .admin-sort-who {
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-inline-start: 6px;
+  margin-inline-start: 2px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+  font-size: 10px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+
+@media (max-width: 900px) {
+  .admin-inbox-sort .admin-sort-who {
+    max-width: 96px;
+  }
+}
+
+/* Le bouton de reprise posé sur la jauge : il dit où la revue reprend, et y
+   mène d'un clic. Le nom du fil s'efface en premier quand la barre est
+   étroite, jamais le geste. */
+.admin-revue-resume {
+  gap: 4px;
+  cursor: pointer;
+  transition: border-color .15s ease, background .15s ease, color .15s ease;
+}
+
+.admin-revue-resume:hover,
+.admin-revue-resume:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 62%, transparent);
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  color: var(--text);
+}
+
+/* Quand le bouton ramène au dernier fil relu plutôt que de partir vers le
+   suivant, il emprunte une teinte plus sourde : le geste de retour se lit
+   avant le clic, sans ajouter une seconde pastille à côté. */
+.admin-revue-resume[data-back='yes'] {
+  border-color: color-mix(in srgb, var(--accent) 34%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.admin-revue-resume[data-back='yes']:hover,
+.admin-revue-resume[data-back='yes']:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 58%, transparent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+}
+
+.admin-revue-resume-word {
+  white-space: nowrap;
+}
+
+.admin-revue-resume-who {
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 10px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+
+@media (max-width: 900px) {
+  .admin-revue-resume-who {
+    max-width: 96px;
+  }
+}
+
+/* La touche qui mène au fil suivant : elle se lit sur le bouton de reprise,
+   comme un raccourci de bureau, sans explication à côté. */
+.admin-revue-resume-key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  min-width: 15px;
+  height: 15px;
+  padding: 0 3px;
+  border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 9.5px;
+  line-height: 1;
+  letter-spacing: .02em;
+  color: color-mix(in srgb, var(--accent) 86%, var(--text));
+}
+
+/* Le jeton « en sommeil seulement » reçoit la même petite gomme que ses
+   voisins : le geste de repartir d'une liste entière se retrouve partout où
+   un filtre est posé. */
+.admin-sleep-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 6px 2px 9px;
+}
+
+.admin-sleep-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* Le jeton « après relance seulement » : il porte le nom du compte qui a le
+   plus déposé, et une petite gomme qui rend la liste entière. Le nom s'efface
+   en premier quand la barre est étroite, jamais le geste. */
+.admin-apres-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 6px 2px 9px;
+}
+
+.admin-apres-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.admin-apres-who {
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 10px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+
+@media (max-width: 900px) {
+  .admin-apres-who {
+    max-width: 96px;
+  }
+}
+
+/* L'avancement en clair sur le bouton de reprise : « 2 sur 5 » se lit avant
+   même d'ouvrir le fil suivant, posé entre le nom du fil et les touches. Il
+   garde son chiffre en colonnes, pour que la longueur ne danse pas d'un fil
+   à l'autre. */
+.admin-revue-resume-count {
+  flex: none;
+  padding-inline-start: 6px;
+  margin-inline-start: 1px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+  font-size: 9.5px;
+  letter-spacing: 0;
+  text-transform: none;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 68%, transparent);
+}
+
+/* Le bouton de reprise et, sous lui, depuis quand la revue s'est arrêtée :
+   la colonne garde le geste à hauteur des autres jetons, et la mesure se lit
+   juste en dessous, sans ajouter une pastille dans la barre. */
+.admin-revue-resume-wrap {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+}
+
+.admin-revue-resume-since {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 6px 1px 2px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: none;
+  font-family: var(--font-label, inherit);
+  font-size: 9.5px;
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-transform: none;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+  cursor: pointer;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+
+/* La ligne « Ouvert il y a … » se clique : elle rouvre le fil sans passer par
+   le bouton, et le survol le dit sans ajouter de mot. */
+.admin-revue-resume-since:hover,
+.admin-revue-resume-since:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 38%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+
+.admin-revue-resume-since i {
+  font-size: 10px;
+  color: color-mix(in srgb, var(--accent) 62%, transparent);
+}
+
+/* Le tri actif dans la ligne récapitulative : l'ordre de lecture se lit juste
+   après les jetons, sans quitter la ligne. Le nom du compte qui ouvre la
+   marche s'efface en premier quand la colonne est étroite. */
+.admin-inbox-note-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+
+.admin-inbox-note-sort i {
+  font-size: 11px;
+}
+
+.admin-inbox-note-sort-who {
+  max-width: 130px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-inline-start: 5px;
+  margin-inline-start: 1px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+  font-size: 10px;
+  letter-spacing: 0;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+
+/* Le rappel de tri se clique : il se lit comme le reste de la ligne, mais le
+   curseur et la petite croix disent qu'un clic rend la liste à son ordre
+   d'origine. La croix s'efface jusqu'au survol, pour que la ligne reste
+   calme tant qu'on ne la touche pas. */
+.admin-inbox-note-sort-btn {
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: none;
+  padding: 1px 5px;
+  font-family: inherit;
+  font-size: inherit;
+  letter-spacing: 0;
+  cursor: pointer;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+
+.admin-inbox-note-sort-btn:hover,
+.admin-inbox-note-sort-btn:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 34%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+}
+
+.admin-inbox-note-sort-back {
+  font-size: 10px;
+  opacity: 0;
+  transition: opacity .15s ease;
+}
+
+.admin-inbox-note-sort-btn:hover .admin-inbox-note-sort-back,
+.admin-inbox-note-sort-btn:focus-visible .admin-inbox-note-sort-back {
+  opacity: .8;
+}
+
+@media (max-width: 900px) {
+  .admin-inbox-note-sort-who {
+    max-width: 88px;
+  }
+}
+
+/* La ligne récapitulative des jetons : les filtres posés, le nombre de fils
+   qu'ils laissent et l'avancement de la revue — une seule ligne, qui se
+   replie proprement quand la colonne est étroite. */
+.admin-inbox-note {
+  flex-wrap: wrap;
+  row-gap: 3px;
+}
+
+.admin-inbox-note-list {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.admin-inbox-note-count {
+  flex: none;
+  padding-inline-start: 7px;
+  margin-inline-start: 1px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  white-space: nowrap;
+}
+
+/* Le compte des jetons posés : le même chiffre que la synthèse du classeur,
+   un peu plus tenu que les nombres de fils, pour que la ligne se lise dans
+   l'ordre — les filtres, combien ils sont, ce qu'ils laissent, où en est la
+   revue. */
+.admin-inbox-note-chips {
+  font-weight: 600;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+}
+
+/* Le seul « effacer » de la ligne récapitulative : il éteint les jetons de la
+   liste et rend toutes les conversations d'un clic, sans les décrocher un par
+   un. Discret, mais toujours à la fin de la ligne, là où le regard arrive. */
+.admin-inbox-note-clear {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: none;
+  padding: 1px 7px;
+  margin-inline-start: 2px;
+  border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
+  border-radius: 999px;
+  background: none;
+  font-family: var(--font-label, inherit);
+  font-size: 10px;
+  letter-spacing: .04em;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  cursor: pointer;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+
+.admin-inbox-note-clear i {
+  font-size: 11px;
+}
+
+.admin-inbox-note-clear:hover,
+.admin-inbox-note-clear:focus-visible {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+}
+
+/* Les deux flèches, posées dans la barre de tri comme la touche N l'est sur
+   la jauge : le geste se lit sans notice, et il ne se déclenche que dans la
+   carte — ailleurs, les flèches gardent le défilement de la page. */
+.admin-inbox-keys {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding-inline-start: 6px;
+  margin-inline-start: 1px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
+  letter-spacing: 0;
+}
+
+/* La touche qui referme le fil se rappelle dans la barre de tri, à côté des
+   flèches : le geste se découvre avant d'en avoir besoin. Elle reste lisible
+   quand rien n'est ouvert, et s'allume dès qu'un fil peut être refermé. */
+.admin-inbox-esc {
+  gap: 4px;
+  font-size: 9.5px;
+  letter-spacing: .04em;
+  color: color-mix(in srgb, var(--text) 46%, transparent);
+  opacity: .62;
+  transition: opacity .16s ease, color .16s ease;
+}
+
+.admin-inbox-esc[data-on="yes"] {
+  opacity: 1;
+  color: color-mix(in srgb, var(--accent) 74%, var(--text));
+}
+
+.admin-inbox-esc .admin-revue-resume-key {
+  opacity: .9;
+}
+
+/* La touche qui referme le fil ouvert se lit dans l'en-tête du fil, à
+   l'autre bout de la ligne des participants : un rappel de clavier, pas un
+   bouton de plus. */
+.admin-thread-esc {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-inline-start: auto;
+  padding-inline-start: 8px;
+  font-family: var(--font-label, inherit);
+  font-size: 9.5px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 46%, transparent);
+}
+
+/* Le tri inverse de la ligne récapitulative : il prend toute la largeur de
+   la ligne qu'il prolonge, pour que le geste se lise comme un bandeau de
+   lecture et non comme une pastille de plus. Au repos il reste discret ;
+   posé, il s'allume et dit dans quel sens les gestes se relisent. */
+.admin-gomme-recap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  margin: 2px 0 6px;
+  padding: 5px 10px;
+  border: 1px dashed color-mix(in srgb, var(--text) 18%, transparent);
+  border-radius: 8px;
+  background: none;
+  font-family: var(--font-label, inherit);
+  font-size: 10px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  text-align: start;
+  color: color-mix(in srgb, var(--text) 56%, transparent);
+  cursor: pointer;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+
+.admin-gomme-recap i {
+  flex: none;
+  font-size: 12px;
+}
+
+.admin-gomme-recap-word {
+  white-space: nowrap;
+}
+
+/* Le sens en clair : « du plus frais au plus ancien » se lit à côté du
+   libellé, sans survol. Il cède en premier quand la colonne est étroite. */
+.admin-gomme-recap-sens {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-inline-start: 7px;
+  margin-inline-start: 1px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--text) 20%, transparent);
+  letter-spacing: 0;
+  text-transform: none;
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+}
+
+/* L'aire effacée le plus récemment, portée par la jauge du tri inverse,
+   juste au-dessus de la ligne des aires parties. */
+.admin-gomme-recap-tete {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-inline-start: 7px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--text) 20%, transparent);
+  letter-spacing: 0;
+  text-transform: none;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+
+.admin-gomme-recap[data-on='yes'] .admin-gomme-recap-tete {
+  color: color-mix(in srgb, var(--accent) 78%, var(--text));
+}
+
+.admin-gomme-recap b {
+  flex: none;
+  margin-inline-start: auto;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+}
+
+.admin-gomme-recap:hover,
+.admin-gomme-recap:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  color: var(--text);
+}
+
+.admin-gomme-recap[data-on='yes'] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+
+.admin-gomme-recap[data-on='yes'] .admin-gomme-recap-sens,
+.admin-gomme-recap[data-on='yes'] b {
+  color: color-mix(in srgb, var(--accent) 78%, var(--text));
+}
+
+/* La carte elle-même n'affiche pas d'anneau : elle ne reçoit le foyer que
+   pour que le clavier ait un endroit où agir. */
+.admin-inbox:focus {
+  outline: none;
+}
+
+/* Les rappels de clavier de la barre de tri — les deux flèches et la touche
+   Échap — ne se montrent qu'une fois la carte au foyer : la ligne reste nue
+   au repos, et le geste se découvre dès qu'on y travaille, au clavier comme
+   après un clic dans la liste. */
+.admin-inbox .admin-inbox-keys {
+  opacity: 0;
+  transition: opacity .16s ease;
+}
+
+.admin-inbox:focus .admin-inbox-keys,
+.admin-inbox:focus-within .admin-inbox-keys {
+  opacity: 1;
+}
+
+/* La touche Échap garde sa nuance une fois montrée : sourde tant que rien
+   n'est ouvert, franche dès qu'il y a quelque chose à refermer. */
+.admin-inbox:focus .admin-inbox-esc[data-on='yes'],
+.admin-inbox:focus-within .admin-inbox-esc[data-on='yes'] {
+  color: color-mix(in srgb, var(--accent) 74%, var(--text));
+}
+
+/* Le bloc de synthèse de la fiche se clique : il porte les bornes de la
+   visite et, sous elles, le journal de la revue réduit à ce compte. Les
+   tuiles reprennent celles de la fiche, sans devenir des liens séparés —
+   c'est la visite entière qui s'ouvre. */
+.admin-revue-visite {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+.admin-revue-visite-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+.admin-revue-visite-fact {
+  display: block;
+  padding: 12px 14px;
+  border: 1px solid color-mix(in srgb, var(--text) 11%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--bg) 32%, transparent);
+  transition: border-color .15s ease, background .15s ease;
+}
+
+.admin-revue-visite-key {
+  display: block;
+  font-family: var(--font-label, inherit);
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+}
+
+.admin-revue-visite-val {
+  display: block;
+  margin-top: 4px;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  word-break: break-word;
+}
+
+/* Le geste se lit sous les tuiles : une ligne de journal, pas un bouton de
+   plus. Le survol allume les tuiles et la ligne ensemble, pour que le bloc
+   se lise comme une seule porte. */
+.admin-revue-visite-foot {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-label, inherit);
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+  transition: color .15s ease;
+}
+
+.admin-revue-visite:hover .admin-revue-visite-fact,
+.admin-revue-visite:focus-visible .admin-revue-visite-fact {
+  border-color: color-mix(in srgb, var(--accent) 42%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.admin-revue-visite:hover .admin-revue-visite-foot,
+.admin-revue-visite:focus-visible .admin-revue-visite-foot {
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+
+/* ---- la revue d'un compte, ouverte depuis sa fiche -----------------------
+   La pastille dit à quel compte la liste se réduit, et la croix la rend
+   entière. Le nom s'efface en premier quand la barre est étroite, jamais le
+   geste. */
+.admin-scope-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 6px 2px 9px;
+}
+
+.admin-scope-word {
+  white-space: nowrap;
+}
+
+.admin-scope-who {
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-inline-start: 6px;
+  margin-inline-start: 1px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  font-size: 10px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: color-mix(in srgb, var(--text) 64%, transparent);
+}
+
+@media (max-width: 900px) {
+  .admin-scope-who {
+    max-width: 96px;
+  }
+}
+
+/* ---- le journal de la revue à l'écran ------------------------------------
+   Une ligne par fil relu, l'heure et les minutes, puis les bornes de la
+   visite au bas du tableau : la même lecture que l'onglet du classeur, sans
+   passer par un fichier. */
+.admin-journal-table td {
+  vertical-align: middle;
+}
+
+.admin-journal-thread {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+  padding: 3px 8px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition: border-color .15s ease, background .15s ease, color .15s ease;
+}
+
+.admin-journal-thread:hover,
+.admin-journal-thread:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 42%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+
+.admin-journal-thread i:first-child {
+  font-size: 11px;
+  color: color-mix(in srgb, var(--accent) 62%, transparent);
+}
+
+.admin-journal-thread-name {
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+.admin-journal-compte {
+  display: block;
+  font-size: 12px;
+}
+
+/* Le bloc de synthèse du journal n'est pas une porte : il ne se clique pas,
+   il se lit. Il garde les tuiles de la fiche, sans en prendre le geste. */
+.admin-journal .admin-revue-visite {
+  margin-top: 14px;
+  cursor: default;
+}
+
+.admin-journal .admin-revue-visite-fact {
+  background: color-mix(in srgb, var(--bg) 28%, transparent);
+}
+
+.admin-journal-note {
+  margin-top: 12px;
+  max-width: 78ch;
+  line-height: 1.55;
+}
+
+@media (max-width: 900px) {
+  .admin-journal-thread-name {
+    max-width: 180px;
+  }
+}

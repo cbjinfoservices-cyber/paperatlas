@@ -1,0 +1,48 @@
+/* Le geste court de l'aire, partout où un profil paraît.
+   Il reprend la tenue de la fiche d'atelier et de plume, sans la dépasser :
+   une rangée qui se replie, et le compte de l'aire à sa droite. */
+.aire-profile-copy {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.aire-profile-copy .pro-aire-row {
+  margin-top: 6px;
+  min-width: 0;
+}
+
+/* Sur la carte d'une candidature, le geste se tient dans la rangée des
+   actions : il ne pousse pas les boutons, il prend sa place et se replie. */
+.capp-actions .aire-profile-copy {
+  flex: 1 1 auto;
+  justify-content: flex-end;
+}
+
+.capp-actions .aire-profile-copy .pro-aire-row {
+  margin-top: 0;
+  justify-content: flex-end;
+}
+
+/* Dans la carte liée d'un compte, le geste se tient sous le nom et ses
+   actions, sur toute la largeur disponible. */
+.aul .aire-profile-copy,
+.b2bc-link .aire-profile-copy {
+  margin-top: 4px;
+}
+
+.aul-linked .aire-profile-copy,
+.b2bc-linked .aire-profile-copy {
+  flex: 1 1 100%;
+  margin-top: 0;
+}
+
+@media (max-width: 640px) {
+  .capp-actions .aire-profile-copy,
+  .capp-actions .aire-profile-copy .pro-aire-row {
+    justify-content: flex-start;
+  }
+}

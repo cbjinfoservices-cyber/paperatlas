@@ -1,0 +1,1750 @@
+/* ============ FEUILLE DES TARIFS — MARCHÉS DÉJÀ PARTIS ============ */
+/* Trois gestes de la même liste : le signal porté par la ligne elle-même, la
+   gélule qui vide la liste d'un coup, et la phrase qui dit que l'appareil la
+   retient d'une visite à l'autre. Les couleurs et la typographie passent
+   uniquement par les variables du thème. */
+
+/* Le marché déjà servi le dit sur sa propre ligne, à côté de son économie :
+   la pastille est en pointillé pour ne pas se confondre avec la pastille
+   pleine du tri, et ne prend jamais la place d'un montant. */
+.of-pays-sent {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  max-width: 100%;
+  margin-top: 1px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 44%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  line-height: 1.5;
+  letter-spacing: .02em;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.of-pays-sent i { flex: 0 0 auto; font-size: 9px; color: inherit; }
+[dir="rtl"] .of-pays-sent { letter-spacing: 0; font-variant-numeric: normal; }
+
+/* Depuis combien de jours l'adresse n'est pas repartie : le nombre suit le
+   compte d'envois, séparé d'un trait fin pour ne pas se lire comme un montant. */
+.of-pays-sent-ago {
+  margin-inline-start: 3px;
+  padding-inline-start: 5px;
+  border-inline-start: 1px dashed color-mix(in srgb, var(--accent) 30%, transparent);
+  font-style: normal;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent) 58%, var(--text));
+  white-space: nowrap;
+}
+
+/* Le même nombre dans la liste « Déjà partis », après la date du dernier
+   envoi : la pastille dit à la fois quand et il y a combien de temps. */
+.of-pays-link-name-ago {
+  margin-inline-start: 2px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  font-style: normal;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent) 68%, var(--text));
+  white-space: nowrap;
+}
+
+/* La relance : une ligne discrète sous la copie, qui dit combien de marchés
+   attendent, et la gélule qui emporte le message prêt à envoyer. */
+.of-pays-link-relance {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 6px 0 0;
+  padding: 5px 9px;
+  border-radius: 9px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 22%, transparent);
+  background: color-mix(in srgb, var(--accent) 4%, transparent);
+}
+.of-pays-link-relance-lab {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 5px;
+  flex: 1 1 220px;
+  min-width: 0;
+  font-size: 10.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.of-pays-link-relance-lab i {
+  flex: 0 0 auto;
+  margin-top: 1px;
+  font-size: 11.5px;
+  color: color-mix(in srgb, var(--accent) 76%, var(--text));
+}
+/* Les deux gestes de la relance, côte à côte : le message à copier, et le
+   fichier à confier à un collègue qui n'a pas la feuille ouverte. */
+.of-pays-link-relance-acts {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.of-pays-relance-csv {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 40%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--accent) 80%, var(--text));
+  font-family: var(--font-label);
+  font-size: 10px;
+  line-height: 1.5;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.of-pays-relance-csv i { font-size: 11px; color: inherit; }
+.of-pays-relance-csv:hover {
+  border-style: solid;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent2);
+}
+.of-pays-relance-csv.is-ok {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+  color: var(--accent2);
+}
+.of-pays-relance-csv:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+[dir="rtl"] .of-pays-relance-csv { letter-spacing: 0; }
+
+.of-pays-link-relance-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: color-mix(in srgb, var(--accent) 86%, var(--text));
+  font-family: var(--font-label);
+  font-size: 10px;
+  line-height: 1.5;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.of-pays-link-relance-btn i { font-size: 11px; color: inherit; }
+.of-pays-link-relance-btn:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--accent2);
+}
+.of-pays-link-relance-btn.is-ok {
+  border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+  color: var(--accent2);
+}
+.of-pays-link-relance-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+[dir="rtl"] .of-pays-link-relance-btn { letter-spacing: 0; }
+
+/* L'adresse de relance elle-même, montrée telle qu'elle partira : on peut la
+   lire ou la reprendre seule, sans copier tout le message. */
+.of-pays-link-relance-link {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 4px 0 0;
+  font-size: 10px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.of-pays-link-relance-link i {
+  flex: 0 0 auto;
+  font-size: 11px;
+  color: color-mix(in srgb, var(--accent) 70%, transparent);
+}
+.of-pays-link-relance-link code {
+  flex: 1 1 180px;
+  min-width: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 9.5px;
+  color: color-mix(in srgb, var(--text) 68%, transparent);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Le geste qui vide la liste : au trait, à côté de la copie, sans jamais
+   prendre sa place ni son apparence pleine. */
+.of-pays-link-copy {
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+.of-pays-link-clear {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--text) 26%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  font-family: var(--font-label);
+  font-size: 10px;
+  line-height: 1.5;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.of-pays-link-clear i { font-size: 11px; color: inherit; }
+.of-pays-link-clear:hover {
+  border-style: solid;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: var(--accent2);
+}
+.of-pays-link-clear:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+[dir="rtl"] .of-pays-link-clear { letter-spacing: 0; }
+
+/* La mémoire de la liste, dite une fois sous elle. */
+.of-pays-link-kept {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  margin: 4px 0 0;
+  font-size: 10px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.of-pays-link-kept i {
+  flex: 0 0 auto;
+  margin-top: 1px;
+  font-size: 11px;
+  color: color-mix(in srgb, var(--accent) 76%, transparent);
+}
+.of-pays-link-kept span { max-width: 78ch; }
+
+@media (max-width: 400px) {
+  .of-pays-sent { font-size: 8px; padding: 0 5px; }
+  .of-pays-sent-ago { font-size: 7.5px; }
+  .of-pays-link-copy { flex-direction: column; align-items: stretch; }
+  .of-pays-link-clear,
+  .of-pays-link-copy-btn,
+  .of-pays-link-relance-btn { justify-content: center; }
+  .of-pays-link-relance { flex-direction: column; align-items: stretch; }
+  .of-pays-link-relance-acts { width: 100%; justify-content: center; }
+  .of-pays-relance-csv { justify-content: center; }
+}
+
+/* Le marché marqué « relancé aujourd'hui » depuis sa ligne : un vrai contact,
+   distingué du simple envoi par un trait plein, là où la pastille d'envoi
+   reste en pointillé. La marque s'écrit sur l'appareil et se retire d'un
+   second clic. */
+.of-pays-relance-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  max-width: 100%;
+  margin-top: 1px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--text) 24%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  line-height: 1.5;
+  letter-spacing: .02em;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.of-pays-relance-mark i { flex: 0 0 auto; font-size: 9px; color: inherit; }
+.of-pays-relance-mark:hover {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 60%, transparent);
+  background: color-mix(in srgb, var(--accent2) 8%, transparent);
+  color: var(--accent2);
+}
+.of-pays-relance-mark.is-on {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 52%, transparent);
+  background: color-mix(in srgb, var(--accent2) 14%, transparent);
+  color: color-mix(in srgb, var(--accent2) 92%, var(--text));
+  font-weight: 600;
+}
+.of-pays-relance-mark:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
+[dir="rtl"] .of-pays-relance-mark { letter-spacing: 0; }
+
+/* Le compteur des marchés déjà relancés, posé au-dessus de la ligne de
+   relance : il dit combien, et la gélule à côté les retire du message. */
+.of-pays-relance-done {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px 8px;
+  margin: 4px 0 0;
+  padding: 4px 9px;
+  border-radius: 9px;
+  border: 1px dashed color-mix(in srgb, var(--accent2) 28%, transparent);
+  background: color-mix(in srgb, var(--accent2) 5%, transparent);
+}
+.of-pays-relance-done-lab {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex: 1 1 200px;
+  min-width: 0;
+  font-family: var(--font-label);
+  font-size: 10px;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent2) 78%, var(--text));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.of-pays-relance-done-lab i { flex: 0 0 auto; font-size: 11px; color: inherit; }
+.of-pays-relance-done-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent2) 38%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--accent2) 82%, var(--text));
+  font-family: var(--font-label);
+  font-size: 10px;
+  line-height: 1.5;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.of-pays-relance-done-btn i { font-size: 11px; color: inherit; }
+.of-pays-relance-done-btn:hover {
+  border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 12%, transparent);
+}
+.of-pays-relance-done-btn.is-on {
+  border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 18%, transparent);
+  font-weight: 600;
+}
+.of-pays-relance-done-btn:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
+[dir="rtl"] .of-pays-relance-done-btn { letter-spacing: 0; }
+
+@media (max-width: 400px) {
+  .of-pays-relance-mark { font-size: 8px; padding: 0 5px; }
+  .of-pays-relance-done { flex-direction: column; align-items: stretch; }
+  .of-pays-relance-done-btn { justify-content: center; }
+}
+
+/* ============ LE COMPTE DES OUBLIÉS, DANS L'EN-TÊTE REPLIÉ ============ */
+/* La pastille dit combien de marchés attendent, sans déplier la feuille :
+   elle emprunte le trait interrompu de la relance, pas la teinte pleine du
+   tri, pour ne jamais se lire comme un ordre en cours. */
+.of-fold-tag.is-oublie {
+  border: 1px dashed color-mix(in srgb, var(--accent2) 46%, transparent);
+  background: color-mix(in srgb, var(--accent2) 10%, transparent);
+  color: color-mix(in srgb, var(--accent2) 86%, var(--text));
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+
+/* La pastille est une porte : elle s'ouvre d'un clic sur la feuille déjà
+   réduite aux marchés oubliés, et se referme en rendant la feuille entière. */
+.of-fold-tag.is-oublie:hover {
+  border-style: solid;
+  border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 18%, transparent);
+  color: var(--accent2);
+}
+.of-fold-tag.is-oublie:focus-visible {
+  outline: 2px solid var(--accent2);
+  outline-offset: 2px;
+}
+/* Ouverte, la pastille se lit comme un filtre en cours — trait plein, jamais
+   confondu avec la teinte du tri. */
+.of-fold-tag.is-oublie.is-on {
+  border-style: solid;
+  border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 20%, transparent);
+  color: var(--accent2);
+}
+
+/* La petite flèche qui dit ce que le clic fera : elle descend vers la feuille,
+   ou s'inverse en filtre barré une fois la feuille réduite. */
+.of-fold-tag-door {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 11px;
+  height: 11px;
+  margin-inline-start: 1px;
+  font-size: 11px;
+  color: inherit;
+  opacity: .8;
+}
+
+/* Le tarif annuel des marchés oubliés, déjà inscrit dans la pastille : il suit
+   le compte, séparé d'un trait fin pour ne pas se lire comme un second nombre
+   d'oublis. Lu en dinars, il s'additionne et se compare d'un marché à l'autre. */
+.of-fold-tag-sum {
+  margin-inline-start: 2px;
+  padding-inline-start: 5px;
+  border-inline-start: 1px dashed color-mix(in srgb, var(--accent2) 40%, transparent);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent2) 88%, var(--text));
+}
+
+/* Le marché le plus ancien, son attente dite à côté du compte : au-dessus de
+   tout, on sait depuis combien de jours le plus vieil oubli attend, sans
+   déplier la feuille. */
+.of-fold-tag-age {
+  margin-inline-start: 2px;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  font-style: normal;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent2) 66%, var(--text));
+  white-space: nowrap;
+  opacity: .85;
+}
+
+/* La relance offerte sous l'en-tête : la feuille reste repliée, le message
+   part quand même — c'est tout l'intérêt du compte affiché au-dessus. */
+.of-pays-fold-relance {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 10px;
+  padding: 5px 9px;
+  border-radius: 11px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 26%, transparent);
+  background: color-mix(in srgb, var(--accent) 5%, transparent);
+}
+.of-pays-fold-relance-lab {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 5px;
+  flex: 1 1 200px;
+  min-width: 0;
+  font-size: 10.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.of-pays-fold-relance-lab i {
+  flex: 0 0 auto;
+  margin-top: 1px;
+  font-size: 11.5px;
+  color: color-mix(in srgb, var(--accent) 76%, var(--text));
+}
+.of-pays-fold-relance-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: color-mix(in srgb, var(--accent) 86%, var(--text));
+  font-family: var(--font-label);
+  font-size: 10px;
+  line-height: 1.5;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.of-pays-fold-relance-btn i { font-size: 11px; color: inherit; }
+.of-pays-fold-relance-btn:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--accent2);
+}
+.of-pays-fold-relance-btn.is-ok {
+  border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+  color: var(--accent2);
+}
+.of-pays-fold-relance-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+[dir="rtl"] .of-pays-fold-relance-btn { letter-spacing: 0; }
+
+/* ============ LE SEUIL DE RELANCE, CHOISI ET RETENU ============ */
+/* Trois pastilles, posées au-dessus de la ligne de relance : quinze, trente
+   ou soixante jours. Le choix reste sur l'appareil, comme le pays. */
+.of-pays-relance-seuil {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px 7px;
+  margin: 4px 0 0;
+  padding: 4px 8px;
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+}
+.of-pays-relance-seuil-lab {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  line-height: 1.5;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.of-pays-relance-seuil-lab i {
+  font-size: 11px;
+  color: color-mix(in srgb, var(--accent) 76%, transparent);
+}
+.of-pays-relance-seuil-btn {
+  padding: 1px 9px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 68%, transparent);
+  font-family: var(--font-label);
+  font-size: 10px;
+  line-height: 1.6;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.of-pays-relance-seuil-btn:hover {
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+  color: var(--accent2);
+}
+.of-pays-relance-seuil-btn.is-on {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+  font-weight: 600;
+}
+.of-pays-relance-seuil-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.of-pays-relance-seuil-kept {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-inline-start: auto;
+  font-size: 9.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.of-pays-relance-seuil-kept i {
+  font-size: 10.5px;
+  color: color-mix(in srgb, var(--accent) 70%, transparent);
+}
+[dir="rtl"] .of-pays-relance-seuil-lab { letter-spacing: 0; }
+
+@media (max-width: 400px) {
+  .of-pays-fold-relance { flex-direction: column; align-items: stretch; }
+  .of-pays-fold-relance-btn,
+  .of-pays-relance-seuil-btn { justify-content: center; }
+  .of-pays-relance-seuil-kept { margin-inline-start: 0; }
+}
+
+/* ============ LA RELANCE GROUPÉE, D'UN SEUL GESTE ============ */
+/* Le geste qui marque tous les marchés du message comme relancés aujourd'hui.
+   Au trait interrompu tant que rien n'est marqué, plein une fois la marque
+   posée : le même bouton dit alors qu'il défait ce qu'il vient de faire. */
+.of-pays-relance-bulk {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--accent2) 42%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--accent2) 80%, var(--text));
+  font-family: var(--font-label);
+  font-size: 10px;
+  line-height: 1.5;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.of-pays-relance-bulk i { font-size: 11px; color: inherit; }
+.of-pays-relance-bulk:hover {
+  border-style: solid;
+  border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 12%, transparent);
+  color: var(--accent2);
+}
+.of-pays-relance-bulk.is-on {
+  border-style: solid;
+  border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 18%, transparent);
+  font-weight: 600;
+}
+.of-pays-relance-bulk:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
+[dir="rtl"] .of-pays-relance-bulk { letter-spacing: 0; }
+
+@media (max-width: 400px) {
+  .of-pays-relance-bulk { justify-content: center; }
+}
+
+/* Le compte des marchés déjà relancés dans l'en-tête replié : il suit le total
+   sans le confondre avec le nombre d'oublis, et ne prend jamais la teinte
+   pleine de la pastille cliquable. */
+.of-fold-tag-done {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-inline-start: 2px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent2) 12%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  font-style: normal;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent2) 82%, var(--text));
+  white-space: nowrap;
+}
+.of-fold-tag-done i { flex: 0 0 auto; font-size: 10px; color: inherit; }
+[dir="rtl"] .of-fold-tag-done { letter-spacing: 0; }
+
+/* ============ LE COMPTEUR DES MARCHÉS DÉJÀ RELANCÉS ============ */
+/* Posé au bas de la feuille, à côté des compteurs du corridor : il emprunte la
+   teinte de la relance, pas celle des oublis, pour ne jamais se confondre avec
+   eux. Un clic ne garde que les marchés marqués depuis leur ligne. */
+.of-pays-floor-btn.is-relance i {
+  color: color-mix(in srgb, var(--accent2) 78%, var(--muted));
+}
+.of-pays-floor-btn.is-relance b { color: var(--accent2); }
+.of-pays-floor-btn.is-relance:hover {
+  border-color: color-mix(in srgb, var(--accent2) 52%, transparent);
+  color: var(--text);
+}
+.of-pays-floor-btn.is-relance.is-on {
+  border-style: solid;
+  border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 16%, var(--surface));
+  color: var(--accent2);
+}
+.of-pays-floor-btn.is-relance:focus-visible {
+  outline: 2px solid var(--accent2);
+  outline-offset: 2px;
+}
+
+/* Le même compte, rappelé dans l'en-tête replié : le trait reste interrompu,
+   comme celui des oublis, mais prend l'encre de la relance. */
+.of-fold-tag.is-relance {
+  border: 1px dashed color-mix(in srgb, var(--accent2) 42%, transparent);
+  background: color-mix(in srgb, var(--accent2) 9%, transparent);
+  color: color-mix(in srgb, var(--accent2) 84%, var(--text));
+}
+
+/* La date de relance dans la liste « Déjà partis » : la pastille pleine dit le
+   vrai contact, là où la date d'envoi reste au trait fin. Un simple envoi et
+   un marché déjà relancé ne se lisent plus de la même façon. */
+.of-pays-link-name-relanced {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-inline-start: 2px;
+  padding: 0 5px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent2) 38%, transparent);
+  background: color-mix(in srgb, var(--accent2) 12%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  font-style: normal;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent2) 88%, var(--text));
+  white-space: nowrap;
+}
+.of-pays-link-name-relanced i { flex: 0 0 auto; font-size: 10px; color: inherit; }
+[dir="rtl"] .of-pays-link-name-relanced { letter-spacing: 0; }
+
+/* La date du second contact, dans la même liste : même pastille que la
+   relance, mais son trait reste pointillé, pour que les deux moments du
+   contact se lisent côte à côte sans se confondre. */
+.of-pays-link-name-rappel {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-inline-start: 2px;
+  padding: 0 5px;
+  border-radius: 999px;
+  border: 1px dotted color-mix(in srgb, var(--accent2) 46%, transparent);
+  background: color-mix(in srgb, var(--accent2) 8%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  font-style: normal;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent2) 84%, var(--text));
+  white-space: nowrap;
+}
+.of-pays-link-name-rappel i { flex: 0 0 auto; font-size: 10px; color: inherit; }
+[dir="rtl"] .of-pays-link-name-rappel { letter-spacing: 0; }
+
+@media (max-width: 400px) {
+  .of-pays-link-name-relanced { font-size: 9px; padding: 0 4px; }
+  .of-pays-link-name-rappel { font-size: 9px; padding: 0 4px; }
+  .of-pays-floor-btn.is-relance { justify-content: center; }
+}
+
+/* ============ DÉMARRER LA TOURNÉE ============ */
+/* Le geste posé sur le bandeau des déjà relancés : il prépare le message pour
+   les seuls marchés restants, et le met dans le presse-papiers. Sa teinte est
+   celle de la relance, mais le trait est plein là où le compteur est
+   interrompu : on voit que celui-ci agit, quand l'autre compte. */
+.of-pays-relance-done-acts {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.of-pays-relance-start {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent2) 55%, transparent);
+  background: color-mix(in srgb, var(--accent2) 16%, transparent);
+  color: color-mix(in srgb, var(--accent2) 92%, var(--text));
+  font-family: var(--font-label);
+  font-size: 10px;
+  line-height: 1.5;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.of-pays-relance-start i { font-size: 11px; color: inherit; }
+.of-pays-relance-start:hover {
+  border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 26%, transparent);
+  color: var(--accent2);
+}
+.of-pays-relance-start:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
+[dir="rtl"] .of-pays-relance-start { letter-spacing: 0; }
+
+/* Tout a déjà été relancé : le bandeau le dit franchement plutôt que d'offrir
+   un geste qui ne préparerait rien. */
+.of-pays-relance-start-none {
+  flex: 1 1 220px;
+  min-width: 0;
+  font-size: 10px;
+  font-style: italic;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+
+/* Ce que le geste a répondu : le message copié, ou le refus du navigateur.
+   Lu juste à côté du bouton, sans fenêtre et sans quitter la feuille. */
+.of-pays-relance-start-ok {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent2) 14%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  font-style: normal;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent2) 88%, var(--text));
+  white-space: nowrap;
+}
+.of-pays-relance-start-ok i { flex: 0 0 auto; font-size: 10px; color: inherit; }
+.of-pays-relance-start-ok.is-err {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+}
+[dir="rtl"] .of-pays-relance-start-ok { letter-spacing: 0; }
+
+/* ============ LE NOM DU COLLÈGUE QUI MÈNE LA TOURNÉE ============ */
+/* Une ligne discrète sous le seuil : le nom reste sur l'appareil et s'écrit
+   dans la colonne « relancé par » du classeur, pour que deux personnes se
+   partagent les mêmes marchés sans refaire le même contact. */
+.of-pays-relance-who {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px 7px;
+  margin: 4px 0 0;
+  padding: 4px 8px;
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+}
+.of-pays-relance-who-lab {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  line-height: 1.5;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.of-pays-relance-who-lab i {
+  font-size: 11px;
+  color: color-mix(in srgb, var(--accent2) 74%, transparent);
+}
+.of-pays-relance-who-in {
+  flex: 0 1 150px;
+  min-width: 0;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  background: color-mix(in srgb, var(--bg) 70%, transparent);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 11px;
+  line-height: 1.6;
+  outline: none;
+  transition: border-color .18s ease, background .18s ease;
+}
+.of-pays-relance-who-in::placeholder { color: color-mix(in srgb, var(--text) 42%, transparent); }
+.of-pays-relance-who-in:focus-visible {
+  border-color: var(--accent2);
+  background: color-mix(in srgb, var(--surface) 86%, transparent);
+}
+.of-pays-relance-who-kept {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1 1 220px;
+  min-width: 0;
+  font-size: 9.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.of-pays-relance-who-kept i {
+  flex: 0 0 auto;
+  font-size: 10.5px;
+  color: color-mix(in srgb, var(--accent2) 62%, transparent);
+}
+.of-pays-relance-who-kept span { min-width: 0; }
+[dir="rtl"] .of-pays-relance-who-lab { letter-spacing: 0; }
+
+/* ============ LE RAPPEL DES MARCHÉS DÉJÀ RELANCÉS ============ */
+/* Une ligne offerte dès l'en-tête : le délai choisi dit à partir de quand un
+   contact peut être repris, et le message part d'un seul clic. Elle prend
+   l'encre de la relance, jamais celle des oublis. */
+.of-pays-rappel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 10px;
+  padding: 5px 9px;
+  border-radius: 11px;
+  border: 1px dashed color-mix(in srgb, var(--accent2) 30%, transparent);
+  background: color-mix(in srgb, var(--accent2) 5%, transparent);
+}
+.of-pays-rappel-lab {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 5px;
+  flex: 1 1 240px;
+  min-width: 0;
+  font-size: 10.5px;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent2) 74%, var(--text));
+}
+.of-pays-rappel-lab i {
+  flex: 0 0 auto;
+  margin-top: 1px;
+  font-size: 11.5px;
+  color: inherit;
+}
+.of-pays-rappel-acts {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+/* Les trois délais, à gauche du geste : sept, quatorze ou vingt et un jours.
+   Le choix reste sur l'appareil, comme le seuil de relance. */
+.of-pays-rappel-delai {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 6px 1px 5px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+}
+.of-pays-rappel-delai > i {
+  font-size: 10.5px;
+  color: color-mix(in srgb, var(--accent2) 64%, transparent);
+}
+.of-pays-rappel-delai-btn {
+  padding: 0 6px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  line-height: 1.6;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.of-pays-rappel-delai-btn:hover {
+  border-color: color-mix(in srgb, var(--accent2) 46%, transparent);
+  color: var(--accent2);
+}
+.of-pays-rappel-delai-btn.is-on {
+  border-color: color-mix(in srgb, var(--accent2) 55%, transparent);
+  background: color-mix(in srgb, var(--accent2) 16%, transparent);
+  color: color-mix(in srgb, var(--accent2) 92%, var(--text));
+  font-weight: 600;
+}
+.of-pays-rappel-delai-btn:focus-visible {
+  outline: 2px solid var(--accent2);
+  outline-offset: 1px;
+}
+
+/* Le geste lui-même : plein, comme celui qui agit, quand les compteurs restent
+   au trait interrompu. */
+.of-pays-rappel-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent2) 52%, transparent);
+  background: color-mix(in srgb, var(--accent2) 14%, transparent);
+  color: color-mix(in srgb, var(--accent2) 92%, var(--text));
+  font-family: var(--font-label);
+  font-size: 10px;
+  line-height: 1.5;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.of-pays-rappel-btn i { font-size: 11px; color: inherit; }
+.of-pays-rappel-btn:hover {
+  border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 24%, transparent);
+}
+.of-pays-rappel-btn.is-ok {
+  border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 26%, transparent);
+}
+.of-pays-rappel-btn:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
+[dir="rtl"] .of-pays-rappel-btn { letter-spacing: 0; }
+
+/* Le geste groupé du second contact : au trait interrompu tant que rien n'est
+   marqué, plein une fois les marques posées — le même bouton dit alors qu'il
+   défait ce qu'il vient de faire, comme celui de la tournée. */
+.of-pays-rappel-bulk {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--accent2) 46%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--accent2) 84%, var(--text));
+  font-family: var(--font-label);
+  font-size: 10px;
+  line-height: 1.5;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.of-pays-rappel-bulk i { font-size: 11px; color: inherit; }
+.of-pays-rappel-bulk:hover {
+  border-style: solid;
+  border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 12%, transparent);
+  color: var(--accent2);
+}
+.of-pays-rappel-bulk.is-on {
+  border-style: solid;
+  border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 18%, transparent);
+  font-weight: 600;
+}
+.of-pays-rappel-bulk:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
+[dir="rtl"] .of-pays-rappel-bulk { letter-spacing: 0; }
+
+/* Ce que le geste a répondu, lu juste à côté du bouton. */
+.of-pays-rappel-ok {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent2) 12%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  font-style: normal;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent2) 86%, var(--text));
+  white-space: nowrap;
+}
+.of-pays-rappel-ok i { flex: 0 0 auto; font-size: 10px; color: inherit; }
+.of-pays-rappel-ok.is-err {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+}
+[dir="rtl"] .of-pays-rappel-ok { letter-spacing: 0; }
+
+/* Le nom du collègue, sur la ligne du marché elle-même : au trait fin, en
+   retrait de la marque pleine, pour qu'il se lise sans prendre sa place. */
+.of-pays-relance-by {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  max-width: 100%;
+  margin-top: 1px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  line-height: 1.5;
+  letter-spacing: .02em;
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.of-pays-relance-by i { flex: 0 0 auto; font-size: 9px; color: inherit; }
+[dir="rtl"] .of-pays-relance-by { letter-spacing: 0; }
+
+@media (max-width: 400px) {
+  .of-pays-rappel { flex-direction: column; align-items: stretch; }
+  .of-pays-rappel-acts { width: 100%; justify-content: center; }
+  .of-pays-rappel-btn { justify-content: center; }
+  .of-pays-rappel-bulk { justify-content: center; }
+  .of-pays-relance-by { font-size: 8px; padding: 0 5px; }
+}
+
+/* ============ LES RELANCES QUI DATENT DE PLUS DE SEPT JOURS ============ */
+/* La pastille de l'en-tête nomme les marchés qu'on peut rappeler : elle prend
+   l'encre de la relance et le trait interrompu des oublis, mais ne se confond
+   ni avec le compte des oublis ni avec celui des relances faites. */
+.of-fold-tag.is-recalled {
+  border: 1px dashed color-mix(in srgb, var(--accent2) 38%, transparent);
+  background: color-mix(in srgb, var(--accent2) 7%, transparent);
+  color: color-mix(in srgb, var(--accent2) 78%, var(--text));
+  font-variant-numeric: tabular-nums;
+}
+.of-fold-tag.is-recalled i {
+  font-size: 10.5px;
+  color: inherit;
+}
+
+/* ============ LE SECOND CONTACT, MARQUÉ À PART ============ */
+/* La marque « rappelé le » se pose à côté de celle de la relance, sur la même
+   ligne de marché : elle prend l'encre de la relance pour rester dans la même
+   famille, mais son trait plein dit qu'il s'agit d'un second contact, pas
+   d'une première relance. Elle reste sur cet appareil. */
+.of-pays-rappel-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  max-width: 100%;
+  margin-top: 1px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  border: 1px dotted color-mix(in srgb, var(--accent2) 34%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--accent2) 62%, var(--text));
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  line-height: 1.5;
+  letter-spacing: .02em;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.of-pays-rappel-mark i { flex: 0 0 auto; font-size: 9px; color: inherit; }
+.of-pays-rappel-mark:hover {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 60%, transparent);
+  background: color-mix(in srgb, var(--accent2) 8%, transparent);
+  color: var(--accent2);
+}
+.of-pays-rappel-mark.is-on {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 52%, transparent);
+  background: color-mix(in srgb, var(--accent2) 12%, transparent);
+  color: color-mix(in srgb, var(--accent2) 94%, var(--text));
+  font-weight: 600;
+}
+.of-pays-rappel-mark:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
+[dir="rtl"] .of-pays-rappel-mark { letter-spacing: 0; }
+
+/* Le compte des rappels faits, dans la pastille de l'en-tête : un second
+   jeton, plus dense, pour que le fait et l'attente ne se lisent jamais comme
+   un seul nombre. */
+.of-fold-tag-done.is-rappele {
+  background: color-mix(in srgb, var(--accent2) 16%, transparent);
+  color: color-mix(in srgb, var(--accent2) 88%, var(--text));
+  font-weight: 600;
+}
+
+/* La pastille de l'en-tête quand la feuille est réduite aux marchés déjà
+   rappelés : même trait interrompu, même encre que la relance, mais son nom
+   dit qu'il s'agit du second contact. */
+.of-fold-tag.is-rappele {
+  border: 1px dashed color-mix(in srgb, var(--accent2) 44%, transparent);
+  background: color-mix(in srgb, var(--accent2) 10%, transparent);
+  color: color-mix(in srgb, var(--accent2) 86%, var(--text));
+}
+
+/* Le compteur posé au bas de la feuille : il ne garde que les marchés marqués
+   « rappelé », pour vérifier que le second contact est bien fait. */
+.of-pays-floor-btn.is-rappel i {
+  color: color-mix(in srgb, var(--accent2) 74%, var(--muted));
+}
+.of-pays-floor-btn.is-rappel b { color: var(--accent2); }
+.of-pays-floor-btn.is-rappel:hover {
+  border-color: color-mix(in srgb, var(--accent2) 52%, transparent);
+  color: var(--text);
+}
+.of-pays-floor-btn.is-rappel.is-on {
+  border-style: solid;
+  border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 14%, var(--surface));
+  color: var(--accent2);
+}
+.of-pays-floor-btn.is-rappel:focus-visible {
+  outline: 2px solid var(--accent2);
+  outline-offset: 2px;
+}
+
+@media (max-width: 400px) {
+  .of-pays-rappel-mark { font-size: 8px; padding: 0 5px; }
+  .of-pays-floor-btn.is-rappel { justify-content: center; }
+}
+
+@media (max-width: 400px) {
+  .of-pays-relance-done-acts { width: 100%; justify-content: center; }
+  .of-pays-relance-start,
+  .of-pays-relance-start-none { justify-content: center; text-align: center; }
+  .of-pays-relance-who { flex-direction: column; align-items: stretch; }
+  .of-pays-relance-who-in { flex: 1 1 auto; }
+}
+
+/* ============ LE RAPPEL EN RETARD, SUR LA LIGNE MÊME ============ */
+/* Le marché relancé au-delà du délai et jamais rappelé porte son retard sur sa
+   propre ligne : même famille d'encre que la relance, mais un trait plein et
+   une teinte plus dense, pour que le retard se lise dans la feuille et pas
+   seulement dans le fichier exporté. */
+.of-pays-rappel-late {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  max-width: 100%;
+  margin-top: 1px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 52%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  line-height: 1.5;
+  letter-spacing: .02em;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.of-pays-rappel-late i { flex: 0 0 auto; font-size: 9px; color: inherit; }
+[dir="rtl"] .of-pays-rappel-late { letter-spacing: 0; }
+
+/* Le compteur du bas de la feuille : il ne garde que les rappels en retard,
+   et prend l'encre du retard pour ne pas se confondre avec celui des rappels
+   déjà faits. */
+.of-pays-floor-btn.is-retard i {
+  color: color-mix(in srgb, var(--accent) 78%, var(--muted));
+}
+.of-pays-floor-btn.is-retard b { color: color-mix(in srgb, var(--accent) 88%, var(--text)); }
+.of-pays-floor-btn.is-retard:hover {
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  color: var(--text);
+}
+.of-pays-floor-btn.is-retard.is-on {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 72%, transparent);
+  background: color-mix(in srgb, var(--accent) 14%, var(--surface));
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+}
+.of-pays-floor-btn.is-retard:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* La pastille de l'en-tête replié quand la feuille est réduite aux rappels en
+   retard : même teinte que le compteur, pour que les deux se répondent. */
+.of-fold-tag.is-retard {
+  border: 1px dashed color-mix(in srgb, var(--accent) 48%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 400px) {
+  .of-pays-rappel-late { font-size: 8px; padding: 0 5px; }
+  .of-pays-floor-btn.is-retard { justify-content: center; }
+}
+
+/* ============ LE MARCHÉ LE PLUS ANCIEN, DANS LE COMPTEUR DES RETARDS ====== */
+/* Le compteur ne dit pas seulement combien de rappels traînent : il nomme le
+   marché qui attend depuis le plus longtemps et son attente en jours, comme la
+   pastille des oublis nomme le sien. Le nom suit le compte, séparé d'un trait
+   fin pour ne pas se lire comme un second nombre. */
+.of-pays-floor-oldest {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-inline-start: 2px;
+  padding-inline-start: 6px;
+  border-inline-start: 1px dashed color-mix(in srgb, var(--accent) 40%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  font-style: normal;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent) 78%, var(--text));
+  white-space: nowrap;
+}
+.of-pays-floor-oldest i { flex: 0 0 auto; font-size: 10px; color: inherit; }
+[dir="rtl"] .of-pays-floor-oldest { letter-spacing: 0; }
+
+/* ============ LA LISTE DES RETARDS, COPIÉE D'UN SEUL CLIC ============ */
+/* Posée à côté du compteur, au même trait que lui : elle n'agit pas sur la
+   feuille, elle emporte seulement ce qu'il vient de nommer. */
+.of-pays-retard-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 44%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+  font-family: var(--font-label);
+  font-size: 10px;
+  line-height: 1.5;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.of-pays-retard-copy i { font-size: 11px; color: inherit; }
+.of-pays-retard-copy:hover {
+  border-style: solid;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+}
+.of-pays-retard-copy.is-ok {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 62%, transparent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  font-weight: 600;
+}
+.of-pays-retard-copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+[dir="rtl"] .of-pays-retard-copy { letter-spacing: 0; }
+
+@media (max-width: 400px) {
+  .of-pays-floor-oldest { font-size: 9px; }
+  .of-pays-retard-copy { justify-content: center; }
+}
+
+/* ============ LE RAPPEL MANQUÉ, AU-DELÀ DE TROIS SEMAINES ============ */
+/* Un marché relancé depuis plus de trois semaines et toujours jamais rappelé
+   ne porte plus un simple retard : le jeton est plein, d'une seule teinte
+   dense, là où celui du retard reste au trait. Il se lit avant tout le reste
+   de la ligne, et dit les jours depuis la relance plutôt que le dépassement —
+   c'est l'attente totale qui compte à ce stade. */
+.of-pays-rappel-critique {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  max-width: 100%;
+  margin-top: 1px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 86%, var(--text));
+  background: color-mix(in srgb, var(--accent) 88%, var(--text));
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  line-height: 1.5;
+  letter-spacing: .03em;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--bg) 92%, #fff);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 14%, transparent);
+}
+.of-pays-rappel-critique i { flex: 0 0 auto; font-size: 9px; color: inherit; }
+[dir="rtl"] .of-pays-rappel-critique { letter-spacing: 0; }
+
+@media (max-width: 400px) {
+  .of-pays-rappel-critique { font-size: 8px; padding: 0 6px; }
+}
+
+/* ============ LE SEUIL D'URGENCE, SOUS LE COMPTEUR DES RETARDS =========== */
+/* Le seuil ne change pas le compte : il dit à partir de quand un retard est
+   urgent, et le compteur annonce alors combien le dépassent. Posé sous le
+   compteur, il occupe toute la largeur du bandeau pour ne pas se lire comme
+   une seconde gélule de filtre. */
+.of-pays-urgence {
+  display: flex;
+  flex-basis: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 6px;
+  padding: 3px 8px;
+  border-radius: 9px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 26%, transparent);
+  background: color-mix(in srgb, var(--accent) 4%, transparent);
+}
+.of-pays-urgence-lab {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-label);
+  font-size: 9px;
+  line-height: 1.5;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--accent) 74%, var(--muted));
+  white-space: nowrap;
+}
+.of-pays-urgence-lab i { font-size: 11px; color: inherit; }
+.of-pays-urgence-btn {
+  padding: 0 8px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  line-height: 1.6;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.of-pays-urgence-btn:hover {
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+.of-pays-urgence-btn.is-on {
+  border-color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  background: color-mix(in srgb, var(--accent) 86%, var(--text));
+  color: color-mix(in srgb, var(--bg) 92%, #fff);
+  font-weight: 700;
+}
+.of-pays-urgence-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.of-pays-urgence-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  font-style: normal;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+  white-space: nowrap;
+}
+.of-pays-urgence-count i { flex: 0 0 auto; font-size: 10px; color: inherit; }
+.of-pays-urgence-kept {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-inline-start: auto;
+  font-size: 9px;
+  font-style: normal;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.of-pays-urgence-kept i { flex: 0 0 auto; font-size: 10px; color: color-mix(in srgb, var(--accent) 66%, transparent); }
+[dir="rtl"] .of-pays-urgence-lab { letter-spacing: 0; }
+
+@media (max-width: 640px) {
+  .of-pays-urgence { flex-direction: row; }
+  .of-pays-urgence-kept { margin-inline-start: 0; }
+}
+
+/* ============ COPIER LES SEULS URGENTS ============ */
+/* Le second geste de copie, posé à côté de celui des retards : il ne retient
+   que les rappels qui dépassent le seuil choisi, et prend donc le trait plein
+   de l'urgence là où la copie des retards reste au trait interrompu. Les deux
+   se lisent côte à côte sans se confondre. */
+.of-pays-retard-copy.is-urgent {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 70%, var(--text));
+  background: color-mix(in srgb, var(--accent) 88%, var(--text));
+  color: color-mix(in srgb, var(--bg) 92%, #fff);
+  font-weight: 600;
+}
+.of-pays-retard-copy.is-urgent i { color: inherit; }
+.of-pays-retard-copy.is-urgent:hover {
+  border-color: color-mix(in srgb, var(--accent) 92%, var(--text));
+  background: color-mix(in srgb, var(--accent) 96%, var(--text));
+  color: color-mix(in srgb, var(--bg) 96%, #fff);
+}
+.of-pays-retard-copy.is-urgent.is-ok {
+  border-color: color-mix(in srgb, var(--accent) 86%, var(--text));
+  background: color-mix(in srgb, var(--accent) 76%, var(--text));
+  color: color-mix(in srgb, var(--bg) 94%, #fff);
+}
+
+/* Le seul rappel le plus urgent se copie à part : même trait que les urgents,
+   mais creux, pour que le geste d'un seul appel ne se confonde jamais avec la
+   liste entière des marchés urgents. */
+.of-pays-retard-copy.is-urgent-one {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 70%, var(--text));
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+  font-weight: 600;
+}
+.of-pays-retard-copy.is-urgent-one i { color: inherit; }
+.of-pays-retard-copy.is-urgent-one:hover {
+  border-color: color-mix(in srgb, var(--accent) 92%, var(--text));
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: color-mix(in srgb, var(--accent) 96%, var(--text));
+}
+.of-pays-retard-copy.is-urgent-one.is-ok {
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 86%, var(--text));
+}
+
+/* ============ LES RAPPELS MANQUÉS, COMPTÉS DANS L'EN-TÊTE ============ */
+/* Une pastille pleine, d'une seule teinte dense, pour les marchés relancés
+   depuis plus de trois semaines et toujours sans second contact : elle se lit
+   avant le compte des retards ordinaires, sans déplier la feuille. Ce n'est pas
+   une porte — elle ne filtre rien, elle signale. */
+.of-fold-tag.is-rappel-manque {
+  border: 1px solid color-mix(in srgb, var(--accent) 86%, var(--text));
+  background: color-mix(in srgb, var(--accent) 90%, var(--text));
+  color: color-mix(in srgb, var(--bg) 92%, #fff);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 14%, transparent);
+}
+.of-fold-tag.is-rappel-manque i {
+  font-size: 10px;
+  color: inherit;
+}
+
+@media (max-width: 400px) {
+  .of-pays-retard-copy.is-urgent { justify-content: center; }
+  .of-pays-retard-copy.is-urgent-one { justify-content: center; }
+}
+
+/* ============ LE COMPTE DES URGENTS, DANS L'EN-TÊTE REPLIÉ ============ */
+/* Une pastille de plus, à côté des rappels manqués : elle dit combien de
+   rappels dépassent le seuil d'urgence choisi, et rappelle ce seuil — le
+   lecteur voit la règle à l'œuvre sans déplier la feuille. C'est aussi une
+   porte : un clic réduit la feuille à ces seuls marchés. */
+.of-fold-tag.is-urgent {
+  border: 1px solid color-mix(in srgb, var(--accent) 62%, transparent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.of-fold-tag.is-urgent i { font-size: 10px; color: inherit; }
+.of-fold-tag.is-urgent:hover {
+  border-color: color-mix(in srgb, var(--accent) 86%, var(--text));
+  background: color-mix(in srgb, var(--accent) 24%, transparent);
+}
+.of-fold-tag.is-urgent:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+/* Ouverte, la pastille se lit comme un filtre en cours : teinte plus dense que
+   la pastille des rappels manqués, qui ne fait que signaler. */
+.of-fold-tag.is-urgent.is-on {
+  border-color: color-mix(in srgb, var(--accent) 88%, var(--text));
+  background: color-mix(in srgb, var(--accent) 86%, var(--text));
+  color: color-mix(in srgb, var(--bg) 92%, #fff);
+  font-weight: 700;
+}
+/* Le seuil rappelé dans la pastille, séparé d'un trait fin : on sait à partir
+   de quand « urgent » veut dire urgent, sans ouvrir la feuille. */
+.of-fold-tag-seuil {
+  margin-inline-start: 2px;
+  padding-inline-start: 5px;
+  border-inline-start: 1px dashed currentColor;
+  font-family: var(--font-label);
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 500;
+  opacity: .82;
+  white-space: nowrap;
+}
+[dir="rtl"] .of-fold-tag.is-urgent { letter-spacing: 0; }
+
+/* ============ LE COMPTE DES URGENTS, SOUS LE COMPTEUR DES RETARDS ====== */
+/* Le même nombre, dans le bloc des retards : il devient une porte vers la
+   feuille réduite aux seuls urgents, d'un clic, et se referme d'un second. */
+button.of-pays-urgence-count {
+  border: 1px solid color-mix(in srgb, var(--accent) 44%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+button.of-pays-urgence-count:hover {
+  border-color: color-mix(in srgb, var(--accent) 78%, var(--text));
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+}
+button.of-pays-urgence-count.is-on {
+  border-color: color-mix(in srgb, var(--accent) 88%, var(--text));
+  background: color-mix(in srgb, var(--accent) 86%, var(--text));
+  color: color-mix(in srgb, var(--bg) 92%, #fff);
+}
+button.of-pays-urgence-count:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+/* ============ LE RAPPEL LE PLUS URGENT, NOMMÉ DANS LA PASTILLE ======== */
+/* La pastille des urgents ne dit pas seulement combien : elle nomme le rappel
+   qui attend depuis le plus longtemps et son retard en jours, pour qu'on sache
+   qui appeler d'abord sans déplier la feuille. Le nom suit le seuil, séparé
+   d'un trait fin pris dans la couleur du texte — il reste donc lisible que la
+   pastille soit au trait ou pleine. */
+.of-fold-tag-oldest {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-inline-start: 2px;
+  padding-inline-start: 5px;
+  border-inline-start: 1px dashed currentColor;
+  font-family: var(--font-label);
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  opacity: .86;
+}
+.of-fold-tag-oldest i { flex: 0 0 auto; font-size: 10px; color: inherit; }
+[dir="rtl"] .of-fold-tag-oldest { letter-spacing: 0; }
+
+/* ============ LE SEUIL D'URGENCE, RÉGLÉ DANS L'EN-TÊTE ============ */
+/* Trois choix — cinq, dix ou vingt jours — posés à côté de la pastille des
+   urgents : le seuil se règle sans déplier la feuille, et le compte des
+   urgents suit aussitôt. Posé au trait, il ne se confond pas avec la pastille
+   pleine, qui reste une porte vers la feuille réduite. */
+.of-fold-urgence-set {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 6px 1px 5px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 34%, transparent);
+  background: color-mix(in srgb, var(--accent) 5%, transparent);
+  white-space: nowrap;
+}
+.of-fold-urgence-set-lab {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  line-height: 1.5;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--accent) 72%, var(--muted));
+}
+.of-fold-urgence-set-lab i { flex: 0 0 auto; font-size: 10px; color: inherit; }
+.of-fold-urgence-set-btn {
+  padding: 0 6px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  font-family: var(--font-label);
+  font-size: 9px;
+  line-height: 1.6;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.of-fold-urgence-set-btn:hover {
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+.of-fold-urgence-set-btn.is-on {
+  border-color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  background: color-mix(in srgb, var(--accent) 86%, var(--text));
+  color: color-mix(in srgb, var(--bg) 92%, #fff);
+  font-weight: 700;
+}
+.of-fold-urgence-set-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+[dir="rtl"] .of-fold-urgence-set-lab { letter-spacing: 0; }
+
+@media (max-width: 400px) {
+  .of-fold-tag-oldest { font-size: 8.5px; }
+  .of-fold-urgence-set {
+    flex-wrap: wrap;
+    border-radius: 9px;
+    padding: 2px 6px;
+  }
+}
+
+/* ============ LA LIGNE D'UN RAPPEL URGENT ============ */
+/* Le marché dont le rappel dépasse le seuil d'urgence prend une teinte plus
+   dense que les autres retards, et un trait plein sur son bord de lecture :
+   on le repère dans la feuille avant même de trier ou de filtrer. */
+.of-pays-row.is-urgent {
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+}
+.of-pays-row.is-urgent::before {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  width: 3px;
+  background: color-mix(in srgb, var(--accent) 76%, var(--text));
+  border-start-end-radius: 3px;
+  border-end-end-radius: 3px;
+  pointer-events: none;
+}
+.of-pays-row.is-urgent:hover {
+  background: color-mix(in srgb, var(--accent) 14%, var(--surface));
+}
+.of-pays-row.is-urgent.is-on,
+.of-pays-row.is-urgent.is-open {
+  background: color-mix(in srgb, var(--accent) 18%, var(--surface));
+}
+
+/* Le compteur posé au bas de la feuille quand elle est réduite aux seuls
+   urgents : teinte pleine de l'urgence, pour que la bande dise d'un regard
+   quelle lecture est ouverte. */
+.of-pays-floor-btn.is-urgent i {
+  color: color-mix(in srgb, var(--accent) 82%, var(--muted));
+}
+.of-pays-floor-btn.is-urgent b { color: color-mix(in srgb, var(--accent) 92%, var(--text)); }
+.of-pays-floor-btn.is-urgent:hover {
+  border-color: color-mix(in srgb, var(--accent) 62%, transparent);
+  color: var(--text);
+}
+.of-pays-floor-btn.is-urgent.is-on {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  background: color-mix(in srgb, var(--accent) 16%, var(--surface));
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+}
+.of-pays-floor-btn.is-urgent:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Le rappel le plus urgent, nommé sous le compte des urgents : le nombre dit
+   combien, ce jeton dit qui appeler d'abord et à quel point il est en retard.
+   Il suit la teinte de l'urgence, sans jamais prendre sa place. */
+.of-pays-urgence-oldest {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-inline-start: 2px;
+  padding-inline-start: 6px;
+  border-inline-start: 1px dashed color-mix(in srgb, var(--accent) 40%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  font-style: normal;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent) 80%, var(--text));
+  white-space: nowrap;
+}
+.of-pays-urgence-oldest i { flex: 0 0 auto; font-size: 10px; color: inherit; }
+[dir="rtl"] .of-pays-urgence-oldest { letter-spacing: 0; }
+
+@media (max-width: 400px) {
+  .of-pays-urgence-oldest { font-size: 9px; }
+}
+
+/* ============ LE PREMIER APPEL, COPIÉ SANS DÉPLIER ================== */
+/* La bande offerte sous l'en-tête replié, dans l'encre dense de l'urgence :
+   elle nomme le rappel le plus urgent et emporte d'un seul clic le message
+   du premier rendez-vous téléphonique, sans ouvrir la feuille. Le trait
+   plein la distingue de la relance, qui reste en pointillé. */
+.of-pays-fold-relance.is-urgent {
+  border: 1px solid color-mix(in srgb, var(--accent) 48%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+.of-pays-fold-relance.is-urgent .of-pays-fold-relance-lab {
+  color: color-mix(in srgb, var(--accent) 86%, var(--text));
+  font-variant-numeric: tabular-nums;
+}
+.of-pays-fold-relance.is-urgent .of-pays-fold-relance-lab i {
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+
+.of-pays-fold-relance-btn.is-urgent {
+  border-color: color-mix(in srgb, var(--accent) 62%, var(--text));
+  background: color-mix(in srgb, var(--accent) 88%, var(--text));
+  color: color-mix(in srgb, var(--bg) 92%, #fff);
+  font-weight: 600;
+}
+.of-pays-fold-relance-btn.is-urgent i { color: inherit; }
+.of-pays-fold-relance-btn.is-urgent:hover {
+  border-color: color-mix(in srgb, var(--accent) 92%, var(--text));
+  background: color-mix(in srgb, var(--accent) 96%, var(--text));
+  color: color-mix(in srgb, var(--bg) 96%, #fff);
+}
+.of-pays-fold-relance-btn.is-urgent.is-ok {
+  border-color: color-mix(in srgb, var(--accent) 86%, var(--text));
+  background: color-mix(in srgb, var(--accent) 76%, var(--text));
+  color: color-mix(in srgb, var(--bg) 94%, #fff);
+}
+.of-pays-fold-relance-btn.is-urgent:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 400px) {
+  .of-pays-fold-relance.is-urgent { flex-direction: column; align-items: stretch; }
+  .of-pays-fold-relance-btn.is-urgent { justify-content: center; }
+}

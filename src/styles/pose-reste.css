@@ -1,0 +1,100 @@
+/* Le repère de pose d'un écran : une ligne calme sous son en-tête, qui dit
+   combien de ses traductions restent à poser. Il ne prend jamais la place du
+   propos de la page — il se lit comme une mesure, pas comme une alerte. */
+.pose-reste {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0;
+  padding: 5px 11px;
+  border-radius: 999px;
+  font-family: var(--font-label);
+  font-size: 10px;
+  line-height: 1.4;
+  letter-spacing: .06em;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 72%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--accent) 34%, transparent);
+  cursor: help;
+}
+
+.pose-reste i {
+  flex: 0 0 auto;
+  font-size: 13px;
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+
+.pose-reste > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Une pastille qui mène au relevé se reconnaît à son geste : même mesure,
+   mais un curseur et une flèche disent qu'elle ouvre quelque chose. */
+.pose-reste--lien {
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+
+.pose-reste--lien:hover,
+.pose-reste--lien:focus-visible {
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 62%, transparent);
+  color: color-mix(in srgb, var(--text) 92%, transparent);
+}
+
+.pose-reste-go {
+  flex: 0 0 auto;
+  font-size: 12px !important;
+  opacity: .62;
+  transition: opacity .18s ease;
+}
+
+.pose-reste--lien:hover .pose-reste-go {
+  opacity: 1;
+}
+
+/* Un écran qui vit dans un en-tête de fiche garde son chiffre sur une seule
+   ligne : sous 520 px, la pastille se cale au début de la colonne. */
+@media (max-width: 520px) {
+  .pose-reste {
+    font-size: 9.5px;
+    padding: 5px 9px;
+  }
+}
+
+[dir="rtl"] .pose-reste {
+  letter-spacing: 0;
+  font-size: 11px;
+}
+
+/* Sous les cartes de formules, le repère se lit après les prix : il prend
+   l'air qui le sépare des cartes et de la suite de la page. */
+.of-plans-pose {
+  margin: 16px 0 2px;
+}
+
+/* Dans l'en-tête d'une fiche, le repère suit la ligne des métadonnées : il
+   s'aligne sur leur rythme plutôt que d'ouvrir un bloc à lui seul. */
+.pro-ident .pose-reste,
+.dir-hero .pose-reste,
+.admin-sheet-pose {
+  margin-top: 2px;
+}
+
+/* Sur les pages légales et le plan du site, le repère suit une date ou une
+   phrase : il prend l'air qui le détache de l'en-tête sans ouvrir un bloc. */
+.dir-hero .legal-pose,
+.dir-hero .plan-pose {
+  margin-top: 10px;
+}
+
+/* Dans l'en-tête de la fiche d'un compte, le repère se cale sous l'adresse,
+   au même rythme que les métadonnées de la fiche. */
+.admin-sheet-head .admin-sheet-pose {
+  margin-top: 9px;
+}

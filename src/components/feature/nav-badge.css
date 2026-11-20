@@ -1,0 +1,46 @@
+/* ============ NAVIGATION: UNREAD APPLICATIONS BADGE ============ */
+.nav-account.nav-member { position: relative; }
+.nav-msg { position: relative; }
+.nav-msg .nav-badge { top: -6px; inset-inline-end: -6px; }
+
+.nav-badge {
+  position: absolute;
+  top: -5px;
+  inset-inline-end: -5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--bg);
+  font-family: var(--font-label);
+  font-size: 10px;
+  line-height: 1;
+  letter-spacing: 0;
+  box-shadow: 0 0 0 2px var(--bg);
+  pointer-events: none;
+}
+
+/* In the mobile panel the count reads as words, so it sits inline. */
+.nav-badge--flat {
+  position: static;
+  inset: auto;
+  width: fit-content;
+  min-width: 0;
+  height: auto;
+  margin-top: 5px;
+  padding: 2px 9px;
+  font-size: 9.5px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  box-shadow: none;
+}
+
+[dir="rtl"] .nav-badge--flat { letter-spacing: 0; text-transform: none; font-size: 10.5px; }
+
+@media (max-width: 1180px) {
+  .nav-badge { top: -4px; inset-inline-end: -4px; min-width: 16px; height: 16px; font-size: 9px; }
+}

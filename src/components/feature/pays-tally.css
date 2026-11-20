@@ -1,0 +1,337 @@
+/* ============ COUNTRY COUNTER ABOVE A BOARD ============ */
+/* A quiet row of chips between the filters and the cards: the shape of the
+   stock before anyone opens a fiche. */
+.pays-tally {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--surface) 78%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--text) 16%, transparent);
+}
+
+.pays-tally-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-inline-end: 4px;
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent2);
+}
+
+.pays-tally-label i {
+  font-size: 13px;
+  color: var(--accent);
+}
+
+.pays-tally-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+  padding: 5px 6px 5px 11px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 12.5px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color .2s ease, background .2s ease, color .2s ease;
+}
+
+.pays-tally-chip b {
+  min-width: 20px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  text-align: center;
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  font-weight: 400;
+  background: color-mix(in srgb, var(--text) 10%, transparent);
+  color: color-mix(in srgb, var(--muted) 58%, var(--text));
+}
+
+.pays-tally-chip:hover {
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  color: var(--accent2);
+}
+
+.pays-tally-chip:hover b {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--accent2);
+}
+
+.pays-tally-chip.is-on {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* The grouping chip is not a filter: its outline stays dashed so nobody reads
+   it as a country, and it never runs the country filter. */
+.pays-tally-chip--sort {
+  gap: 5px;
+  padding: 5px 11px;
+  border-style: dashed;
+  color: color-mix(in srgb, var(--muted) 62%, var(--text));
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.pays-tally-chip--sort i {
+  font-size: 13px;
+  color: var(--accent);
+}
+
+.pays-tally-chip--sort:hover {
+  border-style: solid;
+}
+
+.pays-tally-chip--sort.is-on {
+  border-style: solid;
+}
+
+[dir="rtl"] .pays-tally-chip--sort {
+  letter-spacing: 0;
+  text-transform: none;
+  font-family: var(--font-body);
+  font-size: 11.5px;
+}
+
+.pays-tally-chip.is-on b {
+  background: color-mix(in srgb, var(--bg) 24%, transparent);
+  color: var(--bg);
+}
+
+.pays-tally-chip:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+[dir="rtl"] .pays-tally-label {
+  letter-spacing: 0;
+}
+
+[dir="rtl"] .pays-tally-chip {
+  padding: 5px 11px 5px 6px;
+  font-size: 13px;
+}
+
+/* The copy action of the counter: it copies the board with the country kept,
+   so it stays quiet at the end of the row until someone reaches for it. */
+.pays-tally-share {
+  margin-inline-start: auto;
+}
+
+.pays-tally-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--muted) 62%, var(--text));
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color .2s ease, color .2s ease, background .2s ease;
+}
+
+.pays-tally-copy i {
+  font-size: 13px;
+  color: var(--accent);
+}
+
+.pays-tally-copy:hover {
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  color: var(--accent2);
+}
+
+.pays-tally-copy.is-ok {
+  border-style: solid;
+  border-color: var(--accent);
+  color: var(--accent2);
+}
+
+.pays-tally-copy:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+[dir="rtl"] .pays-tally-copy {
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 11.5px;
+}
+
+@media (max-width: 620px) {
+  .pays-tally {
+    gap: 5px;
+    padding: 10px;
+  }
+
+  .pays-tally-label {
+    flex: 1 1 100%;
+    margin-inline-end: 0;
+  }
+
+  .pays-tally-chip {
+    min-height: 38px;
+    font-size: 13px;
+  }
+
+  .pays-tally-share {
+    margin-inline-start: 0;
+    flex: 1 1 100%;
+  }
+
+  .pays-tally-copy {
+    min-height: 38px;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ── Le nom du pays dans sa propre boîte ───────────────────────────────────
+   Le compteur de pays du tableau n'avait qu'un nœud de texte à côté de son
+   chiffre : à 320 px, un nom long — « République arabe syrienne »,
+   « Émirats arabes unis » — ne pouvait que déborder du cadre ou pousser la
+   pastille hors de la rangée.
+
+   Le nom est désormais une boîte à part dans la pastille : c'est lui qui
+   cède quand la place manque, en se repliant dans sa propre largeur, tandis
+   que le compte garde son cadre — même largeur minimale, même hauteur, jamais
+   écrasé, jamais replié. La pastille garde donc sa forme, son filet et son
+   rembourrage, en arabe comme en latin, et le chiffre se lit toujours entier
+   du côté où la lecture finit. */
+.pays-tally-chip {
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.pays-tally-name {
+  min-width: 0;
+}
+
+.pays-tally-chip b {
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+/* Sous 400 px, le nom se replie sur deux lignes à l'intérieur de sa pastille
+   au lieu d'être coupé ou de chasser le compte : le cadre s'agrandit en
+   hauteur, jamais en largeur, et la rangée des pays garde sa mesure. */
+@media (max-width: 400px) {
+  .pays-tally-chip {
+    max-width: 100%;
+    white-space: normal;
+    align-items: center;
+  }
+
+  /* Le nom se replie sur ses espaces, jamais au milieu d'un mot :
+     « United Arab Emirates » descend en trois morceaux lisibles au lieu
+     d'être cassé à l'endroit où le cadre s'arrête. Une césure reste
+     interdite, pour que le trait d'union d'un nom composé ne se sépare
+     jamais de son mot ; et un mot plus long que la pastille, lui seul, peut
+     encore être coupé pour ne pas déborder. */
+  .pays-tally-name {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow-wrap: break-word;
+    word-break: normal;
+    hyphens: none;
+    line-height: 1.25;
+  }
+}
+
+/* La pastille posée sur la carte est plus étroite encore : le nom s'y replie
+   de la même façon, et le compte garde son cadre. */
+.map-side .pays-tally-name {
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: none;
+  line-height: 1.25;
+}
+
+/* ── Les pastilles du compteur posées sur la carte, à 320 px ────────────────
+   La colonne de la carte est la plus étroite où le compteur se lise. Sous
+   780 px elle passe sous la carte et prend toute la largeur, mais le panneau
+   garde son rembourrage : sur 320 px, un nom de pays en trois mots ou une
+   région arabe y trouve moins de place qu'ailleurs, et c'est la pastille qui
+   se déformait — son filet s'écrasait, son compte se repliait.
+
+   La pastille garde donc sa forme, son filet, sa hauteur et son rembourrage :
+   le nom seul cède, dans sa propre largeur, et le compte reste d'un seul
+   morceau au bout de la ligne, du côté où la lecture finit. Le rembourrage
+   s'écrit une fois, en logique : en arabe le nom prend la marge forte et le
+   compte se pose de l'autre côté, sans qu'aucune règle soit retournée à la
+   main. */
+@media (max-width: 400px) {
+  .map-side .pays-tally .pays-tally-chip {
+    box-sizing: border-box;
+    min-width: 0;
+    max-width: 100%;
+    padding-block: 4px;
+    padding-inline: 10px 6px;
+    align-items: center;
+    white-space: normal;
+    line-height: 1.3;
+  }
+
+  .map-side .pays-tally .pays-tally-name {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow-wrap: break-word;
+    word-break: normal;
+    hyphens: none;
+    line-height: 1.25;
+  }
+
+  .map-side .pays-tally .pays-tally-chip b {
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    min-width: 18px;
+    white-space: nowrap;
+  }
+
+  /* Le nom replié et son compte se touchent au même pas dans les deux sens de
+     lecture : seul l'écart de la pastille les sépare, sans marge ajoutée d'un
+     côté seulement. En arabe comme en latin, le compte se lit donc collé au
+     bout de la ligne, du côté où la lecture finit, et une pastille repliée sur
+     deux lignes se compare à sa voisine anglaise sans un pixel de plus. */
+  .map-side .pays-tally .pays-tally-chip {
+    gap: 5px;
+  }
+
+  .map-side .pays-tally .pays-tally-name + b {
+    margin-inline-start: 0;
+  }
+
+  /* Le compte d'une pastille posée sur la carte garde une avance stable : en
+     arabe, un nom de pays en deux mots fait passer le compte de 9 à 10 sans
+     que la pastille s'élargisse d'un cran, et le chiffre reste isolé du sens
+     de lecture de la phrase qui le porte. */
+  .map-side .pays-tally .pays-tally-chip b {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+  }
+
+  .map-side .pays-tally .pays-tally-name {
+    text-align: start;
+  }
+}

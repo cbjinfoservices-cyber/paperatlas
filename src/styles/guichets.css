@@ -1,0 +1,359 @@
+/* ============ « DEMANDES » — LES GUICHETS ============ */
+/* Deux portes de même poids, puis le récit de ce qui suit l'envoi.
+   Les couleurs ne viennent que du thème : rien n'est écrit en dur ici, la
+   palette et la typographie peuvent changer sans toucher à ce fichier. */
+
+.gui-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  align-items: stretch;
+}
+
+@media (max-width: 900px) {
+  .gui-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+.gui-card {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  padding: clamp(22px, 2.4vw, 34px);
+  border-radius: 18px;
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  transition: border-color .2s ease-out, transform .2s ease-out;
+}
+
+.gui-card:hover {
+  border-color: color-mix(in srgb, var(--accent) 48%, transparent);
+  transform: translateY(-2px);
+}
+
+.gui-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.gui-ico {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--accent);
+  font-size: 20px;
+}
+
+.gui-n {
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .18em;
+  color: var(--accent2);
+}
+
+.gui-tag {
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--accent2);
+}
+
+.gui-h {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(22px, 2.1vw, 30px);
+  line-height: 1.18;
+  letter-spacing: -.02em;
+  color: var(--text);
+  text-wrap: balance;
+}
+
+.gui-p {
+  margin: 0;
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: color-mix(in srgb, var(--text) 80%, transparent);
+}
+
+.gui-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 9px;
+}
+
+.gui-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.gui-list i {
+  flex: 0 0 auto;
+  margin-top: 2px;
+  font-size: 14px;
+  color: var(--accent);
+}
+
+.gui-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  width: fit-content;
+  margin-top: 6px;
+  padding: 13px 20px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #221a12;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background .18s ease-out;
+}
+
+.gui-cta:hover { background: var(--accent2); }
+
+/* Le renvoi discret sous les deux guichets : ceux qui venaient chercher un
+   devis d'abonnement trouvent leur porte ici, sans qu'elle pèse autant qu'une
+   carte. Un filet léger, une petite ligne, un mot — puis les offres. */
+.gui-aside {
+  display: flex;
+  justify-content: flex-end;
+  margin: -4px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
+}
+
+.gui-aside-link {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 6px 2px;
+  color: var(--muted);
+  font-size: 12.5px;
+  letter-spacing: .01em;
+  text-decoration: none;
+  transition: color .18s ease-out;
+}
+
+/* Le couple de signes, en miroir exact de celui posé sous les formules : deux
+   petits cercles teintés de l'accent, légèrement chevauchés, qui s'allument
+   ensemble au survol. Les deux lignes se répondent donc d'un bord à l'autre du
+   propos — ici les signes disent le tarif des formules et leur comparaison,
+   là-bas la pile du grand tirage et la liste des marchés publics. */
+.gui-aside-marks { display: inline-flex; align-items: center; flex: 0 0 auto; }
+
+.gui-aside-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  transition: background .18s ease-out, border-color .18s ease-out, color .18s ease-out;
+}
+
+.gui-aside-mark + .gui-aside-mark { margin-inline-start: -5px; }
+
+.gui-aside-mark i { font-size: 11.5px; line-height: 1; color: inherit; }
+
+.gui-aside-txt { min-width: 0; }
+
+.gui-aside-cta {
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.gui-aside-go {
+  font-size: 14px;
+  color: color-mix(in srgb, var(--accent) 70%, transparent);
+  transition: color .18s ease-out, transform .18s ease-out;
+}
+
+.gui-aside-link:hover,
+.gui-aside-link:hover .gui-aside-go { color: var(--accent); }
+
+.gui-aside-link:hover .gui-aside-mark {
+  background: color-mix(in srgb, var(--accent) 22%, var(--surface));
+  border-color: color-mix(in srgb, var(--accent) 58%, transparent);
+  color: var(--accent);
+}
+
+.gui-aside-link:hover .gui-aside-go { transform: translateX(2px); }
+
+[dir="rtl"] .gui-aside-link { letter-spacing: 0; }
+[dir="rtl"] .gui-aside-go { transform: scaleX(-1); }
+[dir="rtl"] .gui-aside-link:hover .gui-aside-go { transform: scaleX(-1) translateX(2px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .gui-aside-mark, .gui-aside-go { transition: none; }
+}
+
+@media (max-width: 640px) {
+  .gui-aside { justify-content: flex-start; }
+  .gui-aside-link { align-items: flex-start; }
+  .gui-aside-marks { margin-top: 1px; }
+  .gui-aside-cta { white-space: normal; }
+}
+
+/* ── Le renvoi des guichets au plus serré, en arabe ────────────────────────
+   À 320 px, la page ne laisse que 275 px au renvoi, et le phrase arabe y
+   écrit plus long que sa voisine latine. Le couple de signes partageait la
+   première ligne avec le début de la phrase, puis la flèche et son mot
+   tombaient dessous, chacun de son côté : le renvoi se lisait comme trois
+   lignes sans axes.
+
+   Il se lit maintenant comme son jumeau, sous les formules — mêmes signes,
+   même retrait, mêmes cotes : la paire de signes et la phrase sur la première
+   ligne, puis la flèche et le mot des deux guichets posés ensemble sous la
+   phrase, à la même mesure où elle commence. Les deux renvois se répondent
+   donc à l'identique, d'un bord à l'autre du propos, et non seulement dans
+   leurs signes. Rien n'est retiré, aucun mot n'est coupé. */
+@media (max-width: 360px) {
+  .gui-aside { padding-top: 10px; }
+  .gui-aside-link { gap: 6px; font-size: 12px; }
+  .gui-aside-marks { margin-top: 0; }
+  .gui-aside-mark { width: 18px; height: 18px; }
+  .gui-aside-mark i { font-size: 10.5px; }
+  .gui-aside-mark + .gui-aside-mark { margin-inline-start: -4px; }
+  /* La phrase prend la place qui reste sur sa ligne : la flèche et le mot ne
+     peuvent donc plus tomber au hasard à côté d'elle. */
+  .gui-aside-txt { flex: 1 1 0; min-width: 0; line-height: 1.45; }
+  /* 37 px : la largeur des deux cercles chevauchés et de leur gouttière — la
+     flèche se pose donc exactement sous le premier mot de la phrase, ici
+     comme sous les formules. */
+  .gui-aside-go { margin-inline-start: 37px; }
+  .gui-aside-cta { font-size: 12px; }
+  [dir="rtl"] .gui-aside-txt { line-height: 1.5; }
+  [dir="rtl"] .gui-aside-go { transform: scaleX(-1); }
+  [dir="rtl"] .gui-aside-link:hover .gui-aside-go { transform: scaleX(-1) translateX(2px); }
+}
+
+.gui-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.gui-note i {
+  flex: 0 0 auto;
+  margin-top: 2px;
+  font-size: 14px;
+  color: var(--accent);
+}
+
+.gui-after {
+  display: grid;
+  gap: 16px;
+  padding: clamp(18px, 2.4vw, 30px);
+  border-radius: 20px;
+  border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+}
+
+.gui-after-h {
+  display: grid;
+  gap: 6px;
+}
+
+.gui-kicker {
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--accent2);
+}
+
+.gui-h2 {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(20px, 2.2vw, 28px);
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  color: var(--text);
+}
+
+.gui-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+@media (max-width: 900px) {
+  .gui-steps { grid-template-columns: minmax(0, 1fr); }
+}
+
+.gui-step {
+  display: grid;
+  gap: 6px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
+  background: color-mix(in srgb, var(--bg) 45%, transparent);
+}
+
+.gui-step-n {
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .16em;
+  color: var(--accent);
+}
+
+.gui-step p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.gui-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.gui-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 15px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  color: var(--text);
+  font-size: 13px;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: color .18s ease-out, border-color .18s ease-out;
+}
+
+.gui-link:hover {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+}
+
+.gui-link i { font-size: 14px; }

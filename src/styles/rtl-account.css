@@ -1,0 +1,220 @@
+/* ============ ARABIC PASS: THE ACCOUNT PAGES ============ */
+/* The same verification the B2B request form and the three public boards
+   received, carried to the signed-in side: sign-in, sign-up, candidate profile.
+   Arabic script never carries tracking (it breaks the joins), Latin labels are
+   not shouted in Arabic, Arabic headings never take the negative tracking of the
+   Latin ones, and every value written left to right — an e-mail, a phone number,
+   a percentage, a two-letter workshop mark — is isolated so the page cannot
+   reorder it. Directional layout itself is already handled by the document's
+   `dir="rtl"` and by the inline-start / inline-end properties of the forms. */
+
+/* 1. Tracking and shouting, on every small label of the three sheets. */
+[dir="rtl"] .acct-meta,
+[dir="rtl"] .acct-role,
+[dir="rtl"] .acct-member-since,
+[dir="rtl"] .cprof-meter-note,
+[dir="rtl"] .cvf-hint,
+[dir="rtl"] .auth-alt,
+[dir="rtl"] .auth-reminder,
+[dir="rtl"] .link-btn,
+[dir="rtl"] .auth-card .fld label { letter-spacing: 0; text-transform: none; }
+
+/* 2. Arabic headings keep their joins: no negative tracking, ever. */
+[dir="rtl"] .auth-card .page-h1,
+[dir="rtl"] .auth-card .page-h2,
+[dir="rtl"] .auth-done .page-h2,
+[dir="rtl"] .acct-id h2,
+[dir="rtl"] .cprof-meter-pct { letter-spacing: 0; }
+
+/* 3. Values typed left to right, inside a box aligned on the reading side: an
+   e-mail and a phone number are read the way they are written everywhere else,
+   never reordered by the right-to-left flow around them. */
+[dir="rtl"] .auth-card .fld input[type="email"],
+[dir="rtl"] .auth-card .fld input[type="tel"],
+[dir="rtl"] .auth-card .fld input[autocomplete="email"],
+[dir="rtl"] .auth-card .fld input[autocomplete="tel"] {
+  direction: ltr;
+  text-align: right;
+  unicode-bidi: plaintext;
+}
+
+/* 4. The same values, once written on the page instead of typed in a box: the
+   e-mail under the member name, and the address of the account awaiting its
+   confirmation e-mail. One run, so the dot of « gmail.com » cannot jump. */
+[dir="rtl"] .acct-id p,
+[dir="rtl"] .auth-done .auth-note strong {
+  direction: ltr;
+  unicode-bidi: isolate;
+  text-align: start;
+  overflow-wrap: anywhere;
+}
+
+/* 5. Non-sentences, isolated: the initials of the avatar (two letters, not a
+   word), and the completion percentage — neither may be flipped by the flow. */
+[dir="rtl"] .acct-avatar,
+[dir="rtl"] .cprof-meter-pct {
+  direction: ltr;
+  unicode-bidi: isolate;
+  letter-spacing: 0;
+}
+[dir="rtl"] .acct-avatar { justify-content: center; }
+
+/* 6. The completion bar fills from the reading end, not always from the left:
+   the same gesture a left-to-right reader sees, mirrored. */
+[dir="rtl"] .cprof-meter-bar { display: flex; }
+[dir="rtl"] .cprof-meter-bar i { align-self: stretch; }
+
+/* 7. The checklist of the profile: the mark stays on the reading side of its
+   line, the label keeps the reading alignment. */
+[dir="rtl"] .cprof-checks li { align-items: flex-start; }
+[dir="rtl"] .cprof-checks li span { text-align: start; }
+
+/* 8. The consent line of the sign-up: the box sits at the reading side, the
+   sentence keeps its own alignment beside it. */
+[dir="rtl"] .auth-check { align-items: flex-start; text-align: start; }
+[dir="rtl"] .auth-check span { min-width: 0; }
+
+/* 9. The account doors under the profile (jobs, applications, account): the
+   arrow points the way the eye travels, and the rows keep their icon first. */
+[dir="rtl"] .deposit-links a > i:last-child { transform: scaleX(-1); }
+[dir="rtl"] .deposit-links a { text-align: start; }
+
+/* 10. Feedback lines keep the reading alignment, never a leftover centred or
+   left-aligned block under a right-aligned form. */
+[dir="rtl"] .auth-card .form-msg,
+[dir="rtl"] .auth-done .form-msg,
+[dir="rtl"] .cprof-gate .auth-note,
+[dir="rtl"] .cprof-twin .auth-note { text-align: start; }
+
+/* 11. The selected trade or wilaya in the sign-up selects keeps the reading
+   alignment, in both directions. */
+[dir="rtl"] .auth-card select { text-align: start; }
+
+/* 12. The CV block of the candidate profile: the file name is Latin text with
+   a dot extension — one run, so the extension never moves to the front. */
+[dir="rtl"] .cvf-txt strong { direction: ltr; unicode-bidi: isolate; text-align: start; }
+
+@media (max-width: 640px) {
+  /* The stacked field grid of the sign-up keeps the same reading alignment once
+     it collapses into one column. */
+  [dir="rtl"] .auth-card .form-grid { direction: rtl; }
+}
+
+/* ============ ARABIC PASS: MESSAGES AND APPLICATIONS ============ */
+/* The same verification once more, on the two screens where the account reads
+   names, dates, counters and typed conversations. Same rules, one by one:
+   Arabic never carries tracking, Latin values keep one direction, two-letter
+   marks are never read as words, and the directional shapes follow the eye. */
+
+/* 13. Tracked, shouted Latin labels, once they speak Arabic. */
+[dir="rtl"] .capp .capp-note-count,
+[dir="rtl"] .capp .capp-active,
+[dir="rtl"] .capp .capp-date,
+[dir="rtl"] .capp .capp-badge,
+[dir="rtl"] .capp-note strong,
+[dir="rtl"] .msg-day-label,
+[dir="rtl"] .msg-new-title,
+[dir="rtl"] .msg-side-note,
+[dir="rtl"] .msg-hint { letter-spacing: 0; text-transform: none; font-size: 11.5px; }
+
+/* 14. Arabic headings keep their joins: the title of both boards, and the small
+   heading of the messaging column. */
+[dir="rtl"] .capp .page-h2,
+[dir="rtl"] .msg-side-top .pro-h { letter-spacing: 0; text-transform: none; }
+[dir="rtl"] .msg-side-top .pro-h { font-size: 12.5px; }
+
+/* 15. Values written left to right inside a line aligned on the reading side:
+   the candidate's phone in an application, the e-mail of a fiche, and the
+   counter of the shortlist note (two numbers around a slash). */
+[dir="rtl"] .capp-meta a[href^="mailto:"],
+[dir="rtl"] .capp-meta a[href^="tel:"] {
+  direction: ltr;
+  unicode-bidi: isolate;
+  text-align: right;
+}
+[dir="rtl"] .capp-note-num { direction: ltr; unicode-bidi: isolate; }
+
+/* 16. Marks that are not words: the initials of an avatar and the counting
+   pills must never be reordered by the flow around them. */
+[dir="rtl"] .msg-avatar,
+[dir="rtl"] .msg-badge,
+[dir="rtl"] .capp-n,
+[dir="rtl"] .capp-note-num { direction: ltr; unicode-bidi: isolate; letter-spacing: 0; }
+[dir="rtl"] .capp-n,
+[dir="rtl"] .msg-badge { font-size: 10.5px; }
+
+/* 17. The conversation bubbles: the tail turns with the reading direction, so
+   the other speaker still answers from the start of the line. */
+[dir="rtl"] .msg-bubble { border-radius: 16px 16px 4px 16px; }
+[dir="rtl"] .msg-bubble-row.is-mine .msg-bubble { border-radius: 16px 16px 16px 4px; }
+[dir="rtl"] .msg-bubble time { text-align: start; }
+
+/* 18. Directional shapes follow the eye; the others never flip. */
+[dir="rtl"] .msg-back i,
+[dir="rtl"] .msg-send i { transform: scaleX(-1); }
+[dir="rtl"] .msg-send:hover i { transform: scaleX(-1) translateX(4px); }
+
+/* 19. Typed text and written lines keep the reading side: the draft area, the
+   shortlist note, the row headers and the message metadata. */
+[dir="rtl"] .msg-input,
+[dir="rtl"] .capp-note-field,
+[dir="rtl"] .capp-top,
+[dir="rtl"] .capp-meta,
+[dir="rtl"] .capp-note,
+[dir="rtl"] .capp-body,
+[dir="rtl"] .capp-empty,
+[dir="rtl"] .msg-head-id,
+[dir="rtl"] .msg-stream { text-align: start; }
+
+/* 20. The shortlist sheet: its closing mark and its actions stay on the reading
+   side, and the header keeps the title first. */
+[dir="rtl"] .capp-modal-head,
+[dir="rtl"] .capp-modal-actions { text-align: start; }
+[dir="rtl"] .capp-modal-title,
+[dir="rtl"] .capp-title { letter-spacing: 0; }
+
+/* 21. The search field hands its ring to the wrapper, in both directions. */
+[dir="rtl"] .capp-search input,
+[dir="rtl"] .msg-search input { text-align: start; }
+
+/* ============ ARABIC PASS: THE NEW-CONVERSATION PANEL ============ */
+/* The same verification on the panel that opens a thread with a member: names,
+   cities, a search field and an action button. Same rules, one by one. */
+
+/* 22. Tracked, shouted Latin labels, once they speak Arabic. */
+[dir="rtl"] .msg-new .msg-new-title,
+[dir="rtl"] .msg-new .msg-side-note { letter-spacing: 0; text-transform: none; }
+[dir="rtl"] .msg-new .msg-new-title { font-size: 12.5px; }
+
+/* 23. The member rows: the name and its line keep the reading alignment, and
+   the avatar stays one run on the reading side of the row. */
+[dir="rtl"] .msg-members li { text-align: start; }
+[dir="rtl"] .msg-member-id,
+[dir="rtl"] .msg-member-id b,
+[dir="rtl"] .msg-member-id small { text-align: start; }
+
+/* 24. The action of each row keeps its padding on the reading side, and its
+   arrow points the way the eye travels — the label never breaks its line. */
+[dir="rtl"] .msg-members .share-btn {
+  padding-inline-start: 14px;
+  padding-inline-end: 14px;
+  white-space: nowrap;
+}
+[dir="rtl"] .msg-members .share-btn i { transition: transform .2s ease-out; }
+[dir="rtl"] .msg-members .share-btn:hover i { transform: scaleX(-1) translateX(3px); }
+
+/* 25. The search field keeps its icon on the reading side, and the room it
+   needs so the typed text never slides under it. */
+[dir="rtl"] .msg-search input {
+  padding-inline-start: 40px;
+  padding-inline-end: 14px;
+}
+
+/* 26. The loading note and the error line keep the reading alignment, never a
+   leftover centred block under a right-aligned list. */
+[dir="rtl"] .msg-new .msg-side-note,
+[dir="rtl"] .msg-new .form-msg { text-align: start; }
+
+@media (max-width: 640px) {
+  [dir="rtl"] .msg-search input { padding-inline-start: 38px; }
+}

@@ -1,0 +1,843 @@
+/* ============ TABLEAUX → BARRE COLLANTE, COMPTEURS, RYTHME ============ */
+/* Les trois tableaux publics (Annuaire, Annonces, Emplois) empilaient leurs
+   bandes jusqu'à repousser les fiches sous la ligne de flottaison. Ici : la
+   barre de filtres suit la descente, le corps de page lit comme une pile de
+   blocs (et non une grille d'une seule rangée, où un enfant collant ne peut
+   pas se déplacer), et les trois compteurs de l'annuaire tiennent sur une
+   ligne. Rien n'est retiré : tout est resserré. */
+
+/* Un enfant collant a besoin d'un bloc conteneur aussi haut que la liste.
+   La grille d'origine ne lui donnait qu'une rangée : le corps redevient une
+   pile, avec un seul écart, identique à celui de la grille. */
+main .board-body { display: block; }
+main .board-body > * + * { margin-top: 14px; }
+
+/* ============ LA PILE COLLANTE : FILTRES + PASTILLES ============ */
+/* La barre de filtres et la rangée de pastilles qui la suit ne forment plus
+   deux bandes séparées : elles se tiennent ensemble sous la navigation pendant
+   la descente dans les résultats. Une seule pile collante, donc un seul
+   accrochage — les pastilles ne peuvent jamais se décrocher des filtres. */
+main .board-stick {
+  position: sticky;
+  top: 70px;
+  z-index: 45;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  isolation: isolate;
+}
+
+/* Les rangées d'origine portaient leurs propres écarts : dans la pile, c'est
+   le sien qui règle le rythme, sinon les deux se cumulent. */
+main .board-stick > * { margin: 0; }
+
+/* Le filet du haut de la pile n'existe qu'au téléphone : sur grand écran, la
+   pastille de rubrique reste sous les yeux. */
+main .board-stick > .board-thread { display: none; }
+
+/* Les deux flèches de la rangée n'existent qu'à la taille téléphone. */
+main .board-stick .board-nudge { display: none; }
+
+/* La phrase dite aux lecteurs d'écran : présente dans la page, invisible à
+   l'œil. Elle ne prend aucune place et ne déplace jamais la rangée. */
+main .board-stick .board-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---- Le compteur des filtres cachés, pour les barres qui débordent ---- */
+/* Sur grand écran, la flèche n'a pas sa place : quand la rangée déborde
+   vraiment, une petite ligne posée au bord de la barre dit combien de champs
+   restent hors de vue, et de quel côté. Elle ne prend aucune place quand tout
+   tient à l'écran — le compte ne s'invente jamais. */
+main .board-stick .board-hidden-count {
+  display: none;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  margin: 0 2px -2px;
+  font-family: var(--font-label);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  line-height: 1.3;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+
+main .board-stick .board-hidden-count > i { font-size: 13px; color: var(--accent); }
+
+main .board-stick .board-hidden-sides { display: inline-flex; gap: 4px; }
+
+/* Le chiffre porte le geste : un clic pose la rangée sur les champs restés
+   hors de vue de ce côté-là. Il se lit comme un chiffre, se comporte comme
+   une porte. */
+main .board-stick .board-hidden-go {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: none;
+  font: inherit;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease;
+}
+
+main .board-stick .board-hidden-go:hover {
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 38%, transparent);
+}
+
+main .board-stick .board-hidden-go:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+/* Le chevron regarde du côté où le chiffre envoie. En arabe la rangée part de
+   la droite : le chevron se retourne, et le chiffre se range derrière lui. */
+main .board-stick .board-hidden-chev {
+  display: inline-block;
+  line-height: 1;
+}
+
+[dir="rtl"] main .board-stick .board-hidden-chev { transform: scaleX(-1); }
+[dir="rtl"] main .board-stick .board-hidden-go { flex-direction: row-reverse; }
+
+/* ---- Le repère du champ atteint ---- */
+/* Un anneau discret s'allume sur le champ que la rangée vient de rejoindre, puis
+   s'éteint. Il se dessine sur le contrôle lui-même — donc jamais rogné par le
+   défilement de la rangée — et ne déplace rien. */
+main .board-stick .fld.is-reached :is(input, select) {
+  box-shadow: 0 0 0 2px var(--accent);
+  animation: board-reached-pulse 1.5s ease-out;
+}
+
+@keyframes board-reached-pulse {
+  0% {
+    box-shadow:
+      0 0 0 2px var(--accent),
+      0 0 0 6px color-mix(in srgb, var(--accent) 26%, transparent);
+  }
+  60% {
+    box-shadow:
+      0 0 0 2px var(--accent),
+      0 0 0 3px color-mix(in srgb, var(--accent) 14%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 2px var(--accent);
+  }
+}
+
+/* Le champ garde son anneau allumé le temps de la lecture, même sans animation. */
+@media (prefers-reduced-motion: reduce) {
+  main .board-stick .fld.is-reached :is(input, select) { animation: none; }
+}
+
+/* ---- Le repère du haut : la pastille de rubrique ---- */
+/* Dès que la rangée quitte son début, la pastille de rubrique du tableau — les
+   puces de rubrique d'Annonces et d'Emplois, les pastilles de filtre de
+   l'Annuaire — reçoit le même anneau que le champ atteint. Le repère se lit
+   alors d'un seul trait, du haut de la pile jusqu'à la barre : on sait d'où
+   l'on est parti comme où l'on est arrivé. Il s'éteint quand la rangée revient
+   à son début. */
+main .board-stick :is(.board-cats, .fresh-row) button.is-rubric {
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+@media (min-width: 901px) {
+  main .board-stick .board-hidden-count {
+    display: inline-flex;
+    order: 1;
+    align-self: flex-end;
+  }
+
+  /* La barre ouvre la pile : la même ligne se pose juste au-dessus d'elle. */
+  main .board-stick .board-hidden-count.is-first { order: -1; }
+}
+
+/* Le plateau givré et son ombre n'existent qu'une fois la pile réellement
+   accrochée : au repos, rien ne projetait sur la page, et rien ne projette
+   encore. Le voile garde les champs lisibles quand une fiche défile derrière. */
+main .board-stick::before {
+  content: '';
+  position: absolute;
+  inset-inline: -12px;
+  inset-block: -8px;
+  z-index: -1;
+  border-radius: 22px;
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  -webkit-backdrop-filter: blur(16px) saturate(1.06);
+  backdrop-filter: blur(16px) saturate(1.06);
+  box-shadow:
+    0 22px 34px -26px color-mix(in srgb, #000 76%, transparent),
+    0 1px 0 color-mix(in srgb, var(--text) 9%, transparent);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.22s ease, visibility 0.22s ease;
+  pointer-events: none;
+}
+
+main .board-stick.is-stuck::before { opacity: 1; visibility: visible; }
+
+/* Les champs gardent un fond plein par-dessus le flou, pour rester lisibles
+   quand une fiche défile derrière la barre. */
+main .filters :is(input, select, .decade-menu-btn),
+main .board-filters :is(input, select) {
+  background: color-mix(in srgb, var(--surface) 96%, transparent);
+}
+
+/* Une ligne de compteurs déjà posée ne laisse pas de vide sous elle. */
+main .gtally { margin: 0 0 6px; }
+main .genre-tally { margin: 0 0 8px; }
+main .board-keyhint { margin-top: 0; }
+
+/* Annonces & Emplois : les puces de rubrique et le champ de recherche
+   prennent la même assise que la barre de l'annuaire. */
+main .board-cats { gap: 4px; padding: 3px; border-radius: 14px; }
+main .board-cats button { padding: 7px 13px; font-size: 12.5px; }
+main .board-cats button i { font-size: 15px; }
+main .board-filters { padding: 12px 14px; gap: 10px; border-radius: 16px; }
+
+/* Un ancrage (retour au début de la liste) doit atterrir sous la barre
+   collante, jamais derrière elle. */
+main .board-body #board-results { scroll-margin-top: 220px; }
+
+/* ============ ANNUAIRE → LES TROIS COMPTEURS SUR UNE LIGNE ============ */
+/* La semaine, les décennies et le périmètre formaient trois bandes successives
+   au-dessus des fiches. Ils tiennent maintenant sur une ligne, séparés par un
+   filet : la semaine à gauche, les décennies au centre (elles glissent
+   horizontalement plutôt que de passer à la ligne), le périmètre à droite. */
+.dir-countline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  margin: 0 0 12px;
+  padding: 8px 13px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 11%, transparent);
+}
+
+.dir-countline > * { min-width: 0; }
+
+.dir-countline > * + * {
+  padding-inline-start: 14px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+}
+
+/* La semaine : le même pouls qu'avant, en plus bas. */
+main .dir-countline .arrival-brief {
+  flex: 0 1 auto;
+  margin: 0;
+  font-size: 12.5px;
+  gap: 6px 10px;
+}
+
+main .dir-countline .week-pulse { margin-inline-start: 4px; gap: 8px; }
+main .dir-countline .week-pulse-bars { height: 20px; }
+main .dir-countline .week-pulse-cap { font-size: 9px; }
+
+/* Les décennies : leur barre devient un simple segment de la ligne, ses puces
+   glissent sur une seule rangée au lieu de s'empiler. */
+main .dir-countline .genre-tally {
+  flex: 1 1 240px;
+  flex-wrap: nowrap;
+  gap: 8px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+main .dir-countline .genre-tally-lab { flex: 0 0 auto; font-size: 8.5px; }
+
+main .dir-countline .genre-tally-list {
+  flex: 1 1 auto;
+  flex-wrap: nowrap;
+  min-width: 0;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: thin;
+}
+
+main .dir-countline .genre-tally-item { flex: 0 0 auto; }
+
+main .dir-countline .genre-tally-chip {
+  flex: 0 0 auto;
+  padding: 4px 9px;
+  font-size: 12px;
+  gap: 6px;
+}
+
+main .dir-countline .genre-tally-chip.has-parts { padding: 3px 8px 4px; }
+main .dir-countline .genre-tally-parts { font-size: 8.5px; gap: 0 6px; }
+
+/* Le périmètre : ses puces et sa petite porte de partage, sans encadré. */
+main .dir-countline .dir-scope {
+  flex: 0 1 auto;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  gap: 4px 8px;
+}
+
+main .dir-countline .dir-scope-copy { margin-inline-start: 4px; padding: 3px 9px; }
+
+@media (max-width: 780px) {
+  .dir-countline { gap: 0; padding: 8px 11px; }
+  .dir-countline > * + * {
+    margin-top: 8px;
+    padding-inline-start: 0;
+    padding-top: 8px;
+    border-inline-start: 0;
+    border-top: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+    width: 100%;
+  }
+  main .dir-countline .genre-tally { flex: 1 1 100%; }
+  main .dir-countline .arrival-brief { flex: 1 1 100%; }
+}
+
+@media (max-width: 900px) {
+  /* ============ TÉLÉPHONE → SEULE LA RECHERCHE S'ACCROCHE ============ */
+  /* Deux rangées collées mangent la moitié d'un écran de téléphone. La pile se
+     dissout donc sous 900 px : les pastilles et les puces de rubrique
+     repassent dans le flux et défilent normalement, et seule la ligne de
+     recherche — le champ, le pays, la région, le tri, la remise à zéro —
+     reste accrochée sous la navigation. */
+  main .board-stick { position: static; display: contents; }
+
+  /* Le plateau givré de la pile entière n'a plus lieu d'être : la barre de
+     recherche porte son propre fond, assez opaque pour qu'une fiche ne
+     traverse jamais les champs. */
+  main .board-stick::before { display: none; }
+
+  /* La pile dissoute n'a plus de boîte : ses écarts internes disparaissent
+     avec elle. Le rythme general reprend donc sur ses enfants — les pastilles
+     gardent leur place au-dessus de la barre, la barre son petit écart. */
+  main .board-stick > .board-thread + * { margin-top: 14px; }
+  main .board-stick > * + :is(.filters, .board-filters) { margin-top: 8px; }
+
+  /* ---- Le filet collant du haut de la pile ---- */
+  /* Sur téléphone, la rangée de rubrique défile hors de l'écran bien avant la
+     barre des filtres. Pour que le repère ne s'éteigne pas avec elle, un trait
+     mince reste collé juste au-dessus de la barre : éteint au repos, il prend
+     la teinte de l'anneau dès que la rangée quitte son début. Il ne prend
+     aucune place — sa hauteur est rendue au bloc suivant. */
+  main .board-stick > .board-thread {
+    display: block;
+    position: sticky;
+    top: 62px;
+    z-index: 46;
+    height: 2px;
+    width: 100%;
+    margin-block: 0 -2px;
+    border-radius: 999px;
+    background: var(--accent);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 26%, transparent);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+  }
+
+  main .board-stick.is-slid > .board-thread { opacity: 1; }
+
+  main .board-stick > .filters,
+  main .board-stick > .board-filters {
+    position: sticky;
+    top: 62px;
+    z-index: 45;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    border-radius: 14px;
+    background: color-mix(in srgb, var(--bg) 94%, transparent);
+    -webkit-backdrop-filter: blur(16px) saturate(1.06);
+    backdrop-filter: blur(16px) saturate(1.06);
+  }
+
+  main .board-stick > .filters::-webkit-scrollbar,
+  main .board-stick > .board-filters::-webkit-scrollbar { display: none; }
+
+  /* La recherche passe en tête, les autres choix suivent sur la même rangée et
+     glissent latéralement. Aucun champ n'est retiré : chacun garde son nom
+     pour les lecteurs d'écran, il ne prend simplement plus sa propre ligne. */
+  main .board-stick > :is(.filters, .board-filters) > .fld { flex: 0 0 auto; min-width: 0; }
+
+  /* La recherche prend la place restante, les autres choix gardent leur
+     largeur naturelle. */
+  main .board-stick > :is(.filters, .board-filters) > .fld.filters-search,
+  main .board-stick > :is(.filters, .board-filters) > .fld.fld-inline {
+    flex: 1 1 168px;
+    min-width: 132px;
+  }
+
+  main .board-stick .fld > label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  main .board-stick .fld > :is(input, select),
+  main .board-stick .fld-inline input {
+    width: 100%;
+    padding: 9px 12px;
+    border-radius: 10px;
+    font-size: 13px;
+  }
+
+  /* Les listes ne se contentent pas d'un minimum étroit : « Toutes les
+     wilayas », « Sidi Bel Abbès » ou leurs équivalents arabes tiennent
+     maintenant en entier, au lieu d'être coupés au bord du champ. */
+  main .board-stick > :is(.filters, .board-filters) > .fld > select {
+    width: auto;
+    min-width: 146px;
+    max-width: 210px;
+  }
+
+  main .board-stick .filters-search .fld-inline input { padding-inline-start: 36px; }
+
+  /* La recherche passe en tête de la rangée, les autres choix suivent. */
+  main .board-stick .filters-search,
+  main .board-stick > :is(.filters, .board-filters) > .fld-inline { order: -1; }
+
+  /* ---- La remise à zéro reste au bord de la rangée ---- */
+  /* Les champs glissent dessous, le bouton ne quitte jamais le bord : il se
+     voit sans avoir à faire défiler la rangée, et son fond plein empêche une
+     puce de passer au travers. */
+  main .board-stick > :is(.filters, .board-filters) > .filters-reset {
+    position: sticky;
+    inset-inline-end: 0;
+    z-index: 3;
+    flex: 0 0 auto;
+    width: auto;
+    height: 36px;
+    padding: 0 13px;
+    margin-inline-start: auto;
+    background: var(--surface);
+    border-color: color-mix(in srgb, var(--text) 22%, transparent);
+    box-shadow: -9px 0 14px -12px color-mix(in srgb, #000 62%, transparent);
+  }
+
+  /* Éteint, le bouton garde sa teinte discrète mais reste pleinement opaque :
+     il reste lisible même quand aucun filtre n'est posé. */
+  main .board-stick > :is(.filters, .board-filters) > .filters-reset:disabled {
+    opacity: 1;
+    cursor: default;
+    color: color-mix(in srgb, var(--text) 54%, transparent);
+    border-color: color-mix(in srgb, var(--text) 14%, transparent);
+  }
+
+  /* Le voile qui sépare le bouton des champs qui passent dessous. */
+  main .board-stick > :is(.filters, .board-filters) > .filters-reset::before {
+    content: '';
+    position: absolute;
+    inset-block: -1px;
+    inset-inline-end: 100%;
+    width: 28px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    background: linear-gradient(to left, color-mix(in srgb, var(--surface) 88%, transparent), transparent);
+  }
+
+  main .board-stick.is-slide > :is(.filters, .board-filters) > .filters-reset::before { opacity: 1; }
+
+  /* ---- Les deux flèches : un champ à la fois, sans glisser au doigt ---- */
+  /* La flèche du bord de départ recule d'un filtre, celle du bord d'arrivée
+     avance d'un filtre. Toutes deux restent épinglées sur leur arête, portent
+     le petit chiffre des filtres encore cachés de ce côté, et s'effacent dès
+     qu'il n'y a plus rien à voir de ce côté-là. */
+  main .board-stick .board-nudge {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    flex: 0 0 auto;
+    min-width: 30px;
+    height: 30px;
+    padding: 0 6px;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+    background: var(--surface);
+    color: color-mix(in srgb, var(--accent) 80%, var(--text));
+    font: inherit;
+    font-size: 15px;
+    line-height: 1;
+    cursor: pointer;
+    position: sticky;
+    z-index: 5;
+    transition: background 0.18s ease, border-color 0.18s ease;
+  }
+
+  /* Une flèche n'apparaît que s'il reste vraiment quelque chose à voir de son
+     côté : elle ne prend donc jamais de place pour rien. */
+  main .board-stick .board-nudge.is-on { display: inline-flex; }
+
+  main .board-stick .board-nudge:hover {
+    background: color-mix(in srgb, var(--accent) 14%, var(--surface));
+    border-color: color-mix(in srgb, var(--accent) 38%, transparent);
+  }
+
+  main .board-stick .board-nudge:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  main .board-stick .board-nudge-n {
+    font-size: 10.5px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Le recul se pose sur l'arête de départ, le long du voile qui s'y allume. */
+  main .board-stick .board-nudge-prev {
+    order: -3;
+    inset-inline-start: 0;
+  }
+
+  /* L'avance se pose juste devant la remise à zéro, sans jamais la couvrir. */
+  main .board-stick .board-nudge-next {
+    margin-inline-start: 2px;
+    inset-inline-end: calc(var(--reset-w, 104px) + 6px);
+  }
+
+  /* En arabe la rangée part de la droite : les deux chevrons regardent de
+     l'autre côté. */
+  [dir="rtl"] main .board-stick .board-nudge i { transform: scaleX(-1); }
+
+  /* ---- Le voile du bord de départ, symétrique de celui de la remise à zéro ---- */
+  /* Un élément collant au bord de départ de la rangée : il ne défile pas avec
+     les champs, il reste posé sur l'arête. Il reste éteint tant que la rangée
+     est intacte, puis s'allume dès qu'on a commencé à faire glisser — le bord
+     d'arrivée, lui, porte déjà sa flèche et son voile. */
+  main .board-stick > :is(.filters, .board-filters)::before {
+    content: '';
+    position: sticky;
+    inset-inline-start: 0;
+    z-index: 4;
+    flex: 0 0 22px;
+    width: 22px;
+    align-self: stretch;
+    margin-inline-start: -10px;
+    margin-inline-end: -30px;
+    border-start-start-radius: 14px;
+    border-end-start-radius: 14px;
+    background: linear-gradient(to right, color-mix(in srgb, var(--bg) 92%, transparent) 44%, transparent);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+  }
+
+  main .board-stick.is-slid > :is(.filters, .board-filters)::before {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* En arabe la rangée part de la droite : le voile s'accroche au bord droit
+     et s'éclaircit vers la gauche. */
+  [dir="rtl"] main .board-stick > :is(.filters, .board-filters)::before {
+    background: linear-gradient(to left, color-mix(in srgb, var(--bg) 92%, transparent) 44%, transparent);
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+    border-start-end-radius: 14px;
+    border-end-end-radius: 14px;
+  }
+
+  /* En arabe la rangée part de la droite : le voile et la flèche changent de
+     côté, et la flèche regarde vers la gauche. */
+  [dir="rtl"] main .board-stick > :is(.filters, .board-filters) > .filters-reset {
+    box-shadow: 9px 0 14px -12px color-mix(in srgb, #000 62%, transparent);
+  }
+
+  [dir="rtl"] main .board-stick > :is(.filters, .board-filters) > .filters-reset::before {
+    background: linear-gradient(to right, color-mix(in srgb, var(--surface) 88%, transparent), transparent);
+  }
+
+
+  /* L'ombre n'apparaît toujours qu'une fois la barre réellement accrochée. */
+  main .board-stick.is-stuck > .filters,
+  main .board-stick.is-stuck > .board-filters {
+    box-shadow:
+      0 22px 34px -26px color-mix(in srgb, #000 76%, transparent),
+      0 1px 0 color-mix(in srgb, var(--text) 9%, transparent);
+  }
+
+  /* Le retour au début de la liste n'a plus qu'une rangée à franchir. */
+  main .board-body #board-results { scroll-margin-top: 150px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main .board-stick::before { transition: none; }
+  main .board-stick > .board-thread { transition: none; }
+}
+
+/* ============ ANNONCES & EMPLOIS → LA MÊME LIGNE DE COMPTEURS ============ */
+/* Les dépôts de la semaine, l'étendue du tableau (pays et régions) et le
+   périmètre tiennent sur une seule bande, exactement comme dans l'annuaire :
+   les trois tableaux se lisent donc de la même façon, du premier au dernier. */
+main .board-countline .arrival-brief {
+  flex: 0 1 auto;
+  margin: 0;
+  font-size: 12.5px;
+  gap: 6px 10px;
+}
+
+main .board-countline .week-pulse { margin-inline-start: 4px; gap: 8px; }
+main .board-countline .week-pulse-bars { height: 20px; }
+main .board-countline .week-pulse-cap { font-size: 9px; }
+
+/* L'étendue : deux chiffres seulement, le pays et la division, sans encadré. */
+.board-spread {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  flex: 0 1 auto;
+  gap: 4px 12px;
+  min-width: 0;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+}
+
+.board-spread > span,
+.board-spread-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+/* Le nombre de pays est une porte : au repos, il se lit comme le chiffre des
+   régions ; au survol, la pastille s'allume ; une fois le regroupement en
+   place, elle reste pleine, comme les pastilles de type. */
+.board-spread-btn {
+  font: inherit;
+  font-size: 12.5px;
+  line-height: 1.4;
+  margin-inline-start: -8px;
+  margin-block: -2px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  color: inherit;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.board-spread-btn:hover {
+  color: var(--text);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 34%, transparent);
+}
+
+.board-spread-btn.is-on {
+  color: var(--bg);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.board-spread-btn.is-on strong,
+.board-spread-btn.is-on i { color: var(--bg); }
+
+.board-spread i { font-size: 14px; color: var(--accent); flex: 0 0 auto; }
+.board-spread i.board-spread-arrow { font-size: 12px; opacity: 0.6; }
+.board-spread-btn:hover i.board-spread-arrow,
+.board-spread-btn.is-on i.board-spread-arrow { opacity: 1; }
+.board-spread strong { font-weight: 600; color: var(--accent2); }
+
+main .board-countline .dir-scope {
+  flex: 0 1 auto;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  gap: 4px 8px;
+}
+
+main .board-countline .dir-scope-copy { margin-inline-start: 4px; padding: 3px 9px; }
+
+/* ============ LE VIVIER → LA SEMAINE DANS LA LIGNE DE COMPTEURS ============ */
+/* Les deux fenêtres d'arrivée du vivier — la semaine, le mois — sont des
+   compteurs qui filtrent : ils prennent la place de la phrase des dépôts, à
+   gauche de la bande, et le pouls des sept semaines les suit. La ligne se lit
+   donc comme celle des annonces et des emplois. */
+main .board-countline .cand-week-counts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  flex: 0 1 auto;
+  gap: 6px 10px;
+  min-width: 0;
+}
+
+main .board-countline .cand-count-fresh {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+main .board-countline .cand-week-counts .cand-fresh {
+  margin-inline-end: 0;
+  padding: 3px 10px;
+  font-size: 12px;
+}
+
+main .board-countline .cand-week-counts .week-pulse { margin-inline-start: 2px; gap: 8px; }
+main .board-countline .cand-week-counts .week-pulse-bars { height: 20px; }
+main .board-countline .cand-week-counts .week-pulse-cap { font-size: 9px; }
+
+@media (max-width: 780px) {
+  main .board-countline .arrival-brief { flex: 1 1 100%; }
+  main .board-countline .cand-week-counts { flex: 1 1 100%; }
+  .board-spread { flex: 1 1 100%; }
+  main .board-countline .dir-scope { flex: 1 1 100%; }
+}
+
+/* ============ ANNUAIRE → LE TRI ET LES COMPTEURS SUR UNE SEULE BANDE ============ */
+/* « Trier par » et la bande des trois compteurs empilaient deux cadres juste
+   au-dessus des fiches. Ils n'en font plus qu'un : le tri ouvre la bande, un
+   filet le sépare des compteurs, et la page gagne une bordure, un fond et une
+   rangée d'écart avant ses cartes. Rien n'est retiré : le tri garde ses
+   champs, les compteurs gardent leurs portes. */
+main .dir-toolbar {
+  display: grid;
+  gap: 0;
+  padding: 10px 13px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 11%, transparent);
+}
+
+main .dir-toolbar .dir-sortbar {
+  grid-template-columns: minmax(0, 210px) auto;
+  align-items: center;
+  gap: 8px 10px;
+}
+
+/* La bande de compteurs perd son propre cadre : elle devient la seconde
+   rangée de la même bande, séparée par un simple filet. */
+main .dir-toolbar .dir-countline {
+  margin: 9px 0 0;
+  padding: 9px 0 0;
+  border: 0;
+  border-top: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  border-radius: 0;
+  background: none;
+}
+
+@media (max-width: 780px) {
+  main .dir-toolbar { padding: 10px 11px; }
+  main .dir-toolbar .dir-countline { margin-top: 8px; padding-top: 8px; }
+}
+
+/* ============ ANNUAIRE → TOUS LES FICHIERS SOUS UN SEUL BOUTON ============ */
+/* Quatre boutons d'export se suivaient sur la ligne de résultats. Ils tiennent
+   maintenant derrière une seule porte, « Exporter », qui ouvre la liste des
+   fichiers au clic et la referme au clic suivant, à Échap ou dès qu'on clique
+   ailleurs. Chaque ligne garde son icône, son libellé et son retour
+   « téléchargé ». */
+.export-menu { position: relative; display: inline-flex; }
+
+.export-menu-btn { gap: 6px; }
+
+.export-menu-caret {
+  font-size: 14px !important;
+  color: var(--muted) !important;
+  transition: transform .2s ease;
+}
+
+.export-menu.is-open .export-menu-caret { transform: rotate(180deg); }
+.export-menu.is-open .export-menu-btn { border-color: var(--accent); color: var(--accent); }
+
+.export-panel {
+  position: absolute;
+  z-index: 82;
+  top: calc(100% + 8px);
+  inset-inline-end: 0;
+  display: grid;
+  gap: 2px;
+  width: max-content;
+  min-width: 228px;
+  max-width: min(300px, calc(100vw - 32px));
+  padding: 6px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--surface) 94%, var(--bg));
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  box-shadow: 0 22px 48px -20px color-mix(in srgb, #000 52%, transparent);
+}
+
+.export-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  min-width: 0;
+  padding: 9px 10px;
+  border: 0;
+  border-radius: 9px;
+  background: none;
+  color: var(--text);
+  font: inherit;
+  font-size: 12.5px;
+  text-align: start;
+  cursor: pointer;
+  transition: background .18s ease, color .18s ease;
+}
+
+.export-item i { flex: 0 0 auto; font-size: 15px; color: var(--accent); }
+.export-item span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.export-item:hover { background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--accent2); }
+.export-item:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.export-item.is-ok { color: var(--accent2); }
+.export-item.is-ok i { color: var(--accent2); }
+
+@media (max-width: 560px) {
+  .export-panel {
+    position: fixed;
+    top: auto;
+    bottom: 84px;
+    inset-inline: 12px;
+    width: auto;
+    max-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .export-menu-caret,
+  .export-item { transition: none; }
+}

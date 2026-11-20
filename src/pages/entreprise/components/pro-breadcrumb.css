@@ -1,0 +1,45 @@
+/* ============ FIL D'ARIANE D'UNE FICHE ============ */
+.pro-crumb { padding: 26px 0 0; }
+.pro-crumb-list { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px;
+  list-style: none; margin: 0; padding: 0; }
+.pro-crumb-item { display: inline-flex; align-items: center; gap: 6px; min-width: 0; max-width: 100%; }
+.pro-crumb-item + .pro-crumb-item::before { content: '›'; flex: 0 0 auto;
+  font-size: 12px; line-height: 1; color: color-mix(in srgb, var(--text) 34%, transparent); }
+[dir="rtl"] .pro-crumb-item + .pro-crumb-item::before { content: '‹'; }
+
+.pro-crumb-link { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  text-decoration: none; color: var(--muted);
+  font-family: var(--font-label); font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+  transition: color .2s ease; }
+.pro-crumb-link:hover { color: var(--accent); }
+.pro-crumb-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+/* Le dernier maillon est la page lue : on le nomme, sans en faire un lien. */
+.pro-crumb-here { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font-family: var(--font-label); font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 82%, transparent); }
+
+/* Le lien retour garde sa place juste dessous, un peu plus serré. */
+.pro-crumb + .back-link { padding-top: 8px; }
+
+/* « Voir dans le plan du site » : un renvoi discret, sous le retour, qui
+   ouvre le plan du site sur la ligne de cette fiche. */
+.pro-plan-link { display: inline-flex; align-items: center; gap: 5px; width: fit-content;
+  margin-top: 4px; text-decoration: none; color: color-mix(in srgb, var(--text) 56%, transparent);
+  font-family: var(--font-label); font-size: 9px; letter-spacing: .09em; text-transform: uppercase;
+  transition: color .2s ease; }
+.pro-plan-link i { font-size: 11px; color: var(--accent2); }
+.pro-plan-link:hover { color: var(--accent); }
+.pro-plan-link:hover i { color: var(--accent); }
+.pro-plan-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+[dir="rtl"] .pro-plan-link { letter-spacing: 0; }
+
+[dir="rtl"] .pro-crumb-link,
+[dir="rtl"] .pro-crumb-here { letter-spacing: 0; }
+
+@media (max-width: 620px) {
+  .pro-crumb { padding-top: 18px; }
+  .pro-plan-link { font-size: 8.5px; letter-spacing: .06em; }
+  .pro-crumb-link,
+  .pro-crumb-here { font-size: 9px; letter-spacing: .06em; }
+}

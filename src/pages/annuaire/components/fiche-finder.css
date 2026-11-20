@@ -1,0 +1,76 @@
+/* ============ RECHERCHE PAR NOM, AU-DESSUS DES CARTES ============ */
+.dir-find { position: relative; display: grid; gap: 8px; max-width: 640px; margin: 0 0 16px; }
+.dir-find-field { display: flex; align-items: center; gap: 8px; padding: 0 12px;
+  border-radius: 999px; background: color-mix(in srgb, var(--surface) 94%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  transition: border-color .2s ease, box-shadow .2s ease; }
+.dir-find-field:focus-within { border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 16%, transparent); }
+.dir-find-field > i { flex: 0 0 auto; font-size: 15px; color: var(--accent); }
+.dir-find-field input { flex: 1 1 auto; min-width: 0; padding: 10px 0; border: 0; background: none;
+  color: var(--text); font: inherit; font-size: 13.5px; }
+.dir-find-field input::placeholder { color: color-mix(in srgb, var(--text) 52%, transparent); }
+.dir-find-field input:focus-visible { outline: none; }
+.dir-find-field input::-webkit-search-cancel-button { display: none; }
+
+.dir-find-clear { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px; border: 0; border-radius: 999px; background: none; cursor: pointer;
+  color: var(--muted); transition: color .18s ease, background .18s ease; }
+.dir-find-clear:hover { color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, transparent); }
+.dir-find-clear:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+/* La touche « / » : un repère discret au bout du champ, cliquable comme au
+   clavier, et sa phrase d'aide sous la liste. */
+.dir-find-key { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center;
+  min-width: 20px; height: 20px; padding: 0 5px; border-radius: 6px; cursor: pointer;
+  font-family: var(--font-label); font-size: 11px; line-height: 1; letter-spacing: 0;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  background: color-mix(in srgb, var(--text) 7%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  transition: color .18s ease, border-color .18s ease, background .18s ease; }
+.dir-find-key:hover { color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.dir-find-key:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.dir-find-field:focus-within .dir-find-key { color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 44%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.dir-find-keyhint { display: inline; color: color-mix(in srgb, var(--text) 48%, transparent); }
+
+.dir-find-panel { display: grid; gap: 7px; padding: 11px 12px; border-radius: 14px;
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  box-shadow: 0 12px 26px color-mix(in srgb, var(--text) 10%, transparent); }
+.dir-find-count { display: inline-flex; align-items: center; gap: 5px; margin: 0;
+  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .07em; text-transform: uppercase;
+  color: var(--muted); }
+.dir-find-count i { font-size: 11px; color: var(--accent); }
+
+.dir-find-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.dir-find-hit { display: flex; align-items: baseline; gap: 8px; min-width: 0;
+  padding: 5px 8px; border-radius: 9px; text-decoration: none; color: var(--text);
+  transition: background .18s ease, color .18s ease; }
+.dir-find-hit:hover { background: color-mix(in srgb, var(--accent) 13%, transparent); }
+.dir-find-hit.is-active { background: color-mix(in srgb, var(--accent) 18%, transparent); }
+.dir-find-hit.is-active .dir-find-go,
+.dir-find-hit.is-active .dir-find-name { color: var(--accent); }
+.dir-find-hit:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.dir-find-name { flex: 0 1 auto; min-width: 0; font-size: 12.5px; font-weight: 600;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dir-find-meta { display: inline-flex; align-items: baseline; gap: 4px; flex: 1 1 auto; min-width: 0;
+  font-size: 10px; color: var(--muted);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dir-find-meta i { font-size: 10px; color: var(--accent2); }
+.dir-find-meta em { font-style: normal; color: color-mix(in srgb, var(--text) 30%, transparent); }
+.dir-find-go { flex: 0 0 auto; font-size: 13px; color: var(--accent); }
+.dir-find-none { display: inline-flex; align-items: center; gap: 6px; margin: 0; padding: 3px 2px;
+  font-size: 12px; color: var(--muted); }
+.dir-find-none i { font-size: 13px; color: var(--accent2); }
+.dir-find-hint { margin: 0; font-size: 10.5px; color: color-mix(in srgb, var(--text) 58%, transparent); }
+[dir="rtl"] .dir-find-count { letter-spacing: 0; }
+
+@media (max-width: 560px) {
+  .dir-find { max-width: 100%; }
+  .dir-find-hit { flex-wrap: wrap; }
+  .dir-find-meta { flex-basis: 100%; }
+}

@@ -1,0 +1,76 @@
+/* ============ DEVIS — LA DURÉE CHOISIE, SOUS LE MONTANT ============ */
+/* The four lengths of the one subscription replaced the three formulas and the
+   monthly / yearly switch. The amount panel therefore has to name the length
+   the structure picked, right under the figure it commits to, so the recap can
+   never be read as a monthly total by mistake. */
+
+.dv-total-length {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 8px;
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--accent2);
+}
+.dv-total-length i { font-size: 13px; color: inherit; }
+.dv-total-length span { font-weight: 600; }
+.dv-total-length em {
+  font-style: normal;
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  letter-spacing: .02em;
+  color: var(--muted);
+}
+/* The small word that says what the figure above it really covers: a length,
+   not a monthly total. It takes its own line, before the length's own name. */
+.dv-total-length .dv-total-length-stamp {
+  flex: 1 1 100%;
+  font-family: var(--font-label);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.dv-total-length b {
+  font-family: var(--font-heading);
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  color: var(--accent2);
+}
+
+/* The length as the request itself states it, at the very top of the form: the
+   same word, the same months, the same figure as the panel beside it — so the
+   structure reads in the request what it just composed. */
+.dv-recap {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 0;
+  padding: 8px 10px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--accent) 38%, transparent);
+}
+.dv-recap i { flex: 0 0 auto; margin-top: 1px; font-size: 13px; color: var(--accent); }
+.dv-recap span { min-width: 0; }
+.dv-recap b { font-weight: 600; color: var(--accent2); }
+
+/* On a phone the length wraps under the figure instead of squeezing beside it:
+   the name of a length and its month count are never cut. */
+@media (max-width: 420px) {
+  .dv-total-length { gap: 3px 6px; font-size: 12px; }
+  .dv-total-length em { flex: 1 1 100%; }
+  .dv-recap { font-size: 11px; padding: 7px 9px; }
+}
+
+[dir="rtl"] .dv-total-length em,
+[dir="rtl"] .dv-total-length-stamp { letter-spacing: 0; text-transform: none; }
+[dir="rtl"] .dv-recap { text-align: start; }

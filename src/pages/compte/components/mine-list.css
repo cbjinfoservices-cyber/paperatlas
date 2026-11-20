@@ -1,0 +1,2698 @@
+/* ============ KEYBOARD GESTURE ON THE DEPOSIT LIST ============ */
+/* La liste des dépôts prend le focus, le dépôt mis en avant prend le liseré
+   d'accent, et la phrase sous la liste rappelle le geste — comme les autres
+   listes du site. */
+.mine-list:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 16px; }
+.mine-row.is-keyed { border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent); }
+.mine-row.is-keyed:hover { border-color: var(--accent); }
+.mine-keyhint { margin-top: 10px; }
+
+/* ============ RUBRIQUE HORS TYPE ============ */
+/* Un dépôt dont la rubrique appartient à l'autre famille porte son repère dans
+   la ligne, et le formulaire de correction dit pourquoi la liste ne la propose
+   plus : la pastille se lit en ton d'alerte, jamais en ton de réussite. */
+.mine-flag-rubrique { color: var(--accent2);
+  border: 1px solid color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.mine-flag-rubrique i { font-size: 11px; color: var(--accent); }
+/* Le repère est aussi une porte : il ouvre la modification du dépôt, le
+   curseur déjà posé dans le champ de la rubrique — la série se corrige
+d'une ligne à l'autre sans repasser par le tableau. */
+.mine-flag-rubrique-door {
+  cursor: pointer;
+  text-align: start;
+  font-family: var(--font-label);
+  font-size: 9px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+.mine-flag-rubrique-door:hover {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 68%, transparent);
+}
+.mine-flag-rubrique-door:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.mine-flag-rubrique-door .mine-flag-door { font-size: 12px; color: var(--accent); }
+[dir="rtl"] .mine-flag-rubrique-door { letter-spacing: 0; }
+[dir="rtl"] .mine-flag-rubrique-door .mine-flag-door { transform: scaleX(-1); }
+.mine-alert-rubrique { border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent); }
+.mine-rubrique-hint { display: block; margin-top: 6px; line-height: 1.5;
+  font-size: 11.5px; color: var(--accent2); }
+[dir="rtl"] .mine-flag-rubrique { letter-spacing: 0; }
+
+/* La liste des rubriques de la bonne famille, dépliée sous la ligne : le
+   repère devient un choix direct, sans ouvrir le formulaire entier. */
+.mine-rubrique-pick {
+  box-sizing: border-box;
+  display: grid;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid color-mix(in srgb, var(--accent) 38%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+}
+.mine-rubrique-pick-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 0;
+  min-width: 0;
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: var(--accent2);
+}
+.mine-rubrique-pick-head > i { flex: 0 0 auto; font-size: 13px; margin-top: 1px; color: var(--accent); }
+.mine-rubrique-pick-head > span { flex: 1 1 auto; min-width: 0; overflow-wrap: break-word; }
+.mine-rubrique-pick-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color .18s ease, background .18s ease;
+}
+.mine-rubrique-pick-close i { font-size: 14px; }
+.mine-rubrique-pick-close:hover { color: var(--text); background: color-mix(in srgb, var(--text) 10%, transparent); }
+.mine-rubrique-pick-close:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.mine-rubrique-pick-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-width: 0;
+}
+.mine-rubrique-opt {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 11px;
+  border: 1px solid color-mix(in srgb, var(--text) 20%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 80%, transparent);
+  color: var(--text);
+  font: inherit;
+  font-family: var(--font-label);
+  font-size: 11px;
+  line-height: 1.35;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+.mine-rubrique-opt:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--accent) 56%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent2);
+}
+.mine-rubrique-opt:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.mine-rubrique-opt[disabled] { opacity: .55; cursor: wait; }
+.mine-rubrique-pick-note {
+  margin: 0;
+  min-width: 0;
+  font-size: 11px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  overflow-wrap: break-word;
+}
+/* Le compte des dépôts déjà rangés dans chaque rubrique : le chiffre suit le
+   nom dans la pastille, en chiffres tabulaires, pour choisir la plus juste. */
+.mine-rubrique-opt-n {
+  flex: 0 0 auto;
+  min-width: 15px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  font-size: 9px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .02em;
+  line-height: 1.7;
+  text-align: center;
+  color: var(--accent2);
+}
+.mine-rubrique-opt-n.is-zero {
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+/* La rubrique la plus habitée : son jeton se distingue, sans écraser les autres. */
+.mine-rubrique-opt.is-most {
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  color: var(--accent2);
+}
+/* La note sous la liste : le choix le plus fourni, nommé avec son compte. */
+.mine-rubrique-pick-tally {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 0;
+  min-width: 0;
+  font-size: 11px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 70%, transparent);
+  overflow-wrap: break-word;
+}
+.mine-rubrique-pick-tally i {
+  flex: 0 0 auto;
+  margin-top: 1px;
+  font-size: 12px;
+  color: var(--accent);
+}
+/* Ce que la correction retire de la série hors type : un compte calme, sous
+   la liste des rubriques, pour mesurer le geste avant de le faire. */
+.mine-rubrique-pick-series {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 0;
+  min-width: 0;
+  font-size: 11px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+  overflow-wrap: break-word;
+}
+.mine-rubrique-pick-series i {
+  flex: 0 0 auto;
+  margin-top: 1px;
+  font-size: 12px;
+  color: var(--accent2);
+}
+.mine-rubrique-pick-series b { color: var(--text); }
+.mine-rubrique-pick-series.is-end {
+  color: var(--accent);
+}
+.mine-rubrique-pick-series.is-end i { color: var(--accent); }
+/* Le jeton de la rubrique filtrée, au-dessus de la liste. */
+.mine-rub-filter {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 6px 10px;
+  border: 1px solid color-mix(in srgb, var(--accent) 32%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  font-family: var(--font-label);
+  font-size: 11px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 80%, transparent);
+}
+.mine-rub-filter > i {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: var(--accent);
+}
+.mine-rub-filter > span { flex: 1 1 auto; min-width: 0; overflow-wrap: break-word; }
+/* Ce que le jeton montre vraiment, à côté du total de l'onglet : le chiffre se
+   lit sans compter les lignes une à une. */
+.mine-rub-filter > .mine-rub-filter-n {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 8px;
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 72%, transparent);
+}
+.mine-rub-filter-n b { color: var(--accent2); }
+.mine-rub-filter-cross {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  margin-inline-start: auto;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 80%, transparent);
+  color: var(--accent2);
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease;
+}
+.mine-rub-filter-cross i { font-size: 13px; }
+.mine-rub-filter-cross:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+}
+.mine-rub-filter-cross:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* La porte posée sous le jeton : quand le resserrement vient d'une rubrique
+   d'origine, un clic ouvre le premier dépôt de cette rubrique pour la
+   correction, sans repasser par le tableau. */
+.mine-rub-filter-fix {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  justify-self: start;
+  max-width: 100%;
+  margin: 2px 0 0;
+  padding: 4px 6px 4px 11px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 46%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 80%, transparent);
+  color: var(--accent2);
+  font-family: var(--font-label);
+  font-size: 11px;
+  line-height: 1.4;
+  text-align: start;
+  white-space: normal;
+  transition: background .18s ease, border-color .18s ease;
+}
+/* Le corps de la porte : tout le libellé, cliquable comme avant. */
+.mine-rub-filter-fix-main {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  max-width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+.mine-rub-filter-fix-main > i:first-child { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
+/* La croix de la porte : elle saute au dernier dépôt de la série, pour la
+   corriger en commençant par la fin. Un geste à part, jamais dans le corps. */
+.mine-rub-filter-fix-last {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  flex: 0 0 auto;
+  width: auto;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  font-variant-numeric: tabular-nums;
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 78%, transparent);
+  color: var(--accent2);
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+.mine-rub-filter-fix-last i { font-size: 12px; }
+/* Ce que la croix aura remonté une fois la série terminée : un petit compte
+   dans la porte, lisible avant le geste. */
+.mine-rub-filter-fix-last b { font-size: 9.5px; font-weight: 600; line-height: 1; }
+.mine-rub-filter-fix-last:hover {
+  border-color: color-mix(in srgb, var(--accent) 70%, transparent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--accent);
+}
+.mine-rub-filter-fix-last:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* Ce qui reste dans cette seule rubrique après le dépôt ouvert : un compte
+   calme, dans la porte, pour mesurer le chemin avant de le prendre. */
+.mine-rub-filter-fix-rest {
+  flex: 0 0 auto;
+  padding: 0 7px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--text) 76%, transparent);
+  white-space: nowrap;
+}
+.mine-rub-filter-fix-main span { min-width: 0; overflow-wrap: break-word; }
+/* Le nom du dépôt que la porte ouvrira, juste après le compte restant : une
+   seule ligne, coupée d'un point de suspension si le titre est long. */
+.mine-rub-filter-fix-main > .mine-rub-filter-fix-name {
+  flex: 1 1 auto;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 10.5px;
+  color: color-mix(in srgb, var(--text) 64%, transparent);
+}
+.mine-rub-filter-fix-main:hover > .mine-rub-filter-fix-name {
+  color: color-mix(in srgb, var(--text) 82%, transparent);
+}
+/* Ce que la porte de la fin annonce sous elle : le nom du dépôt qu'elle
+   ouvrira, puis les rubriques d'origine que la série laissera intactes,
+   famille par famille. */
+.mine-rub-filter-end {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 3px 10px;
+  margin: 4px 0 0;
+  padding: 0 0 0 12px;
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+.mine-rub-filter-end-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition: color .18s ease;
+}
+.mine-rub-filter-end-name > i { flex: 0 0 auto; font-size: 11px; color: var(--accent); }
+.mine-rub-filter-end-name > span { flex: 0 0 auto; }
+.mine-rub-filter-end-name > b {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--text) 80%, transparent);
+}
+.mine-rub-filter-end-name:hover > b { color: var(--accent2); }
+.mine-rub-filter-end-name:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.mine-rub-filter-end-intact {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  margin: 0;
+}
+.mine-rub-filter-end-intact > i { flex: 0 0 auto; font-size: 11px; color: color-mix(in srgb, var(--text) 44%, transparent); }
+.mine-rub-filter-end-intact > span { min-width: 0; overflow-wrap: break-word; }
+.mine-rub-filter-end-intact.is-end { color: color-mix(in srgb, var(--accent2) 82%, transparent); }
+.mine-rub-filter-end-family {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 0 7px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  font-size: 9.5px;
+  line-height: 1.7;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+}
+.mine-rub-filter-end-family i { flex: 0 0 auto; font-size: 10px; color: var(--accent); }
+.mine-rub-filter-end-family b {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--accent2);
+}
+/* Le repère de la ligne « après la série » : le resserrement vient d'une
+   porte de famille du rappel, et non de la fin de la série. */
+.mine-rub-filter-end-from {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 3px 5px;
+  min-width: 0;
+  margin: 0;
+  padding: 0 7px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 40%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  line-height: 1.7;
+  text-align: start;
+  color: color-mix(in srgb, var(--text) 70%, transparent);
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+/* Le repère est devenu une porte : il rouvre la porte de famille qui a posé
+   le resserrement, sans remonter le tableau pour la retrouver. */
+.mine-rub-filter-end-from:hover {
+  border-style: solid;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: var(--accent2);
+}
+.mine-rub-filter-end-from:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.mine-rub-filter-end-from-door {
+  flex: 0 0 auto;
+  font-size: 9px;
+  color: var(--accent);
+  opacity: .55;
+  transition: opacity .18s ease, transform .18s ease;
+}
+.mine-rub-filter-end-from:hover .mine-rub-filter-end-from-door { opacity: 1; transform: translateX(1px); }
+.mine-rub-filter-end-from i { flex: 0 0 auto; font-size: 10px; color: var(--accent); }
+.mine-rub-filter-end-from span { min-width: 0; overflow-wrap: break-word; }
+.mine-rub-filter-end-from b {
+  flex: 0 0 auto;
+  font-size: 9.5px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--accent2);
+}
+/* La valeur que la porte de famille écarte, nommée dans le repère : séparée
+   d'un filet pointillé, elle reste plus discrète que la phrase. */
+.mine-rub-filter-end-from-aside {
+  flex: 0 0 auto;
+  padding-inline-start: 6px;
+  border-inline-start: 1px dotted color-mix(in srgb, var(--accent) 42%, transparent);
+  font-size: 9.5px;
+  line-height: 1.5;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+/* Ce que la porte de famille laisse hors de l'écran : les dépôts de la valeur
+   écartée, comptés à côté du nom de cette valeur. */
+.mine-rub-filter-end-from-left {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  padding-inline-start: 6px;
+  border-inline-start: 1px dotted color-mix(in srgb, var(--accent) 30%, transparent);
+  font-size: 9.5px;
+  line-height: 1.5;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 46%, transparent);
+}
+.mine-rub-filter-end-from-left i { font-size: 9px; color: color-mix(in srgb, var(--accent) 62%, transparent); }
+.mine-rub-filter-end-from-left b { font-weight: 600; color: color-mix(in srgb, var(--text) 62%, transparent); }
+/* Les valeurs d'origine que le nouveau resserrement laisse encore hors de
+   l'écran : un compte de rubriques, distinct des dépôts écartés à côté. */
+.mine-rub-filter-end-from-still {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  padding-inline-start: 6px;
+  border-inline-start: 1px dotted color-mix(in srgb, var(--accent) 30%, transparent);
+  font-size: 9.5px;
+  line-height: 1.5;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+}
+.mine-rub-filter-end-from-still i { font-size: 9px; color: color-mix(in srgb, var(--accent) 66%, transparent); }
+/* La valeur d'origine restée hors écran la plus lourde : son nom et son
+   compte, à côté du nombre de valeurs écartées. */
+.mine-rub-filter-end-from-heavy {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  padding-inline-start: 6px;
+  border-inline-start: 1px dotted color-mix(in srgb, var(--accent) 30%, transparent);
+  font-size: 9.5px;
+  line-height: 1.5;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+.mine-rub-filter-end-from-heavy i { font-size: 9px; color: color-mix(in srgb, var(--accent) 80%, transparent); }
+/* La même valeur, devenue porte : un clic ramène ses dépôts à l'écran, la
+   liste resserrée sur elle seule. */
+.mine-rub-filter-end-from-heavy-door {
+  margin: 0;
+  border: 0;
+  border-inline-start: 1px dotted color-mix(in srgb, var(--accent) 34%, transparent);
+  background: none;
+  cursor: pointer;
+  transition: color .18s ease, border-color .18s ease;
+}
+.mine-rub-filter-end-from-heavy-door:hover {
+  border-inline-start-color: var(--accent);
+  color: var(--accent2);
+}
+.mine-rub-filter-end-from-heavy-door:hover .mine-rub-filter-end-from-heavy-door-i {
+  color: var(--accent);
+  transform: translateX(1px);
+}
+.mine-rub-filter-end-from-heavy-door.is-on {
+  border-inline-start-style: solid;
+  border-inline-start-color: var(--accent);
+  color: var(--accent2);
+}
+.mine-rub-filter-end-from-heavy-door-i {
+  font-size: 9px;
+  color: color-mix(in srgb, var(--accent) 54%, transparent);
+  transition: color .18s ease, transform .18s ease;
+}
+.mine-rub-filter-end-from-heavy-door:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* Le repère et la porte de la valeur écartée se tiennent côte à côte. */
+.mine-rub-filter-end-from-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+}
+/* La porte de la valeur écartée : elle ramène à l'écran les dépôts que le
+   resserrement laissait hors du cadre. */
+.mine-rub-filter-end-from-aside-door {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 100%;
+  margin: 0;
+  padding: 0 7px;
+  border: 1px dotted color-mix(in srgb, var(--accent) 34%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 86%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  line-height: 1.7;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.mine-rub-filter-end-from-aside-door:hover {
+  border-style: solid;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent2);
+}
+.mine-rub-filter-end-from-aside-door.is-on {
+  border-style: solid;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--accent2);
+}
+.mine-rub-filter-end-from-aside-door:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.mine-rub-filter-end-from-aside-door i { flex: 0 0 auto; font-size: 9px; color: var(--accent); }
+.mine-rub-filter-end-from-aside-door span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mine-rub-filter-end-from-aside-door b {
+  flex: 0 0 auto;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent2);
+}
+/* Le délai écoulé depuis le dernier effacement, à côté de sa date : discret,
+   dans la même ligne que le rappel. */
+.mine-rubrique-restore-ago {
+  flex: 0 0 auto;
+  padding-inline-start: 6px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  font-size: 9.5px;
+  line-height: 1.5;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 54%, transparent);
+}
+.mine-rub-filter-fix:hover {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 66%, transparent);
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+}
+.mine-rub-filter-fix:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.mine-rub-filter-fix .mine-rub-filter-fix-door { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
+[dir="rtl"] .mine-rub-filter-fix .mine-rub-filter-fix-door { transform: scaleX(-1); }
+/* La petite gomme du rappel : elle efface la rubrique d'origine retenue sur
+   les deux familles d'un clic. Un geste discret, jamais une alerte. */
+.mine-rubrique-eraser {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex: 0 0 auto;
+  padding: 4px 10px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 44%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 78%, transparent);
+  color: var(--accent2);
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  line-height: 1.4;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease;
+}
+.mine-rubrique-eraser i { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
+.mine-rubrique-eraser:hover {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 66%, transparent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+.mine-rubrique-eraser:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* Les deux gestes de la gomme se lisent côte à côte : effacer, ou effacer et
+   rouvrir la liste là où le travail attend. */
+.mine-rubrique-eraser-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  min-width: 0;
+}
+.mine-rubrique-eraser-go { border-style: solid; }
+.mine-rubrique-eraser-go b {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--accent2);
+}
+.mine-rubrique-eraser-go:hover b { color: var(--accent); }
+[dir="rtl"] .mine-rubrique-eraser-go i:first-child { transform: scaleX(-1); }
+[dir="rtl"] .mine-rubrique-eraser { letter-spacing: 0; }
+/* Le rappel du dernier effacement : ce que la gomme a retiré, nommé famille
+   par famille, et la porte qui le remet en place. Discret — une trace, pas
+   une alerte. */
+.mine-rubrique-restore {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px 8px;
+  flex: 0 0 auto;
+  min-width: 0;
+  padding: 3px 10px;
+  border: 1px dashed color-mix(in srgb, var(--text) 24%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 74%, transparent);
+  font-family: var(--font-label);
+  font-size: 10px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+}
+.mine-rubrique-restore > i { flex: 0 0 auto; font-size: 11px; color: color-mix(in srgb, var(--text) 46%, transparent); }
+.mine-rubrique-restore-txt { min-width: 0; overflow-wrap: break-word; }
+/* Ce que la porte du rappel rendra à l'écran, famille par famille : deux
+   petits comptes, l'un après l'autre, avant le geste. */
+.mine-rubrique-restore-back {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 6px;
+  flex: 0 0 auto;
+  min-width: 0;
+}
+.mine-rubrique-restore-family {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 0 7px;
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  font-size: 9.5px;
+  line-height: 1.7;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 68%, transparent);
+}
+.mine-rubrique-restore-family i { flex: 0 0 auto; font-size: 10px; color: var(--accent); }
+.mine-rubrique-restore-family b {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--accent2);
+}
+.mine-rubrique-restore-door {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: 0 0 auto;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--accent2);
+  font: inherit;
+  font-size: 10px;
+  white-space: nowrap;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color .18s ease;
+}
+.mine-rubrique-restore-door i { font-size: 11px; }
+.mine-rubrique-restore-door:hover { color: var(--accent); }
+.mine-rubrique-restore-door:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* La croix du rappel : elle oublie le dernier effacement et retire sa porte,
+   sans rien remettre en place — les rubriques restent effacées. */
+.mine-rubrique-restore-forget {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--text) 22%, transparent);
+  border-radius: 999px;
+  background: none;
+  color: color-mix(in srgb, var(--text) 54%, transparent);
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.mine-rubrique-restore-forget i { font-size: 10px; }
+.mine-rubrique-restore-forget:hover {
+  border-color: color-mix(in srgb, var(--text) 40%, transparent);
+  background: color-mix(in srgb, var(--text) 10%, transparent);
+  color: var(--text);
+}
+.mine-rubrique-restore-forget:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* Le rappel rétabli après un oubli : la même ligne calme, posée sous le
+   tableau des rubriques, avec sa porte à côté. */
+.mine-rubrique-restore-undo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 6px 0 0;
+}
+.mine-rubrique-restore-undo .mine-rubrique-restore-txt { flex: 1 1 auto; }
+/* Le jeton de famille de la ligne « après la série » devient une porte : un
+   clic resserre la liste sur les autres rubriques d'origine, un second la
+   rend entière. */
+.mine-rub-filter-end-family-door {
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  font: inherit;
+  font-size: 9.5px;
+  line-height: 1.7;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.mine-rub-filter-end-family-door:hover,
+.mine-rub-filter-end-family-door.is-on {
+  border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: var(--accent2);
+}
+.mine-rub-filter-end-family-door:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+/* Ce que la porte de l'oubli remettra sous la main, famille par famille :
+   une ligne calme sous le rappel, avant le geste. */
+.mine-rubrique-restore-undoback {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 6px;
+  flex: 1 1 100%;
+  min-width: 0;
+  margin: 2px 0 0;
+  padding: 0 2px;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+.mine-rubrique-restore-undoback > i {
+  flex: 0 0 auto;
+  font-size: 10px;
+  color: var(--accent);
+}
+.mine-rubrique-restore-undoback > span { min-width: 0; overflow-wrap: break-word; }
+/* Le petit compte de l'oubli défait, avec le jour du dernier geste : discret,
+   comme les autres compteurs de la page. */
+.mine-rubrique-undo-count {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 6px;
+  margin: 4px 0 0;
+  padding: 0 2px;
+  font-family: var(--font-label);
+  font-size: 10px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+.mine-rubrique-undo-count i { flex: 0 0 auto; font-size: 11px; color: var(--accent); }
+.mine-rubrique-undo-count span { min-width: 0; overflow-wrap: break-word; }
+/* Combien de temps l'effacement est resté oublié avant d'être défait : posé
+   à côté du jour du geste, derrière un filet discret. */
+.mine-rubrique-undo-forgot {
+  flex: 0 0 auto;
+  padding-inline-start: 6px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  font-size: 9.5px;
+  line-height: 1.5;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+/* La moyenne du temps oublié sur les derniers gestes : elle dit si
+   l'annulation traîne, oubli après oubli. */
+.mine-rubrique-undo-avg {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  padding-inline-start: 6px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  font-size: 9.5px;
+  line-height: 1.5;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent2) 72%, transparent);
+}
+.mine-rubrique-undo-avg i { font-size: 9px; color: var(--accent); }
+/* Le geste resté le plus longtemps oublié, à côté de la moyenne : le pire
+   écart se lit sans quitter le compte. */
+.mine-rubrique-undo-max {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  padding-inline-start: 6px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  font-size: 9.5px;
+  line-height: 1.5;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent2) 58%, transparent);
+}
+.mine-rubrique-undo-max i { font-size: 9px; color: color-mix(in srgb, var(--accent) 72%, transparent); }
+/* La valeur médiane du temps oublié : entre la moyenne et le pire geste,
+   elle se lit dans la même écriture que les deux autres. */
+.mine-rubrique-undo-med {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  padding-inline-start: 6px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  font-size: 9.5px;
+  line-height: 1.5;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent2) 64%, transparent);
+}
+.mine-rubrique-undo-med i { font-size: 9px; color: color-mix(in srgb, var(--accent) 84%, transparent); }
+/* L'écart entre la médiane et la moyenne : le signe dit de quel côté la
+   série penche, le chiffre dit de combien. */
+.mine-rubrique-undo-gap {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  padding-inline-start: 6px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  font-size: 9.5px;
+  line-height: 1.5;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent2) 66%, transparent);
+}
+.mine-rubrique-undo-gap i { font-size: 9px; color: var(--accent); }
+.mine-rubrique-undo-gap.is-down { color: color-mix(in srgb, var(--text) 48%, transparent); }
+.mine-rubrique-undo-gap.is-down i { color: color-mix(in srgb, var(--accent) 58%, transparent); }
+/* Le geste qui tire la série : nommé avec sa durée dès que l'écart dépasse
+   un jour, et le côté vers lequel il tire. */
+.mine-rubrique-undo-pull {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  padding-inline-start: 6px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+  font-size: 9.5px;
+  line-height: 1.5;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent2) 78%, transparent);
+}
+.mine-rubrique-undo-pull i { font-size: 9px; color: var(--accent); }
+.mine-rubrique-undo-pull-dir {
+  font-size: 9px;
+  letter-spacing: .02em;
+  color: color-mix(in srgb, var(--text) 46%, transparent);
+}
+.mine-rubrique-undo-pull.is-down {
+  border-inline-start-color: color-mix(in srgb, var(--text) 20%, transparent);
+  color: color-mix(in srgb, var(--text) 56%, transparent);
+}
+.mine-rubrique-undo-pull.is-down i { color: color-mix(in srgb, var(--accent) 56%, transparent); }
+/* La porte posée dans le geste qui tire la série : elle ouvre la valeur que
+   ce geste retirait, prête à être corrigée d'un clic. */
+.mine-rubrique-undo-pull-door {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  flex: 0 1 auto;
+  min-width: 0;
+  margin-inline-start: 3px;
+  padding: 0 5px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 42%, transparent);
+  border-radius: 999px;
+  background: transparent;
+  font: inherit;
+  font-size: 9.5px;
+  line-height: 1.6;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent) 88%, transparent);
+  cursor: pointer;
+}
+.mine-rubrique-undo-pull-door i { flex: 0 0 auto; font-size: 9px; }
+.mine-rubrique-undo-pull-door:hover {
+  border-style: solid;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent2);
+}
+.mine-rubrique-undo-pull-door:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* Ce que la porte ramènera à l'écran : les dépôts de cette valeur restés
+   hors de la liste, comptés avant le clic. */
+.mine-rubrique-undo-pull-door-n {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  flex: 0 0 auto;
+  padding: 0 3px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  font-variant-numeric: tabular-nums;
+  font-size: 9px;
+  color: var(--accent2);
+}
+.mine-rubrique-undo-pull-door-n i { font-size: 8px; }
+[dir="rtl"] .mine-rubrique-undo-pull-door i:last-child { transform: scaleX(-1); }
+/* La petite gomme du compte : elle le remet à zéro et efface le jour du
+   dernier geste, sans toucher au rappel du dernier effacement. */
+.mine-rubrique-undo-reset {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--text) 22%, transparent);
+  border-radius: 999px;
+  background: none;
+  color: color-mix(in srgb, var(--text) 54%, transparent);
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.mine-rubrique-undo-reset i { font-size: 10px; }
+.mine-rubrique-undo-reset:hover {
+  border-color: color-mix(in srgb, var(--text) 40%, transparent);
+  background: color-mix(in srgb, var(--text) 10%, transparent);
+  color: var(--text);
+}
+.mine-rubrique-undo-reset:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+[dir="rtl"] .mine-rubrique-restore { letter-spacing: 0; }
+[dir="rtl"] .mine-rubrique-restore-door i { transform: scaleX(-1); }
+.mine-rub-filter-clear {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: 0 0 auto;
+  margin-inline-start: auto;
+  padding: 2px 9px;
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 80%, transparent);
+  font: inherit;
+  font-size: 10px;
+  white-space: nowrap;
+  color: var(--accent2);
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease;
+}
+.mine-rub-filter-clear:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+.mine-rub-filter-clear:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* Ce que la rubrique retenue laisse hors de la liste : les dépôts hors type,
+   dont la rubrique vient de l'autre famille. Un jeton discret, à côté du
+   total montré, pour que la liste courte dise aussi son manque. */
+.mine-rub-filter > .mine-rub-filter-hors {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 8px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 46%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--accent2);
+}
+.mine-rub-filter-hors i { flex: 0 0 auto; font-size: 11px; color: var(--accent); }
+[dir="rtl"] .mine-rub-filter { letter-spacing: 0; }
+[dir="rtl"] .mine-rubrique-pick-head { letter-spacing: 0; text-transform: none; }
+[dir="rtl"] .mine-rubrique-opt { letter-spacing: 0; }
+
+/* ============ RAPPEL HORS TYPE, DEUX FAMILLES CÔTE À CÔTE ============ */
+/* Le rappel dit le total, puis chaque famille avec son propre compte : les
+   annonces et les offres se lisent sur la même ligne, et chaque porte ouvre
+   la série de sa famille, pas seulement celle de l'onglet ouvert. */
+.mine-rubrique-alert {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  width: 100%;
+  min-width: 0;
+  margin: 8px 0 0;
+  padding: 8px 12px;
+  border: 1px solid color-mix(in srgb, var(--accent) 38%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+}
+.mine-rubrique-alert-txt {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  flex: 1 1 260px;
+  min-width: 0;
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 84%, transparent);
+  overflow-wrap: break-word;
+}
+.mine-rubrique-alert-txt > i {
+  flex: 0 0 auto;
+  font-size: 14px;
+  margin-top: 1px;
+  color: var(--accent);
+}
+.mine-rubrique-alert-txt > span { min-width: 0; }
+.mine-rubrique-alert-txt b { color: var(--text); }
+.mine-rubrique-alert-doors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  flex: 0 0 auto;
+  margin-inline-start: auto;
+  min-width: 0;
+}
+.mine-rubrique-family-door {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 80%, transparent);
+  color: var(--accent2);
+  font-family: var(--font-label);
+  font-size: 11px;
+  line-height: 1.4;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease;
+}
+.mine-rubrique-family-door i { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
+.mine-rubrique-family-door b { font-variant-numeric: tabular-nums; color: var(--text); }
+.mine-rubrique-family-door:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--accent) 66%, transparent);
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+}
+.mine-rubrique-family-door:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.mine-rubrique-family-door[disabled] { opacity: .5; cursor: default; }
+.mine-rubrique-family-door.is-on {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+}
+[dir="rtl"] .mine-rubrique-family-door { letter-spacing: 0; }
+/* La rubrique d'origine, juste à côté de chaque porte de famille : une annonce
+   rangée en contrat, ou l'inverse — le décalage se nomme avant d'ouvrir la
+   série, avec le compte de chaque valeur. */
+.mine-rubrique-alert-doors { align-items: flex-start; }
+.mine-rubrique-family { display: grid; gap: 2px; min-width: 0; }
+/* Le compte des rubriques d'origine qui restent dans la famille : une ligne
+   basse, sous la porte, pour mesurer le décalage avant d'ouvrir la série. */
+.mine-rubrique-orig-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding-inline-start: 10px;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  line-height: 1.5;
+  letter-spacing: .04em;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+.mine-rubrique-orig-count i { flex: 0 0 auto; font-size: 10px; color: var(--accent); }
+/* Les valeurs d'origine qui reviennent dans les deux familles : une ligne à
+   part, sous les portes de famille, chacune avec ses deux comptes. */
+.mine-rubrique-shared {
+  flex: 1 1 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 6px;
+  min-width: 0;
+  margin: 4px 0 0;
+  padding: 4px 8px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 34%, transparent);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+.mine-rubrique-shared > i { flex: 0 0 auto; font-size: 10px; color: var(--accent); }
+.mine-rubrique-shared > span { min-width: 0; overflow-wrap: break-word; }
+.mine-rubrique-shared-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-width: 0;
+}
+.mine-rubrique-shared-value {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 100%;
+  padding: 0 7px;
+  border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 84%, transparent);
+  font-family: inherit;
+  font-size: 9.5px;
+  line-height: 1.7;
+  color: inherit;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.mine-rubrique-shared-value:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent2);
+}
+.mine-rubrique-shared-value.is-on {
+  border-style: solid;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--accent2);
+}
+.mine-rubrique-shared-value:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.mine-rubrique-shared-door {
+  flex: 0 0 auto;
+  font-size: 9px;
+  color: var(--accent);
+  opacity: .5;
+  transition: opacity .18s ease, transform .18s ease;
+}
+.mine-rubrique-shared-value:hover .mine-rubrique-shared-door { opacity: 1; transform: translateX(1px); }
+.mine-rubrique-shared-value b { font-weight: 600; color: var(--accent2); }
+.mine-rubrique-shared-side {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+.mine-rubrique-shared-side i { flex: 0 0 auto; font-size: 9px; color: var(--accent); }
+/* Le total des deux familles réunies, posé après les deux comptes. */
+.mine-rubrique-shared-total {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  flex: 0 0 auto;
+  padding-inline-start: 5px;
+  border-inline-start: 1px dotted color-mix(in srgb, var(--accent) 40%, transparent);
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 48%, transparent);
+}
+.mine-rubrique-shared-total i { flex: 0 0 auto; font-size: 8px; color: color-mix(in srgb, var(--accent) 60%, transparent); }
+.mine-rubrique-shared-total b { font-weight: 600; color: var(--accent2); }
+/* Le jeton de la valeur et le bouton qui copie son total se tiennent
+   ensemble, sans que le second entre dans la porte du premier. */
+.mine-rubrique-shared-pair {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+}
+.mine-rubrique-shared-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0 5px;
+  border: 1px dotted color-mix(in srgb, var(--accent) 30%, transparent);
+  border-radius: 999px;
+  background: none;
+  font-family: var(--font-label);
+  font-size: 9px;
+  line-height: 1.7;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.mine-rubrique-shared-copy i { flex: 0 0 auto; font-size: 9px; color: color-mix(in srgb, var(--accent) 66%, transparent); }
+.mine-rubrique-shared-copy:hover {
+  border-style: solid;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent2);
+}
+.mine-rubrique-shared-copy.is-ok {
+  border-style: solid;
+  border-color: var(--accent);
+  color: var(--accent2);
+}
+.mine-rubrique-shared-copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* La copie groupée : elle ferme la ligne des valeurs partagées et emporte
+   toutes les valeurs d'un coup, une ligne chacune. */
+.mine-rubrique-shared-copyall {
+  margin-inline-start: 0;
+  border-style: dashed;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+/* La copie d'une seule famille : elle ferme la ligne avant la copie groupée
+   et n'emporte que le compte de l'onglet ouvert. */
+.mine-rubrique-shared-copyfam {
+  margin-inline-start: auto;
+  border-style: dotted;
+}
+.mine-rubrique-shared-copyfam b {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+.mine-rubrique-shared-copyall b {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent2);
+}
+/* Le relevé dans l'autre langue : même ligne, autre langue, les noms de
+   rubriques restant tels qu'ils s'affichent ici. */
+.mine-rubrique-shared-copyother {
+  margin-inline-start: 0;
+  border-style: dotted;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+.mine-rubrique-shared-copyother b {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+/* Ce que la pastille a déjà emporté dans cette langue : le compte se garde
+   sur l'appareil et se lit à côté du nombre prêt à partir. */
+.mine-rubrique-shared-copy-taken {
+  flex: 0 0 auto;
+  margin-inline-start: 2px;
+  padding-inline-start: 3px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  font-size: 8.5px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 46%, transparent);
+}
+/* La copie compacte : toutes les valeurs sur une seule ligne, séparées par
+   des virgules. */
+.mine-rubrique-shared-copycompact {
+  margin-inline-start: 0;
+  border-style: dotted;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+.mine-rubrique-shared-copycompact b {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+/* Le choix du séparateur du relevé compact : trois signes côte à côte, un
+   seul retenu — la ligne part ensuite avec celui-là. */
+.mine-rubrique-shared-sep {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  flex: 0 0 auto;
+  padding: 0 4px;
+  border: 1px dotted color-mix(in srgb, var(--text) 20%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+}
+.mine-rubrique-shared-sep i {
+  flex: 0 0 auto;
+  font-size: 10px;
+  color: color-mix(in srgb, var(--text) 42%, transparent);
+}
+.mine-rubrique-shared-sep-opt {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  height: 15px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: none;
+  font-family: var(--font-label);
+  font-size: 10px;
+  line-height: 1;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.mine-rubrique-shared-sep-opt:hover {
+  border-color: color-mix(in srgb, var(--accent) 48%, transparent);
+  color: var(--accent2);
+}
+.mine-rubrique-shared-sep-opt.is-on {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--accent2);
+  font-weight: 600;
+}
+.mine-rubrique-shared-sep-opt:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* Le choix de la langue visée par la pastille « Copier en … » : trois
+   langues côte à côte, une seule retenue — sans choix, la pastille suit le
+   sélecteur de la page. */
+.mine-rubrique-shared-langs {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  flex: 0 0 auto;
+  padding: 0 4px;
+  border: 1px dotted color-mix(in srgb, var(--accent) 26%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+}
+.mine-rubrique-shared-langs > i {
+  flex: 0 0 auto;
+  font-size: 10px;
+  color: color-mix(in srgb, var(--accent) 64%, transparent);
+}
+.mine-rubrique-shared-langs-opt {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 15px;
+  padding: 0 3px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: none;
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  letter-spacing: .04em;
+  line-height: 1;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.mine-rubrique-shared-langs-opt:hover {
+  border-color: color-mix(in srgb, var(--accent) 48%, transparent);
+  color: var(--accent2);
+}
+.mine-rubrique-shared-langs-opt.is-on {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--accent2);
+  font-weight: 600;
+}
+/* La langue suivie, et non choisie : son jeton reste pointillé, comme le
+   sélecteur qui la décide. */
+.mine-rubrique-shared-langs-opt.is-on.is-auto {
+  border-style: dashed;
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+}
+.mine-rubrique-shared-langs-opt:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+[dir="rtl"] .mine-rubrique-shared-langs-opt { letter-spacing: 0; }
+/* La petite gomme d’une pastille de copie : elle remet à zéro le compte de
+   cette seule langue, sans toucher aux autres. */
+.mine-rubrique-shared-copy-erase {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--text) 20%, transparent);
+  border-radius: 999px;
+  background: none;
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.mine-rubrique-shared-copy-erase i { font-size: 9px; }
+.mine-rubrique-shared-copy-erase:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent2);
+}
+.mine-rubrique-shared-copy-erase:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* L’aperçu du relevé compact : la ligne telle qu’elle partira, séparateur
+   compris, lue avant le clic — elle ne se copie pas, elle se regarde. */
+.mine-rubrique-shared-preview {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 1 1 100%;
+  flex-wrap: wrap;
+  min-width: 0;
+  padding: 1px 0;
+  font-family: var(--font-label);
+  font-size: 9px;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--text) 46%, transparent);
+}
+.mine-rubrique-shared-preview i {
+  flex: 0 0 auto;
+  font-size: 9px;
+  color: color-mix(in srgb, var(--accent) 60%, transparent);
+}
+.mine-rubrique-shared-preview-label {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  letter-spacing: .02em;
+}
+.mine-rubrique-shared-preview-txt {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+}
+[dir="rtl"] .mine-rubrique-shared-preview-txt { font-variant-numeric: tabular-nums; }
+/* La longueur de la ligne de l'aperçu : le chiffre dit si elle tiendra d'un
+   seul trait dans un message, avant que rien ne parte. */
+.mine-rubrique-shared-preview-chars {
+  flex: 0 0 auto;
+  padding-inline-start: 6px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  font-size: 8.5px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  letter-spacing: .02em;
+  color: color-mix(in srgb, var(--text) 44%, transparent);
+}
+/* Le choix de la limite de longueur : trois seuils, un seul retenu — l’aperçu
+   mesure la ligne sous celui-là, et le choix se garde sur l’appareil. */
+.mine-rubrique-shared-limit {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  flex: 0 0 auto;
+  padding: 0 4px;
+  border: 1px dotted color-mix(in srgb, var(--text) 20%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+}
+.mine-rubrique-shared-limit > i {
+  flex: 0 0 auto;
+  font-size: 10px;
+  color: color-mix(in srgb, var(--text) 42%, transparent);
+}
+.mine-rubrique-shared-limit-opt {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  height: 15px;
+  padding: 0 3px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: none;
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.mine-rubrique-shared-limit-opt:hover {
+  border-color: color-mix(in srgb, var(--accent) 48%, transparent);
+  color: var(--accent2);
+}
+.mine-rubrique-shared-limit-opt.is-on {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--accent2);
+  font-weight: 600;
+}
+.mine-rubrique-shared-limit-opt:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* Le verdict de l’aperçu : la ligne tient sous la limite choisie, ou de combien
+   de caractères elle la dépasse — le signe change avec la réponse. */
+.mine-rubrique-shared-preview-fit {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  flex: 0 0 auto;
+  padding-inline-start: 6px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  font-size: 8.5px;
+  white-space: nowrap;
+  letter-spacing: .02em;
+}
+.mine-rubrique-shared-preview-fit i { flex: 0 0 auto; font-size: 9px; }
+.mine-rubrique-shared-preview-fit.is-fits {
+  color: color-mix(in srgb, var(--accent) 78%, transparent);
+}
+.mine-rubrique-shared-preview-fit.is-over {
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+/* Le repli de l’aperçu : un clic range le texte long quand le relevé compte
+   beaucoup de valeurs — la longueur, le seuil et le verdict restent. */
+.mine-rubrique-shared-preview-fold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  flex: 0 0 auto;
+  min-width: 16px;
+  height: 16px;
+  margin-inline-start: 2px;
+  padding: 0 4px;
+  border: 1px solid color-mix(in srgb, var(--text) 20%, transparent);
+  border-radius: 999px;
+  background: none;
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.mine-rubrique-shared-preview-fold i { font-size: 9px; }
+/* Ce que le repli retire à la ligne, en caractères : le chiffre se lit sur la
+   porte elle-même, avant le clic. */
+.mine-rubrique-shared-preview-fold-gain {
+  flex: 0 0 auto;
+  font-family: var(--font-label);
+  font-size: 8px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 46%, transparent);
+}
+.mine-rubrique-shared-preview-fold:hover .mine-rubrique-shared-preview-fold-gain {
+  color: var(--accent2);
+}
+.mine-rubrique-shared-preview-fold:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent2);
+}
+.mine-rubrique-shared-preview-fold:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.mine-rubrique-shared-preview.is-folded .mine-rubrique-shared-preview-txt,
+.mine-rubrique-shared-preview.is-folded .mine-rubrique-shared-limit,
+.mine-rubrique-shared-preview.is-folded .mine-rubrique-shared-limit-next,
+.mine-rubrique-shared-preview.is-folded .mine-rubrique-shared-preview-fit {
+  display: none;
+}
+/* Le mot du repli, posé dans la ligne : on sait que le texte long n’a pas
+   disparu, il attend un clic. */
+.mine-rubrique-shared-preview-folded {
+  flex: 0 0 auto;
+  padding: 0 5px;
+  border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
+  border-radius: 999px;
+  font-size: 8.5px;
+  line-height: 1.6;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 46%, transparent);
+}
+/* Le seuil dans le récapitulatif : il se lit juste après la longueur. */
+.mine-rubrique-shared-recap-limit {
+  color: color-mix(in srgb, var(--accent2) 74%, transparent);
+}
+/* Le repli de l’aperçu cité dans le récapitulatif : il se lit comme un fait
+   de la ligne, pas comme un manque. */
+.mine-rubrique-shared-recap-folded {
+  color: color-mix(in srgb, var(--accent2) 66%, transparent);
+}
+/* Le repli effectif se distingue du seuil seulement annoncé : même place,
+   même écriture, mais le fait accompli se dit un peu plus franchement. */
+.mine-rubrique-shared-recap-folded.is-folded {
+  color: var(--accent2);
+}
+/* Le dernier séparateur réellement parti, avec son jour : posé après le signe
+   courant, il se lit comme l’envoi précédent, prêt à comparer. */
+.mine-rubrique-shared-recap-sepused {
+  color: color-mix(in srgb, var(--text) 56%, transparent);
+}
+.mine-rubrique-shared-recap-sepdiff {
+  margin-inline-start: 3px;
+  padding: 0 4px;
+  border-radius: 999px;
+  font-size: 8.5px;
+  white-space: nowrap;
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+  color: color-mix(in srgb, var(--accent2) 82%, transparent);
+}
+/* Le défilement des seuils : une petite flèche au bout des trois limites, qui
+   passe au seuil suivant d’un seul clic — 140, 160, 280, puis retour à 140. */
+.mine-rubrique-shared-limit-next {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  flex: 0 0 auto;
+  margin-inline-start: 1px;
+  padding: 0 3px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 34%, transparent);
+  border-radius: 999px;
+  background: none;
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: color-mix(in srgb, var(--accent) 82%, transparent);
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.mine-rubrique-shared-limit-next i { flex: 0 0 auto; font-size: 9px; }
+.mine-rubrique-shared-limit-next b { font-weight: 600; }
+.mine-rubrique-shared-limit-next:hover {
+  border-style: solid;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: var(--accent2);
+}
+.mine-rubrique-shared-limit-next:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+[dir="rtl"] .mine-rubrique-shared-limit-next i { transform: scaleX(-1); }
+/* Le seuil sous lequel la ligne courte est partie la dernière fois : posé à
+   côté du compte des copies, derrière un filet discret. */
+.mine-rubrique-shared-copy-lastlimit {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  flex: 0 0 auto;
+  margin-inline-start: 2px;
+  padding: 0 3px;
+  border: 1px dotted color-mix(in srgb, var(--accent) 32%, transparent);
+  border-radius: 999px;
+  font-size: 8px;
+  line-height: 1.5;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent) 74%, transparent);
+}
+.mine-rubrique-shared-copy-lastlimit i { font-size: 8px; }
+/* Le récapitulatif sous le relevé : le nombre de valeurs, la longueur de la
+   ligne et les deux comptes de copies, dans une seule ligne calme — et la
+   même phrase copiable d’un geste. */
+.mine-rubrique-shared-recap {
+  display: flex;
+  align-items: center;
+  gap: 4px 6px;
+  flex: 1 1 100%;
+  flex-wrap: wrap;
+  min-width: 0;
+  margin-top: 2px;
+  padding-top: 4px;
+  border-top: 1px dotted color-mix(in srgb, var(--text) 16%, transparent);
+  font-family: var(--font-label);
+  font-size: 9px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+.mine-rubrique-shared-recap > i {
+  flex: 0 0 auto;
+  font-size: 9px;
+  color: color-mix(in srgb, var(--accent) 60%, transparent);
+}
+.mine-rubrique-shared-recap-label {
+  flex: 0 0 auto;
+  letter-spacing: .02em;
+  white-space: nowrap;
+}
+.mine-rubrique-shared-recap-part {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  flex: 0 0 auto;
+  max-width: 100%;
+  padding-inline-start: 5px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 60%, transparent);
+}
+.mine-rubrique-shared-recap-part i {
+  flex: 0 0 auto;
+  font-size: 8px;
+  color: color-mix(in srgb, var(--accent) 54%, transparent);
+}
+.mine-rubrique-shared-recap-copy {
+  margin-inline-start: auto;
+  border-style: dashed;
+  color: color-mix(in srgb, var(--text) 54%, transparent);
+}
+/* Le séparateur de la ligne courte, cité dans le récapitulatif : le signe se
+   lit tel quel, sans changer la teinte des autres mesures. */
+.mine-rubrique-shared-recap-sep {
+  font-weight: 600;
+  color: color-mix(in srgb, var(--accent) 72%, var(--text));
+}
+[dir="rtl"] .mine-rubrique-shared-recap-label { letter-spacing: 0; }
+/* La petite gomme du récapitulatif : elle suit la porte de copie, sans
+   pousser la ligne — le compte repart de zéro comme les autres. */
+.mine-rubrique-shared-recap-erase { margin-inline-start: 0; }
+/* La petite gomme des deux replis, posée dans la ligne de l’aperçu : un clic
+   rend l’aperçu à son seuil et rouvre la rangée — elle s’efface d’elle-même
+   quand aucun repli n’est tenu à la main. */
+.mine-rubrique-shared-folds-erase {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  margin-inline-start: 2px;
+  padding: 0;
+  border: 1px dashed color-mix(in srgb, var(--accent) 36%, transparent);
+  border-radius: 999px;
+  background: none;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+  cursor: pointer;
+}
+.mine-rubrique-shared-folds-erase i { font-size: 9px; }
+/* Le petit compte de la gomme des replis : combien de fois elle a servi, et
+   le jour du dernier geste — discret, il reste lisible une fois la gomme
+   disparue, quand plus aucun repli n'est tenu. */
+.mine-rubrique-shared-folds-erase-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  margin-inline-start: 3px;
+  padding: 0 4px;
+  border: 1px dotted color-mix(in srgb, var(--text) 22%, transparent);
+  border-radius: 999px;
+  font-size: 9px;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+}
+.mine-rubrique-shared-folds-erase-count i { font-size: 8.5px; }
+/* Ce que la gomme des replis rendra à l’écran, famille de valeurs par famille :
+   un rappel discret, posé juste avant elle, avec ses deux comptes. */
+.mine-rubrique-shared-folds-back {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 3px;
+  flex: 0 0 auto;
+  margin-inline-start: 2px;
+  font-size: 9px;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 54%, transparent);
+}
+.mine-rubrique-shared-folds-back-part,
+.mine-rubrique-shared-folds-back-side {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  white-space: nowrap;
+}
+.mine-rubrique-shared-folds-back-part + .mine-rubrique-shared-folds-back-part,
+.mine-rubrique-shared-folds-back-side {
+  padding-inline-start: 4px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+}
+.mine-rubrique-shared-folds-back i { font-size: 9px; opacity: 0.8; }
+.mine-rubrique-shared-folds-erase:hover {
+  border-style: solid;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent2);
+}
+.mine-rubrique-shared-folds-erase:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+/* Le repli automatique de l’aperçu : le nombre de valeurs au-delà duquel il
+   se range de lui-même, et qui reste réglable d’un clic. */
+.mine-rubrique-shared-foldat {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  flex: 0 0 auto;
+  padding: 0 4px;
+  border: 1px dotted color-mix(in srgb, var(--accent) 26%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+}
+.mine-rubrique-shared-foldat > i {
+  flex: 0 0 auto;
+  font-size: 10px;
+  color: color-mix(in srgb, var(--accent) 58%, transparent);
+}
+.mine-rubrique-shared-foldat-opt {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 17px;
+  height: 15px;
+  padding: 0 3px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: none;
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.mine-rubrique-shared-foldat-opt:hover {
+  border-color: color-mix(in srgb, var(--accent) 48%, transparent);
+  color: var(--accent2);
+}
+.mine-rubrique-shared-foldat-opt.is-on {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--accent2);
+  font-weight: 600;
+}
+.mine-rubrique-shared-foldat-opt:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+/* La rangée des valeurs partagées repliée : les valeurs restées de côté se
+   comptent d’un jeton, qui les ramène toutes d’un clic. */
+.mine-rubrique-shared-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  flex: 0 0 auto;
+  padding: 0 7px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 40%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 80%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  line-height: 1.7;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent2);
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease;
+}
+.mine-rubrique-shared-more i { flex: 0 0 auto; font-size: 9px; color: var(--accent); }
+.mine-rubrique-shared-more:hover {
+  border-style: solid;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+}
+.mine-rubrique-shared-more:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* Le repli de la rangée : un clic la range quand elle s’allonge, un second la
+   rouvre — le compte des valeurs reste dans la porte. */
+.mine-rubrique-shared-fold {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  padding: 0 7px;
+  border: 1px dotted color-mix(in srgb, var(--text) 22%, transparent);
+  border-radius: 999px;
+  background: none;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  line-height: 1.7;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 56%, transparent);
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.mine-rubrique-shared-fold i { flex: 0 0 auto; font-size: 10px; color: color-mix(in srgb, var(--accent) 66%, transparent); }
+.mine-rubrique-shared-fold b {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent2);
+}
+/* Ce que la rangée repliée garde hors de l’écran : un compte discret, posé
+   après le total, pour ne pas avoir à compter les valeurs visibles. */
+.mine-rubrique-shared-fold-aside {
+  flex: 0 0 auto;
+  padding-inline-start: 4px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  font-size: 9px;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 54%, transparent);
+}
+.mine-rubrique-shared-fold:hover,
+.mine-rubrique-shared-fold.is-on {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 56%, transparent);
+  background: color-mix(in srgb, var(--accent) 11%, transparent);
+  color: var(--accent2);
+}
+.mine-rubrique-shared-fold:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (max-width: 620px) {
+  .mine-rubrique-shared-recap-copy { margin-inline-start: 0; }
+}
+/* La langue gardée par la pastille : elle se signale quand le sélecteur de la
+   page a changé, pour ne jamais copier dans une langue qu’on n’attendait pas. */
+.mine-rubrique-shared-copy-kept {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  flex: 0 0 auto;
+  margin-inline-start: 2px;
+  padding: 0 3px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 44%, transparent);
+  border-radius: 999px;
+  font-size: 8px;
+  line-height: 1.5;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent) 82%, transparent);
+}
+.mine-rubrique-shared-copy-kept i { font-size: 8px; }
+[dir="rtl"] .mine-rubrique-shared { letter-spacing: 0; }
+/* La porte « autres rubriques » de chaque famille : le même resserrement que
+   la ligne de la fin, ouvert depuis le rappel hors type. */
+.mine-rubrique-orig-rest {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  justify-self: start;
+  max-width: 100%;
+  margin-inline-start: 10px;
+  padding: 1px 8px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 40%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 76%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  line-height: 1.6;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.mine-rubrique-orig-rest i { flex: 0 0 auto; font-size: 10px; color: var(--accent); }
+.mine-rubrique-orig-rest:hover,
+.mine-rubrique-orig-rest.is-on {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: var(--accent2);
+}
+.mine-rubrique-orig-rest:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* Ce que la porte « autres rubriques » laissera à l'écran, famille par
+   famille : le compte des dépôts, à côté du nombre de valeurs. */
+.mine-rubrique-orig-rest-n {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  font-size: 9px;
+  line-height: 1.7;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 74%, transparent);
+}
+.mine-rubrique-orig-rest-n i { flex: 0 0 auto; font-size: 9px; color: var(--accent); }
+.mine-rubrique-orig-rest-n b { font-weight: 600; color: var(--accent2); }
+/* Ce que la porte « autres rubriques » écarte : la valeur la plus habitée de
+   la famille et son compte, à côté des dépôts qu'elle garde. */
+.mine-rubrique-orig-rest-aside {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 1 auto;
+  min-width: 0;
+  padding-inline-start: 6px;
+  border-inline-start: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
+  font-size: 9px;
+  line-height: 1.6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+.mine-rubrique-orig-rest:hover .mine-rubrique-orig-rest-aside,
+.mine-rubrique-orig-rest.is-on .mine-rubrique-orig-rest-aside {
+  color: color-mix(in srgb, var(--text) 72%, transparent);
+}
+[dir="rtl"] .mine-rubrique-orig-rest { letter-spacing: 0; }
+/* Ce que la valeur la plus lourde laisserait encore hors de l'écran une fois
+   ramenée : la période ou le pays de la famille retiennent le reste. */
+.mine-rubrique-orig-rest-still {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  padding-inline-start: 6px;
+  border-inline-start: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
+  font-size: 9.5px;
+  line-height: 1.4;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+.mine-rubrique-orig-rest-still i {
+  flex: 0 0 auto;
+  font-size: 9px;
+  color: color-mix(in srgb, var(--accent) 64%, transparent);
+}
+.mine-rubrique-orig-rest:hover .mine-rubrique-orig-rest-still,
+.mine-rubrique-orig-rest.is-on .mine-rubrique-orig-rest-still {
+  color: color-mix(in srgb, var(--text) 72%, transparent);
+}
+[dir="rtl"] .mine-rubrique-orig-count { letter-spacing: 0; }
+.mine-rubrique-family-orig {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  margin: 0;
+  padding-inline-start: 10px;
+  min-width: 0;
+  max-width: 190px;
+  font-family: var(--font-label);
+  font-size: 10px;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+  overflow-wrap: break-word;
+}
+.mine-rubrique-family-orig i {
+  flex: 0 0 auto;
+  margin-top: 1px;
+  font-size: 10px;
+  color: var(--accent);
+}
+.mine-rubrique-family-orig span { min-width: 0; }
+/* Chaque rubrique d'origine est aussi une porte : un clic resserre la liste
+   sur ces dépôts-là — tous les « CDI rangés en annonce ». Le compte suit le
+   nom, et la porte choisie se distingue. */
+.mine-rubrique-orig-list {
+  flex: 1 1 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+  min-width: 0;
+}
+.mine-rubrique-orig-door {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 100%;
+  padding: 1px 8px;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 78%, transparent);
+  color: color-mix(in srgb, var(--text) 76%, transparent);
+  font: inherit;
+  font-family: var(--font-label);
+  font-size: 10px;
+  line-height: 1.5;
+  text-align: start;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+.mine-rubrique-orig-door b { flex: 0 0 auto; font-variant-numeric: tabular-nums; color: inherit; }
+.mine-rubrique-orig-label { min-width: 0; overflow-wrap: break-word; }
+.mine-rubrique-orig-door:hover {
+  border-color: color-mix(in srgb, var(--accent) 62%, transparent);
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+  color: var(--accent2);
+}
+.mine-rubrique-orig-door:hover b { color: var(--accent2); }
+.mine-rubrique-orig-door:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.mine-rubrique-orig-door.is-on {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--bg);
+}
+.mine-rubrique-orig-door.is-on b { color: var(--bg); }
+[dir="rtl"] .mine-rubrique-orig-door { letter-spacing: 0; }
+[dir="rtl"] .mine-rubrique-family-orig { letter-spacing: 0; }
+[dir="rtl"] .mine-rubrique-family-orig i { transform: scaleX(-1); }
+
+/* La porte du dépôt suivant, sous la ligne de série : un geste qui saute
+   directement au dépôt d'après, sans repasser par le premier. */
+.mine-rubrique-next {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  justify-self: start;
+  max-width: 100%;
+  padding: 5px 11px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 46%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 80%, transparent);
+  color: var(--accent2);
+  font-family: var(--font-label);
+  font-size: 11px;
+  line-height: 1.4;
+  text-align: start;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease;
+}
+.mine-rubrique-next i { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
+.mine-rubrique-next span { min-width: 0; overflow-wrap: break-word; }
+.mine-rubrique-next:hover {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 66%, transparent);
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+}
+.mine-rubrique-next:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+[dir="rtl"] .mine-rubrique-next i:last-child { transform: scaleX(-1); }
+/* Ce qui reste dans la série après le dépôt ouvert par cette porte : un compte
+   calme sous elle, pour mesurer le chemin avant de le prendre. */
+.mine-rubrique-next-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  justify-self: start;
+  margin: 0;
+  padding-inline-start: 4px;
+  min-width: 0;
+  max-width: 100%;
+  font-size: 11px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 68%, transparent);
+  overflow-wrap: break-word;
+}
+.mine-rubrique-next-left i {
+  flex: 0 0 auto;
+  margin-top: 1px;
+  font-size: 12px;
+  color: var(--accent2);
+}
+.mine-rubrique-next-left span { min-width: 0; }
+.mine-rubrique-next-left.is-end { color: var(--accent); }
+.mine-rubrique-next-left.is-end i { color: var(--accent); }
+
+/* ============ BROUILLON NON ENVOYÉ ============ */
+/* Ce qu'un visiteur a commencé sans l'envoyer dort sur l'appareil : la console
+   le signale avant les totaux, avec la porte du formulaire et le geste qui
+   l'efface. Le ton reste calme — c'est une note, pas une alerte. */
+.mine-draft {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 10px 12px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  margin: 14px 0 0;
+  padding: 12px 14px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 42%, transparent);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+.mine-draft-ico {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+}
+.mine-draft-ico i { font-size: 15px; color: var(--accent); }
+.mine-draft-txt { flex: 1 1 220px; min-width: 0; display: grid; gap: 3px; }
+.mine-draft-head {
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text);
+  overflow-wrap: break-word;
+}
+.mine-draft-name {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--text) 84%, transparent);
+  overflow-wrap: anywhere;
+}
+.mine-draft-meta {
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  overflow-wrap: break-word;
+}
+.mine-draft-acts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+  margin-inline-start: auto;
+}
+.mine-draft-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 13px;
+  border-radius: 999px;
+  font-size: 12px;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.mine-draft-open i { font-size: 13px; }
+.mine-draft-clear {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+  white-space: nowrap;
+}
+.mine-draft-clear i { font-size: 13px; }
+
+/* Le brouillon a déjà été rouvert pendant cette visite : la note le dit d'une
+   ligne verte, pour qu'un second départ ne soit pas pris en double. */
+.mine-draft.is-repris {
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+}
+.mine-draft-repris {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 2px 0 0;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 80%, transparent);
+  overflow-wrap: break-word;
+}
+.mine-draft-repris i {
+  flex: 0 0 auto;
+  font-size: 13px;
+  margin-top: 1px;
+  color: var(--accent);
+}
+@media (max-width: 620px) {
+  .mine-draft-acts { margin-inline-start: 0; }
+}
+
+/* ============ CANDIDATURES REÇUES, OFFRE PAR OFFRE ============ */
+/* Sous les métadonnées du dépôt, un relevé discret : combien de candidatures
+   l'offre a reçues, et, quand elle est en ligne, la porte de sa fiche. */
+.mine-cand-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 2px;
+}
+/* Le silence d’une offre en ligne : personne ne postule depuis deux semaines.
+   Le repère se lit en ton d’alerte, sans prendre la place du titre. */
+.mine-flag-idle {
+  color: var(--accent2);
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+}
+.mine-flag-idle i { color: var(--accent); }
+
+/* Le repère « sans candidature » est aussi une porte : il ouvre la
+   modification de l'offre, curseur dans le titre, le salaire juste à côté. */
+.mine-flag-idle-door {
+  cursor: pointer;
+  text-align: start;
+  transition: background .18s ease, border-color .18s ease;
+}
+.mine-flag-idle-door:hover {
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 62%, transparent);
+}
+.mine-flag-idle-door:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.mine-flag .mine-flag-door { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
+[dir="rtl"] .mine-flag .mine-flag-door { transform: scaleX(-1); }
+
+/* Le tri « qui attend une réponse » se dit sous la barre d'outils : combien de
+   candidatures non lues le remontent, et ce qu'il fait quand il n'y en a pas. */
+.mine-sort-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 1 auto;
+  min-width: 0;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+  font-size: 11.5px;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+}
+.mine-sort-note i { flex: 0 0 auto; font-size: 13px; color: var(--accent); }
+.mine-sort-note span { min-width: 0; overflow-wrap: break-word; }
+.mine-cand {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+  padding: 3px 10px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 80%, transparent);
+  color: var(--text);
+  font-family: var(--font-label);
+  font-size: 11px;
+  line-height: 1.35;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+.mine-cand i { font-size: 13px; color: var(--accent); flex: 0 0 auto; }
+.mine-cand b { font-size: 12px; font-variant-numeric: tabular-nums; }
+.mine-cand span { overflow-wrap: break-word; }
+.mine-cand .mine-cand-door { color: color-mix(in srgb, var(--text) 52%, transparent); font-size: 12px; }
+a.mine-cand:hover {
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+a.mine-cand:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.mine-cand.is-idle { cursor: default; color: color-mix(in srgb, var(--text) 72%, transparent); }
+.mine-cand.is-idle i { color: color-mix(in srgb, var(--text) 44%, transparent); }
+
+/* Les candidatures qu'aucune réponse n'a encore ouvertes : un second jeton,
+   celui-ci porteur d'une porte — il ouvre « Mes candidatures » déjà resserré
+   sur l'offre, pas le tableau entier. */
+.mine-cand-unread {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  max-width: 100%;
+  padding: 3px 10px;
+  border: 1px solid color-mix(in srgb, var(--accent) 44%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  color: var(--accent2);
+  font-family: var(--font-label);
+  font-size: 11px;
+  line-height: 1.35;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease, transform .18s ease;
+}
+.mine-cand-unread i { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
+.mine-cand-unread b { font-size: 12px; font-variant-numeric: tabular-nums; }
+.mine-cand-unread span { overflow-wrap: break-word; }
+.mine-cand-unread .mine-cand-door { color: var(--accent); }
+.mine-cand-unread:hover {
+  border-color: color-mix(in srgb, var(--accent) 66%, transparent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+}
+.mine-cand-unread:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Le total des non lues, au-dessus de la liste : une ligne calme, qui nomme
+   le chiffre sans crier plus haut que les alertes de relecture. */
+.mine-cand-total {
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  width: 100%;
+  min-width: 0;
+  margin: 12px 0 0;
+  padding: 8px 12px;
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  font-size: 12px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 84%, transparent);
+}
+.mine-cand-total i { flex: 0 0 auto; font-size: 14px; margin-top: 1px; color: var(--accent); }
+.mine-cand-total span { min-width: 0; overflow-wrap: break-word; }
+
+/* La part des offres qui répondent en moins de 48 h, posée à côté du total
+   des non lues : une barre courte et son pourcentage, pour situer la
+   réactivité d'un coup d'œil — le pendant collectif du délai moyen. */
+.mine-cand-fast {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  width: 100%;
+  min-width: 0;
+  margin: 8px 0 0;
+  padding: 8px 12px;
+  border: 1px dashed color-mix(in srgb, var(--text) 20%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  font-size: 12px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+}
+.mine-cand-fast > i { flex: 0 0 auto; font-size: 14px; color: var(--accent); }
+.mine-cand-fast-txt { flex: 1 1 220px; min-width: 0; overflow-wrap: break-word; }
+.mine-cand-fast-bar {
+  display: block;
+  flex: 0 0 64px;
+  height: 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 12%, transparent);
+  overflow: hidden;
+}
+.mine-cand-fast-fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+  transition: width .3s ease;
+}
+.mine-cand-fast > b {
+  flex: 0 0 auto;
+  font-size: 12.5px;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+/* La porte des offres lentes, au bout de la ligne de réactivité : le complément
+   de la part rapide devient un geste, qui ouvre la liste déjà resserrée sur les
+   offres où la réponse dépasse 48 h. */
+.mine-cand-fast-door {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex: 0 0 auto;
+  padding: 5px 11px;
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  color: var(--accent2);
+  font-family: var(--font-label);
+  font-size: 11px;
+  line-height: 1.3;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease;
+}
+.mine-cand-fast-door i { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
+.mine-cand-fast-door:hover {
+  border-color: color-mix(in srgb, var(--accent) 66%, transparent);
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+}
+.mine-cand-fast-door:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.mine-cand-fast-door.is-on { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.mine-cand-fast-door.is-on i { color: var(--bg); }
+[dir="rtl"] .mine-cand-fast-door { letter-spacing: 0; }
+[dir="rtl"] .mine-cand-fast-door i { transform: scaleX(-1); }
+
+/* Le filtre ouvert depuis cette ligne se nomme sous elle : combien d'offres
+   restent à l'écran, et le geste qui les rend toutes. */
+.mine-cand-slow {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  width: 100%;
+  min-width: 0;
+  margin: 8px 0 0;
+  padding: 8px 12px;
+  border: 1px solid color-mix(in srgb, var(--accent) 38%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+  font-size: 12px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 82%, transparent);
+}
+.mine-cand-slow > i { flex: 0 0 auto; font-size: 14px; color: var(--accent); }
+.mine-cand-slow > span { flex: 1 1 200px; min-width: 0; overflow-wrap: break-word; }
+.mine-cand-slow-clear {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: 0 0 auto;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-size: 11.5px;
+  white-space: nowrap;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.mine-cand-slow-clear:hover { color: var(--accent); }
+.mine-cand-slow-clear i { font-size: 12px; }
+[dir="rtl"] .mine-cand { font-family: var(--font-label); }
+[dir="rtl"] .mine-cand .mine-cand-door { transform: scaleX(-1); }
+[dir="rtl"] .mine-cand-unread { font-family: var(--font-label); letter-spacing: 0; }
+[dir="rtl"] .mine-cand-unread .mine-cand-door { transform: scaleX(-1); }
+
+/* ============ DÉLAI MOYEN DE PREMIÈRE RÉPONSE ============ */
+/* Sous chaque offre, le temps qu'elle met en moyenne à répondre la première
+   fois. Un relevé calme, sans bordure d'alerte : il mesure le silence au lieu
+   de le reprocher. */
+.mine-cand-reply {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  max-width: 100%;
+  padding: 3px 10px;
+  border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  font-family: var(--font-label);
+  font-size: 11px;
+  line-height: 1.35;
+  color: color-mix(in srgb, var(--text) 74%, transparent);
+}
+.mine-cand-reply i { flex: 0 0 auto; font-size: 12px; color: color-mix(in srgb, var(--accent) 80%, transparent); }
+.mine-cand-reply b { font-size: 11.5px; font-variant-numeric: tabular-nums; color: var(--text); }
+.mine-cand-reply-label { overflow-wrap: break-word; }
+
+/* ============ SALAIRE JAMAIS PRÉCISÉ ============ */
+/* Une offre dont le salaire est resté vide le porte sur sa ligne : le repère
+   est aussi une porte, qui ouvre la modification, curseur dans le champ du
+   salaire. Ton calme — un manque à combler, pas une faute. */
+.mine-flag-salary {
+  cursor: pointer;
+  text-align: start;
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--text) 30%, transparent);
+  background: color-mix(in srgb, var(--surface) 76%, transparent);
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+.mine-flag-salary i { font-size: 11px; color: color-mix(in srgb, var(--text) 52%, transparent); }
+.mine-flag-salary:hover {
+  border-color: color-mix(in srgb, var(--accent) 54%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  color: var(--accent2);
+}
+.mine-flag-salary:hover i { color: var(--accent); }
+.mine-flag-salary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+[dir="rtl"] .mine-flag-salary .mine-flag-door { transform: scaleX(-1); }
+
+/* Le champ rejoint depuis un repère s'éclaire un instant : on voit où le
+   curseur vient de se poser. */
+.mine-edit .fld.is-jumped input,
+.mine-edit .fld.is-jumped select,
+.mine-edit .fld.is-jumped textarea,
+.mine-edit input.is-jumped {
+  border-color: color-mix(in srgb, var(--accent) 62%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 16%, transparent);
+}
+
+/* ============ SANS CANDIDATURE NI SALAIRE ============ */
+/* Deux manques sur la même offre : aucune candidature reçue, et le salaire
+   resté vide. Un seul repère les nomme ensemble, et sa porte ouvre la
+   modification, curseur dans le salaire — une visite suffit à corriger. */
+.mine-flag-bare {
+  cursor: pointer;
+  text-align: start;
+  color: var(--accent2);
+  border: 1px solid color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 11%, transparent);
+  transition: background .18s ease, border-color .18s ease;
+}
+.mine-flag-bare i { font-size: 11px; color: var(--accent); }
+.mine-flag-bare:hover {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 68%, transparent);
+}
+.mine-flag-bare:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+[dir="rtl"] .mine-flag-bare .mine-flag-door { transform: scaleX(-1); }
+
+/* Le compte de ces offres, au-dessus de la liste : un compte qui ouvre la
+   liste resserrée, et se referme d'un second clic. */
+.mine-bare-alert {
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  width: 100%;
+  min-width: 0;
+  margin: 8px 0 0;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--accent) 38%, transparent);
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: start;
+  color: color-mix(in srgb, var(--text) 84%, transparent);
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+.mine-bare-alert:hover {
+  border-color: color-mix(in srgb, var(--accent) 62%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+.mine-bare-alert:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.mine-bare-alert.is-on {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  color: var(--accent2);
+}
+.mine-bare-alert i { flex: 0 0 auto; font-size: 14px; margin-top: 1px; color: var(--accent); }
+.mine-bare-alert > i:last-child { margin-inline-start: auto; font-size: 13px; }
+.mine-bare-alert span { min-width: 0; overflow-wrap: break-word; }
+[dir="rtl"] .mine-bare-alert > i:last-child:not(.ri-close-line) { transform: scaleX(-1); }
+
+/* ============ VISITE ENCHAÎNÉE DES OFFRES À COMPLÉTER ============ */
+/* Sous le rappel de relecture, la file qui reste à visiter : une ligne calme,
+   et le bouton qui enchaîne sans repasser par le tableau. */
+.mine-chain {
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 8px 12px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 38%, transparent);
+  border-radius: 11px;
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+  font-size: 11.5px;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--text) 82%, transparent);
+  overflow-wrap: break-word;
+}
+.mine-chain i { flex: 0 0 auto; font-size: 13px; margin-top: 1px; color: var(--accent); }

@@ -1,0 +1,1998 @@
+/* ============ B2B INBOX (account area) ============ */
+.b2br .capp-head { align-items: flex-start; }
+.b2br-toolbar { flex-wrap: wrap; gap: 10px; }
+.b2br-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-inline-start: auto; }
+.b2br-all { white-space: nowrap; }
+.b2br-all:disabled { opacity: .62; cursor: progress; }
+.b2br-new { white-space: nowrap; }
+
+/* The list refreshes on its own: say so, and show when it last did. */
+.b2b-live { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; margin: 6px 0 0;
+  font-family: var(--font-label); font-size: 10px; letter-spacing: .06em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--muted) 58%, var(--text)); }
+.b2b-live i { font-size: 12px; color: var(--accent); }
+.b2b-live time { font-family: var(--font-label); font-size: 10.5px; color: var(--accent2); }
+[dir="rtl"] .b2b-live { letter-spacing: 0; text-transform: none; font-size: 11px; }
+
+/* --- Card linker --- */
+.b2bc-link { margin: 14px 0 4px; padding: 14px; border-radius: 16px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 45%, transparent);
+  background: color-mix(in srgb, var(--accent) 7%, transparent); display: grid; gap: 12px; }
+.b2bc-link-head { display: flex; gap: 10px; align-items: flex-start; }
+.b2bc-link-icon { flex: 0 0 auto; width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 10px; background: color-mix(in srgb, var(--accent) 18%, transparent); color: var(--accent); font-size: 17px; }
+.b2bc-link-txt strong { display: block; font-size: 14px; }
+.b2bc-link-txt p { margin: 4px 0 0; font-size: 12.5px; line-height: 1.55; color: var(--muted); }
+
+.b2bc-linked { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; justify-content: space-between; }
+.b2bc-linked-name { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; }
+.b2bc-linked-name i { color: var(--accent); font-size: 15px; }
+.b2bc-linked-name em { font-style: normal; font-size: 11.5px; color: var(--muted); }
+.b2bc-linked-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.b2bc-pick { display: grid; gap: 10px; }
+.b2bc-search { display: flex; align-items: center; gap: 7px; padding: 0 10px; border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  background: color-mix(in srgb, var(--bg) 55%, transparent); }
+.b2bc-search i { font-size: 15px; color: var(--muted); }
+.b2bc-search input { flex: 1 1 auto; min-width: 0; border: 0; background: none; color: var(--text);
+  font-size: 13px; padding: 9px 0; outline: none; }
+.b2bc-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; max-height: 260px; overflow-y: auto; }
+.b2bc-item { width: 100%; display: flex; align-items: center; gap: 9px; text-align: start; cursor: pointer;
+  padding: 8px 10px; border-radius: 12px; color: var(--text);
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  background: color-mix(in srgb, var(--bg) 40%, transparent); transition: border-color .18s, background .18s; }
+.b2bc-item:hover { border-color: color-mix(in srgb, var(--accent) 55%, transparent); }
+.b2bc-item[data-on="yes"] { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, transparent); }
+.b2bc-item-mark { flex: 0 0 auto; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 8px; font-family: var(--font-label); font-size: 10px; color: var(--accent2);
+  background: color-mix(in srgb, var(--text) 8%, transparent); }
+.b2bc-item-txt { flex: 1 1 auto; min-width: 0; display: grid; gap: 2px; }
+.b2bc-item-txt strong { font-size: 12.5px; }
+.b2bc-item-txt em { font-style: normal; font-size: 11px; color: var(--muted); }
+.b2bc-item i { font-size: 16px; color: color-mix(in srgb, var(--text) 40%, transparent); }
+.b2bc-item i.b2bc-on { color: var(--accent); }
+.b2bc-empty { font-size: 12.5px; color: var(--muted); padding: 8px 2px; }
+.b2bc-pick-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.b2bc-issue { margin: 0; }
+
+/* --- E-mail alert preference --- */
+.b2b-pref { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 4px 0 14px;
+  padding: 12px 14px; border-radius: 16px;
+  border: 1px solid color-mix(in srgb, var(--text) 13%, transparent);
+  background: color-mix(in srgb, var(--bg) 45%, transparent); }
+.b2b-pref-ico { flex: 0 0 auto; width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 10px; font-size: 17px; color: var(--muted);
+  background: color-mix(in srgb, var(--text) 7%, transparent); }
+.b2b-pref[data-on="yes"] .b2b-pref-ico { color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent); }
+.b2b-pref-txt { flex: 1 1 220px; min-width: 0; }
+.b2b-pref-txt strong { display: block; font-size: 13.5px; }
+.b2b-pref-txt p { margin: 3px 0 0; font-size: 12px; line-height: 1.55; color: var(--muted); }
+
+.b2b-switch { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+  border: 0; background: none; padding: 0; color: var(--muted);
+  font-family: var(--font-label); font-size: 10.5px; letter-spacing: .05em; text-transform: uppercase; }
+.b2b-switch:disabled { cursor: not-allowed; opacity: .5; }
+.b2b-switch-track { position: relative; display: inline-block; width: 40px; height: 22px; border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 18%, transparent); transition: background .2s; }
+.b2b-switch-knob { position: absolute; top: 3px; inset-inline-start: 3px; width: 16px; height: 16px; border-radius: 50%;
+  background: var(--bg); box-shadow: 0 1px 3px color-mix(in srgb, var(--text) 40%, transparent);
+  transition: inset-inline-start .2s; }
+.b2b-switch[aria-checked="true"] { color: var(--accent); }
+.b2b-switch[aria-checked="true"] .b2b-switch-track { background: var(--accent); }
+.b2b-switch[aria-checked="true"] .b2b-switch-knob { inset-inline-start: 21px; }
+[dir="rtl"] .b2b-switch { letter-spacing: 0; text-transform: none; font-size: 11px; }
+
+/* --- Request rows --- */
+.b2br-row { display: grid; gap: 8px; }
+
+/* Le geste clavier de la liste : la liste prend le focus, la demande mise en
+   avant prend le liseré d'accent, la phrase sous la liste rappelle le geste. */
+.b2br-list:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 16px; }
+.b2br-row.is-keyed { border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent); }
+.b2br-row.is-keyed:hover { border-color: var(--accent); }
+.b2br-keyhint { margin-top: 10px; }
+/* Les fiches parcourues au clavier : même pas que le rappel des flèches, mais
+   un compteur à part, qui dit ce que la visite a vraiment traversé — et qui
+   rouvre, d'un clic, la dernière fiche mise en avant. */
+.b2br-walked { margin-top: 4px; color: var(--accent2); appearance: none; width: fit-content;
+  background: none; border: 0; padding: 0; font: inherit; text-align: start; cursor: pointer;
+  transition: color .18s ease; }
+.b2br-walked i { color: var(--accent2); }
+.b2br-walked > span { flex: 1 1 auto; min-width: 0; }
+.b2br-walked:hover { color: var(--accent); }
+.b2br-walked:hover i { color: var(--accent); }
+.b2br-walked-go { opacity: .7; transition: opacity .18s ease, transform .18s ease; }
+.b2br-walked:hover .b2br-walked-go { opacity: 1; transform: translateX(2px); }
+.b2br-walked:focus-visible { outline: 2px solid var(--accent2); outline-offset: 3px; border-radius: 6px; }
+.b2br-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.b2br-ref { display: inline-flex; align-items: center; gap: 3px; font-family: var(--font-label); font-size: 11px;
+  color: var(--accent2); padding: 2px 8px; border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent2) 35%, transparent); }
+.b2br-badge { font-size: 10.5px; padding: 2px 9px; border-radius: 999px; font-family: var(--font-label);
+  border: 1px solid color-mix(in srgb, var(--text) 22%, transparent); color: var(--muted); }
+.b2br-badge[data-state="nouvelle"] { border-color: var(--accent); color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.b2br-badge[data-state="traitee"] { border-color: color-mix(in srgb, var(--accent2) 55%, transparent); color: var(--accent2); }
+.b2br-date { margin-inline-start: auto; font-size: 11.5px; color: var(--muted); }
+/* The 48 h sweep left its mark: the workshop can see the request was chased. */
+.b2br-late { display: inline-flex; align-items: center; gap: 5px; margin: 0; width: fit-content;
+  font-family: var(--font-label); font-size: 10px; letter-spacing: .05em; text-transform: uppercase;
+  color: var(--accent2); padding: 2px 9px; border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent2) 32%, transparent);
+  background: color-mix(in srgb, var(--accent2) 8%, transparent); }
+.b2br-late i { font-size: 12px; }
+[dir="rtl"] .b2br-late { letter-spacing: 0; text-transform: none; font-size: 11px; }
+.b2br-who { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0; font-size: 15px; }
+.b2br-who i { color: var(--accent); font-size: 15px; }
+.b2br-who em { font-style: normal; font-size: 12px; color: var(--muted); }
+.b2br-meta { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 0; font-size: 12.5px; color: var(--muted); }
+.b2br-meta span { display: inline-flex; align-items: center; gap: 5px; min-width: 0; }
+.b2br-meta a { color: var(--text); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--text) 26%, transparent); }
+.b2br-meta a:hover { color: var(--accent); border-color: var(--accent); }
+.b2br-facts { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 2px 0 0; padding: 0; }
+.b2br-facts li { display: grid; gap: 2px; padding: 7px 11px; border-radius: 11px;
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 10%, transparent); }
+.b2br-facts span { font-size: 10px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+.b2br-facts strong { font-size: 12.5px; font-weight: 600; }
+.b2br-body { display: flex; gap: 7px; margin: 2px 0 0; font-size: 13px; line-height: 1.6; color: var(--muted); }
+.b2br-body i { color: var(--accent); font-size: 14px; margin-top: 2px; flex: 0 0 auto; }
+.b2br-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.b2br-row[data-state="nouvelle"] { border-inline-start: 2px solid var(--accent); }
+
+/* ============ ACCOUNT SUMMARY STRIP ============ */
+.acct-sum { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; margin: 0 0 18px;
+  padding: 14px 16px; border-radius: 18px;
+  border: 1px solid color-mix(in srgb, var(--text) 15%, transparent);
+  background: color-mix(in srgb, var(--surface) 88%, transparent); }
+.acct-sum-lead { display: flex; align-items: center; gap: 11px; flex: 1 1 240px; min-width: 0; }
+.acct-sum-ico { flex: 0 0 auto; width: 38px; height: 38px; display: inline-flex; align-items: center;
+  justify-content: center; border-radius: 12px; font-size: 19px; color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent); }
+.acct-sum-lead strong { display: block; font-size: 14px; letter-spacing: -.01em; }
+.acct-sum-lead p { margin: 2px 0 0; font-size: 12px; line-height: 1.45; color: var(--muted); }
+.acct-sum-nums { display: flex; flex-wrap: wrap; gap: 8px; }
+.acct-sum-cell { display: grid; gap: 1px; min-width: 104px; padding: 8px 13px; border-radius: 13px;
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 11%, transparent); }
+.acct-sum-cell b { font-family: var(--font-label); font-size: 19px; line-height: 1.15; letter-spacing: -.02em; }
+.acct-sum-cell span { font-size: 10px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+.acct-sum-cell[data-on="yes"] b { color: var(--accent2); }
+.acct-sum-cell--late[data-on="yes"] { border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  background: color-mix(in srgb, var(--accent) 13%, transparent); }
+.acct-sum-cell--late[data-on="yes"] b { color: var(--accent); }
+/* The late counter is a door, like the reminder on the bar: it opens the box
+   already cut, on the oldest request, ringed the same way. */
+button.acct-sum-cell--late { cursor: pointer; text-align: start; font: inherit;
+  color: inherit; transition: border-color .18s ease, background .18s ease; }
+button.acct-sum-cell--late:hover { border-color: color-mix(in srgb, var(--accent) 70%, transparent);
+  background: color-mix(in srgb, var(--accent) 17%, transparent); }
+button.acct-sum-cell--late:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button.acct-sum-cell--late:disabled { cursor: default; }
+/* Of that count, the share that has passed a week: waiting against urgency.
+   Quieter than the figure, never a second number competing with it. */
+.acct-sum-cell--late .acct-sum-week { margin-top: 1px; text-transform: none;
+  font-family: var(--font-label); font-size: 9px; letter-spacing: .02em;
+  line-height: 1.3; white-space: nowrap; color: var(--accent); }
+[dir="rtl"] .acct-sum-cell--late .acct-sum-week { letter-spacing: 0; font-size: 10px; }
+/* The width of the urgency, right before its depth: one counter for the
+   requests past a whole week. A door of its own — it opens that cut alone,
+   longest wait first — and a lighter tint than the 48 h counter, so the two
+   thresholds are never read as the same urgency. */
+.acct-sum-cell--week { cursor: pointer; text-align: start; font: inherit;
+  color: inherit; min-width: 96px;
+  border-color: color-mix(in srgb, var(--accent2) 48%, transparent);
+  background: color-mix(in srgb, var(--accent2) 10%, transparent);
+  transition: border-color .18s ease, background .18s ease; }
+.acct-sum-cell--week b { color: color-mix(in srgb, var(--accent2) 88%, var(--text)); }
+.acct-sum-cell--week:hover { border-color: color-mix(in srgb, var(--accent2) 72%, transparent);
+  background: color-mix(in srgb, var(--accent2) 16%, transparent); }
+.acct-sum-cell--week:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
+.acct-sum-cell--week:disabled { cursor: default; }
+/* Right beside the 48 h counter, the depth of the same backlog: every open wait
+   added up in whole weeks. Dashed edge — it counts the same rows, it is not a
+   second backlog competing with the first. */
+.acct-sum-cell--weeks { min-width: 96px; border-style: dashed;
+  border-color: color-mix(in srgb, var(--accent2) 38%, transparent); }
+.acct-sum-cell--weeks[data-on="yes"] b { color: color-mix(in srgb, var(--accent2) 88%, var(--text)); }
+/* The weeks cell holds two doors: the number opens the same late cut from the
+   oldest end, and the reference under it points at that one request alone. */
+.acct-sum-weeknum { display: grid; gap: 1px; padding: 0; border: 0; background: none;
+  font: inherit; color: inherit; text-align: start; cursor: pointer;
+  transition: color .18s ease; }
+.acct-sum-weeknum:hover b { color: var(--accent2); }
+.acct-sum-weeknum:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px;
+  border-radius: 6px; }
+.acct-sum-weeknum:disabled { cursor: default; }
+/* The depth of the backlog needs a face: right under the weeks, the reference of
+   the request that has been sleeping longest — a shortcut of its own, shorter
+   than the counter: it points at that one request, not at the whole cut. */
+.acct-sum-cell--weeks .acct-sum-oldest { margin-top: 1px; text-transform: none;
+  padding: 0; border: 0; background: none; align-self: start; text-align: start;
+  font-family: var(--font-label); font-size: 9px; letter-spacing: .02em;
+  line-height: 1.3; white-space: nowrap; cursor: pointer;
+  border-bottom: 1px dotted color-mix(in srgb, var(--accent2) 38%, transparent);
+  color: color-mix(in srgb, var(--accent2) 74%, var(--muted));
+  transition: color .18s ease, border-color .18s ease; }
+.acct-sum-cell--weeks .acct-sum-oldest:hover { color: var(--accent2);
+  border-bottom-color: var(--accent2); }
+.acct-sum-cell--weeks .acct-sum-oldest:focus-visible { outline: 2px solid var(--accent2);
+  outline-offset: 2px; }
+.acct-sum-cell--weeks .acct-sum-oldest:disabled { cursor: default; opacity: .68; }
+[dir="rtl"] .acct-sum-cell--weeks .acct-sum-oldest { letter-spacing: 0; font-size: 10px; }
+/* The misses of the shortcut: a figure of absence, so a quiet dashed cell — it
+   counts requests nobody opened, not work that was done. */
+.acct-sum-cell--never { cursor: pointer; text-align: start; font: inherit;
+  color: inherit; min-width: 96px; border-style: dashed;
+  border-color: color-mix(in srgb, var(--muted) 40%, transparent);
+  background: color-mix(in srgb, var(--muted) 8%, transparent);
+  transition: border-color .18s ease, background .18s ease; }
+.acct-sum-cell--never b { color: var(--muted); }
+.acct-sum-cell--never:hover { border-color: color-mix(in srgb, var(--accent) 48%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent); }
+.acct-sum-cell--never:hover b { color: var(--accent); }
+.acct-sum-cell--never:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.acct-sum-cell--never:disabled { cursor: default; }
+/* The cell holds two doors, like the weeks beside it: the number opens the cut,
+   the reference under it names the oldest miss and points at that one request.
+   The line is written in the neutral hue — this is absence, not urgency. */
+.acct-sum-cell--never .acct-sum-weeknum:hover b { color: var(--accent); }
+.acct-sum-cell--never .acct-sum-oldest { margin-top: 1px; text-transform: none;
+  padding: 0; border: 0; background: none; align-self: start; text-align: start;
+  font-family: var(--font-label); font-size: 9px; letter-spacing: .02em;
+  line-height: 1.3; white-space: nowrap; cursor: pointer;
+  border-bottom: 1px dotted color-mix(in srgb, var(--text) 34%, transparent);
+  color: color-mix(in srgb, var(--text) 58%, var(--muted));
+  transition: color .18s ease, border-color .18s ease; }
+.acct-sum-cell--never .acct-sum-oldest:hover { color: var(--accent);
+  border-bottom-color: var(--accent); }
+.acct-sum-cell--never .acct-sum-oldest:focus-visible { outline: 2px solid var(--accent);
+  outline-offset: 2px; }
+.acct-sum-cell--never .acct-sum-oldest:disabled { cursor: default; opacity: .68; }
+[dir="rtl"] .acct-sum-cell--never .acct-sum-oldest { letter-spacing: 0; font-size: 10px; }
+/* The month answers slower than the one before: a cell that opens the twelve-
+   month chart already framed on that month. */
+.acct-sum-cell--slow { cursor: pointer; text-align: start; font: inherit;
+  color: inherit; border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  background: color-mix(in srgb, var(--accent) 11%, transparent);
+  transition: border-color .18s, background .18s; }
+.acct-sum-cell--slow[data-on="yes"] b { display: inline-flex; align-items: center;
+  gap: 2px; color: var(--accent); }
+.acct-sum-cell--slow b i { font-size: 14px; }
+.acct-sum-cell--slow:hover,
+.acct-sum-cell--slow:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 78%, transparent);
+  background: color-mix(in srgb, var(--accent) 18%, transparent); }
+/* The year's worst slowdown, named: same accent family as the monthly chip, but
+   a dashed edge and a smaller lead, so the two are never read as one figure. */
+.acct-sum-cell--slowest { border-style: dashed; min-width: 126px; }
+.acct-sum-cell--slowest b { font-size: 13px; letter-spacing: .01em; }
+.acct-sum-cell--slowest .acct-sum-delta { color: var(--accent); }
+/* The level of that month, right under its rise: « ↑ 3 j » alone says slower,
+   not slow. Quieter than the gap — it explains it, it does not compete. */
+.acct-sum-cell--slowest .acct-sum-avg { margin-top: 1px; font-family: var(--font-label);
+  font-size: 9.5px; letter-spacing: .02em; text-transform: none; white-space: nowrap;
+  color: var(--muted); }
+/* The weight of the rise, on the monthly chip: « ↑ 3 j » over two fiches is not
+   « ↑ 3 j » over twenty, and the chip has to say it on its own face. */
+.acct-sum-cell--slow .acct-sum-thin { margin-top: 1px; font-family: var(--font-label);
+  font-size: 9px; letter-spacing: .02em; text-transform: none; white-space: nowrap;
+  color: var(--muted); }
+/* Thin sample: a small warning mark inside the figure, never a bigger arrow. */
+.acct-sum-cell--slow b .acct-sum-thin-mark { font-size: 11px; margin-inline-start: 1px;
+  color: var(--accent2); }
+.acct-sum-open { flex: 0 0 auto; white-space: nowrap; }
+
+/* ============ LATE FILTER + BADGE ============ */
+.capp-chip--late { border-style: dashed; }
+/* The second threshold of the same family: past a week, the wait gets its own
+   entry in the bar — the other hue, so the two cuts are never confused. */
+.capp-chip--week { border-style: dashed;
+  border-color: color-mix(in srgb, var(--accent2) 48%, transparent); }
+.capp-chip--week.is-on { color: var(--accent2); border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 13%, transparent); }
+.b2br-badge--late { display: inline-flex; align-items: center; gap: 4px; border-color: var(--accent);
+  color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.b2br-badge--late i { font-size: 11px; }
+/* La nature du dossier : à côté de la référence, la pastille dit qu'il s'agit
+   d'un marché public — cahier des charges, bordereau, date limite de remise.
+   L'autre teinte, plus sourde que les deux seuils d'attente. */
+.b2br-badge--marche { display: inline-flex; align-items: center; gap: 4px;
+  border-color: color-mix(in srgb, var(--accent2) 42%, transparent);
+  color: color-mix(in srgb, var(--accent2) 86%, var(--text));
+  background: color-mix(in srgb, var(--accent2) 8%, transparent); }
+.b2br-badge--marche i { font-size: 11px; }
+.b2br-row[data-late="yes"] .b2br-date { color: var(--accent2); }
+/* Past a whole week the wait changes nature: the row carries the second
+   threshold itself, in the other hue, so the urgency is read in the list — not
+   only in the reminder above. */
+.b2br-badge--week { display: inline-flex; align-items: center; gap: 4px;
+  border-color: color-mix(in srgb, var(--accent2) 58%, transparent);
+  color: color-mix(in srgb, var(--accent2) 90%, var(--text));
+  background: color-mix(in srgb, var(--accent2) 13%, transparent); }
+.b2br-badge--week i { font-size: 11px; }
+/* The figure behind the two pills: how many whole days it has really waited,
+   readable without hovering and on the same clock as the export column. Quiet
+   enough not to compete with the two thresholds it explains. */
+.b2br-badge--wait { display: inline-flex; align-items: center; gap: 4px;
+  font-family: var(--font-label); letter-spacing: .04em;
+  border-style: dashed; border-color: color-mix(in srgb, var(--text) 26%, transparent); }
+.b2br-badge--wait i { font-size: 11px; color: var(--muted); }
+/* The narrowest unread cut: still « nouvelle » although the reminder has already
+   been through — dotted, like the other dashed cuts, and never the accent fill. */
+.capp-chip--never { border-style: dashed;
+  border-color: color-mix(in srgb, var(--text) 30%, transparent); }
+.capp-chip--never.is-on { color: var(--bg); background: var(--text);
+  border-color: var(--text); }
+/* La coupe des marchés publics : la même rangée d'attentes, mais une lecture
+   de nature — la teinte sourde de la pastille de fiche, pour que la puce et
+   la ligne disent la même chose. */
+.capp-chip--marche { border-color: color-mix(in srgb, var(--accent2) 40%, transparent); }
+.capp-chip--marche i { color: color-mix(in srgb, var(--accent2) 86%, var(--text)); }
+.capp-chip--marche.is-on { color: var(--accent2); border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 12%, transparent); }
+
+/* Les deux pièces du dossier, sur la fiche : deux portes discrètes, ouvertes
+   par un lien signé. Elles se lisent comme des documents joints, pas comme
+   des actions — d'où le cadre, et le PDF écrit à côté du nom. */
+.b2br-pieces { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin: 2px 0 0; padding: 0; }
+.b2br-pieces li { min-width: 0; }
+.b2br-pieces a { display: inline-flex; align-items: center; gap: 6px; max-width: 100%;
+  padding: 5px 11px; border-radius: 999px; white-space: nowrap;
+  font-size: 11.5px; line-height: 1.4; text-decoration: none;
+  color: color-mix(in srgb, var(--text) 86%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  background: color-mix(in srgb, var(--text) 5%, transparent);
+  transition: color .2s ease, border-color .2s ease; }
+.b2br-pieces a:hover { color: var(--accent2); border-color: color-mix(in srgb, var(--accent2) 55%, transparent); }
+.b2br-pieces a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.b2br-pieces i { font-size: 13px; color: var(--accent2); }
+
+/* ============ A WHOLE WEEK: THE ROW ITSELF IS TINTED ===================== */
+/* Past seven days the delay is no longer read badge by badge: the row takes a
+   quiet wash of the second hue, so the urgency is felt before any word is
+   read. The badge still says it in plain language, and the tint stays light
+   enough that a list of four is not a wall of colour. */
+.b2br-row[data-week="yes"] { position: relative; margin-inline: -8px; padding: 8px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--accent2) 7%, transparent);
+  box-shadow: inset 2px 0 0 color-mix(in srgb, var(--accent2) 45%, transparent); }
+/* The row is already marked as « nouvelle » on its leading edge: on those, the
+   wash is enough, the second line would simply double the same edge. */
+.b2br-row[data-week="yes"][data-state="nouvelle"] { box-shadow: none; }
+[dir="rtl"] .b2br-row[data-week="yes"] { box-shadow: inset -2px 0 0 color-mix(in srgb, var(--accent2) 45%, transparent); }
+[dir="rtl"] .b2br-row[data-week="yes"][data-state="nouvelle"] { box-shadow: none; }
+
+/* ============ THE REQUEST THE HEADER REMINDER POINTED AT ================== */
+/* The bar names the oldest waiting request; the box opens on it and rings it a
+   few seconds. The mark is a landmark of the moment, not a permanent state. */
+.b2br-row.is-focus { position: relative; margin-inline: -8px; padding: 8px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 55%, transparent);
+  animation: b2br-focus-in .34s cubic-bezier(.2,.7,.2,1) both; }
+.b2br-row.is-focus .b2br-ref { color: var(--accent);
+  border-color: var(--accent); font-weight: 600;
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 16%, transparent); }
+.b2br-row.is-focus .b2br-date { color: var(--accent); font-weight: 600; }
+.b2br-row.is-focus:focus { outline: none; }
+.b2br-row.is-focus:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@keyframes b2br-focus-in {
+  from { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 20%, transparent); }
+  to { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 55%, transparent); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .b2br-row.is-focus { animation: none; }
+}
+
+/* The note above the list says which reference is being pointed at, so the
+   ring is never a mystery. */
+.b2br-focusnote { border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 42%, transparent);
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+  color: var(--muted); }
+.b2br-focusnote b { font-family: var(--font-label); font-size: 11px;
+  letter-spacing: .02em; color: var(--accent); }
+
+/* ============ SNOOZE (push a request back to a later day) ============ */
+.b2br-sleep { display: inline-flex; align-items: center; gap: 6px; margin: 0; width: fit-content;
+  padding: 2px 9px; border-radius: 999px; font-family: var(--font-label); font-size: 10px;
+  letter-spacing: .05em; text-transform: uppercase; color: var(--muted);
+  border: 1px dashed color-mix(in srgb, var(--text) 30%, transparent); }
+.b2br-sleep i { font-size: 12px; color: var(--accent); }
+.b2br-sleep-clear { border: 0; padding: 0; background: none; cursor: pointer; font: inherit;
+  color: var(--accent2); text-decoration: underline; text-underline-offset: 2px; }
+.b2br-sleep-clear:hover { color: var(--accent); }
+.b2br-sleep-clear:disabled { opacity: .55; cursor: progress; }
+.b2br-snooze { flex: 1 1 100%; display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  margin-top: 2px; padding: 10px 12px; border-radius: 13px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 45%, transparent);
+  background: color-mix(in srgb, var(--accent) 7%, transparent); }
+.b2br-snooze-label { font-size: 12px; color: var(--muted); }
+.b2br-snooze-date { padding: 7px 10px; border-radius: 10px; font-size: 13px; color: var(--text);
+  font-family: var(--font-body); outline: none; box-sizing: border-box;
+  border: 1px solid color-mix(in srgb, var(--text) 20%, transparent);
+  background: color-mix(in srgb, var(--bg) 72%, transparent); }
+.b2br-snooze-date:focus { border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent); }
+.b2br-snooze-quick { display: flex; flex-wrap: wrap; gap: 6px; }
+.b2br-snooze-chip { padding: 5px 10px; border-radius: 999px; cursor: pointer; white-space: nowrap;
+  font-family: var(--font-label); font-size: 10px; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--muted); border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  background: color-mix(in srgb, var(--bg) 55%, transparent);
+  transition: color .18s, border-color .18s; }
+.b2br-snooze-chip:hover { color: var(--accent); border-color: var(--accent); }
+.b2br-snooze-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-inline-start: auto; }
+
+[dir="rtl"] .acct-sum-cell span,
+[dir="rtl"] .b2br-sleep,
+[dir="rtl"] .b2br-snooze-chip { letter-spacing: 0; text-transform: none; font-size: 11px; }
+[dir="rtl"] .acct-sum-cell b { letter-spacing: 0; }
+
+/* ============ SORT CONTROL + CSV EXPORT ============ */
+.b2br-sort { display: flex; flex-wrap: wrap; align-items: center; gap: 3px; padding: 3px;
+  border-radius: 999px; border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  background: color-mix(in srgb, var(--bg) 45%, transparent); }
+.b2br-sort-lead { padding-inline: 9px 4px; font-family: var(--font-label); font-size: 9.5px;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.b2br-sort-btn { display: inline-flex; align-items: center; gap: 4px; cursor: pointer; white-space: nowrap;
+  padding: 5px 10px; border-radius: 999px; border: 1px solid transparent; background: none;
+  color: var(--muted); font-family: var(--font-body); font-size: 11.5px;
+  transition: color .18s, background .18s, border-color .18s; }
+.b2br-sort-btn i { font-size: 13px; }
+.b2br-sort-btn:hover { color: var(--accent); }
+.b2br-sort-btn.is-on { color: var(--accent2); background: color-mix(in srgb, var(--text) 9%, transparent);
+  border-color: color-mix(in srgb, var(--text) 12%, transparent); }
+.b2br-csv { white-space: nowrap; }
+.b2br-csv.is-ok { color: var(--accent2); border-color: color-mix(in srgb, var(--accent2) 45%, transparent); }
+/* The short sheet beside the full export: same family, dotted edge — it holds
+   a work list, not the whole file. */
+.b2br-csv--never { border-style: dashed; }
+.b2br-csv--never.is-ok { border-style: solid; }
+
+/* ============ SUMMARY STATE PICKER (B2B workbook) ============ */
+/* The second tab counts a slice the reader chooses: a small panel above the
+   export, so the pick never crowds the toolbar. */
+.b2bx { position: relative; display: inline-flex; }
+.b2bx-toggle { white-space: nowrap; }
+.b2bx-toggle.is-on { border-color: color-mix(in srgb, var(--accent2) 45%, transparent);
+  color: var(--accent2); }
+.b2bx-toggle b { font-family: var(--font-label); font-size: 10.5px; font-weight: 600;
+  color: var(--muted); }
+.b2bx-toggle.is-on b { color: var(--accent2); }
+.b2bx-panel {
+  position: absolute;
+  inset-inline-end: 0;
+  top: calc(100% + 6px);
+  z-index: 40;
+  width: 258px;
+  display: grid;
+  gap: 5px;
+  box-sizing: border-box;
+  padding: 11px 12px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  background: var(--surface);
+  box-shadow: 0 14px 34px color-mix(in srgb, var(--text) 16%, transparent);
+}
+.b2bx-lead { margin: 0 0 2px; font-family: var(--font-label); font-size: 10px;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.b2bx-opt { display: flex; align-items: center; gap: 7px; padding: 5px 7px; border-radius: 9px;
+  cursor: pointer; font-size: 12px; color: var(--text); border: 1px solid transparent; }
+.b2bx-opt:hover { background: color-mix(in srgb, var(--accent2) 8%, transparent); }
+.b2bx-opt[data-on="yes"] { border-color: color-mix(in srgb, var(--accent2) 30%, transparent); }
+.b2bx-opt input { width: 13px; height: 13px; accent-color: var(--accent2); cursor: pointer;
+  flex: 0 0 auto; margin: 0; }
+.b2bx-opt input:disabled { cursor: not-allowed; }
+.b2bx-opt span { flex: 1 1 auto; min-width: 0; }
+.b2bx-opt i { font-size: 13px; color: var(--muted); }
+.b2bx-opt[data-on="yes"] i { color: var(--accent2); }
+.b2bx-note { margin: 3px 0 0; font-size: 10px; line-height: 1.45; color: var(--muted); }
+/* Le périmètre est mémorisé : la ligne le dit, en retrait, pour que la
+   prochaine exportation ne surprenne personne. */
+.b2bx-note--kept {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  margin-top: 5px;
+  padding-top: 5px;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 12%, transparent);
+  font-style: italic;
+}
+.b2bx-note--kept i { font-size: 11px; line-height: 1.4; flex: 0 0 auto; }
+
+/* ---- les adresses de la Synthèse, copiables depuis la boîte ---- */
+/* Le panneau est plus large que celui des états : une adresse entière doit se
+   lire, et le bouton qui la copie se tient juste à côté. */
+.b2bx-panel--links {
+  width: 372px;
+  gap: 7px;
+}
+.b2bx-link {
+  display: grid;
+  gap: 3px;
+  padding: 6px 7px;
+  border-radius: 9px;
+  border: 1px solid color-mix(in srgb, var(--accent2) 24%, transparent);
+  background: color-mix(in srgb, var(--accent2) 5%, var(--surface));
+}
+.b2bx-link-l {
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  line-height: 1.4;
+  color: var(--text);
+}
+.b2bx-link-url {
+  display: block;
+  font-family: var(--font-label);
+  font-size: 10px;
+  line-height: 1.4;
+  color: var(--muted);
+  word-break: break-all;
+}
+.b2bx-link-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  width: fit-content;
+  margin-top: 2px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--accent2) 45%, transparent);
+  background: none;
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--accent2) 86%, var(--text));
+  cursor: pointer;
+}
+.b2bx-link-copy i { font-size: 11px; color: inherit; }
+.b2bx-link-copy:hover { color: var(--accent2); border-style: solid; }
+.b2bx-link-copy.is-ok { color: var(--accent2); border-style: solid; border-color: var(--accent2); }
+[dir="rtl"] .b2bx-lead { letter-spacing: 0; text-transform: none; font-size: 11px; }
+@media (max-width: 640px) {
+  .b2bx { display: flex; width: 100%; }
+  .b2bx-toggle { width: 100%; justify-content: center; }
+  .b2bx-panel { inset-inline: 0; width: auto; }
+  .b2bx-panel--links { width: auto; }
+}
+[dir="rtl"] .b2br-sort-lead { letter-spacing: 0; text-transform: none; font-size: 11px; }
+
+/* ============ AVERAGE REPLY TIME (summary cell) ============ */
+.acct-sum-cell--avg[data-on="yes"] b { color: var(--accent2); }
+.acct-sum-cell--avg { min-width: 118px; }
+
+/* ============ PERIOD FILTER ============ */
+.b2br-period { border-style: dashed; }
+
+/* ============ CLOSING REASON (motif) ============ */
+.b2br-solved { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0; width: fit-content;
+  font-family: var(--font-label); font-size: 10px; letter-spacing: .05em; text-transform: uppercase;
+  color: var(--accent2); padding: 3px 9px; border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent2) 34%, transparent);
+  background: color-mix(in srgb, var(--accent2) 9%, transparent); }
+.b2br-solved i { font-size: 12px; }
+.b2br-motif { display: inline-flex; align-items: center; gap: 4px; padding-inline-start: 8px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--accent2) 32%, transparent);
+  text-transform: none; letter-spacing: 0; font-family: var(--font-body); font-size: 11.5px; }
+.b2br-motif i { font-size: 12px; }
+[dir="rtl"] .b2br-solved { letter-spacing: 0; text-transform: none; font-size: 11px; }
+
+.b2br-solve { flex: 1 1 100%; display: grid; gap: 8px;
+  margin-top: 2px; padding: 11px 13px; border-radius: 13px;
+  border: 1px dashed color-mix(in srgb, var(--accent2) 45%, transparent);
+  background: color-mix(in srgb, var(--accent2) 7%, transparent); }
+.b2br-solve-lead { display: inline-flex; align-items: center; gap: 6px; margin: 0;
+  font-family: var(--font-label); font-size: 10px; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--accent2); }
+.b2br-solve-lead i { font-size: 13px; }
+.b2br-solve-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.b2br-solve-chip { padding: 5px 11px; border-radius: 999px; cursor: pointer; white-space: nowrap;
+  font-family: var(--font-body); font-size: 11.5px; color: var(--muted);
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  background: color-mix(in srgb, var(--bg) 55%, transparent);
+  transition: color .18s, border-color .18s, background .18s; }
+.b2br-solve-chip:hover { color: var(--accent2); border-color: var(--accent2); }
+.b2br-solve-chip.is-on { color: var(--accent2); border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 14%, transparent); }
+.b2br-solve-note { display: grid; gap: 4px; font-size: 11.5px; color: var(--muted); }
+.b2br-solve-note input { width: 100%; box-sizing: border-box; padding: 8px 10px; border-radius: 10px;
+  font-family: var(--font-body); font-size: 12.5px; color: var(--text); outline: none;
+  border: 1px solid color-mix(in srgb, var(--text) 20%, transparent);
+  background: color-mix(in srgb, var(--bg) 72%, transparent); }
+.b2br-solve-note input:focus { border-color: var(--accent2);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent2) 16%, transparent); }
+.b2br-solve-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+[dir="rtl"] .b2br-solve-lead { letter-spacing: 0; text-transform: none; font-size: 11px; }
+
+@media (max-width: 620px) {
+  .acct-sum { flex-direction: column; align-items: stretch; }
+  .acct-sum-nums { justify-content: stretch; }
+  .acct-sum-cell { flex: 1 1 40%; }
+  .acct-sum-open { justify-content: center; }
+  .b2br-snooze-actions { margin-inline-start: 0; }
+  .b2br-snooze-actions .ad-btn { flex: 1 1 auto; justify-content: center; }
+  .b2br-solve-actions .ad-btn { flex: 1 1 auto; justify-content: center; }
+  .b2br-period { width: 100%; }
+  .b2br-motifs { width: 100%; }
+}
+
+/* ============ CLOSING REASON FILTER (read back what was lost) ============ */
+.b2br-motifs { border-style: dashed; }
+.b2br-motifs .b2br-sort-btn .capp-n { margin-inline-start: 2px; font-size: 10px; opacity: .78; }
+
+/* --- Default reason, remembered per workshop --- */
+.b2br-solve-chip i { margin-inline-start: 4px; font-size: 10px; color: var(--accent); }
+.b2br-solve-star { display: inline-flex; align-items: center; gap: 6px; width: fit-content; cursor: pointer;
+  padding: 4px 10px; border-radius: 999px; font-family: var(--font-label); font-size: 10px;
+  letter-spacing: .04em; text-transform: uppercase; color: var(--muted);
+  border: 1px dashed color-mix(in srgb, var(--text) 26%, transparent);
+  background: color-mix(in srgb, var(--bg) 45%, transparent);
+  transition: color .18s, border-color .18s; }
+.b2br-solve-star i { font-size: 12px; }
+.b2br-solve-star:hover { color: var(--accent); border-color: var(--accent); }
+.b2br-solve-star:disabled { opacity: .6; cursor: progress; }
+.b2br-solve-saved { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0;
+  width: fit-content; padding: 3px 10px; border-radius: 999px;
+  font-family: var(--font-label); font-size: 10px; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  background: color-mix(in srgb, var(--accent) 11%, transparent); }
+.b2br-solve-saved i { font-size: 11px; }
+.b2br-solve-clear { border: 0; padding: 0; background: none; cursor: pointer; font: inherit;
+  color: var(--accent2); text-decoration: underline; text-underline-offset: 2px; }
+.b2br-solve-clear:hover { color: var(--accent); }
+.b2br-solve-clear:disabled { opacity: .55; cursor: progress; }
+[dir="rtl"] .b2br-solve-star,
+[dir="rtl"] .b2br-solve-saved { letter-spacing: 0; text-transform: none; font-size: 11px; }
+
+/* ============ MONTH REASON BREAKDOWN (summary strip) ============ */
+.acct-sum-motifs { flex: 1 1 100%; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px;
+  margin-top: 2px; padding-top: 11px;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 16%, transparent); }
+.acct-sum-motifs-lead { display: inline-flex; align-items: center; gap: 5px; flex: 0 0 auto;
+  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--muted); }
+.acct-sum-motifs-lead i { font-size: 13px; color: var(--accent2); }
+.acct-sum-motifs-empty { font-size: 11.5px; color: var(--muted); font-style: italic; }
+
+.acct-sum-bar { flex: 1 1 180px; display: flex; gap: 2px; height: 9px; min-width: 140px;
+  border-radius: 999px; overflow: hidden;
+  background: color-mix(in srgb, var(--text) 7%, transparent); }
+.acct-sum-bar span { display: block; flex-basis: 0; min-width: 4px; border-radius: 2px; }
+
+.acct-sum-legend { list-style: none; display: flex; flex-wrap: wrap; gap: 4px 10px;
+  margin: 0; padding: 0; }
+.acct-sum-legend li { display: inline-flex; align-items: center; gap: 5px; font-size: 11px;
+  color: var(--muted); white-space: nowrap; }
+.acct-sum-legend li i { width: 7px; height: 7px; border-radius: 2px; flex: 0 0 auto;
+  background: color-mix(in srgb, var(--text) 30%, transparent); }
+.acct-sum-legend li b { font-family: var(--font-label); font-size: 11.5px; font-weight: 600;
+  color: var(--text); }
+
+/* One hue per reason: the bar and its legend chip always match. */
+.acct-sum-bar span[data-motif="devis"],
+.acct-sum-legend li[data-motif="devis"] i { background: var(--accent); }
+.acct-sum-bar span[data-motif="client"],
+.acct-sum-legend li[data-motif="client"] i { background: var(--accent2); }
+.acct-sum-bar span[data-motif="hors"],
+.acct-sum-legend li[data-motif="hors"] i {
+  background: color-mix(in srgb, var(--accent) 52%, var(--text)); }
+.acct-sum-bar span[data-motif="delai"],
+.acct-sum-legend li[data-motif="delai"] i {
+  background: color-mix(in srgb, var(--accent2) 52%, var(--text)); }
+.acct-sum-bar span[data-motif="sansSuite"],
+.acct-sum-legend li[data-motif="sansSuite"] i {
+  background: color-mix(in srgb, var(--text) 42%, transparent); }
+.acct-sum-bar span[data-motif="none"],
+.acct-sum-legend li[data-motif="none"] i {
+  background: repeating-linear-gradient(135deg,
+    color-mix(in srgb, var(--text) 26%, transparent) 0 2px,
+    transparent 2px 4px); }
+.acct-sum-legend li[data-motif="none"] { color: var(--accent2); }
+
+[dir="rtl"] .acct-sum-motifs-lead { letter-spacing: 0; text-transform: none; font-size: 11px; }
+
+/* ============ CLOSED WITH NO REASON: SAY IT, THEN LET IT BE FIXED ============ */
+.b2br-nomotif { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px;
+  margin: 0 0 12px; padding: 9px 13px; border-radius: 13px;
+  font-size: 12.5px; line-height: 1.5; color: var(--accent2);
+  border: 1px dashed color-mix(in srgb, var(--accent2) 50%, transparent);
+  background: color-mix(in srgb, var(--accent2) 9%, transparent); }
+.b2br-nomotif i { font-size: 15px; color: var(--accent); }
+.b2br-nomotif span { flex: 1 1 200px; min-width: 0; }
+.b2br-nomotif-cta { display: inline-flex; align-items: center; gap: 4px; cursor: pointer;
+  white-space: nowrap; border: 0; background: none; padding: 0; font: inherit;
+  font-family: var(--font-label); font-size: 10px; letter-spacing: .05em; text-transform: uppercase;
+  color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.b2br-nomotif-cta:hover { color: var(--accent2); }
+.b2br-nomotif-cta i { font-size: 12px; color: currentColor; }
+
+.b2br-sort-btn--missing { border-style: dashed;
+  border-color: color-mix(in srgb, var(--accent2) 45%, transparent); }
+.b2br-sort-btn--missing i { color: var(--accent); }
+.b2br-sort-btn--missing.is-on { color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 14%, transparent);
+  border-color: var(--accent2); }
+
+.b2br-solved[data-missing="yes"] { color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 48%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.b2br-solved[data-missing="yes"] .b2br-motif { color: var(--accent);
+  border-inline-start-color: color-mix(in srgb, var(--accent) 34%, transparent); }
+
+.b2br-fix { white-space: nowrap; }
+.b2br-fix--missing { color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.b2br-fix-panel { border-color: color-mix(in srgb, var(--accent) 42%, transparent);
+  background: color-mix(in srgb, var(--accent) 6%, transparent); }
+[dir="rtl"] .b2br-nomotif-cta { letter-spacing: 0; text-transform: none; font-size: 11px; }
+
+/* ============ UNDO A BULK FILL (right after the confirmation) ============ */
+.b2br-notice { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
+.b2br-notice > span { flex: 1 1 200px; min-width: 0; }
+.b2br-undo { display: inline-flex; align-items: center; gap: 4px; flex: 0 0 auto; white-space: nowrap;
+  cursor: pointer; border: 0; background: none; padding: 0;
+  font-family: var(--font-label); font-size: 10.5px; letter-spacing: .05em; text-transform: uppercase;
+  color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.b2br-undo i { font-size: 12px; }
+.b2br-undo:hover { color: var(--accent2); }
+.b2br-undo:disabled { opacity: .55; cursor: progress; }
+[dir="rtl"] .b2br-undo { letter-spacing: 0; text-transform: none; font-size: 11px; }
+
+/* ============ DOCUMENTED CLOSURES RATE (summary strip) ============ */
+.acct-sum-cell--trace { min-width: 112px; }
+.acct-sum-cell--trace[data-on="yes"] b { color: var(--accent2); }
+/* Here more documented closures is the good direction: the hues swap. */
+.acct-sum-cell .acct-sum-delta.b2b-trace-delta[data-dir="up"] { color: var(--accent2); }
+.acct-sum-cell .acct-sum-delta.b2b-trace-delta[data-dir="down"] { color: var(--accent); }
+
+/* ============ FILL THE MISSING REASONS IN BULK ============ */
+.b2br-bulk { display: grid; gap: 9px; margin: -2px 0 12px; padding: 12px 14px; border-radius: 14px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 52%, transparent);
+  background: color-mix(in srgb, var(--accent) 7%, transparent); }
+.b2br-bulk-lead { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0;
+  font-family: var(--font-label); font-size: 10px; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--accent); }
+.b2br-bulk-lead i { font-size: 13px; }
+.b2br-bulk-lead .capp-n { font-family: var(--font-label); font-size: 10px; opacity: .85; }
+.b2br-bulk-row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 8px; }
+.b2br-bulk-row .b2br-solve-note { flex: 1 1 240px; min-width: 0; }
+.b2br-bulk-go { white-space: nowrap; }
+.b2br-bulk-err { margin: 0; }
+[dir="rtl"] .b2br-bulk-lead { letter-spacing: 0; text-transform: none; font-size: 11px; }
+
+/* ============ MONTH vs LAST MONTH (summary strip) ============ */
+.acct-sum-cell .acct-sum-delta { display: inline-flex; align-items: center; gap: 3px; margin-top: 3px;
+  font-family: var(--font-label); font-size: 10px; letter-spacing: .02em; text-transform: none;
+  color: var(--muted); white-space: nowrap; }
+.acct-sum-cell .acct-sum-delta i { font-size: 11px; }
+/* A shorter reply delay is a better month. */
+.acct-sum-cell .acct-sum-delta[data-dir="down"] { color: var(--accent2); }
+.acct-sum-cell .acct-sum-delta[data-dir="up"] { color: var(--accent); }
+
+/* The rebuilt slice of the month's documented share: a quiet pill, so the big
+   number still reads first and this line explains part of it. */
+.acct-sum-cell .acct-sum-lot { display: inline-flex; align-items: center; gap: 3px; margin-top: 3px;
+  padding: 1px 7px; border-radius: 999px; white-space: nowrap;
+  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .02em; text-transform: none;
+  color: var(--accent2); border: 1px dashed color-mix(in srgb, var(--accent2) 45%, transparent);
+  background: color-mix(in srgb, var(--accent2) 9%, transparent); }
+.acct-sum-cell .acct-sum-lot i { font-size: 10px; }
+[dir="rtl"] .acct-sum-cell .acct-sum-lot { letter-spacing: 0; font-size: 10.5px; }
+
+/* The other face of the same trace: the corrections made this month. Quieter
+   than the bulk share, because it is a footnote on the score, not the score. */
+.acct-sum-cell .acct-sum-cleared { display: inline-flex; align-items: center; gap: 3px;
+  margin-top: 2px; padding: 1px 7px; border-radius: 999px; white-space: nowrap;
+  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .02em; text-transform: none;
+  color: var(--muted); border: 1px dashed color-mix(in srgb, var(--text) 26%, transparent);
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  cursor: pointer; transition: color .18s, border-color .18s, background .18s; }
+/* The chip is a door: it opens the box on that month's corrections. */
+.acct-sum-cell .acct-sum-cleared:hover, .acct-sum-cell .acct-sum-cleared:focus-visible {
+  color: var(--accent); border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  background: color-mix(in srgb, var(--accent) 11%, transparent); }
+.acct-sum-cell .acct-sum-cleared i { font-size: 10px; color: var(--accent); }
+[dir="rtl"] .acct-sum-cell .acct-sum-cleared { letter-spacing: 0; font-size: 10.5px; }
+
+.acct-sum-trend { display: inline-flex; align-items: center; gap: 4px; flex: 0 0 auto;
+  padding: 2px 9px; border-radius: 999px; white-space: nowrap;
+  font-family: var(--font-label); font-size: 10.5px; letter-spacing: .02em;
+  color: var(--muted); border: 1px solid color-mix(in srgb, var(--text) 20%, transparent);
+  background: color-mix(in srgb, var(--bg) 40%, transparent); }
+.acct-sum-trend i { font-size: 11px; }
+.acct-sum-trend em { font-style: normal; font-size: 9.5px; letter-spacing: .05em;
+  text-transform: uppercase; opacity: .8; }
+/* More closures than last month is the good direction for volume. */
+.acct-sum-trend[data-dir="up"] { color: var(--accent2);
+  border-color: color-mix(in srgb, var(--accent2) 40%, transparent); }
+.acct-sum-trend[data-dir="down"] { color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent); }
+[dir="rtl"] .acct-sum-trend,
+[dir="rtl"] .acct-sum-trend em { letter-spacing: 0; text-transform: none; font-size: 11px; }
+
+/* ============ REASONS OVER TWELVE MONTHS (no spreadsheet needed) ============ */
+.b2br-trend-toggle { white-space: nowrap; }
+.b2br-trend-toggle.is-on { color: var(--accent2);
+  border-color: color-mix(in srgb, var(--accent2) 45%, transparent);
+  background: color-mix(in srgb, var(--accent2) 10%, transparent); }
+
+.b2br-trend { display: grid; gap: 9px; margin: 0 0 14px; padding: 12px 14px; border-radius: 14px;
+  border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
+  background: color-mix(in srgb, var(--bg) 45%, transparent); }
+.b2br-trend-lead { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0;
+  font-family: var(--font-label); font-size: 10px; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--accent2); }
+.b2br-trend-lead i { font-size: 13px; }
+.b2br-trend-lead em { font-style: normal; text-transform: none; letter-spacing: 0;
+  font-family: var(--font-body); font-size: 11.5px; color: var(--muted); }
+.b2br-trend-empty { margin: 0; font-size: 12px; font-style: italic; color: var(--muted); }
+
+.b2br-trend-legend { list-style: none; display: flex; flex-wrap: wrap; gap: 4px 11px;
+  margin: 0; padding: 0; }
+.b2br-trend-legend li { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap;
+  font-size: 10.5px; color: var(--muted); }
+.b2br-trend-legend li i { width: 7px; height: 7px; flex: 0 0 auto; border-radius: 2px;
+  background: color-mix(in srgb, var(--text) 30%, transparent); }
+
+.b2br-trend-rows { list-style: none; display: grid; gap: 4px; margin: 0; padding: 0; }
+.b2br-trend-rows > li { display: grid; grid-template-columns: 58px 1fr 26px;
+  align-items: center; gap: 8px; }
+.b2br-trend-month { display: flex; align-items: center; gap: 1px; min-width: 0;
+  font-family: var(--font-label); font-size: 10.5px; color: var(--muted); white-space: nowrap; }
+/* The label shrinks and ellipsises on its own: the bulk mark keeps its room. */
+.b2br-trend-month-txt { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.b2br-trend-track { position: relative; display: block; height: 14px; border-radius: 5px; overflow: hidden;
+  background: color-mix(in srgb, var(--text) 7%, transparent); }
+
+/* Each month carries two readings: the volume (the bar) and the trace quality
+   (the thin line under it), so the target can be drawn as a real threshold. */
+.b2br-trend-stack { display: grid; gap: 3px; min-width: 0; }
+.b2br-trend-share { position: relative; display: block; height: 3px; border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 10%, transparent); }
+.b2br-trend-share-fill { display: block; height: 100%; border-radius: 999px;
+  background: color-mix(in srgb, var(--accent2) 68%, transparent); }
+.b2br-trend-share-goal { position: absolute; top: -3px; bottom: -3px; width: 2px;
+  margin-inline-start: -1px; border-radius: 1px; background: var(--accent); opacity: .85; }
+
+/* Missed the target: the month says it, in the colour of attention. */
+.b2br-trend-share[data-below="yes"] .b2br-trend-share-fill { background: var(--accent); }
+.b2br-trend-rows > li[data-below="yes"] .b2br-trend-month { color: var(--accent); }
+.b2br-trend-rows > li[data-below="yes"] .b2br-trend-total { color: var(--accent); }
+.b2br-trend-rows > li[data-below="yes"] .b2br-trend-total::after {
+  content: '!'; margin-inline-start: 1px; font-size: 9px; font-weight: 700; }
+
+.b2br-trend-goalnote { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 5px;
+  margin: 0; font-size: 11px; line-height: 1.45; color: var(--muted); }
+.b2br-trend-goalnote i { font-size: 13px; color: var(--accent); }
+.b2br-trend-bar { display: flex; gap: 1px; height: 100%; min-width: 3px; border-radius: 5px;
+  overflow: hidden; transition: width .25s ease; }
+.b2br-trend-bar > span { display: block; flex-basis: 0; min-width: 2px; }
+.b2br-trend-total { font-family: var(--font-label); font-size: 11px; text-align: end;
+  color: var(--text); }
+.b2br-trend-rows > li[data-empty="yes"] .b2br-trend-month { opacity: .5; }
+.b2br-trend-rows > li[data-empty="yes"] .b2br-trend-total { color: var(--muted); opacity: .6; }
+
+/* One hue per reason, exactly as in the summary strip. */
+.b2br-trend-bar span[data-motif="devis"],
+.b2br-trend-legend li[data-motif="devis"] i { background: var(--accent); }
+.b2br-trend-bar span[data-motif="client"],
+.b2br-trend-legend li[data-motif="client"] i { background: var(--accent2); }
+.b2br-trend-bar span[data-motif="hors"],
+.b2br-trend-legend li[data-motif="hors"] i {
+  background: color-mix(in srgb, var(--accent) 52%, var(--text)); }
+.b2br-trend-bar span[data-motif="delai"],
+.b2br-trend-legend li[data-motif="delai"] i {
+  background: color-mix(in srgb, var(--accent2) 52%, var(--text)); }
+.b2br-trend-bar span[data-motif="sansSuite"],
+.b2br-trend-legend li[data-motif="sansSuite"] i {
+  background: color-mix(in srgb, var(--text) 42%, transparent); }
+.b2br-trend-bar span[data-motif="none"],
+.b2br-trend-legend li[data-motif="none"] i {
+  background: repeating-linear-gradient(135deg,
+    color-mix(in srgb, var(--text) 26%, transparent) 0 2px, transparent 2px 4px); }
+.b2br-trend-legend li[data-motif="none"] { color: var(--accent2); }
+[dir="rtl"] .b2br-trend-lead { letter-spacing: 0; text-transform: none; font-size: 11px; }
+
+/* ============ MONTHLY TARGET FOR DOCUMENTED CLOSURES ============ */
+.b2br-goal { display: grid; gap: 8px; margin: 4px 0 14px; padding: 12px 14px; border-radius: 16px;
+  border: 1px solid color-mix(in srgb, var(--text) 13%, transparent);
+  background: color-mix(in srgb, var(--bg) 45%, transparent); }
+.b2br-goal-head { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.b2br-goal-ico { flex: 0 0 auto; width: 32px; height: 32px; display: inline-flex; align-items: center;
+  justify-content: center; border-radius: 10px; font-size: 17px; color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 14%, transparent); }
+.b2br-goal[data-state="below"] .b2br-goal-ico { color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 15%, transparent); }
+.b2br-goal-txt { flex: 1 1 220px; min-width: 0; }
+.b2br-goal-txt strong { display: block; font-size: 13.5px; }
+.b2br-goal-txt p { margin: 3px 0 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
+
+.b2br-goal-state { display: inline-flex; align-items: center; gap: 4px; flex: 0 0 auto;
+  white-space: nowrap; padding: 3px 9px; border-radius: 999px;
+  font-family: var(--font-label); font-size: 10px; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--accent2); border: 1px solid color-mix(in srgb, var(--accent2) 40%, transparent);
+  background: color-mix(in srgb, var(--accent2) 10%, transparent); }
+.b2br-goal-state i { font-size: 11px; }
+.b2br-goal-state[data-state="below"] { color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent); }
+
+.b2br-goal-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.b2br-goal-chip { padding: 5px 11px; border-radius: 999px; cursor: pointer; white-space: nowrap;
+  font-family: var(--font-label); font-size: 10.5px; letter-spacing: .03em; color: var(--muted);
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  background: color-mix(in srgb, var(--bg) 55%, transparent);
+  transition: color .18s, border-color .18s, background .18s; }
+.b2br-goal-chip:hover { color: var(--accent2); border-color: var(--accent2); }
+.b2br-goal-chip.is-on { color: var(--accent2); border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 14%, transparent); }
+.b2br-goal-chip:disabled { opacity: .55; cursor: progress; }
+.b2br-goal-clear { padding: 4px 8px; border: 0; background: none; cursor: pointer; font: inherit;
+  font-family: var(--font-label); font-size: 10px; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--accent2); text-decoration: underline; text-underline-offset: 2px; }
+.b2br-goal-clear:disabled { opacity: .55; cursor: progress; }
+
+/* The second threshold, on the same panel as the target: the trace and the wait
+   are two settings of one workshop, and saving them side by side keeps the
+   strip, the table and the export on one number of days. */
+.b2br-goal-wait { display: grid; gap: 8px; padding-top: 9px;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 16%, transparent); }
+.b2br-goal-ico--wait { color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent); }
+.b2br-goal-state--wait { color: var(--accent2);
+  border-color: color-mix(in srgb, var(--accent2) 38%, transparent);
+  background: color-mix(in srgb, var(--accent2) 9%, transparent); }
+.b2br-goal-chip--wait.is-on { color: var(--accent); border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 13%, transparent); }
+.b2br-goal-chip--wait:hover { color: var(--accent); border-color: var(--accent); }
+
+.b2br-goal-warn { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: 0;
+  padding: 8px 11px; border-radius: 12px; font-size: 12px; line-height: 1.5; color: var(--accent);
+  border: 1px dashed color-mix(in srgb, var(--accent) 52%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent); }
+.b2br-goal-warn i { font-size: 15px; }
+.b2br-goal-warn span { flex: 1 1 200px; min-width: 0; }
+.b2br-goal-cta { display: inline-flex; align-items: center; gap: 4px; cursor: pointer;
+  white-space: nowrap; border: 0; background: none; padding: 0; font: inherit;
+  font-family: var(--font-label); font-size: 10px; letter-spacing: .05em; text-transform: uppercase;
+  color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.b2br-goal-cta:hover { color: var(--accent2); }
+[dir="rtl"] .b2br-goal-state,
+[dir="rtl"] .b2br-goal-clear,
+[dir="rtl"] .b2br-goal-cta { letter-spacing: 0; text-transform: none; font-size: 11px; }
+
+/* The threshold is a decision: it gets a date, and a list of its own moves. */
+.b2br-goal-hist { display: grid; gap: 6px; padding-top: 2px;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 14%, transparent); }
+.b2br-goal-hist-toggle { display: inline-flex; align-items: center; gap: 5px; width: fit-content;
+  margin-top: 6px; cursor: pointer; padding: 4px 10px; border-radius: 999px; background: none;
+  font: inherit; font-family: var(--font-label); font-size: 10px; letter-spacing: .04em;
+  text-transform: uppercase; color: var(--muted);
+  border: 1px dashed color-mix(in srgb, var(--text) 24%, transparent);
+  transition: color .18s, border-color .18s; }
+.b2br-goal-hist-toggle i { font-size: 12px; }
+.b2br-goal-hist-toggle:hover { color: var(--accent2); border-color: var(--accent2); }
+.b2br-goal-hist-toggle.is-on { color: var(--accent2); border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 45%, transparent);
+  background: color-mix(in srgb, var(--accent2) 9%, transparent); }
+
+.b2br-goal-hist-list { list-style: none; display: grid; gap: 3px; margin: 0; padding: 0; }
+.b2br-goal-hist-item { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px;
+  padding: 4px 9px; border-radius: 10px; font-size: 11.5px; color: var(--text);
+  background: color-mix(in srgb, var(--text) 5%, transparent); }
+.b2br-goal-hist-date { flex: 1 1 120px; min-width: 0; color: var(--muted); font-size: 11.5px; }
+.b2br-goal-hist-val { flex: 0 0 auto; white-space: nowrap; padding: 1px 8px; border-radius: 999px;
+  font-family: var(--font-label); font-size: 10.5px; letter-spacing: .02em;
+  color: var(--accent2); border: 1px solid color-mix(in srgb, var(--accent2) 38%, transparent);
+  background: color-mix(in srgb, var(--accent2) 9%, transparent); }
+.b2br-goal-hist-val[data-state="off"] { color: var(--muted);
+  border-color: color-mix(in srgb, var(--text) 22%, transparent);
+  background: color-mix(in srgb, var(--text) 6%, transparent); }
+[dir="rtl"] .b2br-goal-hist-toggle { letter-spacing: 0; text-transform: none; font-size: 11px; }
+
+/* ============ ONE-CLICK CLOSE WITH THE DEFAULT REASON ============ */
+.b2br-quick { white-space: nowrap; }
+.b2br-quick em { font-style: normal; font-size: 11px; opacity: .82; }
+.b2br-quick:disabled { opacity: .6; cursor: progress; }
+
+@media (max-width: 620px) {
+  .b2br-trend-rows > li { grid-template-columns: 52px 1fr 22px; gap: 6px; }
+  .b2br-goal-state { order: 3; }
+  .b2br-quick { flex: 1 1 auto; justify-content: center; }
+}
+
+/* ============ THE MONTH THAT JUST ENDED (end-of-month review) ============ */
+.b2br-recap { display: grid; gap: 8px; margin: 0 0 14px; padding: 12px 14px; border-radius: 16px;
+  border: 1px solid color-mix(in srgb, var(--text) 13%, transparent);
+  background: color-mix(in srgb, var(--bg) 45%, transparent); }
+.b2br-recap[data-state="missed"] { border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  background: color-mix(in srgb, var(--accent) 6%, transparent); }
+
+.b2br-recap-head { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.b2br-recap-ico { flex: 0 0 auto; width: 32px; height: 32px; display: inline-flex; align-items: center;
+  justify-content: center; border-radius: 10px; font-size: 17px; color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 14%, transparent); }
+.b2br-recap[data-state="missed"] .b2br-recap-ico { color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 15%, transparent); }
+.b2br-recap-txt { flex: 1 1 220px; min-width: 0; }
+.b2br-recap-txt strong { display: block; font-size: 13.5px; }
+.b2br-recap-txt p { margin: 3px 0 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
+
+.b2br-recap-state { display: inline-flex; align-items: center; gap: 4px; flex: 0 0 auto;
+  white-space: nowrap; padding: 3px 9px; border-radius: 999px;
+  font-family: var(--font-label); font-size: 10px; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--accent2); border: 1px solid color-mix(in srgb, var(--accent2) 40%, transparent);
+  background: color-mix(in srgb, var(--accent2) 10%, transparent); }
+.b2br-recap-state i { font-size: 11px; }
+.b2br-recap-state[data-state="missed"] { color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent); }
+
+.b2br-recap-gap { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: 0;
+  padding: 8px 11px; border-radius: 12px; font-size: 12px; line-height: 1.5; color: var(--accent);
+  border: 1px dashed color-mix(in srgb, var(--accent) 52%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent); }
+.b2br-recap-gap i { font-size: 15px; }
+.b2br-recap-gap span { flex: 1 1 200px; min-width: 0; }
+/* Nothing left to fix: the same line, in the calm colour of a job done. */
+.b2br-recap-gap[data-state="done"] { color: var(--accent2);
+  border-color: color-mix(in srgb, var(--accent2) 38%, transparent);
+  background: color-mix(in srgb, var(--accent2) 7%, transparent); }
+.b2br-recap-cta { display: inline-flex; align-items: center; gap: 4px; cursor: pointer;
+  white-space: nowrap; border: 0; background: none; padding: 0; font: inherit;
+  font-family: var(--font-label); font-size: 10px; letter-spacing: .05em; text-transform: uppercase;
+  color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.b2br-recap-cta:hover { color: var(--accent2); }
+[dir="rtl"] .b2br-recap-state,
+[dir="rtl"] .b2br-recap-cta { letter-spacing: 0; text-transform: none; font-size: 11px; }
+
+/* Month against month: a share alone says nothing about the direction taken. */
+.b2br-recap-delta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; margin: 0;
+  padding-top: 2px; font-size: 11.5px; color: var(--muted); }
+.b2br-recap-delta > span { display: inline-flex; align-items: center; gap: 4px; min-width: 0; }
+.b2br-recap-delta i { font-size: 12px; }
+.b2br-recap-delta-pts,
+.b2br-recap-delta-gap { white-space: nowrap; }
+.b2br-recap-delta-pts[data-dir="up"],
+.b2br-recap-delta-gap[data-dir="up"] { color: var(--accent2); }
+.b2br-recap-delta-pts[data-dir="down"],
+.b2br-recap-delta-gap[data-dir="down"] { color: var(--accent); }
+.b2br-recap-delta-pts[data-dir="flat"],
+.b2br-recap-delta-gap[data-dir="flat"] { color: var(--muted); }
+.b2br-recap-delta-gap { padding-inline-start: 12px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--text) 16%, transparent); }
+.b2br-recap-delta-note { font-style: italic; color: var(--muted); }
+.b2br-recap-delta-note i { color: var(--muted); }
+
+/* What part of that trace was rebuilt in bulk: the month can hold its target and
+   still owe part of it to a catch-up made after the fact. */
+.b2br-recap-lot { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 5px; margin: 0;
+  width: fit-content; padding: 3px 10px; border-radius: 999px;
+  font-family: var(--font-label); font-size: 10px; letter-spacing: .03em; text-transform: uppercase;
+  color: var(--muted); border: 1px dashed color-mix(in srgb, var(--text) 30%, transparent);
+  background: color-mix(in srgb, var(--text) 5%, transparent); }
+.b2br-recap-lot i { font-size: 12px; color: var(--accent2); flex: 0 0 auto; }
+.b2br-recap-lot span { min-width: 0; }
+/* The line is a door: it opens the inbox on the closures it counts. */
+.b2br-recap-lot--btn { cursor: pointer; text-align: start; transition: border-color .18s ease, color .18s ease, background .18s ease; }
+.b2br-recap-lot--btn:hover { color: var(--accent2);
+  border-color: color-mix(in srgb, var(--accent2) 55%, transparent);
+  background: color-mix(in srgb, var(--accent2) 10%, transparent); }
+.b2br-recap-lot--btn:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
+.b2br-recap-lot-go { margin-inline-start: 2px; opacity: .7; transition: transform .18s ease, opacity .18s ease; }
+.b2br-recap-lot--btn:hover .b2br-recap-lot-go { opacity: 1; transform: translateX(2px); }
+[dir="rtl"] .b2br-recap-lot--btn:hover .b2br-recap-lot-go { transform: translateX(-2px); }
+[dir="rtl"] .b2br-recap-lot { letter-spacing: 0; text-transform: none; font-size: 11px; }
+
+/* Corrections of the month: the catch-ups that were taken back afterwards. */
+.b2br-recap-cleared { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 5px; margin: 0;
+  width: fit-content; padding: 3px 10px; border-radius: 999px;
+  font-family: var(--font-label); font-size: 10px; letter-spacing: .03em; text-transform: uppercase;
+  color: var(--muted); border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  background: color-mix(in srgb, var(--text) 4%, transparent); }
+.b2br-recap-cleared i { font-size: 12px; color: var(--accent); flex: 0 0 auto; }
+.b2br-recap-cleared span { min-width: 0; }
+[dir="rtl"] .b2br-recap-cleared { letter-spacing: 0; text-transform: none; font-size: 11px; }
+
+@media (max-width: 620px) {
+  .b2br-recap-state { order: 3; }
+}
+
+/* ============ GAPS OF A CHOSEN MONTH (not only last month) ============ */
+.b2br-gapmonth { border-style: dashed; }
+.b2br-gapmonth[data-on="yes"] { border-color: color-mix(in srgb, var(--accent2) 55%, transparent);
+  background: color-mix(in srgb, var(--accent2) 11%, transparent); }
+.b2br-gapmonth-field { display: inline-flex; align-items: center; gap: 5px;
+  padding-inline: 8px 4px; border-radius: 999px; cursor: pointer; min-width: 0; }
+.b2br-gapmonth-field > i { font-size: 13px; color: var(--accent); flex: 0 0 auto; }
+.b2br-gapmonth-field select { appearance: none; -webkit-appearance: none; min-width: 0;
+  max-width: 190px; border: 0; background: transparent; padding: 5px 2px; cursor: pointer;
+  font-family: var(--font-body); font-size: 11.5px; color: var(--text); outline: none; }
+.b2br-gapmonth-field select:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
+.b2br-gapmonth[data-on="yes"] .b2br-gapmonth-field select { color: var(--accent2); }
+[dir="rtl"] .b2br-gapmonth .b2br-sort-lead { letter-spacing: 0; text-transform: none; font-size: 11px; }
+
+/* The twelve-month backlog, read next to the month cut: one month is a slice,
+   the total is the size of the problem — and it is a button, so the whole
+   backlog of the window opens in one click. */
+.b2br-gapmonth-sum { display: inline-flex; align-items: center; gap: 5px; flex-wrap: wrap;
+  padding-inline: 10px; border-inline-start: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
+  font-family: var(--font-label); font-size: 10px; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--muted); }
+.b2br-gapmonth-sum i { font-size: 12px; color: var(--accent2); flex: 0 0 auto; }
+button.b2br-gapmonth-sum { border-block: 0; border-inline-end: 0; background: none;
+  cursor: pointer; padding-block: 2px; transition: color .18s; }
+button.b2br-gapmonth-sum:hover { color: var(--accent2); }
+button.b2br-gapmonth-sum:hover i { color: var(--accent); }
+.b2br-gapmonth-sum[aria-pressed="true"] { color: var(--accent2);
+  border-inline-start-color: color-mix(in srgb, var(--accent2) 55%, transparent); }
+.b2br-gapmonth-sum[aria-pressed="true"] i { color: var(--accent); }
+[dir="rtl"] .b2br-gapmonth-sum { letter-spacing: 0; text-transform: none; font-size: 11px; }
+
+@media (max-width: 620px) {
+  .b2br-gapmonth-sum { border-inline-start: 0; padding-inline: 8px;
+    border-top: 1px dashed color-mix(in srgb, var(--text) 18%, transparent);
+    margin-top: 4px; padding-top: 4px; }
+}
+
+@media (max-width: 620px) {
+  .b2br-gapmonth { width: 100%; }
+  .b2br-gapmonth-field select { max-width: none; flex: 1 1 auto; }
+}
+
+/* ============ A REASON CAUGHT UP IN BULK, NOT GIVEN AT THE CLOSE ============ */
+.b2br-lot { display: inline-flex; align-items: center; gap: 3px; flex: 0 0 auto;
+  padding: 1px 7px; border-radius: 999px; white-space: nowrap;
+  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--muted); border: 1px dashed color-mix(in srgb, var(--text) 34%, transparent);
+  background: color-mix(in srgb, var(--text) 6%, transparent); }
+.b2br-lot i { font-size: 11px; color: var(--muted); }
+[dir="rtl"] .b2br-lot { letter-spacing: 0; text-transform: none; font-size: 11px; }
+
+/* ============ ONLY THE REASONS CAUGHT UP IN BULK ============ */
+.b2br-sort-btn--lot { border-style: dashed;
+  border-color: color-mix(in srgb, var(--text) 30%, transparent); }
+.b2br-sort-btn--lot i { color: var(--muted); }
+.b2br-sort-btn--lot:hover { border-color: var(--accent); }
+.b2br-sort-btn--lot.is-on { color: var(--accent2);
+  border-style: solid; border-color: color-mix(in srgb, var(--accent2) 52%, transparent);
+  background: color-mix(in srgb, var(--accent2) 12%, transparent); }
+.b2br-sort-btn--lot.is-on i { color: var(--accent2); }
+
+/* Erasing a catch-up: the reason goes away, the closure owes one again. */
+.b2br-lot-clear { display: inline-flex; align-items: center; gap: 3px; flex: 0 0 auto;
+  white-space: nowrap; cursor: pointer; border: 0; background: none; padding: 0 0 0 2px;
+  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--muted); text-decoration: underline; text-underline-offset: 2px;
+  transition: color .18s; }
+.b2br-lot-clear i { font-size: 11px; }
+.b2br-lot-clear:hover { color: var(--accent); }
+.b2br-lot-clear:disabled { opacity: .55; cursor: progress; }
+[dir="rtl"] .b2br-lot-clear { letter-spacing: 0; text-transform: none; font-size: 11px; padding: 0 2px 0 0; }
+
+/* ============ THE RECONSTRUCTED PART OF THE TRACE LINE (12-month chart) ===== */
+/* On the mini share line, the stretch rebuilt after the fact is hatched: a
+   catch-up stays visible even when the month is above its target. */
+.b2br-trend-share-lot { position: absolute; top: -1px; bottom: -1px; border-radius: 999px;
+  background: repeating-linear-gradient(135deg,
+    color-mix(in srgb, var(--text) 72%, transparent) 0 1.5px,
+    transparent 1.5px 3.5px); }
+.b2br-trend-month-lot { margin-inline-start: 3px; font-size: 9.5px; color: var(--accent2);
+  vertical-align: baseline; }
+/* The bulk mark opens the catch-ups of that month: a button, not a dot. */
+.b2br-trend-month-lot--btn { display: inline-flex; align-items: center; justify-content: center;
+  flex: 0 0 auto; width: 14px; height: 14px; margin-inline-start: 2px; padding: 0; border: 0;
+  border-radius: 4px; background: none; cursor: pointer; line-height: 1;
+  transition: background .18s ease, color .18s ease; }
+.b2br-trend-month-lot--btn i { font-size: 11px; }
+.b2br-trend-month-lot--btn:hover { color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 18%, transparent); }
+.b2br-trend-month-lot--btn:focus-visible { outline: 2px solid var(--accent2); outline-offset: 1px; }
+
+/* The delay grew against the month before: a small arrow and the gap. Smaller
+   than the label so a slow month is noticed, not shouted. */
+.b2br-trend-slow { display: inline-flex; align-items: center; gap: 1px; flex: 0 0 auto;
+  margin-inline-start: 2px; padding: 0 3px; border-radius: 4px;
+  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .02em;
+  color: var(--accent); background: color-mix(in srgb, var(--accent) 13%, transparent); }
+.b2br-trend-slow i { font-size: 8.5px; }
+/* The arrow is a door: one click lists the closures of that very month, so a
+   slowdown is not a dead figure. Kept the same size — it must stay a whisper. */
+.b2br-trend-slow--btn { border: 0; cursor: pointer; padding: 0 3px;
+  font: inherit; font-family: var(--font-label); font-size: 8.5px;
+  letter-spacing: .02em; color: var(--accent);
+  transition: background .18s ease, color .18s ease; }
+.b2br-trend-slow--btn:hover { color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 26%, transparent); }
+.b2br-trend-slow--btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+/* The rise rests on fewer than three measurable closures: a small mark, not a
+   second figure — the arrow keeps its whisper, the weight is said beside it. */
+.b2br-trend-slow-thin { font-size: 9px; margin-inline-start: 1px;
+  color: var(--accent2); flex: 0 0 auto; }
+.b2br-trend-slownote { margin-top: -2px; }
+.b2br-trend-slownote i { color: var(--accent); }
+
+/* The month pointed at by the account strip is framed: the eye lands on it
+   without counting twelve rows, and the note above says why. */
+.b2br-trend-rows > li[data-focus="yes"] {
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 45%, transparent); }
+.b2br-trend-rows > li[data-focus="yes"] .b2br-trend-month { color: var(--accent); }
+.b2br-trend-focusnote i { color: var(--accent); }
+.b2br-trend-lotnote { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 5px;
+  margin: 0; font-size: 11px; line-height: 1.45; color: var(--muted); }
+.b2br-trend-lotnote i { font-size: 13px; color: var(--accent2); }
+
+/* ============ THE CORRECTIONS OF A MONTH (second hatch, 12-month chart) ===== */
+/* A second, opposite hatch: the month knew a catch-up that was erased after the
+   fact. Opposite angle so the two readings never get confused. */
+.b2br-trend-cleared { position: absolute; inset: 0; pointer-events: none;
+  border-radius: 5px;
+  background: repeating-linear-gradient(45deg,
+    color-mix(in srgb, var(--accent) 62%, transparent) 0 1.5px,
+    transparent 1.5px 4.5px); }
+/* The hatch is a door too: one click lists that month's corrections. */
+.b2br-trend-cleared--btn { pointer-events: auto; cursor: pointer; padding: 0; border: 0;
+  transition: background .18s ease, filter .18s ease; }
+.b2br-trend-cleared--btn:hover {
+  background: repeating-linear-gradient(45deg,
+    color-mix(in srgb, var(--accent) 92%, transparent) 0 2px,
+    transparent 2px 4px); }
+.b2br-trend-cleared--btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.b2br-trend-clearednote i { color: var(--accent); }
+
+/* A bar of its own for the corrections: their count is read against the
+   heaviest month, so a month with two corrections stays visible next to one
+   with twelve. The bar is a door: one click lists those fiches. */
+.b2br-trend-fix { position: relative; display: block; width: 100%; height: 4px;
+  padding: 0; border: 0; border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 13%, transparent); }
+.b2br-trend-fix-fill { display: block; height: 100%; border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 72%, transparent);
+  transition: width .25s ease, background .18s ease; }
+.b2br-trend-fix--btn { cursor: pointer; transition: background .18s ease; }
+/* A 4 px bar is a hard target: the hit area grows without moving anything. */
+.b2br-trend-fix--btn::before { content: ""; position: absolute; inset: -4px 0; }
+.b2br-trend-fix--btn:hover { background: color-mix(in srgb, var(--accent) 26%, transparent); }
+.b2br-trend-fix--btn:hover .b2br-trend-fix-fill { background: var(--accent); }
+.b2br-trend-fix--btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ============ FROM THE MONTH REVIEW TO THE CORRECTIONS THEMSELVES ========== */
+.b2br-recap-cleared--btn { cursor: pointer; text-align: start;
+  transition: border-color .18s ease, color .18s ease, background .18s ease; }
+.b2br-recap-cleared--btn:hover { color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.b2br-recap-cleared--btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.b2br-recap-cleared--btn:hover .b2br-recap-lot-go { opacity: 1; transform: translateX(2px); }
+[dir="rtl"] .b2br-recap-cleared--btn:hover .b2br-recap-lot-go { transform: translateX(-2px); }
+
+/* The two doors of the month line: the month's corrections, and all of them. */
+.b2br-recap-doors { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.b2br-recap-chip { display: inline-flex; align-items: center; gap: 5px; cursor: pointer;
+  width: fit-content; max-width: 100%; padding: 3px 10px; border-radius: 999px;
+  font-family: var(--font-label); font-size: 10px; letter-spacing: .03em; text-transform: uppercase;
+  color: var(--muted); border: 1px dashed color-mix(in srgb, var(--text) 26%, transparent);
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  transition: color .18s ease, border-color .18s ease, background .18s ease; }
+.b2br-recap-chip i { font-size: 12px; color: var(--accent); flex: 0 0 auto; }
+.b2br-recap-chip span { min-width: 0; }
+.b2br-recap-chip:hover { color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.b2br-recap-chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+[dir="rtl"] .b2br-recap-chip { letter-spacing: 0; text-transform: none; font-size: 11px; }
+/* The hardest cut of the corrections: the fiches ploughed over twice. */
+.b2br-recap-chip--rework { border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent); }
+.b2br-recap-chip--rework i { color: var(--accent); }
+/* The opposite cut of the same family: corrected, then left in peace. Colder
+   hue, like the reason bar, because this is absence rather than work done. */
+.b2br-recap-chip--stale { border-style: dashed;
+  border-color: color-mix(in srgb, var(--accent2) 42%, transparent); }
+.b2br-recap-chip--stale i { color: var(--accent2); }
+.b2br-recap-chip--stale:hover { color: var(--accent2);
+  border-color: color-mix(in srgb, var(--accent2) 62%, transparent);
+  background: color-mix(in srgb, var(--accent2) 11%, transparent); }
+
+/* The review pre-fills the duel: one click and the two months stand on the
+   chart, so the comparison of the month does not start with two clicks. */
+.b2br-recap-duel { display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
+  width: fit-content; max-width: 100%; padding: 5px 12px; border-radius: 999px;
+  font-family: var(--font-label); font-size: 10.5px; letter-spacing: .03em;
+  color: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  transition: background .18s ease, border-color .18s ease; }
+.b2br-recap-duel i { font-size: 13px; flex: 0 0 auto; }
+.b2br-recap-duel span { min-width: 0; }
+.b2br-recap-duel:hover { border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 15%, transparent); }
+.b2br-recap-duel:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+[dir="rtl"] .b2br-recap-duel { letter-spacing: 0; }
+
+/* Corrections cut: the order is stated, so nobody wonders why the dates jump. */
+.b2br-sortnote { display: flex; align-items: center; gap: 6px; margin: 8px 0 4px;
+  padding: 6px 11px; border-radius: 10px; font-size: 11.5px; line-height: 1.45;
+  color: var(--muted); border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
+  background: color-mix(in srgb, var(--text) 3%, transparent); }
+.b2br-sortnote i { font-size: 13px; color: var(--accent); flex: 0 0 auto; }
+.b2br-sortnote span { min-width: 0; }
+
+/* How many times a closure was taken back, right on the row. */
+.b2br-cleared-times { display: inline-flex; align-items: center; gap: 2px;
+  padding: 1px 6px; border-radius: 999px; font-family: var(--font-label); font-size: 9.5px;
+  letter-spacing: .04em; color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent); }
+.b2br-cleared-times i { font-size: 11px; }
+
+/* ============ ONLY THE CORRECTIONS OF ONE MONTH ========================== */
+.b2br-sort-btn--rework { border-style: dashed;
+  border-color: color-mix(in srgb, var(--text) 30%, transparent); }
+.b2br-sort-btn--rework i { color: var(--accent); }
+.b2br-sort-btn--rework:hover { border-color: var(--accent); }
+.b2br-sort-btn--rework.is-on { color: var(--accent); border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 58%, transparent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent); }
+
+.b2br-sort-btn--cleared { border-style: dashed;
+  border-color: color-mix(in srgb, var(--text) 30%, transparent); }
+.b2br-sort-btn--cleared:hover { border-color: var(--accent); }
+.b2br-sort-btn--cleared.is-on { color: var(--accent); border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.b2br-sort-btn--cleared.is-on i { color: var(--accent); }
+
+/* The original-trace cut of one month, opened from the twelve-month chart. */
+.b2br-sort-btn--origin { border-style: dashed;
+  border-color: color-mix(in srgb, var(--text) 30%, transparent); }
+.b2br-sort-btn--origin:hover { border-color: var(--text); }
+.b2br-sort-btn--origin.is-on { border-style: solid;
+  border-color: color-mix(in srgb, var(--text) 52%, transparent);
+  background: color-mix(in srgb, var(--text) 10%, transparent); }
+
+/* The closures of one month, opened from the slow arrow of the chart. */
+.b2br-sort-btn--month { border-style: dashed;
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent); }
+.b2br-sort-btn--month i { color: var(--accent); }
+.b2br-sort-btn--month.is-on { color: var(--accent); border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 58%, transparent);
+  background: color-mix(in srgb, var(--accent) 13%, transparent); }
+
+/* The original-trace share: a plain, solid line under the documented one —
+   nothing hatched, because nothing here was rebuilt after the fact. */
+.b2br-trend-origin { position: relative; display: block; height: 3px; border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 8%, transparent); }
+.b2br-trend-origin-fill { display: block; height: 100%; border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 58%, transparent);
+  transition: width .25s ease; }
+.b2br-trend-rows > li[data-empty="yes"] .b2br-trend-origin { opacity: .45; }
+/* The solid line is a door too: one click lists the month's original traces. */
+.b2br-trend-origin--btn { width: 100%; padding: 0; border: 0; cursor: pointer;
+  transition: background .18s ease; }
+/* A 3 px line is a hard target: the hit area grows without moving anything. */
+.b2br-trend-origin--btn::before { content: ""; position: absolute; inset: -5px 0; }
+.b2br-trend-origin--btn:hover .b2br-trend-origin-fill {
+  background: color-mix(in srgb, var(--text) 82%, transparent); }
+.b2br-trend-origin--btn:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
+.b2br-trend-lifenote i { color: color-mix(in srgb, var(--text) 58%, transparent); }
+
+/* ============ TWELVE-MONTH BACKLOG, READ FROM THE ACCOUNT STRIP ============ */
+.acct-sum-cell--gap { min-width: 118px; cursor: pointer; text-align: start;
+  font: inherit; color: inherit; border-style: dashed;
+  transition: border-color .18s, background .18s; }
+.acct-sum-cell--gap:hover { border-color: color-mix(in srgb, var(--accent) 62%, transparent); }
+.acct-sum-cell--gap[data-on="yes"] { border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  background: color-mix(in srgb, var(--accent) 11%, transparent); }
+.acct-sum-cell--gap[data-on="yes"] b { color: var(--accent); }
+
+/* The share of the year, next to the backlog: how many months fell under their
+   own target, and — right under it — on how many judged months that rests. */
+.acct-sum-cell--year { min-width: 132px; }
+.acct-sum-cell--year[data-on="yes"] { border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent); }
+.acct-sum-cell--year[data-on="yes"] b { color: var(--accent); }
+.acct-sum-cell--year .acct-sum-year-judged { margin-top: 1px;
+  font-family: var(--font-label); font-size: 9px; letter-spacing: .02em;
+  text-transform: none; white-space: nowrap; color: var(--muted); }
+[dir="rtl"] .acct-sum-cell--year .acct-sum-year-judged { letter-spacing: 0; font-size: 10px; }
+
+/* The depth of the year, read next to its trace: how many months made people
+   wait over a week on average. Same three figures as the year chip above the
+   count, the months it is judged on, the share — read on the wait instead. */
+.acct-sum-cell--wait { min-width: 138px; border-style: dashed; }
+.acct-sum-cell--wait[data-on="yes"] { border-color: color-mix(in srgb, var(--accent2) 48%, transparent);
+  background: color-mix(in srgb, var(--accent2) 9%, transparent); }
+.acct-sum-cell--wait[data-on="yes"] b { color: var(--accent2); }
+.acct-sum-cell--wait .acct-sum-year-judged { margin-top: 1px;
+  font-family: var(--font-label); font-size: 9px; letter-spacing: .02em;
+  text-transform: none; white-space: nowrap; color: var(--muted); }
+[dir="rtl"] .acct-sum-cell--wait .acct-sum-year-judged { letter-spacing: 0; font-size: 10px; }
+
+/* ============ CORRECTED, THEN LEFT IN PEACE FOR OVER A MONTH ============= */
+/* The correction was made, then nobody came back: the trace quietly fell out
+   of sight. Dashed like its neighbours, but in a colder hue — this is absence,
+   not work that was done. */
+.b2br-sort-btn--stale { border-style: dashed;
+  border-color: color-mix(in srgb, var(--text) 30%, transparent); }
+.b2br-sort-btn--stale i { color: var(--accent2); }
+.b2br-sort-btn--stale:hover { border-color: var(--accent2); }
+.b2br-sort-btn--stale.is-on { color: var(--accent2); border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 55%, transparent);
+  background: color-mix(in srgb, var(--accent2) 13%, transparent); }
+
+/* The « reprises 3 fois et + » counter of the account strip, next to the
+   corrections of the month: same door, harder cut. */
+.acct-sum-cell .acct-sum-cleared.acct-sum-rework {
+  color: var(--accent); border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent); }
+.acct-sum-cell .acct-sum-cleared.acct-sum-rework:hover,
+.acct-sum-cell .acct-sum-cleared.acct-sum-rework:focus-visible {
+  color: var(--accent); border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent); }
+
+/* The other end of the same family, right next to it: corrected, then left in
+   peace. Colder hue, dashed — this is absence, not work that was done. */
+.acct-sum-cell .acct-sum-cleared.acct-sum-stale {
+  color: var(--accent2); border-style: dashed;
+  border-color: color-mix(in srgb, var(--accent2) 45%, transparent);
+  background: color-mix(in srgb, var(--accent2) 8%, transparent); }
+.acct-sum-cell .acct-sum-cleared.acct-sum-stale i { color: var(--accent2); }
+.acct-sum-cell .acct-sum-cleared.acct-sum-stale:hover,
+.acct-sum-cell .acct-sum-cleared.acct-sum-stale:focus-visible {
+  color: var(--accent2); border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 16%, transparent); }
+
+/* The counter before any correction: closures that never got a reason at all.
+   Neutral on purpose — this is a gap, not a repair. */
+.acct-sum-cell .acct-sum-cleared.acct-sum-undoc {
+  color: var(--text); border-style: dotted;
+  border-color: color-mix(in srgb, var(--text) 34%, transparent);
+  background: color-mix(in srgb, var(--text) 6%, transparent); }
+.acct-sum-cell .acct-sum-cleared.acct-sum-undoc i { color: var(--text); }
+.acct-sum-cell .acct-sum-cleared.acct-sum-undoc:hover,
+.acct-sum-cell .acct-sum-cleared.acct-sum-undoc:focus-visible {
+  color: var(--accent); border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  background: color-mix(in srgb, var(--accent) 11%, transparent); }
+
+/* ============ COMPARE TWO MONTHS (correction bars, 12-month chart) ======== */
+/* A picked bar says so: it is the month being compared, not a door any more. */
+.b2br-trend-fix--btn.is-on {
+  background: color-mix(in srgb, var(--accent) 24%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 65%, transparent); }
+.b2br-trend-fix--btn.is-on .b2br-trend-fix-fill { background: var(--accent); }
+
+.b2br-compare { display: grid; gap: 8px; margin-top: 2px; padding: 11px 13px;
+  border-radius: 13px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 40%, transparent);
+  background: color-mix(in srgb, var(--accent) 6%, transparent); }
+.b2br-compare-head { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+.b2br-compare-lead { flex: 1 1 200px; display: inline-flex; align-items: center; gap: 5px;
+  min-width: 0; font-family: var(--font-label); font-size: 10px; letter-spacing: .05em;
+  text-transform: uppercase; color: var(--accent); }
+.b2br-compare-lead i { font-size: 13px; flex: 0 0 auto; }
+.b2br-compare-clear { display: inline-flex; align-items: center; gap: 3px; flex: 0 0 auto;
+  cursor: pointer; padding: 2px 9px; border-radius: 999px; background: none;
+  font-family: var(--font-label); font-size: 10px; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--muted); border: 1px dashed color-mix(in srgb, var(--text) 26%, transparent);
+  transition: color .18s, border-color .18s; }
+.b2br-compare-clear:hover { color: var(--accent); border-color: var(--accent); }
+.b2br-compare-clear i { font-size: 11px; }
+
+/* The duel leaves the screen: a small sheet for the workshop report. Same
+   pill family as « Vider », so the head stays one quiet line. */
+.b2br-compare-export { display: inline-flex; align-items: center; gap: 4px; flex: 0 0 auto;
+  cursor: pointer; padding: 2px 9px; border-radius: 999px; background: none;
+  font-family: var(--font-label); font-size: 10px; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--accent2); border: 1px solid color-mix(in srgb, var(--accent2) 40%, transparent);
+  transition: color .18s, border-color .18s, background .18s; }
+.b2br-compare-export i { font-size: 11px; }
+.b2br-compare-export:hover { color: var(--accent2); border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 12%, transparent); }
+.b2br-compare-export:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
+.b2br-compare-export.is-ok { color: var(--accent2);
+  border-color: color-mix(in srgb, var(--accent2) 62%, transparent);
+  background: color-mix(in srgb, var(--accent2) 16%, transparent); }
+[dir="rtl"] .b2br-compare-export { letter-spacing: 0; text-transform: none; font-size: 11px; }
+
+/* The duel handed over: the same pill as the export it stands next to, in the
+   accent of the comparison itself — one button sends the pair, the other files
+   it as a sheet. */
+.b2br-compare-share { color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 42%, transparent); }
+.b2br-compare-share:hover { color: var(--accent); border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.b2br-compare-share.is-ok { color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 62%, transparent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent); }
+.b2br-compare-share:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* The comparison arrived by link: said under the head, in the quiet tone of the
+   other hand-over notes — a filled duel must not look like a manual pick. */
+.b2br-compare-shared { display: flex; align-items: flex-start; gap: 5px; margin: 0;
+  font-size: 11px; line-height: 1.45; color: var(--muted); }
+.b2br-compare-shared i { font-size: 12px; margin-top: 1px; color: var(--accent2);
+  flex: 0 0 auto; }
+
+.b2br-compare-grid { display: grid; gap: 8px; grid-template-columns: 1fr; align-items: start; }
+@media (min-width: 720px) {
+  .b2br-compare-grid[data-count="2"] { grid-template-columns: 1fr 1fr; }
+}
+.b2br-compare-card { display: grid; gap: 6px; min-width: 0; padding: 9px 11px;
+  border-radius: 11px; border: 1px solid color-mix(in srgb, var(--text) 13%, transparent);
+  background: color-mix(in srgb, var(--bg) 62%, transparent); }
+.b2br-compare-top { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.b2br-compare-top strong { font-size: 12.5px; letter-spacing: -.01em; }
+.b2br-compare-open { display: inline-flex; align-items: center; gap: 3px; margin-inline-start: auto;
+  cursor: pointer; white-space: nowrap; padding: 0; border: 0; background: none;
+  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+.b2br-compare-open i { font-size: 11px; }
+.b2br-compare-open:hover { color: var(--accent2); }
+/* Two doors on the same card — the month's closures, then its corrections:
+   only the first one takes the free space, the second sits beside it. */
+.b2br-compare-top .b2br-compare-open + .b2br-compare-open { margin-inline-start: 0; }
+/* A third door, the hand-over: the link that reopens this very month on a
+   colleague's screen. It never takes the free space and stays a quiet dotted
+   line, so the card still reads as two figures, not three buttons. */
+.b2br-compare-top .b2br-compare-share-card { margin-inline-start: 0; color: var(--accent2);
+  text-decoration: none; border-bottom: 1px dashed color-mix(in srgb, var(--accent) 46%, transparent); }
+.b2br-compare-top .b2br-compare-share-card:hover { color: var(--accent);
+  border-bottom-style: solid; }
+.b2br-compare-top .b2br-compare-share-card.is-ok { color: var(--accent);
+  border-bottom-color: var(--accent); }
+
+.b2br-compare-facts { display: grid; gap: 6px; margin: 0;
+  grid-template-columns: repeat(auto-fit, minmax(78px, 1fr)); }
+.b2br-compare-facts > div { display: grid; gap: 1px; min-width: 0; }
+.b2br-compare-facts dt { font-family: var(--font-label); font-size: 9px; letter-spacing: .04em;
+  text-transform: uppercase; color: var(--muted); }
+.b2br-compare-facts dd { margin: 0; font-family: var(--font-label); font-size: 14.5px;
+  line-height: 1.15; color: var(--text); }
+
+.b2br-compare-hint { margin: 0; font-size: 11.5px; font-style: italic; line-height: 1.45;
+  color: var(--muted); }
+.b2br-compare-delta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; margin: 0;
+  padding-top: 2px; font-size: 11.5px; color: var(--muted);
+  border-top: 1px dashed color-mix(in srgb, var(--text) 14%, transparent); }
+.b2br-compare-delta > span { display: inline-flex; align-items: center; gap: 3px; min-width: 0; }
+.b2br-compare-delta > span:first-of-type { font-style: italic; }
+.b2br-compare-delta b { font-family: var(--font-label); font-size: 11.5px; font-weight: 600;
+  color: var(--text); white-space: nowrap; }
+/* The direction of a counter: more measurable closures is a firmer reading, so
+   the hues follow the same reading as the volume, not the delay. */
+.b2br-compare-delta b[data-dir="up"] { color: var(--accent2); }
+.b2br-compare-delta b[data-dir="down"] { color: var(--accent); }
+.b2br-compare-delta b[data-dir="flat"] { color: var(--muted); }
+/* Past 48 h the gap also reads in days: a quiet mention, not a second figure. */
+.b2br-compare-days { font-style: italic; font-size: 10.5px; line-height: 1.2;
+  color: var(--muted); white-space: nowrap; }
+[dir="rtl"] .b2br-compare-lead,
+[dir="rtl"] .b2br-compare-clear,
+[dir="rtl"] .b2br-compare-open { letter-spacing: 0; text-transform: none; font-size: 11px; }
+
+/* The thin rise of the year, on the slowest-month cell of the strip: same mark
+   as the monthly chip, so the two are read the same way. */
+.acct-sum-cell--slowest .acct-sum-thin-mark { font-size: 11px; margin-inline-start: 1px;
+  color: var(--accent2); }
+
+/* ============ THE TWELVE MONTHS AS A TABLE (headers do the sorting) ======= */
+/* The yearly block of the CSV used to be the only place these columns lived,
+   and sorting it meant rebuilding the table in a spreadsheet. Here a header
+   does it, on the very rows the rest of the panel is read on. */
+.b2br-year { display: grid; gap: 7px; margin-top: 4px; padding-top: 10px;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 16%, transparent); }
+.b2br-year-lead { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0;
+  font-family: var(--font-label); font-size: 10px; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--accent2); }
+.b2br-year-lead i { font-size: 13px; }
+.b2br-year-lead em { font-style: normal; text-transform: none; letter-spacing: 0;
+  font-family: var(--font-body); font-size: 11.5px; color: var(--muted); }
+/* The table can outgrow a narrow column: it scrolls instead of squeezing. */
+.b2br-year-scroll { overflow-x: auto; }
+.b2br-year-table { width: 100%; min-width: 640px; border-collapse: collapse; font-size: 11.5px; }
+.b2br-year-table thead th { padding: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 16%, transparent); }
+.b2br-year-sort { display: inline-flex; align-items: center; gap: 4px; width: 100%;
+  padding: 5px 7px; cursor: pointer; white-space: nowrap; background: none; border: 0;
+  font: inherit; font-family: var(--font-label); font-size: 9px; letter-spacing: .05em;
+  text-transform: uppercase; color: var(--muted); text-align: start;
+  transition: color .18s, background .18s; }
+.b2br-year-sort i { font-size: 11px; opacity: .55; }
+.b2br-year-sort:hover { color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 8%, transparent); }
+.b2br-year-sort.is-on { color: var(--accent2); }
+.b2br-year-sort.is-on i { opacity: 1; }
+.b2br-year-sort:focus-visible { outline: 2px solid var(--accent2); outline-offset: -2px; }
+.b2br-year-table tbody th,
+.b2br-year-table tbody td { padding: 5px 7px;
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 8%, transparent); }
+.b2br-year-month { text-align: start; white-space: nowrap; font-weight: 600;
+  font-family: var(--font-label); font-size: 10.5px; color: var(--text); }
+/* The month is a door: one click lists the closures behind its figures. */
+.b2br-year-month-btn { padding: 0; border: 0; background: none; cursor: pointer;
+  font: inherit; color: inherit; text-align: start; white-space: nowrap;
+  border-bottom: 1px dashed color-mix(in srgb, var(--text) 32%, transparent);
+  transition: color .18s, border-color .18s; }
+.b2br-year-month-btn:hover { color: var(--accent); border-color: var(--accent); }
+.b2br-year-month-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.b2br-year-num { text-align: end; white-space: nowrap;
+  font-family: var(--font-label); font-size: 11.5px; color: var(--text); }
+/* A longer delay is the bad direction, a shorter one the good one. */
+.b2br-year-delta[data-dir="up"] { color: var(--accent); }
+.b2br-year-delta[data-dir="down"] { color: var(--accent2); }
+.b2br-year-delta[data-dir="flat"] { color: var(--muted); }
+.b2br-year-thin { font-size: 10px; margin-inline-start: 2px; color: var(--accent2); }
+/* The deepest wait of the window, marked on the very column it explains: the
+   same small mark as the thin sample of the column next door, but in the
+   attention hue — a long queue is a problem, not a caveat. */
+.b2br-year-worst { font-size: 10px; margin-inline-start: 2px; color: var(--accent); }
+/* The mark is a door, like the month cell next to it: the hourglass opens the
+   closures of that very month, so the deepest wait can be read down to the
+   fiches that produced it. */
+.b2br-year-worstbtn { display: inline-flex; align-items: center; justify-content: center;
+  width: 15px; height: 15px; padding: 0; margin-inline-start: 2px; border: 0;
+  border-radius: 4px; background: none; cursor: pointer; vertical-align: -3px;
+  transition: background .16s ease; }
+.b2br-year-worstbtn .b2br-year-worst { margin: 0; }
+.b2br-year-worstbtn:hover { background: color-mix(in srgb, var(--accent) 18%, transparent); }
+.b2br-year-worstbtn:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.b2br-year-worstnote i { color: var(--accent); }
+/* The target column of the exported sheet, now on screen: the verdict first,
+   the threshold of that very month under it — a month is judged against the
+   target of its own time, never against today's. */
+.b2br-year-below { display: table-cell; }
+.b2br-year-below[data-state="below"] { color: var(--accent); font-weight: 600; }
+.b2br-year-below[data-state="ok"] { color: var(--muted); }
+.b2br-year-below[data-state="none"] { color: color-mix(in srgb, var(--text) 34%, transparent); }
+.b2br-year-goal { display: block; margin-top: 1px; font-style: normal;
+  font-family: var(--font-label); font-size: 9px; letter-spacing: .02em;
+  color: var(--muted); opacity: .85; }
+.b2br-year-below[data-state="below"] .b2br-year-goal { color: var(--accent); opacity: .72; }
+/* The wait threshold read as a column of its own, facing the target column: the
+   foot of the table can then count both faults, one under the other. */
+.b2br-year-over { display: table-cell; }
+.b2br-year-over[data-state="over"] { color: var(--accent2); font-weight: 600; }
+.b2br-year-over[data-state="ok"] { color: var(--muted); }
+.b2br-year-over[data-state="none"] { color: color-mix(in srgb, var(--text) 34%, transparent); }
+/* A month with no closure stays readable, but does not pretend to weigh. */
+.b2br-year-table tbody tr[data-empty="yes"] { opacity: .6; }
+/* A month that fell under its own target is tinted, never shouted: the eye
+   finds it without sorting, and the verdict column still says it in words.
+   Only a judged month is ever tinted — an empty month, or one with no target
+   in force, stays neutral rather than borrowing a verdict. */
+.b2br-year-table tbody tr[data-below="yes"] {
+  background: color-mix(in srgb, var(--accent) 7%, transparent); }
+.b2br-year-table tbody tr[data-below="yes"]:hover {
+  background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.b2br-year-table tbody tr[data-below="yes"] .b2br-year-month { color: var(--accent); }
+/* The tint can be switched off in one click: on a shared screen the shade helps
+   one reader and gets in the way of another. The verdict column never changes —
+   only the wash of colour goes away, the words stay. */
+.b2br-year[data-tint="off"] .b2br-year-table tbody tr[data-below="yes"],
+.b2br-year[data-tint="off"] .b2br-year-table tbody tr[data-below="yes"]:hover,
+.b2br-year[data-tint="off"] .b2br-year-table tbody tr[data-below="yes"] .b2br-year-month {
+  background: transparent;
+  color: inherit; }
+
+/* The other fault of the same table: the month made people wait past the week.
+   A wash of its own, in the cooler hue of the wait counter, plus a mark on the
+   leading edge — so a month can be under its target AND over the wait
+   threshold without one fault hiding the other: the queue and the trace are two
+   different questions about the same month. */
+.b2br-year-table tbody tr[data-over="yes"] {
+  background: color-mix(in srgb, var(--accent2) 6%, transparent); }
+.b2br-year-table tbody tr[data-over="yes"]:hover {
+  background: color-mix(in srgb, var(--accent2) 11%, transparent); }
+.b2br-year-table tbody tr[data-over="yes"] > :first-child {
+  box-shadow: inset 3px 0 0 color-mix(in srgb, var(--accent2) 68%, transparent); }
+[dir="rtl"] .b2br-year-table tbody tr[data-over="yes"] > :first-child {
+  box-shadow: inset -3px 0 0 color-mix(in srgb, var(--accent2) 68%, transparent); }
+.b2br-year-table tbody tr[data-over="yes"] .b2br-year-wait[data-over="yes"] {
+  color: var(--accent2); font-weight: 600; }
+.b2br-year-table tbody tr[data-over="yes"]:hover > :first-child {
+  box-shadow: inset 3px 0 0 var(--accent2); }
+[dir="rtl"] .b2br-year-table tbody tr[data-over="yes"]:hover > :first-child {
+  box-shadow: inset -3px 0 0 var(--accent2); }
+/* Both faults in one month: the two washes are laid one over the other instead
+   of one replacing the other. */
+.b2br-year-table tbody tr[data-over="yes"][data-below="yes"],
+.b2br-year-table tbody tr[data-over="yes"][data-below="yes"]:hover {
+  background:
+    linear-gradient(color-mix(in srgb, var(--accent) 8%, transparent),
+                    color-mix(in srgb, var(--accent) 8%, transparent)),
+    color-mix(in srgb, var(--accent2) 7%, transparent); }
+/* Cutting the tint cuts both faults: the two columns beside them keep saying
+   what happened, in numbers and in words. */
+.b2br-year[data-tint="off"] .b2br-year-table tbody tr[data-over="yes"],
+.b2br-year[data-tint="off"] .b2br-year-table tbody tr[data-over="yes"]:hover,
+.b2br-year[data-tint="off"] .b2br-year-table tbody tr[data-over="yes"][data-below="yes"],
+.b2br-year[data-tint="off"] .b2br-year-table tbody tr[data-over="yes"][data-below="yes"]:hover {
+  background: transparent; }
+.b2br-year[data-tint="off"] .b2br-year-table tbody tr[data-over="yes"] > :first-child,
+.b2br-year[data-tint="off"] .b2br-year-table tbody tr[data-over="yes"]:hover > :first-child {
+  box-shadow: none; }
+.b2br-year[data-tint="off"] .b2br-year-table tbody tr[data-over="yes"] .b2br-year-wait[data-over="yes"] {
+  color: inherit; font-weight: inherit; }
+.b2br-year-overnote i { color: var(--accent2); }
+.b2br-year-sortnote i { color: var(--accent); }
+/* The switch itself: a quiet pill on the lead line, same family as the headers. */
+.b2br-year-tint { display: inline-flex; align-items: center; gap: 4px; flex: 0 0 auto;
+  cursor: pointer; padding: 2px 9px; border-radius: 999px; background: none;
+  font: inherit; font-family: var(--font-label); font-size: 9.5px; letter-spacing: .04em;
+  text-transform: uppercase; color: var(--muted);
+  border: 1px dashed color-mix(in srgb, var(--text) 26%, transparent);
+  transition: color .18s ease, border-color .18s ease, background .18s ease; }
+.b2br-year-tint i { font-size: 11px; }
+.b2br-year-tint:hover { color: var(--accent2);
+  border-color: color-mix(in srgb, var(--accent2) 55%, transparent); }
+.b2br-year-tint.is-on { color: var(--accent);
+  border-style: solid; border-color: color-mix(in srgb, var(--accent) 42%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent); }
+.b2br-year-tint:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
+[dir="rtl"] .b2br-year-tint { letter-spacing: 0; text-transform: none; font-size: 11px; }
+.b2br-year-table tfoot th,
+.b2br-year-table tfoot td { padding: 6px 7px; font-weight: 600; color: var(--text);
+  border-top: 1px dashed color-mix(in srgb, var(--text) 26%, transparent); }
+.b2br-year-table tfoot .b2br-year-month { font-size: 10.5px; }
+[dir="rtl"] .b2br-year-lead { letter-spacing: 0; text-transform: none; font-size: 11px; }
+[dir="rtl"] .b2br-year-sort { letter-spacing: 0; text-transform: none; font-size: 10.5px; }
+
+/* ============ THE YEAR CHIP OF THE STRIP IS A DOOR ======================== */
+/* The count of months under their target opened the trend already filtered on
+   those months: the figure and the months it counts sit one click apart. */
+button.acct-sum-cell--year { cursor: pointer; text-align: start; font: inherit;
+  color: inherit; transition: border-color .18s ease, background .18s ease; }
+
+/* The wait counter is the same family of door: it opens the twelve-month table
+   already sorted on the days waited, so the figure and the months behind it are
+   one click apart. */
+button.acct-sum-cell--wait { cursor: pointer; text-align: start; font: inherit;
+  color: inherit; transition: border-color .18s ease, background .18s ease; }
+button.acct-sum-cell--wait:hover { border-color: color-mix(in srgb, var(--accent2) 68%, transparent);
+  background: color-mix(in srgb, var(--accent2) 14%, transparent); }
+button.acct-sum-cell--wait:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
+button.acct-sum-cell--wait:disabled { cursor: default; }
+button.acct-sum-cell--year:hover { border-color: color-mix(in srgb, var(--accent) 68%, transparent);
+  background: color-mix(in srgb, var(--accent) 13%, transparent); }
+button.acct-sum-cell--year:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button.acct-sum-cell--year:disabled { cursor: default; }
+
+/* The months in fault, only them: the chart says it came filtered, and gives
+   the way back to the twelve in the same breath. */
+.b2br-trend-belownote { margin-top: -2px; }
+.b2br-trend-belownote i { color: var(--accent); }
+.b2br-trend-belownote em { font-style: normal; font-size: 10.5px; color: var(--muted); }
+.b2br-trend-belownote button { display: inline-flex; align-items: center; gap: 3px;
+  flex: 0 0 auto; cursor: pointer; padding: 2px 9px; border-radius: 999px; background: none;
+  font: inherit; font-family: var(--font-label); font-size: 9.5px; letter-spacing: .04em;
+  text-transform: uppercase; color: var(--accent2);
+  border: 1px dashed color-mix(in srgb, var(--accent2) 45%, transparent);
+  transition: color .18s ease, border-color .18s ease, background .18s ease; }
+.b2br-trend-belownote button i { font-size: 11px; }
+.b2br-trend-belownote button:hover { border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 70%, transparent);
+  background: color-mix(in srgb, var(--accent2) 10%, transparent); }
+.b2br-trend-belownote button:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
+[dir="rtl"] .b2br-trend-belownote button { letter-spacing: 0; text-transform: none; font-size: 10.5px; }
+
+/* The foot of the table says the other half of the count: months that closed
+   something and had no target to be read against — not judged, not failed. */
+.b2br-year-note { display: flex; align-items: flex-start; gap: 5px; margin: 0;
+  font-size: 11px; line-height: 1.45; color: var(--muted); }
+.b2br-year-note i { font-size: 12px; margin-top: 1px; color: var(--accent2); flex: 0 0 auto; }
+
+/* ============ THE WAIT COUNT OF THE FOOT IS A DOOR ======================== */
+/* The count of months past the wait threshold now opens the table on those
+   months alone: the figure and the rows it counted sit one click apart. */
+.b2br-year-overfoot { padding: 0; }
+.b2br-year-overfoot .b2br-year-overbtn { display: grid; gap: 1px; width: 100%;
+  padding: 6px 7px; border: 0; border-radius: 6px; background: none; cursor: pointer;
+  font: inherit; font-family: var(--font-label); font-size: 11.5px; font-weight: 600;
+  color: inherit; text-align: end;
+  transition: background .18s ease, color .18s ease; }
+.b2br-year-overfoot[data-state="over"] .b2br-year-overbtn { color: var(--accent2); }
+.b2br-year-overfoot .b2br-year-overbtn:hover {
+  background: color-mix(in srgb, var(--accent2) 13%, transparent); }
+.b2br-year-overfoot[data-on="yes"] .b2br-year-overbtn {
+  background: color-mix(in srgb, var(--accent2) 16%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent2) 48%, transparent); }
+.b2br-year-overfoot .b2br-year-overbtn .b2br-year-goal { text-align: end; }
+.b2br-year-overfoot .b2br-year-overbtn:focus-visible {
+  outline: 2px solid var(--accent2); outline-offset: 1px; }
+.b2br-year-overfoot .b2br-year-overbtn:disabled { cursor: default; }
+
+/* The table kept only its own months: it says so, and gives the way back. */
+.b2br-year-selnote { border-left: 2px solid color-mix(in srgb, var(--accent2) 45%, transparent);
+  padding-left: 8px; }
+.b2br-year-selnote i { color: var(--accent2); }
+.b2br-year-overfilter { flex-wrap: wrap; align-items: center; }
+.b2br-year-overfilter i { color: var(--accent2); }
+.b2br-year-overfilter em { font-style: normal; font-size: 10.5px; color: var(--muted); }
+.b2br-year-overfilter button { display: inline-flex; align-items: center; gap: 3px;
+  flex: 0 0 auto; cursor: pointer; padding: 2px 9px; border-radius: 999px; background: none;
+  font: inherit; font-family: var(--font-label); font-size: 9.5px; letter-spacing: .04em;
+  text-transform: uppercase; color: var(--accent2);
+  border: 1px dashed color-mix(in srgb, var(--accent2) 45%, transparent);
+  transition: color .18s ease, border-color .18s ease, background .18s ease; }
+.b2br-year-overfilter button i { font-size: 11px; color: var(--accent2); }
+.b2br-year-overfilter button:hover { border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 70%, transparent);
+  background: color-mix(in srgb, var(--accent2) 10%, transparent); }
+.b2br-year-overfilter button:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
+[dir="rtl"] .b2br-year-overfilter button { letter-spacing: 0; text-transform: none; font-size: 10.5px; }
+
+/* The chosen wait threshold, recalled in the strip: the counter never reads
+   without the number it is measured against. */
+.acct-sum-threshold { display: inline-flex; align-items: center; gap: 4px; margin-top: 3px;
+  padding: 1px 8px; border-radius: 999px; width: fit-content;
+  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .02em;
+  color: var(--accent2); border: 1px dashed color-mix(in srgb, var(--accent2) 40%, transparent);
+  background: color-mix(in srgb, var(--accent2) 8%, transparent); }
+.acct-sum-threshold { cursor: pointer; transition: background .18s ease, border-color .18s ease; }
+.acct-sum-threshold:hover:not(:disabled) { background: color-mix(in srgb, var(--accent2) 16%, transparent);
+  border-color: color-mix(in srgb, var(--accent2) 62%, transparent); }
+.acct-sum-threshold:disabled { cursor: default; }
+.acct-sum-threshold:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
+.acct-sum-threshold-go { opacity: 0; transition: opacity .18s ease, transform .18s ease; }
+.acct-sum-threshold:hover .acct-sum-threshold-go { opacity: .85; transform: translateX(1px); }
+.acct-sum-threshold i { font-size: 11px; }
+[dir="rtl"] .acct-sum-threshold { letter-spacing: 0; font-size: 10.5px; }
+
+/* ============ THE LONGEST MONTH OF THE YEAR (account strip) ================ */
+/* Next to the month that slowed down the most, the month that made people wait
+   longest: a level, not a rise — a workshop can answer faster every month and
+   still keep one very slow one. Same dashed family as the slowest cell, in the
+   cooler hue of the wait counter, so the two records are never read as one. */
+.acct-sum-cell--waitmonth { border-style: dashed; min-width: 132px;
+  border-color: color-mix(in srgb, var(--accent2) 45%, transparent);
+  background: color-mix(in srgb, var(--accent2) 7%, transparent);
+  transition: border-color .18s ease, background .18s ease; }
+/* The cell holds two doors: the month itself, and — under it, smaller — the way
+   back to the twelve-month table sorted on the very same clock. */
+.acct-sum-waitmonth-main { display: grid; gap: 1px; width: 100%; padding: 0;
+  border: 0; background: none; text-align: start; font: inherit; color: inherit;
+  cursor: pointer; border-radius: 8px; }
+.acct-sum-waitmonth-main:disabled { cursor: default; }
+.acct-sum-cell--waitmonth b { font-size: 13px; letter-spacing: .01em;
+  color: color-mix(in srgb, var(--accent2) 88%, var(--text)); }
+.acct-sum-cell--waitmonth[data-on="yes"] { border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 58%, transparent);
+  background: color-mix(in srgb, var(--accent2) 12%, transparent); }
+.acct-sum-cell--waitmonth .acct-sum-avg { margin-top: 1px;
+  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .02em;
+  text-transform: none; white-space: nowrap; color: var(--muted); }
+/* The threshold in plain words, under the depth of the month: the longest month
+   of the year is not a verdict until it stands next to the number it is judged
+   against. Same cool hue as the wait family, but a dotted edge, so it reads as
+   the rule behind the figure rather than a second figure. */
+.acct-sum-cell--waitmonth .acct-sum-goal { display: inline-flex; align-items: center;
+  gap: 3px; margin-top: 2px; padding: 0 6px; width: fit-content; border-radius: 999px;
+  font-family: var(--font-label); font-size: 9px; letter-spacing: .02em;
+  text-transform: none; white-space: nowrap; color: color-mix(in srgb, var(--accent2) 82%, var(--text));
+  border: 1px dotted color-mix(in srgb, var(--accent2) 42%, transparent);
+  background: color-mix(in srgb, var(--accent2) 7%, transparent); }
+.acct-sum-cell--waitmonth .acct-sum-goal i { font-size: 9px; opacity: .85; }
+[dir="rtl"] .acct-sum-cell--waitmonth .acct-sum-goal { letter-spacing: 0; font-size: 10px; }
+.acct-sum-cell--waitmonth:has(.acct-sum-waitmonth-main:hover:not(:disabled)) {
+  border-color: color-mix(in srgb, var(--accent2) 72%, transparent);
+  background: color-mix(in srgb, var(--accent2) 17%, transparent); }
+.acct-sum-waitmonth-main:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
+[dir="rtl"] .acct-sum-cell--waitmonth .acct-sum-avg { letter-spacing: 0; font-size: 10.5px; }
+
+/* The small door under the longest month: a dotted line, not a second figure —
+   it says where the year can be read whole, on the column this cell quotes. */
+.acct-sum-waitmonth-table { display: inline-flex; align-items: center; gap: 4px;
+  width: fit-content; margin-top: 3px; padding: 1px 0 2px; border: 0; border-bottom: 1px dotted transparent;
+  background: none; cursor: pointer; white-space: nowrap;
+  font-family: var(--font-label); font-size: 9px; letter-spacing: .02em; text-transform: none;
+  color: var(--muted);
+  transition: color .18s ease, border-color .18s ease; }
+.acct-sum-waitmonth-table i { font-size: 10px; opacity: .8; }
+.acct-sum-waitmonth-table:hover { color: color-mix(in srgb, var(--accent2) 82%, var(--text));
+  border-bottom-color: color-mix(in srgb, var(--accent2) 55%, transparent); }
+.acct-sum-waitmonth-table:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px;
+  border-radius: 5px; }
+.acct-sum-cell--waitmonth[data-on="yes"] .acct-sum-waitmonth-table {
+  color: color-mix(in srgb, var(--accent2) 70%, var(--text)); }
+[dir="rtl"] .acct-sum-waitmonth-table { letter-spacing: 0; font-size: 10px; }
+
+/* The month handed over, right under the way back to the table: the same dotted
+   line, so the two doors of the cell read as one family, and a copy that worked
+   says so in the accent hue before going quiet again. */
+.acct-sum-waitmonth-share { margin-top: 1px; }
+.acct-sum-waitmonth-share.is-ok { color: color-mix(in srgb, var(--accent2) 88%, var(--text));
+  border-bottom-color: color-mix(in srgb, var(--accent2) 55%, transparent); }
+.acct-sum-waitmonth-share.is-ok i { opacity: 1; }
+
+/* The discreet way back up, at the top of the twelve-month table, when the visit
+   came from a shared month link: one line, no plate, as quiet as the note it
+   sits in — it points at the strip, it does not compete with the table. */
+.b2br-year-back { display: inline-flex; align-items: center; gap: 4px; margin-inline-start: 2px;
+  padding: 1px 0 2px; border: 0; border-bottom: 1px dotted transparent; background: none;
+  cursor: pointer; white-space: nowrap; font: inherit;
+  font-family: var(--font-label); font-size: 9px; letter-spacing: .02em; text-transform: none;
+  color: var(--muted); transition: color .18s ease, border-color .18s ease; }
+.b2br-year-back i { font-size: 10px; opacity: .8; }
+.b2br-year-back:hover { color: color-mix(in srgb, var(--accent2) 82%, var(--text));
+  border-bottom-color: color-mix(in srgb, var(--accent2) 55%, transparent); }
+.b2br-year-back:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; border-radius: 5px; }
+[dir="rtl"] .b2br-year-back { letter-spacing: 0; font-size: 10px; }
+[dir="rtl"] .b2br-year-back i { transform: scaleX(-1); }
+
+/* The longest month named under the share of the year, in the foot of the table:
+   the count says how many months are in fault, this line says which one carried
+   the deepest wait — both read on the very column beside them. */
+.b2br-year-overfoot .b2br-year-overworst {
+  color: color-mix(in srgb, var(--accent2) 78%, var(--text));
+  opacity: .92; font-size: 8.5px; letter-spacing: .01em; }
+.b2br-year-overfoot[data-on="yes"] .b2br-year-overworst { opacity: 1; }
+
+/* ============ THE WAIT SETTING, ASKED FOR FROM THE STRIP ================== */
+/* The threshold recall does not merely point at the panel: it opens it unfolded
+   on this block, marks the number in force and puts the cursor on it. The block
+   says so — a quiet wash of the wait hue, so the eye lands on the setting the
+   counter measures against. */
+.b2br-goal-wait.is-focus {
+  border-radius: 12px;
+  padding: 9px 11px 11px;
+  margin-inline: -4px;
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 45%, transparent);
+  animation: b2br-wait-flash 1.3s ease-out 3; }
+.b2br-goal-wait.is-focus .b2br-goal-chip--wait.is-on {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent); }
+.b2br-goal-chip--wait:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@keyframes b2br-wait-flash {
+  0% { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 34%, transparent); }
+  45% { box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--accent) 62%, transparent); }
+  100% { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 34%, transparent); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .b2br-goal-wait.is-focus { animation: none; }
+}
+
+/* ============ EVERY MONTH ROW IS HANDED OVER, LIKE THE LONGEST ONE ======== */
+/* The month cell holds two doors: the label opens its closures, the small link
+   beside it hands the same month to a colleague — exactly the gesture the
+   longest month of the strip already offered, now on all twelve rows. */
+.b2br-year-monthcell { display: flex; align-items: center; gap: 5px;
+  justify-content: space-between; }
+.b2br-year-share { display: inline-flex; align-items: center; justify-content: center;
+  flex: 0 0 auto; width: 17px; height: 17px; padding: 0; border: 0; border-radius: 5px;
+  background: none; cursor: pointer;
+  color: color-mix(in srgb, var(--text) 34%, transparent);
+  transition: color .16s ease, background .16s ease; }
+.b2br-year-share i { font-size: 12px; }
+.b2br-year-share:hover { color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 16%, transparent); }
+.b2br-year-share.is-ok { color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 18%, transparent); }
+.b2br-year-share:focus-visible { outline: 2px solid var(--accent2); outline-offset: 1px; }
+
+/* ============ ONE REQUEST, HANDED OVER — REFERENCE INCLUDED ============== */
+/* Same family as « Répondre » and « Appeler », with a dotted edge: the button
+   does not act on the fiche, it sends it. Once the copy worked it says so in
+   the calm hue, then goes quiet again. */
+.b2br .ad-btn.b2br-share { border-style: dashed;
+  border-color: color-mix(in srgb, var(--accent2) 40%, transparent); }
+.b2br .ad-btn.b2br-share i { color: var(--accent2); }
+.b2br .ad-btn.b2br-share:hover { border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 62%, transparent);
+  color: var(--accent2); }
+.b2br .ad-btn.b2br-share.is-ok { border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 62%, transparent);
+  color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 14%, transparent); }
+.b2br .ad-btn.b2br-share.is-ok i { color: var(--accent2); }
+/* The note under the row list, when the visit came from a shared request link:
+   same quiet line as the shared-month note, so the ring is never a mystery. */
+.b2br-sharelinknote i { color: var(--accent2); }

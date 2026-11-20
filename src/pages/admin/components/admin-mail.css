@@ -1,0 +1,1092 @@
+/* ============ CONSOLE · GUIDE DE L'EXPÉDITEUR ============ */
+/* Quatre étapes pour poser la clé et le domaine d'envoi. Le cadre se lit
+   comme un mode d'emploi : un chiffre par étape, un titre, la phrase qui dit
+   où aller, et le nom exact du secret quand il y en a un à poser. */
+
+.mail-guide {
+  display: grid;
+  gap: 9px;
+  padding: 12px 13px 13px;
+  border-radius: 12px;
+  text-align: left;
+  background: color-mix(in srgb, var(--text) 3.5%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+}
+
+.mail-guide-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.mail-guide-head-txt {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.mail-guide-title {
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  color: color-mix(in srgb, var(--text) 92%, transparent);
+}
+
+.mail-guide-sub {
+  margin: 0;
+  max-width: 74ch;
+  font-size: 11px;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+
+.mail-guide-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .05em;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+.mail-guide-count i { font-size: 12px; }
+.mail-guide-count[data-tone='ok'] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 11%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+}
+
+.mail-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.mail-step {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  align-items: start;
+  gap: 9px;
+  padding: 9px 11px;
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--text) 3%, transparent);
+  border: 1px solid transparent;
+}
+.mail-step[data-fait='yes'] {
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+.mail-step-n {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 20%, transparent);
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  background: color-mix(in srgb, var(--surface) 60%, transparent);
+}
+.mail-step-n i { font-size: 13px; }
+.mail-step[data-fait='yes'] .mail-step-n {
+  border-color: color-mix(in srgb, var(--accent) 48%, transparent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+}
+
+.mail-step-body {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.mail-step-top {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.mail-step-title {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--text) 92%, transparent);
+}
+
+.mail-step-state {
+  margin-inline-start: auto;
+  padding: 0 7px;
+  border-radius: 999px;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .05em;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+  background: color-mix(in srgb, var(--text) 7%, transparent);
+}
+.mail-step[data-fait='yes'] .mail-step-state {
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+.mail-step-txt {
+  margin: 0;
+  font-size: 11.2px;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+}
+
+.mail-step-foot {
+  margin: 2px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Le nom du secret, exactement tel qu'il s'écrit dans Supabase : c'est la
+   seule forme sous laquelle il sert. */
+.mail-step-secret {
+  padding: 1px 6px;
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10px;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--text) 80%, transparent);
+  overflow-wrap: anywhere;
+}
+
+.mail-step-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  font-size: 10.5px;
+  font-weight: 600;
+  line-height: 1.45;
+  text-decoration: none;
+  cursor: pointer;
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+  transition: background .16s ease, border-color .16s ease;
+}
+.mail-step-link i { font-size: 11px; }
+.mail-step-link:hover {
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+}
+.mail-step-link:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 2px;
+}
+
+.mail-guide-note {
+  margin: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 10.8px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 54%, transparent);
+}
+.mail-guide-note i {
+  flex: none;
+  font-size: 12px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--accent) 66%, var(--text));
+}
+
+/* Le jour de la preuve, posé dans le pied de l'étape qui l'a produite : une
+   pastille discrète, à côté du geste qui l'a lancée. */
+.mail-step-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  background: color-mix(in srgb, var(--accent) 11%, transparent);
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .04em;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+}
+.mail-step-date i { font-size: 12px; }
+
+[dir='rtl'] .mail-step-date { letter-spacing: 0; font-size: 11px; }
+
+/* L'âge de la preuve, à côté de son jour : « il y a 12 jours » se lit sans
+   compter. Il reste plus calme que la date — c'est une mesure, pas un fait. */
+.mail-step-age {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--text) 20%, transparent);
+  background: color-mix(in srgb, var(--text) 5%, transparent);
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .04em;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+.mail-step-age i { font-size: 12px; }
+
+[dir='rtl'] .mail-step-age { letter-spacing: 0; font-size: 11px; }
+
+/* L'étape que le compteur de la carte a demandée : elle s'allume et le guide
+   la rejoint, pour qu'on ne relise pas les quatre pour retrouver celle qui
+   manque. Le repère s'efface au clic suivant sur une autre étape. */
+.mail-step[data-focus='yes'] {
+  border-color: color-mix(in srgb, var(--accent) 58%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 16%, transparent);
+  outline: none;
+}
+.mail-step[data-focus='yes'] .mail-step-n {
+  border-color: color-mix(in srgb, var(--accent) 64%, transparent);
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  color: color-mix(in srgb, var(--accent) 96%, var(--text));
+}
+
+/* La pastille qui nomme l'étape à faire, posée devant son titre. */
+.mail-step-next {
+  padding: 0 7px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  line-height: 1.7;
+  letter-spacing: .05em;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent) 94%, var(--text));
+  animation: mail-step-call 1.4s ease-out 1;
+}
+
+[dir='rtl'] .mail-step-next { letter-spacing: 0; font-size: 11px; }
+
+@keyframes mail-step-call {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 42%, transparent); }
+  100% { box-shadow: 0 0 0 7px transparent; }
+}
+
+/* Une preuve de plus d'un mois ne se garde pas comme une preuve fraîche : le
+   rappel le dit d'une ligne, sans alarmer — le geste reste le même. */
+.mail-guide-old {
+  margin: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 6px 9px;
+  border-radius: 8px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 32%, transparent);
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  font-size: 10.8px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 68%, transparent);
+}
+.mail-guide-old i {
+  flex: none;
+  font-size: 13px;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+}
+
+/* La porte de l'autre côté du même sujet : elle mène au chantier des e-mails
+   dans le suivi du projet, déjà resserré sur lui. */
+.mail-guide-door-row {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.mail-guide-door {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+  transition: background .16s ease, border-color .16s ease;
+}
+.mail-guide-door i { font-size: 12px; }
+.mail-guide-door i:last-child { margin-inline-start: 2px; }
+.mail-guide-door:hover {
+  background: color-mix(in srgb, var(--accent) 17%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 44%, transparent);
+}
+.mail-guide-door:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 2px;
+}
+
+[dir='rtl'] .mail-guide-count,
+[dir='rtl'] .mail-step-state,
+[dir='rtl'] .mail-step-secret {
+  letter-spacing: 0;
+}
+
+@media (max-width: 560px) {
+  .mail-step {
+    grid-template-columns: 20px minmax(0, 1fr);
+    gap: 8px;
+    padding: 8px 9px;
+  }
+  .mail-step-n { width: 20px; height: 20px; font-size: 10.5px; }
+  .mail-step-state { margin-inline-start: 0; }
+}
+
+/* Le bouton « Envoyer un test » porte son repère quand la preuve a plus d'un
+   mois : le geste attendu se voit depuis l'en-tête, sans dérouler le guide. Le
+   point reste calme — une note, pas une alerte. */
+.mail-test-btn {
+  position: relative;
+}
+
+.mail-test-dot {
+  position: absolute;
+  inset-block-start: -4px;
+  inset-inline-end: -4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  height: 15px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--surface) 90%, transparent);
+  background: color-mix(in srgb, var(--accent) 88%, var(--text));
+  color: color-mix(in srgb, var(--surface) 92%, transparent);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 42%, transparent);
+  animation: mail-test-dot 2.4s ease-out infinite;
+  pointer-events: none;
+}
+
+.mail-test-dot i { font-size: 9px; }
+
+@keyframes mail-test-dot {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 38%, transparent); }
+  70% { box-shadow: 0 0 0 5px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+
+/* Un bouton de test désactivé garde son repère, mais sans battement : le
+   geste se lit quand même, il ne s'anime plus. */
+.mail-test-btn[data-old='yes']:disabled .mail-test-dot {
+  animation: none;
+  background: color-mix(in srgb, var(--text) 34%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mail-test-dot { animation: none; }
+}
+
+/* ============ CONSOLE · E-MAILS D'AUTHENTIFICATION ============ */
+/* Le second chemin des mêmes secrets : Supabase Auth écrit les messages
+   d'inscription et de mot de passe. La carte porte les quatre gestes, les
+   valeurs du SMTP à recopier, et les modèles dans les trois langues. */
+
+.mail-auth {
+  gap: 11px;
+}
+
+.mail-step-date[data-soft='yes'] {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--text) 20%, transparent);
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+
+/* Les petits gestes de la carte : déclarer, demander un test, copier. */
+.auth-mini {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  line-height: 1.5;
+  font-weight: 600;
+  cursor: pointer;
+  color: color-mix(in srgb, var(--text) 72%, transparent);
+  transition: background .16s ease, border-color .16s ease, color .16s ease;
+}
+.auth-mini i { font-size: 12px; }
+.auth-mini:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+  border-color: color-mix(in srgb, var(--text) 30%, transparent);
+}
+.auth-mini:disabled {
+  cursor: not-allowed;
+  opacity: .55;
+}
+.auth-mini[data-tone='accent'] {
+  border-color: color-mix(in srgb, var(--accent) 34%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+}
+.auth-mini[data-tone='accent']:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+}
+.auth-mini:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 2px;
+}
+
+/* Les cinq valeurs du SMTP : la colonne des noms reste courte, la valeur se
+   copie d'un bouton posé à sa droite. */
+.auth-smtp {
+  display: grid;
+  gap: 7px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px dashed color-mix(in srgb, var(--text) 16%, transparent);
+  background: color-mix(in srgb, var(--text) 2.5%, transparent);
+}
+
+/* La tête du bloc : le titre, puis les deux gestes qui commencent le
+   réglage — copier les cinq valeurs d'un coup, ouvrir l'écran de Supabase. */
+.auth-smtp-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.auth-smtp-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* La confirmation de la copie en bloc : une ligne, sous la liste, qui dit ce
+   qui vient de partir dans le presse-papiers. */
+.auth-smtp-flash {
+  margin: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  padding: 5px 9px;
+  border-radius: 7px;
+  font-size: 10.8px;
+  line-height: 1.5;
+}
+.auth-smtp-flash i {
+  flex: none;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.auth-smtp-flash[data-tone='ok'] {
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+.auth-smtp-flash[data-tone='warn'] {
+  border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+}
+
+.auth-smtp-title,
+.auth-models-title {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+.auth-smtp-title i,
+.auth-models-title i {
+  font-size: 13px;
+  color: color-mix(in srgb, var(--accent) 70%, var(--text));
+}
+
+.auth-smtp-list {
+  margin: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.auth-smtp-row {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+}
+
+.auth-smtp-row dt {
+  font-size: 11px;
+  color: color-mix(in srgb, var(--text) 54%, transparent);
+}
+
+.auth-smtp-row dd {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.auth-smtp-row code,
+.auth-model-subject code {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 2px 7px;
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--text) 7%, transparent);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10.5px;
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--text) 84%, transparent);
+  overflow-wrap: anywhere;
+}
+
+.auth-copy {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  cursor: pointer;
+  transition: background .16s ease, color .16s ease;
+}
+.auth-copy i { font-size: 12px; }
+.auth-copy:hover {
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+}
+.auth-copy:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 2px;
+}
+
+/* Les deux modèles, l'un après l'autre : deux onglets, puis le texte prêt à
+   coller dans Supabase. */
+.auth-models {
+  display: grid;
+  gap: 7px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--text) 3%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 9%, transparent);
+}
+
+.auth-models-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.auth-model-tabs {
+  display: inline-flex;
+  gap: 2px;
+  padding: 2px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+}
+
+.auth-model-tab {
+  padding: 3px 10px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  transition: background .16s ease, color .16s ease;
+}
+.auth-model-tab[data-on='yes'] {
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  color: color-mix(in srgb, var(--text) 88%, transparent);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--text) 10%, transparent);
+}
+.auth-model-tab:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 2px;
+}
+
+.auth-models-sub {
+  margin: 0;
+  font-size: 10.8px;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--text) 56%, transparent);
+}
+
+.auth-model-subject {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+}
+
+.auth-model-label {
+  flex: none;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 46%, transparent);
+}
+
+.auth-model-body {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+.auth-model-body-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.auth-model-body pre {
+  margin: 0;
+  max-height: 260px;
+  overflow: auto;
+  padding: 9px 10px;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  color: color-mix(in srgb, var(--text) 76%, transparent);
+}
+
+/* L'aperçu du bloc arabe : un cadre de 320 px, la largeur d'un téléphone, pour
+   juger le sens de lecture sans quitter la console. Le cadre garde son sens de
+   lecture latin autour, et le bloc arabe porte le sien à l'intérieur. */
+.auth-preview {
+  display: grid;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.auth-preview-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.auth-preview-title {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+.auth-preview-title i {
+  font-size: 13px;
+  color: color-mix(in srgb, var(--accent) 70%, var(--text));
+}
+
+/* Les deux mesures, l'une sous l'autre : chaque rangée porte son nom à
+   gauche, puis ses trois valeurs. La hauteur ne dit pas la même chose que la
+   largeur — l'une juge la coupe des lignes, l'autre le défilement — et elles
+   se lisent donc séparément. */
+.auth-preview-measures {
+  display: grid;
+  gap: 3px;
+  justify-items: end;
+}
+
+.auth-preview-measure {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.auth-preview-label {
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 44%, transparent);
+}
+
+[dir='rtl'] .auth-preview-label { letter-spacing: 0; font-size: 10.5px; }
+
+/* Les trois largeurs de téléphone, côte à côte : un appui pose la largeur sur
+   le cadre, un second la change. Le bouton retenu se lit enfoncé. */
+.auth-preview-sizes {
+  display: inline-flex;
+  gap: 2px;
+  padding: 2px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+}
+
+.auth-preview-size {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 1px;
+  padding: 2px 9px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  font-family: var(--font-label);
+  font-size: 10px;
+  line-height: 1.6;
+  letter-spacing: .02em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  cursor: pointer;
+  color: color-mix(in srgb, var(--text) 56%, transparent);
+  transition: background .16s ease, color .16s ease, border-color .16s ease;
+}
+
+.auth-preview-size small {
+  font-size: 8.5px;
+  letter-spacing: .02em;
+  opacity: .8;
+}
+
+.auth-preview-size:hover,
+.auth-preview-size:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 34%, transparent);
+  color: color-mix(in srgb, var(--text) 80%, transparent);
+}
+
+.auth-preview-size[data-on='yes'] {
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--text) 10%, transparent);
+}
+
+.auth-preview-size:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 2px;
+}
+
+[dir='rtl'] .auth-preview-size { letter-spacing: 0; }
+
+.auth-preview-sub {
+  margin: 0;
+  font-size: 10.8px;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--text) 56%, transparent);
+}
+
+.auth-preview-frame {
+  display: flex;
+  justify-content: flex-start;
+  padding: 8px;
+  border-radius: 12px;
+  border: 1px dashed color-mix(in srgb, var(--text) 18%, transparent);
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+}
+
+/* La page d'aperçu prend la largeur choisie par la rangée de boutons ; sous
+   cette largeur, sur un écran étroit, elle cède la place plutôt que de
+   déborder du cadre. */
+.auth-preview-page {
+  max-width: 100%;
+  /* La hauteur vient de la rangée de boutons ; celle-ci n'est qu'un repli
+     pour une page rendue sans mesure choisie. */
+  height: 320px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  background: #ffffff;
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--text) 10%, transparent);
+}
+
+/* Ce qu'il reste à faire défiler pour atteindre la signature : une ligne
+   calme, sous le cadre, qui suit la hauteur choisie et le modèle affiché.
+   Quand rien ne dépasse, elle le dit d'une coche au lieu d'un chiffre. */
+.auth-preview-reste {
+  margin: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 4px 9px;
+  border-radius: 8px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 24%, transparent);
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  font-size: 10.8px;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 68%, transparent);
+}
+.auth-preview-reste i {
+  flex: none;
+  font-size: 13px;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+}
+.auth-preview-reste[data-zero='yes'] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--text) 16%, transparent);
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  color: color-mix(in srgb, var(--text) 56%, transparent);
+}
+
+/* Le relevé des trois hauteurs : trois fenêtres côte à côte, chacune avec les
+   pixels qui restent à faire défiler. La hauteur se choisit d'un seul regard. */
+.auth-preview-tally {
+  display: grid;
+  gap: 5px;
+  padding: 7px 9px 8px;
+  border-radius: 10px;
+  border: 1px dashed color-mix(in srgb, var(--text) 16%, transparent);
+  background: color-mix(in srgb, var(--text) 2.5%, transparent);
+}
+
+.auth-preview-tally-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* La phrase de la copie du relevé : elle dit que la largeur retenue est partie
+   avec les trois mesures, ou que le navigateur a refusé la copie. */
+.auth-preview-tally-flash {
+  margin: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  padding: 4px 8px;
+  border-radius: 7px;
+  font-size: 10.5px;
+  line-height: 1.5;
+}
+.auth-preview-tally-flash i {
+  flex: none;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.auth-preview-tally-flash[data-tone='ok'] {
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+.auth-preview-tally-flash[data-tone='warn'] {
+  border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+}
+
+/* La date de la dernière copie du relevé, sous ses trois cases : une ligne
+   basse, lue sur la mémoire de l'appareil — le presse-papiers ne se relit
+   pas, la date dit donc quand le relevé est parti la dernière fois. */
+.auth-preview-tally-last {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-family: var(--font-label);
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: .02em;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+.auth-preview-tally-last i {
+  flex: none;
+  font-size: 11px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--accent) 72%, var(--text));
+}
+.auth-preview-tally-last[data-vide='yes'] i {
+  color: color-mix(in srgb, var(--text) 40%, transparent);
+}
+
+[dir='rtl'] .auth-preview-tally-last {
+  letter-spacing: 0;
+  font-size: 11px;
+}
+
+.auth-preview-tally-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+}
+.auth-preview-tally-label i {
+  font-size: 12px;
+  color: color-mix(in srgb, var(--accent) 68%, var(--text));
+}
+
+[dir='rtl'] .auth-preview-tally-label { letter-spacing: 0; font-size: 10.5px; }
+
+.auth-preview-tally-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+}
+
+.auth-preview-tally-cell {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  padding: 5px 8px;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  background: color-mix(in srgb, var(--surface) 55%, transparent);
+  text-align: start;
+  cursor: pointer;
+  transition: background .16s ease, border-color .16s ease;
+}
+
+.auth-preview-tally-cell:hover,
+.auth-preview-tally-cell:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+.auth-preview-tally-cell:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 2px;
+}
+
+.auth-preview-tally-cell[data-on='yes'] {
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--text) 8%, transparent);
+}
+
+.auth-preview-tally-h {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 1px;
+  font-family: var(--font-label);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+}
+.auth-preview-tally-h small {
+  font-size: 8.5px;
+  font-weight: 400;
+  opacity: .8;
+}
+.auth-preview-tally-cell[data-on='yes'] .auth-preview-tally-h {
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+}
+
+.auth-preview-tally-rest {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 3px;
+  font-size: 9.5px;
+  line-height: 1.45;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+.auth-preview-tally-rest i {
+  flex: none;
+  font-size: 11px;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--accent) 80%, var(--text));
+}
+.auth-preview-tally-cell[data-zero='yes'] .auth-preview-tally-rest {
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+}
+
+[dir='rtl'] .auth-preview-tally-h,
+[dir='rtl'] .auth-preview-tally-rest { letter-spacing: 0; }
+[dir='rtl'] .auth-preview-tally-rest { font-size: 10.5px; }
+
+@media (max-width: 560px) {
+  .auth-preview-tally-row { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* L'aperçu ne hérite d'aucun retournement : la page reste en lecture latine,
+   le bloc arabe portant son propre sens. */[dir='rtl'] .auth-preview-page {
+  direction: ltr;
+  text-align: left;
+}
+
+/* Les valeurs techniques gardent leur sens de lecture latin, même dans une
+   page arabe : une adresse ou un numéro de port ne se retourne pas. */
+[dir='rtl'] .auth-smtp-row code,
+[dir='rtl'] .auth-model-subject code {
+  direction: ltr;
+  unicode-bidi: isolate;
+  text-align: left;
+}
+
+@media (max-width: 560px) {
+  .auth-smtp-row { grid-template-columns: 76px minmax(0, 1fr); }
+  .auth-preview-measures { justify-items: start; }
+  .auth-preview-measure { justify-content: flex-start; }
+  .auth-smtp-head { align-items: flex-start; }
+  .auth-smtp-actions { width: 100%; }
+  .auth-smtp-actions > * { flex: 1 1 auto; justify-content: center; }
+  .auth-models-head { align-items: flex-start; }
+  .auth-model-tabs { width: 100%; }
+  .auth-model-tab { flex: 1 1 auto; text-align: center; }
+}

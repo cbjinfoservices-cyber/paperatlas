@@ -1,0 +1,124 @@
+/* ── Les trois surfaces qui se referment sur une seule mesure ───────────────
+   La ronde précédente a refermé la grille de comparaison sur le panneau, la
+   fenêtre de devis sur son en-tête et la tête de la feuille imprimée sur son
+   papier. Cette feuille-ci reprend les trois au même endroit de leur cadre :
+   le portrait d'une plume dans sa colonne, les plaques de la fenêtre de devis,
+   puis le bloc de signature et le pied de la feuille imprimée. Rien n'est
+   retiré : les filets, les teintes et les hauteurs gardent leur forme. */
+
+
+/* ── 1. Le portrait d'une plume, mesuré à sa colonne ──────────────────────
+   La grille se mesure désormais à son cadre : sous 620 px l'intitulé de la
+   ligne garde sa part et chaque profil reçoit ce qui reste, à parts égales.
+   À trois profils, le panneau n'ouvre que 300 px de champ et chaque colonne en
+   garde 71 : le portrait, posé à une largeur fixe de 54 px, ne tenait plus que
+   par un pixel, et il débordait franchement de sa colonne dès le quatrième
+   profil — le dossier en accepte quatre.
+
+   Le portrait se mesure donc à la largeur qui lui est donnée : jamais plus de
+   54 px, jamais plus que sa colonne, et toujours d'aplomb. La photographie
+   d'un atelier prenait déjà sa largeur ; les deux colonnes de tête se lisent
+   maintenant de la même façon. */
+.cmp-modal .cmp-table .cmp-portrait {
+  width: min(54px, 100%);
+  height: auto;
+  aspect-ratio: 1 / 1;
+  max-width: 100%;
+}
+
+
+/* ── 2. La fenêtre de devis : sa colonne, mesurée d'un bout à l'autre ─────
+   À 360 px en arabe, la fenêtre s'ouvre à douze pixels des bords et son
+   rembourrage de dix-huit pixels lui laisse 300 px de champ : l'en-tête et les
+   champs se referment bien sur cette même mesure, la grille des champs étant
+   déjà passée sur une seule colonne.
+
+   Ce qui ne se mesurait pas de la même façon, ce sont les deux plaques posées
+   dans cette colonne. La référence du dossier gardait l'interlettrage et les
+   capitales d'un libellé latin — en arabe, ce trait coupe les jointures —, et
+   le compte des caractères du message, écrit au bout de son étiquette, se
+   lisait « 500/0 » : deux chiffres et une barre séparés par le sens de lecture
+   de la phrase qui les porte. */
+[dir="rtl"] .quote-ref,
+[dir="rtl"] .quote-label {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* La référence du dossier reste d'un seul morceau, dans le sens où elle est
+   écrite, et sa plaque ne prend jamais plus que la colonne qui la porte. */
+.quote-ref {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+.quote-ref strong {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* Le compte des caractères : « 0/500 » d'un seul tenant, dans l'ordre où il
+   s'écrit, même au milieu d'une étiquette arabe — et d'une avance stable, pour
+   que le mot posé devant lui ne glisse pas à chaque chiffre gagné. */
+.fld-count {
+  display: inline-block;
+  direction: ltr;
+  unicode-bidi: isolate;
+  white-space: nowrap;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* ── 3. La feuille imprimée : la signature et le pied sur la mesure du papier
+   La feuille s'ouvre à douze pixels des bords comme le panneau, et son
+   rembourrage de dix-huit pixels retombe sur les mêmes 300 px de champ que la
+   tête. Le bloc de signature et le pied se tiennent donc bien sur la mesure du
+   papier — mais le pied n'avait reçu aucune des protections données à la tête
+   et à la signature : ses trois lignes gardaient leur largeur de contenu, et
+   celle qui répète la référence du dossier est tenue d'un seul morceau. Une
+   référence longue, ou une note qui ne se replie pas, l'aurait donc poussé
+   hors de la feuille au lieu de s'y mesurer.
+
+   Chaque ligne du pied prend donc la mesure du papier, son texte se replie
+   dedans, et la référence s'écourte par sa fin plutôt que de sortir. Les deux
+   références de la feuille et la date de la signature sont écrites de gauche à
+   droite : elles sont isolées du sens de lecture de la phrase arabe qui les
+   porte, dans le balisage, pour qu'aucun chiffre ne se retourne contre son
+   mot. */
+.print-sheet > * {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.print-sheet .print-foot {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.print-sheet .print-foot > span {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+
+/* La référence du pied : un seul morceau, qui s'écourte par son bout. */
+.print-sheet .print-foot-ref {
+  display: block;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* En arabe, le pied se lit du côté où la lecture commence, comme la tête. */
+[dir="rtl"] .print-sheet .print-foot {
+  text-align: start;
+}
+
+/* Une mesure écrite de gauche à droite — une référence, une date — garde son
+   sens au milieu d'une phrase arabe. */
+.print-sheet bdi {
+  direction: ltr;
+  unicode-bidi: isolate;
+}

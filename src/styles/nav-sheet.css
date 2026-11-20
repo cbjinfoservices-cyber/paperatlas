@@ -1,0 +1,1116 @@
+/* ── La feuille du menu ────────────────────────────────────────────────────
+   La feuille du téléphone, reprise de haut en bas : un en-tête qui nomme le
+   menu et le referme, un bloc collé (suivi + chapitre sur une ligne), puis
+   deux rubriques — le réseau, le travail — et le compte en dernier.
+
+   Tout ce qui est ici ne fait que resserrer et border la feuille déjà décrite
+   dans nav.css : les portes, leurs marques de lecture et leurs comptes
+   gardent leur dessin, seul le rythme change. */
+
+.nav-sheet {
+  /* Rien ne déborde plus sur le côté : une ligne trop longue se replie au lieu
+     d'ouvrir une barre de défilement horizontale dans le panneau. */
+  overflow-x: clip;
+  /* La feuille reprend la respiration du panneau « Plus » : le même rembourrage
+     extérieur de 8 px, le même galbe de coin, le même écart entre les lignes.
+     Les portes gardent donc leur 11 px intérieur, et les intitulés commencent
+     exactement là où ils commencent dans le panneau — 19 px du bord. */
+  padding: 10px 8px 14px;
+  gap: 8px;
+  border-radius: 14px;
+}
+
+/* ── L'en-tête ──────────────────────────────────────────────────────────────
+   Il ne colle pas au haut du panneau : c'est le bloc du suivi qui tient ce
+   rôle. L'en-tête donne seulement le nom de la feuille et sa porte de sortie. */
+.nav-sheet-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 0 11px 10px;
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+}
+/* Le nom de la feuille porte le total des portes, comme celui du panneau
+   ouvert : « Mon espace · 34 portes en tout ». Le nom garde sa petite capitale,
+   le chiffre se lit en bas de casse à côté, un cran plus bas. Les deux se
+   replient ensemble sur un écran de 320 px, au lieu de pousser la porte de
+   fermeture hors de l'en-tête. */
+.nav-sheet-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 6px;
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+.nav-sheet-title-name { min-width: 0; }
+.nav-sheet-title-n {
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .02em;
+  text-transform: none;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent) 78%, var(--text));
+}
+.nav-sheet-title-n::before {
+  content: "·";
+  margin-inline-end: 5px;
+  opacity: .55;
+}
+[dir="rtl"] .nav-sheet-title { letter-spacing: 0; text-transform: none; font-size: 11.5px; }
+[dir="rtl"] .nav-sheet-title-n { letter-spacing: 0; font-size: 10.5px; }
+.nav-sheet-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 68%, transparent);
+  cursor: pointer;
+  transition: color .18s ease, border-color .18s ease, background .18s ease;
+}
+.nav-sheet-close i { font-size: 16px; line-height: 1; color: inherit; }
+.nav-sheet-close:hover {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+.nav-sheet-close:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ── Le bloc collé ──────────────────────────────────────────────────────────
+   Il s'étale sur toute la largeur du panneau par ses marges latérales, et se
+   colle au bord haut du défilement : l'en-tête, lui, s'en va avec la page. */
+.nav-sheet .nav-sheet-pinned {
+  top: 0;
+  margin: 0 -8px;
+  padding: 8px 8px 6px;
+  gap: 6px;
+  border-radius: 0;
+}
+
+/* ── Une rubrique ───────────────────────────────────────────────────────────
+   Son intitulé est suivi d'un filet qui court jusqu'au bord : la séparation se
+   lit comme un trait, pas comme un vide de plus. */
+.nav-sheet-group { display: grid; gap: 2px; min-width: 0; }
+/* Le filet de la famille, dans la feuille : les deux tableaux ferment la
+   parenté de l'annuaire, puis les autres lieux du réseau reprennent. Il suit
+   la marge des portes, et reste d'un cran plus bas que le filet d'une rubrique. */
+.nav-sheet-rule {
+  display: block;
+  height: 1px;
+  margin: 6px 11px 4px;
+  background: color-mix(in srgb, var(--text) 11%, transparent);
+}
+/* Le même mot de couture que le pied de page et le panneau « Plus », posé au
+   même endroit de la liste : sous le filet qui ferme les deux tableaux, juste
+   avant les autres lieux du réseau. Il suit la marge des portes et n'est pas
+   une porte — rien à ouvrir, et rien à compter. */
+.nav-sheet-seam {
+  display: block;
+  /* La même marge logique que le filet de famille juste au-dessus : le mot se
+     pose sur la jointure des deux tableaux, à la même mesure que le trait, dans
+     les deux sens de lecture. */
+  margin-block: 0 4px;
+  margin-inline: 11px;
+  padding: 0;
+  /* Il commence du côté où la lecture commence — à droite en arabe. */
+  text-align: start;
+  font-family: var(--font-label);
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 42%, transparent);
+}
+[dir="rtl"] .nav-sheet-seam {
+  font-size: 10px;
+  letter-spacing: 0;
+  /* L'arabe tient sur une ligne plus haute que le latin à taille égale : le
+     mot gagne l'interligne de la feuille, et perd ses capitales. */
+  line-height: 1.45;
+  text-transform: none;
+}
+.nav-sheet-group + .nav-sheet-group { margin-top: 4px; }
+.nav-sheet .nav-mobile-group {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 4px 0 5px;
+  padding: 0 11px;
+}
+/* ── L'intitulé et sa pastille, tenus ensemble dans les trois langues ──────
+   À 320 px en arabe, la feuille ne garde que 282 px : le mot de la rubrique
+   et son compte doivent rester voisins, sinon la pastille se lit comme le
+   compte de la rubrique suivante. Le nom est donc une boîte à part dans la
+   rangée (et non un simple texte à côté de la pastille) : c'est lui qui cède
+   quand la place manque, en se repliant dans sa propre largeur, tandis que la
+   pastille garde son cadre et se tient juste après lui.
+
+   L'ordre de la rangée suit le sens de lecture : en arabe, le nom passe à
+   droite et la pastille se pose à sa gauche, c'est-à-dire au bout de la ligne
+   — les chiffres, eux, gardent leur propre sens (voir nav-counts.css). Le nom
+   et son compte se lisent donc d'un même geste, à droite comme à gauche. */
+.nav-sheet .nav-mobile-group .nav-grp-name {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.nav-sheet .nav-mobile-group::after {
+  content: "";
+  flex: 1 1 auto;
+  min-width: 10px;
+  height: 1px;
+  background: color-mix(in srgb, var(--text) 12%, transparent);
+}
+/* ── L'intitulé et son compte au plus serré ────────────────────────────────
+   À 320 px, la feuille laisse 282 px à l'intérieur d'un intitulé. En anglais,
+   « The network » et « Your account » sont les deux plus longs des trois noms :
+   le mot et sa pastille doivent tenir sur la même ligne, la pastille ne se
+   lisant plus comme le compte de ce mot-là si elle passait seule dessous.
+   L'écart se resserre donc avec la largeur, et le filet garde un minimum pour
+   rester un trait plutôt qu'un point. Le nom, lui, ne bouge pas — c'est le
+   premier mot que l'œil doit retrouver, et c'est lui qui commande le chiffre. */
+@media (max-width: 360px) {
+  .nav-sheet .nav-mobile-group { gap: 6px; }
+  .nav-sheet .nav-mobile-group::after { min-width: 8px; }
+  /* Le mot de la rubrique et son compte restent sur une seule rangée, quelle
+     que soit la langue. À 320 px la feuille ne garde que 282 px : un nom plus
+     long — le français « Travailler » ou « Votre compte » — ne doit pas
+     repousser la pastille sous lui. La rangée ne se replie donc plus, le filet
+     qui la ferme cède le premier (il peut tomber à zéro), et le nom se replie
+     dans sa propre largeur au lieu de pousser le chiffre. */
+  .nav-sheet .nav-mobile-group:has(.nav-grp-count) { flex-wrap: nowrap; }
+  /* Le nom seul peut céder : il se replie dans sa largeur, et la pastille du
+     compte reste à sa place, au bout de la ligne — en arabe comme en latin. */
+  .nav-sheet .nav-mobile-group:has(.nav-grp-count) .nav-grp-name {
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+  .nav-sheet .nav-mobile-group:has(.nav-grp-count)::after {
+    min-width: 0;
+    flex: 1 1 0;
+  }
+  /* Le cadre du compte est le même dans les trois langues à cette largeur :
+     deux pixels de rembourrage latéral, un corps de 10 px et une hauteur fixe.
+     L'anglais, l'arabe et le français lisent donc exactement la même pastille —
+     le chiffre ne se laisse ni écraser ni replier, et la ligne de l'intitulé ne
+     bouge pas quand le compte paraît. */
+  .nav-sheet .nav-grp-count {
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    padding: 2px 5px;
+    font-size: 10px;
+    line-height: 1;
+    min-height: 14px;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* ── Les lignes ─────────────────────────────────────────────────────────────
+   Un peu plus serrées qu'avant, avec un fond au survol : la feuille se
+   parcourt au doigt sans que chaque porte prenne trois lignes. */
+.nav-sheet a.nav-mobile-plain,
+.nav-sheet a.nav-mobile-item {
+  min-width: 0;
+  padding: 10px 11px;
+  border-radius: 10px;
+  transition: background .18s ease, color .18s ease;
+}
+/* Le signe et son texte s'alignent sur le haut, comme dans le panneau : une
+   ligne d'explication qui se replie ne fait plus descendre l'icône. */
+.nav-sheet a.nav-mobile-item { align-items: flex-start; }
+.nav-sheet a.nav-mobile-plain:hover,
+.nav-sheet a.nav-mobile-item:hover {
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+}
+.nav-sheet a.nav-mobile-item:hover .nav-mobile-txt small {
+  color: color-mix(in srgb, var(--accent) 76%, transparent);
+}
+/* Une ligne trop longue se replie ; jamais elle ne pousse le panneau. */
+.nav-sheet a small,
+.nav-sheet .nav-mobile-txt small { overflow-wrap: anywhere; }
+.nav-sheet .nav-mobile-tick--named { flex-wrap: wrap; max-width: 100%; }
+
+/* ── Le chapitre, sur une ligne ─────────────────────────────────────────────
+   Le compte et le filet restent visibles ; les lieux lus, la phrase de fin et
+   la remise à zéro attendent qu'on ouvre la ligne. */
+.nav-sheet-chapter {
+  display: grid;
+  gap: 0;
+  padding: 7px 10px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--text) 5%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 9%, transparent);
+}
+.nav-sheet-chapter.is-open { gap: 8px; }
+.nav-sheet-chapter-sum {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 1px 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  color: inherit;
+}
+.nav-sheet-chapter-sum:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 8px; }
+.nav-sheet-chapter-lbl {
+  flex: 0 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 56%, transparent);
+}
+[dir="rtl"] .nav-sheet-chapter-lbl { letter-spacing: 0; text-transform: none; font-size: 11px; }
+.nav-sheet-chapter-track {
+  display: block;
+  flex: 1 1 auto;
+  min-width: 22px;
+  height: 3px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--text) 16%, transparent);
+}
+.nav-sheet-chapter-track i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+  transition: width .34s cubic-bezier(.2,.7,.2,1);
+}
+.nav-sheet-chapter-num {
+  flex: 0 0 auto;
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  letter-spacing: .03em;
+  color: var(--accent);
+}
+.nav-sheet-chapter-done { flex: 0 0 auto; font-size: 13px; line-height: 1; color: var(--accent); }
+.nav-sheet-chapter-caret {
+  flex: 0 0 auto;
+  font-size: 14px;
+  line-height: 1;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+  transition: color .18s ease;
+}
+.nav-sheet-chapter-sum:hover .nav-sheet-chapter-caret { color: var(--accent); }
+.nav-sheet-chapter-body {
+  display: grid;
+  gap: 7px;
+  padding-top: 8px;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 14%, transparent);
+}
+/* La remise à zéro est une phrase entière : elle se replie sur deux lignes
+   plutôt que de sortir du panneau. */
+.nav-sheet .nav-mobile-reset {
+  align-self: stretch;
+  align-items: flex-start;
+  white-space: normal;
+  max-width: 100%;
+  line-height: 1.35;
+  text-align: start;
+}
+.nav-sheet .nav-mobile-reset i { margin-top: 1px; flex: 0 0 auto; }
+.nav-sheet .nav-mobile-places { align-items: flex-start; }
+.nav-sheet .nav-mobile-places i { margin-top: 1px; flex: 0 0 auto; }
+
+/* ── La ligne de la demande B2B, sous le guichet ────────────────────────────
+   Elle se lit comme une des trois voix de « Demandes », pas comme une seconde
+   porte au même poids : un cran plus petite, décalée, avec un filet à gauche. */
+.nav-sheet a.nav-sheet-subline {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  margin: 0 0 2px;
+  margin-inline-start: 27px;
+  padding: 8px 9px;
+  border-radius: 10px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  text-decoration: none;
+  color: color-mix(in srgb, var(--text) 76%, transparent);
+  transition: background .18s ease, color .18s ease, border-color .18s ease;
+}
+.nav-sheet a.nav-sheet-subline > i {
+  flex: 0 0 auto;
+  font-size: 15px;
+  line-height: 1.3;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  transition: color .18s ease;
+}
+.nav-sheet-subline-txt { display: grid; gap: 2px; min-width: 0; }
+.nav-sheet-subline-txt > span { font-size: 13.5px; line-height: 1.32; }
+.nav-sheet-subline-txt small {
+  font-family: var(--font-label);
+  font-size: 11px;
+  line-height: 1.36;
+  letter-spacing: .02em;
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+  transition: color .18s ease;
+}
+.nav-sheet a.nav-sheet-subline:hover {
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  border-inline-start-color: color-mix(in srgb, var(--accent) 46%, transparent);
+}
+.nav-sheet a.nav-sheet-subline:hover > i { color: var(--accent); }
+.nav-sheet a.nav-sheet-subline:hover small { color: color-mix(in srgb, var(--accent) 74%, transparent); }
+.nav-sheet a.nav-sheet-subline.is-current {
+  color: var(--accent);
+  font-weight: 600;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+.nav-sheet a.nav-sheet-subline.is-current > i { color: var(--accent); }
+.nav-sheet a.nav-sheet-subline:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+[dir="rtl"] .nav-sheet a.nav-sheet-subline,
+[dir="rtl"] .nav-sheet-subline-txt small { letter-spacing: 0; }
+
+/* ── Les seconds accès, sur le pas des portes ───────────────────────────────
+   Le façonnier, la marque de lecture, le rappel B2B et sa sourdine sont trois
+   faces du même cran : sous une porte, une ligne plus basse d'un ton. Ils
+   lisaient trois corps différents — 13, 12 et 10,5 px — et trois interlignes :
+   la feuille changeait donc de pas trois fois de suite. Ils lisent maintenant
+   un seul couple, celui de la feuille elle-même : 13,5 px / 1,32 pour le mot,
+   11 px / 1,36 pour la phrase dessous, 2 px entre les deux, et le même
+   rembourrage de ligne. Du haut en bas, la liste avance au même pas. */
+.nav-sheet a.nav-mobile-sub,
+.nav-sheet a.nav-mobile-read,
+.nav-sheet a.nav-mobile-late {
+  margin-top: -4px;
+  margin-inline-start: 27px;
+  padding: 5px 9px 6px 5px;
+  border-radius: 9px;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  line-height: 1.32;
+  letter-spacing: 0;
+}
+/* La pastille de lecture garde son galbe de pastille : elle est la seule des
+   trois à porter un fond, elle ne prend donc pas le coin des deux autres. */
+.nav-sheet a.nav-mobile-read {
+  border-radius: 999px;
+  padding: 5px 10px 6px 8px;
+}
+/* Le signe se cale sur le haut du texte, comme dans les portes : une ligne qui
+   se replie ne fait plus descendre l'icône. */
+.nav-sheet a.nav-mobile-late { align-items: flex-start; }
+.nav-sheet a.nav-mobile-sub > i,
+.nav-sheet a.nav-mobile-read > i,
+.nav-sheet a.nav-mobile-late > i { font-size: 14.5px; line-height: 1.3; }
+.nav-sheet a.nav-mobile-sub > i,
+.nav-sheet a.nav-mobile-late > i { margin-top: 1px; }
+/* La phrase sous le mot suit le même couple dans les trois : c'est elle qui
+   donne son pas à la ligne, et non un réglage propre à chaque accès. */
+.nav-sheet a.nav-mobile-sub small,
+.nav-sheet .nav-mobile-late-txt small { font-size: 11px; line-height: 1.36; }
+.nav-sheet .nav-mobile-late-txt { gap: 2px; min-width: 0; }
+.nav-sheet .nav-mobile-late-txt > span { font-size: 13.5px; line-height: 1.32; }
+/* La sourdine du rappel n'est pas une porte : elle garde sa voix basse, mais
+   son retrait et ses marges sont ceux des trois accès qu'elle prolonge. */
+.nav-sheet .nav-late-mute--sheet,
+.nav-sheet .nav-late-mute-wrap--sheet { margin: -4px 0 4px; margin-inline-start: 27px; }
+[dir="rtl"] .nav-sheet a.nav-mobile-sub,
+[dir="rtl"] .nav-sheet a.nav-mobile-read,
+[dir="rtl"] .nav-sheet a.nav-mobile-late,
+[dir="rtl"] .nav-sheet .nav-mobile-late-txt > span,
+[dir="rtl"] .nav-sheet a.nav-mobile-sub small,
+[dir="rtl"] .nav-sheet .nav-mobile-late-txt small { letter-spacing: 0; }
+/* Les huit types n'ont plus de retrait : la feuille les porte sur deux
+   colonnes, du bord au bord, plutôt que de laisser une colonne de vide à
+   droite de chaque pastille. */
+.nav-sheet .nav-dir-types--sheet { margin: -4px 0 2px; padding-inline: 3px; margin-inline-start: 0; }
+.nav-sheet #nav-sheet-dir-types { padding-inline: 3px; }
+
+/* ── Le compte ──────────────────────────────────────────────────────────────
+   Le membre, ses messages, sa sortie et la langue : la dernière rubrique, la
+   plus calme. */
+.nav-sheet .nav-sheet-member-link { padding: 10px 11px; border-radius: 10px; }
+.nav-sheet .nav-mobile-out { margin-top: 4px; }
+/* ── La bascule de langue ne fait pas une barre ─────────────────────────────
+   Posée dans la grille de la feuille, elle prenait toute la largeur de la
+   colonne : trois pastilles à un bout, et un fond arrondi qui courait jusqu'à
+   l'autre bord. Sur un écran de 320 px, cette barre du bas occupait presque
+   toute la largeur et la petite flèche de défilement, centrée, se posait
+   dessus. Elle reprend donc la largeur de ses trois pastilles et se range du
+   côté où commence la lecture : en arabe à droite, le milieu du bas reste
+   libre pour la flèche, et les deux ne se touchent plus. */
+.nav-sheet .lang-switch.is-compact {
+  justify-self: start;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 8px;
+}
+.nav-sheet a.nav-sheet-join { color: color-mix(in srgb, var(--text) 84%, transparent); }
+
+/* ── Le pied de la feuille est son plancher ────────────────────────────────
+   La langue et la sortie de compte ne défilent plus avec les portes : elles
+   les attendent en bas, collées au bord, exactement comme le pied du panneau.
+   Le voile et la flèche se relèvent donc de sa hauteur (voir --sheet-foot),
+   au lieu de venir se poser sur elles. Sa teinte est pleine : les portes qui
+   passent derrière lui ne le traversent pas. */
+.nav-sheet-foot {
+  position: sticky;
+  bottom: 0;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+  /* Les marges latérales rendent au plancher toute la largeur de la feuille :
+     sa surface touche les deux bords, et son filet plus rien ne le traverse.
+     L'axe du bas, lui, ne bouge pas — le pied reste dans le rembourrage, ce
+     qui le tient à l'écart des deux coins et l'empêche d'en sortir. */
+  margin: 0 -8px;
+  padding: 8px 11px 9px;
+  border-top: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  border-radius: 0 0 13px 13px;
+  background: var(--surface);
+  box-shadow: 0 -10px 14px -13px color-mix(in srgb, #000 58%, transparent);
+  transition: border-color .26s ease, box-shadow .26s ease;
+}
+/* Le filet du plancher s'accuse dès qu'une porte est passée derrière lui —
+   le même signal, au même seuil, que le liseré du bloc collé en haut de la
+   feuille : au repos, la séparation ne se devine qu'à peine ; dès que des
+   portes glissent sous le pied, elle se lit franchement, et le filet dit
+   alors ce qu'il fait. Sa teinte pleine et son ombre ne bougent pas : seuls
+   le trait et son ombre portée changent, donc rien ne saute d'un pixel. */
+.nav-sheet-foot.is-scrolled {
+  border-top-color: color-mix(in srgb, var(--text) 22%, transparent);
+  box-shadow: 0 -14px 18px -13px color-mix(in srgb, #000 70%, transparent);
+}
+.nav-sheet-foot-lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  /* « Langue », « Language », « اللغة » : le mot qui nomme la langue est un
+     seul mot, et il ne se replie jamais à l'intérieur de son bloc. Si la
+     place manque à 320 px, c'est la ligne du pied qui décide — pas le mot. */
+  white-space: nowrap;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+}
+.nav-sheet-foot-lang i {
+  font-size: 13px;
+  line-height: 1;
+  color: color-mix(in srgb, var(--accent) 74%, var(--text));
+}
+[dir="rtl"] .nav-sheet-foot-lang { letter-spacing: 0; text-transform: none; font-size: 11px; }
+/* La bascule garde son galbe de barre, un cran plus serrée, et se tient sur
+   l'axe du pied : elle est un rappel, pas une porte. */
+.nav-sheet .nav-sheet-foot .lang-switch.is-compact {
+  justify-self: auto;
+  margin-top: 0;
+  align-self: center;
+  padding: 2px;
+}
+.nav-sheet .nav-sheet-foot .lang-switch.is-compact button {
+  padding: 3px 7px;
+  min-width: 26px;
+  font-size: 10px;
+}
+.nav-sheet-foot-out {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-inline-start: auto;
+  padding: 4px 9px 4px 7px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .04em;
+  line-height: 1.3;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  transition: color .18s ease, border-color .18s ease, background .18s ease;
+}
+.nav-sheet-foot-out i {
+  font-size: 12.5px;
+  line-height: 1;
+  color: color-mix(in srgb, var(--accent) 78%, transparent);
+}
+.nav-sheet-foot-out:hover {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: var(--accent);
+}
+.nav-sheet-foot-out:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.nav-sheet-foot-out[disabled] { opacity: .55; cursor: wait; }
+[dir="rtl"] .nav-sheet-foot-out { letter-spacing: 0; font-size: 11px; }
+/* ── Le pied à deux lignes, en anglais ────────────────────────────────────
+   « Language · FR ع EN · Sign out » ne tient pas sur une ligne à corps égal :
+   les deux libellés anglais sont plus longs que leurs voisins. La ligne prend
+   donc un écart de plus, et la sortie de compte reprend le bout de la sienne —
+   du côté où la lecture finit —, la langue gardant ses trois pastilles
+   ensemble. Sur un écran court, c'est cette hauteur de pied que le repère de
+   fin et la flèche doivent laisser passer : elle est relevée sur le pied
+   lui-même (--sheet-foot), et le voile comme la flèche remontent d'autant.
+   Le repère, lui, suit désormais la règle du panneau : dès qu'il entre dans la
+   bande visible, voile et flèche s'effacent, quel que soit le nombre de lignes
+   du pied. */
+[lang="en"] .nav-sheet-foot { row-gap: 6px; column-gap: 8px; }
+[lang="en"] .nav-sheet-foot-lang { flex: 0 0 auto; }
+[lang="en"] .nav-sheet-foot-out { margin-inline-start: auto; }
+[lang="en"] .nav-sheet-end { letter-spacing: .1em; margin: 4px 3px 2px; }
+
+/* ── Le plancher anglais au plus serré, à 360 px et moins ────────────────
+   À 360 px, la feuille ne garde plus que 326 px à l'intérieur de son pied,
+   et c'est là que commence le pas resserré du téléphone : en dessous, la
+   feuille et son plancher rendent encore un cran de rembourrage, et
+   « Language · FR ع EN · Sign out » doit y tenir sur une seule ligne.
+
+   Le pied anglais se resserre donc d'un cran de plus que les deux autres
+   lectures, mais seulement sous 360 px : au-dessus, jusqu'à 400 px, il lit au
+   pas commun — il y a largement la place, et le mot n'a pas à rapetisser pour
+   rien. Le mot qui nomme la langue et son signe rendent un demi-point, les
+   trois pastilles deux pixels de large et un de rembourrage, la sortie de
+   compte un demi-point et deux pixels, et les trois écarts se resserrent. Le
+   calcul tient alors dans ~215 px : les cinq items restent sur une seule
+   ligne, avec de la marge devant la sortie de compte. Rien n'est retiré : les
+   trois pastilles gardent leur cadre, chaque mot reste entier. Si une police
+   rendait un mot plus long que prévu, le plancher se replie plutôt que de
+   déborder — et comme sa hauteur est relevée sur lui-même, le voile et la
+   flèche remontent d'autant. */
+@media (max-width: 360px) {
+  [lang="en"] .nav-sheet-foot { column-gap: 5px; row-gap: 4px; }
+  [lang="en"] .nav-sheet-foot-lang { gap: 3px; font-size: 8.5px; }
+  [lang="en"] .nav-sheet-foot-lang i { font-size: 11px; }
+  [lang="en"] .nav-sheet .nav-sheet-foot .lang-switch.is-compact { gap: 2px; padding: 2px; }
+  [lang="en"] .nav-sheet .nav-sheet-foot .lang-switch.is-compact button {
+    min-width: 21px;
+    padding: 2px 4px;
+    font-size: 9px;
+  }
+  [lang="en"] .nav-sheet-foot-out { gap: 3px; padding: 3px 6px 3px 5px; font-size: 9px; }
+  [lang="en"] .nav-sheet-foot-out i { font-size: 11px; }
+}
+
+/* ── Le plancher au plus serré, en arabe ───────────────────────────────────
+   À 320 px de large, la feuille laisse 282 px à son plancher : le mot qui
+   nomme la langue, ses trois pastilles et la sortie de compte doivent tenir
+   sur une seule ligne. La pastille de langue garde sa forme mais rend un peu
+   de sa largeur (24 px au lieu de 26, deux pixels de rembourrage de moins),
+   le mot qui la nomme et la sortie de compte rendent un demi-point, et les
+   trois écarts se resserrent. Le calcul tient alors dans ~225 px : la ligne
+   reste entière, et la marge qui reste appartient à la sortie de compte.
+   Si une langue rendait un mot plus long que prévu, le plancher se replie
+   plutôt que de déborder — et comme sa hauteur est relevée sur lui-même,
+   le voile et la flèche remontent d'autant. */
+@media (max-width: 360px) {
+  .nav-sheet-foot { gap: 4px 6px; padding: 7px 9px 8px; }
+  .nav-sheet-foot-lang { font-size: 9px; gap: 4px; }
+  .nav-sheet-foot-lang i { font-size: 11.5px; }
+  .nav-sheet .nav-sheet-foot .lang-switch.is-compact { padding: 2px; }
+  .nav-sheet .nav-sheet-foot .lang-switch.is-compact button {
+    padding: 2px 5px;
+    min-width: 23px;
+    font-size: 9.5px;
+  }
+  .nav-sheet-foot-out { gap: 4px; padding: 3px 7px 3px 6px; font-size: 9.5px; }
+  .nav-sheet-foot-out i { font-size: 11.5px; }
+  [dir="rtl"] .nav-sheet-foot-lang { font-size: 10px; }
+  [dir="rtl"] .nav-sheet-foot-out { font-size: 10px; }
+  /* En français, « Se déconnecter » est le plus long des trois libellés de
+     sortie à corps égal. À 320 px, le plancher garde une seule ligne : les
+     trois écarts se resserrent d'un demi-pas, sans toucher au corps des mots
+     ni au cadre des pastilles. Rien n'est retiré — chaque mot reste entier,
+     et la ligne tient avec de la marge devant la sortie de compte. */
+  [lang="fr"] .nav-sheet-foot { column-gap: 5px; }
+  [lang="fr"] .nav-sheet-foot-lang { gap: 3px; }
+}
+
+/* ── La fin de la liste, dans la feuille ───────────────────────────────────
+   Le voile dit qu'il reste des portes ; une fois le fond atteint, il s'efface
+   et un petit repère ferme la liste — deux filets et un mot, à la manière
+   d'un point final, juste au-dessus du plancher. Il est dans le flux : il ne
+   recouvre aucune porte et son arrivée ne fait rien sauter. */
+.nav-sheet-end {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 1px 3px;
+  font-family: var(--font-label);
+  font-size: 9px;
+  line-height: 1.3;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 42%, transparent);
+}
+.nav-sheet-end::before,
+.nav-sheet-end::after {
+  content: "";
+  flex: 1 1 auto;
+  min-width: 10px;
+  height: 1px;
+  background: color-mix(in srgb, var(--text) 12%, transparent);
+}
+.nav-sheet-end i {
+  flex: none;
+  font-size: 11px;
+  line-height: 1;
+  color: color-mix(in srgb, var(--accent) 62%, transparent);
+}
+.nav-sheet-end > span { flex: none; }
+[dir="rtl"] .nav-sheet-end {
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 10.5px;
+}
+/* ── Le repère de fin au plus serré, clavier ouvert ───────────────────────
+   À 320 px, la feuille ne garde que 282 px de large et, le clavier monté,
+   une bande visible de quelques centimètres : le plancher y prend sa part,
+   et le repère de fin doit tenir dans ce qui reste sans perdre ses deux
+   filets. Il resserre donc ses écarts et son corps à cette largeur, en
+   arabe comme ailleurs — ses filets gardent un minimum pour se lire, et la
+   ligne reste d'un seul tenant, juste au-dessus du plancher. */
+@media (max-width: 360px) {
+  .nav-sheet-end { margin: 2px 2px 4px; gap: 6px; font-size: 8.5px; }
+  .nav-sheet-end::before,
+  .nav-sheet-end::after { min-width: 8px; }
+  .nav-sheet-end i { font-size: 10px; }
+  [dir="rtl"] .nav-sheet-end { font-size: 9.5px; }
+}
+
+/* ── La recherche de la feuille ────────────────────────────────────────────
+   Elle vit au haut du bloc collé : le panneau peut défiler, le champ reste
+   sous le pouce. Le dessin est celui de la recherche des menus à crans, en
+   un cran plus grand — c'est un geste de la feuille, pas du rang. */
+.nav-sheet .nav-sheet-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 8px 4px;
+  padding: 7px 10px 7px 9px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  background: color-mix(in srgb, var(--text) 5%, transparent);
+  transition: border-color .18s ease, background .18s ease;
+}
+.nav-sheet .nav-sheet-search:focus-within {
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+}
+.nav-sheet-search > i {
+  flex: none;
+  font-size: 14px;
+  line-height: 1;
+  color: color-mix(in srgb, var(--text) 46%, transparent);
+}
+.nav-sheet-search input {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  line-height: 1.35;
+}
+.nav-sheet-search input::placeholder { color: color-mix(in srgb, var(--text) 42%, transparent); }
+.nav-sheet-search-clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+  cursor: pointer;
+  transition: color .18s ease, background .18s ease;
+}
+.nav-sheet-search-clear i { font-size: 14px; line-height: 1; color: inherit; }
+.nav-sheet-search-clear:hover {
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+.nav-sheet-search-clear:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+/* Quand rien ne répond : la feuille le dit au lieu de rester vide. */
+.nav-sheet-empty {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 4px 2px;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--text) 56%, transparent);
+}
+.nav-sheet-empty i { flex: none; font-size: 14px; line-height: 1; color: var(--accent); }
+
+/* ── Le mot de couture dans les résultats de la recherche ────────────────
+   La recherche de la feuille range ses résultats sous l'intitulé de leur
+   rubrique — le réseau, le travail, le compte. Mais sous « Le réseau », une
+   porte des deux tableaux et une porte de la suite du réseau se lisaient
+   pareil. Le mot de couture du pied de page est donc posé au même joint que
+   dans la liste : les portes trouvées au-delà du filet de famille disent à
+   quelle suite elles appartiennent.
+
+   Il emprunte exactement la tenue des deux autres surfaces — plus petit que
+   les portes, sans capitales criardes, marges et alignement logiques pour
+   qu'il commence du côté où la lecture commence — et ce n'est pas une porte :
+   il ne prend la place d'aucune et n'entre dans aucun compte. */
+.nav-hit-seam {
+  display: block;
+  margin: 5px 13px 2px;
+  padding: 0;
+  text-align: start;
+  font-family: var(--font-label);
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 42%, transparent);
+}
+[dir="rtl"] .nav-hit-seam {
+  font-size: 10px;
+  letter-spacing: 0;
+  line-height: 1.45;
+  text-transform: none;
+}
+
+/* ── L'annuaire et ses huit types ──────────────────────────────────────────
+   La ligne mène à l'annuaire entier ; la flèche, à son bout, ouvre les types.
+   Repliés d'office, ils ne prennent plus le haut de la feuille. */
+.nav-sheet .nav-sheet-annuaire { margin: 0; }
+.nav-sheet .nav-sheet-annuaire > a { padding: 10px 11px; border-radius: 10px; }
+.nav-sheet .nav-sheet-annuaire .nav-door-toggle { width: 30px; margin: 2px 0; }
+.nav-sheet .nav-sheet-annuaire .nav-door-toggle i { font-size: 15px; }
+/* Le compte des types tient sur la flèche : elle s'élargit juste ce qu'il
+   faut, et le chiffre se lit à côté du chevron. */
+.nav-sheet .nav-sheet-annuaire .nav-door-toggle--count {
+  width: auto;
+  gap: 4px;
+  padding: 0 7px;
+  border-radius: 999px;
+}
+.nav-sheet .nav-sheet-annuaire .nav-door-toggle--count .nav-door-toggle-n { font-size: 10.5px; }
+.nav-sheet #nav-sheet-dir-types { margin-top: -2px; }
+
+/* L'annuaire trouvé par la recherche : sa ligne, sa flèche déjà ouverte, et
+   les huit types dessous — la réponse se lit dans la famille qui la porte. */
+.nav-sheet .nav-sheet-hits { display: grid; gap: 2px; padding: 1px 0 4px; }
+.nav-sheet .nav-sheet-hits .nav-sheet-annuaire > a { padding: 10px 11px; border-radius: 10px; }
+.nav-sheet .nav-sheet-hits .nav-door-toggle { width: 26px; margin: 2px 0; }
+.nav-sheet .nav-sheet-hits .nav-dir-types--sheet { margin: -2px 0 2px; margin-inline-start: 0; }
+
+/* ── Au plus serré ──────────────────────────────────────────────────────────
+   Sous 360 px, l'en-tête et le chapitre rendent un cran de plus : l'intitulé
+   du chapitre s'efface le premier, jamais le compte. */
+@media (max-width: 360px) {
+  .nav-sheet-chapter-lbl { display: none; }
+  /* Le total du nom rend un demi-point : à 320 px, il tient ainsi sur la même
+     ligne que le nom, à côté de la porte de fermeture. */
+  .nav-sheet-title-n { font-size: 9px; }
+  .nav-sheet { padding: 8px 8px 12px; }
+  .nav-sheet .nav-sheet-pinned { margin: 0 -8px; padding: 8px 8px 6px; }
+  .nav-sheet a.nav-mobile-plain,
+  .nav-sheet a.nav-mobile-item { padding: 9px 9px; }
+}
+
+/* ── Les huit types sur un téléphone de 320 px ──────────────────────────────
+   À cette largeur, la feuille laisse 130 px à chaque colonne : le signe, le
+   compte et les deux rembourrages en prennent 62, et « Bibliothèques » ou
+   « Finishing houses » n'ont plus la place de tenir — ils s'écourtaient par
+   des points de suspension, c'est-à-dire qu'ils ne se lisaient plus. Sous
+   380 px, les huit familles reprennent donc la largeur entière, une par
+   ligne : aucun nom ne s'écourte, et le compte reste au bout de sa ligne. */
+@media (max-width: 380px) {
+  .nav-sheet .nav-dir-types--sheet {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+  /* La pastille garde toute la largeur pour un seul nom : « Finishing houses »
+     — le plus long des huit en anglais — n'a plus à s'écourter, et si un nom
+     venait à dépasser encore, il se replierait dans sa pastille au lieu de
+     sortir de la feuille. */
+  .nav-mobile .nav-dir-types--sheet a.nav-dir-type {
+    padding: 8px 10px 8px 9px;
+    font-size: 13.5px;
+    white-space: normal;
+  }
+  .nav-mobile .nav-dir-types--sheet a.nav-dir-type > i { font-size: 14px; }
+  /* Le nom garde toute sa place : plus de coupe, plus de points de suite. */
+  .nav-mobile .nav-dir-types--sheet a.nav-dir-type > span:not(.nav-sub-count) {
+    overflow: visible;
+    text-overflow: clip;
+    overflow-wrap: anywhere;
+  }
+  .nav-mobile .nav-dir-types--sheet .nav-sub-count { margin-inline-start: auto; }
+}
+
+/* ── Ce qui reste sous la ligne, dans la feuille ────────────────────────────
+   La feuille du téléphone défile comme le panneau : quand des portes restent
+   sous son bord, le même voile y éteint la dernière porte lisible au lieu de
+   la couper net, et la même petite flèche cerclée s'y pose. Elle se pose
+   par-dessus la liste et ne prend aucune place — la marge haute annule l'écart
+   de grille de la feuille, pour que son arrivée ne fasse pas sauter les
+   dernières lignes. Le voile reprend la teinte pleine de la feuille : elle
+   est d'un seul tenant, là où le panneau mêle un peu de texte à sa surface. */
+.nav-sheet .nav-sheet-more {
+  /* Le voile se relève au-dessus du plancher : sa hauteur est relevée par la
+     feuille elle-même (--sheet-foot), pour que la flèche ne se pose jamais sur
+     la langue ni sur la sortie de compte.
+
+     Le voile de la feuille et celui du panneau sont le même voile : sa hauteur
+     et la levée de la flèche sont écrites une seule fois, en variables, et lues
+     par les deux surfaces (voir .nav-more-more). Une flèche posée à la même
+     distance du filet du plancher des deux côtés, un dégradé de même
+     profondeur : la feuille et le panneau ne se lisent plus comme deux dessins
+     voisins, mais comme le même.
+
+     La profondeur du voile n'est pas écrite ici : elle est relevée sur la
+     bande visible de la feuille et posée en `--nav-veil-h` par la feuille
+     elle-même (voir veilHeightIn), donc elle se resserre sur un écran court
+     au lieu de manger le repère de fin et la dernière porte. */
+  --nav-arrow-lift: 12px;
+  bottom: var(--sheet-foot, 0px);
+  margin: -8px -8px 0;
+}
+.nav-sheet .nav-sheet-more::before {
+  height: var(--nav-veil-h, 56px);
+  border-radius: 0 0 13px 13px;
+  background: linear-gradient(to bottom, transparent, var(--surface) 58%);
+}
+.nav-sheet .nav-sheet-more > span { bottom: var(--nav-arrow-lift); }
+/* Le compte des portes restantes, porté par la flèche de la feuille : le même
+   chiffre que dans le panneau, sur le même axe. Il ne déplace rien quand il
+   paraît — le cercle s'ouvre du côté où la lecture finit, et la flèche garde sa
+   distance au filet du plancher. Sous 360 px il rend un demi-point, comme tout
+   ce qui l'entoure à cette largeur. */
+@media (max-width: 360px) {
+  .nav-sheet .nav-more-cue-n { font-size: 9px; }
+  .nav-sheet .nav-more-more > span.has-n { padding-inline: 2px 5px; }
+}
+
+/* ── Le clavier du téléphone ───────────────────────────────────────────────
+   Le clavier ne change pas la hauteur de la page : il change celle du
+   viewport visible. Sur un écran de 360 px, la feuille gardait donc sa
+   hauteur d'avant et sa fin — la langue, la sortie de compte, la flèche du
+   bas — passait sous les touches. Elle se borne maintenant à la hauteur
+   réellement visible, relevée par la feuille elle-même (--sheet-vh) : la
+   recherche et les premières portes restent au-dessus du clavier, le reste
+   défile dans la feuille. À défaut de relevé, l'unité dynamique fait le même
+   travail dès que le navigateur la connaît. */
+.nav-sheet {
+  max-height: calc(var(--sheet-vh, 100dvh) - 84px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-sheet-chapter-track i { transition: none; }
+}
+
+/* ── La pastille trouvée de la feuille, tenue sur une seule ligne ───────────
+   À 360 px la feuille ne garde que 322 px (282 px à 320 px), et une pastille
+   trouvée peut y porter un nom de pays composé — « Guinée-Bissau »,
+   « Timor-Leste », « São-Tomé-et-Príncipe ». Le nom tient donc sur une seule
+   ligne, cède le premier et s'écourte par son propre bout, tandis que le
+   compte et le repère de régions gardent leur cadre au bout de la ligne, du
+   côté où la lecture finit — à gauche en arabe, à droite en latin.
+
+   La pastille ne se coupe jamais sur un trait d'union : la césure est
+   interdite et le repli refusé au milieu d'un mot, si bien que le trait
+   reste dans le nom. Le nom se reconnaît encore quand il raccourcit, et le
+   chiffre ne se sépare jamais du bout de la pastille qu'il ferme. Rien n'est
+   retiré : chaque pastille garde son nombre et sa largeur. */
+@media (max-width: 640px) {
+  .nav-mobile a.nav-door-chip {
+    flex-wrap: nowrap;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+  .nav-mobile a.nav-door-chip > span {
+    flex: 0 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    hyphens: none;
+    word-break: normal;
+    overflow-wrap: normal;
+  }
+  /* Le cadre du compte est le même dans les trois langues : un chiffre d'une
+     seule pièce, jamais écrasé, jamais replié, et d'une largeur stable d'un
+     nombre à l'autre. */
+  .nav-mobile a.nav-door-chip .nav-door-chip-n {
+    flex: none;
+    min-width: 14px;
+    box-sizing: border-box;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+    direction: ltr;
+    unicode-bidi: isolate;
+  }
+  .nav-mobile a.nav-door-chip .nav-door-chip-reg,
+  .nav-mobile a.nav-door-chip > i {
+    flex: none;
+    white-space: nowrap;
+  }
+}
+
+/* ── Une recherche de la feuille relue à 320 px en arabe ────────────────────
+   À cette largeur la feuille ne garde que 282 px à l'intérieur. Une recherche
+   qui répond dans deux familles y nomme chacune par son intitulé, et chaque
+   intitulé porte son compte dans une pastille : le mot arabe ne doit ni
+   pousser la pastille hors du cadre, ni se faire pousser par elle.
+
+   Le nom et son compte forment donc une rangée qui se replie (= le mot passe
+   sous lui-même avant de toucher la pastille), l'écart se resserre encore d'un
+   cran dans cette langue, et le filet qui ferme la rangée garde un minimum pour
+   rester un trait. Les pastilles des types trouvés — rendues sur une seule
+   colonne à cette largeur — gardent leur nom et leur compte à l'intérieur du
+   cadre : le rembourrage passe en propriétés logiques (il se retourne avec la
+   lecture), le nom ne se comprime pas sous son contenu (min-width) et se replie
+   au besoin, et le compte ne se laisse jamais écraser.
+
+   Rien n'est retiré : les deux familles restent nommées, les pastilles gardent
+   leur chiffre, et le panneau continue de défiler comme avant. */
+@media (max-width: 360px) {
+  [dir="rtl"] .nav-sheet .nav-mobile-group { gap: 5px; }
+  [dir="rtl"] .nav-sheet .nav-mobile-group::after { min-width: 6px; }
+  /* La pastille du compte de rubrique suit désormais le cadre commun défini
+     plus haut pour les trois langues : plus rien à régler ici en propre. Le
+     mot de couture des résultats suit le pas de l'intitulé qu'il prolonge, et
+     se range du côté où commence la lecture. */
+  [dir="rtl"] .nav-hit-seam { margin: 5px 11px 2px; }
+  /* La pastille d'un type trouvé se tient de la même façon dans les trois
+     langues à cette largeur — l'anglais comme l'arabe. Le rembourrage passe
+     en propriétés logiques (il se retourne avec le sens de lecture), le nom ne
+     se comprime pas sous son contenu et se replie au besoin, et le compte
+     garde sa place au bout de la ligne, du côté où la lecture finit. Les deux
+     familles de la recherche se comparent donc d'une langue à l'autre. */
+  /* Les pastilles trouvées prennent le même retrait que celles de la liste
+     ordinaire, sous l'annuaire : la réponse d'une recherche ne se décale plus
+     de trois pixels par rapport aux huit pastilles qu'elle remplace. */
+  .nav-sheet .nav-sheet-hits .nav-dir-types--sheet { padding-inline: 3px; }
+  .nav-sheet .nav-sheet-hits .nav-dir-types--sheet a.nav-dir-type {
+    padding-block: 8px;
+    padding-inline: 9px 10px;
+    font-size: 13px;
+  }
+  /* Le nom prend la place qui reste et garde la sienne : il se replie sans
+     jamais raboter le compte, qui se lit toujours entier au bout de la ligne. */
+  .nav-mobile .nav-dir-types--sheet a.nav-dir-type > span:not(.nav-sub-count) {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  /* Le compte garde son cadre des deux côtés : même largeur minimale, même
+     hauteur, jamais écrasé, jamais replié. Ses chiffres gardent leur propre
+     sens de lecture (isolés), si bien qu'un nombre ne se retourne pas contre
+     un nom arabe — la pastille trouvée se lit donc de la même façon qu'en
+     anglais. */
+  .nav-mobile .nav-dir-types--sheet .nav-sub-count {
+    flex: 0 0 auto;
+    min-width: 16px;
+    height: 15px;
+    padding-inline: 4px;
+    box-sizing: border-box;
+    white-space: nowrap;
+    /* Le cadre du compte est fixé ici, une fois pour les trois langues :
+       même corps, même interligne, chiffres d'une même largeur. Le compte
+       d'un type trouvé ne dépend donc plus de la langue ni de l'héritage
+       typographique — l'arabe et l'anglais lisent la même pastille à 320 px. */
+    font-size: 9.5px;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    direction: ltr;
+    unicode-bidi: isolate;
+  }
+}
+
+/* ── La feuille relue en arabe ─────────────────────────────────────────────
+   Trois lignes portent tout le poids de la langue dans la feuille : le
+   plancher (le mot « Langue », ses trois pastilles, « Se déconnecter »), les
+   portes du réseau — dont les cinq du rang, reprises ici avec leurs noms
+   arabes —, et le chapitre en tête. En arabe, chacune s'écrit plus long qu'en
+   latin à corps égal : c'est à 320 px que tout se joue.
+
+   Le plancher garde une seule ligne, et c'est le pas qui cède — l'écart entre
+   le mot, les pastilles et la sortie de compte, puis un demi-point sur le mot
+   et sur la sortie. Rien n'est retiré : les trois pastilles gardent leur
+   cadre, chaque mot reste entier, et le pied ne prend pas une ligne de plus
+   sous laquelle la flèche du bas viendrait se poser. */
+
+/* Les portes du réseau : en arabe, un nom se replie entre ses mots, jamais à
+   l'intérieur de l'un d'eux. « الصيغ والأسعار » se lit donc sur deux mots
+   entiers, là où le repli libre pouvait couper le second en deux. */
+[dir="rtl"] .nav-sheet .nav-mobile-txt > span,
+[dir="rtl"] .nav-sheet a.nav-mobile-plain {
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: none;
+}
+
+/* Le chapitre : son intitulé arabe est le plus long des trois langues, et le
+   filet qui se remplit est ce qui donne le compte d'un coup d'œil. Le filet
+   garde donc un minimum de largeur, et le mot s'écourte par son bout plutôt
+   que de le réduire à un point. */
+[dir="rtl"] .nav-sheet-chapter-lbl { font-size: 10.5px; }
+[dir="rtl"] .nav-sheet-chapter-track { min-width: 20px; }
+[dir="rtl"] .nav-sheet-chapter-num { white-space: nowrap; }
+
+/* À 400 px et moins, la feuille est à son plus juste dans les trois langues —
+   et l'arabe y est la plus large. Le plancher resserre donc ses trois écarts
+   et rend un demi-point sur le mot et sur la sortie : les cinq items tiennent
+   sur une ligne avec de la marge, au lieu de la tenir tout juste. */
+@media (max-width: 400px) {
+  [dir="rtl"] .nav-sheet-foot { column-gap: 5px; }
+  [dir="rtl"] .nav-sheet-foot-lang { gap: 3px; font-size: 9.5px; }
+  [dir="rtl"] .nav-sheet-foot-lang i { font-size: 11px; }
+  [dir="rtl"] .nav-sheet .nav-sheet-foot .lang-switch.is-compact {
+    gap: 2px;
+    padding: 2px;
+  }
+  [dir="rtl"] .nav-sheet .nav-sheet-foot .lang-switch.is-compact button {
+    min-width: 22px;
+    padding: 2px 4px;
+    font-size: 9.5px;
+  }
+  [dir="rtl"] .nav-sheet-foot-out {
+    gap: 3px;
+    padding: 3px 6px 3px 5px;
+    font-size: 9.5px;
+  }
+  [dir="rtl"] .nav-sheet-foot-out i { font-size: 11px; }
+  /* Le chapitre au plus serré : le filet garde de quoi se lire, et le compte
+     reste d'un seul morceau à côté de l'intitulé écourté. */
+  [dir="rtl"] .nav-sheet-chapter-track { min-width: 16px; }
+}

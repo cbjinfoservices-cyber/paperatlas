@@ -1,0 +1,488 @@
+/* ============ CONSOLE · DEMANDES ============ */
+/* Le compteur par sujet se lit avant le détail : une carte par sujet, sa part
+   dans le total, et une barre dont l'échelle est celle du sujet le plus
+   fréquent — jamais du total, qui bougerait à chaque envoi. */
+
+.admin-demandes { display: grid; gap: 14px; }
+
+.admin-demandes-total {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 12.5px;
+  color: color-mix(in srgb, var(--text) 64%, transparent);
+}
+.admin-demandes-total b { font-size: 20px; font-weight: 600; color: var(--text); }
+
+.admin-demandes-tally {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+}
+
+.admin-demandes-tally-row {
+  display: grid;
+  gap: 7px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  box-sizing: border-box;
+  background: color-mix(in srgb, var(--text) 5%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 11%, transparent);
+}
+
+.admin-demandes-tally-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+}
+.admin-demandes-tally-name {
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 60%, transparent);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.admin-demandes-tally-n { font-size: 21px; font-weight: 600; letter-spacing: -.02em; flex: 0 0 auto; }
+.admin-demandes-tally-n small {
+  margin-inline-start: 6px;
+  font-size: 10.5px;
+  font-weight: 400;
+  color: color-mix(in srgb, var(--text) 48%, transparent);
+}
+
+.admin-demandes-bar {
+  display: block;
+  height: 6px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--text) 12%, transparent);
+}
+.admin-demandes-bar-fill {
+  display: block;
+  height: 100%;
+  min-width: 4px;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+.admin-demandes-recent {
+  margin: 6px 0 0;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+}
+
+/* Le message se lit sur trois lignes au plus : la ligne du tableau garde sa
+   hauteur et l'œil balaie la colonne sans s'arrêter. */
+.admin-demandes-msg {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-width: 52ch;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--text) 82%, transparent);
+}
+
+.admin-sujet-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 999px;
+  white-space: nowrap;
+  font-size: 11.5px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+
+/* La porte du guichet, sous le sujet de la demande : elle ouvre l'écran que
+   le visiteur avait sous les yeux, sans que le secrétariat le retape. */
+.admin-demandes-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 6px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  box-sizing: border-box;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  background: color-mix(in srgb, var(--surface) 44%, transparent);
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  font-size: 11px;
+  line-height: 1.4;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+
+.admin-demandes-open:hover,
+.admin-demandes-open:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 56%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+}
+
+.admin-demandes-open i { font-size: 13px; }
+
+.admin-sujet-state {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 999px;
+  white-space: nowrap;
+  font-size: 11.5px;
+}
+.admin-sujet-state[data-done='yes'] {
+  color: color-mix(in srgb, var(--text) 68%, transparent);
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+}
+.admin-sujet-state[data-done='no'] {
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 32%, transparent);
+}
+
+[dir='rtl'] .admin-demandes-tally-name { letter-spacing: 0; text-transform: none; font-size: 11.5px; }
+
+/* La ligne du sujet porte deux choses : la pastille et sa porte. Elles se
+   rangent l'une sous l'autre pour que la colonne garde sa largeur. */
+.admin-demandes-table td .admin-sujet-chip + .admin-demandes-open {
+  display: flex;
+  width: fit-content;
+}
+
+@media (max-width: 620px) {
+  .admin-demandes-tally { grid-template-columns: 1fr 1fr; }
+  .admin-demandes-tally-row { padding: 10px 11px; }
+  .admin-demandes-tally-n { font-size: 18px; }
+  .admin-demandes-msg { max-width: none; }
+  /* Le nom d'un sujet est une phrase en arabe : dans une carte de la largeur
+     d'un demi-écran, il se replie au lieu d'être coupé par une ellipse. */
+  .admin-demandes-tally-name {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    line-height: 1.5;
+  }
+}
+
+/* ============ LA PÉRIODE ET LA FILE ============ */
+/* La fenêtre de lecture se choisit en trois jetons, et la file se resserre
+   d'un quatrième : le compteur, les barres et le classeur lisent tous la
+   même fenêtre, jamais l'une en mois et l'autre depuis toujours. */
+
+.admin-demandes-filters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-bottom: 2px;
+}
+
+.admin-demandes-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.admin-demandes-filter-label {
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+  white-space: nowrap;
+}
+
+[dir='rtl'] .admin-demandes-filter-label { letter-spacing: 0; text-transform: none; font-size: 11px; }
+
+/* L'en-tête de la liste : le titre à gauche, ce qu'elle contient à droite.
+   La note évite de croire que la file entière tient dans quatre-vingts
+   lignes. */
+.admin-demandes-recent-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.admin-demandes-recent-head .admin-demandes-recent { margin: 0; }
+
+.admin-demandes-recent-note {
+  font-size: 11px;
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+}
+
+/* L'état et son geste se lisent côte à côte : la pastille dit où en est la
+   demande, le bouton rond dit ce qu'on peut en faire. */
+.admin-demandes-etat {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: nowrap;
+}
+
+.admin-demandes-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--accent) 38%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+  font-size: 14px;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+
+.admin-demandes-mark:hover:not(:disabled),
+.admin-demandes-mark:focus-visible:not(:disabled) {
+  border-color: color-mix(in srgb, var(--accent) 70%, transparent);
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  color: var(--text);
+}
+
+.admin-demandes-mark:disabled { opacity: .55; cursor: progress; }
+
+/* Une demande déjà traitée garde sa ligne mais s'efface : la file qui reste
+   se lit d'abord, l'historique reste consultable. */
+.admin-demandes-table tbody tr[data-done='yes'] td {
+  background: color-mix(in srgb, var(--text) 3%, transparent);
+}
+
+.admin-demandes-table tbody tr[data-done='yes'] .admin-demandes-msg,
+.admin-demandes-table tbody tr[data-done='yes'] .admin-sujet-chip {
+  opacity: .62;
+}
+
+.admin-demandes-table tbody tr[data-done='yes'] .admin-sujet-chip {
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+  border-color: color-mix(in srgb, var(--text) 18%, transparent);
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+
+.admin-demandes-mark[data-done='yes'] {
+  border-color: color-mix(in srgb, var(--text) 20%, transparent);
+  background: none;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+
+@media (max-width: 620px) {
+  .admin-demandes-filters { align-items: flex-start; }
+  .admin-demandes-filter-group { width: 100%; }
+  .admin-demandes-filter-group .admin-chips { width: 100%; }
+  .admin-demandes-recent-note { font-size: 10.5px; }
+}
+
+/* ============ LA RÉPONSE DEPUIS UNE DEMANDE ============ */
+/* Le geste d'écrire se pose à côté de l'état : la pastille dit où en est la
+   demande, la réponse dit ce qu'on peut lui écrire. */
+
+.admin-demandes-reply {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  border-radius: 999px;
+  background: none;
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+  font-size: 14px;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+
+.admin-demandes-reply:hover:not(:disabled),
+.admin-demandes-reply:focus-visible:not(:disabled) {
+  border-color: color-mix(in srgb, var(--accent) 58%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+}
+
+.admin-demandes-reply:disabled { opacity: .38; cursor: not-allowed; }
+
+/* ============ LA VUE PAR SEMAINE ============ */
+/* Huit barres sous le compteur : la lecture est celle d'un rythme, pas d'un
+   total. La plus haute donne l'échelle, et la ligne du bas compare le mois en
+   cours au précédent. */
+
+.admin-weeks {
+  display: grid;
+  gap: 10px;
+  padding: 14px 16px;
+  border: 1px solid color-mix(in srgb, var(--text) 11%, transparent);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--surface) 42%, transparent);
+}
+
+.admin-weeks-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.admin-weeks-bars {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 6px;
+  align-items: end;
+  padding-top: 4px;
+}
+
+.admin-week {
+  display: grid;
+  gap: 5px;
+  justify-items: center;
+  min-width: 0;
+}
+
+.admin-week-n {
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 82%, transparent);
+}
+
+.admin-week-track {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  height: 62px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+}
+
+.admin-week-fill {
+  display: block;
+  width: 100%;
+  min-height: 3px;
+  border-radius: 8px 8px 0 0;
+  background: color-mix(in srgb, var(--accent) 78%, transparent);
+  transition: height .2s ease;
+}
+
+.admin-week[data-zero='yes'] .admin-week-fill {
+  min-height: 2px;
+  background: color-mix(in srgb, var(--text) 14%, transparent);
+}
+
+.admin-week[data-zero='yes'] .admin-week-n {
+  color: color-mix(in srgb, var(--text) 38%, transparent);
+}
+
+.admin-week-lab {
+  font-size: 10px;
+  letter-spacing: .02em;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+
+.admin-weeks-delta {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+  margin: 2px 0 0;
+  font-size: 11.5px;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+
+.admin-weeks-delta i { font-size: 14px; }
+
+.admin-weeks-delta b {
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.admin-weeks-delta[data-tone='up'] i,
+.admin-weeks-delta[data-tone='up'] b {
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+.admin-weeks-delta[data-tone='up'] b {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+}
+
+.admin-weeks-delta[data-tone='down'] i,
+.admin-weeks-delta[data-tone='down'] b {
+  color: color-mix(in srgb, var(--text) 74%, transparent);
+}
+.admin-weeks-delta[data-tone='down'] b {
+  background: color-mix(in srgb, var(--text) 7%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+}
+
+.admin-weeks-delta[data-tone='flat'] i,
+.admin-weeks-delta[data-tone='flat'] b {
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+.admin-weeks-delta[data-tone='flat'] b {
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+}
+
+.admin-weeks-error {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+}
+
+@media (max-width: 620px) {
+  .admin-weeks { padding: 12px 12px; }
+  .admin-weeks-bars { gap: 4px; }
+  .admin-week-track { height: 48px; }
+  .admin-week-n { font-size: 11px; }
+  .admin-week-lab { font-size: 9px; }
+}
+
+/* Huit semaines ne tiennent pas sur la largeur d'un téléphone : à 9 px, un
+   libellé arabe comme « ٢ نوفمبر » débordait sur la barre voisine. Les huit
+   colonnes deviennent deux rangées de quatre, et le libellé se replie au lieu
+   de pousser la colonne. La lecture reste chronologique, de haut en bas. */
+@media (max-width: 560px) {
+  .admin-weeks-bars {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    row-gap: 12px;
+  }
+  .admin-week-lab {
+    white-space: normal;
+    text-align: center;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+}

@@ -1,0 +1,183 @@
+/* ============ PUBLIC MEMBER / CANDIDATE SHEET ============ */
+.cprof-hero { gap: 18px; }
+/* Le fil d'Ariane vit dans l'en-tête déjà rembourré de la fiche : il n'ajoute
+   pas son propre pas, pour ne pas creuser l'écart avec le tampon et le nom. */
+.cprof-hero .pro-crumb { padding-top: 0; margin-top: -10px; }
+.cprof-id { display: flex; align-items: center; gap: 18px; min-width: 0; }
+.cprof-avatar { width: 76px; height: 76px; flex: 0 0 auto; border-radius: 999px; display: flex;
+  align-items: center; justify-content: center; font-family: var(--font-heading); font-size: 26px;
+  font-weight: 600; letter-spacing: -.02em; color: var(--bg);
+  background: linear-gradient(140deg, var(--accent), color-mix(in srgb, var(--accent2) 70%, var(--accent)));
+  box-shadow: 0 10px 30px color-mix(in srgb, var(--accent) 26%, transparent); }
+.cprof-id-txt { min-width: 0; }
+.cprof-name { max-width: 30ch; overflow-wrap: anywhere; }
+/* Name + « Nouveau » badge: same quiet chip as the list cards. */
+.cprof-name-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; min-width: 0; }
+.cprof-new { flex: 0 0 auto; padding: 3px 9px; border-radius: 999px;
+  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--accent); white-space: nowrap;
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent); }
+/* The exact registration date, written out under the name. */
+.cprof-joined { display: inline-flex; align-items: center; gap: 6px; margin: 8px 0 0;
+  font-size: 12.5px; line-height: 1.4; color: var(--muted); }
+.cprof-joined i { font-size: 14px; color: var(--accent); }
+.cprof-joined strong { font-weight: 600; color: color-mix(in srgb, var(--text) 88%, transparent); }
+.cprof-headline { margin: 8px 0 0; font-size: clamp(15px, 1.4vw, 19px); line-height: 1.5;
+  color: color-mix(in srgb, var(--accent2) 88%, var(--text)); }
+
+.cprof-chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.cprof-chips li { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px;
+  font-size: 12.5px; color: color-mix(in srgb, var(--text) 88%, transparent); white-space: nowrap;
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent); }
+.cprof-chips i { font-size: 14px; color: var(--accent); }
+/* The trade chip is also the way into the list filtered on that trade. */
+.cprof-chips li.is-link { padding: 0; }
+.cprof-chips li.is-link a { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px;
+  border-radius: 999px; color: inherit; text-decoration: none; transition: color .2s, background .2s; }
+.cprof-chips li.is-link:hover { border-color: var(--accent); color: var(--accent); }
+.cprof-chips li.is-link:hover a { background: color-mix(in srgb, var(--accent) 10%, transparent); }
+
+/* Le partage du profil, sous les pastilles : le bouton, puis la phrase qui dit
+   ce que le lien emporte. */
+.cprof-share { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-top: 2px; }
+.cprof-share .ad-btn { width: auto; }
+/* La distance manque au texte tant que la position n'est pas connue : le geste
+   qui la donne se range à côté du partage, sans prendre la ligne entière. */
+.cprof-share .board-trip-go { flex: 0 0 auto; }
+.cprof-share-hint { min-width: 0; font-size: 11.5px; line-height: 1.5; color: var(--muted); }
+@media (max-width: 640px) {
+  .cprof-share .ad-btn { flex: 1 1 auto; justify-content: center; }
+  .cprof-share .board-trip-go { flex: 1 1 auto; justify-content: center; }
+  .cprof-share-hint { flex: 1 1 100%; }
+}
+
+.cprof-fact-link { display: inline-flex; align-items: center; gap: 6px; color: inherit;
+  text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  transition: color .2s, border-color .2s; }
+.cprof-fact-link i { font-size: 14px; color: var(--accent); }
+.cprof-fact-link:hover { color: var(--accent); border-color: var(--accent); }
+
+.cprof-grid { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+.cprof-main { display: grid; gap: 4px; }
+/* Le plan de la région sous les deux colonnes de la fiche : il prend toute la
+   largeur de la grille, sans s'étirer au-delà d'une carte lisible. */
+/* Le rappel du rayon d'où l'on vient, posé juste au-dessus de la fiche : la
+   porte du retour, elle, rouvre le vivier déjà resserré. */
+.cprof-from-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.cprof-from-row .cprof-from { flex: 1 1 340px; }
+.cprof-from { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 0;
+  padding: 10px 14px; border-radius: 14px; font-size: 12.5px; line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 86%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent); }
+.cprof-from > i { flex: 0 0 auto; font-size: 15px; color: var(--accent); }
+.cprof-from > span { min-width: 0; }
+.cprof-from .board-trip-go { margin-left: auto; }
+/* La région d'où l'on vient : sa porte rend le vivier resserré, celle d'à côté
+   le pays entier — la première se cale à droite, la seconde la suit. */
+.cprof-from-region { background: color-mix(in srgb, var(--accent) 8%, transparent); }
+.cprof-from .board-trip-go--all { margin-left: 0; }
+/* Le compte du vivier d'où l'on vient : un rappel de lecture, plus discret
+   que le périmètre — il situe la fiche dans l'ensemble sans rien rouvrir. */
+.cprof-from-count { background: color-mix(in srgb, var(--text) 5%, transparent);
+  border-color: color-mix(in srgb, var(--text) 18%, transparent); }
+.cprof-from-count > i { color: color-mix(in srgb, var(--text) 62%, transparent); }
+.cprof-from-count > span { font-variant-numeric: tabular-nums; }
+/* La lettre d'où l'on vient : même panneau, mais une teinte plus discrète —
+   c'est un point de lecture, pas un périmètre. */
+.cprof-from-letter { background: color-mix(in srgb, var(--text) 4%, transparent);
+  border-style: dashed; border-color: color-mix(in srgb, var(--text) 18%, transparent); }
+.cprof-from-letter > i { color: color-mix(in srgb, var(--accent) 70%, transparent); }
+/* Le métier qui filtrait la liste : un troisième rappel, plus discret que le
+   périmètre et que la lettre — c'est une sélection, pas un rayon. */
+.cprof-from-trade { background: color-mix(in srgb, var(--accent2) 8%, transparent);
+  border-color: color-mix(in srgb, var(--accent2) 28%, transparent); }
+.cprof-from-trade > i { color: color-mix(in srgb, var(--accent2) 80%, transparent); }
+@media (max-width: 640px) {
+  .cprof-from .board-trip-go { margin-left: 0; }
+}
+
+/* La part du vivier tenue par le métier : une phrase, puis un filet qui la
+   rend visible d'un coup d'œil — sans prendre la place d'un bloc à part. */
+.cprof-share-of { display: grid; gap: 8px; margin: 6px 0 2px; padding-top: 12px;
+  border-top: 1px solid color-mix(in srgb, var(--text) 10%, transparent); }
+.cprof-share-of-line { display: flex; align-items: flex-start; gap: 7px; margin: 0;
+  font-size: 12.5px; line-height: 1.55; color: color-mix(in srgb, var(--text) 82%, transparent); }
+.cprof-share-of-line i { flex: 0 0 auto; margin-top: 1px; font-size: 15px; color: var(--accent); }
+.cprof-share-of-line span { min-width: 0; }
+.cprof-share-of-bar { display: block; height: 4px; border-radius: 999px; overflow: hidden;
+  background: color-mix(in srgb, var(--text) 10%, transparent); }
+.cprof-share-of-bar > span { display: block; height: 100%; border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent2) 60%, var(--accent))); }
+
+/* La porte posée sous la part : elle ouvre le vivier déjà filtré sur le métier,
+   plutôt que de laisser reposer le filtre à la main. */
+.cprof-share-door { display: inline-flex; align-items: center; gap: 7px; width: fit-content;
+  max-width: 100%; margin-top: 2px; padding: 6px 11px 6px 9px; border-radius: 999px;
+  text-decoration: none; cursor: pointer; font-size: 12.5px; line-height: 1.4;
+  color: var(--accent2); background: color-mix(in srgb, var(--accent) 9%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+  transition: background .2s ease, border-color .2s ease, color .2s ease; }
+.cprof-share-door > span { min-width: 0; }
+.cprof-share-door > i { flex: 0 0 auto; font-size: 14px; color: var(--accent); }
+.cprof-share-door > i:last-child { transition: transform .2s ease-out; }
+.cprof-share-door:hover { background: color-mix(in srgb, var(--accent) 16%, transparent);
+  border-color: var(--accent); }
+.cprof-share-door:hover > i:last-child { transform: translateX(3px); }
+.cprof-share-door:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+[dir="rtl"] .cprof-share-door > i:last-child { transform: scaleX(-1); }
+[dir="rtl"] .cprof-share-door:hover > i:last-child { transform: scaleX(-1) translateX(3px); }
+
+.cprof-map { grid-column: 1 / -1; width: 100%; max-width: 760px; }
+/* Le compteur des régions parcourues, sous le plan : le même relevé que sur la
+   fiche d'un atelier, à la même distance du plan qu'ailleurs. */
+.cprof-map .dist-walk { margin-top: 12px; }
+.cprof-bio { white-space: pre-line; }
+
+.cprof-facts { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 24px; }
+.cprof-facts > div { display: grid; gap: 3px; min-width: 0; padding-top: 10px;
+  border-top: 1px solid color-mix(in srgb, var(--text) 10%, transparent); }
+.cprof-facts dt { font-family: var(--font-label); font-size: 10px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--muted); }
+.cprof-facts dd { margin: 0; font-size: 15px; line-height: 1.45; overflow-wrap: anywhere; }
+
+.cprof-side { display: grid; gap: 12px; position: sticky; top: 92px; }
+.cprof-side-text { font-size: 14px; line-height: 1.65; }
+.cprof-side-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+/* « Download the CV » — only for an employer who received an application. */
+.cprof-cv { display: inline-flex; align-items: center; justify-content: center; gap: 8px; box-sizing: border-box;
+  width: 100%; padding: 11px 16px; border-radius: 999px; white-space: nowrap; text-decoration: none;
+  font-size: 13px; font-weight: 500; color: var(--accent2);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  transition: background .18s ease, border-color .18s ease, transform .18s ease; }
+.cprof-cv i { font-size: 16px; }
+.cprof-cv:hover { background: color-mix(in srgb, var(--accent) 18%, transparent);
+  border-color: var(--accent); transform: translateY(-1px); }
+.cprof-cta { margin-top: 0; }
+.cprof-cta[disabled] { opacity: .6; cursor: wait; }
+.cprof-side-note { display: flex; align-items: flex-start; gap: 7px; margin: 6px 0 0; padding-top: 12px;
+  border-top: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+  font-size: 12px; line-height: 1.55; color: var(--muted); }
+.cprof-side-note i { font-size: 14px; color: var(--accent); margin-top: 1px; flex: 0 0 auto; }
+
+.cprof-missing { padding-bottom: clamp(64px, 8vw, 120px); }
+
+@media (max-width: 1020px) {
+  .cprof-grid { grid-template-columns: minmax(0, 1fr); }
+  .cprof-side { position: static; }
+}
+@media (max-width: 640px) {
+  .cprof-id { align-items: flex-start; gap: 14px; }
+  .cprof-avatar { width: 60px; height: 60px; font-size: 21px; }
+  .cprof-facts { grid-template-columns: minmax(0, 1fr); }
+  .cprof-side-actions .cta,
+  .cprof-side-actions .ghost-btn { width: 100%; justify-content: center; box-sizing: border-box; }
+}
+
+[dir="rtl"] .cprof-chips li,
+[dir="rtl"] .cprof-facts dt { letter-spacing: 0; }
+[dir="rtl"] .cprof-cta i { transform: scaleX(-1); }

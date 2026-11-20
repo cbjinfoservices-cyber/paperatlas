@@ -1,0 +1,55 @@
+/* ── Les comptes du pied de page, d'une seule largeur ──────────────────────
+   Trois pastilles du bas de page ne portent qu'un nombre : le compte d'une
+   colonne repliée, à côté de son accordéon, le compte du façonnage au bout de
+   son lien, et le compte d'un pays dans le maillage des pages par pays.
+
+   Deux règles, écrites une fois pour les trois : les chiffres tabulaires
+   donnent la même largeur à tous les nombres, si bien qu'une colonne passant
+   de 9 à 10 portes ne déplace plus sa pastille d'un pixel ; et l'isolation
+   donne au nombre son propre sens de lecture, pour qu'en arabe il ne se
+   retourne pas contre le mot ou le pays qu'il termine.
+
+   Cette feuille est lue après toutes les autres : aucune déclaration locale
+   ne peut la défaire. Les repères qui mêlent un nombre et des mots — « 17
+   portes sur 23 », le nom accessible du bouton global — gardent, eux, la
+   phrase qui les porte. */
+.footer-col-n,
+.footer-grid ul a.footer-fac .footer-count,
+.footer-tp-count {
+  font-variant-numeric: tabular-nums;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* Le cadre des pastilles ne se resserre pas quand le compte tombe à un seul
+   chiffre : la ligne du bas de page garde sa mesure, en arabe comme en
+   latin, et le « + » de l'accordéon ne se rapproche pas d'un cran. */
+.footer-col-n,
+.footer-grid ul a.footer-fac .footer-count {
+  box-sizing: border-box;
+}
+.footer-col-n { min-width: 20px; }
+.footer-grid ul a.footer-fac .footer-count { min-width: 18px; }
+
+@media (max-width: 360px) {
+  .footer-col-n { min-width: 18px; }
+}
+
+/* ── La pastille d'une colonne repliée se tient contre son mot ─────────────
+   Le compte était poussé au bout de la ligne par une marge automatique : à
+   320 px, il venait se coller au « + » de l'accordéon, loin du titre qu'il
+   compte, et le lecteur devait traverser tout le vide de la rangée pour
+   rapprocher les deux.
+
+   C'est désormais le « + » qui prend le bout de la ligne, et la pastille qui
+   suit son mot de près. L'écart de l'accordéon reste entre les deux : le
+   signe ne se rapproche jamais du chiffre, et le titre se replie dans sa
+   propre largeur avant de chasser la pastille hors de la rangée. En arabe,
+   où la ligne commence à droite, la marge est logique : le mot, son compte
+   puis le signe se rangent d'eux-mêmes dans l'autre sens, sans règle
+   retournée à la main. */
+@media (max-width: 640px) {
+  .footer-col-toggle { justify-content: flex-start; }
+  .footer-col-n { margin-inline-start: 0; }
+  .footer-col-toggle > i { margin-inline-start: auto; }
+}

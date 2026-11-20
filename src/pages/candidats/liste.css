@@ -1,0 +1,108 @@
+/* ============ CANDIDATE LIST ============ */
+/* The card itself is the shared .biz-card; only the person-specific bits live
+   here, so the list keeps the exact look of the directory. */
+.cand-ident { min-width: 0; }
+.cand-name-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; min-width: 0; }
+.cand-name { margin: 0; font-size: 15.5px; line-height: 1.35; overflow-wrap: anywhere; }
+/* A profile younger than a month: a quiet outline chip, never a loud sticker. */
+.cand-new { flex: 0 0 auto; padding: 2px 8px; border-radius: 999px;
+  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--accent); white-space: nowrap;
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent); }
+.cand-mark { color: var(--bg);
+  background: linear-gradient(140deg, var(--accent), color-mix(in srgb, var(--accent2) 70%, var(--accent))); }
+.cand-role { margin: 4px 0 0; font-size: 13.5px; line-height: 1.4;
+  color: color-mix(in srgb, var(--accent2) 88%, var(--text)); }
+/* « inscrit il y a 3 semaines »: a quiet time line under the place, so the pile
+   can be compared at a glance without opening a single profile. */
+.cand-since { display: flex; align-items: center; gap: 5px; margin: 5px 0 0;
+  font-size: 12px; line-height: 1.3; letter-spacing: .01em;
+  color: color-mix(in srgb, var(--text) 56%, transparent); }
+.cand-since i { font-size: 13px; color: color-mix(in srgb, var(--accent) 72%, var(--text)); }
+.cand-bio { margin: 0; font-size: 13.5px; line-height: 1.65; overflow-wrap: anywhere;
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* The signed-out panel: one card, kept narrow so it reads as an invitation. */
+.cand-gate { max-width: 760px; }
+.cand-gate .acct-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.cand-gate-note { display: flex; align-items: flex-start; gap: 7px; margin: 14px 0 0;
+  font-size: 12.5px; line-height: 1.55;
+  color: color-mix(in srgb, var(--text) 58%, transparent); }
+.cand-gate-note i { font-size: 15px; color: color-mix(in srgb, var(--accent) 72%, var(--text)); }
+
+/* « Devenir candidat » in the hero: the door is on the public page too, not
+   only behind the signed-out gate. */
+.cand-join { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 18px; }
+.cand-join .cta { gap: 8px; }
+.cand-join-hint { font-size: 12.5px; line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 56%, transparent); }
+
+/* Signed in as a business account: the door stays open, but the note has to
+   explain why a second account exists — otherwise it reads like a mistake. */
+.cand-join.is-pro { align-items: flex-start; }
+.cand-join.is-pro .cand-join-hint { display: flex; align-items: flex-start; gap: 7px;
+  flex: 1 1 320px; max-width: 560px; padding: 9px 13px;
+  border-radius: 12px; border: 1px solid color-mix(in srgb, var(--line) 78%, transparent);
+  background: color-mix(in srgb, var(--paper) 84%, var(--text) 4%);
+  color: color-mix(in srgb, var(--text) 68%, transparent); }
+.cand-join.is-pro .cand-join-hint i { font-size: 15px; margin-top: 1px;
+  color: color-mix(in srgb, var(--accent) 76%, var(--text)); }
+
+/* « Voir les nouveaux profils » on the results line: a quiet shortcut, not a
+   second counter competing with the total. The button fills in when the view
+   only shows the arrivals of the month. */
+/* Two windows side by side: the week nested inside the month. */
+.cand-fresh-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-inline-end: auto; }
+.cand-fresh-row .cand-fresh { margin-inline-end: 0; }
+
+.cand-fresh { display: inline-flex; align-items: center; gap: 7px; margin-inline-end: auto;
+  padding: 4px 11px; border-radius: 999px; white-space: nowrap; cursor: pointer;
+  font-family: var(--font-body); font-size: 12.5px; letter-spacing: 0;
+  color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+  transition: background .18s ease, border-color .18s ease, color .18s ease; }
+.cand-fresh i { font-size: 14px; }
+.cand-fresh strong { font-weight: 600; }
+.cand-fresh:hover { background: color-mix(in srgb, var(--accent) 20%, transparent);
+  border-color: var(--accent); }
+.cand-fresh.is-on { color: var(--bg); background: var(--accent); border-color: var(--accent); }
+.cand-fresh.is-on i { color: var(--bg); }
+.cand-fresh.is-on strong { color: var(--bg); }
+.cand-fresh-label { letter-spacing: .01em; }
+.cand-fresh-x { margin-inline-start: -1px; opacity: .8; }
+@media (max-width: 720px) {
+  .cand-fresh { margin-inline-end: 0; }
+  .cand-fresh-label { max-width: 22ch; overflow: hidden; text-overflow: ellipsis; }
+}
+
+/* Le candidat mis en avant par les flèches du clavier : la carte prend le
+   liseré d'accent, comme une annonce ou une offre mise en avant. */
+.cand-card.is-keyed { border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 34%, transparent),
+    0 10px 24px -18px color-mix(in srgb, #000 62%, transparent); }
+.cand-card.is-keyed:hover { border-color: var(--accent); }
+
+/* Seven controls on one line: search, the results figure, country, region,
+   trade, sort, reset — the same row the three other boards read. */
+.cand-filters { grid-template-columns: minmax(0, 1fr) auto minmax(0, 148px) minmax(0, 148px) minmax(0, 168px) minmax(0, 132px) auto; }
+.cand-filters .cand-sort select { cursor: pointer; }
+/* Le chiffre prend la même assise que les champs qu'il accompagne : il ferme
+   la rangée au lieu de flotter au-dessus d'elle. */
+.cand-filters .cand-count { align-self: end; }
+@media (max-width: 1320px) {
+  .cand-filters { grid-template-columns: 1fr 1fr; }
+  .cand-filters .fld-inline { grid-column: 1 / -1; }
+  .cand-filters .cand-count { grid-column: 1 / -1; justify-self: start; }
+  .cand-filters .filters-reset { justify-self: start; }
+}
+@media (max-width: 900px) {
+  .cand-filters .filters-count { flex: 0 0 auto; height: 36px; padding: 0 11px; font-size: 12.5px; }
+  .cand-filters .filters-count > strong { font-size: 13px; }
+}
+@media (max-width: 620px) {
+  .cand-filters { grid-template-columns: 1fr; }
+  .cand-filters .cand-count { grid-column: auto; justify-self: stretch; justify-content: center; }
+  .cand-filters .filters-reset { width: 100%; justify-content: center; }
+}

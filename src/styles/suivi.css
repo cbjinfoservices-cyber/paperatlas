@@ -1,0 +1,825 @@
+/* ============ SUIVI — ONE REFERENCE, ONE FILE ============ */
+/* The lookup on the left, the file on the right. Every colour is read from the
+   theme variables, so the page follows the mode like the rest of the site. */
+
+/* ---- the walk notebook, at the top of the page ---- */
+/* Le parcours de l'annuaire se lit avant la recherche : il ne prend de place
+   que lorsqu'il a quelque chose à rappeler. */
+.sv-walk { display: block; width: 100%; box-sizing: border-box; }
+.sv-walk > .dist-walk { margin: 0 0 16px; }
+
+.sv {
+  display: grid;
+  grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+  gap: 16px;
+  align-items: start;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: start;
+}
+
+/* ---- the one field ---- */
+.sv-form {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  box-sizing: border-box;
+  padding: 18px 18px 16px;
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+}
+.sv-stamp {
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent2);
+}
+.sv-sub {
+  margin: -4px 0 2px;
+  font-size: 11.5px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.sv-field { display: grid; gap: 5px; min-width: 0; }
+.sv-field > span:first-child {
+  font-size: 11.5px;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--text) 74%, transparent);
+}
+.sv-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  box-sizing: border-box;
+  padding: 0 11px;
+  border-radius: 11px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  background: color-mix(in srgb, var(--bg) 60%, var(--surface));
+}
+.sv-input-wrap:focus-within {
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+.sv-input-wrap i { flex: 0 0 auto; font-size: 15px; color: var(--accent); }
+.sv-input-wrap input {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 10px 0;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-size: 14px;
+  letter-spacing: .04em;
+}
+.sv-input-wrap input:focus-visible { outline: none; }
+.sv-input-wrap input::placeholder {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  letter-spacing: normal;
+  color: color-mix(in srgb, var(--text) 40%, transparent);
+}
+
+.sv-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 2px;
+  padding: 11px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--bg);
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease;
+}
+.sv-cta i { font-size: 15px; color: inherit; transition: transform .2s ease-out; }
+.sv-cta:hover:not(:disabled) { background: color-mix(in srgb, var(--accent) 82%, var(--bg)); border-color: transparent; }
+.sv-cta:hover:not(:disabled) i { transform: translateX(3px); }
+.sv-cta:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.sv-cta:disabled { opacity: .7; cursor: progress; }
+.sv-cta:disabled i { animation: sv-spin 1.1s linear infinite; }
+
+@keyframes sv-spin { to { transform: rotate(360deg); } }
+
+.sv-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 0;
+  padding: 8px 10px;
+  border-radius: 9px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent2) 34%, transparent);
+}
+.sv-error i { flex: 0 0 auto; margin-top: 1px; font-size: 13px; color: inherit; }
+
+/* ---- the file, once found ---- */
+.sv-card {
+  display: grid;
+  gap: 12px;
+  box-sizing: border-box;
+  padding: 18px 18px 16px;
+  border-radius: 18px;
+  border: 1px solid color-mix(in srgb, var(--accent) 36%, transparent);
+  background: linear-gradient(150deg,
+    color-mix(in srgb, var(--accent) 10%, transparent) 0%,
+    color-mix(in srgb, var(--surface) 92%, transparent) 58%);
+}
+.sv-card-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.sv-kind {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.sv-kind i { font-size: 14px; color: var(--accent); }
+
+.sv-badge {
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.sv-badge[data-state="en_etude"],
+.sv-badge[data-state="vue"] {
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+  color: var(--accent2);
+}
+.sv-badge[data-state="confirme"],
+.sv-badge[data-state="traitee"] {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--bg);
+}
+.sv-badge[data-state="expire"] {
+  border-style: dashed;
+  color: color-mix(in srgb, var(--text) 48%, transparent);
+}
+
+.sv-ref {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(18px, 2vw, 23px);
+  font-weight: 600;
+  letter-spacing: .05em;
+  line-height: 1.2;
+  color: var(--text);
+}
+
+.sv-figure {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+  margin: 0;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed color-mix(in srgb, var(--text) 14%, transparent);
+}
+.sv-figure strong {
+  font-family: var(--font-heading);
+  font-size: clamp(24px, 2.8vw, 32px);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -.03em;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+.sv-figure span { font-size: 12px; color: var(--muted); }
+
+.sv-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 16px;
+  margin: 0;
+}
+.sv-facts > div { min-width: 0; display: grid; gap: 1px; }
+.sv-facts dt {
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.sv-facts dd {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
+/* ---- who the file is for: the same frame as the printed sheet ---- */
+.sv-attn {
+  display: grid;
+  gap: 7px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 40%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+.sv-attn-stamp {
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent2);
+}
+.sv-attn-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px 16px;
+  margin: 0;
+}
+.sv-attn-facts > div { min-width: 0; display: grid; gap: 1px; }
+.sv-attn-facts dt {
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.sv-attn-facts dd {
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
+/* ---- the journey ---- */
+.sv-track {
+  margin-top: 2px;
+  padding-top: 10px;
+  border-top: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+}
+.sv-track-stamp {
+  margin: 0 0 8px;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.sv-steps {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.sv-steps li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 9px;
+  align-items: start;
+  padding: 5px 0;
+}
+/* The line between two dots: it only shows where a step precedes another. */
+.sv-steps li::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 10px;
+  top: 22px;
+  bottom: -3px;
+  width: 1px;
+  background: color-mix(in srgb, var(--text) 14%, transparent);
+}
+.sv-steps li:last-child::before { display: none; }
+.sv-steps li.is-done::before { background: color-mix(in srgb, var(--accent) 44%, transparent); }
+
+.sv-dot {
+  width: 21px;
+  height: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--text) 20%, transparent);
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+  color: color-mix(in srgb, var(--text) 42%, transparent);
+}
+.sv-dot i { font-size: 12px; color: inherit; }
+.sv-steps li.is-done .sv-dot {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--accent2);
+}
+.sv-steps li[data-current="yes"] .sv-dot {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.sv-step-txt { display: grid; gap: 1px; min-width: 0; padding-top: 1px; }
+.sv-step-txt b {
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+.sv-steps li.is-done .sv-step-txt b { color: var(--text); }
+.sv-step-txt small {
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+.sv-note,
+.sv-privacy {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+.sv-note i { flex: 0 0 auto; margin-top: 1px; font-size: 12px; color: var(--accent); }
+.sv-privacy i { flex: 0 0 auto; margin-top: 1px; font-size: 12px; color: color-mix(in srgb, var(--text) 40%, transparent); }
+
+/* ---- the reminders: when they fall, whom they go to, what really left ---- */
+.sv-rel {
+  margin-top: 2px;
+  padding-top: 10px;
+  border-top: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+}
+.sv-rel-wait {
+  margin: 0 0 8px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.sv-rel-steps {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.sv-rel-steps li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: "day state" "date to";
+  gap: 2px 10px;
+  padding: 7px 10px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+}
+.sv-rel-day {
+  grid-area: day;
+  min-width: 0;
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--accent2);
+}
+.sv-rel-state {
+  grid-area: state;
+  min-width: 0;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: end;
+  color: var(--muted);
+}
+.sv-rel-date {
+  grid-area: date;
+  min-width: 0;
+  font-size: 11.5px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+.sv-rel-to {
+  grid-area: to;
+  min-width: 0;
+  font-size: 11.5px;
+  text-align: end;
+  color: var(--muted);
+}
+.sv-rel-steps li[data-state="sent"] {
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+.sv-rel-steps li[data-state="sent"] .sv-rel-state { color: var(--accent2); }
+.sv-rel-steps li[data-state="reached"] { border-style: dashed; }
+.sv-rel-steps li[data-state="reached"] .sv-rel-state {
+  color: var(--accent2);
+  opacity: .78;
+}
+.sv-rel-next {
+  margin: 8px 0 0;
+  font-size: 11.5px;
+  line-height: 1.5;
+  font-weight: 600;
+  color: var(--accent2);
+}
+
+.sv-actions,
+.sv-help-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 4px;
+}
+.sv-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  background: transparent;
+  color: var(--accent2);
+  font: inherit;
+  font-size: 12px;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease;
+}
+.sv-ghost i { font-size: 13px; color: inherit; }
+.sv-ghost:hover { background: color-mix(in srgb, var(--accent) 15%, transparent); border-color: var(--accent); }
+.sv-ghost:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* the reference just left for the clipboard: the button says so in place */
+.sv-ghost.is-ok {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--accent2);
+}
+
+/* ---- nothing searched yet: what the page follows ---- */
+.sv-help {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  box-sizing: border-box;
+  padding: 18px 18px 16px;
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 13%, transparent);
+}
+.sv-help-title {
+  margin: 0 0 2px;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent2);
+}
+.sv-help-card {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  padding: 11px 12px;
+  border-radius: 13px;
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  background: color-mix(in srgb, var(--surface) 94%, transparent);
+}
+.sv-help-ico {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+  color: var(--accent);
+}
+.sv-help-ico i { font-size: 16px; color: inherit; }
+.sv-help-card b {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text);
+}
+.sv-help-card p {
+  margin: 3px 0 0;
+  font-size: 11.5px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+/* Le devis d'abonnement, sous les deux guichets : une ligne, pas une carte —
+   la même voix basse que le renvoi des formules, et sa porte au bout. */
+.sv-help-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 0;
+  padding-top: 9px;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 13%, transparent);
+  font-size: 11.5px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+.sv-help-note > i {
+  flex: 0 0 auto;
+  margin-top: 1px;
+  font-size: 13px;
+  color: color-mix(in srgb, var(--accent) 70%, transparent);
+}
+.sv-help-note a {
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  font-weight: 600;
+  white-space: nowrap;
+  text-decoration: none;
+  border-bottom: 1px dashed color-mix(in srgb, var(--accent) 44%, transparent);
+  transition: color .18s ease-out, border-color .18s ease-out;
+}
+.sv-help-note a:hover {
+  color: var(--accent);
+  border-bottom-style: solid;
+  border-color: var(--accent);
+}
+
+/* ---- the printable sheet: the file only, no page around it ---- */
+.sv-print { display: none; }
+
+@media print {
+  @page { margin: 16mm; }
+  html,
+  body { background: #ffffff !important; }
+  body * { visibility: hidden; }
+  .sv-print,
+  .sv-print * { visibility: visible; }
+  .sv-print {
+    display: block;
+    position: absolute;
+    inset-inline-start: 0;
+    top: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0;
+    color: #1b1b1b;
+    font-family: var(--font-body);
+    font-size: 11pt;
+    line-height: 1.5;
+    text-align: start;
+  }
+  .sv-print-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 6pt;
+    border-bottom: 1.5pt solid #1b1b1b;
+  }
+  .sv-print-brand {
+    font-family: var(--font-heading);
+    font-size: 14pt;
+    font-weight: 700;
+    letter-spacing: .02em;
+  }
+  .sv-print-stamp {
+    font-family: var(--font-label);
+    font-size: 8.5pt;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #5c544a;
+  }
+  .sv-print-kind {
+    margin: 14pt 0 2pt;
+    font-family: var(--font-label);
+    font-size: 8.5pt;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #5c544a;
+  }
+  .sv-print-ref {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 20pt;
+    font-weight: 700;
+    letter-spacing: .04em;
+    color: #1b1b1b;
+  }
+  .sv-print-state {
+    display: inline-block;
+    margin: 2pt 0 10pt;
+    padding: 1pt 8pt;
+    border: 1pt solid #1b1b1b;
+    border-radius: 999px;
+    font-family: var(--font-label);
+    font-size: 8.5pt;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .sv-print-amount {
+    margin: 0 0 12pt;
+    font-family: var(--font-heading);
+    font-size: 24pt;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .sv-print-facts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6pt 18pt;
+    margin: 0 0 14pt;
+    padding: 10pt 0;
+    border-top: .5pt solid #b9b0a4;
+    border-bottom: .5pt solid #b9b0a4;
+  }
+  .sv-print-facts > div { min-width: 0; }
+  .sv-print-facts dt {
+    font-family: var(--font-label);
+    font-size: 8pt;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #5c544a;
+  }
+  .sv-print-facts dd {
+    margin: 0;
+    font-size: 10.5pt;
+    overflow-wrap: anywhere;
+  }
+  /* The box that frames the file for the person who reads it: who it is for,
+     and the day the subscription should start. */
+  .sv-print-attn {
+    margin: 0 0 14pt;
+    padding: 8pt 10pt;
+    border: 1pt solid #1b1b1b;
+    border-radius: 3pt;
+  }
+  .sv-print-attn-stamp {
+    margin: 0 0 6pt;
+    font-family: var(--font-label);
+    font-size: 8pt;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #5c544a;
+  }
+  .sv-print-attn-facts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4pt 18pt;
+    margin: 0;
+  }
+  .sv-print-attn-facts > div { min-width: 0; }
+  .sv-print-attn-facts dt {
+    font-family: var(--font-label);
+    font-size: 8pt;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #5c544a;
+  }
+  .sv-print-attn-facts dd {
+    margin: 0;
+    font-size: 10.5pt;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+  }
+  .sv-print-track-stamp {
+    margin: 0 0 6pt;
+    font-family: var(--font-label);
+    font-size: 8pt;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #5c544a;
+  }
+  .sv-print-track ol {
+    display: grid;
+    gap: 3pt;
+    margin: 0 0 14pt;
+    padding-inline-start: 14pt;
+  }
+  .sv-print-track li {
+    font-size: 10.5pt;
+  }
+  .sv-print-track li small {
+    margin-inline-start: 6pt;
+    font-size: 9pt;
+    color: #5c544a;
+  }
+  /* Les relances sur la feuille : le même calendrier que l'écran, encadré pour
+     ne pas se confondre avec le parcours déjà tracé. */
+  .sv-print-rel {
+    margin: 0 0 14pt;
+    padding: 8pt 10pt;
+    border: 1pt dashed #1b1b1b;
+    border-radius: 3pt;
+    break-inside: avoid;
+  }
+  .sv-print-rel-wait {
+    margin: 0 0 6pt;
+    font-size: 9.5pt;
+    line-height: 1.4;
+    color: #3f3a33;
+  }
+  .sv-print-rel ol {
+    display: grid;
+    gap: 3pt;
+    margin: 0;
+    padding-inline-start: 14pt;
+  }
+  .sv-print-rel li { font-size: 10.5pt; }
+  .sv-print-rel li b { margin-inline-end: 6pt; }
+  .sv-print-rel-date { font-variant-numeric: tabular-nums; }
+  .sv-print-rel li small {
+    margin-inline-start: 6pt;
+    font-size: 9pt;
+    color: #5c544a;
+  }
+  .sv-print-rel li em {
+    margin-inline-start: 6pt;
+    font-size: 9pt;
+    font-style: normal;
+    color: #5c544a;
+  }
+  .sv-print-rel li[data-state="sent"] b { text-decoration: underline; }
+  .sv-print-rel-next {
+    margin: 6pt 0 0;
+    font-size: 9.5pt;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+  .sv-print-note {
+    margin: 0 0 4pt;
+    font-size: 9.5pt;
+    color: #3f3a33;
+  }
+  .sv-print-foot {
+    margin: 12pt 0 0;
+    padding-top: 6pt;
+    border-top: .5pt solid #b9b0a4;
+    font-size: 8pt;
+    line-height: 1.5;
+    color: #5c544a;
+  }
+  [dir="rtl"] .sv-print-stamp,
+  [dir="rtl"] .sv-print-kind,
+  [dir="rtl"] .sv-print-state,
+  [dir="rtl"] .sv-print-facts dt,
+  [dir="rtl"] .sv-print-attn-stamp,
+  [dir="rtl"] .sv-print-attn-facts dt,
+  [dir="rtl"] .sv-print-track-stamp { letter-spacing: 0; text-transform: none; }
+}
+
+/* ---- breakpoints ---- */
+@media (max-width: 1020px) {
+  .sv { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .sv-form,
+  .sv-card,
+  .sv-help { padding: 14px 13px; border-radius: 15px; }
+  .sv-facts { grid-template-columns: 1fr; }
+  .sv-attn-facts { grid-template-columns: 1fr; }
+}
+
+/* ---- Arabic: no tracking on short labels, and the arrows follow the reading ---- */
+[dir="rtl"] .sv-stamp,
+[dir="rtl"] .sv-kind,
+[dir="rtl"] .sv-badge,
+[dir="rtl"] .sv-attn-stamp,
+[dir="rtl"] .sv-attn-facts dt,
+[dir="rtl"] .sv-track-stamp,
+[dir="rtl"] .sv-rel-day,
+[dir="rtl"] .sv-facts dt,
+[dir="rtl"] .sv-help-title { letter-spacing: 0; text-transform: none; }
+[dir="rtl"] .sv-cta:hover:not(:disabled) i { transform: scaleX(-1) translateX(3px); }
+[dir="rtl"] .sv-cta i { transform: scaleX(-1); }

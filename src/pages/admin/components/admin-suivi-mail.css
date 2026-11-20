@@ -1,0 +1,1383 @@
+/* ============ CONSOLE · SUIVI — LA PORTE DU MODULE DES E-MAILS ============ */
+/* Le tableau du poids des modules porte, sur la seule ligne des e-mails, la
+   même porte que le chantier : le nom du module tient la première colonne, et
+   la porte se range dessous, à sa mesure. */
+
+/* ============ CONSOLE · SUIVI — LES DEUX PORTES DES PREUVES ============ */
+/* Sous le compteur des preuves, deux portes côte à côte : l'écran de
+   l'expéditeur, et Resend — le domaine et la clé se règlent là-bas. Le
+   compteur dit où l'on en est ; les portes, où aller. */
+
+.suivi-preuves-col {
+  display: grid;
+  gap: 3px;
+  justify-items: start;
+}
+
+/* Le bloc des portes : la rangée, puis — juste après la gomme — la phrase
+   qui dit ce qui vient d'être rendu. Le bloc garde la largeur de son contenu,
+   pour que la phrase se range sous les portes sans les déplacer. */
+.suivi-doors-wrap {
+  display: grid;
+  gap: 3px;
+  justify-items: start;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.suivi-preuves-doors {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.suivi-preuves-door {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 26%, transparent);
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  font-weight: 600;
+  line-height: 1.7;
+  letter-spacing: .02em;
+  text-decoration: none;
+  cursor: pointer;
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+  transition: background .16s ease, border-color .16s ease;
+}
+.suivi-preuves-door i { font-size: 11px; }
+
+.suivi-preuves-door:hover,
+.suivi-preuves-door:focus-visible {
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 44%, transparent);
+}
+.suivi-preuves-door:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 2px;
+}
+
+[dir='rtl'] .suivi-preuves-door {
+  letter-spacing: 0;
+  font-size: 10.5px;
+}
+
+/* Le petit repère « déjà ouverte », porté par les deux portes quand la carte de
+   l'expéditeur a déjà été rejointe depuis cet appareil : le bloc n'est plus à
+   chercher, il a déjà été visité — et le survol donne le jour de la visite. */
+.suivi-door-seen {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-inline-start: 2px;
+  padding: 0 5px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
+  background: color-mix(in srgb, var(--accent) 17%, transparent);
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  line-height: 1.7;
+  letter-spacing: .02em;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent) 95%, var(--text));
+}
+.suivi-door-seen i { font-size: 9px; }
+
+[dir='rtl'] .suivi-door-seen {
+  letter-spacing: 0;
+  font-size: 9.5px;
+}
+
+/* La même paire de portes, sous la ligne qui les ouvre : dans le rappel des
+   chantiers comme sur la ligne du module, elle garde le même air et le même
+   ordre — expéditeur d'abord, Resend ensuite. */
+.suivi-mail-doors {
+  margin-block: 2px;
+  align-self: start;
+}
+
+/* Chaque porte et son repère forment une cellule : le repère ne se détache
+   jamais de la porte qu'il date, même quand la rangée se replie. */
+.suivi-door-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+/* La petite gomme du repère : elle n'oublie que la visite retenue par cet
+   appareil, et le repère s'efface sur place. */
+.suivi-door-seen-clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 13px;
+  height: 13px;
+  margin-inline-start: 1px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  cursor: pointer;
+  opacity: .72;
+  transition: opacity .16s ease, background .16s ease;
+}
+.suivi-door-seen-clear i { font-size: 9px; }
+
+.suivi-door-seen-clear:hover,
+.suivi-door-seen-clear:focus-visible {
+  opacity: 1;
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+}
+.suivi-door-seen-clear:focus-visible {
+  outline: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 1px;
+}
+
+/* Ce que la gomme vient de rendre, dit aussitôt sous les portes : le nombre de
+   portes et l'appareil dont la mémoire a été effacée. Un ton calme, une ligne
+   qui s'efface d'elle-même. */
+.suivi-door-cleared {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--text) 20%, transparent);
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  font-family: var(--font-label);
+  font-size: 9px;
+  line-height: 1.6;
+  letter-spacing: .02em;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 60%, transparent);
+}
+.suivi-door-cleared i {
+  flex: none;
+  font-size: 10px;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--accent) 74%, var(--text));
+}
+
+[dir='rtl'] .suivi-door-cleared {
+  letter-spacing: 0;
+  font-size: 10px;
+}
+
+/* ============ CONSOLE · SUIVI — LE REPÈRE DES MODULES À PORTE ========== */
+/* Le nom du module passe dans une rangée souple, pour que le repère se range
+   à sa suite sans casser la ligne. */
+
+.suivi-mod-title {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.suivi-mod-flag {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  height: 15px;
+  border-radius: 5px;
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+  cursor: help;
+}
+.suivi-mod-flag i { font-size: 10px; }
+
+.suivi-mod-name {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.suivi-mod-go {
+  width: fit-content;
+  max-width: 100%;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: .02em;
+  text-decoration: none;
+  cursor: pointer;
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+  transition: background .16s ease, border-color .16s ease;
+}
+.suivi-mod-go i { font-size: 11px; }
+.suivi-mod-go i:last-child { opacity: .72; }
+
+.suivi-mod-go:hover,
+.suivi-mod-go:focus-visible {
+  background: color-mix(in srgb, var(--accent) 17%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+}
+.suivi-mod-go:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 2px;
+}
+
+[dir='rtl'] .suivi-mod-go {
+  letter-spacing: 0;
+  font-size: 11px;
+}
+
+/* ===== CONSOLE · SUIVI — LES PORTES DE « CE QU'IL RESTE À FAIRE » ===== */
+/* Une ligne de cette liste qui mène à un écran porte son repère, puis la
+   porte elle-même sous son texte — au même air que sur les autres lignes. */
+
+.suivi-reste-cell {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.suivi-reste-txt {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.suivi-reste-doors {
+  margin-block: 1px 2px;
+}
+
+/* Le jeton des portes ouvertes, posé en tête de la liste : un appui ne garde
+   que les lignes qui mènent à un écran, un second rend la liste entière. Le
+   compte se lit dans son nom, relevé sur la table du plan. */
+.suivi-reste-jeton {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 30%, transparent);
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: .02em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  cursor: pointer;
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+  transition: background .16s ease, border-color .16s ease;
+}
+.suivi-reste-jeton i { font-size: 11px; }
+
+.suivi-reste-jeton:hover,
+.suivi-reste-jeton:focus-visible {
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+}
+.suivi-reste-jeton:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 2px;
+}
+
+.suivi-reste-jeton[data-on='yes'] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 54%, transparent);
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: color-mix(in srgb, var(--accent) 96%, var(--text));
+}
+
+[dir='rtl'] .suivi-reste-jeton {
+  letter-spacing: 0;
+  font-size: 11px;
+}
+
+/* Ce que la porte d'une ligne est devenue : empruntée un jour précis, ou
+   encore à ouvrir. Deux tons distincts, pour que le regard sépare d'un coup
+   ce qui reste à faire de ce qui est déjà fait. */
+.suivi-reste-etat {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-inline-start: 2px;
+  padding: 0 6px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  line-height: 1.7;
+  letter-spacing: .02em;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+.suivi-reste-etat i { font-size: 9px; }
+.suivi-reste-etat[data-etat='vu'] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  color: color-mix(in srgb, var(--accent) 94%, var(--text));
+}
+
+[dir='rtl'] .suivi-reste-etat {
+  letter-spacing: 0;
+  font-size: 9.5px;
+}
+
+/* La petite gomme du repère « déjà empruntée » : elle n'oublie que la visite de
+   cette porte-là, sur cet appareil, et le repère s'efface sur place. */
+.suivi-reste-etat-clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 12px;
+  height: 12px;
+  margin-inline-start: 1px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  cursor: pointer;
+  opacity: .72;
+  transition: opacity .16s ease, background .16s ease;
+}
+.suivi-reste-etat-clear i { font-size: 8.5px; }
+
+.suivi-reste-etat-clear:hover,
+.suivi-reste-etat-clear:focus-visible {
+  opacity: 1;
+  background: color-mix(in srgb, var(--accent) 24%, transparent);
+}
+.suivi-reste-etat-clear:focus-visible {
+  outline: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 1px;
+}
+
+/* La copie des lignes retenues par le jeton, posée à côté de lui : même
+   famille de pastille, un ton plus calme, et la coche quand c'est parti. */
+.suivi-reste-copie {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  background: color-mix(in srgb, var(--text) 3%, transparent);
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: .02em;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+  cursor: pointer;
+  transition: background .16s ease, border-color .16s ease, color .16s ease;
+}
+.suivi-reste-copie i { font-size: 11px; }
+.suivi-reste-copie:hover,
+.suivi-reste-copie:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 44%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+}
+.suivi-reste-copie:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 2px;
+}
+.suivi-reste-copie[data-on='yes'] {
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: color-mix(in srgb, var(--accent) 96%, var(--text));
+}
+
+[dir='rtl'] .suivi-reste-copie {
+  letter-spacing: 0;
+  font-size: 11px;
+}
+
+/* Ce que la copie vient de faire, dit sous la liste : une ligne calme, qui
+   ne déplace rien au-dessus d'elle. */
+.suivi-reste-copie-flash {
+  margin: 6px 0 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  padding: 4px 8px;
+  border-radius: 7px;
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  line-height: 1.5;
+}
+.suivi-reste-copie-flash i {
+  flex: none;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.suivi-reste-copie-flash[data-tone='ok'] {
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+.suivi-reste-copie-flash[data-tone='warn'] {
+  border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+}
+
+[dir='rtl'] .suivi-reste-copie-flash {
+  font-size: 11px;
+}
+
+/* Le second jeton, « déjà empruntées » : même famille que celui des portes
+   ouvertes, un trait pointillé qui le distingue au repos, et le même accent
+   plein une fois posé. Les deux s'excluent. */
+.suivi-reste-jeton[data-kind='vues'] {
+  border-style: dotted;
+  border-color: color-mix(in srgb, var(--text) 26%, transparent);
+  background: color-mix(in srgb, var(--text) 3%, transparent);
+  color: color-mix(in srgb, var(--text) 74%, transparent);
+}
+
+.suivi-reste-jeton[data-kind='vues']:hover,
+.suivi-reste-jeton[data-kind='vues']:focus-visible {
+  border-style: dotted;
+  border-color: color-mix(in srgb, var(--accent) 44%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+}
+
+.suivi-reste-jeton[data-kind='vues'][data-on='yes'] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 54%, transparent);
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: color-mix(in srgb, var(--accent) 96%, var(--text));
+}
+
+/* Les visites rendues depuis cet appareil, comptées sous la liste : le chiffre
+   dans une pastille, puis le jour du dernier oubli à côté. Une ligne basse,
+   qui ne déplace rien au-dessus d'elle. */
+.suivi-reste-oublis {
+  margin: 8px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  font-family: var(--font-label);
+  font-size: 10px;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 55%, transparent);
+  cursor: help;
+}
+
+.suivi-reste-oublis-compte {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+}
+.suivi-reste-oublis-compte i { font-size: 11px; }
+
+.suivi-reste-oublis[data-etat='vu'] .suivi-reste-oublis-compte {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 36%, transparent);
+  background: color-mix(in srgb, var(--accent) 11%, transparent);
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+
+.suivi-reste-oublis-jour {
+  font-size: 9.5px;
+  letter-spacing: .01em;
+}
+
+[dir='rtl'] .suivi-reste-oublis {
+  font-size: 11px;
+  letter-spacing: 0;
+}
+[dir='rtl'] .suivi-reste-oublis-jour {
+  font-size: 10.5px;
+}
+
+/* Où les oublis se sont concentrés : le carnet rangé par chantier du plan,
+   la ligne la plus fournie portant l'accent. Le survol dit d'où vient le
+   compte, et rien n'est écrit à la main. */
+.suivi-reste-oublis-chantiers {
+  margin: 4px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 3px 8px;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+}
+.suivi-reste-oublis-chantiers > i {
+  font-size: 10.5px;
+  opacity: .7;
+}
+.suivi-reste-oublis-chantiers-lbl {
+  letter-spacing: .01em;
+}
+.suivi-reste-oublis-chantier {
+  padding: 0 7px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--text) 16%, transparent);
+  background: color-mix(in srgb, var(--text) 3%, transparent);
+  font-family: var(--font-label);
+  font-size: inherit;
+  line-height: inherit;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 64%, transparent);
+  cursor: pointer;
+  transition: background .16s ease, border-color .16s ease, color .16s ease;
+}
+.suivi-reste-oublis-chantier:hover,
+.suivi-reste-oublis-chantier:focus-visible {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 34%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+.suivi-reste-oublis-chantier:focus-visible {
+  outline: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 1px;
+}
+/* Le chantier retenu par le jeton : trait plein et accent, pour que le carnet
+   resserré se lise sans survol. */
+.suivi-reste-oublis-chantier[data-on='yes'] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 54%, transparent);
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: color-mix(in srgb, var(--accent) 96%, var(--text));
+}
+
+/* Le resserrement du carnet, dit sous le décompte : le chantier retenu, le
+   nombre de gestes qu’il laisse, et la croix qui rend la liste entière. */
+.suivi-reste-oublis-focus {
+  margin: 4px 0 0;
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+.suivi-reste-oublis-focus > i {
+  flex: none;
+  font-size: 10.5px;
+  opacity: .8;
+}
+.suivi-reste-oublis-focus span {
+  min-width: 0;
+}
+.suivi-reste-oublis-focus-clear {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  cursor: pointer;
+  opacity: .76;
+  transition: opacity .16s ease, background .16s ease;
+}
+.suivi-reste-oublis-focus-clear i { font-size: 10px; }
+.suivi-reste-oublis-focus-clear:hover,
+.suivi-reste-oublis-focus-clear:focus-visible {
+  opacity: 1;
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+}
+.suivi-reste-oublis-focus-clear:focus-visible {
+  outline: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 1px;
+}
+[dir='rtl'] .suivi-reste-oublis-focus {
+  font-size: 10.5px;
+}
+.suivi-reste-oublis-chantier[data-fort='yes'] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 34%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+[dir='rtl'] .suivi-reste-oublis-chantiers {
+  font-size: 10.5px;
+  letter-spacing: 0;
+}
+[dir='rtl'] .suivi-reste-oublis-chantier {
+  letter-spacing: 0;
+}
+
+/* Le carnet part en CSV, et sa petite gomme le remet à zéro : deux gestes
+   posés sur la ligne du carnet, sans déplacer le compte qu'elle dit. */
+.suivi-reste-oublis-csv {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  background: color-mix(in srgb, var(--text) 3%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: .02em;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 74%, transparent);
+  cursor: pointer;
+  transition: background .16s ease, border-color .16s ease, color .16s ease;
+}
+.suivi-reste-oublis-csv i { font-size: 10.5px; }
+
+.suivi-reste-oublis-csv:hover,
+.suivi-reste-oublis-csv:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 44%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+}
+.suivi-reste-oublis-csv:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 2px;
+}
+
+.suivi-reste-oublis-clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  height: 15px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 60%, transparent);
+  cursor: pointer;
+  opacity: .78;
+  transition: opacity .16s ease, background .16s ease, color .16s ease;
+}
+.suivi-reste-oublis-clear i { font-size: 10px; }
+
+.suivi-reste-oublis-clear:hover,
+.suivi-reste-oublis-clear:focus-visible {
+  opacity: 1;
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+}
+.suivi-reste-oublis-clear:focus-visible {
+  outline: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 1px;
+}
+
+[dir='rtl'] .suivi-reste-oublis-csv {
+  letter-spacing: 0;
+  font-size: 10.5px;
+}
+
+/* Le carnet, geste par geste : sous le compte, chaque oubli se lit sur sa
+   ligne — l'écran, le chantier du plan et le jour —, la plus récente en tête,
+   et porte sa propre petite gomme. */
+.suivi-reste-oublis-journal {
+  margin: 6px 0 0;
+  display: grid;
+  gap: 2px;
+  max-width: 640px;
+}
+
+.suivi-reste-oublis-journal-lbl {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  font-family: var(--font-label);
+  font-size: 9px;
+  line-height: 1.5;
+  letter-spacing: .02em;
+  color: color-mix(in srgb, var(--text) 42%, transparent);
+}
+.suivi-reste-oublis-journal-lbl > i {
+  font-size: 10px;
+  opacity: .8;
+}
+
+/* Le tri des gestes par écran, posé dans l’intitulé du carnet : une petite
+   pastille qui range les lignes sans en retirer une seule. */
+.suivi-reste-oublis-journal-tri {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-inline-start: auto;
+  padding: 0 7px;
+  border-radius: 999px;
+  border: 1px dotted color-mix(in srgb, var(--text) 24%, transparent);
+  background: color-mix(in srgb, var(--text) 3%, transparent);
+  font-family: var(--font-label);
+  font-size: inherit;
+  line-height: 1.6;
+  letter-spacing: .02em;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  cursor: pointer;
+  transition: background .16s ease, border-color .16s ease, color .16s ease;
+}
+.suivi-reste-oublis-journal-tri i { font-size: 10px; }
+
+.suivi-reste-oublis-journal-tri:hover,
+.suivi-reste-oublis-journal-tri:focus-visible {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 38%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+}
+.suivi-reste-oublis-journal-tri:focus-visible {
+  outline: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 1px;
+}
+
+.suivi-reste-oublis-journal-tri[data-on='yes'] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 54%, transparent);
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: color-mix(in srgb, var(--accent) 96%, var(--text));
+}
+
+/* La petite gomme du tri : elle rend l’ordre du plus récent au plus ancien
+   d’un seul geste, sans retirer ni resserrer aucun oubli. */
+.suivi-reste-oublis-journal-tri-clear {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  height: 15px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  cursor: pointer;
+  opacity: .78;
+  transition: opacity .16s ease, background .16s ease;
+}
+.suivi-reste-oublis-journal-tri-clear i { font-size: 10px; }
+
+.suivi-reste-oublis-journal-tri-clear:hover,
+.suivi-reste-oublis-journal-tri-clear:focus-visible {
+  opacity: 1;
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+}
+.suivi-reste-oublis-journal-tri-clear:focus-visible {
+  outline: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 1px;
+}
+
+.suivi-reste-oublis-journal ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 1px;
+}
+
+.suivi-reste-oublis-geste {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  padding: 1px 6px;
+  border-radius: 6px;
+  border: 1px dashed color-mix(in srgb, var(--text) 13%, transparent);
+  background: color-mix(in srgb, var(--text) 2%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  line-height: 1.6;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+.suivi-reste-oublis-geste > i {
+  flex: none;
+  font-size: 10px;
+  opacity: .68;
+}
+
+.suivi-reste-oublis-geste-ecran {
+  min-width: 0;
+  color: color-mix(in srgb, var(--text) 76%, transparent);
+}
+
+/* Dans le tri par écran, le nom de l’écran devient un appui : un geste ne
+   garde que les gestes de cet écran, le temps d’en retirer un. Le second
+   appui rend tous les écrans, et aucun oubli n’est retiré. */
+.suivi-reste-oublis-geste-ecran[data-btn='yes'] {
+  padding: 0 6px;
+  border-radius: 999px;
+  border: 1px dotted color-mix(in srgb, var(--text) 20%, transparent);
+  background: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: 1.5;
+  letter-spacing: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition: background .16s ease, border-color .16s ease, color .16s ease;
+}
+.suivi-reste-oublis-geste-ecran[data-btn='yes']:hover,
+.suivi-reste-oublis-geste-ecran[data-btn='yes']:focus-visible {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 36%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+}
+.suivi-reste-oublis-geste-ecran[data-btn='yes']:focus-visible {
+  outline: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 1px;
+}
+.suivi-reste-oublis-geste-ecran[data-btn='yes'][data-on='yes'] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 54%, transparent);
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: color-mix(in srgb, var(--accent) 96%, var(--text));
+}
+
+.suivi-reste-oublis-geste-chantier {
+  padding: 0 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.suivi-reste-oublis-geste-jour {
+  margin-inline-start: auto;
+  white-space: nowrap;
+  opacity: .82;
+}
+
+/* La petite gomme d'une ligne : elle ne retire que ce geste-là du carnet. */
+.suivi-reste-oublis-geste-clear {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+  cursor: pointer;
+  opacity: .78;
+  transition: opacity .16s ease, background .16s ease, color .16s ease;
+}
+.suivi-reste-oublis-geste-clear i {
+  font-size: 9.5px;
+}
+
+.suivi-reste-oublis-geste-clear:hover,
+.suivi-reste-oublis-geste-clear:focus-visible {
+  opacity: 1;
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+}
+.suivi-reste-oublis-geste-clear:focus-visible {
+  outline: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 1px;
+}
+
+[dir='rtl'] .suivi-reste-oublis-journal-lbl,
+[dir='rtl'] .suivi-reste-oublis-geste {
+  letter-spacing: 0;
+  font-size: 10.5px;
+}
+
+/* Les portes d'un chantier déjà empruntées, sous sa ligne : un compte calme,
+   qui s'accentue dès qu'une visite a été retenue. Le jour se lit au survol. */
+.suivi-part-vues {
+  margin: 4px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  line-height: 1.5;
+  letter-spacing: .02em;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  cursor: help;
+}
+.suivi-part-vues i { flex: none; font-size: 10.5px; }
+
+.suivi-part-vues[data-etat='vu'] {
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+}
+
+[dir='rtl'] .suivi-part-vues {
+  letter-spacing: 0;
+  font-size: 10.5px;
+}
+
+/* La petite gomme du rappel d'un chantier : elle ne rend que les visites des
+   portes de ce chantier-là, sur cet appareil. Discrète, elle suit le compte
+   qu'elle remet à zéro et s'efface avec lui. */
+.suivi-part-vues-clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 12px;
+  height: 12px;
+  margin-inline-start: 1px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  cursor: pointer;
+  opacity: .72;
+  transition: opacity .16s ease, background .16s ease;
+}
+.suivi-part-vues-clear i { font-size: 8.5px; }
+
+.suivi-part-vues-clear:hover,
+.suivi-part-vues-clear:focus-visible {
+  opacity: 1;
+  background: color-mix(in srgb, var(--accent) 24%, transparent);
+}
+.suivi-part-vues-clear:focus-visible {
+  outline: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 1px;
+}
+
+/* ====== CONSOLE · SUIVI — LE SECOND JETON DU CARNET ====== */
+/* Sous le décompte par chantier, le jeton de la semaine en cours : un trait
+   pointillé au repos, l'accent plein une fois posé, et sa phrase à côté. Il
+   ne retire aucun oubli — il resserre la lecture des gestes récents. */
+
+.suivi-reste-oublis-semaine {
+  margin: 5px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 3px 7px;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 46%, transparent);
+}
+
+.suivi-reste-oublis-semaine-jeton {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 8px;
+  border-radius: 999px;
+  border: 1px dotted color-mix(in srgb, var(--text) 26%, transparent);
+  background: color-mix(in srgb, var(--text) 3%, transparent);
+  font-family: var(--font-label);
+  font-size: inherit;
+  line-height: 1.8;
+  letter-spacing: .02em;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 68%, transparent);
+  cursor: pointer;
+  transition: background .16s ease, border-color .16s ease, color .16s ease;
+}
+.suivi-reste-oublis-semaine-jeton i { font-size: 10.5px; }
+
+.suivi-reste-oublis-semaine-jeton:hover,
+.suivi-reste-oublis-semaine-jeton:focus-visible {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 38%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+}
+.suivi-reste-oublis-semaine-jeton:focus-visible {
+  outline: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 1px;
+}
+
+.suivi-reste-oublis-semaine-jeton[data-on='yes'] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 54%, transparent);
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: color-mix(in srgb, var(--accent) 96%, var(--text));
+}
+
+.suivi-reste-oublis-semaine-note {
+  font-size: 9px;
+  letter-spacing: .01em;
+  color: color-mix(in srgb, var(--text) 40%, transparent);
+}
+
+.suivi-reste-oublis-semaine-on {
+  font-size: 9px;
+  letter-spacing: .01em;
+  color: color-mix(in srgb, var(--accent) 86%, var(--text));
+}
+
+[dir='rtl'] .suivi-reste-oublis-semaine {
+  font-size: 10.5px;
+  letter-spacing: 0;
+}
+[dir='rtl'] .suivi-reste-oublis-semaine-note,
+[dir='rtl'] .suivi-reste-oublis-semaine-on {
+  font-size: 10px;
+  letter-spacing: 0;
+}
+
+/* ===== CONSOLE · SUIVI — LE COMPTE DES JETONS DU CARNET ===== */
+/* Sous les deux jetons, leur compte réuni et la gomme qui les éteint tous
+   d’un geste : aucun oubli n’est retiré, la liste redevient entière. */
+
+.suivi-reste-oublis-jetons {
+  margin: 4px 0 0;
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 48%, transparent);
+}
+.suivi-reste-oublis-jetons > i {
+  flex: none;
+  font-size: 10.5px;
+  opacity: .74;
+}
+.suivi-reste-oublis-jetons[data-on='yes'] {
+  color: color-mix(in srgb, var(--accent) 86%, var(--text));
+}
+.suivi-reste-oublis-jetons-lbl {
+  min-width: 0;
+}
+
+.suivi-reste-oublis-jetons-clear {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  height: 15px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  cursor: pointer;
+  opacity: .78;
+  transition: opacity .16s ease, background .16s ease;
+}
+.suivi-reste-oublis-jetons-clear i { font-size: 10px; }
+
+.suivi-reste-oublis-jetons-clear:hover,
+.suivi-reste-oublis-jetons-clear:focus-visible {
+  opacity: 1;
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+}
+.suivi-reste-oublis-jetons-clear:focus-visible {
+  outline: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 1px;
+}
+
+[dir='rtl'] .suivi-reste-oublis-jetons {
+  font-size: 10.5px;
+  letter-spacing: 0;
+}
+
+/* ===== CONSOLE · SUIVI — LE DÉPLI DES ÉCRANS DANS LE TRI ===== */
+/* Sous le tri « Par écran », l’intitulé du carnet devient un appui : il déplie
+   les écrans un à un, chacun avec son compte, son dernier oubli et sa petite
+   gomme de retrait. Le dépli ne retire ni ne resserre aucun oubli. */
+
+.suivi-reste-oublis-journal-lbl-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  text-align: start;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  cursor: pointer;
+  transition: color .16s ease;
+}
+.suivi-reste-oublis-journal-lbl-btn i {
+  font-size: 11px;
+  opacity: .72;
+}
+
+.suivi-reste-oublis-journal-lbl-btn:hover,
+.suivi-reste-oublis-journal-lbl-btn:focus-visible {
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+}
+.suivi-reste-oublis-journal-lbl-btn:focus-visible {
+  outline: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 2px;
+}
+
+.suivi-reste-oublis-journal-lbl-btn[data-on='yes'] {
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+}
+
+/* L’intitulé appuyé une seconde fois : les écrans sont rangés du plus fourni
+   au plus léger, et le nom le dit sans ajouter un mot à côté. */
+.suivi-reste-oublis-journal-lbl-btn[data-tri='yes'] {
+  color: color-mix(in srgb, var(--accent) 96%, var(--text));
+  font-variant-numeric: tabular-nums;
+}
+
+.suivi-reste-oublis-journal-lbl-btn[data-tri='yes'] i {
+  opacity: .9;
+}
+
+[dir='rtl'] .suivi-reste-oublis-journal-lbl-btn {
+  font-size: 10.5px;
+  letter-spacing: 0;
+}
+
+/* L’écart de l’écran retenu, posé derrière la ligne du carnet resserré : les
+   journées qui séparent son premier oubli de son dernier, sans reprendre la
+   phrase qu’il complète. */
+.suivi-reste-oublis-focus-span {
+  margin-inline-start: 2px;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent) 78%, var(--text));
+}
+
+/* Les écrans dépliés un à un : une ligne par écran, son nom devant, son
+   compte puis son dernier oubli, et la petite gomme à la fin. */
+.suivi-reste-oublis-ecrans {
+  margin: 4px 0 2px;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 1px;
+}
+
+.suivi-reste-oublis-ecran {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  padding: 1px 6px;
+  border-radius: 6px;
+  border: 1px dotted color-mix(in srgb, var(--text) 15%, transparent);
+  background: color-mix(in srgb, var(--text) 2%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  line-height: 1.6;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  transition: background .16s ease, border-color .16s ease;
+}
+.suivi-reste-oublis-ecran > i {
+  flex: none;
+  font-size: 10px;
+  opacity: .68;
+}
+
+.suivi-reste-oublis-ecran[data-on='yes'] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+}
+
+.suivi-reste-oublis-ecran-nom {
+  min-width: 0;
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+}
+
+/* Le nom d’un écran du dépli est un appui : un seul geste ne garde que ses
+   gestes, le temps d’en retirer un sans se tromper de voisin. */
+.suivi-reste-oublis-ecran-nom[data-btn='yes'] {
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition: color .16s ease, background .16s ease;
+}
+
+.suivi-reste-oublis-ecran-nom[data-btn='yes']:hover,
+.suivi-reste-oublis-ecran-nom[data-btn='yes']:focus-visible {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+}
+.suivi-reste-oublis-ecran-nom[data-btn='yes']:focus-visible {
+  outline: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 1px;
+}
+
+.suivi-reste-oublis-ecran-nom[data-btn='yes'][data-on='yes'] {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: color-mix(in srgb, var(--accent) 96%, var(--text));
+}
+
+.suivi-reste-oublis-ecran-n {
+  opacity: .82;
+  white-space: nowrap;
+}
+
+.suivi-reste-oublis-ecran-jour {
+  margin-inline-start: auto;
+  white-space: nowrap;
+  opacity: .8;
+}
+
+/* La petite gomme d’un écran : elle ne retire que les gestes de cet écran-là
+   du carnet, sur cet appareil. */
+.suivi-reste-oublis-ecran-clear {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+  cursor: pointer;
+  opacity: .78;
+  transition: opacity .16s ease, background .16s ease, color .16s ease;
+}
+.suivi-reste-oublis-ecran-clear i {
+  font-size: 9.5px;
+}
+
+.suivi-reste-oublis-ecran-clear:hover,
+.suivi-reste-oublis-ecran-clear:focus-visible {
+  opacity: 1;
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+}
+.suivi-reste-oublis-ecran-clear:focus-visible {
+  outline: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 1px;
+}
+
+[dir='rtl'] .suivi-reste-oublis-ecran {
+  letter-spacing: 0;
+  font-size: 10.5px;
+}
+
+/* Le jeton de relecture du dépli : il ne garde que les écrans qui tiennent
+   encore plus d’un geste, ceux qu’un second oubli rend ambigus. Un trait
+   pointillé au repos, l’accent plein une fois posé — il ne retire rien. */
+
+.suivi-reste-oublis-ecrans-jeton {
+  margin: 3px 0 1px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 3px 7px;
+  font-family: var(--font-label);
+  font-size: 9px;
+  line-height: 1.5;
+  letter-spacing: .02em;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 46%, transparent);
+}
+
+.suivi-reste-oublis-ecrans-jeton-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 8px;
+  border-radius: 999px;
+  border: 1px dotted color-mix(in srgb, var(--text) 24%, transparent);
+  background: color-mix(in srgb, var(--text) 3%, transparent);
+  font-family: var(--font-label);
+  font-size: inherit;
+  line-height: 1.8;
+  letter-spacing: inherit;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+  cursor: pointer;
+  transition: background .16s ease, border-color .16s ease, color .16s ease;
+}
+.suivi-reste-oublis-ecrans-jeton-btn i { font-size: 10px; }
+
+.suivi-reste-oublis-ecrans-jeton-btn:hover,
+.suivi-reste-oublis-ecrans-jeton-btn:focus-visible {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 38%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  color: color-mix(in srgb, var(--accent) 90%, var(--text));
+}
+.suivi-reste-oublis-ecrans-jeton-btn:focus-visible {
+  outline: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 1px;
+}
+
+.suivi-reste-oublis-ecrans-jeton-btn[data-on='yes'] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 54%, transparent);
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: color-mix(in srgb, var(--accent) 96%, var(--text));
+}
+
+.suivi-reste-oublis-ecrans-jeton-on {
+  font-size: 9px;
+  letter-spacing: .01em;
+  color: color-mix(in srgb, var(--accent) 86%, var(--text));
+}
+
+[dir='rtl'] .suivi-reste-oublis-ecrans-jeton {
+  letter-spacing: 0;
+  font-size: 10px;
+}
+[dir='rtl'] .suivi-reste-oublis-ecrans-jeton-on {
+  letter-spacing: 0;
+  font-size: 10px;
+}

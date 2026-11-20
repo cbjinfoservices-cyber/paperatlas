@@ -1,0 +1,67 @@
+/* The stamp that opens the connection and sign-up pages: the seal, then the
+   name right under it, so the first thing read is who is asking. */
+.auth-brand {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  justify-self: start;
+}
+.auth-brand-seal {
+  display: block;
+  width: 54px;
+  height: 54px;
+  border-radius: 15px;
+  object-fit: cover;
+  box-shadow: 0 1px 0 color-mix(in srgb, #fff 12%, transparent) inset,
+    0 10px 22px -16px color-mix(in srgb, var(--text) 60%, transparent);
+}
+.auth-brand-name {
+  font-family: var(--font-label);
+  font-size: 12px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+@media (max-width: 560px) {
+  .auth-brand-seal { width: 46px; height: 46px; border-radius: 13px; }
+}
+
+/* Le sceau de l'espace compte : le même tampon, à côté du nom du membre.
+   Il s'aligne sur la ligne du titre et laisse le nom respirer, même long. */
+.acct-hero-name {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 1.8vw, 22px);
+}
+.acct-hero-seal {
+  flex: 0 0 auto;
+  display: block;
+  width: clamp(44px, 4.6vw, 62px);
+  height: clamp(44px, 4.6vw, 62px);
+  border-radius: 16px;
+  object-fit: cover;
+  box-shadow: 0 1px 0 color-mix(in srgb, #fff 10%, transparent) inset,
+    0 12px 26px -18px color-mix(in srgb, var(--text) 60%, transparent);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+/* Le même relief que dans la barre : au survol, le tampon se soulève d'un
+   demi-millimètre et son ombre s'ouvre — il se décolle du papier au lieu de
+   clignoter. Le geste reste identique à celui du sceau de la barre. */
+.acct-hero-name:hover .acct-hero-seal {
+  transform: translateY(-2px) rotate(-2deg);
+  box-shadow: 0 1px 0 color-mix(in srgb, #fff 14%, transparent) inset,
+    0 18px 32px -18px color-mix(in srgb, var(--text) 68%, transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .acct-hero-seal { transition: none; }
+  .acct-hero-name:hover .acct-hero-seal { transform: none; }
+}
+.acct-hero-name .page-h1 {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 560px) {
+  .acct-hero-name { align-items: flex-start; gap: 12px; }
+  .acct-hero-seal { width: 38px; height: 38px; border-radius: 12px; margin-top: 4px; }
+}

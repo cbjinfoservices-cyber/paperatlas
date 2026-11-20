@@ -1,0 +1,1185 @@
+/* ============ LES COMPTES DES GOMMES DE LA LIGNE ============ */
+/* Chaque gomme de la ligne des valeurs partagées porte le même petit compte :
+   combien de fois elle a servi, et le jour du dernier geste. Un seul jeton
+   pour les quatre, pour qu'elles se lisent d'un même geste — et il reste
+   visible une fois la gomme disparue, quand il n'y a plus rien à effacer. */
+.mine-rubrique-shared-erase-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  margin-inline-start: 3px;
+  padding: 0 4px;
+  border: 1px dotted color-mix(in srgb, var(--text) 22%, transparent);
+  border-radius: 999px;
+  font-size: 9px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+}
+.mine-rubrique-shared-erase-count i { flex: 0 0 auto; font-size: 8.5px; }
+
+/* Ce que la gomme a effacé la dernière fois, famille de valeurs par famille :
+   un rappel discret posé juste après son compte, dans la même écriture. */
+.mine-rubrique-shared-erase-last {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  margin-inline-start: 2px;
+  padding: 0 4px;
+  border: 1px dotted color-mix(in srgb, var(--accent) 30%, transparent);
+  border-radius: 999px;
+  font-size: 9px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 46%, transparent);
+}
+.mine-rubrique-shared-erase-last i { flex: 0 0 auto; font-size: 8.5px; color: var(--accent); }
+
+/* Combien de fois la petite porte de la gomme s'est ouverte : le compte se
+   lit juste après son usage, dans la même écriture discrète. */
+.mine-rubrique-shared-erase-opens {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  margin-inline-start: 2px;
+  padding: 0 4px;
+  border: 1px dotted color-mix(in srgb, var(--accent2) 32%, transparent);
+  border-radius: 999px;
+  font-size: 9px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 46%, transparent);
+}
+.mine-rubrique-shared-erase-opens i {
+  flex: 0 0 auto;
+  font-size: 8.5px;
+  color: var(--accent2);
+}
+
+/* La petite porte du compte : elle resserre la liste des dépôts sur les
+   valeurs que la gomme a effacées, et se lit juste après le compte — même
+   écriture discrète que le jeton, un clic pour relire le geste dans la liste. */
+.mine-rubrique-shared-erase-door {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 15px;
+  height: 15px;
+  margin-inline-start: 2px;
+  padding: 0;
+  border: 1px dashed color-mix(in srgb, var(--accent) 38%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  font-size: 8.5px;
+  line-height: 1;
+  color: color-mix(in srgb, var(--text) 48%, transparent);
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.mine-rubrique-shared-erase-door i { font-size: 8.5px; }
+.mine-rubrique-shared-erase-door:hover {
+  border-style: solid;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: var(--accent2);
+}
+.mine-rubrique-shared-erase-door:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+/* La porte ouverte : un second clic rend les filtres qu’elle a effacés — le
+   jeton s’affirme alors, et sa flèche de retour le dit d’elle-même. */
+.mine-rubrique-shared-erase-door.is-on {
+  border-style: solid;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--accent2);
+}
+
+/* ============ LA PORTE DU COMPTE HORS ÉCRAN ============ */
+/* Le compte des valeurs restées hors de la rangée repliée devient une porte :
+   un clic resserre la rangée sur ces valeurs-là, et sur elles seules — un
+   second clic rend la rangée entière, comme la porte voisine. */
+.mine-rubrique-shared-aside-door {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0 7px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 40%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 76%, transparent);
+  font-family: var(--font-label);
+  font-size: 9px;
+  line-height: 1.7;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 56%, transparent);
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.mine-rubrique-shared-aside-door i { flex: 0 0 auto; font-size: 9px; color: var(--accent); }
+.mine-rubrique-shared-aside-door:hover,
+.mine-rubrique-shared-aside-door.is-on {
+  border-style: solid;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+  color: var(--accent2);
+}
+.mine-rubrique-shared-aside-door:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+[dir="rtl"] .mine-rubrique-shared-aside-door { letter-spacing: 0; }
+
+/* Les valeurs que la porte resserre, nommées en clair dans la porte elle-même :
+   on lit ce qu'elle ramène avant de cliquer, sans attendre le survol. */
+.mine-rubrique-shared-aside-names {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0 3px;
+  max-width: 280px;
+  margin-inline-start: 4px;
+  font-size: 8.5px;
+  color: color-mix(in srgb, var(--text) 40%, transparent);
+}
+
+/* Le nom d’une valeur gardée hors de l’écran, avec le temps qu’elle y a déjà
+   passé : la porte dit la durée valeur par valeur, sans attendre le survol. */
+.mine-rubrique-shared-aside-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  white-space: nowrap;
+}
+.mine-rubrique-shared-aside-dot { color: color-mix(in srgb, var(--text) 26%, transparent); }
+.mine-rubrique-shared-aside-age {
+  font-size: 8px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 400;
+  color: color-mix(in srgb, var(--accent2) 72%, transparent);
+}
+.mine-rubrique-shared-aside-door:hover .mine-rubrique-shared-aside-name,
+.mine-rubrique-shared-aside-door.is-on .mine-rubrique-shared-aside-name {
+  color: color-mix(in srgb, var(--accent2) 78%, transparent);
+}
+.mine-rubrique-shared-aside-door:hover .mine-rubrique-shared-aside-names,
+.mine-rubrique-shared-aside-door.is-on .mine-rubrique-shared-aside-names {
+  color: color-mix(in srgb, var(--accent2) 78%, transparent);
+}
+
+/* Le bas de la rangée repliée : le temps cumulé que les valeurs nommées ont
+   déjà passé hors de l'écran, additionné valeur par valeur. */
+.mine-rubrique-shared-aside-total {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  margin-inline-start: 4px;
+  padding: 0 5px;
+  border: 1px dotted color-mix(in srgb, var(--text) 20%, transparent);
+  border-radius: 999px;
+  font-size: 8.5px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 44%, transparent);
+}
+.mine-rubrique-shared-aside-total i {
+  flex: 0 0 auto;
+  font-size: 8.5px;
+  color: var(--accent);
+}
+
+/* La valeur qui pèse le plus dans ce temps cumulé, nommée juste après le
+   total : le chiffre dit d'où il vient, sans relire chaque durée. */
+.mine-rubrique-shared-aside-heavy {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  max-width: 300px;
+  margin-inline-start: 3px;
+  padding: 0 5px;
+  border: 1px dotted color-mix(in srgb, var(--accent) 26%, transparent);
+  border-radius: 999px;
+  font-size: 8.5px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: color-mix(in srgb, var(--text) 46%, transparent);
+}
+.mine-rubrique-shared-aside-heavy i {
+  flex: 0 0 auto;
+  font-size: 8.5px;
+  color: var(--accent2);
+}
+/* La part de cette valeur dans le temps cumulé, dite en pourcentage : un
+   chiffre rond, séparé du nom par un point médian. */
+.mine-rubrique-shared-aside-share {
+  flex: 0 0 auto;
+  margin-inline-start: 3px;
+  padding-inline-start: 4px;
+  border-inline-start: 1px dotted color-mix(in srgb, var(--accent2) 34%, transparent);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent2) 78%, var(--text));
+}
+
+/* Le petit signe du bas de la rangée repliée : il ouvre directement la valeur
+   la plus lourde dans la liste, sans passer par la porte de gomme — le geste
+   part de la durée lue, pas du compte de la gomme. */
+.mine-rubrique-shared-aside-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  flex: 0 0 auto;
+  margin: 0;
+  margin-inline-start: 3px;
+  padding: 0 5px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 40%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 74%, transparent);
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  line-height: 1.7;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.mine-rubrique-shared-aside-open i {
+  flex: 0 0 auto;
+  font-size: 8.5px;
+  color: var(--accent);
+}
+.mine-rubrique-shared-aside-open:hover,
+.mine-rubrique-shared-aside-open.is-on {
+  border-style: solid;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+  color: var(--accent2);
+}
+.mine-rubrique-shared-aside-open:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+[dir="rtl"] .mine-rubrique-shared-aside-open i { transform: scaleX(-1); }
+
+/* Combien de dépôts la porte de la plus lourde ramènera : un chiffre discret
+   dans la porte elle-même, lu avant le clic. */
+.mine-rubrique-shared-aside-open-n {
+  flex: 0 0 auto;
+  margin-inline-start: 3px;
+  padding-inline-start: 4px;
+  border-inline-start: 1px dotted color-mix(in srgb, var(--accent) 34%, transparent);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent2) 82%, var(--text));
+}
+
+/* Le second signe du bas de la rangée : les deux valeurs les plus lourdes
+   s'ouvrent ensemble, d'un seul clic — un lien plutôt qu'une flèche. */
+.mine-rubrique-shared-aside-open.mine-rubrique-shared-aside-two {
+  border-color: color-mix(in srgb, var(--accent2) 44%, transparent);
+}
+.mine-rubrique-shared-aside-open.mine-rubrique-shared-aside-two i {
+  color: var(--accent2);
+}
+
+/* Le troisième signe du bas de la rangée : les trois valeurs les plus lourdes
+   s'ouvrent ensemble, avec le compte de dépôts qu'il ramène. */
+.mine-rubrique-shared-aside-open.mine-rubrique-shared-aside-three {
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+}
+.mine-rubrique-shared-aside-open.mine-rubrique-shared-aside-three i {
+  color: var(--accent);
+}
+
+/* Le compte des rubriques restées dehors, porté par le signe des trois quand la
+   liste est resserrée sur celles qu’il laissait de côté : un chiffre discret,
+   séparé du reste par un filet pointillé. */
+.mine-rubrique-shared-aside-leftout {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  margin-inline-start: 4px;
+  padding-inline-start: 5px;
+  border-inline-start: 1px dotted color-mix(in srgb, var(--accent) 34%, transparent);
+  font-size: 8.5px;
+  line-height: 1.6;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 56%, transparent);
+}
+.mine-rubrique-shared-aside-leftout i {
+  flex: 0 0 auto;
+  font-size: 8.5px;
+  color: color-mix(in srgb, var(--accent) 72%, transparent);
+}
+
+/* Le jeton du resserrement sur deux valeurs : la même écriture que les autres
+   jetons de rubrique, un lien qui les réunit. */
+.mine-rub-filter-pair {
+  border-color: color-mix(in srgb, var(--accent2) 36%, transparent);
+}
+
+/* Le temps que les deux valeurs ouvertes pèsent ensemble, lu dans le jeton du
+   resserrement : un chiffre discret, séparé des noms par un filet pointillé. */
+.mine-rub-filter-pair-ago {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  margin-inline-start: 4px;
+  padding-inline-start: 5px;
+  border-inline-start: 1px dotted color-mix(in srgb, var(--accent2) 34%, transparent);
+  font-size: 9px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+.mine-rub-filter-pair-ago i {
+  flex: 0 0 auto;
+  font-size: 9px;
+  color: var(--accent2);
+}
+
+/* Ce que les valeurs ouvertes tiennent, famille par famille, lu dans le jeton
+   du resserrement : annonces et offres côte à côte. */
+.mine-rub-filter-pair-sides {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  margin-inline-start: 4px;
+  padding-inline-start: 5px;
+  border-inline-start: 1px dotted color-mix(in srgb, var(--accent2) 34%, transparent);
+  font-size: 9px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+.mine-rub-filter-pair-sides i {
+  flex: 0 0 auto;
+  font-size: 9px;
+  color: var(--accent2);
+}
+
+/* La part du temps cumulé que les trois valeurs ouvertes pèsent, dite en
+   pourcentage dans le jeton du resserrement : un chiffre rond, séparé du
+   temps réuni par le même filet pointillé. */
+.mine-rub-filter-pair-share {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  margin-inline-start: 4px;
+  padding-inline-start: 5px;
+  border-inline-start: 1px dotted color-mix(in srgb, var(--accent2) 34%, transparent);
+  font-size: 9px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent2) 78%, var(--text));
+}
+.mine-rub-filter-pair-share i {
+  flex: 0 0 auto;
+  font-size: 9px;
+  color: var(--accent2);
+}
+
+/* La plus lourde des rubriques que les trois laissent de côté, lue sur le
+   jeton du resserrement : un nom discret, à côté de la part du temps. */
+.mine-rub-filter-pair-leftheavy {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  margin-inline-start: 4px;
+  padding-inline-start: 5px;
+  border-inline-start: 1px dotted color-mix(in srgb, var(--accent2) 34%, transparent);
+  font-size: 9px;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+}
+.mine-rub-filter-pair-leftheavy i {
+  flex: 0 0 auto;
+  font-size: 9px;
+  color: color-mix(in srgb, var(--accent2) 72%, transparent);
+}
+
+/* Le compte des rubriques laissées hors de la liste est une porte : le signe
+   se lit sur le jeton, et le clic resserre la liste sur elles seules. */
+.mine-rub-filter-pair-leftdoor {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0 6px;
+  border: 1px dashed color-mix(in srgb, var(--accent2) 42%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  line-height: 1.6;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  cursor: pointer;
+}
+.mine-rub-filter-pair-leftdoor i {
+  flex: 0 0 auto;
+  font-size: 8.5px;
+  color: var(--accent2);
+}
+.mine-rub-filter-pair-leftdoor:hover,
+.mine-rub-filter-pair-leftdoor:focus-visible {
+  border-style: solid;
+  border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 13%, transparent);
+  color: color-mix(in srgb, var(--accent2) 82%, var(--text));
+}
+.mine-rub-filter-pair-leftdoor:focus-visible {
+  outline: 2px solid var(--accent2);
+  outline-offset: 2px;
+}
+
+/* Le jeton du resserrement sur les rubriques laissées de côté : la même
+   écriture que celui des valeurs ouvertes, une porte plutôt qu'un lien. */
+.mine-rub-filter-asideleft {
+  border-color: color-mix(in srgb, var(--accent2) 36%, transparent);
+}
+
+/* Le compte de chaque rubrique laissée de côté, un par un : le jeton porte le
+   nom et ses dépôts, chacun dans sa propre direction d’écriture — et chaque
+   pastille est une porte qui resserre la liste sur sa seule rubrique. */
+.mine-rub-filter-asideleft-each {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0 5px;
+  border: 1px solid color-mix(in srgb, var(--accent2) 26%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  color: inherit;
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  line-height: 1.6;
+  white-space: nowrap;
+  cursor: pointer;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+.mine-rub-filter-asideleft-each:hover {
+  border-color: color-mix(in srgb, var(--accent2) 52%, transparent);
+  color: color-mix(in srgb, var(--accent2) 78%, var(--text));
+}
+/* La rubrique seule à l'écran : sa pastille s'affirme, et un second clic la
+   rend aux autres rubriques. */
+.mine-rub-filter-asideleft-each.is-on {
+  border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 16%, transparent);
+  color: color-mix(in srgb, var(--accent2) 86%, var(--text));
+}
+.mine-rub-filter-asideleft-each:focus-visible {
+  outline: 2px solid var(--accent2);
+  outline-offset: 2px;
+}
+.mine-rub-filter-asideleft-each i {
+  flex: 0 0 auto;
+  font-size: 8.5px;
+  color: color-mix(in srgb, var(--accent2) 70%, transparent);
+}
+/* Le temps que la rubrique a passé hors de l'écran, lu dans sa pastille. */
+.mine-rub-filter-asideleft-ago {
+  display: inline-flex;
+  align-items: center;
+  padding-inline-start: 4px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--accent2) 24%, transparent);
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  font-size: 8px;
+}
+
+/* Le total en tête du jeton : ce que les rubriques laissées de côté tiennent
+   ensemble, à côté du temps cumulé qu'elles ont passé dehors. */
+.mine-rub-filter-asideleft-sum {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  padding: 0 6px;
+  border: 1px solid color-mix(in srgb, var(--accent2) 30%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent2) 9%, transparent);
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  font-weight: 600;
+  line-height: 1.6;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent2) 82%, var(--text));
+}
+.mine-rub-filter-asideleft-sum i {
+  flex: 0 0 auto;
+  font-size: 8.5px;
+  color: var(--accent2);
+}
+/* Le temps cumulé, séparé du compte par un filet pointillé : les deux se
+   lisent ensemble, sans se confondre. */
+.mine-rub-filter-asideleft-sum-ago {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding-inline-start: 5px;
+  border-inline-start: 1px dotted color-mix(in srgb, var(--accent2) 38%, transparent);
+  font-weight: 400;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+.mine-rub-filter-asideleft-sum-ago i { color: color-mix(in srgb, var(--accent2) 70%, transparent); }
+
+/* Le petit repère de la rubrique la plus lourde dehors : la pastille se
+   distingue sans qu'on ait à lire chaque durée. */
+.mine-rub-filter-asideleft-heavy {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0;
+  padding-inline-start: 4px;
+  border: 0;
+  border-inline-start: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  background: transparent;
+  font-family: var(--font-label);
+  font-size: 8px;
+  line-height: 1.6;
+  white-space: nowrap;
+  cursor: pointer;
+  color: color-mix(in srgb, var(--accent2) 82%, transparent);
+}
+.mine-rub-filter-asideleft-heavy:hover,
+.mine-rub-filter-asideleft-heavy:focus-visible {
+  border-inline-start-color: var(--accent);
+  color: color-mix(in srgb, var(--accent) 86%, var(--text));
+}
+.mine-rub-filter-asideleft-heavy[aria-pressed='true'] {
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+}
+.mine-rub-filter-asideleft-heavy:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Le compte des rubriques restées hors de la liste quand une seule est
+   affichée : le jeton le porte, la liste courte ne se lit jamais sans son
+   manque. */
+.mine-rub-filter-asideleft-out {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0 6px;
+  border: 1px dashed color-mix(in srgb, var(--accent2) 32%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  line-height: 1.6;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+/* La porte ouverte : un second clic rend la liste entière, et le jeton
+   s’affirme pour le dire avant le geste. */
+.mine-rub-filter-asideleft-out:hover,
+.mine-rub-filter-asideleft-out:focus-visible,
+.mine-rub-filter-asideleft-out.is-on {
+  border-style: solid;
+  border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 14%, transparent);
+  color: color-mix(in srgb, var(--accent2) 84%, var(--text));
+}
+.mine-rub-filter-asideleft-out:focus-visible {
+  outline: 2px solid var(--accent2);
+  outline-offset: 2px;
+}
+/* La plus pesante des rubriques hors de la liste est une porte : un clic
+   resserre la liste sur elle seule et ouvre son premier dépôt à corriger.
+   Le temps qu’elle a passé dehors se lit à côté de son nom. */
+.mine-rub-filter-asideleft-out-heavy {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0 6px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 34%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  font-family: var(--font-label);
+  font-size: 8px;
+  line-height: 1.6;
+  white-space: nowrap;
+  cursor: pointer;
+  color: color-mix(in srgb, var(--accent2) 80%, transparent);
+  transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease;
+}
+.mine-rub-filter-asideleft-out-heavy:hover,
+.mine-rub-filter-asideleft-out-heavy:focus-visible {
+  border-style: solid;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+.mine-rub-filter-asideleft-out-heavy:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.mine-rub-filter-asideleft-out-heavy i {
+  flex: 0 0 auto;
+  font-size: 8px;
+  color: var(--accent);
+}
+.mine-rub-filter-asideleft-out-heavy-go {
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+.mine-rub-filter-asideleft-out-heavy:hover .mine-rub-filter-asideleft-out-heavy-go,
+.mine-rub-filter-asideleft-out-heavy:focus-visible .mine-rub-filter-asideleft-out-heavy-go {
+  opacity: 1;
+}
+.mine-rub-filter-asideleft-out-top-ago {
+  padding-inline-start: 4px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+  font-size: 8px;
+  color: color-mix(in srgb, var(--accent2) 72%, transparent);
+}
+.mine-rub-filter-asideleft-out i {
+  flex: 0 0 auto;
+  font-size: 8.5px;
+  color: color-mix(in srgb, var(--accent2) 68%, transparent);
+}
+.mine-rub-filter-asideleft-heavy i {
+  flex: 0 0 auto;
+  font-size: 8px;
+  color: var(--accent);
+}
+.mine-rub-filter-asideleft-each.is-heavy {
+  border-color: color-mix(in srgb, var(--accent2) 46%, transparent);
+}
+
+/* Le petit signe du tri : il range les pastilles par temps passé dehors, ou
+   par dépôts — un clic bascule de l'un à l'autre, et son icône dit l'ordre lu
+   d'un coup d'œil. */
+.mine-rub-filter-asideleft-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0 6px;
+  border: 1px dashed color-mix(in srgb, var(--accent2) 40%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  line-height: 1.6;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 60%, transparent);
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.mine-rub-filter-asideleft-sort i {
+  flex: 0 0 auto;
+  font-size: 8.5px;
+  color: var(--accent2);
+}
+.mine-rub-filter-asideleft-sort:hover,
+.mine-rub-filter-asideleft-sort:focus-visible {
+  border-style: solid;
+  border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 13%, transparent);
+  color: color-mix(in srgb, var(--accent2) 82%, var(--text));
+}
+.mine-rub-filter-asideleft-sort:focus-visible {
+  outline: 2px solid var(--accent2);
+  outline-offset: 2px;
+}
+
+/* La pastille d'une rubrique et sa porte voisine : un même nom, deux familles
+   — les deux se lisent côte à côte, sans se confondre. */
+.mine-rub-filter-asideleft-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  flex: 0 0 auto;
+}
+/* Le petit signe qui ouvre la rubrique dans l'autre famille, quand elle y
+   tient aussi des dépôts : le compte se lit avant le clic. */
+.mine-rub-filter-asideleft-other {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0 4px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 34%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 64%, transparent);
+  font-family: var(--font-label);
+  font-size: 8px;
+  line-height: 1.7;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 56%, transparent);
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.mine-rub-filter-asideleft-other i {
+  flex: 0 0 auto;
+  font-size: 8px;
+  color: color-mix(in srgb, var(--accent) 78%, transparent);
+}
+.mine-rub-filter-asideleft-other b {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.mine-rub-filter-asideleft-other .mine-rub-filter-asideleft-other-go {
+  font-size: 8px;
+  color: color-mix(in srgb, var(--accent) 62%, transparent);
+}
+.mine-rub-filter-asideleft-other:hover,
+.mine-rub-filter-asideleft-other:focus-visible {
+  border-style: solid;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+}
+.mine-rub-filter-asideleft-other:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+[dir="rtl"] .mine-rub-filter-asideleft-other-go {
+  transform: scaleX(-1);
+}
+
+/* La porte du retour : elle rend les trois valeurs les plus lourdes d'un clic,
+   sans remonter la rangée. */
+.mine-rub-filter-asideleft-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0 6px;
+  border: 1px solid color-mix(in srgb, var(--accent2) 34%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 74%, transparent);
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  line-height: 1.6;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  cursor: pointer;
+}
+.mine-rub-filter-asideleft-back i {
+  flex: 0 0 auto;
+  font-size: 8.5px;
+  color: var(--accent2);
+}
+.mine-rub-filter-asideleft-back:hover,
+.mine-rub-filter-asideleft-back:focus-visible {
+  border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 13%, transparent);
+  color: color-mix(in srgb, var(--accent2) 82%, var(--text));
+}
+.mine-rub-filter-asideleft-back:focus-visible {
+  outline: 2px solid var(--accent2);
+  outline-offset: 2px;
+}
+
+/* La part du temps des trois valeurs, lue dans le récapitulatif : le même
+   jeton discret que celle des deux. */
+.mine-rubrique-shared-recap-asidethreeshare {
+  border-inline-start-color: color-mix(in srgb, var(--accent) 30%, transparent);
+}
+.mine-rubrique-shared-recap-asidethreeshare i {
+  color: color-mix(in srgb, var(--accent) 62%, transparent);
+}
+
+/* Ce que les deux valeurs les plus lourdes tiennent hors de l’écran, lu dans
+   le récapitulatif : le même jeton discret que les autres faits de la ligne. */
+.mine-rubrique-shared-recap-asidetwo {
+  border-inline-start-color: color-mix(in srgb, var(--accent2) 30%, transparent);
+}
+.mine-rubrique-shared-recap-asidetwo i {
+  color: color-mix(in srgb, var(--accent2) 60%, transparent);
+}
+
+/* La part du temps cumulé que les deux valeurs les plus lourdes représentent,
+   en pourcentage : le même jeton discret que le compte voisin. */
+.mine-rubrique-shared-recap-asidetwoshare {
+  border-inline-start-color: color-mix(in srgb, var(--accent2) 30%, transparent);
+}
+.mine-rubrique-shared-recap-asidetwoshare i {
+  color: color-mix(in srgb, var(--accent2) 60%, transparent);
+}
+
+/* Ce que les trois valeurs les plus lourdes tiennent hors écran : le même
+   jeton discret que les deux voisines, un cran plus bas dans l'accent. */
+.mine-rubrique-shared-recap-asidethree {
+  border-inline-start-color: color-mix(in srgb, var(--accent2) 24%, transparent);
+}
+.mine-rubrique-shared-recap-asidethree i {
+  color: color-mix(in srgb, var(--accent2) 55%, transparent);
+}
+
+/* Les valeurs que les trois plus lourdes laissent encore de côté, nommées
+   dans le récapitulatif : un jeton discret, un cran plus bas que le compte. */
+.mine-rubrique-shared-recap-asidethreeleft {
+  border-inline-start-color: color-mix(in srgb, var(--accent2) 22%, transparent);
+}
+.mine-rubrique-shared-recap-asidethreeleft i {
+  color: color-mix(in srgb, var(--accent2) 48%, transparent);
+}
+
+/* Le détail des dépôts par rubrique laissée de côté, dans le récapitulatif :
+   le même jeton discret que les autres, à côté de la phrase copiée. */
+.mine-rubrique-shared-recap-asidelefteach {
+  border-inline-start-color: color-mix(in srgb, var(--accent2) 22%, transparent);
+}
+.mine-rubrique-shared-recap-asidelefteach i {
+  color: color-mix(in srgb, var(--accent2) 48%, transparent);
+}
+
+/* La rubrique la plus lourde dehors, nommée dans le récapitulatif à côté du
+   total : le chiffre dit ce qu’il additionne, sans relire chaque durée. */
+.mine-rubrique-shared-recap-asideleftheavy {
+  border-inline-start-color: color-mix(in srgb, var(--accent) 28%, transparent);
+}
+.mine-rubrique-shared-recap-asideleftheavy i {
+  color: color-mix(in srgb, var(--accent) 62%, transparent);
+}
+
+/* Ce qui reste à corriger après la porte de la plus pesante, lu juste après
+   son nom : le compte suit la rubrique, dans la même écriture discrète. */
+.mine-rubrique-shared-recap-asideleftleft {
+  border-inline-start-color: color-mix(in srgb, var(--accent) 24%, transparent);
+  font-variant-numeric: tabular-nums;
+}
+.mine-rubrique-shared-recap-asideleftleft i {
+  color: color-mix(in srgb, var(--accent) 52%, transparent);
+}
+
+/* La copie en version courte : la pastille dit d'elle-même que la phrase
+   part plus brève, pour qu'aucun texte ne se raccourcisse sans le dire. */
+.mine-rubrique-shared-recap-short {
+  border-inline-start-color: color-mix(in srgb, var(--accent2) 30%, transparent);
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent2) 78%, var(--text));
+}
+.mine-rubrique-shared-recap-short i {
+  color: color-mix(in srgb, var(--accent2) 64%, transparent);
+}
+
+/* La pastille « phrase courte » est aussi une porte : un clic ouvre la phrase
+   complète, pour voir ce que la version brève laisse de côté. */
+button.mine-rubrique-shared-recap-short {
+  appearance: none;
+  border: 0;
+  border-inline-start: 1px solid color-mix(in srgb, var(--accent2) 30%, transparent);
+  border-radius: 4px;
+  background: transparent;
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent2) 78%, var(--text));
+  cursor: pointer;
+}
+button.mine-rubrique-shared-recap-short:hover,
+button.mine-rubrique-shared-recap-short:focus-visible,
+button.mine-rubrique-shared-recap-short[aria-expanded="true"] {
+  border-inline-start-color: color-mix(in srgb, var(--accent2) 62%, transparent);
+  color: color-mix(in srgb, var(--accent2) 92%, var(--text));
+}
+button.mine-rubrique-shared-recap-short:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent2) 56%, transparent);
+  outline-offset: 1px;
+}
+
+/* La phrase complète, ouverte sous la ligne : ce que la version brève laisse
+   de côté se lit ici, avant de copier. */
+.mine-rubrique-shared-recap-full {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px 5px;
+  flex: 1 0 100%;
+  order: 1;
+  min-width: 0;
+  margin-top: 3px;
+  padding: 5px 7px;
+  border: 1px dashed color-mix(in srgb, var(--accent2) 30%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface) 76%, transparent);
+  font-size: 9px;
+  line-height: 1.55;
+  white-space: normal;
+  color: color-mix(in srgb, var(--text) 68%, transparent);
+}
+.mine-rubrique-shared-recap-full > i {
+  flex: 0 0 auto;
+  margin-top: 1px;
+  font-size: 9px;
+  color: color-mix(in srgb, var(--accent2) 62%, transparent);
+}
+.mine-rubrique-shared-recap-full-head {
+  flex: 0 0 auto;
+  font-size: 8.5px;
+  letter-spacing: .01em;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent2) 84%, var(--text));
+}
+.mine-rubrique-shared-recap-full-body {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+/* La porte de copie de la phrase complète : elle part telle quelle, sans
+   passer par la version brève — une pastille discrète dans l’encadré. */
+button.mine-rubrique-shared-recap-full-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0 6px;
+  border: 1px dashed color-mix(in srgb, var(--accent2) 40%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 78%, transparent);
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  line-height: 1.7;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent2) 78%, var(--text));
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+button.mine-rubrique-shared-recap-full-copy i {
+  flex: 0 0 auto;
+  font-size: 8.5px;
+  color: color-mix(in srgb, var(--accent2) 64%, transparent);
+}
+button.mine-rubrique-shared-recap-full-copy:hover,
+button.mine-rubrique-shared-recap-full-copy:focus-visible,
+button.mine-rubrique-shared-recap-full-copy.is-ok {
+  border-style: solid;
+  border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 14%, transparent);
+  color: color-mix(in srgb, var(--accent2) 92%, var(--text));
+}
+button.mine-rubrique-shared-recap-full-copy:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent2) 56%, transparent);
+  outline-offset: 1px;
+}
+.mine-rubrique-shared-recap-full-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 14px;
+  height: 14px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  font-size: 10px;
+  color: color-mix(in srgb, var(--text) 44%, transparent);
+  cursor: pointer;
+}
+.mine-rubrique-shared-recap-full-close:hover,
+.mine-rubrique-shared-recap-full-close:focus-visible {
+  background: color-mix(in srgb, var(--accent2) 14%, transparent);
+  color: color-mix(in srgb, var(--accent2) 86%, var(--text));
+}
+.mine-rubrique-shared-recap-full-close:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent2) 56%, transparent);
+  outline-offset: 1px;
+}
+
+/* Le compte des dépôts est une porte à part entière : un clic ouvre la
+   rubrique hors de la liste qui en tient le plus, quelle que soit son
+   ancienneté — le chiffre se lit sur la porte, avant le geste. */
+.mine-rub-filter-asideleft-out-deps {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0 6px;
+  border: 1px dashed color-mix(in srgb, var(--accent2) 38%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  line-height: 1.6;
+  font-weight: 600;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent2) 84%, var(--text));
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.mine-rub-filter-asideleft-out-deps i {
+  flex: 0 0 auto;
+  font-size: 8.5px;
+  color: color-mix(in srgb, var(--accent2) 70%, transparent);
+}
+.mine-rub-filter-asideleft-out-deps:hover,
+.mine-rub-filter-asideleft-out-deps:focus-visible,
+.mine-rub-filter-asideleft-out-deps.is-on {
+  border-style: solid;
+  border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 14%, transparent);
+  color: color-mix(in srgb, var(--accent2) 92%, var(--text));
+}
+.mine-rub-filter-asideleft-out-deps:focus-visible {
+  outline: 2px solid var(--accent2);
+  outline-offset: 2px;
+}
+
+/* Ce que les rubriques déjà ouvertes tiennent encore à corriger, lu dans leur
+   pastille : un chiffre discret, séparé du compte par un filet pointillé. */
+.mine-rub-filter-asideleft-out-opened-deps {
+  flex: 0 0 auto;
+  padding-inline-start: 5px;
+  border-inline-start: 1px dotted color-mix(in srgb, var(--accent2) 34%, transparent);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent2) 80%, var(--text));
+}
+.mine-rub-filter-asideleft-out-opened:hover .mine-rub-filter-asideleft-out-opened-deps,
+.mine-rub-filter-asideleft-out-opened:focus-visible .mine-rub-filter-asideleft-out-opened-deps,
+.mine-rub-filter-asideleft-out-opened.is-on .mine-rub-filter-asideleft-out-opened-deps {
+  color: color-mix(in srgb, var(--accent2) 94%, var(--text));
+}
+
+/* Le temps qui reste dehors après la dernière porte ouverte, posé dans le
+   récapitulatif à côté du compte de cette porte : le même jeton discret que
+   les autres faits de la ligne. */
+.mine-rubrique-shared-recap-asideleftrest {
+  border-inline-start-color: color-mix(in srgb, var(--accent2) 26%, transparent);
+  font-variant-numeric: tabular-nums;
+}
+.mine-rubrique-shared-recap-asideleftrest i {
+  color: color-mix(in srgb, var(--accent2) 58%, transparent);
+}
+/* Le compte des rubriques que la porte a déjà ouvertes, lu juste après ce
+   qu’elle ramène — et une porte à son tour : un clic rouvre les rubriques
+   vues, sans repasser par le compte. */
+.mine-rub-filter-asideleft-out-opened {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0 6px;
+  border: 1px dashed color-mix(in srgb, var(--text) 24%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  line-height: 1.6;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 54%, transparent);
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.mine-rub-filter-asideleft-out-opened i {
+  flex: 0 0 auto;
+  font-size: 8px;
+  color: color-mix(in srgb, var(--accent2) 60%, transparent);
+}
+.mine-rub-filter-asideleft-out-opened:hover,
+.mine-rub-filter-asideleft-out-opened:focus-visible,
+.mine-rub-filter-asideleft-out-opened.is-on {
+  border-style: solid;
+  border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 13%, transparent);
+  color: color-mix(in srgb, var(--accent2) 80%, var(--text));
+}
+.mine-rub-filter-asideleft-out-opened:focus-visible {
+  outline: 2px solid var(--accent2);
+  outline-offset: 2px;
+}
+
+/* Ce que la rubrique la plus ancienne dehors ramènera, posé à côté de sa
+   durée dans le jeton du temps : le compte se lit avant le clic. */
+.mine-rub-filter-asideleft-out-ago-deps {
+  flex: 0 0 auto;
+  padding-inline-start: 5px;
+  border-inline-start: 1px dotted color-mix(in srgb, var(--accent) 40%, transparent);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+}
+
+/* Les rubriques déjà ouvertes par la porte, citées dans le récapitulatif copié :
+   le même jeton discret que ce qui reste à corriger. */
+.mine-rubrique-shared-recap-asideleftopened {
+  border-inline-start-color: color-mix(in srgb, var(--accent2) 26%, transparent);
+  font-variant-numeric: tabular-nums;
+}
+.mine-rubrique-shared-recap-asideleftopened i {
+  color: color-mix(in srgb, var(--accent2) 56%, transparent);
+}
+
+/* Le temps cumulé que ces rubriques ont passé dehors est une porte : un clic
+   resserre la liste sur la rubrique restée le plus longtemps de côté. Il se
+   lit à côté du compte de dépôts, dans une pastille voisine. */
+.mine-rub-filter-asideleft-out-ago {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0 6px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 38%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  line-height: 1.6;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent) 74%, var(--text));
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.mine-rub-filter-asideleft-out-ago i {
+  flex: 0 0 auto;
+  font-size: 8px;
+  color: color-mix(in srgb, var(--accent) 66%, transparent);
+}
+.mine-rub-filter-asideleft-out-ago:hover,
+.mine-rub-filter-asideleft-out-ago:focus-visible,
+.mine-rub-filter-asideleft-out-ago.is-on {
+  border-style: solid;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+.mine-rub-filter-asideleft-out-ago:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}

@@ -1,0 +1,38 @@
+/* ── Les comptes des tableaux publics, d'une seule largeur ─────────────────
+   Trois pastilles comptent ce que les tableaux publics tiennent : le nombre de
+   résultats posé au-dessus de la grille, le compte de chaque pays dans la
+   rangée du haut, et le compte de chaque type ou de chaque région dans la
+   bande des portes. Toutes les trois portent un nombre seul — pas de mot
+   collé à lui, comme « 12 rég. » ou « 34 portes en tout ».
+
+   Deux règles, écrites une fois pour les trois, et non réglées au cas par cas :
+   les chiffres tabulaires donnent la même largeur à tous les nombres, si bien
+   qu'un compte qui passe de 9 à 10 ne décale plus la rangée d'un pixel ; et
+   l'isolation donne au nombre son propre sens de lecture, pour qu'en arabe il
+   ne se retourne pas contre le mot ou le pays qu'il termine, et reste à la
+   même place d'une langue à l'autre.
+
+   Cette feuille est lue après toutes les autres : aucune déclaration locale
+   ne peut la défaire. */
+.filters-count > strong,
+.pays-tally-chip b,
+.dir-tp-count,
+.legend-count {
+  font-variant-numeric: tabular-nums;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* La pastille d'un pays garde sa largeur minimale, même quand son nombre
+   descend à un seul chiffre : la rangée des pays ne se resserre pas d'un cran
+   quand un filtre fait tomber un compte. */
+.pays-tally-chip b {
+  min-width: 20px;
+  box-sizing: border-box;
+}
+
+/* Dans la colonne latérale de la carte, la même pastille est un peu plus
+   serrée : elle garde pourtant son cadre, et ses chiffres leur largeur. */
+.map-side .pays-tally-chip b {
+  min-width: 18px;
+}

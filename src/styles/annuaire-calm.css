@@ -1,0 +1,635 @@
+/* ============ ANNUAIRE → UNE LECTURE PLUS CALME ============ */
+/* La page empilait ses bandes jusqu'à remplir l'écran avant la première fiche.
+   Rien n'est retiré ici : on resserre le rythme vertical, on rapproche les
+   pastilles et on laisse les encadrés de puces tenir sur une seule ligne, pour
+   que l'œil arrive plus vite aux résultats. Les sélecteurs portent `main` afin
+   de l'emporter sur les règles générales, où qu'elles soient chargées. */
+
+main .dir-hero {
+  padding-top: clamp(26px, 3.2vw, 48px);
+  padding-bottom: 14px;
+  gap: 10px;
+}
+
+main .dir-body { gap: 14px; }
+
+main .dir-tools { gap: 10px; }
+
+/* La barre de filtres : même contenu, une assise plus compacte. */
+main .filters {
+  padding: 12px 14px;
+  gap: 10px;
+  border-radius: 16px;
+}
+
+/* Les pastilles de veille et d'ordre : une seule ligne, plus basse. */
+main .fresh-row {
+  margin-top: 0;
+  gap: 6px 8px;
+}
+
+main .fresh-toggle {
+  padding: 6px 11px;
+  font-size: 12.5px;
+}
+
+main .fresh-toggle > i { font-size: 14px; }
+
+main .fresh-toggle .fresh-count {
+  min-width: 18px;
+  height: 18px;
+  font-size: 10.5px;
+}
+
+main .fresh-hint { font-size: 12px; line-height: 1.45; }
+
+/* Les encadrés de puces (types, pays) respirent moins : deux rangées qui
+   prenaient chacune une hauteur de bloc tiennent maintenant sur une ligne. */
+main .dir-typepages {
+  padding: 7px 9px;
+  gap: 5px;
+  border-radius: 12px;
+}
+
+main .dir-tp { padding: 5px 10px; font-size: 12.5px; }
+main .dir-tp-count { font-size: 10px; }
+
+main .pays-tally {
+  padding: 7px 9px;
+  gap: 5px;
+  border-radius: 12px;
+}
+
+main .pays-tally-chip { padding: 4px 10px; font-size: 12px; }
+
+/* Trier par / Autour de moi : le champ ne dépasse plus la moitié de la barre. */
+main .dir-sortbar {
+  grid-template-columns: minmax(0, 220px) auto;
+  gap: 8px 10px;
+}
+
+main .near-btn { height: 42px; padding: 0 14px; }
+
+/* Les lignes de lecture posées au-dessus du résultat : plus de marge basse,
+   l'écart vient du rythme du corps de page. */
+main .arrival-brief { margin-bottom: 0; }
+main .dir-scope { margin: 0 0 4px; padding: 6px 11px; }
+main .dir-meta { gap: 6px 16px; }
+main .dir-genbadge-row { margin-bottom: 8px; }
+
+/* Carte et liste : leurs intertitres gardent leur place, sans le double écart. */
+main .dir-genblocks { gap: 18px; }
+
+@media (max-width: 620px) {
+  main .dir-hero { padding-top: 22px; padding-bottom: 10px; }
+  main .dir-body { gap: 12px; }
+  main .filters { padding: 10px 12px; }
+  main .fresh-row { gap: 5px 6px; }
+  main .fresh-toggle { padding: 6px 10px; font-size: 12px; }
+  main .dir-via-emblem { width: 24px; height: 24px; }
+  main .dir-via-link { font-size: 11.5px; padding: 4px 8px; }
+}
+
+/* ============ LE RAPPEL DE PASSAGE « ARABE WORLD » ============ */
+/* Un lecteur qui franchit une porte de la page Arabe World change de page sans
+   s'en apercevoir : le tableau s'ouvre sur son métier, mais rien ne dit d'où
+   il vient. Cette ligne le dit une fois — marque, propos, chemin du retour —
+   et s'efface d'un clic. Les marges sont logiques : en arabe, elle se
+   retourne d'elle-même. */
+main .dir-via {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  padding: 8px 10px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--accent) 6%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+}
+
+main .dir-via-emblem {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+main .dir-via-txt {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 8px;
+  min-width: 0;
+}
+
+main .dir-via-lab {
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--accent2);
+}
+
+main .dir-via-sub {
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--text) 72%, transparent);
+}
+
+/* Les deux chemins du retour sont tenus ensemble, au bout de la ligne : la
+   famille d'abord, la page ensuite. Sur un écran étroit, le groupe descend
+   d'un bloc sous la phrase au lieu de serrer chaque lien. */
+main .dir-via-acts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-inline-start: auto;
+  min-width: 0;
+}
+
+/* Le retour nommé : la famille d'où la visite est partie, jamais « la page »
+   en général. Trait pointillé, teinte plus douce que le bouton qui suit —
+   c'est un repère, pas l'action principale. */
+main .dir-via-fam {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  max-width: 100%;
+  padding: 4px 9px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  line-height: 1.35;
+  font-weight: 550;
+  text-decoration: none;
+  color: var(--accent2);
+  border: 1px dashed color-mix(in srgb, var(--accent2) 42%, transparent);
+  transition: background .2s ease, border-color .2s ease, color .2s ease;
+}
+
+main .dir-via-fam > i { flex: none; font-size: 12px; }
+main .dir-via-fam > span { min-width: 0; }
+main .dir-via-fam:hover {
+  color: var(--accent);
+  border-style: solid;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 11%, transparent);
+}
+main .dir-via-fam:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+[dir="rtl"] .dir-via-fam > i { transform: scaleX(-1); }
+
+main .dir-via-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-inline-start: 0;
+  padding: 4px 9px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 550;
+  white-space: nowrap;
+  text-decoration: none;
+  color: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+  transition: background .2s ease, border-color .2s ease;
+}
+
+main .dir-via-link > i { font-size: 12px; }
+main .dir-via-link:hover {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border-color: var(--accent);
+}
+main .dir-via-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+main .dir-via-x {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  background: transparent;
+  font-size: 15px;
+  color: color-mix(in srgb, var(--text) 55%, transparent);
+  transition: background .2s ease, color .2s ease;
+}
+
+main .dir-via-x:hover {
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+  color: var(--text);
+}
+main .dir-via-x:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+[dir="rtl"] .dir-via-lab { letter-spacing: 0; text-transform: none; font-size: 11px; }
+[dir="rtl"] .dir-via-link > i { transform: scaleX(-1); }
+
+@media (prefers-reduced-motion: reduce) {
+  main .dir-via-link, main .dir-via-fam, main .dir-via-x { transition: none; }
+}
+
+/* --- Le rappel au téléphone, dans les deux sens de lecture --- */
+/* Sur une page de pays, la phrase nomme le métier *et* le pays : en arabe elle
+   s'allonge et peut tenir sur trois lignes. La ligne se lit donc en trois
+   temps, jamais en colonnes serrées : l'emblème et le libellé ouvrent la
+   première, la phrase prend toute la largeur sur la deuxième, et les deux
+   chemins du retour descendent sur la troisième. La grille est écrite en
+   colonnes logiques : en arabe, l'emblème passe à droite, la croix à gauche,
+   et le texte se lit du côté où la lecture commence — rien à retourner. */
+@media (max-width: 620px) {
+  main .dir-via {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 6px 8px;
+    padding: 9px 10px;
+  }
+
+  main .dir-via-emblem {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Le libellé et la phrase cessent d'être une seule pièce : chacun prend sa
+     place dans la grille, donc la phrase peut occuper toute la largeur. */
+  main .dir-via-txt { display: contents; }
+
+  main .dir-via-lab {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+    white-space: normal;
+    line-height: 1.3;
+  }
+
+  /* La phrase respire sur toute la largeur : trois lignes d'arabe s'y lisent
+     d'un trait, sans césure au milieu d'un mot. */
+  main .dir-via-sub {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    font-size: 12px;
+    line-height: 1.55;
+    text-align: start;
+    text-wrap: pretty;
+    overflow-wrap: break-word;
+  }
+
+  main .dir-via-acts {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    justify-content: flex-start;
+    margin-inline-start: 0;
+    gap: 6px;
+  }
+
+  main .dir-via-fam {
+    font-size: 11px;
+    padding: 4px 8px;
+    white-space: normal;
+  }
+
+  main .dir-via-link {
+    justify-self: start;
+    padding: 4px 8px;
+    font-size: 11.5px;
+  }
+
+  main .dir-via-x {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
+  }
+}
+
+/* En arabe, les hampes et les points souscrits demandent plus de hauteur de
+   ligne : trois lignes serrées se toucheraient. */
+[dir="rtl"] main .dir-via-sub { line-height: 1.65; letter-spacing: 0; }
+
+/* ============ ANNUAIRE → UNE SEULE RANGÉE, UNE SEULE PORTE ============ */
+/* La page arrivait sur neuf bandes avant sa première fiche. La rangée haute ne
+   montre plus que le type d'établissement, « Autour de moi » et une porte qui
+   ouvre tout le reste : la recherche, le pays, la région, l'ouverture, les
+   pastilles, la recherche par nom, les compteurs et le tri. Rien n'a été
+   retiré de la page, tout s'est rangé derrière le même geste. */
+
+/* La rangée resserrée : trois commandes et une remise à zéro, jamais une
+   grille de six colonnes dont cinq resteraient vides. */
+main .board-stick > .filters.is-slim {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 8px 10px;
+}
+
+main .board-stick > .filters.is-slim .filters-kind {
+  flex: 1 1 260px;
+  max-width: 380px;
+  min-width: 0;
+}
+
+main .board-stick > .filters.is-slim .filters-kind > select {
+  width: 100%;
+  max-width: none;
+}
+
+main .board-stick > .filters.is-slim .filters-near,
+main .board-stick > .filters.is-slim .filters-toggle {
+  flex: 0 0 auto;
+}
+
+main .board-stick > .filters.is-slim .near-btn { height: 45px; }
+
+/* La porte du reste : son nom, et le chiffre de ce qui est déjà posé derrière
+   elle — aucun filtre ne travaille en cachette. */
+.filters-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  height: 45px;
+  padding: 0 14px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.filters-toggle > i:first-child { font-size: 15px; color: var(--muted); }
+.filters-toggle:hover { border-color: var(--accent); color: var(--accent); }
+.filters-toggle:hover > i:first-child { color: var(--accent); }
+.filters-toggle.is-open {
+  border-color: color-mix(in srgb, var(--accent) 42%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: var(--accent2);
+}
+.filters-toggle.is-open > i:first-child { color: var(--accent); }
+.filters-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.filters-toggle-n {
+  display: inline-grid;
+  place-items: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--bg);
+  font-size: 10.5px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.filters-toggle-caret { font-size: 15px; transition: transform 0.2s ease; }
+.filters-toggle.is-open .filters-toggle-caret { transform: rotate(180deg); }
+
+.filters-toggle-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* La position refusée ou indisponible : une ligne, le temps de le dire. */
+.filters-geo {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  margin: 0;
+  padding: 7px 11px;
+  border-radius: 12px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--text) 74%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
+}
+
+.filters-geo > i { flex: 0 0 auto; font-size: 14px; color: var(--accent); margin-top: 1px; }
+
+/* Le dépliant : un seul encadré, ses champs en grille, puis ce qu'il tient
+   d'autre — la recherche par nom, les compteurs, le tri. */
+.filters-panel {
+  display: grid;
+  gap: 11px;
+  padding: 12px 13px 13px;
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 13%, transparent);
+}
+
+.filters-panel > * { margin: 0; }
+
+.filters-panel-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  align-items: end;
+}
+
+@media (max-width: 1000px) {
+  .filters-panel-grid { grid-template-columns: 1fr 1fr; }
+  .filters-panel-grid .filters-search { grid-column: 1 / -1; }
+}
+
+@media (max-width: 620px) {
+  .filters-panel-grid { grid-template-columns: 1fr; }
+  .filters-panel { padding: 11px; gap: 10px; }
+}
+
+/* ---- « Tout rendre », au bas du dépliant ---- */
+/* Les filtres rangés derrière la porte se rendent d'un seul geste, sans
+   toucher à la rubrique lue : la petite ligne nomme le geste, et dit ce
+   qu'elle ne touche pas. Elle se tait quand la porte ne tient rien. */
+.filters-panel-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  margin: 0;
+  padding-top: 10px;
+  border-top: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+}
+
+.filters-panel-clear {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 11px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 20%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 80%, transparent);
+  font-family: var(--font-label);
+  font-size: 11px;
+  letter-spacing: .04em;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.filters-panel-clear > i { font-size: 13px; color: color-mix(in srgb, var(--accent) 76%, var(--text)); }
+.filters-panel-clear:hover:not(:disabled) {
+  color: var(--accent2);
+  background: color-mix(in srgb, var(--accent) 11%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 42%, transparent);
+}
+.filters-panel-clear:disabled { opacity: .42; cursor: default; }
+.filters-panel-clear:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.filters-panel-foot-hint {
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+
+[dir="rtl"] .filters-panel-clear,
+[dir="rtl"] .filters-panel-foot-hint { letter-spacing: 0; }
+
+/* Le dépliant ouvert n'a plus rien à accrocher : une pile plus haute que
+   l'écran ne peut pas rester collée, elle cacherait sa propre fin. */
+main .board-stick.is-panel-open { position: static; }
+main .board-stick.is-panel-open::before { display: none; }
+
+/* Le téléphone : le type prend sa rangée, les deux boutons se la partagent. */
+@media (max-width: 900px) {
+  main .board-stick > .filters.is-slim {
+    flex-wrap: wrap;
+    overflow: visible;
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  main .board-stick > .filters.is-slim .filters-kind {
+    flex: 1 1 100%;
+    max-width: none;
+  }
+
+  main .board-stick > .filters.is-slim .filters-kind > select {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+  }
+
+  main .board-stick > .filters.is-slim .filters-near {
+    flex: 1 1 auto;
+    width: auto;
+    height: 40px;
+    padding: 0 12px;
+    justify-content: center;
+  }
+
+  main .board-stick > .filters.is-slim .filters-toggle { flex: 1 1 auto; height: 40px; padding: 0 12px; }
+
+  main .board-stick > .filters.is-slim > .filters-reset {
+    position: static;
+    flex: 0 0 auto;
+    width: auto;
+    height: 40px;
+    margin-inline-start: 0;
+    box-shadow: none;
+  }
+}
+
+[dir="rtl"] .filters-toggle-caret { transform: rotate(0deg); }
+[dir="rtl"] .filters-toggle.is-open .filters-toggle-caret { transform: rotate(180deg); }
+
+/* ---- Le chiffre des résultats, dans la rangée même ---- */
+/* Il se lit porte fermée, sur les trois tableaux — annuaire, annonces,
+   emplois : aucune liste ne s'ouvre sur un silence au sujet de ce qu'elle
+   tient. Le clic mène droit aux fiches, sans rien déplier. */
+.filters-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 45px;
+  padding: 0 14px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+main .board-stick > .filters.is-slim > .filters-count { flex: 0 0 auto; }
+
+.filters-count > i { font-size: 14px; color: var(--accent); flex: 0 0 auto; }
+
+.filters-count > strong {
+  font-family: var(--font-label);
+  font-size: 14px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+.filters-count-word { color: color-mix(in srgb, var(--text) 66%, transparent); }
+
+.filters-count:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+}
+.filters-count:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+@media (max-width: 900px) {
+  main .board-stick > .filters.is-slim > .filters-count {
+    height: 40px;
+    padding: 0 11px;
+    font-size: 12.5px;
+  }
+  main .board-stick > .filters.is-slim > .filters-count > strong { font-size: 13px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .filters-count { transition: none; }
+}
+
+/* ---- « Explorer par type et par pays », rangé dans le dépliant ---- */
+/* La bande garde ses portes et perd sa tête : un intitulé discret la coiffe.
+   La page n'a plus qu'une seule porte au-dessus des fiches. */
+.dir-explore.is-embedded {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+.dir-explore-cap {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 0 1px;
+  padding: 0 2px;
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.dir-explore-cap > i { flex: 0 0 auto; font-size: 14px; color: var(--accent); }
+.dir-explore.is-embedded .dir-explore-body { padding: 0; }
+[dir="rtl"] .dir-explore-cap { letter-spacing: 0; text-transform: none; font-size: 11px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .filters-toggle,
+  .filters-toggle-caret { transition: none; }
+}

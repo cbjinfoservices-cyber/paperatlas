@@ -1,0 +1,673 @@
+/* Footer: lighter brown than the page, detached by a single hairline. */
+/* La marge du pied de page est écrite une seule fois, dans une variable : le
+   rembourrage et le filigrane la lisent tous les deux. Sans cela, les deux
+   pouvaient partir de valeurs différentes — 7vw pour le contenu, 8vw pour le
+   filigrane — et le second se décollait du premier à chaque retouche. */
+.footer { --footer-pad: clamp(24px, 8vw, 160px);
+  position: relative; background: var(--footer-bg);
+  padding: clamp(56px,7vw,96px) var(--footer-pad) 32px; }
+/* A single fine rule marks the join. No gradient band: on short pages it read as
+   a bar rather than a seam, and the lighter footer colour already separates it.
+   The hairline borrows the stamp's orange, so the seal of the footer and the
+   seam that brings it in are read as one mark. */
+.footer::before {
+  content: ""; position: absolute; inset-inline: 0; top: 0; height: 1px; pointer-events: none;
+  background: color-mix(in srgb, var(--accent) 55%, transparent); }
+/* Les pages internes — espace du membre, messages, console — suivent le même
+   trait, mais plus franc : leur pied de page vient après de longues plaques
+   claires dont l'ombre mangeait le pixel de séparation. Le liseré reprend donc
+   la même orange, un peu plus tenue, et passe devant ces ombres. */
+.footer.is-internal::before {
+  height: 1px;
+  z-index: 2;
+  background: color-mix(in srgb, var(--accent) 64%, transparent); }
+/* Les pages internes alignent tout leur contenu sur une même marge — 7vw
+   jusqu'à 120 px. Leur pied de page, lui, suivait 8vw : à 1024 px, le cachet
+   et les deux colonnes du bas partaient une dizaine de pixels à droite des
+   cartes qu'ils prolongent, et la grille semblait décrochée du reste. Le pied
+   de page reprend donc exactement la marge des pages qu'il ferme, pour que la
+   ligne de séparation tombe dans l'axe du contenu et pas à côté.
+
+   La marge s'écrit en propriété logique : c'est une seule valeur, posée des
+   deux côtés. En arabe, où le contenu commence à droite, le miroir se fait
+   donc sans paire gauche/droite qui pourrait se désunir — le cachet et les
+   deux colonnes restent sur l'axe des cartes, pas à côté. */
+.footer.is-internal {
+  --footer-pad: clamp(20px, 7vw, 120px);
+}
+/* L'espace du membre et la messagerie bornent leur contenu à 1400 px et le
+   centrent. Au-delà de cette largeur, le pied de page suivait encore les 7vw
+   de la fenêtre : à 1920 px, le cachet se retrouvait à 260 px des cartes
+   qu'il prolonge — et, en arabe, du côté opposé à celui où le contenu
+   commence. La marge reprend donc la mesure de la page, centrée comme
+   elle. La console, elle, occupe toute la largeur : elle garde ses 7vw.
+
+   Les pages publiques bâties sur ce cadre — l'annuaire, les annonces, les
+   offres, les emplois, les profils, le suivi et le dépôt — alignent leur
+   contenu sur clamp(20px, 7vw, 120px), à l'intérieur d'une mesure de 1400 px
+   centrée. Leur pied de page, lui, suivait 8vw : à 1024 px comme à 1200 px,
+   le cachet et les deux colonnes partaient déjà une dizaine de pixels à côté
+   des cartes qu'ils prolongent, et le liseré semblait tomber à côté du
+   contenu. La marge reprend donc exactement celle des pages qu'elle ferme,
+   et elle est écrite en propriété logique : en arabe, où la marge change de
+   côté, elle se pose seule sur le bord où le contenu commence, sans paire
+   gauche/droite à désunir. */
+.footer.is-public {
+  --footer-pad: clamp(20px, 7vw, 120px);
+}
+/* Au-delà de la mesure elle-même, le contenu se centre : le pied de page doit
+   alors ajouter à sa marge la gouttière laissée de chaque côté de ces
+   1400 px. Sans cela, à 1920 px, le cachet se retrouvait à plus de 200 px des
+   cartes qu'il prolonge — et, en arabe, du côté opposé au contenu. La console,
+   qui occupe toute la largeur, garde ses 7vw. */
+@media (min-width: 1401px) {
+  .footer.is-workspace,
+  .footer.is-public {
+    --footer-pad: calc((100% - 1400px) / 2 + clamp(20px, 7vw, 120px));
+  }
+}
+/* A ghost of the stamp at the very top of the footer — only on the long pages,
+   where a faint texture can settle a page that has been read for a while.
+   Barely there on purpose: it should be felt, never noticed. */
+.footer-watermark {
+  position: absolute;
+  top: clamp(16px, 2.6vw, 38px);
+  /* Côté de fin de lecture : en arabe, le filigrane passe à gauche du bloc au
+     lieu de venir se poser derrière le cachet et le nom. Il suit exactement
+     la marge du pied de page — la même variable, donc la même valeur que le
+     rembourrage : 7vw sur les pages internes et publiques, et le centrage de
+     la mesure de 1400 px au-delà. */
+  inset-inline-end: var(--footer-pad);
+  width: clamp(96px, 13vw, 176px);
+  height: auto;
+  aspect-ratio: 1 / 1;
+  border-radius: 24px;
+  object-fit: cover;
+  opacity: .035;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+.footer > p,
+.footer > div { position: relative; z-index: 1; }
+.footer-line { font-size: clamp(30px, 4.4vw, 60px); font-weight: 600; letter-spacing: -.03em; line-height: 1.04; margin: 0 0 48px; max-width: 18ch; }
+/* Le pied de page ne fait plus quatre colonnes : le cachet et la phrase d'un
+   côté, un seul bloc de portes illustrées de l'autre. Les listes s'y lisent sur
+   deux rangs, pour que quinze liens ne fassent pas quinze lignes. */
+.footer-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.95fr); gap: clamp(28px, 4vw, 58px); align-items: start; }
+.footer-links { display: grid; gap: clamp(22px, 2.8vw, 32px); min-width: 0; }
+.footer-links ul { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(16px, 2vw, 28px); }
+/* Les pages par pays : un maillage posé sous les colonnes, une ligne par
+   famille, chaque pays avec son compte. Il ferme le site sur des adresses
+   précises — /annuaire/imprimeries/algerie — sans repasser par les filtres. */
+.footer-trade-pages { margin-top: clamp(26px, 3.4vw, 42px);
+  padding-top: clamp(18px, 2.4vw, 26px);
+  border-top: 1px solid color-mix(in srgb, var(--text) 14%, transparent); }
+.footer-tp-head { display: flex; flex-wrap: wrap; align-items: baseline;
+  gap: 4px 14px; margin: 0 0 12px; }
+.footer-tp-title { display: inline-flex; align-items: center; gap: 8px; margin: 0;
+  font-family: var(--font-label); font-size: 11px; font-weight: 400;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--accent2); }
+.footer-tp-title i { font-size: 14px; color: var(--accent); }
+.footer-tp-hint { margin: 0; font-size: 12.5px;
+  color: color-mix(in srgb, var(--text) 56%, transparent); }
+.footer-tp-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px clamp(18px, 3vw, 44px); margin: 0; padding: 0; list-style: none; }
+.footer-tp-row { display: flex; flex-wrap: wrap; align-items: baseline;
+  gap: 5px 10px; min-width: 0; }
+.footer-tp-type { display: inline-flex; align-items: center; gap: 7px;
+  font-family: var(--font-label); font-size: 10.5px; font-weight: 400;
+  letter-spacing: .1em; text-transform: uppercase; white-space: nowrap;
+  color: color-mix(in srgb, var(--accent) 78%, var(--text)); }
+.footer-tp-type i { font-size: 13px; }
+/* Le total mondial du métier, posé contre son nom : le compte de chaque pays
+   se lit alors par rapport à lui, sans quitter la ligne. */
+.footer-tp-world { font-family: var(--font-body); font-size: 9.5px; font-style: normal;
+  letter-spacing: 0; text-transform: none; padding: 1px 6px; border-radius: 999px;
+  font-variant-numeric: tabular-nums; unicode-bidi: isolate;
+  border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  color: color-mix(in srgb, var(--accent) 82%, var(--text)); }
+.footer-tp-type:hover .footer-tp-world {
+  border-color: color-mix(in srgb, var(--accent) 48%, transparent); }
+[dir="rtl"] .footer-tp-world { letter-spacing: 0; }
+.footer-tp-countries { display: flex; flex-wrap: wrap; align-items: baseline;
+  gap: 3px 6px; min-width: 0; }
+.footer-tp-countries a { display: inline-flex; align-items: baseline; gap: 4px;
+  font-size: 12.5px; white-space: nowrap; text-decoration: none;
+  color: color-mix(in srgb, var(--text) 66%, var(--muted));
+  transition: color .2s ease; }
+.footer-tp-countries a:hover { color: var(--text); }
+.footer-tp-count { font-family: var(--font-label); font-size: 10px;
+  letter-spacing: .02em; color: color-mix(in srgb, var(--muted) 86%, transparent); }
+.footer-tp-sep { color: color-mix(in srgb, var(--text) 32%, transparent); font-size: 11px; }
+/* Le pays lu sur la carte, nommé une fois en tête de la bande : le lecteur
+   sait sur quel pays ses comptes ont été pris. */
+.footer-tp-read { display: inline-flex; align-items: center; gap: 6px; margin: 0;
+  padding: 2px 9px; border-radius: 999px; white-space: nowrap;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  font-family: var(--font-label); font-size: 10px; letter-spacing: .05em;
+  text-transform: uppercase; color: color-mix(in srgb, var(--accent) 84%, var(--text)); }
+.footer-tp-read i { flex: none; font-size: 11px; color: var(--accent); }
+[dir="rtl"] .footer-tp-read { letter-spacing: 0; }
+/* Le pays lu passe en tête de chaque famille : son compte s'y lit comme il se
+   lit sur la carte du pays, et la pastille le désigne sans crier. */
+.footer-tp-countries a.is-on { color: var(--text); }
+.footer-tp-countries a.is-on::before { content: ""; flex: none; width: 5px; height: 5px;
+  border-radius: 999px; background: color-mix(in srgb, var(--accent) 82%, var(--text));
+  transform: translateY(-1px); }
+.footer-tp-countries a.is-on .footer-tp-count { color: color-mix(in srgb, var(--accent) 92%, var(--text)); }
+/* Dans l'espace du membre et la console, le pied de page reste un liseré :
+   le maillage y serait du bruit sous des pages de travail. */
+.footer.is-internal .footer-trade-pages { display: none; }
+@media (max-width: 900px) { .footer-tp-list { grid-template-columns: 1fr; } }
+[dir="rtl"] .footer-tp-title { letter-spacing: 0; }
+.footer-grid h4 { font-family: var(--font-label); font-size: 11px; font-weight: 400; letter-spacing: .16em; text-transform: uppercase; color: var(--accent2); margin: 0 0 14px; }
+/* Le pied de page répond à la barre : le cachet du papier, un filet vertical,
+   puis l'emblème « Arabe World » et son lettrage arabe. Le couple est posé sur
+   une seule ligne, avec des marges logiques — en arabe, l'emblème passe à
+   gauche du cachet et le filet reste entre les deux, sans rien réécrire. */
+.footer-marks {
+  display: flex; align-items: center; flex-wrap: nowrap;
+  gap: clamp(10px, 1.2vw, 14px);
+  margin: 0 0 18px; min-width: 0;
+}
+.footer-marks-rule {
+  flex: none; width: 1px; align-self: stretch; min-height: 30px;
+  background: color-mix(in srgb, var(--accent) 32%, transparent);
+}
+.footer-partner {
+  display: inline-flex; align-items: center; min-width: 0;
+  padding: 2px; margin: -2px; border-radius: 10px;
+  text-decoration: none;
+}
+.footer-partner:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 60%, transparent);
+  outline-offset: 2px;
+}
+/* L'emblème se cale un cran sous le cachet : c'est le couple qui compte, dans
+   une même famille de tailles — deux sceaux de la même maison. */
+.footer-partner .partner-mark-img {
+  width: clamp(28px, 3vw, 32px); height: clamp(28px, 3vw, 32px); border-radius: 10px;
+}
+.footer-partner .partner-mark-txt b { font-size: 13px; }
+.footer-partner .partner-mark-txt small { font-size: 8.5px; letter-spacing: .1em; }
+[dir="rtl"] .footer-partner .partner-mark-txt b { font-size: 13.5px; }
+[dir="rtl"] .footer-partner .partner-mark-txt small { font-size: 9.5px; letter-spacing: 0; }
+
+/* The seal sits above the name, printed rather than framed: a warm square the
+   size of a rubber stamp, quiet enough not to compete with the links below. */
+.footer-seal {
+  display: block; width: clamp(46px, 5vw, 56px); height: clamp(46px, 5vw, 56px);
+  border-radius: 14px; margin: 0; object-fit: cover;
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--text) 18%, transparent) inset,
+    0 8px 18px -12px color-mix(in srgb, var(--text) 55%, transparent);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+/* Le troisième cachet se soulève comme les deux autres : le geste du survol
+   est le même partout, deux pixels de hauteur et une ombre qui s'ouvre. */
+.footer-seal:hover {
+  transform: translateY(-2px) rotate(-2deg);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--text) 22%, transparent) inset,
+    0 14px 26px -14px color-mix(in srgb, var(--text) 62%, transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .footer-seal { transition: none; }
+  .footer-seal:hover { transform: none; }
+}
+.footer-grid ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
+/* Le filet de la famille : Annonces et Emplois ferment la parenté de
+   l'annuaire, puis Auteurs reprend la liste. Il traverse les deux rangs — la
+   liste du pied de page se lit sur deux colonnes — et reste d'un cran plus bas
+   que le liseré des colonnes : une couture, pas une frontière. */
+.footer-grid .footer-links ul > .footer-site-rule {
+  grid-column: 1 / -1;
+  height: 1px;
+  min-height: 1px;
+  margin: 3px 0;
+  background: color-mix(in srgb, var(--text) 12%, transparent);
+}
+/* Sous le filet, un mot discret nomme la couture : sans lui, le trait se lisait
+   comme une simple séparation, et la suite de la liste comme une autre liste.
+   Il est plus petit que les liens, sans capitales criardes, et se range du
+   côté où la lecture commence — en arabe il passe donc à droite, sans paire
+   gauche/droite à désunir. */
+.footer-grid .footer-links ul > .footer-site-seam {
+  grid-column: 1 / -1;
+  margin: -5px 0 1px;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-label);
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 42%, transparent);
+}
+[dir="rtl"] .footer-grid .footer-links ul > .footer-site-seam {
+  font-size: 10px;
+  letter-spacing: 0;
+}
+/* Une colonne peut porter deux sous-groupes courts : chacun garde son
+   intitulé, et les deux se lisent d'un seul regard sous le titre commun. */
+.footer-col-list { display: grid; gap: clamp(16px, 1.8vw, 22px); }
+.footer-col-list .footer-group-title {
+  font-family: var(--font-label); font-size: 10px; font-weight: 400;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+  margin: 0 0 10px;
+}
+/* Sur un grand écran, le titre de la colonne suffit : les liens sont là. Le
+   bouton d'accordéon n'existe que pour le téléphone. */
+.footer-col-toggle { display: none; }
+/* Le compte d'une colonne repliée, à côté de son accordéon : la même pastille
+   que le compte des trois rubriques du panneau, pour qu'un pied de page fermé
+   dise lui aussi ce qu'il tient. Il se range au bout de sa ligne, juste avant
+   le « + » — il ne déplace pas le titre, et ne prend pas la place des liens. */
+.footer-col-n {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  min-width: 20px;
+  margin-inline-start: auto;
+  padding: 3px 7px;
+  box-sizing: border-box;
+  border-radius: 999px;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: none;
+  font-variant-numeric: tabular-nums;
+  /* Le chiffre est un compte, pas une phrase : il garde son sens d'écriture
+     du côté où la lecture commence, et se pose au bout de sa ligne, juste
+     avant le « + » de son accordéon. */
+  direction: ltr;
+  unicode-bidi: isolate;
+  color: color-mix(in srgb, var(--accent) 78%, var(--text) 22%);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+/* Le titre cède la place au chiffre avant de le pousser : la pastille ne se
+   comprime jamais, et le mot se replie plutôt que de déborder. */
+.footer-col-toggle > span { min-width: 0; }
+/* The footer sits on its own lighter brown, where the plain muted warm grey fell
+   just under 4:1 at these sizes. Small copy borrows part of the body ink so it
+   clears AA while staying visibly quieter than the links above it. */
+.footer-grid a { text-decoration: none; color: color-mix(in srgb, var(--text) 68%, var(--muted)); font-size: 14px; transition: color .2s; }
+.footer-grid a:hover { color: var(--text); }
+/* Le pied de page reprend le jeu de signes de la barre : un petit pictogramme
+   devant chaque porte, dans le même accent, pour que la marque se répète
+   jusqu'au bas de la page au lieu de s'arrêter à la ligne légale. */
+.footer-grid ul a { display: inline-flex; align-items: flex-start; gap: 8px; }
+.footer-grid ul a > i { flex: none; margin-top: 2px; font-size: 14px; line-height: 1;
+  color: color-mix(in srgb, var(--accent) 72%, var(--text));
+  transition: color .2s ease, transform .2s ease; }
+.footer-grid ul a:hover > i { color: var(--accent); }
+@media (prefers-reduced-motion: reduce) {
+  .footer-grid ul a > i { transition: none; }
+}
+/* Le compte du façonnage descend jusqu'au dernier lien du site.
+   Il garde exactement la tournure de la barre — « Façonniers 12 », et
+   « Façonnier 1 » quand le réseau n'en compte qu'un —, et il appartient au
+   lien lui-même : le chiffre est la porte, pas un témoin posé à côté. La
+   pastille se cale sur la ligne du libellé, un cran plus petite que le texte
+   du pied de page, et se resserre là où la colonne est étroite. */
+.footer-grid ul a.footer-fac { flex-wrap: wrap; }
+.footer-grid ul a.footer-fac .footer-count {
+  flex: none; box-sizing: border-box;
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 18px; height: 17px; padding: 0 5px;
+  margin-top: 2px; margin-inline-start: -1px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+  font-family: var(--font-label); font-size: 10px; font-weight: 500;
+  line-height: 1; letter-spacing: 0;
+  transition: background .2s ease, color .2s ease; }
+.footer-grid ul a.footer-fac:hover .footer-count {
+  background: color-mix(in srgb, var(--accent) 28%, transparent);
+  color: var(--accent); }
+.footer-grid ul a.footer-fac:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 60%, transparent);
+  outline-offset: 3px; border-radius: 6px; }
+.footer-grid p { color: color-mix(in srgb, var(--text) 68%, var(--muted)); font-size: 14px; line-height: 1.6; margin: 0; }
+/* La phrase du cachet garde une mesure de lecture, même quand le bloc
+   s'étale sur toute la largeur du pied de page. */
+.footer-brand p { max-width: 46ch; }
+.socials { display: flex; gap: 10px; margin-top: 18px; }
+.socials .social {
+  width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;
+  border-radius: 999px; background: var(--surface); color: var(--text);
+  border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+  transition: transform .25s ease, background .25s ease, color .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+/* Un réseau sans adresse reste un repère : la pastille garde sa marque, mais
+   elle ne se soulève pas et ne prend pas sa couleur — rien à cliquer, rien à
+   promettre. */
+.socials .social.is-pending {
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  cursor: default;
+}
+.socials a.social:hover { transform: translateY(-3px); color: #fff; }
+.socials a.social:focus-visible { outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent); outline-offset: 2px; }
+/* Chaque réseau porte sa propre marque : la pastille reste neutre au repos,
+   puis prend sa couleur au survol — trois signes distincts plutôt qu'un même
+   cercle sous trois noms. Les couleurs sont celles des marques elles-mêmes,
+   jamais une teinte du thème : elles désignent la plateforme, pas le site. */
+.socials a.social--linkedin:hover {
+  background: #0A66C2; border-color: #0A66C2;
+  box-shadow: 0 12px 22px -14px #0A66C2;
+}
+.socials a.social--facebook:hover {
+  background: #1877F2; border-color: #1877F2;
+  box-shadow: 0 12px 22px -14px #1877F2;
+}
+.socials a.social--instagram:hover {
+  background: linear-gradient(135deg, #F9CE34 0%, #EE2A7B 52%, #6228D7 100%);
+  border-color: transparent;
+  box-shadow: 0 12px 22px -14px #EE2A7B;
+}
+@media (prefers-reduced-motion: reduce) {
+  .socials .social { transition: background .2s ease, color .2s ease, border-color .2s ease; }
+  .socials a.social:hover { transform: none; }
+}
+.legal { margin-top: 56px; padding-top: 20px; border-top: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+  display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-size: 13px;
+  color: color-mix(in srgb, var(--text) 68%, var(--muted)); }
+/* Le seuil descend à 1024 px. À cette largeur, les deux blocs de liens
+   restaient empilés l'un sous l'autre à côté d'un cachet qui finissait bien
+   avant eux : la moitié gauche du pied de page était un vide. « Plateforme »
+   et « Ailleurs » se lisent maintenant côte à côte dès 1024 px, avec des
+   gouttières un peu plus serrées et une colonne de marque plus étroite —
+   aucun lien n'a été retiré, et les deux rangs de « Plateforme » tiennent. */
+@media (min-width: 1024px) {
+  .footer-grid { grid-template-columns: minmax(0, .84fr) minmax(0, 2.16fr);
+    gap: clamp(24px, 3vw, 56px); }
+  .footer-links { grid-template-columns: minmax(0, 1.42fr) minmax(0, 1fr);
+    column-gap: clamp(18px, 2.2vw, 42px); row-gap: 0; align-items: start; }
+  .footer-links ul { column-gap: clamp(12px, 1.5vw, 26px); }
+  /* « Ailleurs » ne tient plus deux colonnes : son adresse e-mail a besoin de
+     toute la largeur du bloc pour rester lisible, et ses sept portes tiennent
+     déjà en une seule liste courte. */
+  .footer-links .footer-col + .footer-col ul { grid-template-columns: 1fr; }
+}
+/* Entre 1024 et 1160 px, la place est comptée : les deux rangs de liens
+   gardent leur largeur de colonne, mais la ligne de texte se resserre d'un
+   point et les interlignes de deux — « Déposer annonce / offre » ou l'adresse
+   e-mail ne se coupent plus en deux. Passé ce cap, tout reprend ses cotes. */
+@media (min-width: 1024px) and (max-width: 1159px) {
+  .footer-grid ul { gap: 7px; }
+  .footer-grid a { font-size: 13px; }
+}
+/* Sous 1024 px, le pied de page ne se partage plus en deux colonnes : le
+   cachet passe au-dessus, et les portes prennent toute la largeur — mieux
+   vaut une pile lisible qu'un bloc à moitié vide. */
+@media (max-width: 1023px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+}
+/* Une phrase courte dans un bloc de 900 px ferait une ligne interminable :
+   la même mesure qu'un paragraphe de lecture, ici aussi. */
+@media (max-width: 560px) { .footer-grid { grid-template-columns: 1fr; } .footer-links ul { grid-template-columns: 1fr; } .footer { padding-left: 20px; padding-right: 20px; } }
+/* Sur le téléphone, les groupes de liens se replient derrière un
+   accordéon : le pied de page s'ouvre sur trois lignes calmes au lieu d'un
+   annuaire à faire défiler. Le trait de séparation est le même que celui des
+   liserés du site, un cran plus bas, pour rester discret. */
+@media (max-width: 640px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 0; }
+  .footer-brand { padding-bottom: 18px; }
+  .footer-col { border-top: 1px solid color-mix(in srgb, var(--text) 14%, transparent); }
+  .footer-col .footer-col-title { display: none; }
+  .footer-col-toggle {
+    display: flex; width: 100%; box-sizing: border-box;
+    align-items: center; justify-content: space-between; gap: 12px;
+    padding: 14px 0; border: 0; background: none;
+    color: var(--accent2);
+    font-family: var(--font-label); font-size: 11px; font-weight: 400;
+    letter-spacing: .16em; text-transform: uppercase; text-align: start;
+    cursor: pointer;
+  }
+  .footer-col-toggle i { font-size: 16px; color: color-mix(in srgb, var(--text) 55%, transparent); transition: color .2s ease; }
+  .footer-col.is-open .footer-col-toggle i { color: var(--accent); }
+  .footer-col.is-open .footer-col-toggle { color: var(--text); }
+  /* À 320 px, le titre anglais de la colonne et sa pastille restent sur une
+     seule ligne : c'est le chiffre qui se serre, jamais le mot qui se coupe. */
+  .footer-col-toggle { gap: 9px; }
+  .footer-col-n { padding: 3px 6px; font-size: 9px; }
+  /* Repliée, la colonne ne garde que son titre : rien à parcourir, rien à
+     traverser du pouce pour atteindre la ligne légale. */
+  .footer-grid .footer-col-list { display: none; }
+  .footer-links ul { grid-template-columns: 1fr; }
+  .footer-col.is-open .footer-col-list { display: grid; padding-bottom: 16px; }
+}
+/* Le geste unique du pied de page : déplier ou replier les deux groupes de
+   liens d'un coup. Il ne paraît que là où les accordéons vivent, c'est-à-dire
+   sur le téléphone — sur un grand écran, les colonnes sont déjà ouvertes et un
+   tel bouton n'aurait rien à faire. */
+/* Le contrôle du pied de page n'existe que là où les accordéons existent. À
+   1024 px — le pied de page large, en arabe comme ailleurs —, les deux
+   colonnes sont ouvertes d'office et le bouton global comme la gomme n'ont
+   rien à tenir : le contrôle reste donc absent, et la question nommée ne
+   s'ouvre jamais sur un geste qui n'aurait pas d'objet. Ce qui se vérifie à
+   cette largeur, c'est que rien du contrôle ne fuit dans le pied large ; ce
+   qui se vérifie sur le téléphone, c'est que la question et ses deux gestes
+   tiennent dans le cadre, en arabe compris. */
+.footer-cols-ctrl { display: none; }
+@media (max-width: 640px) {
+  .footer-cols-ctrl {
+    display: flex; flex-wrap: wrap; align-items: center;
+    justify-content: flex-end; gap: 8px;
+    margin: -6px 0 10px;
+  }
+  .footer-cols-all {
+    display: inline-flex; align-items: center; gap: 8px;
+    box-sizing: border-box; padding: 7px 13px; border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+    background: var(--surface);
+    color: color-mix(in srgb, var(--text) 72%, transparent);
+    font-family: var(--font-label); font-size: 10.5px; font-weight: 400;
+    letter-spacing: .12em; text-transform: uppercase; white-space: nowrap;
+    cursor: pointer; transition: color .2s ease, border-color .2s ease;
+  }
+  .footer-cols-all i { font-size: 14px; color: var(--accent2); }
+  .footer-cols-all:hover,
+  .footer-cols-all:focus-visible {
+    color: var(--text);
+    border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  }
+  .footer-cols-all:focus-visible { outline: 2px solid color-mix(in srgb, var(--accent) 60%, transparent); outline-offset: 2px; }
+  /* La petite gomme du pied de page, sœur de celle du carnet de parcours :
+     un mot bref, un signe, et rien de plus tant qu'on n'y touche pas. */
+  .footer-cols-wipe {
+    display: inline-flex; align-items: center; gap: 5px;
+    box-sizing: border-box; padding: 6px 10px; border-radius: 999px;
+    border: 1px solid transparent; background: transparent;
+    color: color-mix(in srgb, var(--text) 56%, transparent);
+    font-family: var(--font-label); font-size: 10px; font-weight: 400;
+    letter-spacing: .08em; text-transform: uppercase; white-space: nowrap;
+    cursor: pointer; transition: color .2s ease, background .2s ease, border-color .2s ease;
+  }
+  .footer-cols-wipe i { font-size: 12px; }
+  .footer-cols-wipe:hover,
+  .footer-cols-wipe:focus-visible {
+    color: var(--text);
+    background: color-mix(in srgb, var(--text) 7%, transparent);
+    border-color: color-mix(in srgb, var(--text) 20%, transparent);
+  }
+  .footer-cols-wipe:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--accent) 60%, transparent);
+    outline-offset: 2px;
+  }
+  /* La question prend sa propre rangée : elle ne pousse ni ne comprime le
+     bouton global, et les deux gestes restent lisibles à 320 px. */
+  .footer-cols-ask {
+    flex: 1 1 100%;
+    display: flex; flex-wrap: wrap; align-items: center;
+    justify-content: flex-end; gap: 5px 8px;
+    /* La question nomme la colonne ouverte et les portes qu'elle va perdre :
+       elle est donc plus longue que le mot qu'elle remplace, et plus longue
+       encore en arabe à corps égal. Le bloc se borne à la largeur du pied à
+       toute largeur — pas seulement à 320 px —, pour que les deux gestes qui
+       suivent ne soient jamais poussés hors du cadre, quel que soit l'écran
+       où le pied se replie (la gomme ne vit que là où les accordéons vivent,
+       donc jamais dans le pied de page large de 1024 px). */
+    box-sizing: border-box;
+    max-width: 100%;
+    min-width: 0;
+  }
+  .footer-cols-ask-txt {
+    min-width: 0;
+    overflow-wrap: break-word;
+    text-align: start;
+    font-family: var(--font-label); font-size: 10px; font-weight: 400;
+    letter-spacing: .06em; color: color-mix(in srgb, var(--text) 74%, transparent);
+  }
+  .footer-cols-yes,
+  .footer-cols-no {
+    display: inline-flex; align-items: center; gap: 4px;
+    box-sizing: border-box; padding: 5px 10px; border-radius: 999px;
+    font-family: var(--font-label); font-size: 10px; font-weight: 500;
+    letter-spacing: .06em; white-space: nowrap; cursor: pointer;
+    transition: color .2s ease, background .2s ease, border-color .2s ease;
+  }
+  .footer-cols-yes {
+    border: 1px solid color-mix(in srgb, var(--accent) 46%, transparent);
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  }
+  .footer-cols-yes:hover,
+  .footer-cols-yes:focus-visible {
+    background: color-mix(in srgb, var(--accent) 22%, transparent);
+    color: var(--text);
+  }
+  .footer-cols-no {
+    border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+    background: transparent;
+    color: color-mix(in srgb, var(--text) 68%, transparent);
+  }
+  .footer-cols-no:hover,
+  .footer-cols-no:focus-visible {
+    color: var(--text);
+    border-color: color-mix(in srgb, var(--text) 30%, transparent);
+  }
+  .footer-cols-yes:focus-visible,
+  .footer-cols-no:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--accent) 60%, transparent);
+    outline-offset: 2px;
+  }
+  [dir="rtl"] .footer-cols-wipe { letter-spacing: 0; font-size: 10.5px; }
+  [dir="rtl"] .footer-cols-ask-txt,
+  [dir="rtl"] .footer-cols-yes,
+  [dir="rtl"] .footer-cols-no { letter-spacing: 0; }
+  /* En arabe, les petites capitales perdent leur interlettrage : à taille égale
+     la phrase se lit donc un cran plus menu que son équivalent latin. Elle
+     reprend ce demi-point — c'est elle qui porte le nom de la colonne et le
+     compte des portes oubliées, et c'est elle qui doit rester lisible quand
+     les deux gestes se partagent la rangée suivante. */
+  [dir="rtl"] .footer-cols-ask-txt { font-size: 10.5px; }
+}
+/* Sur le téléphone, le pied de page se lit d'une traite : pas de filigrane — il
+   n'y a pas de longue page à poser sous le pouce — et les grands interlignes se
+   resserrent pour que les liens restent à portée de main. */
+@media (max-width: 768px) {
+  .footer-watermark { display: none; }
+  .footer { padding-top: 40px; }
+  .legal { margin-top: 34px; }
+}
+/* En arabe, les petites capitales du pied de page perdent leur interlettrage
+   (règle générale du site) : à taille égale, elles se lisent donc un demi-point
+   plus menu que leur équivalent latin. Les deux accordéons repliés, le bouton
+   qui les ouvre d'un geste et l'intitulé d'un sous-groupe reprennent ce
+   demi-point — sans quitter la famille des petites capitales du bas de page. */
+[dir="rtl"] .footer-col-toggle { font-size: 11.5px; }
+[dir="rtl"] .footer-cols-all { font-size: 11px; }
+[dir="rtl"] .footer-col-list .footer-group-title { font-size: 10.5px; }
+/* Les deux comptes du pied de page relus à 320 px : le bouton global y porte
+   « 17 portes sur 23 » — deux chiffres et un mot —, et chaque accordéon y
+   garde son titre, sa pastille et son « + » sur une seule ligne. Le bouton se
+   resserre donc d'un cran, la pastille rend un peu de son rembourrage, et le
+   titre peut se replier avant de chasser le chiffre du bout de sa ligne. */
+@media (max-width: 360px) {
+  .footer-cols-ctrl { margin: -4px 0 8px; gap: 6px; }
+  /* Le mot d'une colonne nommée fait plus long que les deux chiffres d'avant :
+     à cette largeur, le bouton accepte donc de replier son mot plutôt que de
+     pousser la gomme hors du cadre. La gomme, elle, garde son seul signe. */
+  .footer-cols-all {
+    gap: 6px; padding: 6px 11px; font-size: 10px; max-width: 100%;
+    white-space: normal; line-height: 1.25; text-align: start;
+  }
+  .footer-cols-wipe { padding: 6px; }
+  .footer-cols-wipe span { display: none; }
+  /* En anglais, la question est la plus longue des trois langues — « Return to
+     the default fold? » — et les deux gestes qui la suivent portent chacun deux
+     mots. À 320 px, le pied ne garde que 280 px de contenu : la phrase prend
+     donc sa propre rangée, du côté où la lecture finit, et les deux gestes se
+     partagent la suivante, sans qu'aucun ne sorte du cadre. Le survol de la
+     gomme, lui, nomme les deux colonnes qu'elle oublie (voir le composant). */
+  [lang="en"] .footer-cols-ask { gap: 5px 6px; }
+  [lang="en"] .footer-cols-ask-txt {
+    flex: 1 1 100%;
+    text-align: end;
+    font-size: 9.5px;
+    line-height: 1.3;
+    letter-spacing: .04em;
+  }
+  [lang="en"] .footer-cols-yes,
+  [lang="en"] .footer-cols-no {
+    font-size: 9.5px;
+    padding: 5px 8px;
+    letter-spacing: .03em;
+  }
+  /* Le cadre est tenu de bout en bout : dans les 280 px de contenu, ni la
+     question ni l'un des deux gestes ne peut déborder. Une phrase plus longue
+     que les autres langues se replie sur sa propre rangée, et un geste plus
+     large que l'autre reste borné à la largeur du bloc — c'est le pied de page
+     qui garde sa mesure, jamais le mot qui la dépasse.
+
+     La question nomme maintenant la colonne et les portes que la gomme
+     s'apprête à oublier : elle est donc plus longue qu'avant dans les trois
+     langues, et pas seulement en anglais. Elle prend sa rangée entière à
+     toutes les langues — le mot se replie sur deux lignes plutôt que de
+     chasser les deux gestes hors du cadre. */
+  .footer-cols-ask { max-width: 100%; }
+  .footer-cols-ask-txt {
+    flex: 1 1 100%;
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+  .footer-cols-yes,
+  .footer-cols-no { max-width: 100%; }
+  .footer-col-toggle { gap: 8px; }
+  /* Le filet de la famille, les deux colonnes ouvertes : il traverse la liste
+     d'un bord à l'autre, en arabe comme en latin. Il n'a donc ni marge
+     latérale ni largeur propre — il suit la grille, qui est déjà passée sur
+     une seule colonne à cette largeur. */
+  .footer-grid .footer-links ul > .footer-site-rule {
+    grid-column: 1 / -1;
+    width: auto;
+    min-width: 0;
+    margin-inline: 0;
+  }
+  .footer-col-n { min-width: 18px; padding: 3px 5px; font-size: 8.5px; }
+  /* En arabe, le mot et la pastille portent un demi-point de plus qu'en latin
+     à taille égale : ils le gardent ici plutôt que de descendre d'un cran. */
+  [dir="rtl"] .footer-cols-all { font-size: 10.5px; }
+  [dir="rtl"] .footer-col-n { font-size: 9px; }
+}
+/* Le compte du geste global : présent pour les lecteurs d'écran, il ne prend
+   aucune place et ne déplace jamais le bouton qu'il annonce. */
+.footer-said, .footer-col-said {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

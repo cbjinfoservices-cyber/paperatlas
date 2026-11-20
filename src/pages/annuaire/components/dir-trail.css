@@ -1,0 +1,77 @@
+/* ============ FIL D'ARIANE D'UNE PAGE DE TYPE OU DE PAYS ============ */
+/* Le chemin que la page déclarait déjà aux moteurs, montré au lecteur : le
+   même dessin que sur la fiche d'un atelier, pour que le site se remonte de la
+   même façon partout. Il vit dans l'en-tête, au-dessus du titre, et ne prend
+   qu'une ligne. */
+.dir-trail { display: block; }
+
+.dir-trail-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 3px 6px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dir-trail-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.dir-trail-item + .dir-trail-item::before {
+  content: '›';
+  flex: 0 0 auto;
+  font-size: 12px;
+  line-height: 1;
+  color: color-mix(in srgb, var(--text) 32%, transparent);
+}
+
+[dir='rtl'] .dir-trail-item + .dir-trail-item::before { content: '‹'; }
+
+.dir-trail-link {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-decoration: none;
+  color: var(--muted);
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  transition: color .2s ease;
+}
+.dir-trail-link:hover { color: var(--accent); }
+.dir-trail-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Le dernier maillon est la page lue : on le nomme, sans en faire un lien. */
+.dir-trail-here {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 80%, transparent);
+}
+
+[dir='rtl'] .dir-trail-link,
+[dir='rtl'] .dir-trail-here { letter-spacing: 0; font-size: 11px; }
+
+@media (max-width: 700px) {
+  .dir-trail-link,
+  .dir-trail-here { font-size: 9px; letter-spacing: .06em; }
+  [dir='rtl'] .dir-trail-link,
+  [dir='rtl'] .dir-trail-here { font-size: 10.5px; }
+}

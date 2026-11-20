@@ -1,0 +1,134 @@
+/* ============ CONTACT ============ */
+/* La section de contact n'est plus un panneau qu'on regarde : le formulaire y
+   tient la place principale, l'image reste au fond, adoucie. Le panneau garde
+   son défilement parallaxe, seul le propos change de centre de gravité. */
+.panel--contact .panel-veil {
+  background: linear-gradient(to right,
+    color-mix(in srgb, var(--bg) 90%, transparent) 0%,
+    color-mix(in srgb, var(--bg) 64%, transparent) 52%,
+    color-mix(in srgb, var(--bg) 28%, transparent) 100%);
+}
+
+.panel-copy--contact { max-width: min(720px, 100%); width: 100%; gap: 16px; }
+.panel-copy--contact h2 { margin: 0; }
+
+/* Les coordonnées se lisent en une ligne, sous le titre : elles complètent le
+   formulaire, elles ne prennent pas sa place. */
+.ct-coord { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: -2px 0 2px;
+  font-size: 13px; line-height: 1.5; color: color-mix(in srgb, var(--text) 74%, transparent); }
+.ct-coord > i { font-size: 15px; color: var(--accent); flex: 0 0 auto; }
+.ct-coord a { color: var(--accent); text-decoration: none; white-space: nowrap;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 42%, transparent); padding-bottom: 1px; }
+.ct-coord a:hover { border-bottom-color: var(--accent); }
+.ct-coord-sep { color: color-mix(in srgb, var(--text) 34%, transparent); }
+
+/* La carte du formulaire : une surface pleine, lisible, posée sur la photo. */
+.contact-card { display: grid; gap: 16px; margin-top: 4px; padding: clamp(20px, 2.4vw, 30px);
+  width: 100%; box-sizing: border-box; border-radius: 20px;
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  box-shadow: 0 30px 70px -42px color-mix(in srgb, #000 84%, transparent); }
+
+.ct-form-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+  gap: 4px 12px; }
+.ct-form-head h3 { margin: 0; font-size: clamp(17px, 1.6vw, 20px); font-weight: 600; letter-spacing: -.02em; }
+.ct-form-note { margin: 0; display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--font-label); font-size: 10px; letter-spacing: .08em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text)); }
+.ct-form-note i { font-size: 13px; color: var(--accent); }
+[dir="rtl"] .ct-form-note { letter-spacing: 0; text-transform: none; font-size: 11px; }
+
+/* Les champs respirent : c'est ici qu'on écrit, pas dans une annexe. */
+.contact-card .fld label { font-size: 10px; color: color-mix(in srgb, var(--text) 58%, transparent); }
+.contact-card .fld input,
+.contact-card .fld select,
+.contact-card .fld textarea {
+  padding: 13px 14px; font-size: 14.5px;
+  background: color-mix(in srgb, var(--bg) 62%, var(--surface));
+  border-color: color-mix(in srgb, var(--text) 18%, transparent); }
+.contact-card .fld select { cursor: pointer; }
+/* Le sujet prend la ligne entière : c'est la première chose lue à la
+   réception, il ne partage pas une demi-colonne avec l'établissement. */
+.contact-card .form-grid > .fld--full { grid-column: 1 / -1; }
+.contact-card .fld textarea { min-height: 132px; line-height: 1.6; }
+
+.ct-submit { width: 100%; justify-content: center; margin-top: 2px; padding: 14px 20px; font-size: 15px; }
+
+/* L'échec se lit dans la carte, sous le bouton, sans quitter la page. */
+.ct-err { display: flex; align-items: flex-start; gap: 7px; padding: 10px 12px; border-radius: 12px;
+  font-size: 13px; line-height: 1.5;
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent); }
+.ct-err i { font-size: 15px; color: var(--accent); margin-top: 1px; flex: 0 0 auto; }
+.ct-err span { min-width: 0; }
+
+/* La confirmation prend la place du formulaire : on ne laisse pas la personne
+   devant des champs vides en se demandant si l'envoi est parti. */
+.ct-sent { display: grid; gap: 10px; justify-items: start; padding: clamp(20px, 2.4vw, 30px);
+  width: 100%; box-sizing: border-box; border-radius: 20px;
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 44%, transparent);
+  box-shadow: 0 30px 70px -42px color-mix(in srgb, #000 84%, transparent); }
+.ct-sent > i { font-size: 34px; line-height: 1; color: var(--accent); }
+.ct-sent h3 { margin: 0; font-size: clamp(18px, 1.8vw, 22px); font-weight: 600; letter-spacing: -.02em; }
+
+/* Le prénom et le sujet se lisent ensemble : la confirmation ne dit pas
+   seulement « c'est parti », elle redit ce qui a été demandé. */
+.ct-sent-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.ct-sent-subject { display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px;
+  border-radius: 999px; white-space: nowrap;
+  font-size: 12px; line-height: 1.2;
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); }
+.ct-sent-subject i { font-size: 13px; color: var(--accent); }
+.ct-sent-subject-label { font-family: var(--font-label); font-size: 10px; letter-spacing: .08em;
+  text-transform: uppercase; color: color-mix(in srgb, var(--text) 58%, transparent); }
+.ct-sent-subject strong { font-weight: 600; }
+[dir="rtl"] .ct-sent-subject-label { letter-spacing: 0; text-transform: none; font-size: 11px; }
+.ct-sent p { margin: 0; max-width: 46ch; font-size: 14px; line-height: 1.6;
+  color: color-mix(in srgb, var(--text) 84%, transparent); }
+.ct-again { display: inline-flex; align-items: center; gap: 7px; margin-top: 4px; padding: 10px 16px;
+  border-radius: 999px; border: 1px solid color-mix(in srgb, var(--text) 22%, transparent);
+  background: transparent; color: var(--text); font: inherit; font-size: 13.5px;
+  white-space: nowrap; cursor: pointer;
+  transition: border-color .2s ease, color .2s ease, background .2s ease; }
+.ct-again i { font-size: 14px; color: var(--accent); }
+.ct-again:hover { border-color: var(--accent); color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.ct-again:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+@media (max-width: 780px) {
+  .panel-copy--contact { max-width: none; }
+  .panel--contact .panel-veil { background: linear-gradient(to top,
+    color-mix(in srgb, var(--bg) 92%, transparent) 0%,
+    color-mix(in srgb, var(--bg) 72%, transparent) 58%,
+    color-mix(in srgb, var(--bg) 34%, transparent) 100%); }
+  .contact-card, .ct-sent { padding: 18px; border-radius: 18px; }
+  .ct-submit { padding: 13px 16px; }
+  .ct-coord { font-size: 12.5px; }
+}
+
+/* ── Le formulaire au téléphone ────────────────────────────────────────────
+   La carte occupe toute la largeur utile et ses champs se lisent au pouce :
+   une seule colonne, des cibles assez hautes, et 16 px de texte pour que
+   iOS n'agrandisse pas la page au premier appui dans un champ. */
+@media (max-width: 620px) {
+  .contact-card { gap: 14px; padding: 16px; border-radius: 16px; }
+  .ct-sent { padding: 16px; border-radius: 16px; }
+  .ct-form-head { gap: 3px; }
+  .contact-card .fld input,
+  .contact-card .fld select,
+  .contact-card .fld textarea { padding: 12px 13px; font-size: 16px; }
+  .contact-card .fld select { min-height: 46px; }
+  .contact-card .fld textarea { min-height: 118px; }
+  .ct-submit { padding: 14px 16px; font-size: 15px; }
+  .ct-coord { gap: 4px 8px; font-size: 12px; }
+  .ct-coord a { white-space: normal; word-break: break-word; }
+  .ct-sent h3 { font-size: 17px; line-height: 1.3; }
+  .ct-sent-head { gap: 7px 10px; }
+  .ct-sent-subject { font-size: 11.5px; padding: 4px 10px; }
+  .ct-sent p { font-size: 13.5px; }
+  .ct-again { width: 100%; justify-content: center; }
+  .ct-signup { font-size: 13px; }
+}

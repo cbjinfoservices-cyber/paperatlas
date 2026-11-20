@@ -1,0 +1,20 @@
+/* ============ SKIP TO CONTENT ============ */
+/* Every page of the site opens on a « go to the content » link: a single Tab and
+   the visitor leaves the fixed bar behind instead of walking through the whole
+   menu. It stays above the screen until it takes focus, then slides in.
+   The target is the <main> itself, which is programmatically focusable but never
+   draws a ring of its own — a 2 px box around the whole page would say nothing. */
+#main-content { scroll-margin-top: 96px; }
+#main-content:focus,
+#main-content:focus-visible { outline: none; }
+
+/* The bar sits above the page content, so the link must clear it too. */
+.skip-link:focus-visible { outline-offset: 3px; }
+
+/* Two skip links never stack: on the public boards the deep « to the results »
+   link already skips both the navigation and the filters. */
+.skip-link + .nav { scroll-margin-top: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .skip-link { transition: none; }
+}

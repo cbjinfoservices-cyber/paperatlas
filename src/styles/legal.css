@@ -1,0 +1,238 @@
+/* ============ LES PAGES LÉGALES ============ */
+/* Mentions légales et confidentialité : la même trame pour les deux, lisible
+   avant d'être jolie. Un sommaire numéroté, des paragraphes courts, et la
+   façon d'écrire à l'équipe en bas de page. */
+
+.legal-page { padding-bottom: 24px; }
+
+.legal-updated {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: 14px 0 0;
+  padding: 5px 11px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  font-family: var(--font-label);
+  font-size: 11px;
+  letter-spacing: .04em;
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+}
+.legal-updated i { font-size: 14px; color: var(--accent); }
+
+.legal-doc {
+  display: grid;
+  gap: 22px;
+  width: 100%;
+  max-width: 880px;
+  margin-inline: auto;
+  min-width: 0;
+}
+
+/* Le champ à compléter se signale une fois, en haut, plutôt que d'être
+   répété à chaque crochet dans le corps du texte. */
+.legal-note {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  align-items: start;
+  gap: 10px;
+  margin: 0;
+  padding: 13px 16px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--text) 84%, transparent);
+}
+.legal-note i {
+  font-size: 16px;
+  line-height: 1.35;
+  color: color-mix(in srgb, var(--accent) 86%, var(--text));
+}
+
+.legal-secs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 20px;
+  counter-reset: legal;
+}
+
+.legal-secs > li {
+  display: grid;
+  gap: 7px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 9%, transparent);
+}
+.legal-secs > li:last-child { border-bottom: 0; padding-bottom: 0; }
+
+.legal-secs h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 16.5px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -.01em;
+  color: var(--text);
+}
+[dir='rtl'] .legal-secs h2 { letter-spacing: 0; }
+
+.legal-sec-n {
+  flex: none;
+  font-family: var(--font-label);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .1em;
+  color: color-mix(in srgb, var(--accent) 78%, var(--text));
+}
+
+.legal-secs p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.72;
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+  overflow-wrap: anywhere;
+}
+
+/* ---- le bas de page : écrire, puis passer à l'autre texte ---- */
+.legal-foot {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 16px;
+  padding-top: 6px;
+}
+
+.legal-cta {
+  display: grid;
+  gap: 6px;
+  justify-items: start;
+  padding: 18px 20px;
+  border-radius: 16px;
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, transparent);
+  background:
+    linear-gradient(140deg, color-mix(in srgb, var(--accent) 9%, transparent), transparent 68%),
+    color-mix(in srgb, var(--surface) 52%, transparent);
+}
+.legal-cta-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+.legal-cta-text {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--text) 70%, transparent);
+}
+.legal-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 46%, transparent);
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-label);
+  font-size: 12.5px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .15s ease, filter .15s ease;
+}
+.legal-cta-btn:hover { filter: brightness(1.06); transform: translateY(-1px); }
+.legal-cta-btn i { font-size: 15px; }
+
+.legal-cta-mail {
+  font-size: 11.5px;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.legal-cta-mail:hover { color: var(--text); }
+
+.legal-side {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  padding: 18px 20px;
+  border-radius: 16px;
+  border: 1px solid color-mix(in srgb, var(--text) 11%, transparent);
+  background: color-mix(in srgb, var(--text) 3.5%, transparent);
+}
+.legal-side-lbl {
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+}
+[dir='rtl'] .legal-side-lbl { letter-spacing: 0; text-transform: none; font-size: 11.5px; }
+
+.legal-side-link,
+.legal-side-back {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 11px;
+  border-radius: 10px;
+  font-size: 12.5px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease;
+}
+.legal-side-link {
+  border: 1px solid color-mix(in srgb, var(--text) 13%, transparent);
+  color: color-mix(in srgb, var(--text) 86%, transparent);
+}
+.legal-side-link i:first-child { font-size: 15px; color: var(--accent); }
+.legal-side-link i:last-child { margin-inline-start: auto; font-size: 14px; opacity: .55; }
+.legal-side-link:hover {
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 34%, transparent);
+}
+.legal-side-back {
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+.legal-side-back i { font-size: 14px; }
+.legal-side-back:hover { color: var(--text); background: color-mix(in srgb, var(--text) 6%, transparent); }
+
+/* ---- les deux liens du pied de page ---- */
+.legal-links {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.legal-links a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color .15s ease, border-color .15s ease;
+}
+.legal-links a:hover {
+  color: var(--text);
+  border-bottom-color: color-mix(in srgb, var(--text) 40%, transparent);
+}
+
+@media (max-width: 860px) {
+  .legal-foot { grid-template-columns: 1fr; }
+  .legal-doc { max-width: none; }
+}
+
+@media (max-width: 560px) {
+  .legal-secs h2 { font-size: 15px; }
+  .legal-secs p { font-size: 13.5px; line-height: 1.68; }
+  .legal-cta, .legal-side { padding: 15px 16px; }
+  .legal-cta-btn { width: 100%; justify-content: center; }
+}

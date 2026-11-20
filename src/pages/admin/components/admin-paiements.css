@@ -1,0 +1,1830 @@
+/**
+ * L'écran « Paiements » de la console : deux cartes de lecture, puis le
+ * tableau des abonnements. Les couleurs viennent des variables de la console,
+ * pour que l'écran suive le thème comme les autres sections.
+ */
+.pay-intro {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+}
+
+.pay-intro-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 16px;
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--surface) 42%, transparent);
+}
+
+/* Le compteur de la semaine : une ligne au-dessus de l'archive, qui dit
+   combien d'exports ont été produits ces sept derniers jours et depuis
+   combien de jours le dernier remonte. */
+.pay-week {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 8px;
+  padding: 7px 12px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+  background: color-mix(in srgb, var(--surface) 34%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 11px;
+  letter-spacing: .02em;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+
+.pay-week i {
+  font-size: 14px;
+  color: color-mix(in srgb, var(--text) 42%, transparent);
+}
+
+.pay-week-main {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 3px 8px;
+  min-width: 0;
+}
+
+.pay-week-main b {
+  font-weight: 600;
+  color: color-mix(in srgb, var(--text) 80%, transparent);
+}
+
+.pay-week-n {
+  padding: 0 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 9%, transparent);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--text) 82%, transparent);
+}
+
+.pay-week-main em {
+  font-style: normal;
+  opacity: .84;
+}
+
+/* Un export dans la semaine allume le compteur du trait d'accent ; aucun
+   export le laisse en retrait, pour que l'absence se repère sans lire. */
+.pay-week[data-state="yes"] {
+  border-color: color-mix(in srgb, var(--accent2, var(--accent)) 28%, transparent);
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 6%, transparent);
+}
+
+.pay-week[data-state="yes"] i {
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 76%, var(--text));
+}
+
+.pay-week[data-state="no"] {
+  border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+}
+
+.pay-week[data-state="no"] i {
+  color: color-mix(in srgb, var(--accent) 78%, var(--text));
+}
+
+/* L'archive du jour : une ligne discrète sous le titre, qui dit la date du
+   dernier export et ce qu'il contenait. Le jour même, elle s'allume d'un
+   trait d'accent, pour qu'on n'exporte pas deux fois le même tableau. */
+.pay-memo {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  margin: 0 0 12px;
+  padding: 9px 12px;
+  border: 1px dashed color-mix(in srgb, var(--text) 18%, transparent);
+  border-radius: 12px;
+  font-family: var(--font-label, inherit);
+  font-size: 11px;
+  letter-spacing: .02em;
+  color: color-mix(in srgb, var(--text) 60%, transparent);
+}
+
+.pay-memo i {
+  font-size: 14px;
+  color: color-mix(in srgb, var(--text) 42%, transparent);
+}
+
+.pay-memo[data-today="yes"] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2, var(--accent)) 34%, transparent);
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 6%, transparent);
+}
+
+.pay-memo[data-today="yes"] i {
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 76%, var(--text));
+}
+
+.pay-memo-main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 3px 8px;
+  min-width: 0;
+}
+
+.pay-memo-main b {
+  font-weight: 600;
+  color: color-mix(in srgb, var(--text) 82%, transparent);
+}
+
+.pay-memo-main em {
+  font-style: normal;
+  opacity: .82;
+}
+
+/* Le montant emporté par l'export, à côté du nombre de lignes : il dit ce que
+   l'archive pesait, pas seulement ce qu'elle comptait. Il se clique : l'écran
+   reprend la vue et le motif de ce fichier-là, pour le refaire à l'identique. */
+.pay-memo-main .pay-memo-amount {
+  padding: 0 7px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  opacity: 1;
+  color: color-mix(in srgb, var(--text) 76%, transparent);
+}
+
+.pay-memo-replay {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px dashed color-mix(in srgb, var(--text) 24%, transparent);
+  font: inherit;
+  letter-spacing: inherit;
+  cursor: pointer;
+  transition: color .18s ease, border-color .18s ease, background .18s ease;
+}
+
+.pay-memo-replay i {
+  font-size: 12px;
+  color: inherit;
+  opacity: .8;
+}
+
+.pay-memo-replay:hover,
+.pay-memo-replay:focus-visible {
+  border-color: color-mix(in srgb, var(--accent2, var(--accent)) 52%, transparent);
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 12%, transparent);
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 84%, var(--text));
+}
+
+/* L'export rejoué : la pastille confirme que l'écran a bien repris la vue et
+   le motif du fichier, puis s'éteint d'elle-même. */
+.pay-memo-replay[data-done="yes"] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2, var(--accent)) 52%, transparent);
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 14%, transparent);
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 88%, var(--text));
+}
+
+/* L'historique des sept derniers exports, rangé sous la ligne d'archive :
+   une ligne par export, de la plus récente à la plus ancienne. */
+.pay-hist {
+  margin: 0 0 12px;
+  padding: 9px 12px 10px;
+  border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--surface) 30%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 11px;
+  letter-spacing: .02em;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+
+.pay-hist-head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 3px 8px;
+  margin: 0 0 6px;
+}
+
+.pay-hist-head i {
+  font-size: 13px;
+  color: color-mix(in srgb, var(--text) 40%, transparent);
+}
+
+.pay-hist-head b {
+  font-weight: 600;
+  color: color-mix(in srgb, var(--text) 76%, transparent);
+}
+
+.pay-hist-head em {
+  margin-inline-start: auto;
+  font-style: normal;
+  opacity: .72;
+}
+
+/* Le jeton des exports qui ont bougé : posé dans l'en-tête de l'historique,
+   il ne garde que les archives dont le décompte diffère de celui du jour. Il
+   se lit comme un filtre — allumé quand il est posé —, et son chiffre dit
+   combien de lignes de l'historique ont bougé. */
+.pay-hist-moved {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 9px;
+  border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
+  border-radius: 999px;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: color .18s ease, border-color .18s ease, background .18s ease;
+}
+
+.pay-hist-moved i {
+  font-size: 12px;
+  color: inherit;
+}
+
+.pay-hist-moved b {
+  padding: 0 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 10%, transparent);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: inherit;
+}
+
+.pay-hist-moved:hover,
+.pay-hist-moved:focus-visible {
+  border-color: color-mix(in srgb, var(--accent2, var(--accent)) 46%, transparent);
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 8%, transparent);
+  color: color-mix(in srgb, var(--text) 82%, transparent);
+}
+
+.pay-hist-moved[data-on="yes"] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2, var(--accent)) 52%, transparent);
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 14%, transparent);
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 88%, var(--text));
+}
+
+/* Le coût total de l'historique filtré : posé sous le bouton d'export, il dit
+   ce que les exports retenus pesaient au moment du clic — la somme se lit
+   avant d'ouvrir le fichier. */
+.pay-hist-cost {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  margin: 3px 0 6px;
+  padding: 2px 10px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 36%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent) 86%, var(--text));
+}
+
+.pay-hist-cost i {
+  font-size: 12px;
+  color: inherit;
+}
+
+/* Le jeton posé ne trouve rien à garder : la ligne le dit, plutôt que de
+   laisser une liste vide passer pour un historique perdu. */
+.pay-hist-empty {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 2px 0 0;
+  font-style: normal;
+  color: color-mix(in srgb, var(--text) 56%, transparent);
+}
+
+.pay-hist-empty i {
+  font-size: 13px;
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 74%, var(--text));
+}
+
+.pay-hist-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pay-hist-list li {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 3px 10px;
+  padding: 3px 0;
+  border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
+}
+
+.pay-hist-list li:first-child {
+  border-top: 0;
+}
+
+/* Le dernier export est celui de la ligne d'archive : il reste en tête, un
+   peu plus affirmé, pour que l'historique ne le confonde pas avec un ancien. */
+.pay-hist-list li[data-last="yes"] {
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+}
+
+.pay-hist-date {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.pay-hist-n {
+  font-variant-numeric: tabular-nums;
+  opacity: .84;
+}
+
+.pay-hist-amount {
+  padding: 0 7px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--text) 74%, transparent);
+}
+
+/* L'écart entre ce que l'export emportait et ce que la file compte
+   aujourd'hui, à vue et motif égaux : le chiffre se lit juste après la
+   pastille du montant, sans ouvrir l'archive. La hausse prend l'accent, la
+   baisse le second trait, et l'immobilité reste en retrait. */
+.pay-memo-delta {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 8px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  white-space: nowrap;
+  color: inherit;
+  cursor: pointer;
+  transition: color .18s ease, border-color .18s ease, background .18s ease;
+}
+
+.pay-memo-delta i {
+  font-size: 11px;
+  color: inherit;
+}
+
+.pay-memo-delta[data-tone="up"] {
+  border-color: color-mix(in srgb, var(--accent) 32%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+}
+
+.pay-memo-delta[data-tone="down"] {
+  border-color: color-mix(in srgb, var(--accent2, var(--accent)) 32%, transparent);
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 10%, transparent);
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 84%, var(--text));
+}
+
+.pay-memo-delta[data-tone="flat"] {
+  background: color-mix(in srgb, var(--text) 7%, transparent);
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  font-weight: 500;
+}
+
+/* Le jeton d'écart s'ouvre au clic : le survol le souligne d'un trait, et
+   l'état ouvert le garde allumé tant que la différence est à l'écran. */
+.pay-memo-delta[data-open="yes"]:hover,
+.pay-memo-delta[data-open="yes"]:focus-visible {
+  border-color: color-mix(in srgb, var(--text) 32%, transparent);
+}
+
+.pay-memo-delta[data-on="yes"] {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--text) 40%, transparent);
+}
+
+/* Une mémoire plus ancienne n'a pas retenu la liste des lignes : le jeton
+   reste une lecture, et ne promet pas une ouverture qu'il ne peut pas tenir. */
+.pay-memo-delta[data-open="no"] {
+  cursor: default;
+}
+
+/* Le second écart : les lignes gagnées ou perdues depuis l'export, à côté du
+   montant. Il reste plus discret que lui — un décompte ne pèse pas autant
+   qu'une somme — mais garde la même grammaire de couleurs. */
+.pay-memo-rows {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 8px;
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  border-radius: 999px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+
+.pay-memo-rows i {
+  font-size: 11px;
+  color: inherit;
+}
+
+.pay-memo-rows[data-tone="up"] {
+  border-color: color-mix(in srgb, var(--accent) 26%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+}
+
+.pay-memo-rows[data-tone="down"] {
+  border-color: color-mix(in srgb, var(--accent2, var(--accent)) 26%, transparent);
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 8%, transparent);
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 82%, var(--text));
+}
+
+/* La moyenne sous l'historique : elle dit la suite des sept exports en un
+   chiffre, et la tendance entre le plus récent et le plus ancien. */
+.pay-hist-avg {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 3px 8px;
+  margin: 7px 0 0;
+  padding: 6px 0 0;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 14%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 11px;
+  letter-spacing: .02em;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+
+.pay-hist-avg i {
+  font-size: 13px;
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 74%, var(--text));
+}
+
+.pay-hist-avg b {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 82%, transparent);
+}
+
+.pay-hist-avg em {
+  font-style: normal;
+  opacity: .76;
+}
+
+.pay-hist-trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-inline-start: auto;
+  padding: 1px 8px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.pay-hist-trend i {
+  font-size: 11px;
+  color: inherit;
+}
+
+.pay-hist-trend[data-tone="up"] {
+  border-color: color-mix(in srgb, var(--accent) 28%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+}
+
+.pay-hist-trend[data-tone="down"] {
+  border-color: color-mix(in srgb, var(--accent2, var(--accent)) 28%, transparent);
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 9%, transparent);
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 84%, var(--text));
+}
+
+.pay-hist-trend[data-tone="flat"] {
+  background: color-mix(in srgb, var(--text) 7%, transparent);
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  font-weight: 500;
+}
+
+/* La différence ouverte d'un export : un bandeau au-dessus de la file, qui
+   nomme ce qu'il garde et ce qu'il ne peut que compter. */
+.pay-ecart {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  margin: 0 0 12px;
+  padding: 8px 12px;
+  border: 1px dashed color-mix(in srgb, var(--accent2, var(--accent)) 40%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 7%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 11px;
+  letter-spacing: .02em;
+  color: color-mix(in srgb, var(--text) 66%, transparent);
+}
+
+.pay-ecart > i {
+  font-size: 14px;
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 80%, var(--text));
+}
+
+.pay-ecart-main {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 3px 8px;
+  min-width: 0;
+}
+
+.pay-ecart-main b {
+  font-weight: 600;
+  color: color-mix(in srgb, var(--text) 84%, transparent);
+}
+
+.pay-ecart-main em {
+  font-style: normal;
+  padding: 0 7px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 9%, transparent);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+}
+
+/* Les lignes parties ne peuvent que se compter : la pastille reste en
+   retrait, teintée de l'alerte, pour qu'elle ne se lise pas comme une ligne
+   du tableau. */
+.pay-ecart-main em.pay-ecart-left {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+}
+
+/* L'extrait des arrivées part directement depuis le bandeau : la ligne de
+   différence emporte ce qu'elle montre, sans repasser par la file entière. */
+.pay-ecart-export {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border: 1px dashed color-mix(in srgb, var(--text) 24%, transparent);
+  border-radius: 999px;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: color .18s ease, border-color .18s ease, background .18s ease;
+}
+
+.pay-ecart-export i {
+  font-size: 12px;
+  color: inherit;
+}
+
+.pay-ecart-export:hover,
+.pay-ecart-export:focus-visible {
+  border-color: color-mix(in srgb, var(--accent2, var(--accent)) 52%, transparent);
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 12%, transparent);
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 84%, var(--text));
+}
+
+/* Le fichier parti, la pastille confirme le geste puis s'éteint d'elle-même. */
+.pay-ecart-export[data-done="yes"] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2, var(--accent)) 52%, transparent);
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 14%, transparent);
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 88%, var(--text));
+}
+
+.pay-ecart-clear {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-inline-start: auto;
+  padding: 3px 9px;
+  border: 1px solid color-mix(in srgb, var(--text) 20%, transparent);
+  border-radius: 999px;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: color .18s ease, border-color .18s ease;
+}
+
+.pay-ecart-clear:hover,
+.pay-ecart-clear:focus-visible {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--text) 36%, transparent);
+}
+
+.pay-ecart-clear i {
+  font-size: 12px;
+  color: inherit;
+}
+
+/* Chaque ligne d'historique se rejoue : le geste couvre toute la ligne, et
+   le survol la dessine sans ajouter de bouton dans la marge. */
+.pay-hist-row {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 3px 10px;
+  width: 100%;
+  margin: 0 -6px;
+  padding: 3px 6px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+
+.pay-hist-row i {
+  margin-inline-start: auto;
+  font-size: 12px;
+  opacity: .55;
+}
+
+.pay-hist-row:hover,
+.pay-hist-row:focus-visible {
+  border-color: color-mix(in srgb, var(--accent2, var(--accent)) 40%, transparent);
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 8%, transparent);
+  color: color-mix(in srgb, var(--text) 86%, transparent);
+}
+
+.pay-hist-row:hover i,
+.pay-hist-row:focus-visible i {
+  opacity: .9;
+}
+
+/* La ligne rejouée confirme le geste, puis s'éteint d'elle-même. */
+.pay-hist-row[data-done="yes"] {
+  border-color: color-mix(in srgb, var(--accent2, var(--accent)) 52%, transparent);
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 14%, transparent);
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 88%, var(--text));
+}
+
+.pay-hist-row[data-done="yes"] i {
+  opacity: 1;
+}
+
+/* La ligne de l'historique dont le décompte a bougé depuis : le chiffre dit
+   combien de lignes se sont ajoutées ou retirées, à la vue et au motif de cet
+   export. Il reste plus discret que le montant — un décompte ne pèse pas
+   autant qu'une somme. */
+.pay-hist-row .pay-hist-move {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 0 7px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.pay-hist-row .pay-hist-move i {
+  margin-inline-start: 0;
+  font-size: 11px;
+  opacity: .9;
+}
+
+.pay-hist-move[data-tone="up"] {
+  border-color: color-mix(in srgb, var(--accent) 28%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+}
+
+.pay-hist-move[data-tone="down"] {
+  border-color: color-mix(in srgb, var(--accent2, var(--accent)) 28%, transparent);
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 9%, transparent);
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 84%, var(--text));
+}
+
+/* Le repère des sens opposés : le décompte et le montant se contredisent, et
+   c'est ensemble qu'ils se lisent. Un trait plein et une teinte propre le
+   distinguent des deux écarts qu'il rapproche. */
+.pay-hist-row .pay-hist-opposite {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 0 7px;
+  border: 1px solid color-mix(in srgb, var(--accent2, var(--accent)) 40%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 8%, transparent);
+  font-weight: 600;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 86%, var(--text));
+}
+
+.pay-hist-row .pay-hist-opposite i {
+  margin-inline-start: 0;
+  font-size: 11px;
+  opacity: .9;
+}
+
+/* Le montant qui a bougé, à côté du décompte : le même jeton, mais cerclé
+   d'un trait plein pour ne pas se confondre avec un nombre de lignes. */
+.pay-hist-row .pay-hist-amount {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--text) 16%, transparent);
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+}
+
+.pay-hist-row .pay-hist-amount[data-tone="up"] {
+  border-color: color-mix(in srgb, var(--ok, var(--accent)) 30%, transparent);
+  background: color-mix(in srgb, var(--ok, var(--accent)) 8%, transparent);
+  color: color-mix(in srgb, var(--ok, var(--accent)) 84%, var(--text));
+}
+
+.pay-hist-row .pay-hist-amount[data-tone="down"] {
+  border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+}
+
+.pay-hist-row .pay-hist-amount i {
+  font-size: 11px;
+  opacity: .9;
+}
+
+/* L'export le plus lourd de la semaine : un repère dans la liste, et son
+   rappel sous elle, à côté de la moyenne — le pic se lit avec la tendance. */
+.pay-hist-peak {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 8px;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent) 86%, var(--text));
+}
+
+.pay-hist-row .pay-hist-peak i {
+  margin-inline-start: 0;
+  font-size: 11px;
+  opacity: 1;
+}
+
+.pay-hist-peak-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 8px;
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+}
+
+.pay-hist-peak-note i {
+  font-size: 11px;
+  color: inherit;
+}
+
+/* Le rappel du pic se clique : il rejoue l'export qui l'a produit, pour
+   relire la semaine au moment de son sommet. */
+button.pay-hist-peak-note {
+  cursor: pointer;
+  background: transparent;
+  font: inherit;
+  transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease;
+}
+
+button.pay-hist-peak-note:hover,
+button.pay-hist-peak-note[data-done='yes'] {
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+}
+
+button.pay-hist-peak-note[data-done='yes'] {
+  border-color: color-mix(in srgb, var(--ok, var(--accent)) 46%, transparent);
+  background: color-mix(in srgb, var(--ok, var(--accent)) 10%, transparent);
+  color: color-mix(in srgb, var(--ok, var(--accent)) 88%, var(--text));
+}
+
+/* La comparaison de deux exports : replié, un seul bouton sous la moyenne ;
+   ouvert, deux points à choisir et l'écart entre eux. */
+.pay-cmp {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 7px 0 0;
+  padding: 7px 0 0;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 14%, transparent);
+  font-family: var(--font-label, inherit);
+  font-size: 11px;
+  letter-spacing: .02em;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+}
+
+.pay-cmp-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  align-self: flex-start;
+  padding: 3px 10px;
+  border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
+  border-radius: 999px;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: color .18s ease, border-color .18s ease, background .18s ease;
+}
+
+.pay-cmp-open i {
+  font-size: 12px;
+  color: inherit;
+}
+
+.pay-cmp-open:hover,
+.pay-cmp-open:focus-visible {
+  border-color: color-mix(in srgb, var(--accent2, var(--accent)) 46%, transparent);
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 8%, transparent);
+  color: color-mix(in srgb, var(--text) 82%, transparent);
+}
+
+.pay-cmp-head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 3px 8px;
+  margin: 0;
+}
+
+.pay-cmp-head i {
+  font-size: 13px;
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 74%, var(--text));
+}
+
+.pay-cmp-head b {
+  font-weight: 600;
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+}
+
+.pay-cmp-close {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-inline-start: auto;
+  padding: 2px 9px;
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  border-radius: 999px;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: color .18s ease, border-color .18s ease;
+}
+
+.pay-cmp-close i {
+  font-size: 12px;
+  color: inherit;
+}
+
+.pay-cmp-close:hover,
+.pay-cmp-close:focus-visible {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--text) 34%, transparent);
+}
+
+.pay-cmp-pick {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+}
+
+.pay-cmp-pick > i {
+  padding-bottom: 6px;
+  font-size: 13px;
+  color: color-mix(in srgb, var(--text) 34%, transparent);
+}
+
+.pay-cmp-field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1 1 190px;
+  min-width: 0;
+}
+
+.pay-cmp-field > span {
+  font-size: 10.5px;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 46%, transparent);
+}
+
+.pay-cmp-select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 4px 8px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface) 60%, transparent);
+  font-family: inherit;
+  font-size: 11px;
+  letter-spacing: inherit;
+  color: color-mix(in srgb, var(--text) 82%, transparent);
+  cursor: pointer;
+}
+
+.pay-cmp-select:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent2, var(--accent)) 46%, transparent);
+  outline-offset: 1px;
+}
+
+.pay-cmp-result {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.pay-cmp-empty {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0;
+  font-style: normal;
+  color: color-mix(in srgb, var(--text) 54%, transparent);
+}
+
+.pay-cmp-empty i {
+  font-size: 12px;
+  color: inherit;
+}
+
+.pay-cmp-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 8px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.pay-cmp-chip i {
+  font-size: 11px;
+  color: inherit;
+}
+
+.pay-cmp-chip[data-tone="up"] {
+  border-color: color-mix(in srgb, var(--accent) 28%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+}
+
+.pay-cmp-chip[data-tone="down"] {
+  border-color: color-mix(in srgb, var(--accent2, var(--accent)) 28%, transparent);
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 9%, transparent);
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 84%, var(--text));
+}
+
+.pay-cmp-chip[data-tone="flat"] {
+  background: color-mix(in srgb, var(--text) 7%, transparent);
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  font-weight: 500;
+}
+
+.pay-cmp-ids {
+  font-style: normal;
+  opacity: .82;
+}
+
+/* Le chiffre des lignes parties, à côté du rappel des arrivées : un jeton
+   cerclé d'un trait plein, pour ne pas se confondre avec un décompte. Il
+   resserre la file sur celles qui sont encore au tableau. */
+.pay-cmp-parties-token {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 0 7px;
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+  border-radius: 999px;
+  background: none;
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+
+.pay-cmp-parties-token i {
+  font-size: 12px;
+  color: inherit;
+}
+
+.pay-cmp-parties-token:hover,
+.pay-cmp-parties-token:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 56%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: color-mix(in srgb, var(--accent) 94%, var(--text));
+}
+
+.pay-cmp-parties-token[data-on="yes"] {
+  border-color: color-mix(in srgb, var(--accent) 62%, transparent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: color-mix(in srgb, var(--accent) 94%, var(--text));
+}
+
+/* Aucune de ces lignes n'est plus au tableau : le chiffre reste, le geste
+   n'existe pas — le survol le dit, le curseur ne promet rien. */
+span.pay-cmp-parties-token {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--text) 20%, transparent);
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  cursor: default;
+}
+
+/* Le resserrement des lignes parties se dit d'un autre ton que celui des
+   arrivées : deux filtres voisins ne se confondent pas. */
+.pay-cmp-narrow-parties {
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+}
+
+.pay-cmp-narrow-parties > i {
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+}
+
+/* Le second jeton de l'historique, celui des montants : le trait plein et la
+   teinte le distinguent du décompte de lignes, posé juste avant. */
+.pay-hist-moved-amount {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+  color: color-mix(in srgb, var(--accent) 80%, var(--text));
+}
+
+.pay-hist-moved-amount[data-on="yes"] {
+  border-color: color-mix(in srgb, var(--accent) 56%, transparent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+}
+
+.pay-hist-moved-amount b {
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+/* Le jeton des deux écarts contraires : cerclé de plein et teinté comme le
+   repère qu'il allume, pour ne pas se confondre avec le décompte de lignes. */
+.pay-hist-moved-opposite {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2, var(--accent)) 32%, transparent);
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 82%, var(--text));
+}
+
+.pay-hist-moved-opposite[data-on="yes"] {
+  border-color: color-mix(in srgb, var(--accent2, var(--accent)) 58%, transparent);
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 14%, transparent);
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 92%, var(--text));
+}
+
+.pay-hist-moved-opposite b {
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 14%, transparent);
+}
+
+/* Le jeton des montants en baisse : il ne garde que les exports dont la file
+   pèse aujourd'hui moins que le fichier. Il se teinte comme une baisse pour
+   ne pas se confondre avec celui des montants qui ont bougé dans les deux
+   sens. */
+.pay-hist-moved-baisse {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--text) 24%, transparent);
+  color: color-mix(in srgb, var(--text) 70%, transparent);
+}
+
+.pay-hist-moved-baisse[data-on="yes"] {
+  border-color: color-mix(in srgb, var(--accent) 58%, transparent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+}
+
+.pay-hist-moved-baisse b {
+  background: color-mix(in srgb, var(--text) 10%, transparent);
+}
+
+.pay-hist-moved-baisse[data-on="yes"] b {
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+}
+
+/* La baisse cumulée se pose comme un jeton à part entière, à côté de celui
+   des montants en baisse : son clic resserre l'historique sur ces seuls
+   exports. Elle se teinte autrement, pour ne pas se confondre avec le
+   compteur voisin qui, lui, compte les archives. */
+.pay-hist-baisse-cumul-token {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--accent) 42%, transparent);
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+}
+
+.pay-hist-baisse-cumul-token[data-on="yes"] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 58%, transparent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+}
+
+.pay-hist-baisse-cumul-token b {
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+
+/* Ce que les jetons laissent à lire : un rappel discret, posé à côté d'eux dès
+   qu'un filtre est allumé, pour que l'historique resserré ne passe pas pour un
+   historique perdu. */
+.pay-hist-shown {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-inline-start: 2px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+
+.pay-hist-shown i {
+  font-size: 12px;
+  color: inherit;
+}
+
+/* La petite gomme du rappel : elle éteint les trois jetons d'un seul geste.
+   Elle reste discrète — un geste d'entretien, pas une commande de la file —,
+   mais s'atteint sans survol et se distingue du reste du rappel. */
+.pay-hist-shown-clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 17px;
+  height: 17px;
+  margin-inline-start: 2px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: background .18s ease, color .18s ease;
+}
+
+.pay-hist-shown-clear:hover,
+.pay-hist-shown-clear:focus-visible {
+  background: color-mix(in srgb, var(--text) 14%, transparent);
+  color: var(--text);
+}
+
+.pay-hist-shown-clear i {
+  font-size: 11px;
+  color: inherit;
+}
+
+/* Le bouton d'export du bandeau des sens opposés : cerclé de plein comme le
+   jeton qu'il accompagne, mais il ouvre un fichier au lieu de resserrer. */
+.pay-hist-moved-export {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--text) 20%, transparent);
+}
+
+.pay-hist-moved-export[data-done="yes"] {
+  border-color: color-mix(in srgb, var(--accent2, var(--accent)) 52%, transparent);
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 12%, transparent);
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 88%, var(--text));
+}
+
+/* L'export de l'historique filtré : il emporte ce que les jetons laissent
+   lire, dans l'ordre de la liste. Il reste plus discret que celui des sens
+   opposés — il suit un resserrement, il n'en désigne pas un. */
+.pay-hist-filter-export {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--text) 24%, transparent);
+  color: color-mix(in srgb, var(--text) 68%, transparent);
+}
+
+.pay-hist-filter-export:hover,
+.pay-hist-filter-export:focus-visible {
+  border-color: color-mix(in srgb, var(--accent2, var(--accent)) 52%, transparent);
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 10%, transparent);
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 86%, var(--text));
+}
+
+.pay-hist-filter-export[data-done="yes"] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--ok, var(--accent)) 52%, transparent);
+  background: color-mix(in srgb, var(--ok, var(--accent)) 12%, transparent);
+  color: color-mix(in srgb, var(--ok, var(--accent)) 88%, var(--text));
+}
+
+/* Le repère de la ligne s'allume quand le jeton est posé : il dit d'où vient
+   le resserrement de l'historique. */
+.pay-hist-row .pay-hist-opposite[data-on="yes"] {
+  border-style: solid;
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 16%, transparent);
+}
+
+/* Le total apporté par les arrivées : un jeton dans le bandeau de différence,
+   qui déplie les montants ligne à ligne sans ouvrir le fichier. */
+.pay-cmp-arrival-total {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 0 7px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 34%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+
+.pay-cmp-arrival-total i {
+  font-size: 12px;
+  color: inherit;
+}
+
+.pay-cmp-arrival-total:hover,
+.pay-cmp-arrival-total:focus-visible,
+.pay-cmp-arrival-total[data-on="yes"] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent) 56%, transparent);
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+  color: color-mix(in srgb, var(--accent) 92%, var(--text));
+}
+
+/* Le second clic du jeton resserre la file sur ces lignes-là : le jeton dit
+   qu'il est posé, pas seulement déplié. */
+.pay-cmp-arrival-total[data-narrow="yes"] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--ok, var(--accent)) 52%, transparent);
+  background: color-mix(in srgb, var(--ok, var(--accent)) 14%, transparent);
+  color: color-mix(in srgb, var(--ok, var(--accent)) 90%, var(--text));
+}
+
+/* Le resserrement posé, dit sous la comparaison : la file ne garde que les
+   lignes arrivées, et le geste qui la rend entière est juste à côté. */
+.pay-cmp-narrow {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  margin: 0;
+  padding: 5px 9px;
+  border: 1px dashed color-mix(in srgb, var(--ok, var(--accent)) 36%, transparent);
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--ok, var(--accent)) 7%, transparent);
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 72%, transparent);
+}
+
+.pay-cmp-narrow > i {
+  font-size: 12px;
+  color: color-mix(in srgb, var(--ok, var(--accent)) 82%, var(--text));
+}
+
+.pay-cmp-narrow b {
+  font-weight: 600;
+  color: color-mix(in srgb, var(--text) 84%, transparent);
+}
+
+.pay-cmp-narrow em {
+  font-style: normal;
+  opacity: .8;
+}
+
+.pay-cmp-narrow-clear {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-inline-start: auto;
+  padding: 0 7px;
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  border-radius: 999px;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease;
+}
+
+.pay-cmp-narrow-clear:hover,
+.pay-cmp-narrow-clear:focus-visible {
+  border-color: color-mix(in srgb, var(--text) 34%, transparent);
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+}
+
+.pay-cmp-narrow-clear i {
+  font-size: 11px;
+  color: inherit;
+}
+
+/* L'extrait des lignes parties, posé sur le bandeau de resserrement : il
+   emporte exactement ce que le bandeau laisse lire. */
+.pay-cmp-narrow-export {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 8px;
+  border: 1px solid color-mix(in srgb, var(--ok, var(--accent)) 32%, transparent);
+  border-radius: 999px;
+  background: none;
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--ok, var(--accent)) 84%, var(--text));
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+
+.pay-cmp-narrow-export i {
+  font-size: 11px;
+  color: inherit;
+}
+
+.pay-cmp-narrow-export b {
+  padding: 0 5px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ok, var(--accent)) 14%, transparent);
+  font-weight: 600;
+  color: inherit;
+}
+
+.pay-cmp-narrow-export:hover,
+.pay-cmp-narrow-export:focus-visible {
+  border-color: color-mix(in srgb, var(--ok, var(--accent)) 54%, transparent);
+  background: color-mix(in srgb, var(--ok, var(--accent)) 10%, transparent);
+}
+
+.pay-cmp-narrow-export[data-done="yes"] {
+  border-color: color-mix(in srgb, var(--ok, var(--accent)) 62%, transparent);
+  background: color-mix(in srgb, var(--ok, var(--accent)) 16%, transparent);
+}
+
+/* Le bandeau des lignes parties garde son bouton d'extrait à droite, avant
+   celui qui rend la file entière. */
+.pay-cmp-narrow-parties .pay-cmp-narrow-export {
+  margin-inline-start: auto;
+}
+
+.pay-cmp-narrow-parties .pay-cmp-narrow-clear {
+  margin-inline-start: 0;
+}
+
+/* Les montants des arrivées, dépliés depuis le total : une ligne par arrivée,
+   avec ce qu'elle a apporté, sous la comparaison. */
+.pay-cmp-arrivals {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pay-cmp-arrivals li {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 3px 8px;
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  font-variant-numeric: tabular-nums;
+}
+
+.pay-cmp-arrivals li > i {
+  flex: none;
+  font-size: 11px;
+  color: color-mix(in srgb, var(--text) 40%, transparent);
+}
+
+.pay-cmp-arrival-name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 6px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.pay-cmp-arrival-name b {
+  font-weight: 600;
+  color: color-mix(in srgb, var(--text) 80%, transparent);
+}
+
+.pay-cmp-arrival-name em {
+  font-style: normal;
+  opacity: .7;
+  font-size: 10px;
+}
+
+.pay-cmp-arrival-amount {
+  flex: none;
+  padding: 0 7px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  font-weight: 600;
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+}
+
+/* La comparaison part en fichier : un bouton sous les deux chiffres, qui ne
+   se confond ni avec les pastilles d'écart ni avec l'export du tableau. */
+.pay-cmp-export {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  align-self: flex-start;
+  padding: 3px 10px;
+  border: 1px dashed color-mix(in srgb, var(--text) 24%, transparent);
+  border-radius: 999px;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: color .18s ease, border-color .18s ease, background .18s ease;
+}
+
+.pay-cmp-export i {
+  font-size: 12px;
+  color: inherit;
+}
+
+.pay-cmp-export:hover,
+.pay-cmp-export:focus-visible {
+  border-color: color-mix(in srgb, var(--accent2, var(--accent)) 52%, transparent);
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 12%, transparent);
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 84%, var(--text));
+}
+
+.pay-cmp-export[data-done="yes"] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2, var(--accent)) 52%, transparent);
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 14%, transparent);
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 88%, var(--text));
+}
+
+.pay-memo-today {
+  margin-inline-start: auto;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 16%, transparent);
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 82%, var(--text));
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Le geste d'effacement de la mémoire, à droite de la ligne d'archive : il
+   reste discret, mais il est atteignable sans survol. Le premier clic
+   demande confirmation, le second efface. */
+.pay-memo-act {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pay-memo-clear,
+.pay-memo-cancel {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  border-radius: 999px;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: color .18s ease, border-color .18s ease, background .18s ease;
+}
+
+.pay-memo-clear:hover,
+.pay-memo-clear:focus-visible {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--text) 34%, transparent);
+}
+
+/* La confirmation prend la couleur de l'alerte : ce second clic efface pour
+   de bon, il ne doit pas ressembler au premier. */
+.pay-memo-clear[data-ask="yes"] {
+  border-color: color-mix(in srgb, var(--accent) 58%, transparent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+}
+
+.pay-memo-cancel:hover,
+.pay-memo-cancel:focus-visible {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--text) 30%, transparent);
+}
+
+.pay-memo-clear i,
+.pay-memo-cancel i {
+  font-size: 12px;
+  color: inherit;
+}
+
+/* La ligne vierge confirmée : un repère de couleur, effacé au bout de
+   quelques secondes, pour que l'absence d'archive ne se lise pas comme une
+   archive oubliée. */
+.pay-memo-done {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent2, var(--accent)) 16%, transparent);
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 82%, var(--text));
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.pay-memo-done i {
+  font-size: 12px;
+  color: inherit;
+}
+
+/* Le montant de la file lue, à côté du jeton de tri : il dit ce que la
+   liste affichée porte, dans son ordre de lecture. Il ne remplace pas les
+   cinq chiffres du haut — ceux-là parlent de tous les abonnements —, il
+   parle de la seule file qu'on est en train de lire. */
+.pay-sum {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 3px 7px;
+  padding: 5px 11px;
+  border: 1px dashed color-mix(in srgb, var(--text) 18%, transparent);
+  border-radius: 999px;
+  font-family: var(--font-label, inherit);
+  font-size: 11px;
+  letter-spacing: .02em;
+  color: color-mix(in srgb, var(--text) 60%, transparent);
+}
+
+.pay-sum i {
+  font-size: 13px;
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 74%, var(--text));
+}
+
+.pay-sum b {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 86%, transparent);
+}
+
+.pay-sum em {
+  font-style: normal;
+  opacity: .78;
+}
+
+/* La part déjà encaissable de la file lue : séparée du premier montant par un
+   filet, pour que les deux se lisent côte à côte sans se confondre. */
+.pay-sum-ready {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  padding-inline-start: 8px;
+  margin-inline-start: 2px;
+  border-inline-start: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
+  opacity: 1;
+  color: color-mix(in srgb, var(--accent2, var(--accent)) 82%, var(--text));
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.pay-sum-ready i {
+  font-size: 12px;
+  color: inherit;
+}
+
+/* Ce que la file laisse en suspens : le troisième montant, dans le même
+   jeton, séparé par un filet et teinté de l'alerte, pour qu'il ne se
+   confonde pas avec la part encaissable qui le précède. */
+.pay-sum-due {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  padding-inline-start: 8px;
+  margin-inline-start: 2px;
+  border-inline-start: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
+  opacity: 1;
+  color: color-mix(in srgb, var(--accent) 78%, var(--text));
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.pay-sum-due i {
+  font-size: 12px;
+  color: inherit;
+}
+
+/* Le compte nommé par sa fiche : l'écran le dit avant les chiffres, pour que
+   personne ne lise une file resserrée comme la file entière. */
+.pay-focus {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 12px;
+}
+
+/* Le chiffre de l'export reste collé au libellé, séparé par un filet discret. */
+.admin-card-head .admin-btn b {
+  padding-inline-start: 7px;
+  margin-inline-start: 1px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--text) 20%, transparent);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  opacity: .82;
+}
+
+/* La carte du prestataire manquant : le trait d'accent la sépare des autres,
+   sans crier plus fort qu'une alerte du tableau. */
+.pay-intro-card[data-tone="warn"] {
+  border-color: color-mix(in srgb, var(--accent) 34%, transparent);
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+}
+
+.pay-intro-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-family: var(--font-heading, inherit);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--text);
+}
+
+.pay-intro-card h3 i {
+  font-size: 16px;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+}
+
+.pay-intro-card p {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: color-mix(in srgb, var(--text) 64%, transparent);
+}
+
+/* La légende des raisons : chaque ligne porte son point de couleur, la même
+   que la pastille du tableau. */
+.pay-raisons {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 2px 0 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-label, inherit);
+  font-size: 11px;
+  letter-spacing: .02em;
+}
+
+.pay-raisons li {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+
+.pay-raisons b {
+  margin-inline-start: auto;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+}
+
+.pay-raison-dot {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 7px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 34%, transparent);
+}
+
+/* Chaque raison se clique : elle isole les abonnements qu'elle bloque, et un
+   second clic rend la file entière. Le geste est écrit dans la ligne de
+   rappel, pour qu'il se découvre sans survol. */
+.pay-raison-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex: 1 1 auto;
+  min-width: 0;
+  margin-inline-start: -7px;
+  padding: 3px 7px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+
+.pay-raison-btn:hover {
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+}
+
+.pay-raison-btn[data-on="yes"] {
+  border-color: color-mix(in srgb, var(--text) 22%, transparent);
+  background: color-mix(in srgb, var(--text) 9%, transparent);
+  color: var(--text);
+}
+
+.pay-raison-label {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.pay-raison-hint {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  margin: 2px 0 0;
+  font-family: var(--font-label, inherit);
+  font-size: 10.5px;
+  letter-spacing: .02em;
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+}
+
+.pay-raison-clear {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 9px;
+  border: 1px solid color-mix(in srgb, var(--text) 20%, transparent);
+  border-radius: 999px;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: color .18s ease, border-color .18s ease;
+}
+
+.pay-raison-clear:hover {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--text) 34%, transparent);
+}
+
+.pay-raisons li[data-tone="ok"] .pay-raison-dot {
+  background: color-mix(in srgb, var(--accent2) 72%, var(--text));
+}
+
+.pay-raisons li[data-tone="warn"] .pay-raison-dot {
+  background: color-mix(in srgb, var(--accent) 80%, var(--text));
+}
+
+.pay-raisons li[data-tone="off"] .pay-raison-dot {
+  background: color-mix(in srgb, var(--text) 28%, transparent);
+}

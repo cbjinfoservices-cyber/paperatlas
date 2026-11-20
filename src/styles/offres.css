@@ -1,0 +1,3297 @@
+/* ============ OFFRES — PRICING COMPARISON ============ */
+/* Shared by the home section and the dedicated « Offres » page: one card
+   design, one table, so the three formulas read the same wherever they are
+   met. Everything is scoped with the `of-` prefix to stay clear of the older
+   .card / .plans rules of the home page. */
+
+.of-sec { display: grid; gap: 18px; }
+/* ---- the quote, called out at the very top of the plans page ---- */
+.of-hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 18px;
+  margin-top: 22px;
+}
+.of-hero-cta .cta { margin-top: 0; }
+.of-hero-cta-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 70%, transparent);
+}
+.of-hero-cta-note i { font-size: 14px; color: var(--accent); }
+.of-hero-cta-later {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding-bottom: 1px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 32%, transparent);
+}
+.of-hero-cta-later:hover {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--text) 40%, transparent);
+}
+.of-hero-cta-later i { font-size: 13px; }
+
+.of-sec-head { display: grid; gap: 8px; }
+.of-sec-sub {
+  margin: 0;
+  max-width: 64ch;
+  font-size: 14.5px;
+  line-height: 1.62;
+  color: color-mix(in srgb, var(--text) 74%, transparent);
+}
+
+/* ---- the money the prices are read in ---- */
+.of-price-pays {
+  display: grid;
+  gap: 7px;
+  margin-top: 0;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--text) 16%, transparent);
+}
+.of-price-pays-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+.of-price-pays-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.of-price-pays-label i { font-size: 15px; color: var(--accent); }
+.of-price-pays-select {
+  min-width: 190px;
+  padding: 7px 11px;
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: var(--text);
+  background: color-mix(in srgb, var(--surface) 96%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.of-price-pays-select:hover { border-color: color-mix(in srgb, var(--accent) 46%, transparent); }
+.of-price-pays-select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.of-price-pays-money { font-size: 12.5px; color: var(--muted); }
+.of-price-pays-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+.of-price-pays-note i { flex: 0 0 auto; margin-top: 1px; font-size: 14px; color: var(--accent); }
+.of-price-pays-note span { max-width: 78ch; }
+
+/* The share door: the address already carries the market read on screen. */
+.of-price-share {
+  margin-inline-start: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+  font-size: 12px;
+  line-height: 1.2;
+  color: var(--accent2);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 38%, transparent);
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease, color .2s ease;
+}
+.of-price-share i { font-size: 13px; color: inherit; }
+.of-price-share:hover {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  border-color: var(--accent);
+  color: var(--text);
+}
+.of-price-share.is-ok {
+  color: var(--accent2);
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+}
+.of-price-share:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* The market that pays less than the plain rate says so, and says by how much. */
+.of-price-pays-coef {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--accent2);
+}
+.of-price-pays-coef i { flex: 0 0 auto; margin-top: 1px; font-size: 14px; color: inherit; }
+.of-price-pays-coef strong {
+  font-family: var(--font-heading);
+  font-size: 13.5px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+/* A market whose written coefficient leaves the corridor is flagged, never
+   quietly charged: the price applies the nearest bound and says so. */
+.of-price-pays-warn {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  margin: 0;
+  padding: 7px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent2) 36%, transparent);
+}
+.of-price-pays-warn i { flex: 0 0 auto; margin-top: 1px; font-size: 14px; color: inherit; }
+.of-price-pays-warn strong {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+.of-price-pays-share {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+.of-price-pays-share i { flex: 0 0 auto; margin-top: 1px; font-size: 13px; color: var(--accent); }
+.of-price-pays-share span { max-width: 78ch; }
+
+/* The open markets sit right under the selector, on the same plate: the money
+   of the page changes with one chip, without scrolling to the tariff table. */
+.of-price-pays-markets {
+  padding-top: 9px;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 13%, transparent);
+}
+.of-price-pays-markets .market-chip {
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+}
+
+@media (max-width: 640px) {
+  .of-price-pays-select { min-width: 0; width: 100%; }
+  .of-price-share { margin-inline-start: 0; }
+  .of-price-pays-markets { padding-top: 8px; }
+}
+
+/* ---- the three cards ---- */
+.of-plans {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  width: 100%;
+  margin-top: 6px;
+  text-align: start;
+  align-items: stretch;
+}
+.of-plan {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 24px 22px 22px;
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  backdrop-filter: blur(10px);
+  transition: transform .28s ease-out, border-color .28s ease-out;
+}
+.of-plan:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--accent) 46%, transparent); }
+.of-plan.is-featured {
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--accent) 13%, transparent) 0%,
+    color-mix(in srgb, var(--surface) 92%, transparent) 58%);
+  box-shadow: 0 22px 48px -30px color-mix(in srgb, #000 62%, transparent);
+}
+.of-plan-badge {
+  position: absolute;
+  top: -11px;
+  inset-inline-start: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 11px;
+  border-radius: 999px;
+  white-space: nowrap;
+  background: var(--accent);
+  color: var(--bg);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.of-plan-badge i { font-size: 12px; }
+
+.of-plan-head { display: grid; grid-template-columns: 42px minmax(0, 1fr); gap: 12px; align-items: start; }
+.of-plan-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--accent) 15%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--accent) 36%, transparent);
+  color: var(--accent);
+}
+.of-plan-icon i { font-size: 19px; color: inherit; }
+.of-plan-ident { min-width: 0; }
+.of-plan-name {
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent2);
+}
+.of-plan-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 5px; margin: 7px 0 0; }
+.of-plan-price strong {
+  font-family: var(--font-heading);
+  font-size: clamp(23px, 2.2vw, 30px);
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -.03em;
+  color: var(--text);
+}
+.of-plan.is-featured .of-plan-price strong { color: var(--accent2); }
+.of-plan-per { font-size: 12.5px; color: var(--muted); }
+
+/* The price the board started from, kept small under the converted figure. */
+.of-plan-dzd {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 7px;
+  margin: 5px 0 0;
+  font-size: 11.5px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+.of-plan-dzd i { font-size: 12px; color: color-mix(in srgb, var(--accent) 70%, transparent); }
+.of-plan-dzd b {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+}
+.of-plan-dzd-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  white-space: nowrap;
+  font-family: var(--font-label);
+  font-size: 9px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--accent2);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+}
+.of-plan-dzd-tag i { font-size: 10px; color: inherit; }
+/* A market held on the bottom of the corridor says it in the same word the
+   tariff table uses, so the card never reads as a rounded mistake. */
+.of-plan-dzd-tag.is-floor {
+  color: var(--accent2);
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+}
+.of-plan-unit { margin: 5px 0 0; font-size: 12px; line-height: 1.5; color: color-mix(in srgb, var(--muted) 60%, var(--text)); }
+
+/* The same plan paid for a year: eleven months charged, the last one offered.
+   Read in the money on screen, right under the monthly figure. */
+.of-plan-year {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  margin: 4px 0 0;
+  font-size: 11.5px;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--text) 72%, transparent);
+}
+.of-plan-year-line { display: inline-flex; align-items: center; gap: 5px; min-width: 0; }
+.of-plan-year-line i { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
+.of-plan-year-line b { font-weight: 600; font-variant-numeric: tabular-nums; }
+.of-plan-year-line em { font-style: normal; color: var(--muted); }
+.of-plan-year-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  white-space: nowrap;
+  font-family: var(--font-label);
+  font-size: 9px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--accent2);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--accent) 48%, transparent);
+}
+.of-plan-year-tag i { font-size: 10px; color: inherit; }
+.of-plans.is-compact .of-plan-year { font-size: 10.5px; gap: 3px 6px; margin-top: 3px; }
+
+/* ---- the billing rhythm, chosen on the Premium card itself ---- */
+.of-plan-bill { display: flex; flex-wrap: wrap; gap: 5px; margin: 7px 0 0; }
+.of-plan-bill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  padding: 4px 9px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  color: var(--muted);
+  font: inherit;
+  font-size: 11px;
+  line-height: 1.3;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.of-plan-bill-btn i { font-size: 11.5px; color: inherit; }
+.of-plan-bill-btn em {
+  font-style: normal;
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  letter-spacing: .02em;
+  color: color-mix(in srgb, var(--accent) 76%, var(--muted));
+}
+.of-plan-bill-btn:hover { border-color: color-mix(in srgb, var(--accent) 46%, transparent); }
+.of-plan-bill-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.of-plan-bill-btn.is-on {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, var(--surface));
+  color: var(--accent2);
+}
+/* The plain year stays struck under the year actually paid, so the offered
+   month can be seen without opening anything. */
+.of-plan-year-was {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--muted);
+}
+.of-plan-year-was s { text-decoration: line-through; font-variant-numeric: tabular-nums; }
+
+.of-includes {
+  list-style: none;
+  margin: 0;
+  padding: 14px 0 0;
+  display: grid;
+  gap: 9px;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 16%, transparent);
+}
+.of-includes li {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--text) 86%, transparent);
+}
+.of-includes li i { font-size: 14px; margin-top: 2px; color: var(--accent); }
+
+.of-plan-diff {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+  margin: auto 0 0;
+  padding: 11px 12px;
+  border-radius: 12px;
+  font-size: 12.5px;
+  line-height: 1.56;
+  color: color-mix(in srgb, var(--text) 82%, transparent);
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+}
+.of-plan-diff i { font-size: 14px; margin-top: 1px; color: var(--accent2); }
+
+.of-plan-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 16px;
+  border-radius: 999px;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid color-mix(in srgb, var(--accent) 48%, transparent);
+  background: transparent;
+  color: var(--accent2);
+  font-size: 13.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background .22s ease, color .22s ease, border-color .22s ease;
+}
+.of-plan-cta i { font-size: 15px; transition: transform .22s ease-out; }
+.of-plan-cta:hover { background: color-mix(in srgb, var(--accent) 16%, transparent); color: var(--text); border-color: var(--accent); }
+.of-plan-cta:hover i { transform: translateX(3px); }
+.of-plan-cta.is-solid { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.of-plan-cta.is-solid:hover { background: color-mix(in srgb, var(--accent) 82%, var(--bg)); border-color: transparent; color: var(--bg); }
+
+/* The home section keeps the same cards, tightened to stay one screen tall. */
+.of-plans.is-compact .of-plan { padding: 20px 17px 18px; gap: 12px; border-radius: 16px; }
+.of-plans.is-compact .of-plan-head { grid-template-columns: 34px minmax(0, 1fr); gap: 10px; }
+.of-plans.is-compact .of-plan-icon { width: 34px; height: 34px; border-radius: 10px; }
+.of-plans.is-compact .of-plan-icon i { font-size: 16px; }
+.of-plans.is-compact .of-plan-name { font-size: 10px; }
+.of-plans.is-compact .of-plan-price strong { font-size: 21px; }
+.of-plans.is-compact .of-plan-per { font-size: 11.5px; }
+.of-plans.is-compact .of-plan-dzd { font-size: 10.5px; gap: 3px 6px; margin-top: 4px; }
+.of-plans.is-compact .of-includes { padding-top: 12px; gap: 7px; }
+.of-plans.is-compact .of-includes li { font-size: 12.5px; }
+.of-plans.is-compact .of-plan-diff { padding: 9px 10px; font-size: 11.5px; }
+.of-plans.is-compact .of-plan-cta { padding: 10px 14px; font-size: 12.5px; }
+
+.of-plans-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; width: 100%; margin-top: 4px; }
+.of-plans-note { margin: 0; flex: 1 1 240px; min-width: 0; font-size: 12px; line-height: 1.55; color: var(--muted); }
+.of-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  color: var(--accent2);
+  text-decoration: none;
+  white-space: nowrap;
+  border-bottom: 1px dashed color-mix(in srgb, var(--accent) 46%, transparent);
+  padding-bottom: 2px;
+  transition: border-color .2s ease, color .2s ease;
+}
+.of-more i { font-size: 14px; transition: transform .2s ease-out; }
+.of-more:hover { border-bottom-style: solid; border-color: var(--accent); color: var(--text); }
+.of-more:hover i { transform: translateX(3px); }
+
+/* Le renvoi en miroir de celui posé sous les cartes des guichets : même filet
+   léger, même petite ligne, mais il regarde l'autre bord — les formules
+   s'ouvrent ici, la demande se dépose là-bas. Rien n'est écrit en dur : la
+   palette et la typographie peuvent changer sans le toucher. */
+.of-aside {
+  display: flex;
+  justify-content: flex-start;
+  margin: 2px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
+}
+
+.of-aside-link {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 6px 2px;
+  color: var(--muted);
+  font-size: 12.5px;
+  letter-spacing: .01em;
+  text-decoration: none;
+  transition: color .18s ease-out;
+}
+
+/* Les deux signes, côte à côte : chacun dans son petit cercle teinté de
+   l'accent, et légèrement chevauchés. Le renvoi des formules se lit ainsi
+   comme une paire de guichets — la pile pour le grand tirage et la
+   sous-traitance, la liste pour les marchés publics. Le renvoi posé sous ces
+   mêmes guichets porte exactement le même couple : les deux lignes se
+   répondent d'un bord à l'autre du propos. */
+.of-aside-marks { display: inline-flex; align-items: center; flex: 0 0 auto; }
+
+.of-aside-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  transition: background .18s ease-out, border-color .18s ease-out, color .18s ease-out;
+}
+
+.of-aside-mark + .of-aside-mark { margin-inline-start: -5px; }
+
+.of-aside-mark i { font-size: 11.5px; line-height: 1; color: inherit; }
+
+.of-aside-txt { min-width: 0; }
+
+.of-aside-cta {
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.of-aside-go {
+  font-size: 14px;
+  color: color-mix(in srgb, var(--accent) 70%, transparent);
+  transition: color .18s ease-out, transform .18s ease-out;
+}
+
+.of-aside-link:hover,
+.of-aside-link:hover .of-aside-go { color: var(--accent); }
+
+.of-aside-link:hover .of-aside-mark {
+  background: color-mix(in srgb, var(--accent) 22%, var(--surface));
+  border-color: color-mix(in srgb, var(--accent) 58%, transparent);
+  color: var(--accent);
+}
+
+.of-aside-link:hover .of-aside-go { transform: translateX(2px); }
+
+[dir="rtl"] .of-aside-link { letter-spacing: 0; }
+[dir="rtl"] .of-aside-go { transform: scaleX(-1); }
+[dir="rtl"] .of-aside-link:hover .of-aside-go { transform: scaleX(-1) translateX(2px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .of-aside-mark, .of-aside-go { transition: none; }
+}
+
+@media (max-width: 640px) {
+  .of-aside-link { align-items: flex-start; }
+  .of-aside-marks { margin-top: 1px; }
+  .of-aside-cta { white-space: normal; }
+}
+
+/* ── Le renvoi des formules au plus serré, en arabe ────────────────────────
+   À 320 px, la page ne laisse que 275 px au renvoi, et « جئت لإيداع طلب لا
+   للبحث عن صيغة؟ » y écrit plus long que son équivalent latin. Le couple de
+   signes et la phrase se partageaient donc la première ligne au hasard, et la
+   flèche avec son mot tombaient dessous, chacun de son côté : le renvoi se
+   lisait comme trois lignes sans axes.
+
+   Le renvoi prend ici deux lignes qui se répondent : la paire de signes
+   d'abord, la phrase ensuite, qui s'enroule dans la largeur qui reste et non
+   au-delà ; puis la flèche et le mot qui nomme les deux guichets, posés
+   ensemble sous la phrase, alignés sur elle. Les deux signes rendent un peu
+   de leur cercle et se chevauchent davantage, la phrase un demi-point — rien
+   n'est retiré, aucun mot n'est coupé, et le couple reste le même que sous
+   les guichets. */
+@media (max-width: 360px) {
+  .of-aside { padding-top: 10px; }
+  .of-aside-link { gap: 6px; font-size: 12px; }
+  .of-aside-marks { margin-top: 0; }
+  .of-aside-mark { width: 18px; height: 18px; }
+  .of-aside-mark i { font-size: 10.5px; }
+  .of-aside-mark + .of-aside-mark { margin-inline-start: -4px; }
+  /* La phrase prend la place qui reste sur sa ligne : la flèche et le mot ne
+     peuvent donc plus tomber au hasard à côté d'elle. */
+  .of-aside-txt { flex: 1 1 0; min-width: 0; line-height: 1.45; }
+  .of-aside-go { margin-inline-start: 37px; }
+  .of-aside-cta { font-size: 12px; }
+  [dir="rtl"] .of-aside-txt { line-height: 1.5; }
+  [dir="rtl"] .of-aside-go { transform: scaleX(-1); }
+  [dir="rtl"] .of-aside-link:hover .of-aside-go { transform: scaleX(-1) translateX(2px); }
+}
+
+/* ---- the comparison table ---- */
+.of-table-block { display: grid; gap: 12px; }
+.of-table-wrap {
+  overflow-x: auto;
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  -webkit-overflow-scrolling: touch;
+}
+.of-table { min-width: 720px; display: grid; }
+.of-tr {
+  display: grid;
+  grid-template-columns: minmax(160px, 1.25fr) repeat(3, minmax(150px, 1fr));
+  border-top: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+}
+.of-tr-head { border-top: 0; background: color-mix(in srgb, var(--text) 5%, transparent); }
+.of-th { padding: 14px 16px; display: grid; gap: 3px; align-content: center; }
+.of-th-label {
+  padding: 14px 16px;
+  align-content: center;
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.of-th-name { font-size: 14px; font-weight: 600; color: var(--text); }
+.of-th-price { font-family: var(--font-label); font-size: 11.5px; color: var(--accent2); }
+.of-th-price em { font-style: normal; color: var(--muted); }
+.of-th-dzd { font-size: 10.5px; line-height: 1.4; color: color-mix(in srgb, var(--text) 54%, transparent); }
+.of-td { padding: 13px 16px; font-size: 13.5px; line-height: 1.55; color: color-mix(in srgb, var(--text) 88%, transparent); }
+.of-td-label { font-size: 13px; color: color-mix(in srgb, var(--text) 72%, transparent); }
+.of-td.is-featured { background: color-mix(in srgb, var(--accent) 7%, transparent); }
+.of-table-note { display: flex; align-items: flex-start; gap: 7px; margin: 0; font-size: 12px; line-height: 1.55; color: var(--muted); }
+.of-table-note i { flex: 0 0 auto; margin-top: 1px; font-size: 14px; color: var(--accent); }
+
+/* ---- the pricing FAQ ---- */.of-faq { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.of-faq-item {
+  border-radius: 16px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  transition: border-color .22s ease;
+}
+.of-faq-item.is-open { border-color: color-mix(in srgb, var(--accent) 42%, transparent); }
+.of-faq-head { margin: 0; font-size: inherit; font-weight: inherit; }
+.of-faq-btn {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) 26px;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px 16px;
+  border: 0;
+  background: none;
+  color: var(--text);
+  font: inherit;
+  font-size: 14.5px;
+  font-weight: 600;
+  text-align: start;
+  cursor: pointer;
+}
+.of-faq-num { font-family: var(--font-label); font-size: 10px; font-weight: 400; letter-spacing: .1em; color: var(--accent); }
+.of-faq-q { min-width: 0; }
+.of-faq-sign {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  color: var(--accent2);
+}
+.of-faq-sign i { font-size: 15px; color: inherit; }
+.of-faq-item.is-open .of-faq-sign { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.of-faq-panel { padding: 0 16px 16px; padding-inline-start: 62px; }
+.of-faq-panel p {
+  margin: 0;
+  max-width: 80ch;
+  font-size: 13.5px;
+  line-height: 1.68;
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+}
+.of-faq-panel[hidden] { display: none; }
+
+/* ---- the whole tariff, folded under the questions ---- */
+.of-faq-block { display: grid; gap: 10px; width: 100%; }
+.of-pays-fold { display: grid; gap: 8px; width: 100%; }
+.of-pays-body { display: grid; gap: 8px; }
+.of-pays-body[hidden] { display: none; }
+
+/* ---- the order of the sheet: the catalogue, or the most advantageous first ---- */
+/* The four lengths are read in the market's own money, so two markets can never
+   be compared by their figures. The saving, on the other hand, is read against
+   the reference price and kept in dinars: one number, one scale, and the sheet
+   can rank the 22 markets without inventing a rate. */
+.of-pays-sort {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  padding: 7px 9px;
+  border-radius: 11px;
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 11%, transparent);
+}
+.of-pays-sort-lab {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.of-pays-sort-lab i { font-size: 12px; color: var(--accent); }
+.of-pays-sort-set { display: flex; flex-wrap: wrap; gap: 5px; min-width: 0; }
+.of-pays-sort-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+  color: var(--muted);
+  font: inherit;
+  font-size: 11px;
+  line-height: 1.3;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.of-pays-sort-btn i { font-size: 11.5px; color: inherit; }
+.of-pays-sort-btn:hover { border-color: color-mix(in srgb, var(--accent) 46%, transparent); color: var(--text); }
+.of-pays-sort-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.of-pays-sort-btn.is-on {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, var(--surface));
+  color: var(--accent2);
+}
+.of-pays-sort-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  flex: 1 1 260px;
+  min-width: 0;
+  margin: 0;
+  font-size: 10.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.of-pays-sort-note i { flex: 0 0 auto; margin-top: 1px; font-size: 12px; color: var(--accent); }
+.of-pays-sort-note b { font-weight: 600; color: var(--accent2); }
+.of-pays-table {
+  display: grid;
+  border-radius: 14px;
+  /* The four lengths take more room than the single monthly figure did: on a
+     phone the sheet scrolls sideways rather than squeezing a price to nothing. */
+  overflow-x: auto;
+  overflow-y: hidden;
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 13%, transparent);
+}
+.of-pays-tr {
+  display: grid;
+  grid-template-columns:
+    minmax(104px, 1.15fr)
+    repeat(4, minmax(78px, 0.9fr))
+    74px;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 12px;
+}
+.of-pays-head {
+  /* The small key of every line takes this width, so the six columns above
+     land exactly on the six columns below. */
+  min-width: 760px;
+  box-sizing: border-box;
+  padding-inline-end: 46px;
+  background: color-mix(in srgb, var(--text) 5%, transparent);
+  font-family: var(--font-label);
+  font-size: 9px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.of-pays-head-dur { text-align: end; white-space: nowrap; }
+.of-pays-head-dur.is-year { color: var(--accent2); }
+.of-pays-row {
+  /* The line is no longer a grid of three cells: the pick button holds those
+     three columns, and the copy key sits beside them. */
+  display: block;
+  position: relative;
+  padding: 0;
+  border-top: 1px solid color-mix(in srgb, var(--text) 9%, transparent);
+  transition: background .18s ease, color .18s ease;
+}
+.of-pays-row:hover { background: color-mix(in srgb, var(--accent) 9%, transparent); }
+.of-pays-row.is-on { background: color-mix(in srgb, var(--accent) 13%, var(--surface)); }
+/* The whole line reads every price in its market; the key beside it hands the
+   same market to someone else, without climbing back up to the selector. */
+.of-pays-pick {
+  display: grid;
+  grid-template-columns:
+    minmax(104px, 1.15fr)
+    repeat(4, minmax(78px, 0.9fr))
+    74px;
+  gap: 8px;
+  align-items: center;
+  min-width: 760px;
+  width: 100%;
+  box-sizing: border-box;
+  /* Logical padding: the key sits at the reading end, so the four figures
+     keep the very columns of the head in both directions. */
+  padding-block: 8px;
+  padding-inline: 12px 46px;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+.of-pays-pick:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.of-pays-copy {
+  position: absolute;
+  inset-inline-end: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  background: color-mix(in srgb, var(--surface) 80%, transparent);
+  color: var(--muted);
+  cursor: pointer;
+  transition: color .18s ease, border-color .18s ease, background .18s ease;
+}
+.of-pays-copy i { font-size: 13px; color: inherit; }
+.of-pays-copy:hover,
+.of-pays-copy:focus-visible {
+  color: var(--accent2);
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+}
+.of-pays-copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 0; }
+.of-pays-copy.is-ok { color: var(--accent2); border-color: color-mix(in srgb, var(--accent) 55%, transparent); }
+.of-pays-copy.is-err { color: var(--accent2); border-color: color-mix(in srgb, var(--accent) 40%, transparent); }
+/* What the key just did, said once under the table. */
+.of-pays-copied {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.of-pays-copied i { font-size: 12px; color: var(--accent); }
+.of-pays-copied.is-err { color: color-mix(in srgb, var(--accent2) 85%, var(--text)); }
+.of-pays-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.of-pays-name i { flex: 0 0 auto; font-size: 13px; color: var(--accent); }
+/* La première colonne tient deux lignes : le nom du marché, puis la pastille
+   de son économie annuelle — le chiffre se lit donc sans ouvrir la ligne. */
+.of-pays-name-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  min-width: 0;
+}
+.of-pays-eco {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  max-width: 100%;
+  padding: 1px 6px 1px 5px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 32%, transparent);
+  color: var(--accent2);
+  /* La pastille est aussi un tri : elle se clique comme un bouton, sans
+     ouvrir la ligne qui la porte. */
+  font: inherit;
+  font-family: var(--font-label);
+  font-size: 9px;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+.of-pays-eco:hover {
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 56%, transparent);
+  color: var(--text);
+}
+.of-pays-eco:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.of-pays-eco.is-on {
+  background: color-mix(in srgb, var(--accent) 28%, transparent);
+  border-color: var(--accent);
+  color: var(--accent2);
+}
+/* Le total de la feuille, posé juste au-dessus : un seul chiffre pour tout le
+   catalogue, dans la même teinte que la pastille dont il est la somme. */
+.of-pays-eco-total {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  padding: 8px 11px;
+  border-radius: 11px;
+  background: color-mix(in srgb, var(--accent) 11%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+}
+.of-pays-eco-total-lab {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--accent2);
+}
+.of-pays-eco-total-lab i { font-size: 12px; color: inherit; }
+.of-pays-eco-total-n {
+  font-family: var(--font-heading);
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -.02em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--accent2);
+}
+.of-pays-eco-total-note {
+  flex: 1 1 220px;
+  min-width: 0;
+  font-size: 10.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+/* Le total part tel quel : une petite commande qui ne prend pas la place du
+   chiffre qu'elle copie. */
+.of-pays-eco-copy {
+  flex: 0 0 auto;
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 38%, transparent);
+  background: color-mix(in srgb, var(--surface) 84%, transparent);
+  color: var(--accent2);
+  font: inherit;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .04em;
+  line-height: 1.5;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+.of-pays-eco-copy i { font-size: 11px; color: inherit; }
+.of-pays-eco-copy span { font-size: 9.5px; color: inherit; }
+.of-pays-eco-copy:hover {
+  background: color-mix(in srgb, var(--accent) 18%, var(--surface));
+  border-color: var(--accent);
+  color: var(--text);
+}
+.of-pays-eco-copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.of-pays-eco-copy.is-ok {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 20%, var(--surface));
+  color: var(--accent2);
+}
+
+/* ── Le compteur des marchés au plancher ───────────────────────────────────
+   Posé au bas de la feuille, il dit combien de marchés paient le minimum de la
+   fourchette — et il les garde seuls d'un clic, sans repasser par les filtres. */
+.of-pays-floor-band {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px 10px;
+  padding: 6px 9px;
+  border-radius: 11px;
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--text) 16%, transparent);
+}
+.of-pays-floor-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+  color: color-mix(in srgb, var(--text) 74%, transparent);
+  font: inherit;
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  line-height: 1.5;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.of-pays-floor-btn i { font-size: 12px; color: color-mix(in srgb, var(--accent) 74%, var(--muted)); }
+.of-pays-floor-btn b {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent2);
+}
+.of-pays-floor-btn:hover {
+  border-color: color-mix(in srgb, var(--accent) 48%, transparent);
+  color: var(--text);
+}
+.of-pays-floor-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.of-pays-floor-btn.is-on {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 16%, var(--surface));
+  color: var(--accent2);
+}
+.of-pays-floor-btn.is-on b { color: var(--accent2); }
+/* Le second compteur du corridor, celui des marchés hors fourchette : la même
+   gélule que celui du plancher, mais une encre d'alerte — il nomme un réglage
+   à vérifier, pas un prix tenu au minimum. */
+.of-pays-hors-btn i { color: color-mix(in srgb, var(--accent2) 74%, var(--muted)); }
+.of-pays-hors-btn b { color: var(--accent2); }
+.of-pays-hors-btn:hover {
+  border-color: color-mix(in srgb, var(--accent2) 48%, transparent);
+  color: var(--text);
+}
+.of-pays-hors-btn.is-on {
+  border-style: solid;
+  border-color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 14%, var(--surface));
+  color: var(--accent2);
+}
+[dir="rtl"] .of-pays-hors-btn { letter-spacing: 0; }
+/* La copie de la lecture « hors fourchette », posée contre son compteur : la
+   même gélule, mais en pointillé, pour que le geste ne se confonde pas avec
+   le filtre qu'il accompagne. */
+.of-pays-hors-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--accent2) 34%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--accent2) 84%, var(--text));
+  font-family: var(--font-label);
+  font-size: 10px;
+  line-height: 1.5;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.of-pays-hors-copy i { font-size: 11px; color: inherit; }
+.of-pays-hors-copy:hover {
+  border-color: color-mix(in srgb, var(--accent2) 62%, transparent);
+  background: color-mix(in srgb, var(--accent2) 8%, transparent);
+  color: var(--accent2);
+}
+.of-pays-hors-copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.of-pays-hors-copy.is-ok {
+  border-style: solid;
+  border-color: var(--accent);
+  color: var(--accent2);
+}
+[dir="rtl"] .of-pays-hors-copy { letter-spacing: 0; }
+.of-pays-floor-note {
+  flex: 1 1 200px;
+  min-width: 0;
+  font-size: 10.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.of-pays-eco i { flex: 0 0 auto; font-size: 9.5px; color: inherit; }
+.of-pays-eco b {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 600;
+}
+.of-pays-row.is-on .of-pays-eco {
+  background: color-mix(in srgb, var(--accent) 22%, var(--surface));
+  border-color: color-mix(in srgb, var(--accent) 48%, transparent);
+}
+.of-pays-eco-note { flex-basis: 100%; }
+.of-pays-eco-note i { color: var(--accent); }
+.of-pays-row.is-on .of-pays-name { font-weight: 600; color: var(--accent2); }
+.of-pays-money {
+  font-family: var(--font-heading);
+  font-size: 12.5px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 84%, transparent);
+}
+/* Each length, read in the market's own money: the four figures sit in one
+   row, so the month, the quarter, the half year and the year are compared
+   without opening the line. The year keeps the accent, as on the cards. */
+.of-pays-dur {
+  min-width: 0;
+  /* The values take the whole cell and end-align, exactly like their heading:
+     the four figures then share one edge with the four labels above them, in
+     French as in Arabic. `end` follows the cell's own direction, so nothing has
+     to be mirrored by hand. */
+  text-align: end;
+  font-family: var(--font-heading);
+  font-size: 11.5px;
+  line-height: 1.35;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--text) 84%, transparent);
+}
+.of-pays-dur.is-year { font-weight: 600; color: var(--accent2); }
+.of-pays-coef {
+  display: inline-grid;
+  justify-items: end;
+  align-content: center;
+  gap: 1px;
+  min-height: 22px;
+  white-space: nowrap;
+  font-family: var(--font-label);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+.of-pays-coef-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+}
+.of-pays-coef i { font-size: 12px; color: inherit; }
+.of-pays-head-coef { text-align: end; }
+/* The market sitting exactly on the 35 % floor says it in a word, so the
+   figure reads as the board's own bound and not as a mistake. */
+.of-pays-floor {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-style: normal;
+  font-family: var(--font-label);
+  font-size: 9px;
+  line-height: 1.2;
+  letter-spacing: .02em;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent) 72%, var(--muted));
+}
+.of-pays-floor i { font-size: 9px; color: inherit; }
+.of-pays-row.is-plancher .of-pays-coef-num { color: var(--accent2); }
+.of-pays-row.is-on .of-pays-coef { color: var(--accent2); }
+.of-pays-row.is-hors .of-pays-coef { color: var(--accent2); }
+.of-pays-row.is-open { background: color-mix(in srgb, var(--accent) 11%, var(--surface)); }
+
+/* A line opens into its own detail panel: the month, the year with its offered
+   month, the coefficient and the market's own address, without leaving the
+   sheet or climbing back up to the country selector. */
+/* La ligne citée par une adresse copiée se ramène au centre : elle garde une
+   marge de défilement, pour ne pas finir sous la navigation. */
+.of-pays-item { display: block; scroll-margin-top: 120px; }
+.of-pays-detail {
+  display: grid;
+  gap: 8px;
+  padding: 10px 12px 12px;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 14%, transparent);
+  background: color-mix(in srgb, var(--accent) 5%, var(--surface));
+}
+.of-pays-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px 12px;
+  margin: 0;
+}
+.of-pays-detail-grid > div { display: grid; gap: 2px; min-width: 0; }
+.of-pays-detail-grid dt {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-label);
+  font-size: 9px;
+  line-height: 1.3;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.of-pays-detail-grid dd {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  line-height: 1.35;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+.of-pays-detail-offer {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 0 6px;
+  border-radius: 999px;
+  white-space: nowrap;
+  font-size: 8.5px;
+  letter-spacing: .02em;
+  text-transform: none;
+  color: var(--accent2);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--accent) 48%, transparent);
+}
+.of-pays-detail-offer i { font-size: 9px; color: inherit; }
+.of-pays-detail-was {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--muted);
+  text-decoration: line-through;
+}
+/* A unit, not a struck price: the annual saving keeps « par an » beside it
+   without any line through the figure. */
+.of-pays-detail-unit {
+  display: inline-block;
+  margin-inline-start: 4px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.of-pays-detail-floor {
+  font-family: var(--font-label);
+  font-size: 9px;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--accent) 72%, var(--muted));
+}
+.of-pays-detail-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 0;
+  font-size: 10.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.of-pays-detail-note i { flex: 0 0 auto; margin-top: 1px; font-size: 12px; color: var(--accent); }
+.of-pays-detail-note.is-floor i { color: var(--accent2); }
+.of-pays-detail-link {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 4px 5px 4px 9px;
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--text) 5%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+}
+.of-pays-detail-link > i { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
+.of-pays-detail-link code {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  color: var(--muted);
+  direction: ltr;
+  text-align: start;
+}
+.of-pays-key {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border-radius: 7px;
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  background: color-mix(in srgb, var(--surface) 85%, transparent);
+  color: var(--muted);
+  cursor: pointer;
+  transition: color .16s ease, border-color .16s ease, background .16s ease;
+}
+.of-pays-key i { font-size: 12px; color: inherit; }
+.of-pays-key:hover,
+.of-pays-key:focus-visible {
+  color: var(--accent2);
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+}
+.of-pays-key:focus-visible { outline: 2px solid var(--accent); outline-offset: 0; }
+.of-pays-key.is-ok { color: var(--accent2); border-color: color-mix(in srgb, var(--accent) 55%, transparent); }
+.of-pays-read {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: var(--accent2);
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  letter-spacing: .03em;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background .16s ease, border-color .16s ease;
+}
+.of-pays-read i { font-size: 12px; color: inherit; }
+.of-pays-read:hover,
+.of-pays-read:focus-visible {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+}
+.of-pays-read:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* The rhythm chosen on this very line: the month, or the year with its offered
+   month already taken off, each with its own figure. */
+.of-pays-bill {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+.of-pays-bill-btn {
+  display: grid;
+  gap: 1px;
+  justify-items: start;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 6px 9px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--text) 13%, transparent);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  color: var(--muted);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.of-pays-bill-btn:hover { border-color: color-mix(in srgb, var(--accent) 45%, transparent); }
+.of-pays-bill-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.of-pays-bill-btn.is-on {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 13%, var(--surface));
+  color: var(--accent2);
+}
+.of-pays-bill-lab {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-label);
+  font-size: 9px;
+  line-height: 1.3;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: inherit;
+}
+.of-pays-bill-lab i { font-size: 10px; color: inherit; }
+.of-pays-bill-btn b {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.35;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--text);
+}
+.of-pays-bill-btn em {
+  font-style: normal;
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  line-height: 1.3;
+  letter-spacing: .02em;
+  color: color-mix(in srgb, var(--accent) 72%, var(--muted));
+}
+.of-pays-bill-kept {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0;
+  font-size: 10.5px;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+.of-pays-bill-kept i { flex: 0 0 auto; font-size: 11px; color: color-mix(in srgb, var(--accent) 72%, transparent); }
+.of-pays-signup {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 7px 12px;
+  border-radius: 999px;
+  text-decoration: none;
+  white-space: nowrap;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--bg);
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  transition: background .2s ease, border-color .2s ease;
+}
+.of-pays-signup i { font-size: 12px; color: inherit; transition: transform .2s ease-out; }
+.of-pays-signup:hover {
+  background: color-mix(in srgb, var(--accent) 82%, var(--bg));
+  border-color: transparent;
+}
+.of-pays-signup:hover i { transform: translateX(3px); }
+.of-pays-signup:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.of-pays-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.of-pays-note i { flex: 0 0 auto; margin-top: 1px; font-size: 12px; color: var(--accent); }
+
+/* The sheet leaves as a file: the whole table, market by market. */
+.of-pays-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 10px;
+}
+.of-pays-foot .of-pays-note { flex: 1 1 260px; }
+.of-pays-csv { margin-top: 0; }
+.of-pays-csv i { font-size: 14px; color: var(--accent); }
+.of-pays-csv.is-ok i { color: var(--accent2); }
+.of-pays-csv-hint {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  margin: 0;
+  font-size: 10.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.of-pays-csv-hint i { flex: 0 0 auto; margin-top: 1px; font-size: 12px; color: var(--accent); }
+.of-pays-csv-hint span { max-width: 78ch; }
+/* La phrase sous la feuille : le lien d'une ligne ouvre la page sur ce marché,
+   la ligne citée déjà dépliée — le geste se découvre sans qu'on le cherche. */
+.of-pays-link-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 2px 0 0;
+  padding: 6px 9px;
+  border-radius: 9px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 26%, transparent);
+  background: color-mix(in srgb, var(--accent) 5%, transparent);
+  font-size: 10.5px;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--text) 68%, transparent);
+}
+.of-pays-link-note i {
+  flex: 0 0 auto;
+  margin-top: 1px;
+  font-size: 12px;
+  color: var(--accent);
+}
+.of-pays-link-note span { max-width: 76ch; }
+/* Ce que la visite a déjà envoyé depuis la feuille : une gélule posée à côté
+   de la phrase qui explique le geste, un marché compté une seule fois. */
+.of-pays-link-note { flex-wrap: wrap; }
+.of-pays-link-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-inline-start: auto;
+  padding: 1px 8px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: .03em;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent) 85%, var(--text));
+  white-space: nowrap;
+}
+.of-pays-link-count i { margin: 0; font-size: 11px; color: inherit; }
+[dir="rtl"] .of-pays-link-count { letter-spacing: 0; }
+/* Les marchés dont l’adresse est déjà partie : sous la phrase qui explique le
+   geste, la liste nomme chacun d’eux, sur un trait qui la rattache au compte.
+   Le nom se lit d’un coup d’œil, sans ouvrir une seule ligne. */
+.of-pays-link-names {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 5px 8px;
+  margin: 4px 0 0;
+  padding: 5px 9px;
+  border-radius: 9px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 20%, transparent);
+  background: color-mix(in srgb, var(--accent) 4%, transparent);
+  font-size: 10.5px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+.of-pays-link-names > i {
+  flex: 0 0 auto;
+  font-size: 12px;
+  color: color-mix(in srgb, var(--accent) 80%, var(--text));
+}
+.of-pays-link-names-lab {
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--accent) 78%, var(--text));
+  white-space: nowrap;
+}
+[dir="rtl"] .of-pays-link-names-lab { letter-spacing: 0; }
+.of-pays-link-name-list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-width: 0;
+}
+.of-pays-link-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  white-space: nowrap;
+}
+.of-pays-link-name i { font-size: 10px; color: inherit; }
+/* Le jour et l'heure du dernier envoi, dans la même pastille que le nom : la
+   date se lit sans ouvrir la feuille, et reste discrète derrière le nom. */
+.of-pays-link-name { max-width: 100%; flex-wrap: wrap; white-space: normal; }
+.of-pays-link-name-at {
+  margin-inline-start: 2px;
+  padding-inline-start: 5px;
+  border-inline-start: 1px dashed color-mix(in srgb, var(--accent) 28%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  font-style: normal;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent) 60%, var(--text));
+  white-space: nowrap;
+}
+/* Combien de fois l'adresse est repartie, juste après le nom : la pastille
+   répond à « combien d'envois », sans masquer le jour du dernier départ. */
+.of-pays-link-name-times {
+  padding: 0 5px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  font-style: normal;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent) 86%, var(--text));
+  white-space: nowrap;
+}
+/* Une copie faite par erreur quitte la liste d'un clic : la croix reste
+   discrète, à la fin de la pastille du marché. */
+.of-pays-link-name-x {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  margin-inline-start: 1px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 42%, transparent);
+  font-size: 10px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background .16s ease, color .16s ease;
+}
+.of-pays-link-name-x i { font-size: 10px; color: inherit; }
+.of-pays-link-name-x span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.of-pays-link-name-x:hover {
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: color-mix(in srgb, var(--accent) 86%, var(--text));
+}
+.of-pays-link-name-x:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+/* La liste des marchés déjà servis s'emporte d'un geste : une gélule en
+   pointillé, à la même place que les autres copies de la feuille. */
+.of-pays-link-copy {
+  display: flex;
+  justify-content: flex-end;
+  margin: 6px 0 0;
+}
+.of-pays-link-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 34%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+  font-family: var(--font-label);
+  font-size: 10px;
+  line-height: 1.5;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.of-pays-link-copy-btn i { font-size: 11px; color: inherit; }
+.of-pays-link-copy-btn:hover {
+  border-color: color-mix(in srgb, var(--accent) 62%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+.of-pays-link-copy-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.of-pays-link-copy-btn.is-ok {
+  border-style: solid;
+  border-color: var(--accent);
+}
+[dir="rtl"] .of-pays-link-copy-btn { letter-spacing: 0; }
+
+.of-cta-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.of-cta-actions .cta { margin-top: 0; }
+.of-cta-actions .ghost-btn { margin-top: 0; }
+.of-cta-actions .ghost-btn i { font-size: 15px; color: var(--accent); }
+/* Le passage vers le formulaire de contact garde son sujet : la ligne le dit,
+   plutôt que de laisser la personne le découvrir une fois sur place. */
+.of-cta-actions .of-cta-contact-hint { flex: 1 1 100%; margin: 0; max-width: none;
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11.5px; line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 62%, transparent); }
+.of-cta-actions .of-cta-contact-hint i { font-size: 13px; color: var(--accent); flex: 0 0 auto; }
+
+/* ---- keyboard focus ---- */
+.of-plan-cta:focus-visible,
+.of-faq-btn:focus-visible,
+.of-fold-head:focus-visible,
+.of-more:focus-visible,
+.of-plan-banner-link:focus-visible,
+.of-plan-banner-close:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.of-faq-btn:focus-visible { outline-offset: -2px; }
+
+/* ---- plan reminder carried by the sign-up form ---- */
+.of-plan-banner {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 14px;
+  border-radius: 16px;
+  text-align: start;
+  border: 1px solid color-mix(in srgb, var(--accent) 44%, transparent);
+  background: linear-gradient(120deg,
+    color-mix(in srgb, var(--accent) 15%, transparent) 0%,
+    color-mix(in srgb, var(--surface) 92%, transparent) 62%);
+}
+.of-plan-banner-icon {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 11px;
+  background: color-mix(in srgb, var(--accent) 18%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  color: var(--accent);
+}
+.of-plan-banner-icon i { font-size: 17px; color: inherit; }
+.of-plan-banner-main { min-width: 0; display: grid; gap: 3px; }
+.of-plan-banner-badge {
+  font-family: var(--font-label);
+  font-size: 9px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent2);
+}
+.of-plan-banner-title {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--text) 82%, transparent);
+}
+.of-plan-banner-title strong {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -.02em;
+  color: var(--text);
+}
+.of-plan-banner-price { color: var(--accent2); white-space: nowrap; }
+/* La durée retenue, posée à côté du montant : le récapitulatif dit à quelle
+   longueur ce prix correspond, sans qu'il faille remonter à la carte. */
+.of-plan-banner-duree {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-inline-start: 7px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  vertical-align: baseline;
+  white-space: nowrap;
+  font-family: var(--font-label);
+  font-size: 10.5px;
+  line-height: 1.5;
+  letter-spacing: .02em;
+  color: var(--accent2);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 38%, transparent);
+}
+.of-plan-banner-duree i { font-size: 11px; color: inherit; }
+.of-plan-banner-was {
+  font-size: 11px;
+  color: var(--muted);
+  text-decoration: line-through;
+  white-space: nowrap;
+}
+/* The month or the year, read in the reminder itself, so the offered month is
+   seen before the account is opened. */
+.of-plan-banner-bill { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+.of-plan-banner-bill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  color: var(--muted);
+  font: inherit;
+  font-size: 11px;
+  line-height: 1.3;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.of-plan-banner-bill-btn i { font-size: 12px; color: inherit; }
+.of-plan-banner-bill-btn:hover { border-color: color-mix(in srgb, var(--accent) 46%, transparent); }
+.of-plan-banner-bill-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.of-plan-banner-bill-btn.is-on {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, var(--surface));
+  color: var(--accent2);
+}
+.of-plan-banner-bill-btn em {
+  font-style: normal;
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  letter-spacing: .02em;
+  color: color-mix(in srgb, var(--accent) 76%, var(--muted));
+}
+.of-plan-banner-hint { margin: 0; font-size: 11.5px; line-height: 1.5; color: var(--muted); }
+.of-plan-banner-actions { display: flex; align-items: center; gap: 6px; }
+.of-plan-banner-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--accent2);
+  text-decoration: none;
+  padding-bottom: 1px;
+  border-bottom: 1px dashed color-mix(in srgb, var(--accent) 46%, transparent);
+  transition: border-color .2s ease, color .2s ease;
+}
+.of-plan-banner-link i { font-size: 13px; transition: transform .2s ease-out; }
+.of-plan-banner-link:hover { border-bottom-style: solid; color: var(--text); }
+.of-plan-banner-link:hover i { transform: translateX(3px); }
+.of-plan-banner-close {
+  width: 26px;
+  height: 26px;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: border-color .2s ease, color .2s ease, background .2s ease;
+}
+.of-plan-banner-close i { font-size: 14px; color: inherit; }
+.of-plan-banner-close:hover {
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--text);
+}
+
+.of-plan-banner--recall { margin-bottom: 2px; }
+.of-prefill-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  margin: 6px 0 0;
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+.of-prefill-note i { flex: 0 0 auto; margin-top: 1px; font-size: 12px; color: var(--accent); }
+
+.of-voices.is-compact { gap: 10px; }
+.of-voices.is-compact .of-voice { padding: 15px 13px 11px; border-radius: 14px; gap: 8px; }
+.of-voices.is-compact .of-voice-mark { font-size: 34px; top: 1px; inset-inline-end: 11px; }
+.of-voices.is-compact .of-voice-quote p { font-size: 12px; line-height: 1.58; }
+.of-voices.is-compact .of-voice-by {
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 8px;
+  padding-top: 9px;
+}
+.of-voices.is-compact .of-voice-face { width: 30px; height: 30px; }
+.of-voices.is-compact .of-voice-ident b { font-size: 11.5px; }
+.of-voices.is-compact .of-voice-ident em { font-size: 10px; }
+.of-voices.is-compact .of-voice-plan {
+  grid-column: 2;
+  justify-self: start;
+  font-size: 9px;
+  padding: 2px 7px;
+  margin-top: 2px;
+}
+
+/* ---- the voices folded into a single line, in the home offers section ---- */
+.of-home-voices { width: 100%; display: grid; gap: 9px; margin-top: 4px; text-align: start; }
+.of-fold-head {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr) 24px;
+  gap: 11px;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 13px;
+  border-radius: 13px;
+  border: 1px solid color-mix(in srgb, var(--text) 13%, transparent);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  color: var(--text);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition: border-color .22s ease, background .22s ease;
+}
+.of-fold-head:hover { border-color: color-mix(in srgb, var(--accent) 44%, transparent); }
+.of-fold-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--accent) 13%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--accent) 32%, transparent);
+  color: var(--accent);
+}
+.of-fold-icon i { font-size: 15px; color: inherit; }
+.of-fold-main { min-width: 0; display: grid; gap: 2px; }
+.of-fold-main strong { font-size: 13px; font-weight: 600; letter-spacing: -.01em; color: var(--text); }
+.of-fold-main em { font-style: normal; font-size: 11.5px; line-height: 1.45; color: var(--muted); }
+.of-fold-sign {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  color: var(--accent2);
+}
+.of-fold-sign i { font-size: 14px; color: inherit; }
+.of-fold-head[aria-expanded="true"] .of-fold-sign {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+}
+/* L'état de la feuille, dans son en-tête : le tri et le filtre en cours se
+   lisent avant de déplier, sans rien promettre d'autre que ce qui s'ouvrira. */
+.of-fold-state {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 3px 6px;
+  margin-top: 3px;
+}
+.of-fold-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  line-height: 1.5;
+  letter-spacing: .04em;
+  color: var(--accent2);
+  white-space: nowrap;
+}
+.of-fold-tag i { font-size: 10px; color: inherit; }
+.of-fold-tag b {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: inherit;
+}
+.of-fold-tag.is-warn {
+  border: 1px dashed color-mix(in srgb, var(--accent2) 40%, transparent);
+  background: color-mix(in srgb, var(--accent2) 9%, transparent);
+}
+.of-fold-tag-note {
+  font-size: 9.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+[dir="rtl"] .of-fold-tag { letter-spacing: 0; }
+.of-home-voices-body { display: grid; gap: 8px; }
+.of-home-voices-body[hidden] { display: none; }
+
+/* ---- workshop voices, right under the comparison ---- */
+.of-voices-block { display: grid; gap: 14px; margin-top: 10px; }
+.of-voices-head { display: grid; gap: 5px; }
+.of-voices-title {
+  margin: 0;
+  font-size: clamp(19px, 1.8vw, 24px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -.02em;
+  color: var(--text);
+}
+.of-voices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.of-voice {
+  position: relative;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px 20px 16px;
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 13%, transparent);
+  transition: border-color .26s ease-out, transform .26s ease-out;
+}
+.of-voice:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--accent) 40%, transparent); }
+.of-voice-mark {
+  position: absolute;
+  top: 4px;
+  inset-inline-end: 16px;
+  font-family: var(--font-heading);
+  font-size: 48px;
+  line-height: 1;
+  color: color-mix(in srgb, var(--accent) 32%, transparent);
+  pointer-events: none;
+}
+.of-voice-quote { margin: 0; }
+.of-voice-quote p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.66;
+  color: color-mix(in srgb, var(--text) 84%, transparent);
+}
+.of-voice-by {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 15%, transparent);
+}
+.of-voice-face {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--accent) 38%, transparent);
+}
+.of-voice-face img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+.of-voice-ident { min-width: 0; display: grid; gap: 1px; }
+.of-voice-ident b {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.of-voice-ident em { font-style: normal; font-size: 11px; line-height: 1.4; color: var(--muted); }
+.of-voice-plan {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .06em;
+  color: var(--accent2);
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 32%, transparent);
+}
+.of-voice-plan i { font-size: 11px; color: inherit; }
+.of-voices-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+.of-voices-note i { flex: 0 0 auto; margin-top: 1px; font-size: 13px; color: var(--accent); }
+
+/* ---- pricing FAQ inside the home offers section ---- */
+.of-home-faq { width: 100%; display: grid; gap: 10px; margin-top: 8px; text-align: start; }
+.of-home-faq-head { display: grid; gap: 3px; }
+.of-home-faq-head h3 {
+  margin: 0;
+  font-size: clamp(17px, 1.6vw, 21px);
+  font-weight: 600;
+  letter-spacing: -.02em;
+  color: var(--text);
+}
+.of-home-faq-head p { margin: 0; font-size: 12.5px; line-height: 1.55; color: var(--muted); }
+.of-faq.is-compact { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.of-faq.is-compact .of-faq-item { border-radius: 13px; }
+.of-faq.is-compact .of-faq-btn {
+  grid-template-columns: 22px minmax(0, 1fr) 22px;
+  gap: 8px;
+  padding: 10px 12px;
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+.of-faq.is-compact .of-faq-num { font-size: 9px; }
+.of-faq.is-compact .of-faq-sign { width: 22px; height: 22px; }
+.of-faq.is-compact .of-faq-sign i { font-size: 13px; }
+.of-faq.is-compact .of-faq-panel { padding: 0 12px 12px; padding-inline-start: 12px; }
+.of-faq.is-compact .of-faq-panel p { font-size: 12.5px; line-height: 1.6; }
+
+/* ---- the three formulas as one choice: sign-up form and « Mon compte » ---- */
+.of-pills-block { display: grid; gap: 8px; width: 100%; }
+.of-pills-set { margin: 0; padding: 0; border: 0; min-width: 0; }
+.of-pills-legend {
+  padding: 0;
+  margin-bottom: 8px;
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  color: var(--accent2);
+}
+.of-pills { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.of-pill {
+  position: relative;
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr) 16px;
+  gap: 8px;
+  align-items: center;
+  padding: 9px 10px;
+  border-radius: 13px;
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  background: color-mix(in srgb, var(--surface) 86%, transparent);
+  cursor: pointer;
+  transition: border-color .22s ease, background .22s ease, transform .22s ease-out;
+}
+.of-pill:hover { border-color: color-mix(in srgb, var(--accent) 44%, transparent); }
+.of-pill input { position: absolute; opacity: 0; width: 0; height: 0; margin: 0; pointer-events: none; }
+.of-pill:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }
+.of-pill.is-on {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+}
+.of-pill-icon {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+  color: var(--accent);
+}
+.of-pill-icon i { font-size: 14px; color: inherit; }
+.of-pill-txt { min-width: 0; display: grid; gap: 1px; }
+.of-pill-txt b {
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.of-pill-txt em { font-style: normal; font-size: 11px; line-height: 1.3; color: var(--muted); white-space: nowrap; }
+.of-pill.is-on .of-pill-txt b { color: var(--accent2); }
+.of-pill-check { display: flex; align-items: center; justify-content: center; }
+.of-pill-check i { font-size: 15px; color: color-mix(in srgb, var(--text) 26%, transparent); }
+.of-pill.is-on .of-pill-check i { color: var(--accent); }
+.of-pill:has(input:disabled) { opacity: .6; cursor: progress; }
+.of-pills-hint {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.of-pills-hint i { flex: 0 0 auto; margin-top: 1px; font-size: 13px; color: var(--accent); }
+
+/* ---- changing the formula from « Mon compte » ---- */
+.of-plan-change {
+  display: grid;
+  gap: 10px;
+  margin-top: 2px;
+  padding-top: 14px;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 15%, transparent);
+}
+.of-plan-change-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 10px;
+}
+.of-plan-change-head h3 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  color: var(--text);
+}
+.of-plan-change-state {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+  color: var(--muted);
+}
+.of-plan-change-state i { font-size: 12px; color: inherit; }
+.of-plan-change-state.is-done { color: var(--accent2); }
+
+/* ---- the accounts counted per formula ---- */
+.of-tally { display: grid; gap: 8px; }
+.of-tally-list { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 8px; }
+.of-tally-row {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
+  gap: 9px;
+  align-items: center;
+  padding: 9px 10px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  background: color-mix(in srgb, var(--surface) 86%, transparent);
+}
+.of-tally-row.is-mine {
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface));
+}
+.of-tally-icon {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+  color: var(--accent);
+}
+.of-tally-icon i { font-size: 14px; color: inherit; }
+.of-tally-name {
+  min-width: 0;
+  display: grid;
+  gap: 1px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text);
+}
+.of-tally-name em {
+  font-style: normal;
+  font-family: var(--font-label);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--accent2);
+}
+.of-tally-num {
+  display: grid;
+  justify-items: end;
+  gap: 4px;
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--text);
+}
+.of-tally-bar { display: block; width: 62px; height: 3px; border-radius: 999px; overflow: hidden; background: color-mix(in srgb, var(--text) 14%, transparent); }
+.of-tally-bar > span { display: block; height: 100%; border-radius: 999px; background: var(--accent); }
+
+/* ---- the quote door, carried by the Institutions card ---- */
+.of-plan-quote {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: -6px;
+  padding: 9px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  white-space: nowrap;
+  font-size: 12.5px;
+  color: var(--accent2);
+  background: transparent;
+  border: 1px dashed color-mix(in srgb, var(--accent2) 42%, transparent);
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease, color .2s ease;
+}
+.of-plan-quote i { font-size: 14px; color: inherit; }
+.of-plan-quote:hover {
+  background: color-mix(in srgb, var(--accent2) 12%, transparent);
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--accent2) 58%, transparent);
+  color: var(--text);
+}
+.of-plan-quote:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
+.of-plans.is-compact .of-plan-quote { padding: 8px 12px; font-size: 11.5px; }
+
+/* A card reached through an anchor stops below the sticky navigation. */
+.of-plan { scroll-margin-top: 96px; }
+
+/* ---- breakpoints ---- */
+@media (max-width: 1020px) {
+  .of-plans { grid-template-columns: 1fr; }
+  .of-plan-price strong { font-size: 24px; }
+  .of-voices { grid-template-columns: 1fr; }
+  .of-faq.is-compact { grid-template-columns: 1fr; }
+}
+@media (max-width: 720px) {
+  .of-plan { padding: 20px 16px 18px; border-radius: 16px; }
+  .of-plans.is-compact .of-plan { padding: 18px 15px 16px; }
+  .of-sec { gap: 14px; }
+  .of-faq-btn { grid-template-columns: 26px minmax(0, 1fr) 24px; gap: 10px; padding: 14px; font-size: 14px; }
+  .of-faq-panel { padding-inline-start: 16px; }
+  .of-pays-head {
+    padding-block: 8px;
+    padding-inline: 10px 42px;
+  }
+  .of-pays-pick {
+    padding-block: 8px;
+    padding-inline: 10px 42px;
+  }
+  .of-pays-copy { inset-inline-end: 6px; width: 24px; height: 24px; }
+  .of-pays-copy i { font-size: 12px; }
+  .of-pays-name { font-size: 12px; }
+  .of-pays-money { font-size: 12px; }
+  .of-pays-foot { flex-direction: column; align-items: stretch; }
+  .of-pays-csv { justify-content: center; }
+  /* The detail panel keeps its three readings readable on a phone: two columns,
+     then one when even that gets tight. */
+  .of-pays-detail { padding: 9px 10px 11px; }
+  .of-pays-detail-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .of-pays-detail-link code { font-size: 10px; }
+  .of-pays-read { width: 100%; justify-content: center; }
+  .of-pays-bill { grid-template-columns: 1fr; }
+  .of-pays-bill-btn { grid-template-columns: auto minmax(0, 1fr); align-items: center; column-gap: 8px; }
+  .of-pays-bill-btn em { grid-column: 2; }
+  .of-plan-banner-bill { width: 100%; }
+  .of-plan-banner-bill-btn { flex: 1 1 auto; justify-content: center; }
+  .of-table-wrap { border-radius: 14px; }
+  .of-cta-actions { width: 100%; }
+  .of-cta-actions .cta,
+  .of-cta-actions .ghost-btn { flex: 1 1 auto; justify-content: center; }
+  .of-plan-banner { grid-template-columns: 32px minmax(0, 1fr); gap: 10px; padding: 12px; }
+  .of-plan-banner-icon { width: 32px; height: 32px; border-radius: 9px; }
+  .of-plan-banner-icon i { font-size: 15px; }
+  .of-plan-banner-actions { grid-column: 1 / -1; justify-content: space-between; }
+  .of-voice { padding: 18px 16px 14px; }
+  .of-voice-by { grid-template-columns: 36px minmax(0, 1fr); }
+  .of-voice-plan { grid-column: 2; justify-self: start; }
+  .of-voice-face { width: 36px; height: 36px; }
+}
+
+/* ---- Arabic: no tracking on short labels, and the arrows follow the reading ---- */
+[dir="rtl"] .of-plan-name,
+[dir="rtl"] .of-plan-badge,
+[dir="rtl"] .of-th-label,
+[dir="rtl"] .of-faq-num { letter-spacing: 0; }
+[dir="rtl"] .of-plan-name,
+[dir="rtl"] .of-plan-badge { text-transform: none; }
+[dir="rtl"] .of-plan-cta i,
+[dir="rtl"] .of-more i { transform: scaleX(-1); }
+[dir="rtl"] .of-plan-cta:hover i,
+[dir="rtl"] .of-more:hover i { transform: scaleX(-1) translateX(3px); }
+[dir="rtl"] .of-plan-banner-link i { transform: scaleX(-1); }
+[dir="rtl"] .of-plan-banner-link:hover i { transform: scaleX(-1) translateX(3px); }
+[dir="rtl"] .of-plan-banner-badge { letter-spacing: 0; text-transform: none; }
+[dir="rtl"] .of-plan-banner-duree { letter-spacing: 0; }
+[dir="rtl"] .of-voice-plan { letter-spacing: 0; }
+[dir="rtl"] .of-fold-main strong { letter-spacing: 0; }
+[dir="rtl"] .of-voice-ident { text-align: right; }
+[dir="rtl"] .of-pills-legend { letter-spacing: 0; text-transform: none; }
+[dir="rtl"] .of-tally-name em { letter-spacing: 0; }
+[dir="rtl"] .of-tally-num { justify-items: start; }
+[dir="rtl"] .of-plan-dzd-tag { letter-spacing: 0; text-transform: none; }
+[dir="rtl"] .of-pays-head { letter-spacing: 0; text-transform: none; }
+[dir="rtl"] .of-pays-money { font-family: var(--font-heading); }
+[dir="rtl"] .of-pays-coef { justify-items: start; }
+[dir="rtl"] .of-pays-coef-num { justify-content: flex-start; }
+[dir="rtl"] .of-pays-head-coef { text-align: start; }
+[dir="rtl"] .of-pays-bill-btn { justify-items: end; text-align: end; }
+[dir="rtl"] .of-pays-signup i { transform: scaleX(-1); }
+[dir="rtl"] .of-pays-signup:hover i { transform: scaleX(-1) translateX(3px); }
+[dir="rtl"] .of-pays-bill-lab { letter-spacing: 0; text-transform: none; }
+[dir="rtl"] .of-pays-sort-lab { letter-spacing: 0; text-transform: none; }
+/* Les montants sont des chiffres, pas des phrases : ils restent un seul bloc,
+   dans l'ordre où ils s'écrivent partout ailleurs — « 1 307 000 SYP » ne se
+   relit pas à l'envers dans une page arabe. */
+[dir="rtl"] .of-pays-dur { unicode-bidi: isolate; }
+[dir="rtl"] .of-pays-name-cell { align-items: flex-end; }
+[dir="rtl"] .of-pays-eco { font-variant-numeric: normal; letter-spacing: 0; }
+[dir="rtl"] .of-pays-eco-total-lab { letter-spacing: 0; text-transform: none; }
+[dir="rtl"] .of-pays-eco-total-n { direction: ltr; unicode-bidi: isolate; }
+[dir="rtl"] .of-pays-eco-copy { letter-spacing: 0; }
+[dir="rtl"] .of-pays-floor-btn { letter-spacing: 0; }
+[dir="rtl"] .of-pays-floor-btn i { transform: scaleX(-1); }
+/* Les montants des deux boutons de facturation sont des prix, pas des phrases. */
+[dir="rtl"] .of-pays-bill-btn b { direction: ltr; unicode-bidi: isolate; }
+
+/* ── La feuille des pays à 360 px ──────────────────────────────────────────
+   360 px de large, moins les marges de la page et le rembourrage de la carte :
+   il reste environ 290 px pour six colonnes. La feuille défile latéralement,
+   mais ses six colonnes gardent exactement les mêmes repères dans l'en-tête et
+   dans les lignes : l'en-tête et le bouton de ligne reçoivent le même
+   rembourrage logique, donc les quatre montants tombent sous leurs intitulés
+   dans les deux sens de lecture. Un nom de pays long peut passer à la ligne au
+   lieu d'être coupé. */
+@media (max-width: 400px) {
+  .of-pays-sort { padding: 6px 8px; gap: 5px 8px; }
+  .of-pays-sort-lab { font-size: 9px; }
+  .of-pays-sort-btn { padding: 4px 8px; font-size: 10.5px; }
+  .of-pays-sort-btn i { font-size: 11px; }
+  .of-pays-sort-note { flex-basis: 100%; font-size: 10px; }
+  .of-pays-tr,
+  .of-pays-pick {
+    grid-template-columns: minmax(88px, 1.1fr) repeat(4, minmax(66px, 0.95fr)) 62px;
+    gap: 5px;
+  }
+  .of-pays-head,
+  .of-pays-pick { min-width: 640px; }
+  .of-pays-head {
+    padding-inline: 8px 38px;
+    font-size: 8px;
+    letter-spacing: .04em;
+  }
+  .of-pays-pick { padding-inline: 8px 38px; }
+  .of-pays-copy { inset-inline-end: 6px; width: 22px; height: 22px; }
+  .of-pays-copy i { font-size: 11px; }
+  .of-pays-name {
+    font-size: 11px;
+    line-height: 1.3;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+  }
+  .of-pays-dur { font-size: 10.5px; }
+  .of-pays-eco { font-size: 8.5px; padding: 1px 5px; }
+  .of-pays-eco i { font-size: 9px; }
+  .of-pays-eco-total { padding: 7px 9px; gap: 3px 8px; }
+  .of-pays-eco-total-lab { font-size: 9px; }
+  .of-pays-eco-total-n { font-size: 16px; }
+  .of-pays-eco-total-note { flex-basis: 100%; font-size: 10px; }
+  .of-pays-eco-copy { margin-inline-start: 0; font-size: 9px; }
+  .of-pays-floor-band { padding: 6px 8px; }
+  .of-pays-floor-btn { font-size: 10px; }
+  .of-pays-floor-note { flex-basis: 100%; font-size: 10px; }
+  .of-pays-coef { font-size: 10px; }
+  .of-pays-floor { font-size: 8px; letter-spacing: 0; }
+  .of-pays-detail { padding: 9px 9px 11px; }
+  .of-pays-detail-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .of-pays-bill-btn b { font-size: 11.5px; }
+}
+[dir="rtl"] .of-plan-banner-bill-btn em { letter-spacing: 0; }
+
+@media (max-width: 640px) {
+  .of-pills { grid-template-columns: 1fr; }
+}
+
+/* ---- the formula read under the workshop's name ---- */
+.pro-plan {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  white-space: nowrap;
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 72%, transparent);
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color .2s ease, background .2s ease, color .2s ease, transform .2s ease-out;
+}
+.pro-plan i { font-size: 12px; color: var(--accent); }
+.pro-plan .pro-plan-go {
+  font-size: 12px;
+  opacity: .5;
+  transition: opacity .2s ease, transform .2s ease-out;
+}
+.pro-plan:hover { transform: translateY(-1px); border-color: color-mix(in srgb, var(--accent) 54%, transparent); color: var(--text); }
+.pro-plan:hover .pro-plan-go { opacity: 1; transform: translate(1px, -1px); }
+.pro-plan:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.pro-plan.is-annuaire { border-style: dashed; }
+.pro-plan.is-premium {
+  border-color: color-mix(in srgb, var(--accent) 48%, transparent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: var(--accent2);
+}
+.pro-plan.is-institutions {
+  border-color: color-mix(in srgb, var(--accent2) 44%, transparent);
+  background: color-mix(in srgb, var(--accent2) 12%, transparent);
+  color: var(--accent2);
+}
+.pro-plan.is-institutions i { color: var(--accent2); }
+
+/* ---- the journal of the formula moves ---- */
+.of-journal { display: grid; gap: 8px; }
+/* Reached through a link that asks for one cut: the block stops clear of the
+   sticky navigation instead of hiding under it. */
+#journal-formules { scroll-margin-top: 96px; }
+.of-journal-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+.of-journal-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 9px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  background: color-mix(in srgb, var(--surface) 86%, transparent);
+  color: color-mix(in srgb, var(--text) 76%, transparent);
+  font-size: 11.5px;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color .2s ease, background .2s ease, color .2s ease;
+}
+.of-journal-tab:hover { border-color: color-mix(in srgb, var(--accent) 44%, transparent); color: var(--text); }
+.of-journal-tab.is-on {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, var(--surface));
+  color: var(--accent2);
+}
+.of-journal-tab-num {
+  min-width: 17px;
+  padding: 1px 4px;
+  border-radius: 999px;
+  text-align: center;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  font-variant-numeric: tabular-nums;
+  background: color-mix(in srgb, var(--text) 9%, transparent);
+  color: var(--muted);
+}
+.of-journal-tab.is-on .of-journal-tab-num {
+  background: color-mix(in srgb, var(--accent) 26%, transparent);
+  color: var(--accent2);
+}
+.of-journal-tab:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.of-journal-list { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 7px; }
+.of-journal-row {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr) auto;
+  gap: 9px;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 11px;
+  background: color-mix(in srgb, var(--surface) 86%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+}
+.of-journal-row.is-mine {
+  border-color: color-mix(in srgb, var(--accent) 42%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, var(--surface));
+}
+.of-journal-icon {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+  color: var(--accent);
+}
+.of-journal-icon i { font-size: 14px; color: inherit; }
+.of-journal-body { min-width: 0; display: grid; gap: 2px; }
+.of-journal-who { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.of-journal-who b {
+  min-width: 0;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.of-journal-who em {
+  flex: 0 0 auto;
+  font-style: normal;
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--accent2);
+}
+.of-journal-move {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+.of-journal-plan { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.of-journal-move i { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
+.of-journal-plan.is-to { color: var(--accent2); font-weight: 600; }
+.of-journal-date {
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  letter-spacing: .04em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+/* The rhythm a move was made on, read beside the plan it landed on. */
+.of-journal-move { flex-wrap: wrap; }
+.of-journal-rhy {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  padding: 1px 6px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  background: color-mix(in srgb, var(--text) 7%, transparent);
+  color: color-mix(in srgb, var(--text) 72%, transparent);
+  font-style: normal;
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  line-height: 1.5;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.of-journal-rhy i { font-size: 9px; color: inherit; }
+.of-journal-rhy.is-year {
+  border-color: color-mix(in srgb, var(--accent) 44%, transparent);
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+  color: var(--accent2);
+}
+
+/* ---- the public pace of the climbs to Premium, above the three cards ---- */
+.of-rhythm {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 2px;
+  padding: 10px 13px;
+  border-radius: 13px;
+  text-align: start;
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  background: color-mix(in srgb, var(--surface) 84%, transparent);
+}
+.of-rhythm-ico {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+  color: var(--accent);
+}
+.of-rhythm-ico i { font-size: 13px; color: inherit; }
+.of-rhythm-txt {
+  margin: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 76%, transparent);
+}
+.of-rhythm-txt b {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--accent2);
+  font-variant-numeric: tabular-nums;
+}
+.of-rhythm-sep { color: var(--muted); }
+/* Two doors leave the pace line: the journal, already narrowed on this month,
+   and the Premium card. They wrap together when the line grows tight. */
+.of-rhythm-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 14px;
+  margin-inline-start: auto;
+}
+.of-rhythm-actions .of-rhythm-link { margin-inline-start: 0; }
+.of-rhythm-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-inline-start: auto;
+  font-size: 12px;
+  color: var(--accent2);
+  text-decoration: none;
+  white-space: nowrap;
+  padding-bottom: 1px;
+  border-bottom: 1px dashed color-mix(in srgb, var(--accent) 46%, transparent);
+  transition: border-color .2s ease, color .2s ease;
+}
+.of-rhythm-link i { font-size: 13px; }
+/* The leading icon (the journal's book) stays put; only the arrow slides. */
+.of-rhythm-link i:not(.of-rhythm-link-lead) { transition: transform .2s ease-out; }
+.of-rhythm-link:hover { border-bottom-style: solid; border-color: var(--accent); color: var(--text); }
+.of-rhythm-link:hover i:not(.of-rhythm-link-lead) { transform: translateX(3px); }
+.of-rhythm-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---- « Vous êtes une institution ? », under the three cards ---- */
+.of-insti-band {
+  display: grid;
+  gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 8px;
+  padding: 20px 22px 18px;
+  border-radius: 20px;
+  border: 1px solid color-mix(in srgb, var(--accent2) 30%, transparent);
+  background: linear-gradient(125deg,
+    color-mix(in srgb, var(--accent2) 12%, transparent) 0%,
+    color-mix(in srgb, var(--surface) 90%, transparent) 62%);
+}
+.of-insti-band-head { display: grid; gap: 5px; }
+.of-insti-band-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(18px, 1.7vw, 23px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -.02em;
+  color: var(--text);
+}
+.of-insti-band-sub {
+  margin: 0;
+  max-width: 70ch;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--text) 74%, transparent);
+}
+.of-insti-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+.of-insti-step {
+  display: grid;
+  gap: 5px;
+  align-content: start;
+  padding: 12px 13px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--surface) 78%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+}
+.of-insti-step-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.of-insti-step-num {
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: .12em;
+  color: var(--accent2);
+}
+.of-insti-step-ico {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--accent2) 13%, transparent);
+  color: var(--accent2);
+}
+.of-insti-step-ico i { font-size: 14px; color: inherit; }
+.of-insti-step b { font-size: 13px; font-weight: 600; line-height: 1.3; color: var(--text); }
+.of-insti-step > span:last-child {
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--text) 76%, transparent);
+}
+.of-insti-band-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 18px;
+  padding-top: 13px;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 15%, transparent);
+}
+.of-insti-band-foot .cta,
+.of-insti-band-foot .ghost-btn { margin-top: 0; }
+.of-insti-band-foot .ghost-btn i { font-size: 15px; color: var(--accent2); }
+.of-insti-band-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.of-insti-band-note i { flex: 0 0 auto; margin-top: 1px; font-size: 13px; color: var(--accent2); }
+
+/* The same band, folded to one row for the home offers section. */
+.of-insti-band.is-compact {
+  margin-top: 4px;
+  padding: 15px 17px 13px;
+  gap: 11px;
+  border-radius: 16px;
+  text-align: start;
+}
+.of-insti-band.is-compact .of-insti-band-head { gap: 3px; }
+.of-insti-band.is-compact .of-insti-band-title { font-size: clamp(15px, 1.4vw, 18px); }
+.of-insti-band.is-compact .of-insti-steps { gap: 7px; }
+.of-insti-band.is-compact .of-insti-step { padding: 8px 10px; gap: 3px; border-radius: 11px; }
+.of-insti-band.is-compact .of-insti-step-num { font-size: 9px; }
+.of-insti-band.is-compact .of-insti-step-ico { width: 22px; height: 22px; border-radius: 7px; }
+.of-insti-band.is-compact .of-insti-step-ico i { font-size: 12px; }
+.of-insti-band.is-compact .of-insti-step b { font-size: 11.5px; }
+.of-insti-band.is-compact .of-insti-band-foot { padding-top: 10px; gap: 8px 14px; }
+.of-insti-band.is-compact .of-insti-band-foot .cta { padding: 9px 15px; font-size: 12.5px; }
+.of-insti-band.is-compact .of-insti-band-note { font-size: 11px; }
+
+/* ---- the institution path, at the top of the sign-up form ---- */
+.of-insti {
+  display: grid;
+  gap: 12px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px;
+  border-radius: 16px;
+  text-align: start;
+  border: 1px solid color-mix(in srgb, var(--accent2) 38%, transparent);
+  background: linear-gradient(120deg,
+    color-mix(in srgb, var(--accent2) 12%, transparent) 0%,
+    color-mix(in srgb, var(--surface) 92%, transparent) 68%);
+}
+.of-insti-head { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 11px; align-items: start; }
+.of-insti-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--accent2) 16%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--accent2) 38%, transparent);
+  color: var(--accent2);
+}
+.of-insti-icon i { font-size: 17px; color: inherit; }
+.of-insti-txt { min-width: 0; display: grid; gap: 3px; }
+.of-insti-stamp {
+  font-family: var(--font-label);
+  font-size: 9px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent2);
+}
+.of-insti-txt p {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--text) 80%, transparent);
+}
+.of-insti-field { display: grid; gap: 5px; max-width: 280px; min-width: 0; }
+.of-insti-hint {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.of-insti-hint i { flex: 0 0 auto; margin-top: 1px; font-size: 12px; color: var(--accent); }
+.of-insti-free {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 0;
+  padding-top: 10px;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--muted);
+  border-top: 1px dashed color-mix(in srgb, var(--text) 15%, transparent);
+}
+.of-insti-free i { flex: 0 0 auto; margin-top: 1px; font-size: 13px; color: var(--accent2); }
+
+[dir="rtl"] .pro-plan { letter-spacing: 0; text-transform: none; font-size: 11px; }
+[dir="rtl"] .pro-plan .pro-plan-go { transform: scaleX(-1); }
+[dir="rtl"] .pro-plan:hover .pro-plan-go { transform: scaleX(-1) translate(1px, -1px); }
+[dir="rtl"] .of-journal-who em,
+[dir="rtl"] .of-insti-stamp { letter-spacing: 0; text-transform: none; }
+[dir="rtl"] .of-journal-move i { transform: scaleX(-1); }
+[dir="rtl"] .of-journal-date { letter-spacing: 0; }
+[dir="rtl"] .of-journal-rhy { letter-spacing: 0; text-transform: none; }
+[dir="rtl"] .of-plan-bill-btn em { letter-spacing: 0; }
+
+/* ---- breakpoints for the institution band and the journal filters ---- */
+@media (max-width: 1020px) {
+  .of-insti-steps { grid-template-columns: 1fr; }
+}
+@media (max-width: 720px) {
+  .of-insti { padding: 12px; }
+  .of-insti-field { max-width: none; }
+  .of-journal-row { grid-template-columns: 24px minmax(0, 1fr); }
+  .of-journal-date { grid-column: 2; }
+  .of-insti-band { padding: 16px 15px 14px; border-radius: 16px; gap: 13px; }
+  .of-insti-band-foot { flex-direction: column; align-items: stretch; }
+  .of-insti-band-foot .of-cta-actions .cta,
+  .of-insti-band-foot .of-cta-actions .ghost-btn { flex: 1 1 auto; justify-content: center; }
+  .of-journal-tab { font-size: 11px; padding: 5px 8px; }
+}
+[dir="rtl"] .of-insti-step-num { letter-spacing: 0; }
+
+/* ---- the compact institution band keeps its three steps on one row ---- */
+@media (max-width: 1020px) {
+  .of-insti-band.is-compact .of-insti-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 520px) {
+  .of-insti-band.is-compact .of-insti-steps { grid-template-columns: 1fr; }
+  .of-rhythm-link { margin-inline-start: 0; }
+}
+[dir="rtl"] .of-rhythm-link i:not(.of-rhythm-link-lead) { transform: scaleX(-1); }
+[dir="rtl"] .of-rhythm-link:hover i:not(.of-rhythm-link-lead) { transform: scaleX(-1) translateX(3px); }
+
+/* ---- the pace of the climbs and the six months drawn under it ---- */
+.of-rhythm-block { display: grid; gap: 8px; width: 100%; }
+
+.of-rhythm-chart {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: end;
+  gap: 6px 14px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 13px 9px;
+  border-radius: 13px;
+  text-align: start;
+  border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+}
+.of-rhythm-chart-lab {
+  align-self: center;
+  max-width: 92px;
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  line-height: 1.4;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.of-bars {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 9px;
+  align-items: end;
+}
+.of-bars > li { display: block; min-width: 0; }
+/* Each column is a door to the journal, on its own month. */
+.of-bar {
+  display: grid;
+  gap: 3px;
+  justify-items: center;
+  min-width: 0;
+  padding: 3px 2px 4px;
+  border-radius: 8px;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .18s ease, box-shadow .18s ease;
+}
+.of-bar:hover,
+.of-bar:focus-visible {
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 26%, transparent);
+  outline: none;
+}
+.of-bar:focus-visible { box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--accent) 52%, transparent); }
+.of-bar-track {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  height: 44px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+}
+.of-bar-fill {
+  display: block;
+  width: 100%;
+  border-radius: 5px;
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--text) 22%, transparent) 0%,
+    color-mix(in srgb, var(--text) 10%, transparent) 100%);
+  transition: height .45s ease-out, background .3s ease;
+}
+.of-bar.has-move .of-bar-fill {
+  background: linear-gradient(180deg,
+    var(--accent) 0%,
+    color-mix(in srgb, var(--accent) 52%, transparent) 100%);
+}
+.of-bar-num {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text) 70%, transparent);
+}
+.of-bar.has-move .of-bar-num { color: var(--accent2); }
+.of-bar-month {
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  letter-spacing: .05em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--muted);
+}
+.of-rhythm-chart-note {
+  grid-column: 1 / -1;
+  margin: 2px 0 0;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+/* ---- the six columns, taken away as a sheet ---- */
+.of-rhythm-chart-foot {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 10px;
+  margin-top: 3px;
+  padding-top: 8px;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 13%, transparent);
+}
+.of-rhythm-chart-hint {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  flex: 1 1 170px;
+  margin: 0;
+  font-size: 10.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.of-rhythm-chart-hint i { flex: 0 0 auto; margin-top: 1px; font-size: 12px; color: var(--accent); }
+.of-rhythm-csv { margin-top: 0; }
+.of-rhythm-csv i { font-size: 14px; color: var(--accent); }
+.of-rhythm-csv.is-ok i { color: var(--accent2); }
+.of-rhythm-csv-err { flex: 1 1 100%; margin: 0; font-size: 11.5px; }
+
+/* ---- the journal, exported as a sheet ---- */
+.of-journal-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 10px;
+  margin-top: 4px;
+  padding-top: 9px;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 14%, transparent);
+}
+.of-journal-hint {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  flex: 1 1 190px;
+  margin: 0;
+  font-size: 10.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.of-journal-hint i { flex: 0 0 auto; margin-top: 1px; font-size: 12px; color: var(--accent); }
+.of-journal-csv { margin-top: 0; }
+.of-journal-csv:disabled { opacity: .6; cursor: progress; }
+.of-journal-csv i { font-size: 14px; color: var(--accent); }
+.of-journal-csv-err { flex: 1 1 100%; margin: 0; font-size: 11.5px; }
+/* A month handed over by a chart column: the journal says which month it reads,
+   and offers the way back to the one running now. */
+.of-journal-month {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  margin: 2px 0 0;
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+.of-journal-month > i { flex: 0 0 auto; font-size: 13px; color: var(--accent); }
+.of-journal-month b {
+  font-family: var(--font-heading);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--accent2);
+}
+.of-journal-month-x {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 74%, transparent);
+  font: inherit;
+  font-size: 11px;
+  cursor: pointer;
+  transition: border-color .2s ease, color .2s ease, background .2s ease;
+}
+.of-journal-month-x i { font-size: 12px; color: inherit; }
+.of-journal-month-x:hover {
+  border-color: color-mix(in srgb, var(--accent) 48%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: var(--text);
+}
+.of-journal-month-x:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---- the establishments already gathered, read in the institution band ---- */
+.of-insti-count {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  margin: 4px 0 0;
+  padding-top: 9px;
+  border-top: 1px dashed color-mix(in srgb, var(--accent2) 30%, transparent);
+  font-size: 12px;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--text) 74%, transparent);
+}
+.of-insti-count > i { flex: 0 0 auto; font-size: 14px; color: var(--accent2); }
+.of-insti-count-num {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  white-space: nowrap;
+}
+.of-insti-count-num b {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent2);
+}
+.of-insti-count-sep { color: color-mix(in srgb, var(--text) 34%, transparent); }
+.of-insti-count-quiet { color: var(--muted); }
+.of-insti-band.is-compact .of-insti-count { margin-top: 2px; padding-top: 7px; font-size: 11px; gap: 3px 8px; }
+.of-insti-band.is-compact .of-insti-count b { font-size: 13px; }
+.of-insti-band.is-compact .of-insti-count > i { font-size: 12px; }
+
+/* The establishments total, standing right beside the Institutions card door. */
+.of-insti-door-count {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  white-space: nowrap;
+  font-size: 11.5px;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--text) 70%, transparent);
+}
+.of-insti-door-count i {
+  align-self: center;
+  font-size: 12px;
+  color: var(--accent2);
+}
+.of-insti-door-count b {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent2);
+}
+
+/* ---- the establishments gathered by an Institutions account ---- */
+/* Reached from a directory card: the figure stops clear of the sticky
+   navigation instead of hiding under it. */
+#pro-etabs { scroll-margin-top: 108px; }
+.pro-etabs {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  color: var(--accent2);
+  background: color-mix(in srgb, var(--accent2) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent2) 28%, transparent);
+}
+.pro-etabs i { font-size: 12px; color: inherit; }
+
+/* ---- the sites themselves, listed on the public sheet ---- */
+.pro-etabcard-head { display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+.pro-etabcard-head .pro-h { margin: 0; }
+.pro-etabcard-count { display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 10px; border-radius: 999px; font-size: 11px; white-space: nowrap;
+  color: var(--accent2); background: color-mix(in srgb, var(--accent2) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent2) 28%, transparent); }
+.pro-etabcard-count i { font-size: 12px; color: inherit; }
+.pro-etablist { list-style: none; margin: 0; padding: 0; display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; }
+.pro-etablist li { display: flex; align-items: flex-start; gap: 9px; min-width: 0;
+  padding: 10px 12px; border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--text) 11%, transparent);
+  background: color-mix(in srgb, var(--surface) 92%, transparent); }
+.pro-etablist-ico { flex: none; display: inline-flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px; border-radius: 8px; font-size: 14px;
+  color: var(--accent2); background: color-mix(in srgb, var(--accent2) 10%, transparent); }
+.pro-etablist-ico i { font-size: 14px; color: inherit; }
+.pro-etablist-body { display: grid; gap: 2px; min-width: 0; }
+.pro-etablist-name { font-family: var(--font-heading); font-size: 13px; line-height: 1.3;
+  color: var(--text); overflow-wrap: anywhere; }
+.pro-etablist-where { display: inline-flex; align-items: center; gap: 4px;
+  font-size: 11px; color: var(--muted); }
+.pro-etablist-where i { font-size: 11px; color: inherit; }
+.pro-etablist-note { display: inline-flex; align-items: flex-start; gap: 6px;
+  margin: 12px 0 0; font-size: 11px; line-height: 1.5; color: var(--muted); }
+.pro-etablist-note i { font-size: 12px; color: inherit; margin-top: 1px; }
+/* Each site is a door into the directory, filtered on its own region. */
+.pro-etablist-link { display: flex; align-items: flex-start; gap: 9px; width: 100%;
+  color: inherit; text-decoration: none; border-radius: 8px;
+  transition: color .2s ease; }
+.pro-etablist-body { flex: 1 1 auto; }
+.pro-etablist-link:hover .pro-etablist-name { color: var(--accent2); }
+.pro-etablist-go { flex: none; align-self: center; font-size: 14px; color: var(--muted);
+  opacity: 0; transform: translateX(-3px);
+  transition: opacity .2s ease, transform .2s ease, color .2s ease; }
+.pro-etablist-link:hover .pro-etablist-go,
+.pro-etablist-link:focus-visible .pro-etablist-go { opacity: 1; transform: none; color: var(--accent2); }
+.pro-etablist-link:focus-visible { outline: 2px solid var(--accent2); outline-offset: 3px; }
+.pro-etablist-hint { display: inline-flex; align-items: flex-start; gap: 6px;
+  margin: 10px 0 0; font-size: 11px; line-height: 1.5; color: var(--accent2); }
+.pro-etablist-hint i { font-size: 12px; color: inherit; margin-top: 1px; }
+/* An Institutions account that has not named its sites yet: the block still
+   stands, and says why it is empty instead of vanishing without a word. */
+.pro-etablist-empty { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px;
+  margin: 0; padding: 14px 15px; border-radius: 12px;
+  border: 1px dashed color-mix(in srgb, var(--text) 16%, transparent);
+  background: color-mix(in srgb, var(--text) 3%, transparent); }
+.pro-etablist-empty > i { font-size: 15px; color: color-mix(in srgb, var(--accent2) 74%, var(--text)); }
+.pro-etablist-empty b { font-family: var(--font-heading); font-size: 13.5px; color: var(--text); }
+.pro-etablist-empty p { flex: 1 1 100%; margin: 0; font-size: 12px; line-height: 1.6;
+  color: var(--muted); }
+
+/* The door of each site points the way the eye travels: in Arabic the arrow
+   turns, as it does everywhere else on the sheet. */
+[dir="rtl"] .pro-etablist-go { transform: scaleX(-1); }
+[dir="rtl"] .pro-etablist-link:hover .pro-etablist-go,
+[dir="rtl"] .pro-etablist-link:focus-visible .pro-etablist-go {
+  transform: scaleX(-1);
+}
+
+/* On a phone there is no hover to reveal the arrow: the site list is read
+   with the door already visible, and each site takes its own row so a long
+   Arabic name is never squeezed beside a stub. */
+@media (max-width: 720px) {
+  .pro-etablist { grid-template-columns: 1fr; }
+  .pro-etablist li { padding: 11px 12px; }
+  .pro-etablist-go { opacity: .55; }
+  .pro-etablist-link:focus-visible .pro-etablist-go { opacity: 1; }
+}
+
+@media (max-width: 720px) {
+  .of-rhythm-chart { grid-template-columns: 1fr; gap: 6px; padding: 10px 11px 9px; }
+  .of-rhythm-chart-lab { max-width: none; }
+  .of-bars { gap: 6px; }
+  .of-bar-track { height: 38px; }
+  .of-rhythm-actions { width: 100%; margin-inline-start: 0; justify-content: space-between; }
+  .of-journal-foot { flex-direction: column; align-items: stretch; }
+  .of-journal-csv { justify-content: center; }
+  .of-rhythm-chart-foot { flex-direction: column; align-items: stretch; }
+  .of-rhythm-csv { justify-content: center; }
+}
+[dir="rtl"] .of-rhythm-chart-lab,
+[dir="rtl"] .of-bar-month { letter-spacing: 0; text-transform: none; }
