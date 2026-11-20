@@ -5,9 +5,8 @@ import { readRequester, saveRequester, clearRequester, type Requester } from '@/
 import { saveDossier } from '@/hooks/useDossiers';
 import { nomRegion } from '@/lib/regionLabels';
 import { nomCommune } from '@/lib/communeLabels';
+import { supabase } from '@/lib/supabase';
 import type { Entreprise } from '@/mocks/entreprises';
-
-const SUBMIT_URL = 'https://readdy.ai/api/form/dbhnqdh252h9p3p40n40';
 
 type Props = {
   items: Entreprise[];
@@ -75,27 +74,27 @@ export default function QuoteModal({ items, reference: referenceProp, onClose }:
     setStatus('sending');
     setFormError('');
 
-    const body = new URLSearchParams();
-    data.forEach((value, key) => body.append(key, String(value)));
-
     try {
-      const response = await fetch(SUBMIT_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: body.toString(),
+      const { data: result, error } = await supabase.functions.invoke('enregistrer-demande', {
+        body: {
+          type: 'devis',
+          nom: nameValue,
+          email: emailValue,
+          telephone: String(data.get('telephone') || ''),
+          champs: {
+            reference,
+            partenaires: partners,
+            organisation: orgValue,
+            quantite: String(data.get('quantite') || ''),
+            delai: String(data.get('delai') || ''),
+            budget: String(data.get('budget') || ''),
+            message,
+            langue: lang,
+          },
+        },
       });
-      const responseText = await response.text();
-      let parsed: { code?: string; message?: string; meta?: { message?: string; detail?: string } } | null = null;
-      try {
-        parsed = JSON.parse(responseText);
-      } catch {
-        parsed = null;
-      }
-      const serverMsg =
-        parsed?.meta?.message || parsed?.message || parsed?.meta?.detail || responseText || t('cf.errSend');
-      const spam = /spam/i.test(`${parsed?.meta?.message || ''} ${parsed?.meta?.detail || ''} ${responseText}`);
 
-      if (response.ok && parsed?.code === 'OK' && !spam) {
+      if (!error && result?.ok) {
         saveRequester({ name: nameValue, email: emailValue, org: orgValue });
         setRequester({ name: nameValue, email: emailValue, org: orgValue });
         setPrefilled(true);
@@ -108,7 +107,7 @@ export default function QuoteModal({ items, reference: referenceProp, onClose }:
         setStatus('ok');
       } else {
         setStatus('err');
-        setFormError(serverMsg);
+        setFormError(t('cf.errSend'));
       }
     } catch {
       setStatus('err');
@@ -167,7 +166,7 @@ export default function QuoteModal({ items, reference: referenceProp, onClose }:
             <p className="quote-hint">{t('quote.hint')}</p>
           </div>
         ) : (
-          <form id="paperatlas-quote" className="quote-form" data-readdy-form onSubmit={onSubmit}>
+          <form id="paperatlas-quote" className="quote-form" onSubmit={onSubmit}>
             <input
               type="text"
               name="website_alt"

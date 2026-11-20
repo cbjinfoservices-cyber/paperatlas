@@ -80,7 +80,7 @@ export default function Footer() {
     const page = typeof window === 'undefined' ? `${BASE}${pathname}` : window.location.href;
     const sujet = t('foot.signalSubject');
     const corps = t('foot.signalBody').replace('{url}', page);
-    return `mailto:contact@paperatlas-dz.com?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(corps)}`;
+    return `mailto:contact@paperatlas.net?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(corps)}`;
   })();
 
   return (
@@ -259,7 +259,7 @@ export default function Footer() {
                 <span className="footer-count" aria-hidden="true">{compteDe('fournisseurs')}</span>
               </Link>
             </li>
-            <li><a href="mailto:contact@paperatlas-dz.com"><i className="ri-mail-line" aria-hidden="true"></i>contact@paperatlas-dz.com</a></li>
+            <li><a href="mailto:contact@paperatlas.net"><i className="ri-mail-line" aria-hidden="true"></i>contact@paperatlas.net</a></li>
             <li><a href={`${BASE}/#annuaire`}><i className="ri-map-pin-2-line" aria-hidden="true"></i>{t('foot.cities')}</a></li>
             {/* « Demandes » a rejoint le réseau, dans la première colonne :
                 le pied de page ne la nomme plus deux fois. */}

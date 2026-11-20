@@ -267,7 +267,7 @@ export default function EmploiDetailPage() {
      référence de l’offre et son titre déjà cités, avec l’adresse exacte de la
      fiche. Rien ne part tant que le candidat ne l’envoie pas lui-même. */
   const signalUrl = `${window.location.origin}${__BASE_PATH__.replace(/\/$/, '')}/emplois/${item.id}`;
-  const signalHref = `mailto:contact@paperatlas-dz.com?subject=${encodeURIComponent(
+  const signalHref = `mailto:contact@paperatlas.net?subject=${encodeURIComponent(
     `${t('jobd.signalSubject')} · ${detail.ref}`,
   )}&body=${encodeURIComponent(
     t('jobd.signalBody')

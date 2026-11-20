@@ -275,5 +275,5 @@ const demoAuteurs: Auteur[] = [
   ...marchesAuteurs,
 ];
 
-/* Données de démonstration : développement seulement (voir ./demo.ts). */
+/* Données de démonstration : développement seulement. */
 export const auteurs: Auteur[] = import.meta.env.DEV ? demoAuteurs : [];

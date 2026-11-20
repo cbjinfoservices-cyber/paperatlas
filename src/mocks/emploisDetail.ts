@@ -266,5 +266,5 @@ const demoEmploiDetails: Record<string, EmploiDetail> = {
   },
 };
 
-/* Données de démonstration : développement seulement (voir ./demo.ts). */
+/* Données de démonstration : développement seulement. */
 export const emploiDetails: Record<string, EmploiDetail> = import.meta.env.DEV ? demoEmploiDetails : {};

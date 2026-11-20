@@ -71,7 +71,7 @@ export function initChapter(): void {
   }
 
   async function attach(c: any) {
-    if (!c || c.video || NARROW) return;
+    if (!c || c.video || NARROW || !c.src) return;
     await afterLCP;
     if (c.video || !c.el.isConnected) return;
     const v = document.createElement('video');

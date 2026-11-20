@@ -1,5 +1,5 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-import { getMailConfig, sendMailMessage } from '../_shared/mail.ts';
+import { getMailConfig, sendMailMessage, siteUrl } from '../_shared/mail.ts';
 
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') || '';
 const ANON_KEY = Deno.env.get('SUPABASE_ANON_KEY') || '';
@@ -538,7 +538,7 @@ async function sendMail(quote: Quote, kind: MailKind): Promise<boolean> {
   const mailCfg = getMailConfig();
   if (!mailCfg.apiKey || !mailCfg.fromEmail || !quote.email) return false;
 
-  const site = (Deno.env.get('SITE_URL') ?? '').replace(/\/+$/, '');
+  const site = siteUrl();
   const mail = buildEmail(quote, site, kind);
 
   const res = await sendMailMessage({
@@ -554,7 +554,7 @@ async function sendStatutMail(quote: Quote, statut: StatutMail): Promise<boolean
   const mailCfg = getMailConfig();
   if (!mailCfg.apiKey || !mailCfg.fromEmail || !quote.email) return false;
 
-  const site = (Deno.env.get('SITE_URL') ?? '').replace(/\/+$/, '');
+  const site = siteUrl();
   const mail = buildStatutEmail(quote, site, statut);
 
   const res = await sendMailMessage({
@@ -577,7 +577,7 @@ async function sendBulkMail(rows: Row[], to: string): Promise<boolean> {
   const mailCfg = getMailConfig();
   if (!mailCfg.apiKey || !mailCfg.fromEmail || !to || !rows.length) return false;
 
-  const site = (Deno.env.get('SITE_URL') ?? '').replace(/\/+$/, '');
+  const site = siteUrl();
   const lang = LANG_OF(rows[0]?.lang);
   const copy = COPY[lang];
   const bulk = BULK_COPY[lang];

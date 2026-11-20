@@ -84,12 +84,12 @@ export default function LegalDoc({ kind }: Props) {
               <div className="legal-cta">
                 <p className="legal-cta-title">{t('lg.contactTitle')}</p>
                 <p className="legal-cta-text">{t('lg.contactText')}</p>
-                <a className="legal-cta-btn" href="mailto:contact@paperatlas-dz.com">
+                <a className="legal-cta-btn" href="mailto:contact@paperatlas.net">
                   <i className="ri-mail-line" aria-hidden="true"></i>
                   <span className="whitespace-nowrap">{t('lg.contactCta')}</span>
                 </a>
-                <a className="legal-cta-mail" href="mailto:contact@paperatlas-dz.com">
-                  contact@paperatlas-dz.com
+                <a className="legal-cta-mail" href="mailto:contact@paperatlas.net">
+                  contact@paperatlas.net
                 </a>
               </div>
               <div className="legal-side">

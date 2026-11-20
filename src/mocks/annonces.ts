@@ -412,5 +412,5 @@ const demoAnnonces: Annonce[] = [
   },
 ];
 
-/* Données de démonstration : développement seulement (voir ./demo.ts). */
+/* Données de démonstration : développement seulement. */
 export const annonces: Annonce[] = import.meta.env.DEV ? demoAnnonces : [];

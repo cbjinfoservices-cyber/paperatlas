@@ -1194,7 +1194,7 @@ export default function MyListings() {
   const signalHrefOf = (row: ListingRow) => {
     const ref = refOf(row);
     const base = `${window.location.origin}${__BASE_PATH__.replace(/\/$/, '')}`;
-    return `mailto:contact@paperatlas-dz.com?subject=${encodeURIComponent(
+    return `mailto:contact@paperatlas.net?subject=${encodeURIComponent(
       `${t('acct.mine.signalSubject')} · ${ref}`,
     )}&body=${encodeURIComponent(
       t('acct.mine.signalBody')

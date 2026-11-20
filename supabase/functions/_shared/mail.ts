@@ -1,5 +1,14 @@
 export type MailProvider = 'brevo' | 'resend';
 
+/**
+ * L'adresse publique du site, pour les liens des e-mails. Les secrets du projet
+ * Supabase sont partagés avec d'autres applications : PaperAtlas ne s'appuie
+ * donc pas sur un SITE_URL global, mais sur PAPERATLAS_SITE_URL, avec son
+ * propre domaine pour valeur par défaut.
+ */
+export const siteUrl = (): string =>
+  (Deno.env.get('PAPERATLAS_SITE_URL') || 'https://paperatlas.net').replace(/\/+$/, '');
+
 export type MailConfig = {
   provider: MailProvider | null;
   apiKey: string;
@@ -9,36 +18,31 @@ export type MailConfig = {
   replyTo: string;
 };
 
+/**
+ * Les réglages d'envoi de PaperAtlas. Le projet Supabase est partagé avec
+ * d'autres applications : seules les variables MAIL_* sont lues pour
+ * l'expéditeur, jamais BREVO_FROM_EMAIL ou RESEND_* qui peuvent appartenir à
+ * une autre application. Sans réglage, l'expéditeur est noreply@paperatlas.net
+ * et les réponses arrivent sur contact@paperatlas.net. La clé d'API Brevo, elle,
+ * est celle du compte.
+ */
+const DEFAULT_DOMAIN = 'paperatlas.net';
+
 export function getMailConfig(): MailConfig {
   const brevoKey = (Deno.env.get('BREVO_API_KEY') ?? '').trim();
   const resendKey = (Deno.env.get('RESEND_API_KEY') ?? '').trim();
   const provider: MailProvider | null = brevoKey ? 'brevo' : resendKey ? 'resend' : null;
   const apiKey = brevoKey || resendKey;
 
-  const domain = (
-    Deno.env.get('MAIL_FROM_DOMAIN') ??
-    Deno.env.get('BREVO_FROM_DOMAIN') ??
-    Deno.env.get('RESEND_FROM_DOMAIN') ??
-    ''
-  )
-    .trim()
-    .replace(/^@/, '');
+  const domainFromEnv = (Deno.env.get('MAIL_FROM_DOMAIN') ?? '').trim().replace(/^@/, '');
+  const explicitFrom = (Deno.env.get('MAIL_FROM_EMAIL') ?? '').trim();
 
-  const explicitFrom = (
-    Deno.env.get('MAIL_FROM_EMAIL') ??
-    Deno.env.get('BREVO_FROM_EMAIL') ??
-    ''
-  ).trim();
+  const fromEmail = explicitFrom || `noreply@${domainFromEnv || DEFAULT_DOMAIN}`;
+  /* Sans domaine déclaré, il se lit sur l'adresse d'expédition. */
+  const domain = domainFromEnv || fromEmail.split('@')[1].toLowerCase();
+  const fromHeader = `PaperAtlas <${fromEmail}>`;
 
-  const fromEmail = explicitFrom || (domain ? `noreply@${domain}` : '');
-  const fromHeader = fromEmail ? `PaperAtlas <${fromEmail}>` : '';
-
-  const replyTo = (
-    Deno.env.get('MAIL_REPLY_TO') ??
-    Deno.env.get('BREVO_REPLY_TO') ??
-    Deno.env.get('RESEND_REPLY_TO') ??
-    ''
-  ).trim();
+  const replyTo = (Deno.env.get('MAIL_REPLY_TO') ?? '').trim() || `contact@${DEFAULT_DOMAIN}`;
 
   return { provider, apiKey, domain, fromEmail, fromHeader, replyTo };
 }

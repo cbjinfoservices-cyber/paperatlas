@@ -1,5 +1,5 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-import { getMailConfig, sendMailMessage } from '../_shared/mail.ts';
+import { getMailConfig, sendMailMessage, siteUrl } from '../_shared/mail.ts';
 
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') || '';
 const SERVICE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || '';
@@ -190,7 +190,7 @@ Deno.serve(async (req) => {
     if (key && mail && !inbox.has(key)) inbox.set(key, mail);
   });
 
-  const site = (Deno.env.get('SITE_URL') ?? '').replace(/\/+$/, '');
+  const site = siteUrl();
   const accountLink = site ? `${site}/compte#demandes-b2b` : '';
 
   const byDest = new Map<string, LateRow[]>();

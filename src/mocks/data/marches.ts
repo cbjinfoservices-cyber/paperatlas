@@ -17,7 +17,7 @@ const H_STD: Hour[] = [
  * same three languages — so a reader who clicks the chip lands on a real board
  * instead of an empty one. Prices are in the money of each country.
  */
-export const marchesEntreprises: Entreprise[] = [
+const demoMarchesEntreprises: Entreprise[] = [
   {
     id: 'imprimerie-el-manar',
     name: 'Imprimerie El Manar',
@@ -301,7 +301,7 @@ export const marchesEntreprises: Entreprise[] = [
  * Riyadh poet. Same sheet as the rest of the directory, so the authors board
  * also has something to show when a country is picked.
  */
-export const marchesAuteurs: Auteur[] = [
+const demoMarchesAuteurs: Auteur[] = [
   {
     id: 'selma-trabelsi',
     name: 'Selma Trabelsi',
@@ -426,3 +426,7 @@ export const marchesAuteurs: Auteur[] = [
     website: 'alharbi-poetry.sa',
   },
 ];
+
+/* Données de démonstration : développement seulement. */
+export const marchesEntreprises: Entreprise[] = import.meta.env.DEV ? demoMarchesEntreprises : [];
+export const marchesAuteurs: Auteur[] = import.meta.env.DEV ? demoMarchesAuteurs : [];

@@ -344,5 +344,5 @@ const demoEmplois: Emploi[] = [
   },
 ];
 
-/* Données de démonstration : développement seulement (voir ./demo.ts). */
+/* Données de démonstration : développement seulement. */
 export const emplois: Emploi[] = import.meta.env.DEV ? demoEmplois : [];

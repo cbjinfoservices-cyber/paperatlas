@@ -3,8 +3,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { useLang } from '@/i18n/LangProvider';
 import { supabase } from '@/lib/supabase';
 
-const SUBMIT_URL = 'https://readdy.ai/api/form/dbo5695umrrn79g3io8g';
-
 /* Les sujets possibles, dans l'ordre où ils sont proposés. L'identifiant sert
    dans l'adresse — /?sujet=devis#contact — et la clé donne le libellé traduit
    qui part avec la demande. */
@@ -54,46 +52,31 @@ export default function ContactPanel() {
       setStatus('err'); setFormError(t('cf.errName')); return;
     }
     setStatus('sending'); setFormError('');
-    const body = new URLSearchParams();
-    data.forEach((v, k) => body.append(k, String(v)));
+    const chosen = String(data.get('sujet') || '').trim();
+    /* Le compteur de la console range par identifiant, jamais par libellé :
+       « Devis », « عرض سعر » et « Quote » sont le même sujet, et le total
+       ne doit pas se couper en trois selon la langue du visiteur. */
+    const chosenId = subjects.find((s) => t(s.key) === chosen)?.id || '';
     try {
-      const response = await fetch(SUBMIT_URL, {
-        method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString(),
+      const { data: result, error } = await supabase.functions.invoke('enregistrer-demande', {
+        body: {
+          type: 'contact',
+          nom: name,
+          email: String(data.get('email') || ''),
+          sujet: chosenId,
+          profil: String(data.get('profil') || ''),
+          organisation: String(data.get('organisation') || ''),
+          message,
+        },
       });
-      const responseText = await response.text();
-      let parsed: { code?: string; message?: string; meta?: { message?: string; detail?: string } } | null = null;
-      try { parsed = JSON.parse(responseText); } catch { parsed = null; }
-      const serverMsg = parsed?.meta?.message || parsed?.message || parsed?.meta?.detail || responseText;
-      const spam = /spam/i.test(`${parsed?.meta?.message || ''} ${parsed?.meta?.detail || ''} ${responseText}`);
-      if (response.ok && parsed?.code === 'OK' && !spam) {
-        const chosen = String(data.get('sujet') || '').trim();
-        /* Le compteur de la console range par identifiant, jamais par libellé :
-           « Devis », « عرض سعر » et « Quote » sont le même sujet, et le total
-           ne doit pas se couper en trois selon la langue du visiteur. */
-        const chosenId = subjects.find((s) => t(s.key) === chosen)?.id || '';
-        /* La demande est aussi rangée dans Supabase : c'est cette ligne qui
-           permet de compter les demandes par sujet dans la console. L'envoi
-           vers les formulaires reste le seul nécessaire — un échec ici ne
-           change rien pour la personne qui vient d'écrire. */
-        void supabase
-          .functions.invoke('enregistrer-demande', {
-            body: {
-              nom: name,
-              email: String(data.get('email') || ''),
-              sujet: chosenId,
-              profil: String(data.get('profil') || ''),
-              organisation: String(data.get('organisation') || ''),
-              message,
-            },
-          })
-          .catch(() => undefined);
+      if (!error && result?.ok) {
         setFirstName(name.split(/\s+/)[0] || '');
         setSentSubject(chosen);
         setStatus('ok');
         form.reset();
         setCount(0);
       } else {
-        setStatus('err'); setFormError(serverMsg || t('cf.errSend'));
+        setStatus('err'); setFormError(t('cf.errSend'));
       }
     } catch {
       setStatus('err'); setFormError(t('cf.errNet'));
@@ -110,14 +93,14 @@ export default function ContactPanel() {
 
   return (
     <section className="panel panel--contact" data-side="left" id="contact">
-      <img className="panel-bg" data-parallax="0.32" alt="Palettes de cartons et de livres emballés dans un entrepôt d'imprimerie" title="Contact PaperAtlas, demande de devis impression" src="https://readdy.ai/api/search-image?query=Wide%20cinematic%20photo%20of%20a%20print%20shop%20warehouse%20with%20wooden%20pallets%20of%20kraft%20wrapped%20book%20bundles%20in%20the%20right%20third%20of%20the%20frame%2C%20left%20half%20calm%20dark%20concrete%20floor%20and%20shadow%2C%20low%20amber%20sunlight%20through%20dusty%20air%2C%20warm%20brown%20tones%2C%20no%20text&width=2400&height=1350&seq=pa-panel-contact&orientation=landscape" />
+      <img className="panel-bg" data-parallax="0.32" alt="Palettes de cartons et de livres emballés dans un entrepôt d'imprimerie" title="Contact PaperAtlas, demande de devis impression" src="/media/panel-contact.jpg" />
       <div className="panel-veil"></div>
       <div className="panel-copy panel-copy--contact" data-parallax="-0.08">
         <p className="stamp" data-reveal>{t('ct.stamp')}</p>
         <h2 data-reveal dangerouslySetInnerHTML={{ __html: t('ct.title') }} />
         <p className="ct-coord" data-reveal>
           <i className="ri-mail-line" aria-hidden="true"></i>
-          <a href="mailto:contact@paperatlas-dz.com">contact@paperatlas-dz.com</a>
+          <a href="mailto:contact@paperatlas.net">contact@paperatlas.net</a>
           <span className="ct-coord-sep" aria-hidden="true">·</span>
           <i className="ri-time-line" aria-hidden="true"></i>
           <span>{t('cf.headNote')}</span>
@@ -147,7 +130,7 @@ export default function ContactPanel() {
             </button>
           </div>
         ) : (
-          <form id="paperatlas-contact" className="form-card contact-card" data-readdy-form onSubmit={onSubmit} data-reveal>
+          <form id="paperatlas-contact" className="form-card contact-card" onSubmit={onSubmit} data-reveal>
             <div className="ct-form-head">
               <h3>{t('cf.head')}</h3>
               <p className="ct-form-note">

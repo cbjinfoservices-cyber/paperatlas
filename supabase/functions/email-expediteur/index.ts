@@ -1,5 +1,5 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-import { getMailConfig, sendMailMessage, verifySenderDomain } from '../_shared/mail.ts';
+import { getMailConfig, sendMailMessage, siteUrl, verifySenderDomain } from '../_shared/mail.ts';
 
 const CORS = {
   'Access-Control-Allow-Origin': '*',
@@ -29,7 +29,6 @@ const escapeHtml = (value: string) =>
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
 
-const siteUrl = () => (Deno.env.get('SITE_URL') ?? '').replace(/\/+$/, '');
 const apiKey = () => getMailConfig().apiKey;
 const domain = () => getMailConfig().domain;
 /** L'adresse de réponse, quand elle est posée séparément : les confirmations

@@ -1,5 +1,5 @@
 import { createClient, type SupabaseClient } from 'https://esm.sh/@supabase/supabase-js@2';
-import { getMailConfig, sendMailMessage } from '../_shared/mail.ts';
+import { getMailConfig, sendMailMessage, siteUrl } from '../_shared/mail.ts';
 
 const CORS = {
   'Access-Control-Allow-Origin': '*',
@@ -264,7 +264,7 @@ Deno.serve(async (req) => {
     return reply({ code: 'OK', sent: false, reason: 'email-not-configured' });
   }
 
-  const site = (Deno.env.get('SITE_URL') ?? '').replace(/\/+$/, '');
+  const site = siteUrl();
   const copy = COPY[lang];
   const nom = (candidature.candidat_nom || '').split(' ')[0].trim() || copy.hello;
   const titre = `${copy.qOpen}${candidature.offre_titre}${copy.qClose}`;

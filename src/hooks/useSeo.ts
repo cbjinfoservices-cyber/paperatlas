@@ -24,8 +24,7 @@ const OG_LOCALE: Record<Lang, string> = {
  * d'atelier qui dit le métier mieux qu'un logo. Une page peut la remplacer
  * quand elle en a une plus juste — la fiche d'un atelier, celle d'une annonce.
  */
-const OG_IMAGE =
-  'https://readdy.ai/api/search-image?query=Sunlit%20letterpress%20workshop%20interior%20with%20a%20printer%20in%20a%20work%20apron%20examining%20freshly%20bound%20hardcover%20books%20on%20a%20wooden%20worktable%2C%20stacks%20of%20printed%20sheets%20and%20offset%20presses%20in%20the%20warm%20background%2C%20soft%20golden%20window%20light%2C%20muted%20earth%20tones%2C%20editorial%20documentary%20photography%20with%20shallow%20depth%20of%20field&width=1920&height=1080&seq=paperatlas-hero-press-hall&orientation=landscape';
+const OG_IMAGE_PATH = '/media/hero-landscape.jpg';
 
 type SeoProps = {
   page: SeoPage;
@@ -87,6 +86,8 @@ export function useSeo({ page, path, title, description, keywords, image }: SeoP
     const base = __BASE_PATH__.replace(/\/$/, '');
     const clean = path.startsWith('/') ? path : `/${path}`;
     const url = `${window.location.origin}${base}${clean}`;
+    /* L'image de partage est servie par le site lui-même, en adresse absolue. */
+    const OG_IMAGE = `${window.location.origin}${base}${OG_IMAGE_PATH}`;
 
     document.title = finalTitle;
     upsertMeta('description', 'name', finalDescription);

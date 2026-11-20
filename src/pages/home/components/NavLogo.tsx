@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import BrandSeal from '@/components/feature/BrandSeal';
+import { PARTNER_EMBLEM_SRC } from '@/components/feature/PartnerMark';
 
 /**
  * Le nom du site et, à côté, la seconde marque du réseau : le cachet de
@@ -16,7 +17,7 @@ export default function NavLogo() {
       <span className="nav-logo-partner">
         <img
           className="nav-logo-partner-mark"
-          src="https://readdy.ai/api/search-image?query=Minimal%20flat%20emblem%20of%20a%20globe%20formed%20by%20interlocking%20Arabic%20geometric%20eight-point%20stars%2C%20fine%20warm%20orange%20line%20art%20on%20a%20plain%20cream%20background%2C%20centered%20round%20seal%2C%20no%20text%2C%20crisp%20editorial%20vector%20look%2C%20soft%20inner%20glow%2C%20branding%20mark&width=200&height=200&seq=arabe-world-emblem-01&orientation=squarish"
+          src={PARTNER_EMBLEM_SRC}
           alt="Arabe World"
           width={200}
           height={200}

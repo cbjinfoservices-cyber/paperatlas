@@ -203,7 +203,7 @@ export default function AnnonceDetailPage() {
      référence et le titre de cette annonce déjà cités, avec son adresse. Rien
      ne part tant que le visiteur ne l'envoie pas lui-même. */
   const signalPage = `${window.location.origin}${__BASE_PATH__.replace(/\/$/, '')}/annonces/${item.id}`;
-  const signalHref = `mailto:contact@paperatlas-dz.com?subject=${encodeURIComponent(
+  const signalHref = `mailto:contact@paperatlas.net?subject=${encodeURIComponent(
     `${t('ann.signalSubject')} · ${ref}`,
   )}&body=${encodeURIComponent(
     t('ann.signalBody')

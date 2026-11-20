@@ -6,8 +6,7 @@
  * de repère dans la barre, de sceau dans le pied de page, d'en-tête des pages
  * de connexion et de marque dans la console d'administration.
  */
-export const BRAND_SEAL_SRC =
-  'https://public.readdy.ai/ai/img_res/edited_cd70c41b8e1a93ec1ff2f345b9556bab_a56d7c3c.jpg';
+export const BRAND_SEAL_SRC = '/media/logo.jpg';
 
 type Props = {
   className?: string;

@@ -6,7 +6,6 @@ export default function Chapter() {
   return (
     <section
       className="chapter"
-      data-video="https://storage.helloreaddy.io/project_files/390dbf81-919e-45ef-82b7-8afd5649fa69/daf8d51d-8ca4-47e5-a4ec-910091133420_scrub.mp4"
       data-label="Une commande, de la presse à la palette"
       style={{ ['--beat-count' as string]: 5 }}
     >
@@ -20,11 +19,11 @@ export default function Chapter() {
         <picture>
           <source
             media="(max-width: 780px)"
-            srcSet="https://readdy.ai/api/search-image?query=Vertical%20portrait%20composition%20in%20a%20tall%20narrow%20frame:%20a%20printer%20in%20a%20work%20apron%20stands%20beside%20a%20wooden%20worktable%20in%20a%20sunlit%20letterpress%20workshop%2C%20holding%20three%20freshly%20bound%20hardcover%20books%2C%20offset%20presses%20and%20stacks%20of%20printed%20sheets%20behind%20him%2C%20a%20tall%20window%20wall%20rising%20above%2C%20warm%20golden%20afternoon%20light%2C%20muted%20earth%20tones%2C%20editorial%20documentary%20photography%2C%20subject%20held%20in%20the%20upper%20half%20with%20quiet%20shadowed%20floor%20space%20left%20at%20the%20bottom%2C%20high%20detail&width=900&height=1600&seq=paperatlas-hero-portrait&orientation=portrait"
+            srcSet="/media/hero-portrait.jpg"
           />
           <img
             className="plate"
-            src="https://readdy.ai/api/search-image?query=Sunlit%20letterpress%20workshop%20interior%20with%20a%20printer%20in%20a%20work%20apron%20examining%20freshly%20bound%20hardcover%20books%20on%20a%20wooden%20worktable%2C%20stacks%20of%20printed%20sheets%20and%20offset%20presses%20with%20wooden%20pallets%20in%20the%20warm%20background%2C%20soft%20golden%20window%20light%2C%20muted%20earth%20tones%2C%20editorial%20documentary%20photography%20with%20shallow%20depth%20of%20field&width=1920&height=1080&seq=paperatlas-hero-press-hall&orientation=landscape"
+            src="/media/hero-landscape.jpg"
             width={1920}
             height={1080}
             fetchPriority="high"

@@ -1,5 +1,5 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-import { getMailConfig, sendMailMessage } from '../_shared/mail.ts';
+import { getMailConfig, sendMailMessage, siteUrl } from '../_shared/mail.ts';
 
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') || '';
 const ANON_KEY = Deno.env.get('SUPABASE_ANON_KEY') || '';
@@ -258,7 +258,7 @@ async function notifyWorkshops(
   });
   if (inbox.size === 0) return 0;
 
-  const site = (Deno.env.get('SITE_URL') ?? '').replace(/\/+$/, '');
+  const site = siteUrl();
   const accountLink = site ? `${site}/compte#demandes-b2b` : '';
 
   const tender = isTender(who);
@@ -530,7 +530,7 @@ async function confirmRequester(
   if (!mailCfg.apiKey || !mailCfg.fromEmail || !who.email) return false;
 
   const workshops = rows.map((row) => String(row.dest_name ?? '')).filter(Boolean);
-  const site = (Deno.env.get('SITE_URL') ?? '').replace(/\/+$/, '');
+  const site = siteUrl();
   const accountLink = site ? `${site}/compte#demandes-b2b` : '';
 
   const tender = isTender(who);

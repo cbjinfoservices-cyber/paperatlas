@@ -220,7 +220,7 @@ export default function EntrepriseProfile() {
      référence de la fiche et son nom déjà cités, avec l’adresse exacte de la
      page. Rien ne part tant que le visiteur ne l’envoie pas lui-même. */
   const signalUrl = `${window.location.origin}${__BASE_PATH__.replace(/\/$/, '')}/entreprise/${item.id}`;
-  const signalHref = `mailto:contact@paperatlas-dz.com?subject=${encodeURIComponent(
+  const signalHref = `mailto:contact@paperatlas.net?subject=${encodeURIComponent(
     `${t('pro.signalSubject')} · ${item.id}`,
   )}&body=${encodeURIComponent(
     t('pro.signalBody')

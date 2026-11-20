@@ -10,8 +10,7 @@ import type { Lang } from '@/i18n/dict';
  */
 
 /** Le signe de la maison : la même image que l'onglet et le partage. */
-const LOGO_URL =
-  'https://public.readdy.ai/ai/img_res/edited_cd70c41b8e1a93ec1ff2f345b9556bab_a56d7c3c.jpg';
+const LOGO_PATH = '/media/logo.jpg';
 
 /** L'adresse absolue d'un chemin du site, préfixe de publication compris. */
 export function absoluteUrl(path: string): string {
@@ -51,7 +50,7 @@ export function organizationLd(lang: Lang) {
     url: absoluteUrl('/'),
     logo: {
       '@type': 'ImageObject',
-      url: LOGO_URL,
+      url: absoluteUrl(LOGO_PATH),
     },
     description: ORG_TEXT[lang],
     knowsLanguage: ['fr', 'ar', 'en'],
