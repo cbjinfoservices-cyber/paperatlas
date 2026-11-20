@@ -1,0 +1,10 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: to-paperatlas-net
+  namespace: paperatlas-dz
+spec:
+  redirectRegex:
+    regex: '^https?://(?:www\.)?paper-atlas-dz\.com/?(.*)'
+    replacement: 'https://paperatlas.net/${1}'
+    permanent: true
