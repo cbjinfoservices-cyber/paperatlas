@@ -173,7 +173,7 @@ export default function Admin() {
     waiting: number;
     overdue: number;
     oldest: string | null;
-    /** La porte de l'envoi, lue chez Resend : tant que la clé ou le domaine
+    /** La porte de l'envoi, lue chez Brevo : tant que la clé ou le domaine
      *  vérifié manque, aucun accusé ne peut réellement partir — la pastille
      *  le dit depuis n'importe quel onglet. */
     gate: {
@@ -699,7 +699,7 @@ export default function Admin() {
     { key: 'params', label: t('ad.tab.params'), icon: 'ri-settings-3-line', count: null },
   ];
 
-  /* La porte de l'envoi des accusés, lue chez Resend par la même fonction que
+  /* La porte de l'envoi des accusés, lue chez Brevo par la même fonction que
      les compteurs : tant qu'elle est fermée, la pastille de l'en-tête le dit,
      et l'on voit depuis n'importe quel onglet que rien ne peut partir. */
   const accusesGate = accusesHead?.gate ?? null;
@@ -713,8 +713,8 @@ export default function Admin() {
       : t('ad.accuse.gateReady');
 
   return (
-    <main className="admin">
-      <header className="admin-top">
+    <main className="admin admin-shell">
+      <aside className="admin-side">
         <div className="admin-brand">
           <BrandSeal className="admin-brand-mark" label="PaperAtlas" />
           <span className="admin-brand-text">
@@ -728,7 +728,23 @@ export default function Admin() {
             <small>Arabe World</small>
           </span>
         </div>
-        <div className="admin-top-actions">
+        <nav className="admin-tabs" aria-label={t('ad.title')}>
+          {tabs.map((tab) => (
+            <button
+              key={tab.key}
+              type="button"
+              className="admin-tab"
+              data-on={section === tab.key ? 'yes' : 'no'}
+              aria-pressed={section === tab.key}
+              onClick={() => choisirSection(tab.key)}
+            >
+              <i className={tab.icon} aria-hidden="true"></i>
+              <span>{tab.label}</span>
+              {tab.count !== null && <b>{tab.count}</b>}
+            </button>
+          ))}
+        </nav>
+        <div className="admin-side-todo">
           {/* Les deux comptes de la relecture, côte à côte : celui de l'arabe
               et celui de l'anglais, chacun avec son reste. Un écart entre les
               deux dit de quel côté la relecture traîne ; un clic ouvre la
@@ -965,7 +981,7 @@ export default function Admin() {
             }
             onClick={() => {
               /* Quand la pastille signale un envoi bloqué, elle n’ouvre pas la
-                 file des accusés mais la vérification chez Resend — le seul
+                 file des accusés mais la vérification chez Brevo — le seul
                  fait qui autorise un accusé à partir. Sinon elle ouvre la
                  carte des accusés elle-même. */
               const cible = accusesGateBlocked ? 'expediteur' : 'accuses';
@@ -1004,6 +1020,12 @@ export default function Admin() {
               <b className="admin-relire-num">{accusesHead.waiting}</b>
             )}
           </button>
+        </div>
+      </aside>
+
+      <div className="admin-content">
+      <header className="admin-top">
+        <div className="admin-top-actions">
           <span className="admin-who" title={user?.email ?? ''}>
             {t('ad.signedAs')} <b>{user?.email}</b>
           </span>
@@ -1021,23 +1043,6 @@ export default function Admin() {
           </button>
         </div>
       </header>
-
-      <nav className="admin-tabs" aria-label={t('ad.title')}>
-        {tabs.map((tab) => (
-          <button
-            key={tab.key}
-            type="button"
-            className="admin-tab"
-            data-on={section === tab.key ? 'yes' : 'no'}
-            aria-pressed={section === tab.key}
-            onClick={() => choisirSection(tab.key)}
-          >
-            <i className={tab.icon} aria-hidden="true"></i>
-            <span>{tab.label}</span>
-            {tab.count !== null && <b>{tab.count}</b>}
-          </button>
-        ))}
-      </nav>
 
       <div className="admin-body">
         {loading ? (
@@ -1101,6 +1106,7 @@ export default function Admin() {
         ) : (
           <AdminParametres data={data} onReload={() => void load()} />
         )}
+      </div>
       </div>
 
       {fiche && (

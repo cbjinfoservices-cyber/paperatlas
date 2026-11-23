@@ -17,6 +17,85 @@
   padding: 64px 24px;
 }
 
+/* ---- la coque : une barre latérale à gauche, le contenu à droite ---- */
+.admin-shell {
+  display: grid;
+  grid-template-columns: 248px minmax(0, 1fr);
+  align-items: start;
+}
+
+.admin-side {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 18px 14px 24px;
+  border-inline-end: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+}
+
+.admin-side .admin-brand { padding-inline: 6px; flex-wrap: wrap; }
+
+.admin-side .admin-brand-world { margin-inline-start: 0; }
+
+.admin-content {
+  min-width: 0;
+}
+
+.admin-side-todo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-top: 16px;
+  border-top: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+}
+
+.admin-side-todo .admin-relire {
+  flex: 1 1 auto;
+  justify-content: center;
+}
+
+.admin-side .admin-tabs {
+  position: static;
+  z-index: auto;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 2px;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.admin-side .admin-tabs::after { display: none; }
+
+.admin-side .admin-tab {
+  width: 100%;
+  justify-content: flex-start;
+  padding: 9px 12px;
+  border-bottom: 0;
+  border-inline-start: 2px solid transparent;
+  border-radius: 8px;
+  background: none;
+}
+
+.admin-side .admin-tab span { flex: 1 1 auto; text-align: start; }
+
+.admin-side .admin-tab b { margin-inline-start: auto; }
+
+.admin-side .admin-tab:hover {
+  background: color-mix(in srgb, var(--text) 5%, transparent);
+}
+
+.admin-side .admin-tab[data-on="yes"] {
+  border-bottom: 0;
+  border-inline-start-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  box-shadow: none;
+}
+
 /* ---- l'en-tête ---- */
 .admin-top {
   display: flex;
@@ -3699,9 +3778,40 @@ button.admin-scope-cmp-parties-share-note[data-on="yes"] {
 
 /* ---- l'adaptation aux petits écrans ---- */
 @media (max-width: 900px) {
+  .admin-shell { grid-template-columns: minmax(0, 1fr); }
+  .admin-side {
+    position: static;
+    height: auto;
+    overflow: visible;
+    gap: 12px;
+    padding: 12px 16px;
+    border-inline-end: 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  }
+  .admin-side .admin-brand { padding-inline: 0; }
+  .admin-side-todo { padding-top: 10px; border-top: 0; }
+  .admin-side .admin-tabs {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .admin-side .admin-tab {
+    flex: 0 0 auto;
+    width: auto;
+    padding: 8px 12px;
+    border-inline-start: 0;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--text) 6%, transparent);
+    font-size: 12px;
+    white-space: nowrap;
+  }
+  .admin-side .admin-tab span { flex: none; }
+  .admin-side .admin-tab[data-on="yes"] {
+    background: color-mix(in srgb, var(--accent) 16%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 44%, transparent);
+  }
   .admin-top { padding: 12px 16px; }
-  .admin-tabs { padding: 12px 16px 0; }
-  .admin-tabs::after { inset-inline: 16px; }
   .admin-body { padding: 18px 16px 0; }
   .admin-card { padding: 18px 16px; }
   /* Le liseré du bloc suit le rembourrage réduit : il garde exactement la même
