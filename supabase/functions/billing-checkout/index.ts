@@ -7,6 +7,7 @@ import {
   stripeMinorAmount,
   currencyExponent,
 } from '../_shared/billingPricing.ts';
+import { creerCacheTemporaire } from '../_shared/cacheTemporaire.ts';
 
 const CORS = {
   'Access-Control-Allow-Origin': '*',
@@ -29,6 +30,23 @@ const json = (body: unknown, status = 200) =>
     status,
     headers: { ...CORS, 'Content-Type': 'application/json' },
   });
+
+type ReglageEssai = { essaiJours: number; erreur: string | null };
+
+const lireReglageEssai = creerCacheTemporaire({
+  ttlMs: 5 * 60 * 1000,
+  charger: async (admin: ReturnType<typeof createClient>): Promise<ReglageEssai> => {
+    const { data, error } = await admin
+      .from('parametres_app')
+      .select('essai_jours')
+      .limit(1)
+      .maybeSingle();
+    if (error) return { essaiJours: NaN, erreur: error.message };
+    return { essaiJours: Number(data?.essai_jours), erreur: null };
+  },
+  valide: (reglage) =>
+    reglage.erreur === null && Number.isInteger(reglage.essaiJours) && reglage.essaiJours >= 0 && reglage.essaiJours <= 90,
+});
 
 function isPlanId(value: unknown): value is PlanId {
   return typeof value === 'string' && Object.hasOwn(PLANS, value);
@@ -175,14 +193,10 @@ Deno.serve(async (req) => {
     }
   }
 
-  const { data: settings, error: settingsError } = await admin
-    .from('parametres_app')
-    .select('essai_jours')
-    .limit(1)
-    .maybeSingle();
-  const trialDays = Number(settings?.essai_jours);
-  if (settingsError || !Number.isInteger(trialDays) || trialDays < 0 || trialDays > 90) {
-    console.error('billing-trial-setting-invalid', settingsError?.message ?? 'invalid-value');
+  const reglage = await lireReglageEssai(admin);
+  const trialDays = reglage.essaiJours;
+  if (reglage.erreur !== null || !Number.isInteger(trialDays) || trialDays < 0 || trialDays > 90) {
+    console.error('billing-trial-setting-invalid', reglage.erreur ?? 'invalid-value');
     return json({ error: 'billing-trial-setting-invalid' }, 500);
   }
 
