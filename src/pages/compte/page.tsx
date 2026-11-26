@@ -56,14 +56,11 @@ export default function Compte() {
       || (params.has('journal') || params.has('jm') ? 'journal-formules' : '');
     if (!targetId) return;
     const target = document.getElementById(targetId);
-    let opened = false;
-    for (let node = target; node; node = node.parentElement) {
-      if (node instanceof HTMLDetailsElement && !node.open) {
-        node.open = true;
-        opened = true;
-      }
+    if (!target) return;
+    for (let node: HTMLElement | null = target; node; node = node.parentElement) {
+      if (node instanceof HTMLDetailsElement && !node.open) node.open = true;
     }
-    if (opened) target?.scrollIntoView({ block: 'start' });
+    target.scrollIntoView({ block: 'start' });
   }, [isEstablishment, location.hash, location.search]);
 
   /* The country picks the regions offered right below it; the profile loads
