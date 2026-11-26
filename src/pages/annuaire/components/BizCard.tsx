@@ -18,6 +18,7 @@ import { decadeLabel, decadeOf } from '@/lib/generation';
 import { formuleDe, type Entreprise } from '@/mocks/entreprises';
 import { specialitesDe } from '@/lib/specialites';
 import { useWriteToWorkshop } from '@/hooks/useWriteToWorkshop';
+import BizPhoto from './BizPhoto';
 import { nomDemo } from '@/lib/nomsDemo';
 import { nomCommune } from '@/lib/communeLabels';
 import './biz-card.css';
@@ -101,12 +102,13 @@ export default function BizCard({
   if (boardRegion) keep.set('wilaya', boardRegion);
   if (boardPays) keep.set('pays', boardPays);
   const carriedView = keep.toString();
-  const to = `/entreprise/${item.id}${carriedView ? `?${carriedView}` : ''}`;
+  const to = `/annuaire/entreprise/${item.id}${carriedView ? `?${carriedView}` : ''}`;
 
   return (
     <Link to={to} className="biz-card" style={{ ['--i' as string]: index % 3 }}>
       <div className="biz-thumb">
-        <img src={item.photos[0]} alt={`${nom} · ${t(`trade.${item.trade}`)} · ${item.wilaya}`} title={`${nom} · ${t(`trade.${item.trade}`)} ${item.wilaya}`} width={1200} height={900} />
+        <BizPhoto item={item} alt={`${nom} · ${t(`trade.${item.trade}`)} · ${item.wilaya}`} title={`${nom} · ${t(`trade.${item.trade}`)} ${item.wilaya}`} />
+
         <span className="biz-tag">{t(`trade.${item.trade}`)}</span>
         {shownSpec && (
           <span className={`biz-spec${focusSpec === shownSpec ? ' is-on' : ''}`}>
@@ -182,7 +184,7 @@ export default function BizCard({
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    navigate(`/entreprise/${item.id}#pro-etabs`);
+                    navigate(`/annuaire/entreprise/${item.id}#pro-etabs`);
                   }}
                 >
                   <i className="ri-building-4-line" aria-hidden="true"></i>
@@ -212,7 +214,9 @@ export default function BizCard({
           <i className="ri-arrow-right-line biz-b2b-go" aria-hidden="true"></i>
         </button>
         <div className="biz-foot">
-          <span className="biz-rate"><i className="ri-star-fill" aria-hidden="true"></i>{item.rating.toFixed(1)} <em>({item.reviews})</em></span>
+          {item.reviews > 0 && (
+            <span className="biz-rate"><i className="ri-star-fill" aria-hidden="true"></i>{item.rating.toFixed(1)} <em>({item.reviews})</em></span>
+          )}
           {/* Le geste court de l'aire : deux lignes, le nom de l'aire où se
               tient l'atelier et ses fiches. Le clic n'ouvre pas la fiche —
               la carte reste un lien, le geste s'arrête là. */}

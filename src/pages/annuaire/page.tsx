@@ -13,7 +13,8 @@ import { useShortlist } from '@/hooks/useShortlist';
 import { readDirMemory, saveDirMemory, clearDirMemory } from '@/hooks/useDirMemory';
 import { notePaysWalk, noteRegionWalk, noteTradeWalk } from '@/lib/regionWalk';
 import { readAuteurMemory, saveAuteurMemory, clearAuteurMemory } from '@/hooks/useAuteurMemory';
-import { entreprises, capacityScore, formuleDe } from '@/mocks/entreprises';
+import { capacityScore, formuleDe } from '@/mocks/entreprises';
+import { usePublishedEntreprises } from './usePublishedEntreprises';
 import { isNewcomer } from '@/lib/newcomers';
 import { facEmptyTitle } from '@/lib/faconnage';
 import { emptyPlaceLine, emptyPlaceTitle } from '@/lib/emptyPlace';
@@ -57,6 +58,7 @@ import GenerationBlock from './components/GenerationBlock';
 import WeekPulse from './components/WeekPulse';
 import MapLegend from './components/MapLegend';
 import CompareTray from './components/CompareTray';
+import BizPhoto from './components/BizPhoto';
 import ShareView from './components/ShareView';
 import MyDossiers from './components/MyDossiers';
 import ExportMenu from './components/ExportMenu';
@@ -93,6 +95,8 @@ export default function Annuaire() {
   const kindRestored = useRef(false);
   const kindSwitch = useRef(false);
   const geo = useGeo();
+  /* Les fiches publiées de la base : la carte, la liste et les compteurs les lisent. */
+  const { entreprises } = usePublishedEntreprises();
   /* The deposits published on the boards, counted per country: the country
      cards add them to their own sheets. */
   const { depots: depotsPays } = useFichesPubliees();
@@ -661,7 +665,7 @@ export default function Annuaire() {
     if (!geo.point) return map;
     entreprises.forEach((e) => map.set(e.id, haversineKm(geo.point as { lat: number; lng: number }, { lat: e.lat, lng: e.lng })));
     return map;
-  }, [geo.point]);
+  }, [geo.point, entreprises]);
 
   const bizPool = useMemo(() => entreprises.filter((e) => {
     if (trade && e.trade !== trade) return false;
@@ -676,7 +680,7 @@ export default function Annuaire() {
     const hay = [nomDemoCherchable(e.name), e.wilaya, graphiesRegion(e.wilaya).join(' '), e.commune, e.blurb.fr, e.blurb.ar, e.blurb.en ?? '', ...e.services.map((s) => `${s.fr} ${s.ar} ${s.en ?? ''}`)]
       .join(' ').toLowerCase();
     return hay.includes(needle);
-  }), [needle, trade, spec, month, radius, distances]);
+  }), [needle, trade, spec, month, radius, distances, entreprises]);
 
   /* The country filter is applied on top of that pool, so the counter above
      the board can still show where the whole selection comes from. */
@@ -725,7 +729,7 @@ export default function Annuaire() {
     () => entreprises.filter((e) => e.trade === 'faconnage'
       && (!pays || paysDe(e) === pays)
       && (!wilaya || e.wilaya === wilaya)).length,
-    [pays, wilaya],
+    [pays, wilaya, entreprises],
   );
 
   /** Combien d'ateliers de chaque métier répondent dans le pays et la région
@@ -740,7 +744,7 @@ export default function Annuaire() {
       counts[e.trade] = (counts[e.trade] ?? 0) + 1;
     });
     return counts;
-  }, [pays, wilaya]);
+  }, [pays, wilaya, entreprises]);
 
   /** Le total du périmètre, écrit à côté de « Tous les métiers ». */
   const tradeTotal = useMemo(
@@ -752,11 +756,10 @@ export default function Annuaire() {
       d'une page de type, le plus fourni d'abord. */
   const tradePaysTally = useMemo(
     () => (trade ? tallyPays(entreprises.filter((e) => e.trade === trade)) : []),
-    [trade],
+    [trade, entreprises],
   );
 
-  /** Combien d'ateliers de chaque spécialité répondent dans le pays et la
-      région déjà retenus : le second niveau du menu annonce un chiffre réel,
+  /** Combien d'ateliers de chaque spécialité répondent dans le pays et la région
       jamais un total national que la région a déjà écarté. */
   const specTally = useMemo(() => {
     const counts: Record<string, number> = {};
@@ -768,7 +771,7 @@ export default function Annuaire() {
       });
     });
     return counts;
-  }, [pays, wilaya]);
+  }, [pays, wilaya, entreprises]);
 
   /** Combien d'ateliers du métier choisi répondent dans le pays et la région
       déjà retenus. Zéro, et la rangée de filtres le dit avant la page vide. */
@@ -776,7 +779,7 @@ export default function Annuaire() {
     () => (trade ? entreprises.filter((e) => e.trade === trade
       && (!pays || paysDe(e) === pays)
       && (!wilaya || e.wilaya === wilaya)).length : -1),
-    [trade, pays, wilaya],
+    [trade, pays, wilaya, entreprises],
   );
 
   const bizBase = useMemo(() => {
@@ -1056,7 +1059,7 @@ export default function Annuaire() {
      emirates — the same word the counters above the cards use. */
   const regionSpread = useMemo(
     () => new Set(entreprises.filter((e) => !pays || paysDe(e) === pays).map((e) => e.wilaya)).size,
-    [pays],
+    [pays, entreprises],
   );
 
   /* How many sheets are on screen is part of the address: coming back from a
@@ -1494,7 +1497,7 @@ export default function Annuaire() {
           )}
 
           {returnBiz && (
-            <Link className="dir-return" to={`/entreprise/${returnBiz.id}`}>
+            <Link className="dir-return" to={`/annuaire/entreprise/${returnBiz.id}`}>
               <i className="ri-arrow-left-line" aria-hidden="true"></i>
               <span>{t('dir.returnTo')} <strong>{returnBiz.name}</strong></span>
             </Link>
@@ -1709,8 +1712,9 @@ export default function Annuaire() {
                 <span className="map-hint"><i className="ri-cursor-line" aria-hidden="true"></i>{t('dir.mapHint')}</span>
               </div>
               {activeBiz && (
-                <Link to={`/entreprise/${activeBiz.id}`} className="map-card">
-                  <img src={activeBiz.photos[0]} alt={activeBiz.name} title={`${activeBiz.name} ${nomRegion(activeBiz.wilaya, lang)}`} width={1200} height={900} />
+                <Link to={`/annuaire/entreprise/${activeBiz.id}`} className="map-card">
+                  <BizPhoto item={activeBiz} alt={activeBiz.name} title={`${activeBiz.name} ${nomRegion(activeBiz.wilaya, lang)}`} />
+
                   <div>
                     <span className="stamp">{t(`trade.${activeBiz.trade}`)}</span>
                     <h3>{activeBiz.name}</h3>
@@ -1854,7 +1858,7 @@ export default function Annuaire() {
         </section>
       </main>
       <LatestBoard />
-      <CompareTray kind={mode} />
+      <CompareTray kind={mode} source={entreprises} />
       <Footer />
     </>
   );

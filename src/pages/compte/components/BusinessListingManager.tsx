@@ -18,12 +18,18 @@ type BusinessListing = {
   telephone_public: string | null;
   email_public: string | null;
   site_web: string | null;
+  latitude: number | null;
+  longitude: number | null;
   publie: boolean;
 };
 
 type Props = { onSaved?: () => void };
 
-type Fields = Omit<BusinessListing, 'id' | 'user_id'>;
+/* Les coordonnées restent en texte le temps de la saisie ; vides, la fiche suit sa wilaya. */
+type Fields = Omit<BusinessListing, 'id' | 'user_id' | 'latitude' | 'longitude'> & {
+  latitude: string;
+  longitude: string;
+};
 
 const EMPTY_FIELDS: Fields = {
   nom: '',
@@ -35,8 +41,18 @@ const EMPTY_FIELDS: Fields = {
   telephone_public: '',
   email_public: '',
   site_web: '',
+  latitude: '',
+  longitude: '',
   publie: false,
 };
+
+function parseCoordinate(value: string, limit: number): number | null | undefined {
+  const text = value.trim();
+  if (!text) return null;
+  const number = Number(text.replace(',', '.'));
+  if (!Number.isFinite(number) || Math.abs(number) > limit) return undefined;
+  return number;
+}
 
 export default function BusinessListingManager({ onSaved }: Props) {
   const { t, lang } = useLang();
@@ -56,7 +72,7 @@ export default function BusinessListingManager({ onSaved }: Props) {
       setError('');
       const { data, error: loadError } = await supabase
         .from('paperatlas_entreprises')
-        .select('id,user_id,nom,metier,pays,wilaya,commune,description,telephone_public,email_public,site_web,publie')
+        .select('id,user_id,nom,metier,pays,wilaya,commune,description,telephone_public,email_public,site_web,latitude,longitude,publie')
         .eq('user_id', user.id)
         .maybeSingle();
       if (!alive) return;
@@ -75,6 +91,8 @@ export default function BusinessListingManager({ onSaved }: Props) {
           telephone_public: data.telephone_public ?? '',
           email_public: data.email_public ?? '',
           site_web: data.site_web ?? '',
+          latitude: data.latitude == null ? '' : String(data.latitude),
+          longitude: data.longitude == null ? '' : String(data.longitude),
           publie: data.publie,
         });
       } else {
@@ -108,6 +126,12 @@ export default function BusinessListingManager({ onSaved }: Props) {
       setError(t('dir.listing.required'));
       return;
     }
+    const latitude = parseCoordinate(fields.latitude, 90);
+    const longitude = parseCoordinate(fields.longitude, 180);
+    if (latitude === undefined || longitude === undefined || (latitude === null) !== (longitude === null)) {
+      setError(t('dir.listing.coordsInvalid'));
+      return;
+    }
 
     setSaving(true);
     setSaved(false);
@@ -122,6 +146,8 @@ export default function BusinessListingManager({ onSaved }: Props) {
       telephone_public: fields.telephone_public?.trim() || null,
       email_public: fields.email_public?.trim() || null,
       site_web: fields.site_web?.trim() || null,
+      latitude,
+      longitude,
       publie: fields.publie,
       updated_at: new Date().toISOString(),
     };
@@ -181,6 +207,17 @@ export default function BusinessListingManager({ onSaved }: Props) {
             <label htmlFor="business-city">{t('dir.listing.city')}</label>
             <input id="business-city" value={fields.commune ?? ''} maxLength={100} onChange={(event) => update('commune', event.target.value)} />
           </div>
+        </div>
+        <div className="form-grid">
+          <div className="fld">
+            <label htmlFor="business-latitude">{t('dir.listing.latitude')}</label>
+            <input id="business-latitude" inputMode="decimal" value={fields.latitude} maxLength={12} onChange={(event) => update('latitude', event.target.value)} />
+          </div>
+          <div className="fld">
+            <label htmlFor="business-longitude">{t('dir.listing.longitude')}</label>
+            <input id="business-longitude" inputMode="decimal" value={fields.longitude} maxLength={12} onChange={(event) => update('longitude', event.target.value)} />
+          </div>
+          <p className="auth-note">{t('dir.listing.coordsHint')}</p>
         </div>
         <div className="fld">
           <label htmlFor="business-description">{t('dir.listing.description')}</label>

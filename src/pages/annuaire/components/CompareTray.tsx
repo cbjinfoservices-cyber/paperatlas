@@ -4,6 +4,7 @@ import { useLang } from '@/i18n/LangProvider';
 import { langCode, localize } from '@/i18n/localize';
 import { useShortlist, type ListKind } from '@/hooks/useShortlist';
 import { entreprises, type Entreprise } from '@/mocks/entreprises';
+import BizPhoto from './BizPhoto';
 import { auteurs, type Auteur } from '@/mocks/auteurs';
 import { paysDe } from '@/lib/pays';
 import { motDivision } from '@/lib/division';
@@ -18,7 +19,7 @@ import { readRequester } from '@/hooks/useRequester';
 
 type Row<T> = { key: string; label: string; render: (item: T) => ReactNode };
 
-export default function CompareTray({ kind }: { kind: ListKind }) {
+export default function CompareTray({ kind, source = entreprises }: { kind: ListKind; source?: Entreprise[] }) {
   const { t, lang } = useLang();
   const { ids, clear, toggle, max } = useShortlist(kind);
   const [params, setParams] = useSearchParams();
@@ -62,7 +63,7 @@ export default function CompareTray({ kind }: { kind: ListKind }) {
   }, [ids.length]);
 
   const bizList = kind === 'entreprises'
-    ? (ids.map((id) => entreprises.find((e) => e.id === id)).filter(Boolean) as Entreprise[])
+    ? (ids.map((id) => source.find((e) => e.id === id)).filter(Boolean) as Entreprise[])
     : [];
   const auList = kind === 'auteurs'
     ? (ids.map((id) => auteurs.find((a) => a.id === id)).filter(Boolean) as Auteur[])
@@ -104,10 +105,10 @@ export default function CompareTray({ kind }: { kind: ListKind }) {
     if (!reference || ids.length === 0) return;
     if (!open && !printOpen && !quoteOpen) return;
     const names = kind === 'entreprises'
-      ? (ids.map((id) => entreprises.find((e) => e.id === id)?.name).filter(Boolean) as string[])
+      ? (ids.map((id) => source.find((e) => e.id === id)?.name).filter(Boolean) as string[])
       : (ids.map((id) => auteurs.find((a) => a.id === id)?.name).filter(Boolean) as string[]);
     saveDossier({ ref: reference, kind, ids, names });
-  }, [open, printOpen, quoteOpen, reference, ids, kind]);
+  }, [open, printOpen, quoteOpen, reference, ids, kind, source]);
 
   if (ids.length === 0) return null;
 
@@ -236,15 +237,13 @@ export default function CompareTray({ kind }: { kind: ListKind }) {
                     <div className="cmp-colhead" key={e.id}>
                       {/* La première vue de l'atelier, comme la plume montre son
                           portrait : la colonne se reconnaît avant d'être lue. */}
-                      <img
+                      <BizPhoto
                         className="cmp-photo"
-                        src={e.photos[0]}
+                        item={e}
                         alt={`${e.name} · ${t(`trade.${e.trade}`)}`}
                         title={`${e.name} · ${t(`trade.${e.trade}`)}`}
-                        width={1200}
-                        height={900}
                       />
-                      <Link to={`/entreprise/${e.id}`}>{e.name}</Link>
+                      <Link to={`/annuaire/entreprise/${e.id}`}>{e.name}</Link>
                       <span className="cmp-where">{nomRegion(e.wilaya, lang)}</span>
                     </div>
                   ))}
