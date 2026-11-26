@@ -14,7 +14,7 @@
   border-radius: 8px;
   border: 1px dashed color-mix(in srgb, var(--accent) 30%, transparent);
   background: color-mix(in srgb, var(--accent) 6%, transparent);
-  font-size: 10.8px;
+  font-size: 12px;
   line-height: 1.5;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 72%, transparent);
@@ -37,7 +37,7 @@
   color: color-mix(in srgb, var(--accent) 88%, var(--text));
 }
 
-[dir='rtl'] .suivi-rl-tournee { font-size: 11.5px; }
+[dir='rtl'] .suivi-rl-tournee { font-size: 12px; }
 
 /* La porte de reprise : le premier écran encore non coché de la tournée. Elle
    se tient à côté du geste de cochage, mais d'un trait plus discret — on y
@@ -52,7 +52,7 @@
   border: 1px dashed color-mix(in srgb, var(--text) 26%, transparent);
   color: color-mix(in srgb, var(--text) 78%, transparent);
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.05em;
   text-decoration: none;
   cursor: pointer;
@@ -76,7 +76,7 @@
   outline-offset: 2px;
 }
 
-[dir='rtl'] .suivi-rl-resume { letter-spacing: 0; font-size: 11px; }
+[dir='rtl'] .suivi-rl-resume { letter-spacing: 0; font-size: 12px; }
 
 /* Le geste qui coche les dix écrans du côté où la tournée se tient. Il prend
    la teinte d'accent et le trait plein d'un bouton tenu, pour se distinguer
@@ -92,7 +92,7 @@
   background: color-mix(in srgb, var(--accent) 12%, transparent);
   color: color-mix(in srgb, var(--accent) 90%, var(--text));
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.05em;
   cursor: pointer;
   transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
@@ -118,7 +118,7 @@
   align-items: center;
   gap: 5px;
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.05em;
   color: color-mix(in srgb, var(--accent) 84%, var(--text));
 }
@@ -126,7 +126,7 @@
 .suivi-rl-marked i { font-size: 12px; line-height: 1; }
 
 [dir='rtl'] .suivi-rl-marked,
-[dir='rtl'] .suivi-rl-mark { letter-spacing: 0; font-size: 11px; }
+[dir='rtl'] .suivi-rl-mark { letter-spacing: 0; font-size: 12px; }
 
 /* ============ LA FRISE DES TRENTE ÉCRANS ============ */
 /* Une marque par écran, rangée en tranches — les deux tournées, puis le reste
@@ -167,7 +167,7 @@
   color: color-mix(in srgb, var(--accent) 82%, var(--text));
 }
 
-.suivi-rl-frise-note { font-size: 10.4px; line-height: 1.45; }
+.suivi-rl-frise-note { font-size: 12px; line-height: 1.45; }
 
 /* Ce que le carnet des gestes retient : combien, et depuis quel jour le plus
    ancien. Il se lit avant la porte d'oubli, pour savoir ce qu'elle emporterait. */
@@ -177,21 +177,21 @@
   align-items: center;
   gap: 4px;
   font-family: var(--font-label);
-  font-size: 9.4px;
+  font-size: 12px;
   line-height: 1.4;
   letter-spacing: 0.04em;
   color: color-mix(in srgb, var(--text) 58%, transparent);
 }
 
 .suivi-rl-frise-book i {
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1;
   color: color-mix(in srgb, var(--text) 44%, transparent);
 }
 
 [dir='rtl'] .suivi-rl-frise-book {
   letter-spacing: 0;
-  font-size: 10.4px;
+  font-size: 12px;
 }
 
 /* La porte d'oubli du carnet des gestes : au bout de la tête de frise, elle
@@ -209,14 +209,14 @@
   background: transparent;
   color: color-mix(in srgb, var(--text) 62%, transparent);
   font-family: var(--font-label, inherit);
-  font-size: 9.4px;
+  font-size: 12px;
   letter-spacing: .05em;
   text-transform: uppercase;
   cursor: pointer;
   transition: border-color .2s ease, background .2s ease, color .2s ease;
 }
 
-.suivi-rl-frise-forget i { font-size: 11px; line-height: 1; }
+.suivi-rl-frise-forget i { font-size: 12px; line-height: 1; }
 
 .suivi-rl-frise-forget:hover,
 .suivi-rl-frise-forget:focus-visible {
@@ -239,7 +239,7 @@
   color: color-mix(in srgb, var(--accent) 94%, var(--text));
 }
 
-[dir='rtl'] .suivi-rl-frise-forget { letter-spacing: 0; text-transform: none; font-size: 10.4px; }
+[dir='rtl'] .suivi-rl-frise-forget { letter-spacing: 0; text-transform: none; font-size: 12px; }
 
 /* La clé des trois états : trois pastilles, jamais une couleur sans mot. */
 .suivi-rl-frise-key {
@@ -248,7 +248,7 @@
   gap: 4px 12px;
   flex-wrap: wrap;
   font-family: var(--font-label);
-  font-size: 9.6px;
+  font-size: 12px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 54%, transparent);
@@ -295,7 +295,7 @@
   border: 1px dashed color-mix(in srgb, var(--text) 18%, transparent);
   background: color-mix(in srgb, var(--text) 3%, transparent);
   font-family: var(--font-label);
-  font-size: 9.4px;
+  font-size: 12px;
   line-height: 1.45;
   letter-spacing: 0.05em;
   color: color-mix(in srgb, var(--text) 62%, transparent);
@@ -335,14 +335,14 @@
   background: transparent;
   color: color-mix(in srgb, var(--accent) 88%, var(--text));
   font-family: var(--font-label);
-  font-size: 9.2px;
+  font-size: 12px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   cursor: pointer;
   transition: background 0.2s ease, border-color 0.2s ease;
 }
 
-.suivi-rl-frise-last-go i { font-size: 11px; line-height: 1; }
+.suivi-rl-frise-last-go i { font-size: 12px; line-height: 1; }
 
 .suivi-rl-frise-last-go:hover {
   background: color-mix(in srgb, var(--accent) 14%, transparent);
@@ -371,7 +371,7 @@
 [dir='rtl'] .suivi-rl-frise-last,
 [dir='rtl'] .suivi-rl-frise-last-go {
   letter-spacing: 0;
-  font-size: 10.4px;
+  font-size: 12px;
 }
 
 /* Les tranches encore ouvertes, comptées par le sens de leur dernier geste :
@@ -382,21 +382,21 @@
   align-items: center;
   gap: 4px;
   font-family: var(--font-label);
-  font-size: 9.4px;
+  font-size: 12px;
   line-height: 1.4;
   letter-spacing: 0.04em;
   color: color-mix(in srgb, var(--accent) 74%, var(--text));
 }
 
 .suivi-rl-frise-ouvertes i {
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1;
   color: color-mix(in srgb, var(--accent) 68%, var(--text));
 }
 
 [dir='rtl'] .suivi-rl-frise-ouvertes {
   letter-spacing: 0;
-  font-size: 10.4px;
+  font-size: 12px;
 }
 
 /* Ce que ces tranches gardent encore ouvert : un compte d'écrans, à côté de la
@@ -408,7 +408,7 @@
   align-items: center;
   gap: 4px;
   font-family: var(--font-label);
-  font-size: 9.4px;
+  font-size: 12px;
   line-height: 1.4;
   letter-spacing: 0.04em;
   font-variant-numeric: tabular-nums;
@@ -416,14 +416,14 @@
 }
 
 .suivi-rl-frise-ouverts i {
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1;
   color: color-mix(in srgb, var(--accent) 60%, var(--text));
 }
 
 [dir='rtl'] .suivi-rl-frise-ouverts {
   letter-spacing: 0;
-  font-size: 10.4px;
+  font-size: 12px;
 }
 
 /* La porte de réouverture des tranches ouvertes : elle retire des cases
@@ -440,7 +440,7 @@
   background: transparent;
   color: color-mix(in srgb, var(--text) 64%, transparent);
   font-family: var(--font-label, inherit);
-  font-size: 9.4px;
+  font-size: 12px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   cursor: pointer;
@@ -448,7 +448,7 @@
 }
 
 .suivi-rl-frise-reopen i {
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1;
 }
 
@@ -484,7 +484,7 @@
 [dir='rtl'] .suivi-rl-frise-reopen {
   letter-spacing: 0;
   text-transform: none;
-  font-size: 10.4px;
+  font-size: 12px;
 }
 
 /* La porte de réouverture et ce qu'elle retirerait : le compte se lit sous la
@@ -503,7 +503,7 @@
   gap: 4px;
   padding-inline-start: 4px;
   font-family: var(--font-label, inherit);
-  font-size: 8.8px;
+  font-size: 12px;
   line-height: 1.3;
   letter-spacing: 0.03em;
   font-variant-numeric: tabular-nums;
@@ -511,13 +511,13 @@
 }
 
 .suivi-rl-frise-reopen-cases i {
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1;
 }
 
 [dir='rtl'] .suivi-rl-frise-reopen-cases {
   letter-spacing: 0;
-  font-size: 9.8px;
+  font-size: 12px;
 }
 
 /* Le sens du dernier geste de chaque tranche encore ouverte : une pastille par
@@ -539,7 +539,7 @@
   border-radius: 999px;
   border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
   font-family: var(--font-label, inherit);
-  font-size: 8.8px;
+  font-size: 11px;
   letter-spacing: 0.03em;
   color: color-mix(in srgb, var(--text) 66%, transparent);
   white-space: nowrap;
@@ -596,7 +596,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
 
 [dir='rtl'] .suivi-rl-frise-sens-chip {
   letter-spacing: 0;
-  font-size: 9.8px;
+  font-size: 11px;
 }
 
 .suivi-rl-frise-bande {
@@ -617,7 +617,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
   justify-content: space-between;
   gap: 6px 8px;
   font-family: var(--font-label);
-  font-size: 9.4px;
+  font-size: 12px;
   letter-spacing: 0.07em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 46%, transparent);
@@ -674,7 +674,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
   outline-offset: 2px;
 }
 
-.suivi-rl-frise-bande-last i { font-size: 10.5px; line-height: 1; }
+.suivi-rl-frise-bande-last i { font-size: 12px; line-height: 1; }
 
 /* Le délai écoulé depuis le geste, à côté de sa date : un filet le sépare du
    mot, et il reste plus discret que la date — c'est un âge, pas un événement. */
@@ -708,12 +708,12 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
 
 .suivi-rl-frise-bande-reouvert i {
   flex: none;
-  font-size: 10.5px;
+  font-size: 12px;
   line-height: 1;
   opacity: 0.82;
 }
 
-[dir='rtl'] .suivi-rl-frise-bande-reouvert { font-size: 10.4px; }
+[dir='rtl'] .suivi-rl-frise-bande-reouvert { font-size: 12px; }
 
 .suivi-rl-frise-bande-last[data-sens='ferme'] {
   border-color: color-mix(in srgb, var(--accent) 38%, transparent);
@@ -721,7 +721,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
   color: color-mix(in srgb, var(--accent) 86%, var(--text));
 }
 
-[dir='rtl'] .suivi-rl-frise-bande-last { font-size: 10.4px; }
+[dir='rtl'] .suivi-rl-frise-bande-last { font-size: 12px; }
 
 /* ---- la carte des gestes d'une tranche ---- */
 /* Ouverte par le clic sur la date, elle déplie les clics de cette tranche-là,
@@ -744,13 +744,13 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
   align-items: center;
   gap: 5px;
   font-family: var(--font-label);
-  font-size: 9.2px;
+  font-size: 12px;
   letter-spacing: 0.07em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--accent) 88%, var(--text));
 }
 
-.suivi-rl-frise-gestes-head i { font-size: 11px; line-height: 1; }
+.suivi-rl-frise-gestes-head i { font-size: 12px; line-height: 1; }
 
 .suivi-rl-frise-gestes-head b {
   font-weight: 600;
@@ -798,7 +798,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
   gap: 2px 7px;
   padding: 2px 0;
   font-family: var(--font-label);
-  font-size: 9.8px;
+  font-size: 12px;
   line-height: 1.45;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 68%, transparent);
@@ -809,7 +809,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
 
 .suivi-rl-frise-gestes li i {
   flex: none;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1;
   color: color-mix(in srgb, var(--text) 44%, transparent);
 }
@@ -854,7 +854,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
 
 .suivi-rl-frise-geste-autres i {
   flex: none;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1;
   color: color-mix(in srgb, var(--accent) 62%, var(--text));
 }
@@ -874,7 +874,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
 
 .suivi-rl-frise-geste-clic i {
   flex: none;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1;
   opacity: 0.76;
 }
@@ -893,7 +893,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
   background: transparent;
   color: color-mix(in srgb, var(--text) 58%, transparent);
   font-family: var(--font-label, inherit);
-  font-size: 8.6px;
+  font-size: 12px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   cursor: pointer;
@@ -902,7 +902,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
 
 .suivi-rl-frise-geste-copier i {
   flex: none;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1;
 }
 
@@ -920,7 +920,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
 [dir='rtl'] .suivi-rl-frise-geste-copier {
   letter-spacing: 0;
   text-transform: none;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 /* La tranche encore ouverte la plus ancienne du carnet : une pastille mate à
@@ -934,7 +934,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
   border-radius: 999px;
   border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
   font-family: var(--font-label, inherit);
-  font-size: 8.8px;
+  font-size: 12px;
   line-height: 1.4;
   letter-spacing: 0.04em;
   font-variant-numeric: tabular-nums;
@@ -944,7 +944,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
 
 .suivi-rl-frise-ancienne i {
   flex: none;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1;
   opacity: 0.8;
 }
@@ -957,12 +957,12 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
 
 [dir='rtl'] .suivi-rl-frise-ancienne {
   letter-spacing: 0;
-  font-size: 9.8px;
+  font-size: 12px;
 }
 
-[dir='rtl'] .suivi-rl-frise-geste-clic { font-size: 10.8px; }
+[dir='rtl'] .suivi-rl-frise-geste-clic { font-size: 12px; }
 
-[dir='rtl'] .suivi-rl-frise-gestes li { font-size: 10.8px; }
+[dir='rtl'] .suivi-rl-frise-gestes li { font-size: 12px; }
 
 @keyframes suiviRlCarte {
   from {
@@ -986,7 +986,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
   border: 1px dashed color-mix(in srgb, var(--accent) 34%, transparent);
   background: color-mix(in srgb, var(--accent) 7%, transparent);
   font-family: var(--font-label);
-  font-size: 9.4px;
+  font-size: 12px;
   letter-spacing: 0.05em;
   color: color-mix(in srgb, var(--accent) 88%, var(--text));
   animation: suiviRlGeste 0.3s ease both;
@@ -994,13 +994,13 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
 
 .suivi-rl-frise-reset i {
   flex: none;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1;
 }
 
 [dir='rtl'] .suivi-rl-frise-reset {
   letter-spacing: 0;
-  font-size: 10.4px;
+  font-size: 12px;
 }
 
 /* Le geste groupé d'une tranche : fermer d'un coup les écrans encore ouverts,
@@ -1017,14 +1017,14 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
   background: color-mix(in srgb, var(--accent) 10%, transparent);
   color: color-mix(in srgb, var(--accent) 90%, var(--text));
   font-family: var(--font-label);
-  font-size: 9.4px;
+  font-size: 12px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   cursor: pointer;
   transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
-.suivi-rl-frise-bulk i { font-size: 11px; line-height: 1; }
+.suivi-rl-frise-bulk i { font-size: 12px; line-height: 1; }
 
 .suivi-rl-frise-bulk:hover {
   background: color-mix(in srgb, var(--accent) 18%, transparent);
@@ -1043,7 +1043,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
   color: color-mix(in srgb, var(--text) 62%, transparent);
 }
 
-[dir='rtl'] .suivi-rl-frise-bulk { letter-spacing: 0; font-size: 10.4px; }
+[dir='rtl'] .suivi-rl-frise-bulk { letter-spacing: 0; font-size: 12px; }
 
 .suivi-rl-frise-cells {
   list-style: none;
@@ -1068,7 +1068,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
   border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
   background: color-mix(in srgb, var(--surface) 55%, transparent);
   font-family: var(--font-label);
-  font-size: 9.2px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   text-decoration: none;
   color: color-mix(in srgb, var(--text) 58%, transparent);
@@ -1118,7 +1118,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
 }
 
 [dir='rtl'] .suivi-rl-frise-key,
-[dir='rtl'] .suivi-rl-frise-legende { letter-spacing: 0; font-size: 10.4px; }
+[dir='rtl'] .suivi-rl-frise-legende { letter-spacing: 0; font-size: 12px; }
 
 /* Ce que le geste de tranche vient de faire : un compte bref, posé sous les
    marques de la tranche cliquée, qui s'efface de lui-même. Il apparaît un
@@ -1130,7 +1130,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
   gap: 5px;
   margin: -1px 0 1px;
   font-family: var(--font-label);
-  font-size: 9.4px;
+  font-size: 12px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--accent) 88%, var(--text));
@@ -1151,7 +1151,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
 [dir='rtl'] .suivi-rl-frise-flash {
   letter-spacing: 0;
   text-transform: none;
-  font-size: 10.6px;
+  font-size: 12px;
 }
 
 @keyframes suiviRlGeste {
@@ -1173,7 +1173,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
 
 @media (max-width: 640px) {
   .suivi-rl-frise-cells { grid-template-columns: repeat(5, minmax(0, 1fr)); }
-  .suivi-rl-frise-note { font-size: 10px; }
+  .suivi-rl-frise-note { font-size: 12px; }
 }
 
 /* ============ LA PORTE « ÉCRAN SUIVANT » ============ */
@@ -1197,7 +1197,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
   background: transparent;
   color: color-mix(in srgb, var(--text) 62%, transparent);
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.04em;
   text-decoration: none;
   cursor: pointer;
@@ -1205,7 +1205,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
 }
 
 .suivi-rl-next i {
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1;
 }
 
@@ -1244,7 +1244,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
   opacity: 0.92;
 }
 
-[dir='rtl'] .suivi-rl-next { letter-spacing: 0; font-size: 11px; }
+[dir='rtl'] .suivi-rl-next { letter-spacing: 0; font-size: 12px; }
 [dir='rtl'] .suivi-rl-next i { transform: scaleX(-1); }
 
 /* ---- la porte du CSV d'une tranche ---- */
@@ -1262,14 +1262,14 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
   background: transparent;
   color: color-mix(in srgb, var(--accent) 84%, var(--text));
   font-family: var(--font-label, inherit);
-  font-size: 9.4px;
+  font-size: 12px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   cursor: pointer;
   transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
 }
 
-.suivi-rl-frise-slice i { font-size: 11px; line-height: 1; }
+.suivi-rl-frise-slice i { font-size: 12px; line-height: 1; }
 
 .suivi-rl-frise-slice:hover,
 .suivi-rl-frise-slice:focus-visible {
@@ -1294,7 +1294,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
 [dir='rtl'] .suivi-rl-frise-slice {
   letter-spacing: 0;
   text-transform: none;
-  font-size: 10.4px;
+  font-size: 12px;
 }
 
 /* La porte des tranches ouvertes se distingue de celle d'une seule tranche :
@@ -1320,7 +1320,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
   background: transparent;
   color: color-mix(in srgb, var(--text) 66%, transparent);
   font-family: var(--font-label, inherit);
-  font-size: 9.4px;
+  font-size: 12px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   cursor: pointer;
@@ -1328,7 +1328,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
 }
 
 .suivi-rl-frise-copy i {
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1;
 }
 
@@ -1418,7 +1418,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
 [dir='rtl'] .suivi-rl-frise-copy {
   letter-spacing: 0;
   text-transform: none;
-  font-size: 10.4px;
+  font-size: 12px;
 }
 
 /* Ce que le dernier clic a emporté : combien de tranches une réouverture
@@ -1432,7 +1432,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
   border-radius: 999px;
   border: 1px dashed color-mix(in srgb, var(--accent) 40%, transparent);
   font-family: var(--font-label, inherit);
-  font-size: 8.8px;
+  font-size: 12px;
   line-height: 1.4;
   letter-spacing: 0.04em;
   font-variant-numeric: tabular-nums;
@@ -1441,7 +1441,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
 }
 
 .suivi-rl-frise-last-tranches i {
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1;
 }
 
@@ -1456,7 +1456,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
 
 [dir='rtl'] .suivi-rl-frise-last-tranches {
   letter-spacing: 0;
-  font-size: 9.8px;
+  font-size: 12px;
 }
 
 /* ---- le tri par sens, dans la carte des gestes ---- */
@@ -1481,7 +1481,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
   background: transparent;
   color: color-mix(in srgb, var(--text) 58%, transparent);
   font-family: var(--font-label);
-  font-size: 8.8px;
+  font-size: 12px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   cursor: pointer;
@@ -1514,7 +1514,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
 [dir='rtl'] .suivi-rl-frise-gestes-sens {
   letter-spacing: 0;
   text-transform: none;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 /* Un sens absent de la tranche : la carte le dit, au lieu de rester vide. */
@@ -1525,20 +1525,20 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
   gap: 5px;
   padding: 2px 0;
   font-family: var(--font-label);
-  font-size: 9.4px;
+  font-size: 12px;
   letter-spacing: 0.04em;
   color: color-mix(in srgb, var(--text) 56%, transparent);
 }
 
 .suivi-rl-frise-gestes-vide i {
   flex: none;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1;
 }
 
 [dir='rtl'] .suivi-rl-frise-gestes-vide {
   letter-spacing: 0;
-  font-size: 10.4px;
+  font-size: 12px;
 }
 
 /* Ce que ce sens a réellement touché : la somme des écrans de ses gestes,
@@ -1551,7 +1551,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
   padding: 2px 0;
   border-top: 1px dashed color-mix(in srgb, var(--accent) 22%, transparent);
   font-family: var(--font-label);
-  font-size: 9.2px;
+  font-size: 12px;
   line-height: 1.45;
   letter-spacing: 0.04em;
   color: color-mix(in srgb, var(--accent) 82%, var(--text));
@@ -1559,13 +1559,13 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
 
 .suivi-rl-frise-gestes-reel i {
   flex: none;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1;
 }
 
 [dir='rtl'] .suivi-rl-frise-gestes-reel {
   letter-spacing: 0;
-  font-size: 10.2px;
+  font-size: 12px;
 }
 
 /* ---- le tri par sens de la tête de frise ---- */
@@ -1595,7 +1595,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
   background: transparent;
   color: color-mix(in srgb, var(--text) 54%, transparent);
   font-family: var(--font-label, inherit);
-  font-size: 8.6px;
+  font-size: 12px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   cursor: pointer;
@@ -1603,7 +1603,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
 }
 
 .suivi-rl-frise-tri-gomme i {
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1;
 }
 
@@ -1623,7 +1623,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
 [dir='rtl'] .suivi-rl-frise-tri-gomme {
   letter-spacing: 0;
   text-transform: none;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 /* Le poids du rangement : combien de tranches le tri a réellement déplacées.
@@ -1640,7 +1640,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
   border-radius: 999px;
   border: 1px dotted color-mix(in srgb, var(--text) 24%, transparent);
   font-family: var(--font-label, inherit);
-  font-size: 8.6px;
+  font-size: 12px;
   line-height: 1.4;
   letter-spacing: 0.04em;
   font-variant-numeric: tabular-nums;
@@ -1649,7 +1649,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
 }
 
 .suivi-rl-frise-tri-poids i {
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1;
   opacity: 0.8;
 }
@@ -1667,7 +1667,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
 
 [dir='rtl'] .suivi-rl-frise-tri-poids {
   letter-spacing: 0;
-  font-size: 9.8px;
+  font-size: 12px;
 }
 
 /* La tranche que le tri en cours a déplacée le plus récemment : elle se pose
@@ -1682,7 +1682,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
   border-radius: 999px;
   border: 1px dotted color-mix(in srgb, var(--text) 20%, transparent);
   font-family: var(--font-label, inherit);
-  font-size: 8.8px;
+  font-size: 12px;
   line-height: 1.4;
   letter-spacing: 0.04em;
   font-variant-numeric: tabular-nums;
@@ -1692,7 +1692,7 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
 
 .suivi-rl-frise-deplacee i {
   flex: none;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1;
   opacity: 0.8;
 }
@@ -1718,5 +1718,5 @@ button.suivi-rl-frise-sens-chip[data-carte='yes'] {
 
 [dir='rtl'] .suivi-rl-frise-deplacee {
   letter-spacing: 0;
-  font-size: 9.8px;
+  font-size: 12px;
 }

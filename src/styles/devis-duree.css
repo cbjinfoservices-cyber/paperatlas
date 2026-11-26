@@ -19,7 +19,7 @@
 .dv-total-length em {
   font-style: normal;
   font-family: var(--font-label);
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: .02em;
   color: var(--muted);
 }
@@ -28,7 +28,7 @@
 .dv-total-length .dv-total-length-stamp {
   flex: 1 1 100%;
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 400;
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -53,7 +53,7 @@
   padding: 8px 10px;
   border-radius: 10px;
   box-sizing: border-box;
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--text) 78%, transparent);
   background: color-mix(in srgb, var(--accent) 9%, transparent);
@@ -68,7 +68,7 @@
 @media (max-width: 420px) {
   .dv-total-length { gap: 3px 6px; font-size: 12px; }
   .dv-total-length em { flex: 1 1 100%; }
-  .dv-recap { font-size: 11px; padding: 7px 9px; }
+  .dv-recap { font-size: 12px; padding: 7px 9px; }
 }
 
 [dir="rtl"] .dv-total-length em,

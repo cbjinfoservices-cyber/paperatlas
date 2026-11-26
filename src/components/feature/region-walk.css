@@ -61,7 +61,7 @@
   white-space: nowrap;
   text-decoration: none;
   font-family: var(--font-label);
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: .04em;
   color: var(--accent2);
   background: color-mix(in srgb, var(--accent) 12%, transparent);
@@ -151,7 +151,7 @@
   border-radius: 999px;
   text-decoration: none;
   font-family: inherit;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.4;
   color: color-mix(in srgb, var(--text) 78%, transparent);
   background: color-mix(in srgb, var(--text) 4%, transparent);
@@ -196,7 +196,7 @@
   border-inline-start: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
   font-family: var(--font-label);
   font-variant-numeric: tabular-nums;
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .02em;
   opacity: .78;
 }
@@ -231,7 +231,7 @@
   margin-inline-start: -2px;
   border-radius: 999px;
   font-family: var(--font-label);
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: .03em;
   color: color-mix(in srgb, var(--text) 60%, transparent);
   background: transparent;
@@ -257,7 +257,7 @@
 }
 .dist-walk-ask-txt {
   font-family: var(--font-label);
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: .03em;
   color: color-mix(in srgb, var(--text) 76%, transparent);
 }
@@ -269,7 +269,7 @@
   padding: 3px 9px;
   border-radius: 999px;
   font-family: var(--font-label);
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: .03em;
   cursor: pointer;
   transition: background .2s ease, color .2s ease, border-color .2s ease;
@@ -309,7 +309,7 @@
   gap: 6px;
   margin: 0;
   font-family: var(--font-label);
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: .03em;
   color: color-mix(in srgb, var(--text) 62%, transparent);
 }
@@ -333,7 +333,7 @@
 .dist-walk-alone {
   margin: 0;
   font-family: var(--font-label);
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: .03em;
   color: color-mix(in srgb, var(--text) 52%, transparent);
 }
@@ -349,7 +349,7 @@
   margin: 0;
   padding-bottom: 0;
   font-family: var(--font-label);
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: .03em;
   line-height: 1.5;
   color: color-mix(in srgb, var(--text) 70%, transparent);
@@ -362,7 +362,7 @@
 .dist-walk-dead.is-clear i { color: color-mix(in srgb, var(--accent) 66%, transparent); }
 /* L'arabe porte ses diacritiques : la ligne se donne un peu plus de corps que
    le latin, sinon les points se touchent. */
-[dir="rtl"] .dist-walk-dead { letter-spacing: 0; font-size: 11.5px; line-height: 1.7; }
+[dir="rtl"] .dist-walk-dead { letter-spacing: 0; font-size: 12px; line-height: 1.7; }
 /* Posée sous le relevé d'une fiche, la ligne ferme le bloc : le trait du
    chiffre des carnets passe au-dessus, elle ne s'y colle pas. */
 .dist-walk-bottom + .dist-walk-dead { padding-top: 2px; }
@@ -379,7 +379,7 @@
   border-radius: 999px;
   white-space: nowrap;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .04em;
   color: color-mix(in srgb, var(--text) 60%, transparent);
   background: transparent;
@@ -387,7 +387,7 @@
   cursor: pointer;
   transition: border-color .2s ease, color .2s ease, background .2s ease;
 }
-.dist-walk-dead .dist-walk-copy i { font-size: 11.5px; line-height: 1; color: inherit; }
+.dist-walk-dead .dist-walk-copy i { font-size: 12px; line-height: 1; color: inherit; }
 .dist-walk-dead .dist-walk-copy:hover {
   border-style: solid;
   border-color: var(--accent);
@@ -431,7 +431,7 @@
   border-radius: 10px;
   box-shadow: 0 10px 26px rgba(0, 0, 0, .45);
   font-family: var(--font-label);
-  font-size: 10.5px;
+  font-size: 11px;
   line-height: 1.5;
   color: var(--text);
   /* Une plaque levée au-dessus de la carte : la fiche et le relevé partagent
@@ -453,7 +453,7 @@
   padding: 3px 10px;
   border-radius: 999px;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: .04em;
   color: color-mix(in srgb, var(--text) 62%, transparent);
   background: transparent;
@@ -478,7 +478,7 @@
   border-radius: 999px;
   text-align: center;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 11px;
   font-weight: 400;
   background: color-mix(in srgb, var(--text) 12%, transparent);
   color: color-mix(in srgb, var(--text) 72%, transparent);
@@ -509,14 +509,14 @@
 .dist-walk-tag-kept {
   flex: 0 0 auto;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: .04em;
   white-space: nowrap;
   opacity: .82;
 }
 [dir="rtl"] .dist-walk-tag-kept {
   letter-spacing: 0;
-  font-size: 10.5px;
+  font-size: 11px;
 }
 
 /* Le compte des profils à porte vide, posé à côté du jeton : une plaque
@@ -531,7 +531,7 @@
   padding: 3px 10px;
   border-radius: 999px;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: .04em;
   line-height: 1.5;
   font-variant-numeric: tabular-nums;
@@ -555,7 +555,7 @@
   padding: 7px 11px;
   border-radius: 10px;
   box-shadow: 0 10px 26px rgba(0, 0, 0, .45);
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: .02em;
   line-height: 1.5;
   color: var(--text);
@@ -567,13 +567,13 @@
 .dist-walk-tag-lost:focus-visible .dist-walk-lost-hint,
 .dist-walk-tag-lost:focus-within .dist-walk-lost-hint { display: flex; }
 .dist-walk-tag-lost:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-[dir="rtl"] .dist-walk-lost-hint { font-size: 11.5px; line-height: 1.7; letter-spacing: 0; }
+[dir="rtl"] .dist-walk-lost-hint { font-size: 12px; line-height: 1.7; letter-spacing: 0; }
 @media (max-width: 640px) {
-  .dist-walk-lost-hint { width: 100%; max-width: 100%; font-size: 11.5px; }
+  .dist-walk-lost-hint { width: 100%; max-width: 100%; font-size: 12px; }
 }
 .dist-walk-tag-lost i { flex: 0 0 auto; font-size: 12px; color: color-mix(in srgb, var(--text) 56%, transparent); }
 .dist-walk-tag-lost > span { min-width: 0; overflow-wrap: anywhere; }
-[dir="rtl"] .dist-walk-tag-lost { letter-spacing: 0; font-size: 10.5px; }
+[dir="rtl"] .dist-walk-tag-lost { letter-spacing: 0; font-size: 11px; }
 @media (max-width: 640px) {
   .dist-walk-tag-lost { flex: 1 1 100%; align-items: flex-start; font-size: 11px; }
   .dist-walk-tag-lost i { margin-top: 1px; }
@@ -609,7 +609,7 @@
      vides garde sa taille lisible : elle porte un compte, pas une note. */
   .dist-walk { padding: 9px 10px 10px; }
   .dist-walk-top { padding-bottom: 8px; }
-  .dist-walk-dead { font-size: 11.5px; line-height: 1.6; gap: 5px; }
+  .dist-walk-dead { font-size: 12px; line-height: 1.6; gap: 5px; }
   .dist-walk-dead i { font-size: 14px; }
   [dir="rtl"] .dist-walk-dead { font-size: 12px; line-height: 1.75; }
   /* Sur téléphone, le geste de copie prend sa propre rangée sous la phrase :
@@ -618,7 +618,7 @@
   .dist-walk-dead .dist-walk-copy {
     margin-inline-start: 0;
     padding: 3px 10px;
-    font-size: 10px;
+    font-size: 12px;
   }
   .dist-walk-tag { white-space: normal; row-gap: 1px; }
   .dist-walk-tag > span:not(.dist-walk-tag-count) {
@@ -647,7 +647,7 @@
   .dist-walk-tag b { flex: 0 0 auto; }
   /* Le mot du compte posé reste entier sur sa ligne : il ne se coupe pas au
      milieu d'un mot arabe. */
-  .dist-walk-tag-kept { white-space: nowrap; font-size: 10px; }
+  .dist-walk-tag-kept { white-space: nowrap; font-size: 11px; }
   [dir="rtl"] .dist-walk-tag-kept { font-size: 11px; }
   /* Le chiffre qui ferme le relevé d'une fiche se replie comme le reste : en
      arabe, le nombre et son verbe ne tiennent pas toujours sur une ligne. */

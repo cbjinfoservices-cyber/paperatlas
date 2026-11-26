@@ -81,8 +81,9 @@ export default function Connexion() {
     setFormError('');
 
     try {
+      const redirectOrigin = import.meta.env.PROD ? 'https://paperatlas.net' : window.location.origin;
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}${base}/compte`,
+        redirectTo: `${redirectOrigin}${base}/compte/mot-de-passe`,
       });
       if (error) {
         setStatus('error');

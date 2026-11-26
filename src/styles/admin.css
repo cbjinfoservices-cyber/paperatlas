@@ -138,10 +138,8 @@
 .admin-brand-text em {
   font-style: normal;
   font-family: var(--font-label, inherit);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .16em;
-  text-transform: uppercase;
-  color: color-mix(in srgb, var(--text) 52%, transparent);
 }
 
 .admin-brand-text strong {
@@ -176,7 +174,7 @@
 
 .admin-brand-world small {
   font-family: var(--font-label, inherit);
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: .12em;
   text-transform: uppercase;
@@ -371,7 +369,7 @@
   padding: 1px 7px;
   border-radius: 999px;
   background: color-mix(in srgb, var(--text) 12%, transparent);
-  font-size: 11px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
 }
 
@@ -492,7 +490,7 @@
 
 .admin-stat span {
   font-family: var(--font-label, inherit);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: .06em;
   color: color-mix(in srgb, var(--text) 56%, transparent);
 }
@@ -517,7 +515,7 @@
   gap: 4px;
 }
 
-.admin-stat-btn span i { font-size: 11px; opacity: .55; }
+.admin-stat-btn span i { font-size: 12px; opacity: .55; }
 
 .admin-stat-btn:hover,
 .admin-stat-btn:focus-visible {
@@ -564,7 +562,7 @@
 .admin-stamp {
   margin: 0;
   font-family: var(--font-label, inherit);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .16em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--accent) 82%, var(--text));
@@ -638,7 +636,7 @@
   border-bottom: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
   background: color-mix(in srgb, var(--bg) 38%, transparent);
   font-family: var(--font-label, inherit);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -679,7 +677,7 @@
 .admin-muted {
   display: block;
   margin-top: 2px;
-  font-size: 11px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--text) 48%, transparent);
 }
 
@@ -692,7 +690,7 @@
 }
 
 .admin-row-sleep i {
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .admin-num {
@@ -708,7 +706,7 @@
   border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
   border-radius: 999px;
   font-family: var(--font-label, inherit);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: .05em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -774,7 +772,7 @@
   align-items: center;
   gap: 5px;
   font-family: var(--font-label, inherit);
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: .04em;
   color: color-mix(in srgb, var(--accent) 82%, var(--text));
 }
@@ -873,17 +871,17 @@
 .admin-fiche-fil-aire .pro-aire-copy {
   padding: 2px 8px;
   gap: 4px;
-  font-size: 8.5px;
+  font-size: 12px;
 }
 
 .admin-fiche-fil-aire .pro-aire-copy i {
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .admin-fiche-fil-aire .pro-aire-count {
   padding: 2px 6px;
   gap: 3px;
-  font-size: 8px;
+  font-size: 12px;
 }
 
 .admin-fiche-fil-aire .pro-aire-count-lab,
@@ -900,7 +898,7 @@
   border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
   border-radius: 8px;
   font-family: var(--font-label, inherit);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .03em;
   text-decoration: none;
   color: color-mix(in srgb, var(--text) 58%, transparent);
@@ -945,7 +943,7 @@
 
 .admin-fiche-fil-main em {
   font-family: var(--font-label, inherit);
-  font-size: 10.5px;
+  font-size: 12px;
   font-style: normal;
   letter-spacing: .03em;
   color: color-mix(in srgb, var(--text) 58%, transparent);
@@ -956,7 +954,7 @@
 
 .admin-fiche-fil-pace {
   font-family: var(--font-label, inherit);
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: .04em;
   color: color-mix(in srgb, var(--accent) 82%, var(--text));
   white-space: nowrap;
@@ -1032,7 +1030,7 @@
   gap: 5px;
   margin-inline-end: 2px;
   font-family: var(--font-label, inherit);
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: .04em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--accent) 84%, var(--text));
@@ -1042,7 +1040,7 @@
 
 .admin-rubrique-fix .admin-chip {
   padding: 3px 10px;
-  font-size: 10.5px;
+  font-size: 11px;
 }
 
 .admin-rubrique-fix .admin-chip:disabled { opacity: .5; cursor: progress; }
@@ -1169,7 +1167,7 @@
 
 .admin-kind {
   font-family: var(--font-label, inherit);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .06em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 50%, transparent);
@@ -1265,17 +1263,17 @@
 .admin-thread-top em {
   flex: none;
   font-style: normal;
-  font-size: 10px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--text) 46%, transparent);
 }
 
 .admin-thread-subject {
-  font-size: 11px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--accent) 74%, var(--text));
 }
 
 .admin-thread-last {
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--text) 52%, transparent);
   overflow: hidden;
@@ -1292,13 +1290,13 @@
   gap: 4px;
   margin-top: 2px;
   font-family: var(--font-label, inherit);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .04em;
   color: color-mix(in srgb, var(--accent) 82%, var(--text));
   white-space: nowrap;
 }
 
-.admin-thread-sleep i { font-size: 11px; }
+.admin-thread-sleep i { font-size: 12px; }
 
 /* Un fil dormant déjà ouvert pendant la visite : le repère de revue se pose
    sous la lune, et la mesure s'efface pour laisser lire ce qui reste à voir. */
@@ -1308,13 +1306,13 @@
   gap: 4px;
   margin-top: 2px;
   font-family: var(--font-label, inherit);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .04em;
   color: color-mix(in srgb, var(--accent2) 84%, var(--text));
   white-space: nowrap;
 }
 
-.admin-thread-revu i { font-size: 11px; }
+.admin-thread-revu i { font-size: 12px; }
 
 /* La pastille de l'aire d'un fil : le nom de l'aire du monde, posé sous le
    dernier message pour situer la ligne sans remonter au compte du groupe. */
@@ -1330,7 +1328,7 @@
   border-radius: 999px;
   background: color-mix(in srgb, var(--accent) 8%, transparent);
   font-family: var(--font-label, inherit);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .05em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--accent) 82%, var(--text));
@@ -1392,7 +1390,7 @@
 
 .admin-thread-foot .admin-thread-open { margin-inline-start: auto; }
 
-.admin-thread-aire i { flex: none; font-size: 10px; }
+.admin-thread-aire i { flex: none; font-size: 12px; }
 
 /* Le compte du relevé de toutes les aires, posé à côté du geste : combien de
    fois il est parti et le jour de la dernière fois. */
@@ -1403,13 +1401,13 @@
   white-space: nowrap;
 }
 
-.admin-releves-tally b { font-size: 11px; font-variant-numeric: tabular-nums; }
+.admin-releves-tally b { font-size: 12px; font-variant-numeric: tabular-nums; }
 
-.admin-releves-tally-word { font-size: 10px; }
+.admin-releves-tally-word { font-size: 12px; }
 
 .admin-releves-tally-last {
   font-style: normal;
-  font-size: 10px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--text) 52%, transparent);
 }
 
@@ -1422,12 +1420,12 @@
   margin-inline-start: 1px;
   padding-inline-start: 6px;
   border-inline-start: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
-  font-size: 10px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 52%, transparent);
 }
 
-.admin-releves-tally-aires i { font-size: 10px; }
+.admin-releves-tally-aires i { font-size: 12px; }
 
 /* Les aires de la boîte qu'aucun relevé n'a encore emportées : le chiffre et
    son mot se lisent ensemble, et le survol les nomme une à une. */
@@ -1438,11 +1436,11 @@
   white-space: nowrap;
 }
 
-.admin-aires-jamais b { font-size: 11px; font-variant-numeric: tabular-nums; }
+.admin-aires-jamais b { font-size: 12px; font-variant-numeric: tabular-nums; }
 
-.admin-aires-jamais-word { font-size: 10px; }
+.admin-aires-jamais-word { font-size: 12px; }
 
-.admin-aires-jamais i { font-size: 11px; }
+.admin-aires-jamais i { font-size: 12px; }
 
 /* La pastille des aires jamais relevées est une porte : chaque appui resserre
    la boîte sur l'aire qui vient, appui après appui. Elle garde la tenue d'une
@@ -1450,7 +1448,7 @@
 .admin-aires-jamais-btn {
   font: inherit;
   font-family: var(--font-label, inherit);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .04em;
   text-transform: uppercase;
   cursor: pointer;
@@ -1480,7 +1478,7 @@
   max-width: 130px;
   padding-inline-start: 6px;
   border-inline-start: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0;
   text-transform: none;
   white-space: nowrap;
@@ -1489,7 +1487,7 @@
   color: color-mix(in srgb, var(--text) 60%, transparent);
 }
 
-.admin-aires-jamais-next i { font-size: 11px; }
+.admin-aires-jamais-next i { font-size: 12px; }
 
 /* Les deux chemins d'un relevé d'aire, séparés du compte des aires par un
    filet : les relevés partis d'un en-tête de groupe et ceux emportés d'un
@@ -1501,7 +1499,7 @@
   margin-inline-start: 1px;
   padding-inline-start: 6px;
   border-inline-start: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
-  font-size: 10px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 52%, transparent);
 }
@@ -1513,7 +1511,7 @@
   white-space: nowrap;
 }
 
-.admin-releves-tally-chemin i { font-size: 10px; }
+.admin-releves-tally-chemin i { font-size: 12px; }
 
 /* La gomme des deux chemins : une petite touche au bout du compte, qui dit au
    survol ce qu’elle efface — les gestes, jamais les dates des groupes. */
@@ -1539,7 +1537,7 @@
   margin: 0;
   padding: 0 2px;
   font-family: var(--font-label, inherit);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.5;
   letter-spacing: .02em;
   color: color-mix(in srgb, var(--text) 50%, transparent);
@@ -1561,7 +1559,7 @@
   margin: 0;
   padding: 0 2px;
   font-family: var(--font-label, inherit);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.5;
   letter-spacing: .02em;
   color: color-mix(in srgb, var(--text) 50%, transparent);
@@ -1608,7 +1606,7 @@
   margin-inline-start: 1px;
   padding-inline-start: 6px;
   border-inline-start: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0;
   text-transform: none;
   font-variant-numeric: tabular-nums;
@@ -1616,7 +1614,7 @@
   white-space: nowrap;
 }
 
-.admin-gommes-tally i { font-size: 10px; opacity: .8; }
+.admin-gommes-tally i { font-size: 12px; opacity: .8; }
 
 /* Le partage des aires rendues par la dernière gomme, posé sur la pastille :
    celles qui se tiennent encore dans la boîte, puis celles qui en sont
@@ -1636,7 +1634,7 @@
   display: inline-flex;
   align-items: center;
   gap: 2px;
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0;
   text-transform: none;
   color: color-mix(in srgb, var(--text) 54%, transparent);
@@ -1664,7 +1662,7 @@
   max-width: 34ch;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0;
   text-transform: none;
   white-space: nowrap;
@@ -1693,7 +1691,7 @@
   background: transparent;
   color: inherit;
   font-family: var(--font-label, inherit);
-  font-size: .68rem;
+  font-size: 12px;
   letter-spacing: .04em;
   text-transform: uppercase;
   cursor: pointer;
@@ -1728,7 +1726,7 @@
   margin: 0;
   padding: 0 2px;
   font-family: var(--font-label, inherit);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .02em;
   color: color-mix(in srgb, var(--text) 52%, transparent);
 }
@@ -1805,7 +1803,7 @@
   border-radius: 999px;
   background: none;
   font-family: var(--font-label, inherit);
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: .03em;
   text-decoration: none;
   color: color-mix(in srgb, var(--text) 58%, transparent);
@@ -1846,7 +1844,7 @@
   background: color-mix(in srgb, var(--text) 16%, transparent);
 }
 
-.admin-revue-clear i { margin: 0; font-size: 11px; }
+.admin-revue-clear i { margin: 0; font-size: 12px; }
 
 /* La jauge de revue : « 3 / 8 fils dormants relus ». Le chiffre se lit d'un
    coup d'œil, la barre dit où en est la visite sans ajouter une phrase. */
@@ -1858,7 +1856,7 @@
 }
 
 .admin-revue-words {
-  font-size: 10.5px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--text) 62%, transparent);
   white-space: nowrap;
 }
@@ -1973,7 +1971,7 @@
   align-items: baseline;
   justify-content: space-between;
   gap: 10px;
-  font-size: 11px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--text) 52%, transparent);
 }
 
@@ -2000,7 +1998,7 @@
   align-items: flex-start;
   gap: 6px;
   margin: 0;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.6;
   color: color-mix(in srgb, var(--text) 54%, transparent);
 }
@@ -2029,7 +2027,7 @@
 
 .admin-def dt {
   font-family: var(--font-label, inherit);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 50%, transparent);
@@ -2057,7 +2055,7 @@
   display: block;
   margin-top: 3px;
   font-family: var(--font-label, inherit);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .04em;
   color: color-mix(in srgb, var(--accent) 82%, var(--text));
 }
@@ -2077,7 +2075,7 @@
   background: none;
   color: color-mix(in srgb, var(--text) 72%, transparent);
   font-family: var(--font-label, inherit);
-  font-size: 11px;
+  font-size: 12px;
   cursor: pointer;
   transition: color .15s ease, border-color .15s ease, background .15s ease;
 }
@@ -2150,7 +2148,7 @@
   background: none;
   color: color-mix(in srgb, var(--text) 72%, transparent);
   font-family: var(--font-label, inherit);
-  font-size: 11px;
+  font-size: 12px;
   cursor: pointer;
   transition: color .15s ease, border-color .15s ease, background .15s ease;
 }
@@ -2181,7 +2179,7 @@
   border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
   border-radius: 999px;
   font-family: var(--font-label, inherit);
-  font-size: 11px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--text) 62%, transparent);
 }
 
@@ -2342,9 +2340,9 @@
   background: none;
   color: color-mix(in srgb, var(--text) 56%, transparent);
   font-family: var(--font-label, inherit);
-  font-size: 11.5px;
-  letter-spacing: .03em;
-  white-space: nowrap;
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: .02em;
   cursor: pointer;
   transition: color .16s ease, background .16s ease, box-shadow .16s ease;
 }
@@ -2448,7 +2446,7 @@
   border-radius: 12px;
   background: none;
   font-family: var(--font-label, inherit);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: .02em;
   text-align: start;
   color: color-mix(in srgb, var(--text) 58%, transparent);
@@ -2580,7 +2578,7 @@
 
 .admin-scope-main em {
   font-family: var(--font-label, inherit);
-  font-size: 10.5px;
+  font-size: 12px;
   font-style: normal;
   letter-spacing: .03em;
   color: color-mix(in srgb, var(--text) 56%, transparent);
@@ -2613,7 +2611,7 @@
   gap: 4px 8px;
   margin: 0 0 6px;
   font-family: var(--font-label, inherit);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: .02em;
   color: color-mix(in srgb, var(--text) 66%, transparent);
 }
@@ -2647,7 +2645,7 @@
 }
 
 .admin-scope-cmp-gap i {
-  font-size: 11px;
+  font-size: 12px;
   color: inherit;
 }
 
@@ -2682,7 +2680,7 @@
 }
 
 .admin-scope-cmp-parties i {
-  font-size: 11px;
+  font-size: 12px;
   color: inherit;
 }
 
@@ -2706,7 +2704,7 @@
   flex-wrap: wrap;
   gap: 3px 8px;
   margin: 0;
-  font-size: 11.5px;
+  font-size: 12px;
 }
 
 .admin-scope-cmp-parties-head i {
@@ -2734,7 +2732,7 @@
   margin: 2px 0 0;
   padding-top: 4px;
   border-top: 1px dashed color-mix(in srgb, var(--text) 14%, transparent);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.45;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 64%, transparent);
@@ -2755,7 +2753,7 @@ button.admin-scope-cmp-parties-major {
   border-top: 1px dashed color-mix(in srgb, var(--text) 14%, transparent);
   background: none;
   font: inherit;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.45;
   font-variant-numeric: tabular-nums;
   text-align: start;
@@ -2805,7 +2803,7 @@ button.admin-scope-cmp-parties-major[data-on="yes"] {
   border-radius: 999px;
   background: none;
   font: inherit;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.45;
   letter-spacing: .02em;
   font-variant-numeric: tabular-nums;
@@ -2868,12 +2866,12 @@ button.admin-scope-cmp-parties-major[data-on="yes"] {
   gap: 5px;
   min-width: 0;
   padding: 2px 0;
-  font-size: 11.5px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
 }
 
 .admin-scope-cmp-parties-list li > i {
-  font-size: 11px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--text) 34%, transparent);
 }
 
@@ -2893,7 +2891,7 @@ button.admin-scope-cmp-parties-major[data-on="yes"] {
 
 .admin-scope-cmp-parties-name em {
   font-style: normal;
-  font-size: 10.5px;
+  font-size: 12px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -2923,7 +2921,7 @@ button.admin-scope-cmp-parties-major[data-on="yes"] {
   margin: 3px 0 0;
   padding-top: 4px;
   border-top: 1px dashed color-mix(in srgb, var(--text) 14%, transparent);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.45;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--accent2, var(--accent)) 82%, var(--text));
@@ -2985,14 +2983,14 @@ button.admin-scope-cmp-parties-share-note[data-on="yes"] {
   border-radius: 999px;
   background: color-mix(in srgb, var(--accent) 9%, transparent);
   font-family: var(--font-label, inherit);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .03em;
   white-space: nowrap;
   color: color-mix(in srgb, var(--accent) 84%, var(--text));
 }
 
 .admin-scope-cmp-parties-mark i {
-  font-size: 11px;
+  font-size: 12px;
   color: inherit;
 }
 
@@ -3010,7 +3008,7 @@ button.admin-scope-cmp-parties-share-note[data-on="yes"] {
   border-radius: 999px;
   background: color-mix(in srgb, var(--accent) 7%, transparent);
   font: inherit;
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: .02em;
   font-variant-numeric: tabular-nums;
   text-align: start;
@@ -3054,13 +3052,13 @@ button.admin-scope-cmp-parties-share-note[data-on="yes"] {
   padding: 5px 9px;
   border-radius: 8px;
   background: color-mix(in srgb, var(--text) 5%, transparent);
-  font-size: 11.5px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
 }
 
 .admin-scope-cmp-point em {
   font-family: var(--font-label, inherit);
-  font-size: 10px;
+  font-size: 12px;
   font-style: normal;
   letter-spacing: .03em;
   text-transform: uppercase;
@@ -3078,7 +3076,7 @@ button.admin-scope-cmp-parties-share-note[data-on="yes"] {
 
 .admin-scope-cmp-note {
   margin: 6px 0 0;
-  font-size: 10.5px;
+  font-size: 12px;
   line-height: 1.45;
   color: color-mix(in srgb, var(--text) 52%, transparent);
 }
@@ -3095,7 +3093,7 @@ button.admin-scope-cmp-parties-share-note[data-on="yes"] {
   border-radius: 999px;
   background: none;
   font-family: var(--font-label, inherit);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: .02em;
   color: color-mix(in srgb, var(--text) 70%, transparent);
   cursor: pointer;
@@ -3128,7 +3126,7 @@ button.admin-scope-cmp-parties-share-note[data-on="yes"] {
   align-items: center;
   gap: 6px;
   margin: 0;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--text) 54%, transparent);
 }
@@ -3186,7 +3184,7 @@ button.admin-scope-cmp-parties-share-note[data-on="yes"] {
 .admin-fiche-apres-date {
   flex: none;
   font-family: var(--font-label, inherit);
-  font-size: 11px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 58%, transparent);
 }
@@ -3253,7 +3251,7 @@ button.admin-scope-cmp-parties-share-note[data-on="yes"] {
   border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
   border-radius: 999px;
   font-family: var(--font-label, inherit);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: .03em;
   color: color-mix(in srgb, var(--text) 62%, transparent);
 }
@@ -3364,7 +3362,7 @@ button.admin-scope-cmp-parties-share-note[data-on="yes"] {
   flex-basis: 100%;
   padding-top: 7px;
   border-top: 1px dashed color-mix(in srgb, var(--accent) 26%, transparent);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.45;
   word-break: normal;
   color: color-mix(in srgb, var(--text) 62%, transparent);
@@ -3407,7 +3405,7 @@ button.admin-scope-cmp-parties-share-note[data-on="yes"] {
   padding: 0 5px;
   border-radius: 999px;
   background: color-mix(in srgb, var(--accent) 16%, transparent);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   line-height: 1;
   color: color-mix(in srgb, var(--accent) 78%, var(--text));
@@ -3423,7 +3421,7 @@ button.admin-scope-cmp-parties-share-note[data-on="yes"] {
   border: 1px dashed color-mix(in srgb, var(--accent) 34%, transparent);
   border-radius: 999px;
   background: color-mix(in srgb, var(--accent) 7%, transparent);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.7;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 70%, transparent);
@@ -3516,7 +3514,7 @@ button.admin-scope-cmp-parties-share-note[data-on="yes"] {
 
 .admin-relance-field > span {
   font-family: var(--font-label, inherit);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 52%, transparent);
@@ -3553,7 +3551,7 @@ button.admin-scope-cmp-parties-share-note[data-on="yes"] {
 .admin-relance-count {
   margin-inline-end: auto;
   min-width: 0;
-  font-size: 11px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--text) 52%, transparent);
   word-break: break-word;
 }
@@ -3585,7 +3583,7 @@ button.admin-scope-cmp-parties-share-note[data-on="yes"] {
   border: 0;
   background: none;
   font-family: var(--font-label, inherit);
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: .08em;
   text-transform: uppercase;
   text-align: start;
@@ -3639,7 +3637,7 @@ button.admin-scope-cmp-parties-share-note[data-on="yes"] {
   gap: 2px 6px;
   margin-inline-start: auto;
   font-family: var(--font-label, inherit);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .03em;
   color: color-mix(in srgb, var(--text) 52%, transparent);
   white-space: nowrap;
@@ -3654,7 +3652,7 @@ button.admin-scope-cmp-parties-share-note[data-on="yes"] {
   color: color-mix(in srgb, var(--text) 44%, transparent);
 }
 
-.admin-aire-group-last i { font-size: 11px; }
+.admin-aire-group-last i { font-size: 12px; }
 
 /* Le geste du relevé, dans l'en-tête : il copie les fils de l'aire et date le
    dernier départ, sans jamais resserrer la liste — la porte reste au titre. */
@@ -3667,7 +3665,7 @@ button.admin-scope-cmp-parties-share-note[data-on="yes"] {
   border-radius: 999px;
   background: none;
   font-family: var(--font-label, inherit);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .03em;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 54%, transparent);
@@ -3675,7 +3673,7 @@ button.admin-scope-cmp-parties-share-note[data-on="yes"] {
   transition: color .16s ease, border-color .16s ease, background .16s ease;
 }
 
-.admin-aire-group-copy i { font-size: 11px; }
+.admin-aire-group-copy i { font-size: 12px; }
 
 .admin-aire-group-copy:hover,
 .admin-aire-group-copy:focus-visible {
@@ -3693,7 +3691,7 @@ button.admin-scope-cmp-parties-share-note[data-on="yes"] {
    relevé d'un groupe, sans le compte des fils qui n'aurait plus de sens ici. */
 .admin-releves-all {
   padding: 3px 10px;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .admin-releves-all span { letter-spacing: .02em; }
@@ -3719,7 +3717,7 @@ button.admin-scope-cmp-parties-share-note[data-on="yes"] {
   gap: 5px;
   min-width: 0;
   font-family: var(--font-label, inherit);
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: .04em;
   color: color-mix(in srgb, var(--accent) 88%, var(--text));
 }
@@ -3736,7 +3734,7 @@ button.admin-scope-cmp-parties-share-note[data-on="yes"] {
 }
 
 .admin-aire-tray-pill span {
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0;
   color: color-mix(in srgb, var(--text) 54%, transparent);
   white-space: nowrap;
@@ -3772,7 +3770,7 @@ button.admin-scope-cmp-parties-share-note[data-on="yes"] {
   opacity: .55;
 }
 
-.admin-aire-tray .admin-chip { padding: 3px 9px; font-size: 10px; }
+.admin-aire-tray .admin-chip { padding: 3px 9px; font-size: 11px; }
 
 [dir='rtl'] .admin-aire-group-title { letter-spacing: 0; }
 
@@ -3824,7 +3822,7 @@ button.admin-scope-cmp-parties-share-note[data-on="yes"] {
   .admin-sheet-head { padding: 14px 16px; }
   .admin-sheet-body { padding: 16px 16px 36px; }
   .admin-sheet-tabs { padding: 8px 12px; gap: 2px; }
-  .admin-sheet-tab { padding: 6px 9px; font-size: 11px; }
+  .admin-sheet-tab { padding: 6px 9px; font-size: 12px; }
 }
 
 /* Sous 820 px, les quatre onglets ne tiennent plus sur une ligne. Le trait

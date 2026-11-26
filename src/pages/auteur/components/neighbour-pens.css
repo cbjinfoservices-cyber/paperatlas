@@ -8,7 +8,7 @@
   gap: 8px 14px; flex-wrap: wrap; }
 .pro-pens-head .pro-h { margin: 0; }
 .pro-pens-name { min-width: 0; max-width: 100%; overflow: hidden; text-overflow: ellipsis;
-  white-space: nowrap; font-family: var(--font-label); font-size: 9px; letter-spacing: .08em;
+  white-space: nowrap; font-family: var(--font-label); font-size: 12px; letter-spacing: .08em;
   text-transform: uppercase; color: color-mix(in srgb, var(--text) 55%, transparent); }
 
 .pro-pens-hint { display: flex; align-items: flex-start; gap: 6px; margin: 0;
@@ -37,12 +37,12 @@
   font-family: var(--font-heading); font-size: 13.5px; font-weight: 600; letter-spacing: -.01em;
   color: var(--text); }
 .pro-pens-genres { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-  font-size: 10.5px; color: var(--muted); }
+  font-size: 12px; color: var(--muted); }
 .pro-pens-meta { display: flex; align-items: baseline; gap: 4px; min-width: 0;
-  font-size: 10px; color: color-mix(in srgb, var(--text) 58%, transparent);
+  font-size: 12px; color: color-mix(in srgb, var(--text) 58%, transparent);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.pro-pens-meta b { font-family: var(--font-body); font-size: 11px; font-weight: 600; color: var(--accent2); }
-.pro-pens-meta i { flex: 0 0 auto; font-size: 10px; color: var(--accent2); }
+.pro-pens-meta b { font-family: var(--font-body); font-size: 12px; font-weight: 600; color: var(--accent2); }
+.pro-pens-meta i { flex: 0 0 auto; font-size: 12px; color: var(--accent2); }
 .pro-pens-meta em { font-style: normal; color: color-mix(in srgb, var(--text) 48%, transparent); }
 
 .pro-pens-go { flex: 0 0 auto; font-size: 14px; color: var(--accent); }
@@ -57,15 +57,15 @@
 .pro-pens-all { display: inline-flex; align-items: center; gap: 6px; justify-self: start;
   max-width: 100%; padding: 5px 12px; border-radius: 999px; text-decoration: none;
   border: 1px dashed color-mix(in srgb, var(--accent) 42%, transparent);
-  color: var(--accent); font-size: 11.5px; line-height: 1.6;
+  color: var(--accent); font-size: 12px; line-height: 1.6;
   transition: background .2s ease, border-color .2s ease; }
 .pro-pens-all > i:first-child { flex: 0 0 auto; font-size: 13px; }
 .pro-pens-all > i:last-child { flex: 0 0 auto; font-size: 12px; }
 .pro-pens-all span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.pro-pens-all b { flex: 0 0 auto; font-family: var(--font-body); font-size: 11px; font-weight: 600;
+.pro-pens-all b { flex: 0 0 auto; font-family: var(--font-body); font-size: 12px; font-weight: 600;
   color: color-mix(in srgb, var(--text) 68%, transparent); }
 .pro-pens-all em { flex: 0 0 auto; font-style: normal; font-family: var(--font-label);
-  font-size: 9px; letter-spacing: .05em; padding: 1px 5px; border-radius: 999px;
+  font-size: 12px; letter-spacing: .05em; padding: 1px 5px; border-radius: 999px;
   background: color-mix(in srgb, var(--accent) 16%, transparent); color: var(--accent); }
 .pro-pens-all:hover { background: color-mix(in srgb, var(--accent) 11%, transparent);
   border-color: var(--accent); }
@@ -76,7 +76,7 @@
 .pro-pens-areas { display: inline-flex; align-items: center; gap: 6px; max-width: 100%;
   padding: 5px 12px; border-radius: 999px; text-decoration: none;
   border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
-  color: color-mix(in srgb, var(--text) 74%, transparent); font-size: 11.5px; line-height: 1.6;
+  color: color-mix(in srgb, var(--text) 74%, transparent); font-size: 12px; line-height: 1.6;
   transition: background .2s ease, border-color .2s ease, color .2s ease; }
 .pro-pens-areas > i:first-child { flex: 0 0 auto; font-size: 13px; color: var(--accent2); }
 .pro-pens-areas > i:last-child { flex: 0 0 auto; font-size: 12px; color: var(--accent);
@@ -85,7 +85,7 @@
 .pro-pens-areas b { flex: 0 0 auto; font-family: var(--font-body); font-size: 12px; font-weight: 600;
   color: var(--accent2); }
 .pro-pens-areas em { flex: 0 0 auto; font-style: normal; font-family: var(--font-label);
-  font-size: 9px; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+  font-size: 12px; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
 .pro-pens-areas:hover { border-color: color-mix(in srgb, var(--accent) 55%, transparent);
   background: color-mix(in srgb, var(--accent) 10%, transparent);
   color: var(--text); }

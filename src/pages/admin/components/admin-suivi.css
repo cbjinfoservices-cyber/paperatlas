@@ -28,7 +28,7 @@
   align-items: center;
   gap: 4px;
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .04em;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
@@ -37,7 +37,7 @@
 }
 .suivi-last i { font-size: 12px; }
 
-[dir='rtl'] .suivi-last { letter-spacing: 0; font-size: 11px; }
+[dir='rtl'] .suivi-last { letter-spacing: 0; font-size: 12px; }
 
 /* La petite gomme, posée à côté de la date : elle n'efface rien d'un seul
    geste. Un premier appui l'arme — le libellé le dit —, un second efface ;
@@ -51,7 +51,7 @@
   border: 1px solid transparent;
   background: transparent;
   font-family: var(--font-label);
-  font-size: 9.8px;
+  font-size: 12px;
   line-height: 1.6;
   letter-spacing: .04em;
   cursor: pointer;
@@ -79,7 +79,7 @@
   color: color-mix(in srgb, var(--accent) 92%, var(--text));
 }
 
-[dir='rtl'] .suivi-gomme { letter-spacing: 0; font-size: 11px; }
+[dir='rtl'] .suivi-gomme { letter-spacing: 0; font-size: 12px; }
 
 /* Dans la ligne du resserrement, la date de l'archive du chantier est portée
    par sa propre gomme : la pastille garde le pas de la ligne, et le geste
@@ -89,7 +89,7 @@
   border-radius: 999px;
   border: 1px dashed color-mix(in srgb, var(--text) 20%, transparent);
   background: color-mix(in srgb, var(--text) 5%, transparent);
-  font-size: 9.8px;
+  font-size: 12px;
   line-height: 1.6;
   color: color-mix(in srgb, var(--text) 58%, transparent);
 }
@@ -111,7 +111,7 @@
   color: color-mix(in srgb, var(--accent) 94%, var(--text));
 }
 
-[dir='rtl'] .suivi-gomme[data-part='yes'] { letter-spacing: 0; font-size: 11px; }
+[dir='rtl'] .suivi-gomme[data-part='yes'] { letter-spacing: 0; font-size: 12px; }
 
 /* ---- le chiffre officiel ---- */
 .suivi-score {
@@ -152,7 +152,7 @@
 .suivi-score-lbl {
   margin: 0;
   font-family: var(--font-label);
-  font-size: 10.5px;
+  font-size: 11px;
   letter-spacing: .14em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 58%, transparent);
@@ -186,7 +186,7 @@
 }
 .suivi-score-facts > div { display: grid; gap: 1px; min-width: 132px; }
 .suivi-score-facts dt {
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: .06em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 52%, transparent);
@@ -199,7 +199,7 @@
   color: color-mix(in srgb, var(--text) 90%, transparent);
 }
 
-[dir='rtl'] .suivi-score-facts dt { letter-spacing: 0; text-transform: none; font-size: 11.5px; }
+[dir='rtl'] .suivi-score-facts dt { letter-spacing: 0; text-transform: none; font-size: 12px; }
 
 /* ---- la part restante, posée sous la barre ---- */
 .suivi-part {
@@ -246,7 +246,7 @@
   border: 1px dashed color-mix(in srgb, var(--text) 18%, transparent);
   background: color-mix(in srgb, var(--text) 4%, transparent);
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .04em;
   line-height: 1.6;
   font-variant-numeric: tabular-nums;
@@ -275,7 +275,7 @@
   max-width: 100%;
 }
 .suivi-part-archives-date {
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .02em;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 48%, transparent);
@@ -318,7 +318,7 @@
   align-items: baseline;
   gap: 7px;
   min-width: 0;
-  font-size: 10.5px;
+  font-size: 12px;
   line-height: 1.6;
   color: color-mix(in srgb, var(--text) 66%, transparent);
 }
@@ -330,7 +330,7 @@
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   background: color-mix(in srgb, var(--accent) 16%, transparent);
@@ -385,7 +385,7 @@
   display: flex;
   align-items: baseline;
   gap: 5px;
-  font-size: 10.5px;
+  font-size: 12px;
   line-height: 1.45;
   color: color-mix(in srgb, var(--accent) 88%, var(--text));
 }
@@ -393,7 +393,7 @@
 @media (max-width: 700px) {
   .suivi-part-archives-list { grid-template-columns: minmax(0, 1fr); }
 }
-[dir='rtl'] .suivi-part-archives { letter-spacing: 0; font-size: 11px; }
+[dir='rtl'] .suivi-part-archives { letter-spacing: 0; font-size: 12px; }
 /* La ligne des archives, atteinte par l'ancre du compteur du cap, garde le
    même repère que les lignes du tableau : on voit où l'on a été déposé. */
 .suivi-part-archives:target {
@@ -461,7 +461,7 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: .06em;
   text-transform: uppercase;
@@ -479,14 +479,14 @@
 .suivi-cap-num em {
   margin-inline-start: 5px;
   font-style: normal;
-  font-size: 10.5px;
+  font-size: 12px;
   font-weight: 500;
   color: color-mix(in srgb, var(--text) 58%, transparent);
 }
 .suivi-cap-txt,
 .suivi-cap-after {
   margin: 0;
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--text) 72%, transparent);
 }
@@ -541,7 +541,7 @@
 .suivi-cap-list-head,
 .suivi-cap-list-foot {
   margin: 0;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--text) 66%, transparent);
 }
@@ -563,7 +563,7 @@
   border: 1px dashed color-mix(in srgb, var(--text) 18%, transparent);
   background: color-mix(in srgb, var(--text) 4%, transparent);
   font-family: var(--font-label);
-  font-size: 9.8px;
+  font-size: 12px;
   letter-spacing: .03em;
   line-height: 1.6;
   font-variant-numeric: tabular-nums;
@@ -571,7 +571,7 @@
   cursor: help;
   color: color-mix(in srgb, var(--text) 56%, transparent);
 }
-.suivi-cap-desc i { font-size: 11px; }
+.suivi-cap-desc i { font-size: 12px; }
 /* Le compteur du cap descend lui-même jusqu'à la ligne des archives : le
    texte garde le pas de la pastille, le pointillé dit le geste. */
 .suivi-cap-desc-jump {
@@ -614,7 +614,7 @@
   cursor: pointer;
   transition: opacity .18s ease, color .18s ease, background .18s ease;
 }
-.suivi-cap-desc-gomme i { font-size: 10.5px; }
+.suivi-cap-desc-gomme i { font-size: 12px; }
 .suivi-cap-desc-gomme:hover { opacity: 1; background: color-mix(in srgb, var(--text) 8%, transparent); }
 .suivi-cap-desc-gomme[data-arme='yes'] {
   opacity: 1;
@@ -630,7 +630,7 @@
   background: color-mix(in srgb, var(--accent) 9%, transparent);
   color: color-mix(in srgb, var(--accent) 86%, var(--text));
 }
-[dir='rtl'] .suivi-cap-desc { letter-spacing: 0; font-size: 11px; }
+[dir='rtl'] .suivi-cap-desc { letter-spacing: 0; font-size: 12px; }
 .suivi-cap-list-ul {
   margin: 5px 0 0;
   padding: 0;
@@ -644,7 +644,7 @@
   align-items: baseline;
   gap: 8px;
   min-width: 0;
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.45;
 }
 .suivi-cap-list-name {
@@ -697,7 +697,7 @@
   border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
   background: color-mix(in srgb, var(--background) 70%, transparent);
   font: inherit;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   color: color-mix(in srgb, var(--text) 62%, transparent);
   cursor: pointer;
@@ -725,7 +725,7 @@
   align-items: center;
   gap: 5px;
   margin: 2px 0 0;
-  font-size: 10.5px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: .02em;
   color: color-mix(in srgb, var(--text) 66%, transparent);
@@ -788,7 +788,7 @@
   padding: 1px 7px;
   border-radius: 999px;
   font-family: var(--font-label);
-  font-size: 9.8px;
+  font-size: 11px;
   line-height: 1.6;
   letter-spacing: .04em;
   white-space: nowrap;
@@ -835,7 +835,7 @@
   border-radius: 999px;
   width: fit-content;
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .04em;
   color: color-mix(in srgb, var(--accent) 90%, var(--text));
   background: color-mix(in srgb, var(--accent) 9%, transparent);
@@ -843,7 +843,7 @@
 }
 .suivi-part-focus i { font-size: 12px; }
 
-[dir='rtl'] .suivi-part-focus { letter-spacing: 0; font-size: 11px; }
+[dir='rtl'] .suivi-part-focus { letter-spacing: 0; font-size: 12px; }
 
 /* L'archive du seul chantier resserré, posée dans la ligne qui dit le
    resserrement : une porte discrète, au même pas que la pastille. */
@@ -856,7 +856,7 @@
   border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
   background: color-mix(in srgb, var(--accent) 12%, transparent);
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .04em;
   line-height: 1.6;
   cursor: pointer;
@@ -864,7 +864,7 @@
   color: color-mix(in srgb, var(--accent) 92%, var(--text));
   transition: background .16s ease, border-color .16s ease;
 }
-.suivi-part-archive i { font-size: 11px; }
+.suivi-part-archive i { font-size: 12px; }
 .suivi-part-archive:hover,
 .suivi-part-archive:focus-visible {
   background: color-mix(in srgb, var(--accent) 22%, transparent);
@@ -877,7 +877,7 @@
 
 [dir='rtl'] .suivi-part-archive {
   letter-spacing: 0;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .suivi-part-widen {
@@ -889,7 +889,7 @@
   border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
   background: none;
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .04em;
   cursor: pointer;
   white-space: nowrap;
@@ -904,7 +904,7 @@
   background: color-mix(in srgb, var(--accent) 9%, transparent);
 }
 
-[dir='rtl'] .suivi-part-widen { letter-spacing: 0; font-size: 11px; }
+[dir='rtl'] .suivi-part-widen { letter-spacing: 0; font-size: 12px; }
 
 /* Un seul chantier retenu : sa carte prend la largeur du rappel, au lieu de
    rester seule dans une moitié de grille. */
@@ -935,7 +935,7 @@
   align-items: flex-start;
   gap: 5px;
   font-family: var(--font-label);
-  font-size: 10.5px;
+  font-size: 12px;
   line-height: 1.45;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 66%, transparent);
@@ -950,12 +950,12 @@
 /* En arabe, l'interlettrage et les capitales latines se retirent. */
 [dir='rtl'] .suivi-part-share {
   letter-spacing: 0;
-  font-size: 11.5px;
+  font-size: 12px;
 }
 
 .suivi-part-reste {
   margin: 0;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--text) 58%, transparent);
 }
@@ -967,7 +967,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 10.8px;
+  font-size: 12px;
   line-height: 1.45;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 54%, transparent);
@@ -984,7 +984,7 @@
   margin-top: 2px;
   padding: 5px 9px;
   border-radius: 8px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   line-height: 1.4;
   text-decoration: none;
@@ -1083,7 +1083,7 @@
 .suivi-manque-tag {
   padding: 1px 7px;
   border-radius: 999px;
-  font-size: 10px;
+  font-size: 11px;
   white-space: nowrap;
   color: color-mix(in srgb, var(--accent) 90%, var(--text));
   background: color-mix(in srgb, var(--accent) 13%, transparent);
@@ -1091,7 +1091,7 @@
 }
 .suivi-manque-pct {
   margin-inline-start: auto;
-  font-size: 11.5px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 56%, transparent);
@@ -1128,7 +1128,7 @@
 
 .suivi-manque-txt {
   margin: 0;
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.55;
   color: color-mix(in srgb, var(--text) 64%, transparent);
 }
@@ -1152,7 +1152,7 @@
   color: color-mix(in srgb, var(--text) 92%, transparent);
 }
 
-.suivi-block-note { font-size: 11px; }
+.suivi-block-note { font-size: 12px; }
 
 /* ---- les modules ---- */
 .suivi-mods {
@@ -1216,7 +1216,7 @@
   color: color-mix(in srgb, var(--accent) 80%, var(--text));
   cursor: help;
 }
-.suivi-mod-vu i { font-size: 9px; }
+.suivi-mod-vu i { font-size: 12px; }
 /* Le jour de la dernière archive partie pour le chantier de la ligne, posé à
    côté de l'épingle de descente : la pièce et le parcours se lisent d'un même
    regard, sans quitter le poids des modules. */
@@ -1232,7 +1232,7 @@
   border: 1px dashed color-mix(in srgb, var(--text) 18%, transparent);
   background: color-mix(in srgb, var(--text) 4%, transparent);
   font-family: var(--font-label);
-  font-size: 9.2px;
+  font-size: 12px;
   letter-spacing: .02em;
   line-height: 1;
   font-variant-numeric: tabular-nums;
@@ -1240,7 +1240,7 @@
   color: color-mix(in srgb, var(--text) 56%, transparent);
   cursor: help;
 }
-.suivi-mod-archive i { font-size: 9.5px; }
+.suivi-mod-archive i { font-size: 12px; }
 /* Le repère est le geste : un appui descend jusqu'à la ligne des archives,
    dans le rappel. Le lien garde le pas de la pastille, et son survol se
    teinte un peu pour dire qu'il mène quelque part. */
@@ -1261,12 +1261,12 @@ a.suivi-mod-archive:focus-visible {
   outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
   outline-offset: 2px;
 }
-.suivi-mod-archive-date { font-size: 9.2px; }
+.suivi-mod-archive-date { font-size: 12px; }
 [dir='rtl'] .suivi-mod-archive {
   letter-spacing: 0;
-  font-size: 10px;
+  font-size: 12px;
 }
-[dir='rtl'] .suivi-mod-archive-date { font-size: 10px; }
+[dir='rtl'] .suivi-mod-archive-date { font-size: 12px; }
 /* La petite gomme d'une seule ligne atteinte : posée à côté de l'épingle, elle
    n'oublie que ce module-là. Elle se voit sans crier, et s'arme en accent au
    premier appui, comme les autres gommes de l'onglet. */
@@ -1286,7 +1286,7 @@ a.suivi-mod-archive:focus-visible {
   vertical-align: -2px;
   transition: color .18s ease, background .18s ease, opacity .18s ease;
 }
-.suivi-mod-gomme i { font-size: 9.5px; }
+.suivi-mod-gomme i { font-size: 12px; }
 .suivi-mod-gomme:hover {
   color: color-mix(in srgb, var(--accent) 82%, var(--text));
   background: color-mix(in srgb, var(--accent) 14%, transparent);
@@ -1308,7 +1308,7 @@ a.suivi-mod-archive:focus-visible {
 }
 
 .suivi-mod-weight {
-  font-size: 11.5px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   text-align: center;
   color: color-mix(in srgb, var(--text) 54%, transparent);
@@ -1341,7 +1341,7 @@ a.suivi-mod-archive:focus-visible {
 }
 
 .suivi-mod-pts {
-  font-size: 11.5px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   text-align: right;
   color: color-mix(in srgb, var(--accent) 84%, var(--text));
@@ -1356,7 +1356,7 @@ a.suivi-mod-archive:focus-visible {
   padding: 10px 12px 0;
   border-top: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
   font-family: var(--font-label);
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 58%, transparent);
@@ -1374,7 +1374,7 @@ a.suivi-mod-archive:focus-visible {
 .suivi-total { flex-wrap: wrap; row-gap: 4px; }
 .suivi-total-jamais {
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .04em;
   text-transform: none;
   font-variant-numeric: tabular-nums;
@@ -1385,7 +1385,7 @@ a.suivi-mod-archive:focus-visible {
 .suivi-total-jamais[data-vide='yes'] {
   color: color-mix(in srgb, var(--text) 48%, transparent);
 }
-[dir='rtl'] .suivi-total-jamais { letter-spacing: 0; font-size: 11px; }
+[dir='rtl'] .suivi-total-jamais { letter-spacing: 0; font-size: 12px; }
 
 /* ---- ce qui reste ---- */
 .suivi-reste {
@@ -1474,7 +1474,7 @@ a.suivi-mod-archive:focus-visible {
 }
 .suivi-phase-n {
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 48%, transparent);
@@ -1487,7 +1487,7 @@ a.suivi-mod-archive:focus-visible {
   align-items: center;
   padding: 2px 8px;
   border-radius: 999px;
-  font-size: 10.5px;
+  font-size: 12px;
   white-space: nowrap;
 }
 .suivi-phase-etat[data-etat='fait'] {
@@ -1523,7 +1523,7 @@ a.suivi-mod-archive:focus-visible {
   grid-template-columns: 14px minmax(0, 1fr);
   align-items: start;
   gap: 6px;
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--text) 72%, transparent);
 }
@@ -1568,7 +1568,7 @@ a.suivi-mod-archive:focus-visible {
 .suivi-blocage-head b { font-weight: 600; color: color-mix(in srgb, var(--text) 92%, transparent); }
 .suivi-blocage-etat {
   margin-inline-start: auto;
-  font-size: 10.5px;
+  font-size: 12px;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 52%, transparent);
 }
@@ -1603,12 +1603,12 @@ a.suivi-mod-archive:focus-visible {
   gap: 8px;
 }
 .suivi-rl-jauge-name {
-  font-size: 11.5px;
+  font-size: 12px;
   font-weight: 600;
   color: color-mix(in srgb, var(--text) 86%, transparent);
 }
 .suivi-rl-jauge-num {
-  font-size: 11px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 56%, transparent);
@@ -1632,7 +1632,7 @@ a.suivi-mod-archive:focus-visible {
 .suivi-rl-deux {
   grid-column: 1 / -1;
   margin: 0;
-  font-size: 10.8px;
+  font-size: 12px;
   line-height: 1.45;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 54%, transparent);
@@ -1667,19 +1667,19 @@ a.suivi-mod-archive:focus-visible {
   color: color-mix(in srgb, var(--text) 90%, transparent);
 }
 
-.suivi-rl-termes-note { font-size: 10.8px; line-height: 1.45; }
+.suivi-rl-termes-note { font-size: 12px; line-height: 1.45; }
 
 .suivi-rl-termes-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 11.5px;
+  font-size: 12px;
 }
 
 .suivi-rl-termes-table th {
   padding: 4px 8px;
   text-align: left;
   font-family: var(--font-label);
-  font-size: 9.8px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -1754,7 +1754,7 @@ a.suivi-mod-archive:focus-visible {
   align-items: baseline;
   gap: 6px;
   flex-wrap: wrap;
-  font-size: 10.8px;
+  font-size: 12px;
   line-height: 1.45;
   color: color-mix(in srgb, var(--text) 52%, transparent);
 }
@@ -1764,7 +1764,7 @@ a.suivi-mod-archive:focus-visible {
 
 .suivi-rl-watch {
   margin: 0;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--text) 62%, transparent);
 }
@@ -1809,7 +1809,7 @@ a.suivi-mod-archive:focus-visible {
 
 .suivi-rl-etiq {
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: .06em;
   font-weight: 600;
   color: color-mix(in srgb, var(--text) 62%, transparent);
@@ -1823,7 +1823,7 @@ a.suivi-mod-archive:focus-visible {
   /* Sur un écran étroit, l'en-tête de colonne arabe perd son interlettrage :
      les capitales latines n'ont pas d'équivalent en arabe, et le mot se
      couperait au milieu. */
-  .suivi-rl-termes-table th { font-size: 9.2px; padding: 4px 6px; }
+  .suivi-rl-termes-table th { font-size: 12px; padding: 4px 6px; }
   .suivi-rl-termes-table td { padding: 5px 6px; }
   .suivi-rl-terme-ar { font-size: 12px; }
   .suivi-rl-row {
@@ -1863,7 +1863,7 @@ a.suivi-mod-archive:focus-visible {
   .suivi-mod-name { grid-area: name; }
   .suivi-mod-pct { grid-area: pct; }
   .suivi-mod-track { grid-area: track; }
-  .suivi-mod-weight { grid-area: weight; text-align: right; font-size: 10.5px; }
+  .suivi-mod-weight { grid-area: weight; text-align: right; font-size: 12px; }
   .suivi-mod-pts { display: none; }
   .suivi-score-facts { grid-template-columns: 1fr 1fr; }
   .suivi-phase { grid-template-columns: 24px minmax(0, 1fr); gap: 9px; }
@@ -1885,7 +1885,7 @@ a.suivi-mod-archive:focus-visible {
   border-radius: 999px;
   border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
   background: color-mix(in srgb, var(--accent) 8%, transparent);
-  font-size: 10.5px;
+  font-size: 12px;
   font-weight: 600;
   line-height: 1.4;
   text-decoration: none;
@@ -1907,7 +1907,7 @@ a.suivi-mod-archive:focus-visible {
    sur un écran étroit — la ligne du dessus la porte déjà. */
 .suivi-rl-open-addr {
   font-family: var(--font-label);
-  font-size: 9.8px;
+  font-size: 12px;
   font-weight: 500;
   opacity: .68;
   overflow-wrap: anywhere;
@@ -1923,7 +1923,7 @@ a.suivi-mod-archive:focus-visible {
   padding: 3px 9px 3px 7px;
   border-radius: 999px;
   border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
-  font-size: 10.5px;
+  font-size: 12px;
   line-height: 1.4;
   color: color-mix(in srgb, var(--text) 58%, transparent);
 }
@@ -1964,7 +1964,7 @@ a.suivi-mod-archive:focus-visible {
 .suivi-par-note {
   margin: 0;
   max-width: 68ch;
-  font-size: 10.8px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--text) 56%, transparent);
 }
@@ -2003,14 +2003,14 @@ a.suivi-mod-archive:focus-visible {
 
 .suivi-par-cell-lang {
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: .08em;
   color: color-mix(in srgb, var(--text) 50%, transparent);
 }
 
 .suivi-par-cell-lbl {
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.4;
   color: color-mix(in srgb, var(--text) 58%, transparent);
 }
@@ -2045,7 +2045,7 @@ a.suivi-mod-archive:focus-visible {
 .suivi-par-file {
   margin: 0;
   font-family: var(--font-label);
-  font-size: 11.5px;
+  font-size: 12px;
   font-weight: 600;
   color: color-mix(in srgb, var(--text) 88%, transparent);
   overflow-wrap: anywhere;
@@ -2057,7 +2057,7 @@ a.suivi-mod-archive:focus-visible {
   display: flex;
   align-items: baseline;
   gap: 5px;
-  font-size: 10.2px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 54%, transparent);
@@ -2070,7 +2070,7 @@ a.suivi-mod-archive:focus-visible {
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 10.8px;
+  font-size: 12px;
   line-height: 1.45;
   color: color-mix(in srgb, var(--text) 56%, transparent);
 }
@@ -2088,7 +2088,7 @@ a.suivi-mod-archive:focus-visible {
 .suivi-par-cle-titre {
   flex-shrink: 0;
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: .06em;
   text-transform: uppercase;
@@ -2113,24 +2113,24 @@ a.suivi-mod-archive:focus-visible {
   border-radius: 5px;
   background: color-mix(in srgb, var(--text) 8%, transparent);
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--text) 78%, transparent);
   overflow-wrap: anywhere;
 }
 
 .suivi-par-plus {
-  font-size: 10px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 50%, transparent);
 }
 
 .suivi-par-cle-vide {
-  font-size: 10.5px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--text) 40%, transparent);
 }
 
-[dir='rtl'] .suivi-par-cle-titre { letter-spacing: 0; text-transform: none; font-size: 11.5px; }
+[dir='rtl'] .suivi-par-cle-titre { letter-spacing: 0; text-transform: none; font-size: 12px; }
 
 @media (max-width: 520px) {
   /* L'adresse se retire du lien : la ligne du dessus la porte déjà, et les
@@ -2165,7 +2165,7 @@ a.suivi-mod-archive:focus-visible {
   border-radius: 999px;
   background: none;
   font-family: var(--font-label);
-  font-size: 10.5px;
+  font-size: 11px;
   letter-spacing: .06em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 62%, transparent);
@@ -2201,13 +2201,13 @@ a.suivi-mod-archive:focus-visible {
   padding: 1px 5px;
   border-radius: 999px;
   background: color-mix(in srgb, var(--accent) 20%, transparent);
-  font-size: 9.5px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: .08em;
 }
 
 .suivi-rl-filtres-count {
-  font-size: 10.8px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 52%, transparent);
 }
@@ -2222,7 +2222,7 @@ a.suivi-mod-archive:focus-visible {
   padding: 12px 13px;
   border-radius: 9px;
   border: 1px dashed color-mix(in srgb, var(--text) 20%, transparent);
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--text) 62%, transparent);
 }
@@ -2242,7 +2242,7 @@ a.suivi-mod-archive:focus-visible {
 
 @media (max-width: 700px) {
   .suivi-rl-filtres { gap: 5px; }
-  .suivi-rl-filtres-count { font-size: 10.2px; }
+  .suivi-rl-filtres-count { font-size: 12px; }
 }
 
 /* ---- le relevé revenu du relecteur -------------------------------------
@@ -2297,7 +2297,7 @@ a.suivi-mod-archive:focus-visible {
   flex-wrap: wrap;
   margin: 0;
   margin-inline-end: auto;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.5;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 78%, transparent);
@@ -2310,7 +2310,7 @@ a.suivi-mod-archive:focus-visible {
 
 .suivi-par-retour-file {
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   font-style: normal;
   letter-spacing: .04em;
   color: color-mix(in srgb, var(--text) 52%, transparent);
@@ -2362,7 +2362,7 @@ a.suivi-mod-archive:focus-visible {
 
 .suivi-par-retour-group-file {
   font-family: var(--font-label);
-  font-size: 10.5px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: .04em;
   color: color-mix(in srgb, var(--text) 86%, transparent);
@@ -2374,7 +2374,7 @@ a.suivi-mod-archive:focus-visible {
   padding: 1px 7px;
   border-radius: 999px;
   font-family: var(--font-label);
-  font-size: 9.8px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   letter-spacing: .03em;
   white-space: nowrap;
@@ -2392,7 +2392,7 @@ a.suivi-mod-archive:focus-visible {
 
 .suivi-par-retour-fic {
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .03em;
   color: color-mix(in srgb, var(--text) 52%, transparent);
   overflow-wrap: anywhere;
@@ -2404,7 +2404,7 @@ a.suivi-mod-archive:focus-visible {
   border-radius: 999px;
   background: color-mix(in srgb, var(--accent) 16%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: .07em;
   color: color-mix(in srgb, var(--accent) 88%, var(--text));
@@ -2413,7 +2413,7 @@ a.suivi-mod-archive:focus-visible {
 .suivi-par-retour-val {
   flex: 1 1 200px;
   min-width: 0;
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--text) 84%, transparent);
   overflow-wrap: anywhere;
@@ -2458,7 +2458,7 @@ a.suivi-mod-archive:focus-visible {
   padding: 1px 7px;
   border-radius: 999px;
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   font-style: normal;
   letter-spacing: .04em;
   color: color-mix(in srgb, var(--text) 54%, transparent);
@@ -2467,14 +2467,14 @@ a.suivi-mod-archive:focus-visible {
 }
 
 .suivi-par-retour-date i {
-  font-size: 11px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--text) 44%, transparent);
 }
 
 [dir='rtl'] .suivi-par-retour-date {
   letter-spacing: 0;
   font-family: inherit;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 /* Une clé encore vide ne disparaît pas : elle se dit, un cran plus bas. */
@@ -2501,7 +2501,7 @@ a.suivi-mod-archive:focus-visible {
   padding: 4px 10px;
   border-radius: 999px;
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .05em;
   color: color-mix(in srgb, var(--text) 62%, transparent);
   background: color-mix(in srgb, var(--text) 6%, transparent);
@@ -2516,7 +2516,7 @@ a.suivi-mod-archive:focus-visible {
 [dir='rtl'] .suivi-par-gommees-count {
   letter-spacing: 0;
   font-family: inherit;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 /* Le compte des clés déjà posées depuis, à côté du nom du fichier : le
@@ -2526,7 +2526,7 @@ a.suivi-mod-archive:focus-visible {
   align-items: center;
   gap: 4px;
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   font-style: normal;
   letter-spacing: .04em;
   color: color-mix(in srgb, var(--accent) 88%, var(--text));
@@ -2540,7 +2540,7 @@ a.suivi-mod-archive:focus-visible {
   padding: 1px 6px;
   border-radius: 999px;
   font-family: var(--font-label);
-  font-size: 9.8px;
+  font-size: 12px;
   font-style: normal;
   letter-spacing: .02em;
   text-transform: none;
@@ -2549,10 +2549,10 @@ a.suivi-mod-archive:focus-visible {
   background: color-mix(in srgb, var(--text) 7%, transparent);
 }
 
-[dir='rtl'] .suivi-par-tri-age { letter-spacing: 0; font-size: 10.8px; }
+[dir='rtl'] .suivi-par-tri-age { letter-spacing: 0; font-size: 12px; }
 
 .suivi-par-retour-posees i {
-  font-size: 11px;
+  font-size: 12px;
 }
 
 /* Une clé déjà posée sort du travail restant : la ligne s'efface, la clé se
@@ -2603,7 +2603,7 @@ a.suivi-mod-archive:focus-visible {
   background: none;
   outline: none;
   font-family: var(--font-label);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: .02em;
   color: color-mix(in srgb, var(--text) 88%, transparent);
 }
@@ -2642,7 +2642,7 @@ a.suivi-mod-archive:focus-visible {
   padding: 1px 7px;
   border-radius: 999px;
   font-family: var(--font-label);
-  font-size: 9.8px;
+  font-size: 12px;
   letter-spacing: .04em;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;

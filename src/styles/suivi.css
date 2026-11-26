@@ -32,21 +32,21 @@
 .sv-stamp {
   margin: 0;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--accent2);
 }
 .sv-sub {
   margin: -4px 0 2px;
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.55;
   color: var(--muted);
 }
 
 .sv-field { display: grid; gap: 5px; min-width: 0; }
 .sv-field > span:first-child {
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.4;
   color: color-mix(in srgb, var(--text) 74%, transparent);
 }
@@ -154,7 +154,7 @@
   align-items: center;
   gap: 6px;
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--muted);
@@ -167,7 +167,7 @@
   border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
   background: color-mix(in srgb, var(--text) 6%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: .06em;
   text-transform: uppercase;
   color: var(--muted);
@@ -229,7 +229,7 @@
 .sv-facts > div { min-width: 0; display: grid; gap: 1px; }
 .sv-facts dt {
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--muted);
@@ -254,7 +254,7 @@
 .sv-attn-stamp {
   margin: 0;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--accent2);
@@ -268,7 +268,7 @@
 .sv-attn-facts > div { min-width: 0; display: grid; gap: 1px; }
 .sv-attn-facts dt {
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--muted);
@@ -291,7 +291,7 @@
 .sv-track-stamp {
   margin: 0 0 8px;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--muted);
@@ -356,7 +356,7 @@
 }
 .sv-steps li.is-done .sv-step-txt b { color: var(--text); }
 .sv-step-txt small {
-  font-size: 11px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   color: var(--muted);
 }
@@ -367,7 +367,7 @@
   align-items: flex-start;
   gap: 6px;
   margin: 0;
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.55;
   color: var(--muted);
 }
@@ -407,7 +407,7 @@
   grid-area: day;
   min-width: 0;
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .08em;
   text-transform: uppercase;
   color: var(--accent2);
@@ -415,7 +415,7 @@
 .sv-rel-state {
   grid-area: state;
   min-width: 0;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   line-height: 1.4;
   text-align: end;
@@ -424,14 +424,14 @@
 .sv-rel-date {
   grid-area: date;
   min-width: 0;
-  font-size: 11.5px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   color: var(--muted);
 }
 .sv-rel-to {
   grid-area: to;
   min-width: 0;
-  font-size: 11.5px;
+  font-size: 12px;
   text-align: end;
   color: var(--muted);
 }
@@ -447,7 +447,7 @@
 }
 .sv-rel-next {
   margin: 8px 0 0;
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.5;
   font-weight: 600;
   color: var(--accent2);
@@ -500,7 +500,7 @@
 .sv-help-title {
   margin: 0 0 2px;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--accent2);
@@ -536,7 +536,7 @@
 }
 .sv-help-card p {
   margin: 3px 0 0;
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.55;
   color: var(--muted);
 }
@@ -550,7 +550,7 @@
   margin: 0;
   padding-top: 9px;
   border-top: 1px dashed color-mix(in srgb, var(--text) 13%, transparent);
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.55;
   color: var(--muted);
 }
@@ -614,7 +614,7 @@
   }
   .sv-print-stamp {
     font-family: var(--font-label);
-    font-size: 8.5pt;
+    font-size: 12px;
     letter-spacing: .12em;
     text-transform: uppercase;
     color: #5c544a;
@@ -622,7 +622,7 @@
   .sv-print-kind {
     margin: 14pt 0 2pt;
     font-family: var(--font-label);
-    font-size: 8.5pt;
+    font-size: 12px;
     letter-spacing: .1em;
     text-transform: uppercase;
     color: #5c544a;
@@ -642,7 +642,7 @@
     border: 1pt solid #1b1b1b;
     border-radius: 999px;
     font-family: var(--font-label);
-    font-size: 8.5pt;
+    font-size: 12px;
     letter-spacing: .08em;
     text-transform: uppercase;
   }
@@ -667,7 +667,7 @@
   .sv-print-facts > div { min-width: 0; }
   .sv-print-facts dt {
     font-family: var(--font-label);
-    font-size: 8pt;
+    font-size: 12px;
     letter-spacing: .1em;
     text-transform: uppercase;
     color: #5c544a;
@@ -688,7 +688,7 @@
   .sv-print-attn-stamp {
     margin: 0 0 6pt;
     font-family: var(--font-label);
-    font-size: 8pt;
+    font-size: 12px;
     letter-spacing: .12em;
     text-transform: uppercase;
     color: #5c544a;
@@ -702,7 +702,7 @@
   .sv-print-attn-facts > div { min-width: 0; }
   .sv-print-attn-facts dt {
     font-family: var(--font-label);
-    font-size: 8pt;
+    font-size: 12px;
     letter-spacing: .1em;
     text-transform: uppercase;
     color: #5c544a;
@@ -716,7 +716,7 @@
   .sv-print-track-stamp {
     margin: 0 0 6pt;
     font-family: var(--font-label);
-    font-size: 8pt;
+    font-size: 12px;
     letter-spacing: .1em;
     text-transform: uppercase;
     color: #5c544a;
@@ -786,7 +786,7 @@
     margin: 12pt 0 0;
     padding-top: 6pt;
     border-top: .5pt solid #b9b0a4;
-    font-size: 8pt;
+    font-size: 12px;
     line-height: 1.5;
     color: #5c544a;
   }

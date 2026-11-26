@@ -18,7 +18,7 @@
   border: 1px dashed color-mix(in srgb, var(--accent) 44%, transparent);
   background: color-mix(in srgb, var(--accent) 8%, transparent);
   font-family: var(--font-label);
-  font-size: 8.5px;
+  font-size: 11px;
   line-height: 1.5;
   letter-spacing: .02em;
   color: color-mix(in srgb, var(--accent) 82%, var(--text));
@@ -26,7 +26,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.of-pays-sent i { flex: 0 0 auto; font-size: 9px; color: inherit; }
+.of-pays-sent i { flex: 0 0 auto; font-size: 11px; color: inherit; }
 [dir="rtl"] .of-pays-sent { letter-spacing: 0; font-variant-numeric: normal; }
 
 /* Depuis combien de jours l'adresse n'est pas repartie : le nombre suit le
@@ -50,7 +50,7 @@
   border-radius: 999px;
   background: color-mix(in srgb, var(--accent) 7%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 11px;
   font-style: normal;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
@@ -78,7 +78,7 @@
   gap: 5px;
   flex: 1 1 220px;
   min-width: 0;
-  font-size: 10.5px;
+  font-size: 11px;
   line-height: 1.5;
   color: var(--muted);
 }
@@ -106,13 +106,13 @@
   background: transparent;
   color: color-mix(in srgb, var(--accent) 80%, var(--text));
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.5;
   white-space: nowrap;
   cursor: pointer;
   transition: border-color .18s ease, background .18s ease, color .18s ease;
 }
-.of-pays-relance-csv i { font-size: 11px; color: inherit; }
+.of-pays-relance-csv i { font-size: 12px; color: inherit; }
 .of-pays-relance-csv:hover {
   border-style: solid;
   border-color: var(--accent);
@@ -137,13 +137,13 @@
   background: color-mix(in srgb, var(--accent) 10%, transparent);
   color: color-mix(in srgb, var(--accent) 86%, var(--text));
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.5;
   white-space: nowrap;
   cursor: pointer;
   transition: border-color .18s ease, background .18s ease, color .18s ease;
 }
-.of-pays-link-relance-btn i { font-size: 11px; color: inherit; }
+.of-pays-link-relance-btn i { font-size: 12px; color: inherit; }
 .of-pays-link-relance-btn:hover {
   border-color: var(--accent);
   background: color-mix(in srgb, var(--accent) 16%, transparent);
@@ -164,20 +164,20 @@
   flex-wrap: wrap;
   gap: 5px;
   margin: 4px 0 0;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.5;
   color: var(--muted);
 }
 .of-pays-link-relance-link i {
   flex: 0 0 auto;
-  font-size: 11px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--accent) 70%, transparent);
 }
 .of-pays-link-relance-link code {
   flex: 1 1 180px;
   min-width: 0;
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 9.5px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--text) 68%, transparent);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -201,13 +201,13 @@
   background: transparent;
   color: color-mix(in srgb, var(--text) 62%, transparent);
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.5;
   white-space: nowrap;
   cursor: pointer;
   transition: border-color .18s ease, background .18s ease, color .18s ease;
 }
-.of-pays-link-clear i { font-size: 11px; color: inherit; }
+.of-pays-link-clear i { font-size: 12px; color: inherit; }
 .of-pays-link-clear:hover {
   border-style: solid;
   border-color: var(--accent);
@@ -223,21 +223,21 @@
   align-items: flex-start;
   gap: 5px;
   margin: 4px 0 0;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.5;
   color: var(--muted);
 }
 .of-pays-link-kept i {
   flex: 0 0 auto;
   margin-top: 1px;
-  font-size: 11px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--accent) 76%, transparent);
 }
 .of-pays-link-kept span { max-width: 78ch; }
 
 @media (max-width: 400px) {
-  .of-pays-sent { font-size: 8px; padding: 0 5px; }
-  .of-pays-sent-ago { font-size: 7.5px; }
+  .of-pays-sent { font-size: 11px; padding: 0 5px; }
+  .of-pays-sent-ago { font-size: 11px; }
   .of-pays-link-copy { flex-direction: column; align-items: stretch; }
   .of-pays-link-clear,
   .of-pays-link-copy-btn,
@@ -263,14 +263,14 @@
   background: transparent;
   color: color-mix(in srgb, var(--text) 58%, transparent);
   font-family: var(--font-label);
-  font-size: 8.5px;
+  font-size: 11px;
   line-height: 1.5;
   letter-spacing: .02em;
   white-space: nowrap;
   cursor: pointer;
   transition: border-color .18s ease, background .18s ease, color .18s ease;
 }
-.of-pays-relance-mark i { flex: 0 0 auto; font-size: 9px; color: inherit; }
+.of-pays-relance-mark i { flex: 0 0 auto; font-size: 11px; color: inherit; }
 .of-pays-relance-mark:hover {
   border-style: solid;
   border-color: color-mix(in srgb, var(--accent2) 60%, transparent);
@@ -308,7 +308,7 @@
   flex: 1 1 200px;
   min-width: 0;
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.5;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--accent2) 78%, var(--text));
@@ -327,13 +327,13 @@
   background: transparent;
   color: color-mix(in srgb, var(--accent2) 82%, var(--text));
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.5;
   white-space: nowrap;
   cursor: pointer;
   transition: border-color .18s ease, background .18s ease, color .18s ease;
 }
-.of-pays-relance-done-btn i { font-size: 11px; color: inherit; }
+.of-pays-relance-done-btn i { font-size: 12px; color: inherit; }
 .of-pays-relance-done-btn:hover {
   border-color: var(--accent2);
   background: color-mix(in srgb, var(--accent2) 12%, transparent);
@@ -347,7 +347,7 @@
 [dir="rtl"] .of-pays-relance-done-btn { letter-spacing: 0; }
 
 @media (max-width: 400px) {
-  .of-pays-relance-mark { font-size: 8px; padding: 0 5px; }
+  .of-pays-relance-mark { font-size: 11px; padding: 0 5px; }
   .of-pays-relance-done { flex-direction: column; align-items: stretch; }
   .of-pays-relance-done-btn { justify-content: center; }
 }
@@ -394,7 +394,7 @@
   width: 11px;
   height: 11px;
   margin-inline-start: 1px;
-  font-size: 11px;
+  font-size: 12px;
   color: inherit;
   opacity: .8;
 }
@@ -419,7 +419,7 @@
 .of-fold-tag-age {
   margin-inline-start: 2px;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 11px;
   font-style: normal;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--accent2) 66%, var(--text));
@@ -446,7 +446,7 @@
   gap: 5px;
   flex: 1 1 200px;
   min-width: 0;
-  font-size: 10.5px;
+  font-size: 11px;
   line-height: 1.5;
   color: var(--muted);
 }
@@ -466,13 +466,13 @@
   background: color-mix(in srgb, var(--accent) 10%, transparent);
   color: color-mix(in srgb, var(--accent) 86%, var(--text));
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.5;
   white-space: nowrap;
   cursor: pointer;
   transition: border-color .18s ease, background .18s ease, color .18s ease;
 }
-.of-pays-fold-relance-btn i { font-size: 11px; color: inherit; }
+.of-pays-fold-relance-btn i { font-size: 12px; color: inherit; }
 .of-pays-fold-relance-btn:hover {
   border-color: var(--accent);
   background: color-mix(in srgb, var(--accent) 16%, transparent);
@@ -504,7 +504,7 @@
   align-items: center;
   gap: 4px;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 11px;
   line-height: 1.5;
   letter-spacing: .04em;
   text-transform: uppercase;
@@ -521,7 +521,7 @@
   background: transparent;
   color: color-mix(in srgb, var(--text) 68%, transparent);
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.6;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
@@ -544,12 +544,12 @@
   align-items: center;
   gap: 4px;
   margin-inline-start: auto;
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.5;
   color: var(--muted);
 }
 .of-pays-relance-seuil-kept i {
-  font-size: 10.5px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--accent) 70%, transparent);
 }
 [dir="rtl"] .of-pays-relance-seuil-lab { letter-spacing: 0; }
@@ -575,13 +575,13 @@
   background: transparent;
   color: color-mix(in srgb, var(--accent2) 80%, var(--text));
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.5;
   white-space: nowrap;
   cursor: pointer;
   transition: border-color .18s ease, background .18s ease, color .18s ease;
 }
-.of-pays-relance-bulk i { font-size: 11px; color: inherit; }
+.of-pays-relance-bulk i { font-size: 12px; color: inherit; }
 .of-pays-relance-bulk:hover {
   border-style: solid;
   border-color: var(--accent2);
@@ -613,13 +613,13 @@
   border-radius: 999px;
   background: color-mix(in srgb, var(--accent2) 12%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 11px;
   font-style: normal;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--accent2) 82%, var(--text));
   white-space: nowrap;
 }
-.of-fold-tag-done i { flex: 0 0 auto; font-size: 10px; color: inherit; }
+.of-fold-tag-done i { flex: 0 0 auto; font-size: 11px; color: inherit; }
 [dir="rtl"] .of-fold-tag-done { letter-spacing: 0; }
 
 /* ============ LE COMPTEUR DES MARCHÉS DÉJÀ RELANCÉS ============ */
@@ -666,14 +666,14 @@
   border: 1px solid color-mix(in srgb, var(--accent2) 38%, transparent);
   background: color-mix(in srgb, var(--accent2) 12%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 11px;
   font-style: normal;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--accent2) 88%, var(--text));
   white-space: nowrap;
 }
-.of-pays-link-name-relanced i { flex: 0 0 auto; font-size: 10px; color: inherit; }
+.of-pays-link-name-relanced i { flex: 0 0 auto; font-size: 11px; color: inherit; }
 [dir="rtl"] .of-pays-link-name-relanced { letter-spacing: 0; }
 
 /* La date du second contact, dans la même liste : même pastille que la
@@ -689,19 +689,19 @@
   border: 1px dotted color-mix(in srgb, var(--accent2) 46%, transparent);
   background: color-mix(in srgb, var(--accent2) 8%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 11px;
   font-style: normal;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--accent2) 84%, var(--text));
   white-space: nowrap;
 }
-.of-pays-link-name-rappel i { flex: 0 0 auto; font-size: 10px; color: inherit; }
+.of-pays-link-name-rappel i { flex: 0 0 auto; font-size: 11px; color: inherit; }
 [dir="rtl"] .of-pays-link-name-rappel { letter-spacing: 0; }
 
 @media (max-width: 400px) {
-  .of-pays-link-name-relanced { font-size: 9px; padding: 0 4px; }
-  .of-pays-link-name-rappel { font-size: 9px; padding: 0 4px; }
+  .of-pays-link-name-relanced { font-size: 11px; padding: 0 4px; }
+  .of-pays-link-name-rappel { font-size: 11px; padding: 0 4px; }
   .of-pays-floor-btn.is-relance { justify-content: center; }
 }
 
@@ -726,14 +726,14 @@
   background: color-mix(in srgb, var(--accent2) 16%, transparent);
   color: color-mix(in srgb, var(--accent2) 92%, var(--text));
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.5;
   font-weight: 600;
   white-space: nowrap;
   cursor: pointer;
   transition: border-color .18s ease, background .18s ease, color .18s ease;
 }
-.of-pays-relance-start i { font-size: 11px; color: inherit; }
+.of-pays-relance-start i { font-size: 12px; color: inherit; }
 .of-pays-relance-start:hover {
   border-color: var(--accent2);
   background: color-mix(in srgb, var(--accent2) 26%, transparent);
@@ -747,7 +747,7 @@
 .of-pays-relance-start-none {
   flex: 1 1 220px;
   min-width: 0;
-  font-size: 10px;
+  font-size: 12px;
   font-style: italic;
   line-height: 1.5;
   color: color-mix(in srgb, var(--text) 58%, transparent);
@@ -763,13 +763,13 @@
   border-radius: 999px;
   background: color-mix(in srgb, var(--accent2) 14%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 11px;
   font-style: normal;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--accent2) 88%, var(--text));
   white-space: nowrap;
 }
-.of-pays-relance-start-ok i { flex: 0 0 auto; font-size: 10px; color: inherit; }
+.of-pays-relance-start-ok i { flex: 0 0 auto; font-size: 11px; color: inherit; }
 .of-pays-relance-start-ok.is-err {
   background: color-mix(in srgb, var(--accent) 12%, transparent);
   color: color-mix(in srgb, var(--accent) 82%, var(--text));
@@ -796,7 +796,7 @@
   align-items: center;
   gap: 4px;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 11px;
   line-height: 1.5;
   letter-spacing: .04em;
   text-transform: uppercase;
@@ -816,7 +816,7 @@
   background: color-mix(in srgb, var(--bg) 70%, transparent);
   color: var(--text);
   font-family: var(--font-body);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.6;
   outline: none;
   transition: border-color .18s ease, background .18s ease;
@@ -832,13 +832,13 @@
   gap: 4px;
   flex: 1 1 220px;
   min-width: 0;
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.5;
   color: var(--muted);
 }
 .of-pays-relance-who-kept i {
   flex: 0 0 auto;
-  font-size: 10.5px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--accent2) 62%, transparent);
 }
 .of-pays-relance-who-kept span { min-width: 0; }
@@ -865,7 +865,7 @@
   gap: 5px;
   flex: 1 1 240px;
   min-width: 0;
-  font-size: 10.5px;
+  font-size: 11px;
   line-height: 1.5;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--accent2) 74%, var(--text));
@@ -895,7 +895,7 @@
   background: color-mix(in srgb, var(--surface) 70%, transparent);
 }
 .of-pays-rappel-delai > i {
-  font-size: 10.5px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--accent2) 64%, transparent);
 }
 .of-pays-rappel-delai-btn {
@@ -905,7 +905,7 @@
   background: transparent;
   color: color-mix(in srgb, var(--text) 62%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.6;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
@@ -939,7 +939,7 @@
   background: color-mix(in srgb, var(--accent2) 14%, transparent);
   color: color-mix(in srgb, var(--accent2) 92%, var(--text));
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.5;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
@@ -947,7 +947,7 @@
   cursor: pointer;
   transition: border-color .18s ease, background .18s ease, color .18s ease;
 }
-.of-pays-rappel-btn i { font-size: 11px; color: inherit; }
+.of-pays-rappel-btn i { font-size: 12px; color: inherit; }
 .of-pays-rappel-btn:hover {
   border-color: var(--accent2);
   background: color-mix(in srgb, var(--accent2) 24%, transparent);
@@ -972,13 +972,13 @@
   background: transparent;
   color: color-mix(in srgb, var(--accent2) 84%, var(--text));
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.5;
   white-space: nowrap;
   cursor: pointer;
   transition: border-color .18s ease, background .18s ease, color .18s ease;
 }
-.of-pays-rappel-bulk i { font-size: 11px; color: inherit; }
+.of-pays-rappel-bulk i { font-size: 12px; color: inherit; }
 .of-pays-rappel-bulk:hover {
   border-style: solid;
   border-color: var(--accent2);
@@ -1003,13 +1003,13 @@
   border-radius: 999px;
   background: color-mix(in srgb, var(--accent2) 12%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 11px;
   font-style: normal;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--accent2) 86%, var(--text));
   white-space: nowrap;
 }
-.of-pays-rappel-ok i { flex: 0 0 auto; font-size: 10px; color: inherit; }
+.of-pays-rappel-ok i { flex: 0 0 auto; font-size: 11px; color: inherit; }
 .of-pays-rappel-ok.is-err {
   background: color-mix(in srgb, var(--accent) 12%, transparent);
   color: color-mix(in srgb, var(--accent) 82%, var(--text));
@@ -1028,7 +1028,7 @@
   border-radius: 999px;
   background: color-mix(in srgb, var(--text) 6%, transparent);
   font-family: var(--font-label);
-  font-size: 8.5px;
+  font-size: 11px;
   line-height: 1.5;
   letter-spacing: .02em;
   color: color-mix(in srgb, var(--text) 66%, transparent);
@@ -1036,7 +1036,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.of-pays-relance-by i { flex: 0 0 auto; font-size: 9px; color: inherit; }
+.of-pays-relance-by i { flex: 0 0 auto; font-size: 11px; color: inherit; }
 [dir="rtl"] .of-pays-relance-by { letter-spacing: 0; }
 
 @media (max-width: 400px) {
@@ -1044,7 +1044,7 @@
   .of-pays-rappel-acts { width: 100%; justify-content: center; }
   .of-pays-rappel-btn { justify-content: center; }
   .of-pays-rappel-bulk { justify-content: center; }
-  .of-pays-relance-by { font-size: 8px; padding: 0 5px; }
+  .of-pays-relance-by { font-size: 11px; padding: 0 5px; }
 }
 
 /* ============ LES RELANCES QUI DATENT DE PLUS DE SEPT JOURS ============ */
@@ -1058,7 +1058,7 @@
   font-variant-numeric: tabular-nums;
 }
 .of-fold-tag.is-recalled i {
-  font-size: 10.5px;
+  font-size: 11px;
   color: inherit;
 }
 
@@ -1079,14 +1079,14 @@
   background: transparent;
   color: color-mix(in srgb, var(--accent2) 62%, var(--text));
   font-family: var(--font-label);
-  font-size: 8.5px;
+  font-size: 11px;
   line-height: 1.5;
   letter-spacing: .02em;
   white-space: nowrap;
   cursor: pointer;
   transition: border-color .18s ease, background .18s ease, color .18s ease;
 }
-.of-pays-rappel-mark i { flex: 0 0 auto; font-size: 9px; color: inherit; }
+.of-pays-rappel-mark i { flex: 0 0 auto; font-size: 11px; color: inherit; }
 .of-pays-rappel-mark:hover {
   border-style: solid;
   border-color: color-mix(in srgb, var(--accent2) 60%, transparent);
@@ -1143,7 +1143,7 @@
 }
 
 @media (max-width: 400px) {
-  .of-pays-rappel-mark { font-size: 8px; padding: 0 5px; }
+  .of-pays-rappel-mark { font-size: 11px; padding: 0 5px; }
   .of-pays-floor-btn.is-rappel { justify-content: center; }
 }
 
@@ -1171,7 +1171,7 @@
   border: 1px solid color-mix(in srgb, var(--accent) 52%, transparent);
   background: color-mix(in srgb, var(--accent) 12%, transparent);
   font-family: var(--font-label);
-  font-size: 8.5px;
+  font-size: 11px;
   line-height: 1.5;
   letter-spacing: .02em;
   font-weight: 600;
@@ -1181,7 +1181,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.of-pays-rappel-late i { flex: 0 0 auto; font-size: 9px; color: inherit; }
+.of-pays-rappel-late i { flex: 0 0 auto; font-size: 11px; color: inherit; }
 [dir="rtl"] .of-pays-rappel-late { letter-spacing: 0; }
 
 /* Le compteur du bas de la feuille : il ne garde que les rappels en retard,
@@ -1216,7 +1216,7 @@
 }
 
 @media (max-width: 400px) {
-  .of-pays-rappel-late { font-size: 8px; padding: 0 5px; }
+  .of-pays-rappel-late { font-size: 11px; padding: 0 5px; }
   .of-pays-floor-btn.is-retard { justify-content: center; }
 }
 
@@ -1233,13 +1233,13 @@
   padding-inline-start: 6px;
   border-inline-start: 1px dashed color-mix(in srgb, var(--accent) 40%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 11px;
   font-style: normal;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--accent) 78%, var(--text));
   white-space: nowrap;
 }
-.of-pays-floor-oldest i { flex: 0 0 auto; font-size: 10px; color: inherit; }
+.of-pays-floor-oldest i { flex: 0 0 auto; font-size: 11px; color: inherit; }
 [dir="rtl"] .of-pays-floor-oldest { letter-spacing: 0; }
 
 /* ============ LA LISTE DES RETARDS, COPIÉE D'UN SEUL CLIC ============ */
@@ -1255,13 +1255,13 @@
   background: transparent;
   color: color-mix(in srgb, var(--accent) 84%, var(--text));
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.5;
   white-space: nowrap;
   cursor: pointer;
   transition: border-color .18s ease, background .18s ease, color .18s ease;
 }
-.of-pays-retard-copy i { font-size: 11px; color: inherit; }
+.of-pays-retard-copy i { font-size: 12px; color: inherit; }
 .of-pays-retard-copy:hover {
   border-style: solid;
   border-color: var(--accent);
@@ -1278,7 +1278,7 @@
 [dir="rtl"] .of-pays-retard-copy { letter-spacing: 0; }
 
 @media (max-width: 400px) {
-  .of-pays-floor-oldest { font-size: 9px; }
+  .of-pays-floor-oldest { font-size: 11px; }
   .of-pays-retard-copy { justify-content: center; }
 }
 
@@ -1299,7 +1299,7 @@
   border: 1px solid color-mix(in srgb, var(--accent) 86%, var(--text));
   background: color-mix(in srgb, var(--accent) 88%, var(--text));
   font-family: var(--font-label);
-  font-size: 8.5px;
+  font-size: 11px;
   line-height: 1.5;
   letter-spacing: .03em;
   font-weight: 700;
@@ -1311,11 +1311,11 @@
   text-overflow: ellipsis;
   box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 14%, transparent);
 }
-.of-pays-rappel-critique i { flex: 0 0 auto; font-size: 9px; color: inherit; }
+.of-pays-rappel-critique i { flex: 0 0 auto; font-size: 11px; color: inherit; }
 [dir="rtl"] .of-pays-rappel-critique { letter-spacing: 0; }
 
 @media (max-width: 400px) {
-  .of-pays-rappel-critique { font-size: 8px; padding: 0 6px; }
+  .of-pays-rappel-critique { font-size: 11px; padding: 0 6px; }
 }
 
 /* ============ LE SEUIL D'URGENCE, SOUS LE COMPTEUR DES RETARDS =========== */
@@ -1339,7 +1339,7 @@
   align-items: center;
   gap: 4px;
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 11px;
   line-height: 1.5;
   letter-spacing: .05em;
   text-transform: uppercase;
@@ -1354,7 +1354,7 @@
   background: transparent;
   color: color-mix(in srgb, var(--text) 66%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.6;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
@@ -1380,25 +1380,25 @@
   border-radius: 999px;
   background: color-mix(in srgb, var(--accent) 14%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 11px;
   font-style: normal;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--accent) 90%, var(--text));
   white-space: nowrap;
 }
-.of-pays-urgence-count i { flex: 0 0 auto; font-size: 10px; color: inherit; }
+.of-pays-urgence-count i { flex: 0 0 auto; font-size: 11px; color: inherit; }
 .of-pays-urgence-kept {
   display: inline-flex;
   align-items: center;
   gap: 4px;
   margin-inline-start: auto;
-  font-size: 9px;
+  font-size: 12px;
   font-style: normal;
   line-height: 1.5;
   color: var(--muted);
 }
-.of-pays-urgence-kept i { flex: 0 0 auto; font-size: 10px; color: color-mix(in srgb, var(--accent) 66%, transparent); }
+.of-pays-urgence-kept i { flex: 0 0 auto; font-size: 12px; color: color-mix(in srgb, var(--accent) 66%, transparent); }
 [dir="rtl"] .of-pays-urgence-lab { letter-spacing: 0; }
 
 @media (max-width: 640px) {
@@ -1465,7 +1465,7 @@
   box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 14%, transparent);
 }
 .of-fold-tag.is-rappel-manque i {
-  font-size: 10px;
+  font-size: 11px;
   color: inherit;
 }
 
@@ -1488,7 +1488,7 @@
   cursor: pointer;
   transition: border-color .18s ease, background .18s ease, color .18s ease;
 }
-.of-fold-tag.is-urgent i { font-size: 10px; color: inherit; }
+.of-fold-tag.is-urgent i { font-size: 11px; color: inherit; }
 .of-fold-tag.is-urgent:hover {
   border-color: color-mix(in srgb, var(--accent) 86%, var(--text));
   background: color-mix(in srgb, var(--accent) 24%, transparent);
@@ -1512,7 +1512,7 @@
   padding-inline-start: 5px;
   border-inline-start: 1px dashed currentColor;
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 11px;
   font-style: normal;
   font-weight: 500;
   opacity: .82;
@@ -1557,14 +1557,14 @@ button.of-pays-urgence-count:focus-visible {
   padding-inline-start: 5px;
   border-inline-start: 1px dashed currentColor;
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 11px;
   font-style: normal;
   font-weight: 500;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
   opacity: .86;
 }
-.of-fold-tag-oldest i { flex: 0 0 auto; font-size: 10px; color: inherit; }
+.of-fold-tag-oldest i { flex: 0 0 auto; font-size: 11px; color: inherit; }
 [dir="rtl"] .of-fold-tag-oldest { letter-spacing: 0; }
 
 /* ============ LE SEUIL D'URGENCE, RÉGLÉ DANS L'EN-TÊTE ============ */
@@ -1587,13 +1587,13 @@ button.of-pays-urgence-count:focus-visible {
   align-items: center;
   gap: 3px;
   font-family: var(--font-label);
-  font-size: 8.5px;
+  font-size: 11px;
   line-height: 1.5;
   letter-spacing: .04em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--accent) 72%, var(--muted));
 }
-.of-fold-urgence-set-lab i { flex: 0 0 auto; font-size: 10px; color: inherit; }
+.of-fold-urgence-set-lab i { flex: 0 0 auto; font-size: 11px; color: inherit; }
 .of-fold-urgence-set-btn {
   padding: 0 6px;
   border-radius: 999px;
@@ -1601,7 +1601,7 @@ button.of-pays-urgence-count:focus-visible {
   background: transparent;
   color: color-mix(in srgb, var(--text) 62%, transparent);
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 12px;
   line-height: 1.6;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
@@ -1625,7 +1625,7 @@ button.of-pays-urgence-count:focus-visible {
 [dir="rtl"] .of-fold-urgence-set-lab { letter-spacing: 0; }
 
 @media (max-width: 400px) {
-  .of-fold-tag-oldest { font-size: 8.5px; }
+  .of-fold-tag-oldest { font-size: 11px; }
   .of-fold-urgence-set {
     flex-wrap: wrap;
     border-radius: 9px;
@@ -1692,17 +1692,17 @@ button.of-pays-urgence-count:focus-visible {
   padding-inline-start: 6px;
   border-inline-start: 1px dashed color-mix(in srgb, var(--accent) 40%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 11px;
   font-style: normal;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--accent) 80%, var(--text));
   white-space: nowrap;
 }
-.of-pays-urgence-oldest i { flex: 0 0 auto; font-size: 10px; color: inherit; }
+.of-pays-urgence-oldest i { flex: 0 0 auto; font-size: 11px; color: inherit; }
 [dir="rtl"] .of-pays-urgence-oldest { letter-spacing: 0; }
 
 @media (max-width: 400px) {
-  .of-pays-urgence-oldest { font-size: 9px; }
+  .of-pays-urgence-oldest { font-size: 11px; }
 }
 
 /* ============ LE PREMIER APPEL, COPIÉ SANS DÉPLIER ================== */

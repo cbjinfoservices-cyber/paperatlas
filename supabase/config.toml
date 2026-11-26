@@ -1,0 +1,7 @@
+project_id = "paperatlas"
+
+[functions.billing-stripe-webhook]
+verify_jwt = false
+
+[functions.billing-paypal-webhook]
+verify_jwt = false

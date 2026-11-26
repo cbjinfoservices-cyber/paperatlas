@@ -63,7 +63,7 @@
 }
 .dep-tab-txt small {
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .08em;
   text-transform: uppercase;
   line-height: 1.4;
@@ -87,7 +87,7 @@
   background: color-mix(in srgb, var(--text) 7%, transparent);
   color: var(--text);
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .04em;
   line-height: 1.2;
   white-space: nowrap;
@@ -115,12 +115,12 @@
   background: color-mix(in srgb, var(--accent) 16%, transparent);
   color: var(--accent);
 }
-.dep-tab-draft i { font-size: 11px; color: inherit; }
+.dep-tab-draft i { font-size: 12px; color: inherit; }
 .dep-tab.is-on .dep-tab-draft {
   background: color-mix(in srgb, var(--bg) 26%, transparent);
   color: var(--bg);
 }
-[dir="rtl"] .dep-tab-txt small { letter-spacing: 0; text-transform: none; font-size: 11px; }
+[dir="rtl"] .dep-tab-txt small { letter-spacing: 0; text-transform: none; font-size: 12px; }
 
 /* Sous 900 px, la rangée se replie en deux blocs arrondis : un onglet pleine
    largeur se lit mieux qu'une pilule écrasée. */
@@ -176,7 +176,7 @@
   background: transparent;
   color: var(--accent);
   font: inherit;
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.2;
   white-space: nowrap;
   cursor: pointer;
@@ -398,7 +398,7 @@
   background: transparent;
   color: color-mix(in srgb, var(--text) 78%, transparent);
   font: inherit;
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.2;
   white-space: nowrap;
   cursor: pointer;
@@ -450,7 +450,7 @@
   background: color-mix(in srgb, var(--accent) 12%, transparent);
   color: var(--text);
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .04em;
   white-space: nowrap;
 }
@@ -473,7 +473,7 @@
   border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
   border-radius: 999px;
   color: var(--accent);
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.2;
   white-space: nowrap;
   text-decoration: none;
@@ -503,7 +503,7 @@
   border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
   border-radius: 10px;
   background: color-mix(in srgb, var(--text) 4%, transparent);
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--text) 78%, transparent);
 }
@@ -535,7 +535,7 @@
   min-width: 0;
   margin: 0;
   padding: 2px 2px 0;
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.55;
   color: color-mix(in srgb, var(--text) 66%, transparent);
 }
@@ -553,7 +553,7 @@
   padding: 1px 7px;
   border-radius: 999px;
   background: color-mix(in srgb, var(--text) 7%, transparent);
-  font-size: 10.5px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 58%, transparent);
 }
@@ -571,7 +571,7 @@
   border-radius: 999px;
   background: color-mix(in srgb, var(--accent) 8%, transparent);
   font-family: var(--font-label);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.3;
   white-space: nowrap;
   color: var(--accent2);
@@ -620,7 +620,7 @@ input.is-jumped {
 }
 .dep-rubrique-bar-fill.is-waiting { background: color-mix(in srgb, var(--text) 30%, transparent); }
 .dep-rubrique-share-num {
-  font-size: 11.5px;
+  font-size: 12px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   color: var(--text);
@@ -628,7 +628,7 @@ input.is-jumped {
 }
 .dep-rubrique-share-label {
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: .04em;
   color: var(--muted);
   white-space: nowrap;
@@ -695,7 +695,7 @@ input.is-jumped {
   color: var(--text);
   font: inherit;
   font-family: var(--font-label);
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: .03em;
   line-height: 1.3;
   white-space: nowrap;
@@ -739,7 +739,7 @@ input.is-jumped {
   background: transparent;
   color: color-mix(in srgb, var(--text) 78%, transparent);
   font-family: var(--font-label);
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.2;
   white-space: nowrap;
   cursor: pointer;
@@ -802,7 +802,7 @@ input.is-jumped {
   border: 1px dashed color-mix(in srgb, var(--accent) 38%, transparent);
   border-radius: 12px;
   background: color-mix(in srgb, var(--accent) 6%, transparent);
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.45;
   color: color-mix(in srgb, var(--text) 78%, transparent);
 }
@@ -819,8 +819,7 @@ input.is-jumped {
   flex: 1 1 100%;
   min-width: 0;
   font-family: var(--font-label);
-  font-size: 10px;
-  line-height: 1.5;
+  font-size: 12px;
   letter-spacing: .04em;
   color: color-mix(in srgb, var(--text) 62%, transparent);
   overflow-wrap: break-word;
@@ -843,13 +842,13 @@ input.is-jumped {
   border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
   border-radius: 999px;
   background: color-mix(in srgb, var(--surface) 84%, transparent);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .03em;
   line-height: 1.5;
   white-space: nowrap;
   color: var(--accent2);
 }
-.dep-preview-range-board i { font-size: 11px; color: var(--accent); }
+.dep-preview-range-board i { font-size: 12px; color: var(--accent); }
 /* Le compte des dépôts publiés que le filtre ouvrira vraiment : discret,
    tenu dans la porte, pour mesurer avant d'y entrer. */
 .dep-preview-range-board-n {
@@ -859,7 +858,7 @@ input.is-jumped {
   border-radius: 999px;
   background: color-mix(in srgb, var(--accent) 20%, transparent);
   color: var(--accent2);
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: .02em;
   line-height: 1.7;
@@ -884,13 +883,13 @@ input.is-jumped {
   border-radius: 999px;
   background: color-mix(in srgb, var(--surface) 74%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .03em;
   line-height: 1.5;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 70%, transparent);
 }
-.dep-preview-range-priced i { font-size: 11px; color: color-mix(in srgb, var(--accent) 82%, transparent); }
+.dep-preview-range-priced i { font-size: 12px; color: color-mix(in srgb, var(--accent) 82%, transparent); }
 [dir="rtl"] .dep-preview-range-priced { letter-spacing: 0; }
 /* Les lignes que le tableau ouvrira sans montant lisible : le jeton se tient
    dans la porte, à côté du compte des prix, sans l'alourdir. */
@@ -904,13 +903,13 @@ input.is-jumped {
   border-radius: 999px;
   background: color-mix(in srgb, var(--text) 5%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .03em;
   line-height: 1.5;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 66%, transparent);
 }
-.dep-preview-range-unpriced i { font-size: 11px; color: color-mix(in srgb, var(--text) 58%, transparent); }
+.dep-preview-range-unpriced i { font-size: 12px; color: color-mix(in srgb, var(--text) 58%, transparent); }
 [dir="rtl"] .dep-preview-range-unpriced { letter-spacing: 0; }
 /* La porte de correction : une ligne à part, après celle du tableau, pour que
    le prix manquant se répare sans repasser par la recherche. */
@@ -924,7 +923,7 @@ input.is-jumped {
   border-radius: 999px;
   background: color-mix(in srgb, var(--surface) 80%, transparent);
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .03em;
   line-height: 1.6;
   white-space: nowrap;
@@ -933,7 +932,7 @@ input.is-jumped {
   cursor: pointer;
   transition: border-color .18s ease, background .18s ease, color .18s ease;
 }
-.dep-preview-range-fix i { font-size: 11px; color: var(--accent); }
+.dep-preview-range-fix i { font-size: 12px; color: var(--accent); }
 .dep-preview-range-fix:hover {
   border-color: var(--accent);
   background: color-mix(in srgb, var(--accent) 12%, transparent);
@@ -954,7 +953,7 @@ input.is-jumped {
   color: var(--text);
   font: inherit;
   font-family: var(--font-label);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.3;
   white-space: nowrap;
   cursor: pointer;
@@ -971,7 +970,7 @@ input.is-jumped {
   flex: 0 1 auto;
   min-width: 0;
   font-family: var(--font-label);
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: .03em;
   color: color-mix(in srgb, var(--text) 56%, transparent);
   overflow-wrap: break-word;
@@ -988,7 +987,7 @@ input.is-jumped {
   align-items: center;
   gap: 5px;
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.5;
   letter-spacing: .04em;
   color: color-mix(in srgb, var(--accent) 82%, var(--text));
@@ -1003,7 +1002,7 @@ input.is-jumped {
   border-radius: 999px;
   border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
   background: color-mix(in srgb, var(--accent) 8%, transparent);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .02em;
   line-height: 1.5;
   white-space: nowrap;
@@ -1022,7 +1021,7 @@ input.is-jumped {
   color: color-mix(in srgb, var(--text) 82%, transparent);
   font: inherit;
   font-family: var(--font-label);
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: .03em;
   line-height: 1.3;
   white-space: nowrap;
@@ -1048,7 +1047,7 @@ input.is-jumped {
   background: color-mix(in srgb, var(--accent) 7%, transparent);
   color: var(--text);
   font-family: var(--font-label);
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.2;
   text-decoration: none;
   white-space: nowrap;

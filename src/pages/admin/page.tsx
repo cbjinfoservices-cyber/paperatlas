@@ -1,3 +1,4 @@
+import '@/i18n/adminDictLoader';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useAuth } from '@/auth/AuthProvider';

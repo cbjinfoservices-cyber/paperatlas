@@ -11,7 +11,7 @@
   padding: 5px 11px;
   border-radius: 999px;
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.4;
   letter-spacing: .06em;
   white-space: nowrap;
@@ -62,14 +62,14 @@
    ligne : sous 520 px, la pastille se cale au début de la colonne. */
 @media (max-width: 520px) {
   .pose-reste {
-    font-size: 9.5px;
+    font-size: 12px;
     padding: 5px 9px;
   }
 }
 
 [dir="rtl"] .pose-reste {
   letter-spacing: 0;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 /* Sous les cartes de formules, le repère se lit après les prix : il prend

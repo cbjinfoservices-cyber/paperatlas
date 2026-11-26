@@ -12,12 +12,12 @@
   padding: 0 4px;
   border: 1px dotted color-mix(in srgb, var(--text) 22%, transparent);
   border-radius: 999px;
-  font-size: 9px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 50%, transparent);
 }
-.mine-rubrique-shared-erase-count i { flex: 0 0 auto; font-size: 8.5px; }
+.mine-rubrique-shared-erase-count i { flex: 0 0 auto; font-size: 12px; }
 
 /* Ce que la gomme a effacé la dernière fois, famille de valeurs par famille :
    un rappel discret posé juste après son compte, dans la même écriture. */
@@ -30,12 +30,12 @@
   padding: 0 4px;
   border: 1px dotted color-mix(in srgb, var(--accent) 30%, transparent);
   border-radius: 999px;
-  font-size: 9px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 46%, transparent);
 }
-.mine-rubrique-shared-erase-last i { flex: 0 0 auto; font-size: 8.5px; color: var(--accent); }
+.mine-rubrique-shared-erase-last i { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
 
 /* Combien de fois la petite porte de la gomme s'est ouverte : le compte se
    lit juste après son usage, dans la même écriture discrète. */
@@ -48,14 +48,14 @@
   padding: 0 4px;
   border: 1px dotted color-mix(in srgb, var(--accent2) 32%, transparent);
   border-radius: 999px;
-  font-size: 9px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 46%, transparent);
 }
 .mine-rubrique-shared-erase-opens i {
   flex: 0 0 auto;
-  font-size: 8.5px;
+  font-size: 12px;
   color: var(--accent2);
 }
 
@@ -74,13 +74,13 @@
   border: 1px dashed color-mix(in srgb, var(--accent) 38%, transparent);
   border-radius: 999px;
   background: color-mix(in srgb, var(--surface) 70%, transparent);
-  font-size: 8.5px;
+  font-size: 12px;
   line-height: 1;
   color: color-mix(in srgb, var(--text) 48%, transparent);
   cursor: pointer;
   transition: border-color .18s ease, background .18s ease, color .18s ease;
 }
-.mine-rubrique-shared-erase-door i { font-size: 8.5px; }
+.mine-rubrique-shared-erase-door i { font-size: 12px; }
 .mine-rubrique-shared-erase-door:hover {
   border-style: solid;
   border-color: var(--accent);
@@ -115,7 +115,7 @@
   border-radius: 999px;
   background: color-mix(in srgb, var(--surface) 76%, transparent);
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 12px;
   line-height: 1.7;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
@@ -123,7 +123,7 @@
   cursor: pointer;
   transition: border-color .18s ease, background .18s ease, color .18s ease;
 }
-.mine-rubrique-shared-aside-door i { flex: 0 0 auto; font-size: 9px; color: var(--accent); }
+.mine-rubrique-shared-aside-door i { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
 .mine-rubrique-shared-aside-door:hover,
 .mine-rubrique-shared-aside-door.is-on {
   border-style: solid;
@@ -146,7 +146,7 @@
   gap: 0 3px;
   max-width: 280px;
   margin-inline-start: 4px;
-  font-size: 8.5px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--text) 40%, transparent);
 }
 
@@ -160,7 +160,7 @@
 }
 .mine-rubrique-shared-aside-dot { color: color-mix(in srgb, var(--text) 26%, transparent); }
 .mine-rubrique-shared-aside-age {
-  font-size: 8px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   font-weight: 400;
   color: color-mix(in srgb, var(--accent2) 72%, transparent);
@@ -185,14 +185,14 @@
   padding: 0 5px;
   border: 1px dotted color-mix(in srgb, var(--text) 20%, transparent);
   border-radius: 999px;
-  font-size: 8.5px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 44%, transparent);
 }
 .mine-rubrique-shared-aside-total i {
   flex: 0 0 auto;
-  font-size: 8.5px;
+  font-size: 12px;
   color: var(--accent);
 }
 
@@ -208,7 +208,7 @@
   padding: 0 5px;
   border: 1px dotted color-mix(in srgb, var(--accent) 26%, transparent);
   border-radius: 999px;
-  font-size: 8.5px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
   overflow: hidden;
@@ -217,7 +217,7 @@
 }
 .mine-rubrique-shared-aside-heavy i {
   flex: 0 0 auto;
-  font-size: 8.5px;
+  font-size: 12px;
   color: var(--accent2);
 }
 /* La part de cette valeur dans le temps cumulé, dite en pourcentage : un
@@ -247,7 +247,7 @@
   border-radius: 999px;
   background: color-mix(in srgb, var(--surface) 74%, transparent);
   font-family: var(--font-label);
-  font-size: 8.5px;
+  font-size: 12px;
   line-height: 1.7;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 50%, transparent);
@@ -256,7 +256,7 @@
 }
 .mine-rubrique-shared-aside-open i {
   flex: 0 0 auto;
-  font-size: 8.5px;
+  font-size: 12px;
   color: var(--accent);
 }
 .mine-rubrique-shared-aside-open:hover,
@@ -313,14 +313,14 @@
   margin-inline-start: 4px;
   padding-inline-start: 5px;
   border-inline-start: 1px dotted color-mix(in srgb, var(--accent) 34%, transparent);
-  font-size: 8.5px;
+  font-size: 12px;
   line-height: 1.6;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 56%, transparent);
 }
 .mine-rubrique-shared-aside-leftout i {
   flex: 0 0 auto;
-  font-size: 8.5px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--accent) 72%, transparent);
 }
 
@@ -340,14 +340,14 @@
   margin-inline-start: 4px;
   padding-inline-start: 5px;
   border-inline-start: 1px dotted color-mix(in srgb, var(--accent2) 34%, transparent);
-  font-size: 9px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 52%, transparent);
 }
 .mine-rub-filter-pair-ago i {
   flex: 0 0 auto;
-  font-size: 9px;
+  font-size: 12px;
   color: var(--accent2);
 }
 
@@ -361,14 +361,14 @@
   margin-inline-start: 4px;
   padding-inline-start: 5px;
   border-inline-start: 1px dotted color-mix(in srgb, var(--accent2) 34%, transparent);
-  font-size: 9px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 52%, transparent);
 }
 .mine-rub-filter-pair-sides i {
   flex: 0 0 auto;
-  font-size: 9px;
+  font-size: 12px;
   color: var(--accent2);
 }
 
@@ -383,7 +383,7 @@
   margin-inline-start: 4px;
   padding-inline-start: 5px;
   border-inline-start: 1px dotted color-mix(in srgb, var(--accent2) 34%, transparent);
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
@@ -391,7 +391,7 @@
 }
 .mine-rub-filter-pair-share i {
   flex: 0 0 auto;
-  font-size: 9px;
+  font-size: 12px;
   color: var(--accent2);
 }
 
@@ -405,13 +405,13 @@
   margin-inline-start: 4px;
   padding-inline-start: 5px;
   border-inline-start: 1px dotted color-mix(in srgb, var(--accent2) 34%, transparent);
-  font-size: 9px;
+  font-size: 12px;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 50%, transparent);
 }
 .mine-rub-filter-pair-leftheavy i {
   flex: 0 0 auto;
-  font-size: 9px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--accent2) 72%, transparent);
 }
 
@@ -428,7 +428,7 @@
   border-radius: 999px;
   background: color-mix(in srgb, var(--surface) 72%, transparent);
   font-family: var(--font-label);
-  font-size: 8.5px;
+  font-size: 12px;
   line-height: 1.6;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 62%, transparent);
@@ -436,7 +436,7 @@
 }
 .mine-rub-filter-pair-leftdoor i {
   flex: 0 0 auto;
-  font-size: 8.5px;
+  font-size: 12px;
   color: var(--accent2);
 }
 .mine-rub-filter-pair-leftdoor:hover,
@@ -472,7 +472,7 @@
   background: color-mix(in srgb, var(--surface) 70%, transparent);
   color: inherit;
   font-family: var(--font-label);
-  font-size: 8.5px;
+  font-size: 12px;
   line-height: 1.6;
   white-space: nowrap;
   cursor: pointer;
@@ -495,7 +495,7 @@
 }
 .mine-rub-filter-asideleft-each i {
   flex: 0 0 auto;
-  font-size: 8.5px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--accent2) 70%, transparent);
 }
 /* Le temps que la rubrique a passé hors de l'écran, lu dans sa pastille. */
@@ -505,7 +505,7 @@
   padding-inline-start: 4px;
   border-inline-start: 1px solid color-mix(in srgb, var(--accent2) 24%, transparent);
   color: color-mix(in srgb, var(--text) 58%, transparent);
-  font-size: 8px;
+  font-size: 12px;
 }
 
 /* Le total en tête du jeton : ce que les rubriques laissées de côté tiennent
@@ -520,7 +520,7 @@
   border-radius: 999px;
   background: color-mix(in srgb, var(--accent2) 9%, transparent);
   font-family: var(--font-label);
-  font-size: 8.5px;
+  font-size: 12px;
   font-weight: 600;
   line-height: 1.6;
   white-space: nowrap;
@@ -529,7 +529,7 @@
 }
 .mine-rub-filter-asideleft-sum i {
   flex: 0 0 auto;
-  font-size: 8.5px;
+  font-size: 12px;
   color: var(--accent2);
 }
 /* Le temps cumulé, séparé du compte par un filet pointillé : les deux se
@@ -559,7 +559,7 @@
   border-inline-start: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
   background: transparent;
   font-family: var(--font-label);
-  font-size: 8px;
+  font-size: 12px;
   line-height: 1.6;
   white-space: nowrap;
   cursor: pointer;
@@ -592,7 +592,7 @@
   border-radius: 999px;
   background: color-mix(in srgb, var(--surface) 72%, transparent);
   font-family: var(--font-label);
-  font-size: 8.5px;
+  font-size: 12px;
   line-height: 1.6;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 58%, transparent);
@@ -628,7 +628,7 @@
   border-radius: 999px;
   background: color-mix(in srgb, var(--surface) 72%, transparent);
   font-family: var(--font-label);
-  font-size: 8px;
+  font-size: 12px;
   line-height: 1.6;
   white-space: nowrap;
   cursor: pointer;
@@ -648,7 +648,7 @@
 }
 .mine-rub-filter-asideleft-out-heavy i {
   flex: 0 0 auto;
-  font-size: 8px;
+  font-size: 12px;
   color: var(--accent);
 }
 .mine-rub-filter-asideleft-out-heavy-go {
@@ -662,17 +662,17 @@
 .mine-rub-filter-asideleft-out-top-ago {
   padding-inline-start: 4px;
   border-inline-start: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
-  font-size: 8px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--accent2) 72%, transparent);
 }
 .mine-rub-filter-asideleft-out i {
   flex: 0 0 auto;
-  font-size: 8.5px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--accent2) 68%, transparent);
 }
 .mine-rub-filter-asideleft-heavy i {
   flex: 0 0 auto;
-  font-size: 8px;
+  font-size: 12px;
   color: var(--accent);
 }
 .mine-rub-filter-asideleft-each.is-heavy {
@@ -693,7 +693,7 @@
   border-radius: 999px;
   background: color-mix(in srgb, var(--surface) 72%, transparent);
   font-family: var(--font-label);
-  font-size: 8.5px;
+  font-size: 12px;
   line-height: 1.6;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 60%, transparent);
@@ -702,7 +702,7 @@
 }
 .mine-rub-filter-asideleft-sort i {
   flex: 0 0 auto;
-  font-size: 8.5px;
+  font-size: 12px;
   color: var(--accent2);
 }
 .mine-rub-filter-asideleft-sort:hover,
@@ -738,7 +738,7 @@
   border-radius: 999px;
   background: color-mix(in srgb, var(--surface) 64%, transparent);
   font-family: var(--font-label);
-  font-size: 8px;
+  font-size: 12px;
   line-height: 1.7;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
@@ -748,7 +748,7 @@
 }
 .mine-rub-filter-asideleft-other i {
   flex: 0 0 auto;
-  font-size: 8px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--accent) 78%, transparent);
 }
 .mine-rub-filter-asideleft-other b {
@@ -756,7 +756,7 @@
   font-variant-numeric: tabular-nums;
 }
 .mine-rub-filter-asideleft-other .mine-rub-filter-asideleft-other-go {
-  font-size: 8px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--accent) 62%, transparent);
 }
 .mine-rub-filter-asideleft-other:hover,
@@ -787,7 +787,7 @@
   border-radius: 999px;
   background: color-mix(in srgb, var(--surface) 74%, transparent);
   font-family: var(--font-label);
-  font-size: 8.5px;
+  font-size: 12px;
   line-height: 1.6;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 62%, transparent);
@@ -795,7 +795,7 @@
 }
 .mine-rub-filter-asideleft-back i {
   flex: 0 0 auto;
-  font-size: 8.5px;
+  font-size: 12px;
   color: var(--accent2);
 }
 .mine-rub-filter-asideleft-back:hover,
@@ -931,7 +931,7 @@ button.mine-rubrique-shared-recap-short:focus-visible {
   border: 1px dashed color-mix(in srgb, var(--accent2) 30%, transparent);
   border-radius: 8px;
   background: color-mix(in srgb, var(--surface) 76%, transparent);
-  font-size: 9px;
+  font-size: 12px;
   line-height: 1.55;
   white-space: normal;
   color: color-mix(in srgb, var(--text) 68%, transparent);
@@ -939,12 +939,12 @@ button.mine-rubrique-shared-recap-short:focus-visible {
 .mine-rubrique-shared-recap-full > i {
   flex: 0 0 auto;
   margin-top: 1px;
-  font-size: 9px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--accent2) 62%, transparent);
 }
 .mine-rubrique-shared-recap-full-head {
   flex: 0 0 auto;
-  font-size: 8.5px;
+  font-size: 12px;
   letter-spacing: .01em;
   white-space: nowrap;
   color: color-mix(in srgb, var(--accent2) 84%, var(--text));
@@ -967,7 +967,7 @@ button.mine-rubrique-shared-recap-full-copy {
   border-radius: 999px;
   background: color-mix(in srgb, var(--surface) 78%, transparent);
   font-family: var(--font-label);
-  font-size: 8.5px;
+  font-size: 12px;
   line-height: 1.7;
   white-space: nowrap;
   color: color-mix(in srgb, var(--accent2) 78%, var(--text));
@@ -976,7 +976,7 @@ button.mine-rubrique-shared-recap-full-copy {
 }
 button.mine-rubrique-shared-recap-full-copy i {
   flex: 0 0 auto;
-  font-size: 8.5px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--accent2) 64%, transparent);
 }
 button.mine-rubrique-shared-recap-full-copy:hover,
@@ -1002,7 +1002,7 @@ button.mine-rubrique-shared-recap-full-copy:focus-visible {
   border: 0;
   border-radius: 999px;
   background: transparent;
-  font-size: 10px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--text) 44%, transparent);
   cursor: pointer;
 }
@@ -1030,7 +1030,7 @@ button.mine-rubrique-shared-recap-full-copy:focus-visible {
   border-radius: 999px;
   background: color-mix(in srgb, var(--surface) 72%, transparent);
   font-family: var(--font-label);
-  font-size: 8.5px;
+  font-size: 12px;
   line-height: 1.6;
   font-weight: 600;
   white-space: nowrap;
@@ -1041,7 +1041,7 @@ button.mine-rubrique-shared-recap-full-copy:focus-visible {
 }
 .mine-rub-filter-asideleft-out-deps i {
   flex: 0 0 auto;
-  font-size: 8.5px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--accent2) 70%, transparent);
 }
 .mine-rub-filter-asideleft-out-deps:hover,
@@ -1097,7 +1097,7 @@ button.mine-rubrique-shared-recap-full-copy:focus-visible {
   border-radius: 999px;
   background: color-mix(in srgb, var(--surface) 72%, transparent);
   font-family: var(--font-label);
-  font-size: 8.5px;
+  font-size: 12px;
   line-height: 1.6;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
@@ -1107,7 +1107,7 @@ button.mine-rubrique-shared-recap-full-copy:focus-visible {
 }
 .mine-rub-filter-asideleft-out-opened i {
   flex: 0 0 auto;
-  font-size: 8px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--accent2) 60%, transparent);
 }
 .mine-rub-filter-asideleft-out-opened:hover,
@@ -1158,7 +1158,7 @@ button.mine-rubrique-shared-recap-full-copy:focus-visible {
   border-radius: 999px;
   background: color-mix(in srgb, var(--surface) 72%, transparent);
   font-family: var(--font-label);
-  font-size: 8.5px;
+  font-size: 12px;
   line-height: 1.6;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
@@ -1168,7 +1168,7 @@ button.mine-rubrique-shared-recap-full-copy:focus-visible {
 }
 .mine-rub-filter-asideleft-out-ago i {
   flex: 0 0 auto;
-  font-size: 8px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--accent) 66%, transparent);
 }
 .mine-rub-filter-asideleft-out-ago:hover,

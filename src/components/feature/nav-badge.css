@@ -17,7 +17,7 @@
   background: var(--accent);
   color: var(--bg);
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1;
   letter-spacing: 0;
   box-shadow: 0 0 0 2px var(--bg);
@@ -33,14 +33,14 @@
   height: auto;
   margin-top: 5px;
   padding: 2px 9px;
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: .08em;
   text-transform: uppercase;
   box-shadow: none;
 }
 
-[dir="rtl"] .nav-badge--flat { letter-spacing: 0; text-transform: none; font-size: 10.5px; }
+[dir="rtl"] .nav-badge--flat { letter-spacing: 0; text-transform: none; font-size: 11px; }
 
 @media (max-width: 1180px) {
-  .nav-badge { top: -4px; inset-inline-end: -4px; min-width: 16px; height: 16px; font-size: 9px; }
+  .nav-badge { top: -4px; inset-inline-end: -4px; min-width: 16px; height: 16px; font-size: 11px; }
 }

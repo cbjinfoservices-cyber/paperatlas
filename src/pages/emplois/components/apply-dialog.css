@@ -25,8 +25,8 @@
 .apply-note { display: flex; align-items: flex-start; gap: 7px; margin: 0; font-size: 13px; line-height: 1.55; color: var(--muted); }
 .apply-note i { color: var(--accent); font-size: 15px; margin-top: 1px; }
 .apply-h3 { margin: 0; font-size: 18px; letter-spacing: -.01em; }
-.apply-hint { margin: -4px 0 0; font-size: 11.5px; color: var(--muted); line-height: 1.5; }
-.apply-count { display: block; margin-top: 5px; text-align: end; font-size: 10.5px; color: var(--muted); }
+.apply-hint { margin: -4px 0 0; font-size: 12px; color: var(--muted); line-height: 1.5; }
+.apply-count { display: block; margin-top: 5px; text-align: end; font-size: 12px; color: var(--muted); }
 .apply-body .auth-done { display: grid; gap: 10px; justify-items: start; }
 .apply-body .auth-done > i { font-size: 30px; color: var(--accent2); }
 .apply-body .acct-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 4px; }

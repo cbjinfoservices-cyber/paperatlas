@@ -71,10 +71,10 @@
   .pro-wrap .pro-head-actions .pro-head-cta { flex: 1 1 100%; justify-content: center; }
   .pro-wrap .pro-meta { gap: 7px 12px; font-size: 12.5px; }
   .pro-wrap .pro-name { gap: 7px 10px; }
-  .pro-wrap .pro-plan { font-size: 10px; padding: 4px 9px; }
-  .pro-wrap .pro-joined { font-size: 10.5px; }
+  .pro-wrap .pro-plan { font-size: 12px; padding: 4px 9px; }
+  .pro-wrap .pro-joined { font-size: 12px; }
   .pro-wrap .pro-specs { font-size: 12px; }
-  .pro-wrap .pro-map-link { font-size: 11px; }
+  .pro-wrap .pro-map-link { font-size: 12px; }
 }
 
 /* La photo de présentation garde sa légende entière : elle s'allège un peu en
@@ -137,29 +137,29 @@
   .biz-card .biz-top > div { min-width: 0; }
   .biz-card .biz-top h3 { font-size: 16.5px; overflow-wrap: anywhere; }
   .biz-card .biz-place { font-size: 12px; line-height: 1.45; }
-  .biz-card .biz-serv li { font-size: 11.5px; padding: 4px 9px; }
+  .biz-card .biz-serv li { font-size: 12px; padding: 4px 9px; }
   .biz-card .biz-foot { gap: 8px; padding-top: 10px; }
   .biz-card .biz-write { margin-inline-start: 0; }
   .biz-card .biz-link { margin-inline-start: auto; }
   .biz-card .biz-b2b { padding: 8px 11px; font-size: 12px; }
   .biz-card .biz-thumb { height: 190px; }
-  .biz-card .biz-since { font-size: 11px; }
-  .biz-card .biz-gen { font-size: 9.5px; padding: 4px 8px; }
+  .biz-card .biz-since { font-size: 12px; }
+  .biz-card .biz-gen { font-size: 12px; padding: 4px 8px; }
 
   .biz-card.author-card { padding: 15px; }
   .author-card .author-top { grid-template-columns: 52px minmax(0, 1fr) auto; gap: 10px; }
   .author-card .author-portrait { width: 52px; height: 52px; }
   .author-card .author-ident h3 { font-size: 16.5px; overflow-wrap: anywhere; }
-  .author-card .author-gen { font-size: 9.5px; padding: 4px 8px; }
+  .author-card .author-gen { font-size: 12px; padding: 4px 8px; }
   .author-card .author-latest { flex-wrap: wrap; row-gap: 2px; }
 
   .ad-card { padding: 15px; gap: 9px; }
   .ad-card .ad-title { font-size: 16px; }
   .ad-card .ad-body { font-size: 13px; }
   .ad-card .ad-actions { gap: 7px; }
-  .ad-card .ad-btn { padding: 7px 11px; font-size: 11.5px; }
+  .ad-card .ad-btn { padding: 7px 11px; font-size: 12px; }
   .ad-card .ad-seller { flex: 1 1 100%; text-align: start; }
-  .ad-card .ad-cat { font-size: 9px; }
+  .ad-card .ad-cat { font-size: 12px; }
 }
 
 /* ============ COMPTEUR DE LA GALERIE SUR TÉLÉPHONE ============ */
@@ -174,7 +174,7 @@
     gap: 5px;
     margin: 0;
     font-family: var(--font-label);
-    font-size: 10px;
+    font-size: 12px;
     letter-spacing: .12em;
     color: var(--muted);
   }
@@ -228,19 +228,19 @@
 @media (max-width: 400px) {
   .job-card { padding: 14px; gap: 9px; }
   .job-card .job-top { grid-template-columns: 38px minmax(0, 1fr) auto; gap: 9px; }
-  .job-card .job-top .logo-mark { width: 38px; height: 38px; border-radius: 10px; font-size: 11.5px; }
+  .job-card .job-top .logo-mark { width: 38px; height: 38px; border-radius: 10px; font-size: 12px; }
   .job-card .job-title { font-size: 15px; }
   .job-card .job-co { font-size: 12px; }
-  .job-card .ad-hot { padding: 3px 7px; font-size: 8.5px; gap: 3px; }
-  .job-card .ad-hot i { font-size: 10px; }
+  .job-card .ad-hot { padding: 3px 7px; font-size: 12px; gap: 3px; }
+  .job-card .ad-hot i { font-size: 12px; }
   .job-card .ad-body { font-size: 13px; line-height: 1.55; }
-  .job-card .ad-place { font-size: 11.5px; }
-  .job-card .job-tags li { font-size: 10.5px; padding: 4px 8px; }
+  .job-card .ad-place { font-size: 12px; }
+  .job-card .job-tags li { font-size: 11px; padding: 4px 8px; }
   .job-card .ad-foot { gap: 5px 10px; padding-top: 9px; }
   .job-card .job-salary { font-size: 12.5px; }
   .job-card .ad-actions { gap: 7px; }
-  .job-card .job-contract { font-size: 9px; padding: 4px 8px; letter-spacing: .1em; }
-  .job-card .ad-btn { padding: 7px 11px; font-size: 11.5px; }
+  .job-card .job-contract { font-size: 12px; padding: 4px 8px; letter-spacing: .1em; }
+  .job-card .ad-btn { padding: 7px 11px; font-size: 12px; }
   .job-card .job-apply { flex: 1 1 100%; justify-content: center; }
 
   /* La fiche d'une offre : la colonne des repères se resserre, et une valeur
@@ -267,27 +267,27 @@
   .dv-plan-ico { width: 24px; height: 24px; border-radius: 7px; }
   .dv-plan-ico i { font-size: 13px; }
   .dv-plan-txt b { font-size: 12.5px; }
-  .dv-plan-txt em { font-size: 11px; }
+  .dv-plan-txt em { font-size: 12px; }
   .dv-plan > i { font-size: 15px; }
   .dv-stepper { grid-template-columns: 34px minmax(0, 1fr) 34px; }
   .dv-step-btn { min-height: 36px; }
   .dv-step-input { font-size: 14px; }
   .dv-select { font-size: 12.5px; padding: 8px 9px; }
-  .dv-bill-btn { font-size: 11.5px; padding: 7px 9px; }
+  .dv-bill-btn { font-size: 12px; padding: 7px 9px; }
   /* Les montants et leurs libellés respirent sur deux lignes au lieu de se
      disputer la largeur : le total reste lisible, la ligne aussi. */
   .dv-total-figure { gap: 4px; }
   .dv-total-figure strong { font-size: clamp(24px, 8vw, 30px); }
-  .dv-total-per { font-size: 11.5px; }
+  .dv-total-per { font-size: 12px; }
   .dv-lines > div { gap: 3px 8px; }
-  .dv-lines dt { font-size: 11.5px; }
+  .dv-lines dt { font-size: 12px; }
   .dv-lines dd { font-size: 12.5px; white-space: normal; }
   .dv-fields { gap: 8px; }
   .dv-fld input,
   .dv-fld textarea { font-size: 13px; }
   .dv-send { padding: 11px 12px; font-size: 13px; }
   .dv-note,
-  .dv-saving { font-size: 11px; }
+  .dv-saving { font-size: 12px; }
 }
 
 /* ============ ESPACE COMPTE À 360 px ============ */
@@ -302,7 +302,7 @@
   .acct-avatar { width: 40px; height: 40px; font-size: 17px; }
   .acct-id h2 { font-size: 15.5px; }
   .acct-id p { font-size: 12px; }
-  .acct-meta { font-size: 9.5px; letter-spacing: .06em; }
+  .acct-meta { font-size: 11px; letter-spacing: .06em; }
   .acct-member-since time { font-size: 12px; }
   .acct-actions { gap: 8px; }
   .acct-actions > .cta,
@@ -335,28 +335,28 @@
   .msg-side { padding: 12px; border-radius: 15px; gap: 10px; }
   .msg-side-top { gap: 8px; }
   .msg-side-top .pro-h { font-size: 15px; gap: 6px; }
-  .msg-badge { height: 18px; min-width: 18px; padding: 0 5px; font-size: 9.5px; }
-  .msg-badge--sleep i { font-size: 10px; }
+  .msg-badge { height: 18px; min-width: 18px; padding: 0 5px; font-size: 11px; }
+  .msg-badge--sleep i { font-size: 11px; }
   .msg-kinds { gap: 5px; }
-  .msg-kind { padding: 3px 8px; font-size: 10.5px; gap: 4px; }
-  .msg-kind i { font-size: 11px; }
+  .msg-kind { padding: 3px 8px; font-size: 12px; gap: 4px; }
+  .msg-kind i { font-size: 12px; }
   /* Le tri et le filtre prennent la largeur, et leurs mots restent courts :
      aucun bouton ne sort plus du cadre ni ne coupe son libellé. */
   .msg-sort { width: 100%; justify-self: stretch; justify-content: space-between; }
   .msg-sort-btn { flex: 1 1 auto; justify-content: center; padding: 5px 6px;
-    font-size: 10px; gap: 3px; }
-  .msg-sort-btn i { font-size: 11px; }
-  .msg-sort-count { min-width: 14px; height: 14px; font-size: 9px; }
-  .msg-sort-hint { font-size: 10px; }
+    font-size: 12px; gap: 3px; }
+  .msg-sort-btn i { font-size: 12px; }
+  .msg-sort-count { min-width: 14px; height: 14px; font-size: 12px; }
+  .msg-sort-hint { font-size: 12px; }
   /* La liste n'a plus de plafond : elle se lit d'un bout à l'autre sous le
      pouce, au lieu de s'enfermer dans une fenêtre de 520 px. */
   .msg-threads { max-height: none; gap: 3px; }
   .msg-thread { grid-template-columns: 32px minmax(0, 1fr); gap: 8px; padding: 9px 8px; }
   .msg-avatar { width: 32px; height: 32px; font-size: 12px; }
   .msg-thread-top b { font-size: 13px; }
-  .msg-thread-top time { font-size: 10px; }
+  .msg-thread-top time { font-size: 12px; }
   .msg-thread-last { font-size: 12px; }
-  .msg-thread-pace { font-size: 9.5px; }
+  .msg-thread-pace { font-size: 12px; }
   .msg-threads > li { grid-template-columns: minmax(0, 1fr) 24px; }
   .msg-unread-btn { width: 24px; height: 24px; }
 
@@ -367,7 +367,7 @@
   .msg-head-id b { font-size: 14px; }
   .msg-head-seal { width: 20px; height: 20px; }
   .msg-head-meta { gap: 5px; }
-  .msg-pill { font-size: 9.5px; padding: 2px 7px; }
+  .msg-pill { font-size: 11px; padding: 2px 7px; }
   .msg-pill i { font-size: 11px; }
   .msg-stream { padding: 14px 12px; gap: 10px; }
   .msg-bubble { max-width: 94%; padding: 9px 12px; }
@@ -379,7 +379,7 @@
   .msg-pane-empty p { font-size: 12.5px; }
   .msg-members li { grid-template-columns: 32px minmax(0, 1fr) auto; gap: 8px; }
   .msg-member-id b { font-size: 12.5px; }
-  .msg-member-id small { font-size: 10.5px; }
+  .msg-member-id small { font-size: 12px; }
 }
 
 /* ============ SUIVI DE DOSSIER À 360 px ============ */
@@ -392,25 +392,25 @@
   .sv-form,
   .sv-card,
   .sv-help { padding: 13px 12px; border-radius: 15px; gap: 9px; }
-  .sv-stamp { font-size: 9px; }
-  .sv-sub { font-size: 11px; }
-  .sv-field > span:first-child { font-size: 11px; }
+  .sv-stamp { font-size: 12px; }
+  .sv-sub { font-size: 12px; }
+  .sv-field > span:first-child { font-size: 12px; }
   .sv-input-wrap { padding: 0 9px; gap: 6px; }
   .sv-input-wrap i { font-size: 14px; }
   .sv-input-wrap input { padding: 9px 0; font-size: 15px; letter-spacing: .02em; }
-  .sv-input-wrap input::placeholder { font-size: 11.5px; }
+  .sv-input-wrap input::placeholder { font-size: 12px; }
   .sv-cta { padding: 10px 13px; font-size: 13px; }
   .sv-card-head { gap: 6px; }
-  .sv-kind { font-size: 9.5px; }
-  .sv-badge { font-size: 9px; padding: 3px 8px; }
+  .sv-kind { font-size: 12px; }
+  .sv-badge { font-size: 11px; padding: 3px 8px; }
   .sv-ref { font-size: clamp(16px, 5.6vw, 20px); overflow-wrap: anywhere; }
   .sv-figure { gap: 5px; }
   .sv-figure strong { font-size: clamp(22px, 7.4vw, 28px); }
-  .sv-figure span { font-size: 11.5px; }
+  .sv-figure span { font-size: 12px; }
   .sv-facts,
   .sv-attn-facts { gap: 7px 12px; }
   .sv-facts dt,
-  .sv-attn-facts dt { font-size: 9px; }
+  .sv-attn-facts dt { font-size: 12px; }
   .sv-facts dd,
   .sv-attn-facts dd { font-size: 12px; }
   .sv-attn { padding: 9px 10px; }
@@ -425,12 +425,12 @@
   .sv-steps li { grid-template-columns: 20px minmax(0, 1fr); gap: 8px; }
   .sv-dot { width: 20px; height: 20px; }
   .sv-step-txt b { font-size: 12px; }
-  .sv-step-txt small { font-size: 10.5px; }
+  .sv-step-txt small { font-size: 12px; }
   .sv-note,
-  .sv-privacy { font-size: 11px; }
+  .sv-privacy { font-size: 12px; }
   .sv-help-card { grid-template-columns: 30px minmax(0, 1fr); padding: 10px; gap: 8px; }
   .sv-help-ico { width: 30px; height: 30px; border-radius: 8px; }
   .sv-help-ico i { font-size: 14px; }
   .sv-help-card b { font-size: 13px; }
-  .sv-help-card p { font-size: 11px; }
+  .sv-help-card p { font-size: 12px; }
 }

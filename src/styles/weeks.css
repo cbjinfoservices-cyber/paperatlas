@@ -10,7 +10,7 @@
 .week-pulse-bar:hover i { background: var(--accent2); }
 .week-pulse-bar.is-now i { background: var(--accent); }
 .week-pulse-cap { display: inline-flex; align-items: baseline; gap: 5px; margin: 0; white-space: nowrap;
-  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  font-family: var(--font-label); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
 .week-pulse-cap b { font-family: var(--font-body); font-size: 11.5px; font-weight: 400; letter-spacing: 0;
   text-transform: none; color: var(--accent2); }
 [dir="rtl"] .week-pulse-cap { letter-spacing: 0; }
@@ -40,6 +40,6 @@ button.dir-week-chip:hover { background: color-mix(in srgb, var(--accent) 22%, t
 .map-week-note { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 8px;
   background: color-mix(in srgb, var(--bg) 80%, transparent); backdrop-filter: blur(8px);
   border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
-  font-size: 11.5px; line-height: 1.3; color: color-mix(in srgb, var(--text) 78%, transparent); }
+  font-size: 12px; line-height: 1.3; color: color-mix(in srgb, var(--text) 78%, transparent); }
 .map-week-note i { font-size: 13px; color: var(--accent); flex: 0 0 auto; }
-@media (max-width: 620px) { .map-week-note { font-size: 11px; padding: 4px 8px; } }
+@media (max-width: 620px) { .map-week-note { font-size: 12px; padding: 4px 8px; } }

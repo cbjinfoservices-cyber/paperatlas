@@ -45,7 +45,7 @@
   min-width: 0;
   margin: 0;
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .16em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 58%, transparent);
@@ -53,7 +53,7 @@
 .nav-sheet-title-name { min-width: 0; }
 .nav-sheet-title-n {
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .02em;
   text-transform: none;
   white-space: nowrap;
@@ -64,8 +64,8 @@
   margin-inline-end: 5px;
   opacity: .55;
 }
-[dir="rtl"] .nav-sheet-title { letter-spacing: 0; text-transform: none; font-size: 11.5px; }
-[dir="rtl"] .nav-sheet-title-n { letter-spacing: 0; font-size: 10.5px; }
+[dir="rtl"] .nav-sheet-title { letter-spacing: 0; text-transform: none; font-size: 12px; }
+[dir="rtl"] .nav-sheet-title-n { letter-spacing: 0; font-size: 12px; }
 .nav-sheet-close {
   display: inline-flex;
   align-items: center;
@@ -128,7 +128,7 @@
   /* Il commence du côté où la lecture commence — à droite en arabe. */
   text-align: start;
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 400;
   line-height: 1.3;
   letter-spacing: .18em;
@@ -136,7 +136,7 @@
   color: color-mix(in srgb, var(--text) 42%, transparent);
 }
 [dir="rtl"] .nav-sheet-seam {
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0;
   /* L'arabe tient sur une ligne plus haute que le latin à taille égale : le
      mot gagne l'interligne de la feuille, et perd ses capitales. */
@@ -212,7 +212,7 @@
     flex: 0 0 auto;
     box-sizing: border-box;
     padding: 2px 5px;
-    font-size: 10px;
+    font-size: 11px;
     line-height: 1;
     min-height: 14px;
     white-space: nowrap;
@@ -278,7 +278,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 56%, transparent);
@@ -303,7 +303,7 @@
 .nav-sheet-chapter-num {
   flex: 0 0 auto;
   font-family: var(--font-label);
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: .03em;
   color: var(--accent);
 }
@@ -364,7 +364,7 @@
 .nav-sheet-subline-txt > span { font-size: 13.5px; line-height: 1.32; }
 .nav-sheet-subline-txt small {
   font-family: var(--font-label);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.36;
   letter-spacing: .02em;
   color: color-mix(in srgb, var(--text) 50%, transparent);
@@ -424,7 +424,7 @@
 /* La phrase sous le mot suit le même couple dans les trois : c'est elle qui
    donne son pas à la ligne, et non un réglage propre à chaque accès. */
 .nav-sheet a.nav-mobile-sub small,
-.nav-sheet .nav-mobile-late-txt small { font-size: 11px; line-height: 1.36; }
+.nav-sheet .nav-mobile-late-txt small { font-size: 12px; line-height: 1.36; }
 .nav-sheet .nav-mobile-late-txt { gap: 2px; min-width: 0; }
 .nav-sheet .nav-mobile-late-txt > span { font-size: 13.5px; line-height: 1.32; }
 /* La sourdine du rappel n'est pas une porte : elle garde sa voix basse, mais
@@ -509,7 +509,7 @@
      place manque à 320 px, c'est la ligne du pied qui décide — pas le mot. */
   white-space: nowrap;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 50%, transparent);
@@ -519,7 +519,7 @@
   line-height: 1;
   color: color-mix(in srgb, var(--accent) 74%, var(--text));
 }
-[dir="rtl"] .nav-sheet-foot-lang { letter-spacing: 0; text-transform: none; font-size: 11px; }
+[dir="rtl"] .nav-sheet-foot-lang { letter-spacing: 0; text-transform: none; font-size: 12px; }
 /* La bascule garde son galbe de barre, un cran plus serrée, et se tient sur
    l'axe du pied : elle est un rappel, pas une porte. */
 .nav-sheet .nav-sheet-foot .lang-switch.is-compact {
@@ -531,7 +531,7 @@
 .nav-sheet .nav-sheet-foot .lang-switch.is-compact button {
   padding: 3px 7px;
   min-width: 26px;
-  font-size: 10px;
+  font-size: 12px;
 }
 .nav-sheet-foot-out {
   display: inline-flex;
@@ -545,7 +545,7 @@
   cursor: pointer;
   font: inherit;
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .04em;
   line-height: 1.3;
   white-space: nowrap;
@@ -565,7 +565,7 @@
 }
 .nav-sheet-foot-out:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 .nav-sheet-foot-out[disabled] { opacity: .55; cursor: wait; }
-[dir="rtl"] .nav-sheet-foot-out { letter-spacing: 0; font-size: 11px; }
+[dir="rtl"] .nav-sheet-foot-out { letter-spacing: 0; font-size: 12px; }
 /* ── Le pied à deux lignes, en anglais ────────────────────────────────────
    « Language · FR ع EN · Sign out » ne tient pas sur une ligne à corps égal :
    les deux libellés anglais sont plus longs que leurs voisins. La ligne prend
@@ -602,16 +602,16 @@
    flèche remontent d'autant. */
 @media (max-width: 360px) {
   [lang="en"] .nav-sheet-foot { column-gap: 5px; row-gap: 4px; }
-  [lang="en"] .nav-sheet-foot-lang { gap: 3px; font-size: 8.5px; }
-  [lang="en"] .nav-sheet-foot-lang i { font-size: 11px; }
+  [lang="en"] .nav-sheet-foot-lang { gap: 3px; font-size: 12px; }
+  [lang="en"] .nav-sheet-foot-lang i { font-size: 12px; }
   [lang="en"] .nav-sheet .nav-sheet-foot .lang-switch.is-compact { gap: 2px; padding: 2px; }
   [lang="en"] .nav-sheet .nav-sheet-foot .lang-switch.is-compact button {
     min-width: 21px;
     padding: 2px 4px;
-    font-size: 9px;
+    font-size: 12px;
   }
-  [lang="en"] .nav-sheet-foot-out { gap: 3px; padding: 3px 6px 3px 5px; font-size: 9px; }
-  [lang="en"] .nav-sheet-foot-out i { font-size: 11px; }
+  [lang="en"] .nav-sheet-foot-out { gap: 3px; padding: 3px 6px 3px 5px; font-size: 12px; }
+  [lang="en"] .nav-sheet-foot-out i { font-size: 12px; }
 }
 
 /* ── Le plancher au plus serré, en arabe ───────────────────────────────────
@@ -627,18 +627,18 @@
    le voile et la flèche remontent d'autant. */
 @media (max-width: 360px) {
   .nav-sheet-foot { gap: 4px 6px; padding: 7px 9px 8px; }
-  .nav-sheet-foot-lang { font-size: 9px; gap: 4px; }
-  .nav-sheet-foot-lang i { font-size: 11.5px; }
+  .nav-sheet-foot-lang { font-size: 12px; gap: 4px; }
+  .nav-sheet-foot-lang i { font-size: 12px; }
   .nav-sheet .nav-sheet-foot .lang-switch.is-compact { padding: 2px; }
   .nav-sheet .nav-sheet-foot .lang-switch.is-compact button {
     padding: 2px 5px;
     min-width: 23px;
-    font-size: 9.5px;
+    font-size: 12px;
   }
-  .nav-sheet-foot-out { gap: 4px; padding: 3px 7px 3px 6px; font-size: 9.5px; }
-  .nav-sheet-foot-out i { font-size: 11.5px; }
-  [dir="rtl"] .nav-sheet-foot-lang { font-size: 10px; }
-  [dir="rtl"] .nav-sheet-foot-out { font-size: 10px; }
+  .nav-sheet-foot-out { gap: 4px; padding: 3px 7px 3px 6px; font-size: 12px; }
+  .nav-sheet-foot-out i { font-size: 12px; }
+  [dir="rtl"] .nav-sheet-foot-lang { font-size: 12px; }
+  [dir="rtl"] .nav-sheet-foot-out { font-size: 12px; }
   /* En français, « Se déconnecter » est le plus long des trois libellés de
      sortie à corps égal. À 320 px, le plancher garde une seule ligne : les
      trois écarts se resserrent d'un demi-pas, sans toucher au corps des mots
@@ -659,7 +659,7 @@
   gap: 8px;
   margin: 1px 3px;
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 12px;
   line-height: 1.3;
   letter-spacing: .14em;
   text-transform: uppercase;
@@ -676,7 +676,7 @@
 }
 .nav-sheet-end i {
   flex: none;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1;
   color: color-mix(in srgb, var(--accent) 62%, transparent);
 }
@@ -684,7 +684,7 @@
 [dir="rtl"] .nav-sheet-end {
   letter-spacing: 0;
   text-transform: none;
-  font-size: 10.5px;
+  font-size: 12px;
 }
 /* ── Le repère de fin au plus serré, clavier ouvert ───────────────────────
    À 320 px, la feuille ne garde que 282 px de large et, le clavier monté,
@@ -694,11 +694,11 @@
    arabe comme ailleurs — ses filets gardent un minimum pour se lire, et la
    ligne reste d'un seul tenant, juste au-dessus du plancher. */
 @media (max-width: 360px) {
-  .nav-sheet-end { margin: 2px 2px 4px; gap: 6px; font-size: 8.5px; }
+  .nav-sheet-end { margin: 2px 2px 4px; gap: 6px; font-size: 12px; }
   .nav-sheet-end::before,
   .nav-sheet-end::after { min-width: 8px; }
-  .nav-sheet-end i { font-size: 10px; }
-  [dir="rtl"] .nav-sheet-end { font-size: 9.5px; }
+  .nav-sheet-end i { font-size: 12px; }
+  [dir="rtl"] .nav-sheet-end { font-size: 12px; }
 }
 
 /* ── La recherche de la feuille ────────────────────────────────────────────
@@ -791,7 +791,7 @@
   padding: 0;
   text-align: start;
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 400;
   line-height: 1.3;
   letter-spacing: .18em;
@@ -799,7 +799,7 @@
   color: color-mix(in srgb, var(--text) 42%, transparent);
 }
 [dir="rtl"] .nav-hit-seam {
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0;
   line-height: 1.45;
   text-transform: none;
@@ -820,7 +820,7 @@
   padding: 0 7px;
   border-radius: 999px;
 }
-.nav-sheet .nav-sheet-annuaire .nav-door-toggle--count .nav-door-toggle-n { font-size: 10.5px; }
+.nav-sheet .nav-sheet-annuaire .nav-door-toggle--count .nav-door-toggle-n { font-size: 12px; }
 .nav-sheet #nav-sheet-dir-types { margin-top: -2px; }
 
 /* L'annuaire trouvé par la recherche : sa ligne, sa flèche déjà ouverte, et
@@ -837,7 +837,7 @@
   .nav-sheet-chapter-lbl { display: none; }
   /* Le total du nom rend un demi-point : à 320 px, il tient ainsi sur la même
      ligne que le nom, à côté de la porte de fermeture. */
-  .nav-sheet-title-n { font-size: 9px; }
+  .nav-sheet-title-n { font-size: 12px; }
   .nav-sheet { padding: 8px 8px 12px; }
   .nav-sheet .nav-sheet-pinned { margin: 0 -8px; padding: 8px 8px 6px; }
   .nav-sheet a.nav-mobile-plain,
@@ -915,7 +915,7 @@
    distance au filet du plancher. Sous 360 px il rend un demi-point, comme tout
    ce qui l'entoure à cette largeur. */
 @media (max-width: 360px) {
-  .nav-sheet .nav-more-cue-n { font-size: 9px; }
+  .nav-sheet .nav-more-cue-n { font-size: 12px; }
   .nav-sheet .nav-more-more > span.has-n { padding-inline: 2px 5px; }
 }
 
@@ -1048,7 +1048,7 @@
        même corps, même interligne, chiffres d'une même largeur. Le compte
        d'un type trouvé ne dépend donc plus de la langue ni de l'héritage
        typographique — l'arabe et l'anglais lisent la même pastille à 320 px. */
-    font-size: 9.5px;
+    font-size: 11px;
     line-height: 1;
     font-variant-numeric: tabular-nums;
     direction: ltr;
@@ -1083,7 +1083,7 @@
    filet qui se remplit est ce qui donne le compte d'un coup d'œil. Le filet
    garde donc un minimum de largeur, et le mot s'écourte par son bout plutôt
    que de le réduire à un point. */
-[dir="rtl"] .nav-sheet-chapter-lbl { font-size: 10.5px; }
+[dir="rtl"] .nav-sheet-chapter-lbl { font-size: 11px; }
 [dir="rtl"] .nav-sheet-chapter-track { min-width: 20px; }
 [dir="rtl"] .nav-sheet-chapter-num { white-space: nowrap; }
 
@@ -1093,8 +1093,8 @@
    sur une ligne avec de la marge, au lieu de la tenir tout juste. */
 @media (max-width: 400px) {
   [dir="rtl"] .nav-sheet-foot { column-gap: 5px; }
-  [dir="rtl"] .nav-sheet-foot-lang { gap: 3px; font-size: 9.5px; }
-  [dir="rtl"] .nav-sheet-foot-lang i { font-size: 11px; }
+  [dir="rtl"] .nav-sheet-foot-lang { gap: 3px; font-size: 12px; }
+  [dir="rtl"] .nav-sheet-foot-lang i { font-size: 12px; }
   [dir="rtl"] .nav-sheet .nav-sheet-foot .lang-switch.is-compact {
     gap: 2px;
     padding: 2px;
@@ -1102,14 +1102,14 @@
   [dir="rtl"] .nav-sheet .nav-sheet-foot .lang-switch.is-compact button {
     min-width: 22px;
     padding: 2px 4px;
-    font-size: 9.5px;
+    font-size: 12px;
   }
   [dir="rtl"] .nav-sheet-foot-out {
     gap: 3px;
     padding: 3px 6px 3px 5px;
-    font-size: 9.5px;
+    font-size: 12px;
   }
-  [dir="rtl"] .nav-sheet-foot-out i { font-size: 11px; }
+  [dir="rtl"] .nav-sheet-foot-out i { font-size: 12px; }
   /* Le chapitre au plus serré : le filet garde de quoi se lire, et le compte
      reste d'un seul morceau à côté de l'intitulé écourté. */
   [dir="rtl"] .nav-sheet-chapter-track { min-width: 16px; }

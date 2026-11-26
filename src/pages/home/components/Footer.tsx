@@ -66,6 +66,8 @@ export default function Footer() {
     || pathname === '/devis'
     || pathname === '/mentions-legales'
     || pathname === '/confidentialite'
+    || pathname === '/cgu'
+    || pathname === '/cgv'
     || pathname === '/plan-du-site'
     || pathname === '/sitemap'
     || pathname === '/arabe-world'
@@ -280,6 +282,10 @@ export default function Footer() {
           <Link to="/mentions-legales">{t('foot.legalMentions')}</Link>
           <span aria-hidden="true">·</span>
           <Link to="/confidentialite">{t('foot.legalPrivacy')}</Link>
+          <span aria-hidden="true">·</span>
+          <Link to="/cgu">{t('foot.cgu')}</Link>
+          <span aria-hidden="true">·</span>
+          <Link to="/cgv">{t('foot.cgv')}</Link>
           {/* Le plan du site : toutes les pages de type et de pays réunies
               sur une seule adresse, pour le lecteur comme pour le robot. */}
           <span aria-hidden="true">·</span>

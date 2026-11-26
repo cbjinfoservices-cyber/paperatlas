@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useLang } from '@/i18n/LangProvider';
 import { localeFor } from '@/i18n/localize';
 import { useB2bStats } from '@/hooks/useB2b';
@@ -17,6 +17,7 @@ const THIN_SAMPLE = 3;
  */
 export default function B2bSummary({
   enabled,
+  compact = false,
   onOpenGap,
   onOpenCleared,
   onOpenRework,
@@ -35,6 +36,7 @@ export default function B2bSummary({
   onFocusRequest,
 }: {
   enabled: boolean;
+  compact?: boolean;
   /** Asked from the twelve-month counter: the box opens on that very cut. */
   onOpenGap?: () => void;
   /** Asked from the correction chip: the box opens on that month's corrections. */
@@ -102,6 +104,7 @@ export default function B2bSummary({
   onFocusRequest?: (ref: string) => void;
 }) {
   const { t, lang } = useLang();
+  const [expanded, setExpanded] = useState(false);
 
   const {
     todo,
@@ -403,7 +406,7 @@ export default function B2bSummary({
     dir === 'down' ? 'ri-arrow-down-line' : dir === 'up' ? 'ri-arrow-up-line' : 'ri-subtract-line';
 
   return (
-    <section className="acct-sum" id="acct-summary" aria-label={t('acct.b2b.summaryTitle')}>
+    <section className={`acct-sum${compact ? ' is-compact' : ''}${expanded ? ' is-expanded' : ''}`} id="acct-summary" aria-label={t('acct.b2b.summaryTitle')}>
       <div className="acct-sum-lead">
         <span className="acct-sum-ico" aria-hidden="true">
           <i className="ri-inbox-archive-line"></i>
@@ -431,8 +434,8 @@ export default function B2bSummary({
         </div>
       </div>
 
-      <div className="acct-sum-nums">
-        <div className="acct-sum-cell" data-on={todo > 0 ? 'yes' : 'no'}>
+      <div className="acct-sum-nums" id={compact ? 'acct-summary-metrics' : undefined}>
+        <div className="acct-sum-cell acct-sum-cell--todo" data-on={todo > 0 ? 'yes' : 'no'}>
           <b>{todo}</b>
           <span>{t('acct.b2b.summaryTodo')}</span>
         </div>
@@ -868,9 +871,22 @@ export default function B2bSummary({
         {t('acct.b2b.summaryOpen')}
         <i className="ri-arrow-down-line" aria-hidden="true"></i>
       </button>
+      {compact && (
+        <button
+          type="button"
+          className="ghost-btn acct-sum-detail-toggle"
+          aria-expanded={expanded}
+          aria-controls="acct-summary-metrics acct-summary-motifs"
+          onClick={() => setExpanded((value) => !value)}
+        >
+          {t(expanded ? 'acct.dashboard.lessActivity' : 'acct.dashboard.moreActivity')}
+          <i className={expanded ? 'ri-arrow-up-s-line' : 'ri-arrow-down-s-line'} aria-hidden="true"></i>
+        </button>
+      )}
 
       <div
         className="acct-sum-motifs"
+        id={compact ? 'acct-summary-motifs' : undefined}
         title={
           month.total > 0
             ? t('acct.b2b.summaryMotifsHint').replace('{n}', String(month.total))

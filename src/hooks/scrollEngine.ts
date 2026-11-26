@@ -2,10 +2,6 @@
 export function initChapter(): void {
   const TOUCH = matchMedia('(pointer: coarse)').matches;
   const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  /* Sous 780 px, le bandeau porte sa propre photo verticale, composée pour
-     l'écran. Le film, cadré en large, ne s'y superpose plus : il prendrait la
-     place de cette composition et la recadrerait comme avant. */
-  const NARROW = matchMedia('(max-width: 780px)').matches;
   const LERP = TOUCH ? 0.03 : 0.02;
   const FADE = 0.10;
   const STAGGER = 0.035;
@@ -71,15 +67,20 @@ export function initChapter(): void {
   }
 
   async function attach(c: any) {
-    if (!c || c.video || NARROW || !c.src) return;
+    if (!c || c.video || !c.src) return;
     await afterLCP;
     if (c.video || !c.el.isConnected) return;
     const v = document.createElement('video');
     v.muted = true; v.playsInline = true; v.preload = 'auto';
     (v as any).disablePictureInPicture = true; v.tabIndex = -1;
     v.setAttribute('aria-hidden', 'true');
-    v.src = c.src;
     v.addEventListener('loadeddata', () => { c.stage.classList.add('is-live'); }, { once: true });
+    v.addEventListener('error', () => {
+      if (c.video !== v) return;
+      console.warn('Chapter video could not load:', c.src, v.error);
+      detach(c);
+    }, { once: true });
+    v.src = c.src;
     c.stage.insertBefore(v, c.stage.querySelector('.veil'));
     c.video = v;
     if (TOUCH) warmUp(c, v);

@@ -11,7 +11,7 @@
 
 /* The order of the cards: activity first, then breadth, then the alphabet. */
 .cmaps-sort { display: inline-flex; align-items: center; gap: 7px; flex: 0 0 auto;
-  font-family: var(--font-label); font-size: 9px; letter-spacing: .07em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .07em; text-transform: uppercase;
   color: var(--muted); }
 .cmaps-sort > i:first-child { font-size: 13px; color: var(--accent); }
 .cmaps-sort-label { white-space: nowrap; }
@@ -35,7 +35,7 @@
   padding: 5px 11px; border-radius: 999px; appearance: none; cursor: pointer;
   background: transparent; white-space: nowrap;
   border: 1px dashed color-mix(in srgb, var(--text) 20%, transparent);
-  font-family: var(--font-label); font-size: 9px; letter-spacing: .06em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .06em; text-transform: uppercase;
   color: var(--muted);
   transition: background .2s ease, border-color .2s ease, color .2s ease; }
 .cmaps-csv > i { flex: 0 0 auto; font-size: 12px; color: var(--accent2); }
@@ -54,10 +54,10 @@
   transition: border-color .2s ease, background .2s ease, color .2s ease;
   background: color-mix(in srgb, var(--accent2) 12%, transparent);
   border: 1px solid color-mix(in srgb, var(--accent2) 32%, transparent);
-  font-family: var(--font-label); font-size: 9px; letter-spacing: .06em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .06em; text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 74%, transparent); white-space: nowrap; }
-.cmaps-csvcount > i { flex: 0 0 auto; font-size: 11px; color: var(--accent2); }
-.cmaps-csvcount b { flex: 0 0 auto; font-family: var(--font-body); font-size: 11px;
+.cmaps-csvcount > i { flex: 0 0 auto; font-size: 12px; color: var(--accent2); }
+.cmaps-csvcount b { flex: 0 0 auto; font-family: var(--font-body); font-size: 12px;
   letter-spacing: 0; color: var(--accent2); }
 .cmaps-csvcount span { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .cmaps-csvcount > i:last-child { flex: 0 0 auto; font-size: 12px; color: var(--accent2); }
@@ -77,15 +77,15 @@
   background: var(--surface);
   box-shadow: 0 14px 34px color-mix(in srgb, var(--text) 16%, transparent); }
 .cmaps-csvpanel-lead { display: inline-flex; align-items: center; gap: 5px; margin: 0;
-  font-family: var(--font-label); font-size: 9px; letter-spacing: .06em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .06em; text-transform: uppercase;
   color: var(--muted); }
 .cmaps-csvpanel-lead i { font-size: 12px; color: var(--accent2); }
 .cmaps-csvpanel-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 3px;
   max-height: 220px; overflow-y: auto; }
 .cmaps-csvpanel-list li { display: flex; align-items: center; gap: 6px; min-width: 0;
-  padding: 3px 7px; border-radius: 8px; font-size: 11.5px; color: var(--text);
+  padding: 3px 7px; border-radius: 8px; font-size: 12px; color: var(--text);
   background: color-mix(in srgb, var(--text) 5%, transparent); }
-.cmaps-csvpanel-list li i { flex: 0 0 auto; font-size: 11px; color: var(--accent2); }
+.cmaps-csvpanel-list li i { flex: 0 0 auto; font-size: 12px; color: var(--accent2); }
 .cmaps-csvpanel-list li span { flex: 1 1 auto; min-width: 0; overflow: hidden;
   text-overflow: ellipsis; white-space: nowrap; }
 .cmaps-csvpanel-foot { display: flex; align-items: center; gap: 6px;
@@ -93,10 +93,10 @@
 .cmaps-csvpanel-clear { display: inline-flex; align-items: center; gap: 4px; flex: 0 1 auto; min-width: 0;
   padding: 4px 10px; border-radius: 999px; appearance: none; cursor: pointer;
   background: transparent; border: 1px dashed color-mix(in srgb, var(--text) 26%, transparent);
-  font-family: var(--font-label); font-size: 9px; letter-spacing: .05em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .05em; text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 74%, transparent);
   transition: color .2s ease, border-color .2s ease, background .2s ease; }
-.cmaps-csvpanel-clear i { flex: 0 0 auto; font-size: 11px; color: var(--accent); }
+.cmaps-csvpanel-clear i { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
 .cmaps-csvpanel-clear:hover { color: var(--accent); border-style: solid; border-color: var(--accent);
   background: color-mix(in srgb, var(--accent) 12%, transparent); }
 .cmaps-csvpanel-clear:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -116,10 +116,10 @@
 .cmaps-csvcopy { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
   width: 100%; min-width: 0; padding: 4px 9px; border-radius: 999px; appearance: none; cursor: pointer;
   background: transparent; border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
-  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .05em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .05em; text-transform: uppercase;
   color: var(--muted);
   transition: background .2s ease, border-color .2s ease, color .2s ease; }
-.cmaps-csvcopy > i { flex: 0 0 auto; font-size: 11px; color: var(--accent2); }
+.cmaps-csvcopy > i { flex: 0 0 auto; font-size: 12px; color: var(--accent2); }
 .cmaps-csvcopy > span { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis;
   white-space: nowrap; }
 .cmaps-csvcopy:hover { color: var(--text); border-style: solid;
@@ -135,19 +135,19 @@
   margin: 0; padding: 5px 8px; border-radius: 8px; min-width: 0;
   background: color-mix(in srgb, var(--accent2) 9%, transparent);
   border: 1px dashed color-mix(in srgb, var(--accent2) 30%, transparent);
-  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .05em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .05em; text-transform: uppercase;
   color: color-mix(in srgb, var(--accent2) 88%, var(--text)); }
-.cmaps-csvpanel-today i { flex: 0 0 auto; font-size: 11px; color: var(--accent2); }
+.cmaps-csvpanel-today i { flex: 0 0 auto; font-size: 12px; color: var(--accent2); }
 .cmaps-csvpanel-today span { flex: 0 1 auto; min-width: 0; }
 .cmaps-csvpanel-today em { flex: 1 1 100%; min-width: 0; font-style: normal; font-family: var(--font-body);
-  font-size: 10px; letter-spacing: 0; text-transform: none;
+  font-size: 12px; letter-spacing: 0; text-transform: none;
   color: color-mix(in srgb, var(--text) 68%, transparent);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 [dir="rtl"] .cmaps-csvpanel-today { letter-spacing: 0; }
 
 /* Le bouton du jour, sous sa ligne : plus discret que celui de la liste
    entière, il ne copie que les pays partis aujourd'hui. */
-.cmaps-csvcopy--today { margin-top: 3px; font-size: 8px; padding: 3px 8px; }
+.cmaps-csvcopy--today { margin-top: 3px; font-size: 12px; padding: 3px 8px; }
 
 /* La semaine, sous le jour et dans le même esprit : une ligne plus discrète,
    pour que le départ du jour garde la vedette sans cacher celui de la semaine. */
@@ -159,7 +159,7 @@
    le dit en prenant la couleur de l'accent une fois pressée. */
 .cmaps-csvpanel-weekbtn { width: 100%; appearance: none; cursor: pointer;
   text-align: start; font: inherit;
-  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .05em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .05em; text-transform: uppercase;
   transition: border-color .2s ease, background .2s ease, color .2s ease; }
 .cmaps-csvpanel-weekbtn:hover { border-style: solid;
   border-color: color-mix(in srgb, var(--accent) 52%, transparent);
@@ -172,12 +172,12 @@
 
 /* Le compte des copies se copie seul : même forme que la liste, un cran plus
    discret — il n'emporte qu'un chiffre, pas des pays. */
-.cmaps-csvcopy--copies { border-style: dotted; font-size: 8px; padding: 3px 8px; }
+.cmaps-csvcopy--copies { border-style: dotted; font-size: 12px; padding: 3px 8px; }
 
 /* Combien de ces feuilles ont été copiées plutôt que téléchargées : un constat
    dans le compteur, à côté du total, et sans bouton. */
 .cmaps-csvcount > .cmaps-csvcount-copied { flex: 0 0 auto; font-style: normal;
-  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .05em;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .05em;
   white-space: nowrap; color: var(--accent); }
 [dir="rtl"] .cmaps-csvcount > .cmaps-csvcount-copied { letter-spacing: 0; }
 
@@ -187,9 +187,9 @@
   padding: 3px 9px; border-radius: 999px; min-width: 0;
   background: color-mix(in srgb, var(--text) 5%, transparent);
   border: 1px dashed color-mix(in srgb, var(--text) 18%, transparent);
-  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .05em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .05em; text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 70%, transparent); }
-.cmaps-csvago i { flex: 0 0 auto; font-size: 11px; color: var(--accent2); }
+.cmaps-csvago i { flex: 0 0 auto; font-size: 12px; color: var(--accent2); }
 .cmaps-csvago span { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis;
   white-space: nowrap; }
 [dir="rtl"] .cmaps-csvago { letter-spacing: 0; }
@@ -200,13 +200,13 @@
   min-width: 0; max-width: 100%; padding: 4px 10px; border-radius: 999px;
   background: color-mix(in srgb, var(--accent) 9%, transparent);
   border: 1px dashed color-mix(in srgb, var(--accent) 34%, transparent);
-  font-family: var(--font-label); font-size: 9px; letter-spacing: .05em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .05em; text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 70%, transparent); white-space: nowrap; }
-.cmaps-famleft > i { flex: 0 0 auto; font-size: 11px; color: var(--accent); }
-.cmaps-famleft b { flex: 0 0 auto; font-family: var(--font-body); font-size: 11px;
+.cmaps-famleft > i { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
+.cmaps-famleft b { flex: 0 0 auto; font-family: var(--font-body); font-size: 12px;
   letter-spacing: 0; unicode-bidi: isolate; color: var(--accent); }
 .cmaps-famleft em { flex: 0 0 auto; font-style: normal; font-family: var(--font-body);
-  font-size: 9.5px; letter-spacing: 0; unicode-bidi: isolate;
+  font-size: 12px; letter-spacing: 0; unicode-bidi: isolate;
   color: color-mix(in srgb, var(--text) 52%, transparent); }
 .cmaps-famleft-label { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 /* Les huit familles traversées : la pastille s'apaise au lieu de crier zéro. */
@@ -225,15 +225,15 @@
   border-radius: 999px; appearance: none; cursor: pointer;
   background: color-mix(in srgb, var(--accent) 10%, transparent);
   border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
-  font-family: var(--font-label); font-size: 9px; letter-spacing: .05em;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .05em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 72%, transparent); white-space: nowrap;
   transition: border-color .2s ease, background .2s ease, color .2s ease; }
-.cmaps-completesleft > i { flex: 0 0 auto; font-size: 11px; color: var(--accent); }
+.cmaps-completesleft > i { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
 .cmaps-completesleft b { flex: 0 0 auto; font-family: var(--font-body);
-  font-size: 11px; letter-spacing: 0; unicode-bidi: isolate; color: var(--accent); }
+  font-size: 12px; letter-spacing: 0; unicode-bidi: isolate; color: var(--accent); }
 .cmaps-completesleft em { flex: 0 0 auto; font-style: normal;
-  font-family: var(--font-body); font-size: 9.5px; letter-spacing: 0;
+  font-family: var(--font-body); font-size: 12px; letter-spacing: 0;
   unicode-bidi: isolate; color: color-mix(in srgb, var(--text) 50%, transparent); }
 .cmaps-completesleft-label { flex: 0 1 auto; min-width: 0; overflow: hidden;
   text-overflow: ellipsis; }
@@ -277,18 +277,18 @@ button.cmaps-completesleft:focus-visible { outline: 2px solid var(--accent);
   gap: 4px; flex-wrap: wrap; flex: 0 0 auto; max-width: 100%;
   padding: 4px 11px; border-radius: 999px; background: none;
   border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
-  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .04em;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .04em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 62%, transparent); }
-.cmaps-aires-completes-copies > i { flex: 0 0 auto; font-size: 11px;
+.cmaps-aires-completes-copies > i { flex: 0 0 auto; font-size: 12px;
   color: var(--accent); }
 .cmaps-aires-completes-copies > b { flex: 0 0 auto; font-family: var(--font-body);
-  font-size: 11px; font-weight: 600; letter-spacing: 0;
+  font-size: 12px; font-weight: 600; letter-spacing: 0;
   unicode-bidi: isolate; color: var(--accent); }
 .cmaps-aires-completes-copies-label { flex: 0 1 auto; min-width: 0;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .cmaps-aires-completes-copies-last { flex: 0 0 auto; font-style: normal;
-  font-family: var(--font-body); font-size: 9px; letter-spacing: 0;
+  font-family: var(--font-body); font-size: 12px; letter-spacing: 0;
   text-transform: none; white-space: nowrap;
   color: color-mix(in srgb, var(--text) 48%, transparent); }
 [dir="rtl"] .cmaps-aires-completes-copies { letter-spacing: 0; }
@@ -300,14 +300,14 @@ button.cmaps-completesleft:focus-visible { outline: 2px solid var(--accent);
   min-width: 0; max-width: 100%; padding: 4px 10px; border-radius: 999px;
   background: color-mix(in srgb, var(--text) 4%, transparent);
   border: 1px solid color-mix(in srgb, var(--accent2) 32%, transparent);
-  font-family: var(--font-label); font-size: 9px; letter-spacing: .05em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .05em; text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 70%, transparent); white-space: nowrap; }
-.cmaps-tradeabsent > i { flex: 0 0 auto; font-size: 11px;
+.cmaps-tradeabsent > i { flex: 0 0 auto; font-size: 12px;
   color: color-mix(in srgb, var(--accent2) 82%, var(--text)); }
-.cmaps-tradeabsent b { flex: 0 0 auto; font-family: var(--font-body); font-size: 11px;
+.cmaps-tradeabsent b { flex: 0 0 auto; font-family: var(--font-body); font-size: 12px;
   letter-spacing: 0; unicode-bidi: isolate; color: var(--accent2); }
 .cmaps-tradeabsent em { flex: 0 0 auto; font-style: normal; font-family: var(--font-body);
-  font-size: 9.5px; letter-spacing: 0; unicode-bidi: isolate;
+  font-size: 12px; letter-spacing: 0; unicode-bidi: isolate;
   color: color-mix(in srgb, var(--text) 52%, transparent); }
 .cmaps-tradeabsent-label { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 /* Le métier tenu dans les 22 pays : la pastille s'apaise au lieu de crier zéro. */
@@ -325,7 +325,7 @@ button.cmaps-completesleft:focus-visible { outline: 2px solid var(--accent);
   appearance: none; cursor: pointer;
   background: color-mix(in srgb, var(--text) 4%, transparent);
   border: 1px dotted color-mix(in srgb, var(--accent2) 44%, transparent);
-  font-family: var(--font-label); font-size: 9px; letter-spacing: .05em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .05em; text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 70%, transparent); white-space: nowrap;
   transition: border-color .2s ease, background .2s ease, color .2s ease; }
 .cmaps-famabsent:hover { border-style: solid;
@@ -336,12 +336,12 @@ button.cmaps-completesleft:focus-visible { outline: 2px solid var(--accent);
 .cmaps-famabsent.is-on { border-style: solid; border-color: var(--accent2);
   background: color-mix(in srgb, var(--accent2) 18%, transparent); color: var(--text); }
 .cmaps-famabsent.is-done { cursor: default; }
-.cmaps-famabsent > i { flex: 0 0 auto; font-size: 11px;
+.cmaps-famabsent > i { flex: 0 0 auto; font-size: 12px;
   color: color-mix(in srgb, var(--accent2) 82%, var(--text)); }
-.cmaps-famabsent b { flex: 0 0 auto; font-family: var(--font-body); font-size: 11px;
+.cmaps-famabsent b { flex: 0 0 auto; font-family: var(--font-body); font-size: 12px;
   letter-spacing: 0; unicode-bidi: isolate; color: var(--accent2); }
 .cmaps-famabsent em { flex: 0 0 auto; font-style: normal; font-family: var(--font-body);
-  font-size: 9.5px; letter-spacing: 0; unicode-bidi: isolate;
+  font-size: 12px; letter-spacing: 0; unicode-bidi: isolate;
   color: color-mix(in srgb, var(--text) 52%, transparent); }
 .cmaps-famabsent-label { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 /* Aucune famille absente : la pastille s'apaise au lieu d'afficher un zéro. */
@@ -358,10 +358,10 @@ button.cmaps-completesleft:focus-visible { outline: 2px solid var(--accent);
   padding: 4px 8px; border-radius: 999px; appearance: none; cursor: pointer;
   background: transparent; white-space: nowrap;
   border: 1px dashed color-mix(in srgb, var(--text) 20%, transparent);
-  font-family: var(--font-label); font-size: 9px; letter-spacing: .05em;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .05em;
   text-transform: uppercase; color: var(--muted);
   transition: background .2s ease, border-color .2s ease, color .2s ease; }
-.cmaps-famclear > i { flex: 0 0 auto; font-size: 11px; }
+.cmaps-famclear > i { flex: 0 0 auto; font-size: 12px; }
 .cmaps-famclear:hover { color: var(--text); border-style: solid;
   border-color: color-mix(in srgb, var(--text) 32%, transparent);
   background: color-mix(in srgb, var(--text) 6%, transparent); }
@@ -369,7 +369,7 @@ button.cmaps-completesleft:focus-visible { outline: 2px solid var(--accent);
   background: color-mix(in srgb, var(--accent) 14%, transparent);
   color: color-mix(in srgb, var(--accent) 86%, var(--text)); }
 .cmaps-famclear.is-armed > i { color: var(--accent); }
-.cmaps-famclear-ask { font-size: 9px; letter-spacing: .04em; }
+.cmaps-famclear-ask { font-size: 12px; letter-spacing: .04em; }
 .cmaps-famclear:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 [dir="rtl"] .cmaps-famclear { letter-spacing: 0; }
 [dir="rtl"] .cmaps-famclear-ask { letter-spacing: 0; }
@@ -381,10 +381,10 @@ button.cmaps-completesleft:focus-visible { outline: 2px solid var(--accent);
   background: color-mix(in srgb, var(--bg) 45%, transparent); }
 .cmaps-csvscope-btn { display: inline-flex; align-items: center; gap: 4px; padding: 5px 10px;
   border-radius: 999px; border: 0; background: none; cursor: pointer; appearance: none;
-  font-family: var(--font-body); font-size: 11px; color: var(--muted);
+  font-family: var(--font-body); font-size: 12px; color: var(--muted);
   transition: color .2s ease, background .2s ease; }
-.cmaps-csvscope-btn i { font-size: 11px; color: var(--accent2); }
-.cmaps-csvscope-btn b { font-family: var(--font-label); font-size: 10px; font-weight: 600;
+.cmaps-csvscope-btn i { font-size: 12px; color: var(--accent2); }
+.cmaps-csvscope-btn b { font-family: var(--font-label); font-size: 12px; font-weight: 600;
   color: var(--accent2); }
 .cmaps-csvscope-btn:hover { color: var(--text); }
 .cmaps-csvscope-btn[aria-pressed="true"] { color: var(--accent);
@@ -402,9 +402,9 @@ button.cmaps-completesleft:focus-visible { outline: 2px solid var(--accent);
 .cmaps-csvnone-off { display: inline-flex; align-items: center; gap: 4px; flex: 0 0 auto;
   padding: 4px 11px; border-radius: 999px; appearance: none; cursor: pointer;
   background: none; border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
-  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .04em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .04em; text-transform: uppercase;
   color: var(--accent); transition: background .2s ease, border-color .2s ease; }
-.cmaps-csvnone-off i { font-size: 11px; }
+.cmaps-csvnone-off i { font-size: 12px; }
 .cmaps-csvnone-off:hover { background: color-mix(in srgb, var(--accent) 13%, transparent);
   border-color: var(--accent); }
 .cmaps-csvnone-off:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -439,24 +439,24 @@ button.cmaps-completesleft:focus-visible { outline: 2px solid var(--accent);
 /* La date du dernier export, sous le nom du pays : un mot et son jour, sans
    pastille, pour ne pas peser plus que le nom qu'elle accompagne. */
 .cmap-exported { display: inline-flex; align-items: center; gap: 3px; min-width: 0;
-  font-style: normal; font-family: var(--font-label); font-size: 8px; letter-spacing: .05em;
+  font-style: normal; font-family: var(--font-label); font-size: 12px; letter-spacing: .05em;
   text-transform: uppercase; color: color-mix(in srgb, var(--accent2) 88%, var(--text)); }
-.cmap-exported i { flex: 0 0 auto; font-size: 9px; color: var(--accent2); }
+.cmap-exported i { flex: 0 0 auto; font-size: 12px; color: var(--accent2); }
 .cmap-exported span { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis;
   white-space: nowrap; }
 [dir="rtl"] .cmap-exported { letter-spacing: 0; }
 .cmap-count { display: inline-flex; align-items: center; gap: 4px; flex: 0 0 auto; white-space: nowrap;
-  font-family: var(--font-label); font-size: 9px; letter-spacing: .06em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .06em; text-transform: uppercase;
   color: var(--muted); }
 .cmap-count b { font-family: var(--font-body); font-size: 12px; letter-spacing: 0; color: var(--accent2); }
 
 /* What part of the card's figure comes from the boards: a quiet line under the
    country name, so the counter says where its sheets were counted. */
 .cmap-depots { display: flex; align-items: center; gap: 5px; margin: 0; padding: 0 12px 8px;
-  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .06em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .06em; text-transform: uppercase;
   color: var(--muted); }
-.cmap-depots i { font-size: 11px; color: var(--accent2); }
-.cmap-depots b { font-family: var(--font-body); font-size: 11px; letter-spacing: 0; color: var(--accent2); }
+.cmap-depots i { font-size: 12px; color: var(--accent2); }
+.cmap-depots b { font-family: var(--font-body); font-size: 12px; letter-spacing: 0; color: var(--accent2); }
 
 [dir="rtl"] .cmap-depots { letter-spacing: 0; }
 
@@ -486,20 +486,20 @@ button.cmaps-completesleft:focus-visible { outline: 2px solid var(--accent);
 .cmap-penpins-main { display: flex; align-items: center; gap: 5px; min-width: 0;
   text-decoration: none; color: var(--muted);
   transition: color .2s ease; }
-.cmap-penpins-main > i:first-child { flex: 0 0 auto; font-size: 11px; color: var(--accent); }
+.cmap-penpins-main > i:first-child { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
 .cmap-penpins-dot { flex: 0 0 auto; width: 8px; height: 8px; border-radius: 2px;
   transform: rotate(45deg); background: var(--accent2); }
-.cmap-penpins b { flex: 0 0 auto; font-family: var(--font-body); font-size: 10px; letter-spacing: 0;
+.cmap-penpins b { flex: 0 0 auto; font-family: var(--font-body); font-size: 12px; letter-spacing: 0;
   font-weight: 600; color: var(--accent2); }
 .cmap-penpins-label { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis;
   white-space: nowrap;
-  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .05em; text-transform: uppercase; }
+  font-family: var(--font-label); font-size: 11px; letter-spacing: .05em; text-transform: uppercase; }
 /* Le geste se lit dans le compteur : le libellé dit qu'il ouvre la liste. */
 .cmap-penpins-filter { flex: 0 0 auto; padding: 1px 7px; border-radius: 999px;
-  font-family: var(--font-label); font-size: 8px; letter-spacing: .05em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .05em; text-transform: uppercase;
   color: var(--accent); border: 1px dashed color-mix(in srgb, var(--accent) 42%, transparent);
   transition: background .2s ease, border-color .2s ease, color .2s ease; }
-.cmap-penpins-main > i:last-child { flex: 0 0 auto; font-size: 10px; color: var(--accent); }
+.cmap-penpins-main > i:last-child { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
 .cmap-penpins-main:hover { color: var(--text); }
 .cmap-penpins-main:hover .cmap-penpins-filter { background: color-mix(in srgb, var(--accent) 14%, transparent);
   border-style: solid; border-color: var(--accent); }
@@ -513,12 +513,12 @@ button.cmaps-completesleft:focus-visible { outline: 2px solid var(--accent);
    classement national. */
 .cmap-penpins-zone { display: inline-flex; align-items: center; gap: 3px; flex: 0 1 auto; min-width: 0;
   padding: 1px 6px 1px 7px; border-radius: 999px; text-decoration: none; cursor: pointer;
-  font-family: var(--font-label); font-size: 8px; letter-spacing: .05em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .05em; text-transform: uppercase;
   color: var(--accent2); white-space: nowrap;
   background: color-mix(in srgb, var(--accent2) 14%, transparent);
   border: 1px solid color-mix(in srgb, var(--accent2) 38%, transparent);
   transition: background .2s ease, border-color .2s ease, color .2s ease; }
-.cmap-penpins-zone i { flex: 0 0 auto; font-size: 9px; }
+.cmap-penpins-zone i { flex: 0 0 auto; font-size: 12px; }
 .cmap-penpins-zone-name { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 /* Le nom de la région se retire : la croix dit que le resserrement se lève. */
 .cmap-penpins-zone-x { color: var(--accent); opacity: .8; }
@@ -532,7 +532,7 @@ button.cmaps-completesleft:focus-visible { outline: 2px solid var(--accent);
 /* An empty country still says so, over its own outline. */
 .cmap-none { position: absolute; inset-inline: 8px; bottom: 8px; margin: 0; padding: 5px 9px;
   border-radius: 999px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  font-size: 10.5px; color: color-mix(in srgb, var(--text) 74%, transparent);
+  font-size: 12px; color: color-mix(in srgb, var(--text) 74%, transparent);
   background: color-mix(in srgb, var(--bg) 80%, transparent); backdrop-filter: blur(8px);
   border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent); pointer-events: none; }
 
@@ -547,20 +547,20 @@ button.cmaps-completesleft:focus-visible { outline: 2px solid var(--accent);
 .cmap-best:hover { border-color: var(--accent);
   background: color-mix(in srgb, var(--accent) 16%, transparent); }
 .cmap-best:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.cmap-best > i:first-child { flex: 0 0 auto; font-size: 11px; color: var(--accent2); }
+.cmap-best > i:first-child { flex: 0 0 auto; font-size: 12px; color: var(--accent2); }
 .cmap-best-body { display: flex; align-items: baseline; gap: 5px; flex: 1 1 auto; min-width: 0; }
-.cmap-best-name { flex: 0 1 auto; min-width: 0; font-size: 10.5px; font-weight: 600;
+.cmap-best-name { flex: 0 1 auto; min-width: 0; font-size: 12px; font-weight: 600;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.cmap-best-meta { flex: 0 0 auto; font-family: var(--font-body); font-size: 9.5px; color: var(--accent2); }
+.cmap-best-meta { flex: 0 0 auto; font-family: var(--font-body); font-size: 11px; color: var(--accent2); }
 .cmap-best-meta em { font-style: normal; color: var(--muted); }
 /* Le geste court de l'aire, juste sous la fiche du meilleur atelier : deux
    lignes seulement, dans le même pas que la fiche qu'il suit. */
 .cmap-best-aire { margin: 0 12px 6px; }
 [dir="rtl"] .cmap-best-aire { margin: 0 12px 6px; }
 .cmap-best-see { flex: 0 0 auto; white-space: nowrap;
-  font-family: var(--font-label); font-size: 8px; letter-spacing: .07em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .07em; text-transform: uppercase;
   color: var(--accent); }
-.cmap-best-go { flex: 0 0 auto; font-size: 11px; color: var(--accent); }
+.cmap-best-go { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
 [dir="rtl"] .cmap-best-see { letter-spacing: 0; }
 
 /* Le second lien de la carte : la région où la famille de ce meilleur atelier
@@ -574,13 +574,13 @@ button.cmaps-completesleft:focus-visible { outline: 2px solid var(--accent);
 .cmap-best-region:hover { border-color: color-mix(in srgb, var(--accent) 55%, transparent);
   background: color-mix(in srgb, var(--accent) 11%, transparent); color: var(--text); }
 .cmap-best-region:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.cmap-best-region > i { flex: 0 0 auto; font-size: 11px; color: var(--accent2); }
+.cmap-best-region > i { flex: 0 0 auto; font-size: 12px; color: var(--accent2); }
 .cmap-best-region-lab { flex: 0 0 auto; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  max-width: 60%; font-family: var(--font-label); font-size: 8px; letter-spacing: .07em;
+  max-width: 60%; font-family: var(--font-label); font-size: 11px; letter-spacing: .07em;
   text-transform: uppercase; color: var(--muted); }
-.cmap-best-region-name { flex: 1 1 auto; min-width: 0; font-size: 10.5px;
+.cmap-best-region-name { flex: 1 1 auto; min-width: 0; font-size: 12px;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.cmap-best-region b { flex: 0 0 auto; font-family: var(--font-body); font-size: 10.5px;
+.cmap-best-region b { flex: 0 0 auto; font-family: var(--font-body); font-size: 12px;
   font-weight: 600; color: var(--accent2); }
 [dir="rtl"] .cmap-best-region-lab { letter-spacing: 0; }
 
@@ -588,7 +588,7 @@ button.cmaps-completesleft:focus-visible { outline: 2px solid var(--accent);
   padding: 9px 12px; border-top: 1px solid color-mix(in srgb, var(--text) 10%, transparent); }
 .cmap-open { display: inline-flex; align-items: center; gap: 5px; flex: 0 1 auto; min-width: 0;
   padding: 5px 10px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
-  background: transparent; color: var(--text); font: inherit; font-size: 11.5px; cursor: pointer;
+  background: transparent; color: var(--text); font: inherit; font-size: 12px; cursor: pointer;
   transition: border-color .2s ease, color .2s ease, background .2s ease; }
 .cmap-open i { font-size: 12px; color: var(--accent); }
 .cmap-open:hover { border-color: var(--accent); color: var(--accent); }
@@ -596,9 +596,9 @@ button.cmaps-completesleft:focus-visible { outline: 2px solid var(--accent);
 .cmap-open[aria-pressed="true"] i { color: var(--bg); }
 .cmap-open:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .cmap-zoom { display: inline-flex; align-items: center; gap: 4px; flex: 0 0 auto; white-space: nowrap;
-  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .07em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .07em; text-transform: uppercase;
   color: var(--muted); }
-.cmap-zoom i { font-size: 11px; color: var(--accent); }
+.cmap-zoom i { font-size: 12px; color: var(--accent); }
 [dir="rtl"] .cmap-count, [dir="rtl"] .cmap-zoom { letter-spacing: 0; }
 @media (max-width: 560px) { .cmap-canvas { height: 150px; } }
 
@@ -606,12 +606,12 @@ button.cmaps-completesleft:focus-visible { outline: 2px solid var(--accent);
 .cmap-regions { display: grid; gap: 6px; padding: 9px 12px 10px;
   border-top: 1px solid color-mix(in srgb, var(--text) 10%, transparent); }
 .cmap-regions-label { display: inline-flex; align-items: center; gap: 5px;
-  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .07em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 11px; letter-spacing: .07em; text-transform: uppercase;
   color: var(--muted); }
 .cmap-regions-label i { font-size: 11px; color: var(--accent); }
 .cmap-regions-num { display: inline-flex; align-items: center; justify-content: center; min-width: 16px;
   height: 15px; padding: 0 4px; margin-inline-start: 2px; border-radius: 999px;
-  font-family: var(--font-body); font-size: 9.5px; letter-spacing: 0; text-transform: none;
+  font-family: var(--font-body); font-size: 12px; letter-spacing: 0; text-transform: none;
   color: var(--accent2); background: color-mix(in srgb, var(--accent) 16%, transparent); }
 .cmap-region-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px; }
 .cmap-region-item { display: inline-flex; min-width: 0; max-width: 100%; }
@@ -624,9 +624,9 @@ button.cmaps-completesleft:focus-visible { outline: 2px solid var(--accent);
 .cmap-region:hover { border-color: color-mix(in srgb, var(--accent) 52%, transparent);
   background: color-mix(in srgb, var(--accent) 14%, transparent); }
 .cmap-region:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.cmap-region-name { font-size: 10.5px; line-height: 1.5; color: color-mix(in srgb, var(--text) 76%, transparent);
+.cmap-region-name { font-size: 12px; line-height: 1.5; color: color-mix(in srgb, var(--text) 76%, transparent);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.cmap-region b { flex: 0 0 auto; font-family: var(--font-body); font-size: 10.5px; font-weight: 600; color: var(--accent2); }
+.cmap-region b { flex: 0 0 auto; font-family: var(--font-body); font-size: 12px; font-weight: 600; color: var(--accent2); }
 .cmap-region:hover .cmap-region-name { color: var(--text); }
 .cmap-region.is-on { background: var(--accent); border-color: var(--accent); }
 /* Une région où le genre lu est réellement tenu : la carte s'ouvre déjà
@@ -639,9 +639,9 @@ button.cmaps-completesleft:focus-visible { outline: 2px solid var(--accent);
 .cmap-region.is-on .cmap-region-name,
 .cmap-region.is-on b { color: var(--bg); }
 .cmap-region--more { gap: 3px;
-  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .05em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .05em; text-transform: uppercase;
   color: var(--muted); background: transparent; border-style: dashed; white-space: nowrap; }
-.cmap-region--more i { font-size: 10px; }
+.cmap-region--more i { font-size: 12px; }
 .cmap-region--more:hover { color: var(--text); }
 [dir="rtl"] .cmap-regions-label, [dir="rtl"] .cmap-region--more { letter-spacing: 0; }
 
@@ -649,7 +649,7 @@ button.cmaps-completesleft:focus-visible { outline: 2px solid var(--accent);
    compte, comme les imprimeurs — un clic ouvre la page du type dans ce pays. */
 .cmap-fams { display: grid; gap: 6px; padding: 0 12px 10px; }
 .cmap-fams-label { display: inline-flex; align-items: center; gap: 5px;
-  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .07em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 11px; letter-spacing: .07em; text-transform: uppercase;
   color: var(--muted); }
 .cmap-fams-label i { font-size: 11px; color: var(--accent); }
 .cmap-fam-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px; }
@@ -672,14 +672,14 @@ button.cmaps-completesleft:focus-visible { outline: 2px solid var(--accent);
 .cmap-fam:hover { border-color: color-mix(in srgb, var(--accent) 55%, transparent);
   background: color-mix(in srgb, var(--accent) 12%, transparent); }
 .cmap-fam:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.cmap-fam-name { font-size: 10px; line-height: 1.5; color: color-mix(in srgb, var(--text) 74%, transparent);
+.cmap-fam-name { font-size: 12px; line-height: 1.5; color: color-mix(in srgb, var(--text) 74%, transparent);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.cmap-fam b { flex: 0 0 auto; font-family: var(--font-body); font-size: 10px; font-weight: 600;
+.cmap-fam b { flex: 0 0 auto; font-family: var(--font-body); font-size: 12px; font-weight: 600;
   color: var(--accent2); }
 /* Le total mondial de la famille, à côté de son compte local : le chiffre du
    pays se situe contre la mesure du répertoire entier, sans ouvrir de page. */
 .cmap-fam-world { flex: 0 0 auto; font-style: normal; font-family: var(--font-body);
-  font-size: 9px; letter-spacing: 0; unicode-bidi: isolate; white-space: nowrap;
+  font-size: 12px; letter-spacing: 0; unicode-bidi: isolate; white-space: nowrap;
   color: color-mix(in srgb, var(--text) 42%, transparent); }
 [dir="rtl"] .cmap-fam-world { letter-spacing: 0; }
 .cmap-fam:hover .cmap-fam-name { color: var(--text); }
@@ -689,7 +689,7 @@ button.cmaps-completesleft:focus-visible { outline: 2px solid var(--accent);
    famille, la région nommée et son compte, qui ouvre la carte resserrée. */
 .cmap-hot { display: grid; gap: 5px; padding: 0 12px 10px; }
 .cmap-hot-label { display: inline-flex; align-items: center; gap: 5px;
-  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .07em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 11px; letter-spacing: .07em; text-transform: uppercase;
   color: var(--muted); }
 .cmap-hot-label i { font-size: 11px; color: var(--accent); }
 .cmap-hot-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
@@ -702,13 +702,13 @@ button.cmaps-completesleft:focus-visible { outline: 2px solid var(--accent);
 .cmap-hot-link:hover { border-color: color-mix(in srgb, var(--accent) 52%, transparent);
   background: color-mix(in srgb, var(--accent) 12%, transparent); }
 .cmap-hot-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.cmap-hot-trade { flex: 0 0 auto; font-family: var(--font-label); font-size: 8px; letter-spacing: .06em;
+.cmap-hot-trade { flex: 0 0 auto; font-family: var(--font-label); font-size: 12px; letter-spacing: .06em;
   text-transform: uppercase; color: var(--muted); }
 .cmap-hot-region { display: inline-flex; align-items: center; gap: 3px; flex: 1 1 auto; min-width: 0;
-  font-size: 10.5px; color: color-mix(in srgb, var(--text) 80%, transparent);
+  font-size: 12px; color: color-mix(in srgb, var(--text) 80%, transparent);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.cmap-hot-region i { flex: 0 0 auto; font-size: 10px; color: var(--accent2); }
-.cmap-hot-link b { flex: 0 0 auto; font-family: var(--font-body); font-size: 10.5px; font-weight: 600;
+.cmap-hot-region i { flex: 0 0 auto; font-size: 12px; color: var(--accent2); }
+.cmap-hot-link b { flex: 0 0 auto; font-family: var(--font-body); font-size: 12px; font-weight: 600;
   color: var(--accent2); }
 
 /* La meilleure fiche de la famille, dans ce pays : un cran sous sa région, une
@@ -719,12 +719,12 @@ button.cmaps-completesleft:focus-visible { outline: 2px solid var(--accent);
   transition: color .2s ease, background .2s ease; }
 .cmap-hot-best:hover { color: var(--text); background: color-mix(in srgb, var(--accent) 11%, transparent); }
 .cmap-hot-best:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.cmap-hot-best > i:first-child { flex: 0 0 auto; font-size: 9px; color: var(--accent2); }
-.cmap-hot-best-name { flex: 1 1 auto; min-width: 0; font-size: 10px; font-weight: 600;
+.cmap-hot-best > i:first-child { flex: 0 0 auto; font-size: 12px; color: var(--accent2); }
+.cmap-hot-best-name { flex: 1 1 auto; min-width: 0; font-size: 12px; font-weight: 600;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.cmap-hot-best b { flex: 0 0 auto; font-family: var(--font-body); font-size: 9.5px; font-weight: 600;
+.cmap-hot-best b { flex: 0 0 auto; font-family: var(--font-body); font-size: 12px; font-weight: 600;
   color: var(--accent2); }
-.cmap-hot-best > i:last-child { flex: 0 0 auto; font-size: 10px; color: var(--accent); }
+.cmap-hot-best > i:last-child { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
 [dir="rtl"] .cmap-hot-label, [dir="rtl"] .cmap-hot-trade { letter-spacing: 0; }
 
 /* Les fiches de la famille dans sa région la plus fournie : un renvoi
@@ -737,20 +737,20 @@ button.cmaps-completesleft:focus-visible { outline: 2px solid var(--accent);
 .cmap-hot-files:hover { color: var(--text); border-color: color-mix(in srgb, var(--accent) 50%, transparent);
   background: color-mix(in srgb, var(--accent) 10%, transparent); }
 .cmap-hot-files:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.cmap-hot-files > i:first-child { flex: 0 0 auto; font-size: 10px; color: var(--accent2); }
-.cmap-hot-files span { flex: 0 1 auto; min-width: 0; font-family: var(--font-label); font-size: 8.5px;
+.cmap-hot-files > i:first-child { flex: 0 0 auto; font-size: 12px; color: var(--accent2); }
+.cmap-hot-files span { flex: 0 1 auto; min-width: 0; font-family: var(--font-label); font-size: 12px;
   letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; overflow: hidden;
   text-overflow: ellipsis; }
 .cmap-hot-files em { flex: 0 0 auto; font-style: normal; font-family: var(--font-body);
-  font-size: 9.5px; font-weight: 600; color: var(--accent2); }
-.cmap-hot-files > i:last-child { flex: 0 0 auto; font-size: 10px; color: var(--accent); }
+  font-size: 12px; font-weight: 600; color: var(--accent2); }
+.cmap-hot-files > i:last-child { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
 [dir="rtl"] .cmap-hot-files span { letter-spacing: 0; }
 
 /* La bibliothèque la mieux fournie, région par région : une ligne par région,
    le fonds nommé et son volume, le lien ouvrant la fiche. */
 .cmap-bibs { display: grid; gap: 5px; padding: 0 12px 10px; }
 .cmap-bibs-label { display: inline-flex; align-items: center; gap: 5px;
-  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .07em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 11px; letter-spacing: .07em; text-transform: uppercase;
   color: var(--muted); }
 .cmap-bibs-label i { font-size: 11px; color: var(--accent); }
 .cmap-bib-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
@@ -761,15 +761,15 @@ button.cmaps-completesleft:focus-visible { outline: 2px solid var(--accent);
   transition: color .2s ease, background .2s ease; }
 .cmap-bib:hover { color: var(--text); background: color-mix(in srgb, var(--accent) 11%, transparent); }
 .cmap-bib:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.cmap-bib > i:first-child { flex: 0 0 auto; font-size: 10px; color: var(--accent2); }
+.cmap-bib > i:first-child { flex: 0 0 auto; font-size: 12px; color: var(--accent2); }
 .cmap-bib-region { flex: 0 0 auto; max-width: 40%; overflow: hidden; text-overflow: ellipsis;
-  white-space: nowrap; font-family: var(--font-label); font-size: 8px; letter-spacing: .05em;
+  white-space: nowrap; font-family: var(--font-label); font-size: 12px; letter-spacing: .05em;
   text-transform: uppercase; color: var(--muted); }
-.cmap-bib-name { flex: 1 1 auto; min-width: 0; font-size: 10px; font-weight: 600;
+.cmap-bib-name { flex: 1 1 auto; min-width: 0; font-size: 12px; font-weight: 600;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.cmap-bib b { flex: 0 0 auto; font-family: var(--font-body); font-size: 9.5px; font-weight: 600;
+.cmap-bib b { flex: 0 0 auto; font-family: var(--font-body); font-size: 12px; font-weight: 600;
   color: var(--accent2); }
-.cmap-bib > i:last-child { flex: 0 0 auto; font-size: 10px; color: var(--accent); }
+.cmap-bib > i:last-child { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
 [dir="rtl"] .cmap-bibs-label, [dir="rtl"] .cmap-bib-region { letter-spacing: 0; }
 
 /* La librairie au plus large fonds, juste à côté des bibliothèques : le second
@@ -788,7 +788,7 @@ button.cmaps-completesleft:focus-visible { outline: 2px solid var(--accent);
    les trois blocs, qui nomme la gagnante et ouvre ses fiches. */
 .cmap-trio { display: grid; gap: 5px; padding: 0 12px 10px; }
 .cmap-trio-label { display: inline-flex; align-items: center; gap: 5px;
-  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .07em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 11px; letter-spacing: .07em; text-transform: uppercase;
   color: var(--muted); }
 .cmap-trio-label i { font-size: 11px; color: var(--accent); }
 .cmap-trio-row { display: flex; align-items: center; gap: 5px; min-width: 0;
@@ -796,22 +796,22 @@ button.cmaps-completesleft:focus-visible { outline: 2px solid var(--accent);
   background: color-mix(in srgb, var(--accent) 8%, transparent);
   border: 1px solid color-mix(in srgb, var(--accent) 24%, transparent); }
 .cmap-trio-region { display: inline-flex; align-items: center; gap: 4px;
-  flex: 1 1 auto; min-width: 0; font-size: 10.5px; font-weight: 600; color: var(--text);
+  flex: 1 1 auto; min-width: 0; font-size: 12px; font-weight: 600; color: var(--text);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.cmap-trio-region i { flex: 0 0 auto; font-size: 10px; color: var(--accent2); }
+.cmap-trio-region i { flex: 0 0 auto; font-size: 12px; color: var(--accent2); }
 .cmap-trio-parts { list-style: none; display: flex; align-items: center; gap: 4px;
   margin: 0; padding: 0; flex: 0 0 auto; }
 .cmap-trio-parts li { display: inline-flex; align-items: center; gap: 2px;
-  font-family: var(--font-body); font-size: 9px; color: var(--accent2); white-space: nowrap; }
-.cmap-trio-parts i { font-size: 9px; opacity: .8; }
+  font-family: var(--font-body); font-size: 12px; color: var(--accent2); white-space: nowrap; }
+.cmap-trio-parts i { font-size: 12px; opacity: .8; }
 .cmap-trio-files { display: inline-flex; align-items: center; gap: 3px; flex: 0 0 auto;
   padding: 2px 7px; border-radius: 999px; text-decoration: none; white-space: nowrap;
-  font-family: var(--font-label); font-size: 8px; letter-spacing: .05em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .05em; text-transform: uppercase;
   color: var(--accent); border: 1px dashed color-mix(in srgb, var(--accent) 42%, transparent);
   transition: background .2s ease, border-color .2s ease; }
 .cmap-trio-files:first-of-type { margin-inline-start: 0; }
 .cmap-trio-files span { max-width: 76px; overflow: hidden; text-overflow: ellipsis; }
-.cmap-trio-files > i { font-size: 9px; }
+.cmap-trio-files > i { font-size: 12px; }
 .cmap-trio-files:hover { background: color-mix(in srgb, var(--accent) 14%, transparent);
   border-color: var(--accent); }
 .cmap-trio-files:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -828,13 +828,13 @@ button.cmaps-completesleft:focus-visible { outline: 2px solid var(--accent);
 .cmap-trio-rank-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .cmap-trio-rank-link em { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center;
   width: 13px; height: 13px; border-radius: 999px; font-style: normal;
-  font-family: var(--font-body); font-size: 8.5px; font-weight: 600;
+  font-family: var(--font-body); font-size: 12px; font-weight: 600;
   color: color-mix(in srgb, var(--text) 62%, transparent);
   background: color-mix(in srgb, var(--text) 8%, transparent); }
-.cmap-trio-rank-name { flex: 1 1 auto; min-width: 0; font-size: 10px;
+.cmap-trio-rank-name { flex: 1 1 auto; min-width: 0; font-size: 12px;
   color: color-mix(in srgb, var(--text) 76%, transparent);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.cmap-trio-rank-link b { flex: 0 0 auto; font-family: var(--font-body); font-size: 9.5px;
+.cmap-trio-rank-link b { flex: 0 0 auto; font-family: var(--font-body); font-size: 12px;
   font-weight: 600; color: var(--accent2); }
 .cmap-trio-rank-link:hover .cmap-trio-rank-name { color: var(--text); }
 
@@ -845,10 +845,10 @@ button.cmaps-completesleft:focus-visible { outline: 2px solid var(--accent);
   padding: 2px 8px; border-radius: 999px; appearance: none; cursor: pointer;
   background: transparent;
   border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
-  font-family: var(--font-label); font-size: 8px; letter-spacing: .05em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .05em; text-transform: uppercase;
   color: var(--muted);
   transition: background .2s ease, border-color .2s ease, color .2s ease; }
-.cmap-trio-copy > i { flex: 0 0 auto; font-size: 10px; color: var(--accent2); }
+.cmap-trio-copy > i { flex: 0 0 auto; font-size: 12px; color: var(--accent2); }
 .cmap-trio-copy > span { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis;
   white-space: nowrap; }
 .cmap-trio-copy:hover { color: var(--text); border-style: solid;
@@ -872,37 +872,37 @@ button.cmaps-completesleft:focus-visible { outline: 2px solid var(--accent);
 .cmap-trio-copy--csv > i { color: var(--accent2); }
 .cmap-trio-map { display: inline-flex; align-items: center; gap: 4px; justify-self: start; min-width: 0;
   margin-top: 1px; padding: 2px 8px; border-radius: 999px; text-decoration: none;
-  font-family: var(--font-label); font-size: 8px; letter-spacing: .05em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .05em; text-transform: uppercase;
   color: var(--accent); border: 1px dashed color-mix(in srgb, var(--accent) 42%, transparent);
   transition: background .2s ease, border-color .2s ease; }
 .cmap-trio-map:hover { background: color-mix(in srgb, var(--accent) 14%, transparent);
   border-color: var(--accent); }
 .cmap-trio-map:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.cmap-trio-map > i { flex: 0 0 auto; font-size: 9px; }
+.cmap-trio-map > i { flex: 0 0 auto; font-size: 12px; }
 .cmap-trio-map span { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis;
   white-space: nowrap; }
 .cmap-trio-map em { flex: 0 0 auto; font-style: normal; font-family: var(--font-body);
-  font-size: 9px; letter-spacing: 0; }
+  font-size: 12px; letter-spacing: 0; }
 [dir="rtl"] .cmap-trio-map { letter-spacing: 0; }
 
 /* Les plumes du pays, genre par genre : le plus primé de chaque genre, son
    compte de distinctions et le lien qui ouvre sa fiche. */
 .cmap-pens { display: grid; gap: 5px; padding: 0 12px 10px; }
 .cmap-pens-label { display: inline-flex; align-items: center; gap: 5px;
-  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .07em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 11px; letter-spacing: .07em; text-transform: uppercase;
   color: var(--muted); }
 .cmap-pens-label i { font-size: 11px; color: var(--accent); }
 .cmap-pens-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
 .cmap-pens-item { display: grid; gap: 1px; min-width: 0; }
 .cmap-pens-row { display: flex; align-items: center; gap: 6px; min-width: 0; }
 .cmap-pens-genre { display: inline-flex; align-items: center; gap: 4px; flex: 0 0 auto;
-  max-width: 42%; font-family: var(--font-label); font-size: 8px; letter-spacing: .06em;
+  max-width: 42%; font-family: var(--font-label); font-size: 12px; letter-spacing: .06em;
   text-transform: uppercase; color: var(--muted); }
-.cmap-pens-genre b { font-family: var(--font-body); font-size: 9px; letter-spacing: 0;
+.cmap-pens-genre b { font-family: var(--font-body); font-size: 12px; letter-spacing: 0;
   font-weight: 600; color: color-mix(in srgb, var(--text) 40%, transparent); }
 /* Les deux comptes du genre, côte à côte : les plumes du pays tout entier,
    puis les régions où le genre est réellement tenu. */
-.cmap-pens-genre .cmap-pens-total { font-size: 9.5px; color: var(--accent2);
+.cmap-pens-genre .cmap-pens-total { font-size: 12px; color: var(--accent2);
   text-decoration: none; border-bottom: 1px dotted color-mix(in srgb, var(--accent2) 62%, transparent);
   transition: color .2s ease, border-color .2s ease; }
 a.cmap-pens-total:hover { color: var(--accent);
@@ -912,30 +912,30 @@ a.cmap-pens-total:focus-visible { outline: 2px solid var(--accent); outline-offs
    titre du bloc, plutôt que de laisser croire à un cadrage ordinaire. */
 .cmap-pens-narrow { display: inline-flex; align-items: center; gap: 4px; justify-self: start;
   padding: 1px 7px; border-radius: 999px;
-  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .05em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .05em; text-transform: uppercase;
   color: var(--accent2);
   background: color-mix(in srgb, var(--accent) 14%, transparent);
   border: 1px dashed color-mix(in srgb, var(--accent) 40%, transparent); }
-.cmap-pens-narrow i { font-size: 10px; }
+.cmap-pens-narrow i { font-size: 12px; }
 [dir="rtl"] .cmap-pens-narrow { letter-spacing: 0; }
 .cmap-pens-areas { display: inline-flex; align-items: center; gap: 1px;
   margin-inline-start: 1px; padding: 0 4px; border-radius: 999px;
-  font-family: var(--font-body); font-size: 8.5px; letter-spacing: 0;
+  font-family: var(--font-body); font-size: 12px; letter-spacing: 0;
   color: color-mix(in srgb, var(--text) 52%, transparent);
   background: color-mix(in srgb, var(--text) 8%, transparent); }
-.cmap-pens-areas i { font-size: 8px; }
+.cmap-pens-areas i { font-size: 12px; }
 .cmap-pens-link { display: flex; align-items: center; gap: 4px; flex: 1 1 auto; min-width: 0;
   padding: 2px 6px; border-radius: 8px; text-decoration: none;
   color: color-mix(in srgb, var(--text) 78%, transparent);
   transition: color .2s ease, background .2s ease; }
 .cmap-pens-link:hover { color: var(--text); background: color-mix(in srgb, var(--accent) 11%, transparent); }
 .cmap-pens-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.cmap-pens-link > i:first-child { flex: 0 0 auto; font-size: 9px; color: var(--accent2); }
-.cmap-pens-name { flex: 1 1 auto; min-width: 0; font-size: 10px; font-weight: 600;
+.cmap-pens-link > i:first-child { flex: 0 0 auto; font-size: 12px; color: var(--accent2); }
+.cmap-pens-name { flex: 1 1 auto; min-width: 0; font-size: 12px; font-weight: 600;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.cmap-pens-link b { flex: 0 0 auto; font-family: var(--font-body); font-size: 9.5px;
+.cmap-pens-link b { flex: 0 0 auto; font-family: var(--font-body); font-size: 12px;
   font-weight: 600; color: var(--accent2); }
-.cmap-pens-link > i:last-child { flex: 0 0 auto; font-size: 10px; color: var(--accent); }
+.cmap-pens-link > i:last-child { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
 [dir="rtl"] .cmap-pens-label, [dir="rtl"] .cmap-pens-genre { letter-spacing: 0; }
 
 /* Toutes les plumes de ce genre dans le pays : un renvoi pointillé, un cran
@@ -948,13 +948,13 @@ a.cmap-pens-total:focus-visible { outline: 2px solid var(--accent); outline-offs
 .cmap-pens-all:hover { color: var(--text); border-color: color-mix(in srgb, var(--accent) 50%, transparent);
   background: color-mix(in srgb, var(--accent) 10%, transparent); }
 .cmap-pens-all:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.cmap-pens-all > i:first-child { flex: 0 0 auto; font-size: 10px; color: var(--accent2); }
-.cmap-pens-all span { flex: 0 1 auto; min-width: 0; font-family: var(--font-label); font-size: 8.5px;
+.cmap-pens-all > i:first-child { flex: 0 0 auto; font-size: 12px; color: var(--accent2); }
+.cmap-pens-all span { flex: 0 1 auto; min-width: 0; font-family: var(--font-label); font-size: 12px;
   letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; overflow: hidden;
   text-overflow: ellipsis; }
 .cmap-pens-all em { flex: 0 0 auto; font-style: normal; font-family: var(--font-body);
-  font-size: 9.5px; font-weight: 600; color: var(--accent2); }
-.cmap-pens-all > i:last-child { flex: 0 0 auto; font-size: 10px; color: var(--accent); }
+  font-size: 12px; font-weight: 600; color: var(--accent2); }
+.cmap-pens-all > i:last-child { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
 [dir="rtl"] .cmap-pens-all span { letter-spacing: 0; }
 
 /* Le compteur des pays sans le métier est une porte : il s'appuie, se lit
@@ -986,10 +986,9 @@ a.cmap-pens-total:focus-visible { outline: 2px solid var(--accent); outline-offs
   flex: 0 0 auto; padding: 3px 10px; border-radius: 999px;
   border: 1px solid color-mix(in srgb, var(--accent2) 40%, transparent);
   background: color-mix(in srgb, var(--accent2) 16%, transparent);
-  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .04em;
-  text-transform: uppercase; white-space: nowrap;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap;
   color: color-mix(in srgb, var(--text) 76%, transparent); }
-.cmaps-sansnote-files > i { flex: 0 0 auto; font-size: 11px; color: var(--accent2);
+.cmaps-sansnote-files > i { flex: 0 0 auto; font-size: 12px; color: var(--accent2);
   text-transform: none; }
 .cmaps-sansnote-files > b { flex: 0 0 auto; font-family: var(--font-body); font-size: 12px;
   letter-spacing: 0; unicode-bidi: isolate; color: var(--accent2); }
@@ -998,9 +997,9 @@ a.cmap-pens-total:focus-visible { outline: 2px solid var(--accent); outline-offs
 .cmaps-sansnote-off { display: inline-flex; align-items: center; gap: 4px; flex: 0 0 auto;
   padding: 4px 11px; border-radius: 999px; appearance: none; cursor: pointer;
   background: none; border: 1px solid color-mix(in srgb, var(--accent) 48%, transparent);
-  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .04em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .04em; text-transform: uppercase;
   color: var(--accent); transition: background .2s ease, border-color .2s ease; }
-.cmaps-sansnote-off i { font-size: 11px; }
+.cmaps-sansnote-off i { font-size: 12px; }
 .cmaps-sansnote-off:hover { background: color-mix(in srgb, var(--accent) 13%, transparent);
   border-color: var(--accent); }
 .cmaps-sansnote-off:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -1011,12 +1010,12 @@ a.cmap-pens-total:focus-visible { outline: 2px solid var(--accent); outline-offs
    d'un geste, les vingt-deux cartes reviennent. */
 .cmaps-airesnote-erase { display: inline-flex; align-items: center; gap: 5px; flex: 0 0 auto;
   padding: 4px 9px; border-radius: 999px; appearance: none; cursor: pointer;
-  background: none; font-family: var(--font-label); font-size: 9.5px;
+  background: none; font-family: var(--font-label); font-size: 12px;
   letter-spacing: .04em; text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 54%, transparent);
   border: 1px dotted color-mix(in srgb, var(--text) 26%, transparent);
   transition: background .2s ease, border-color .2s ease, color .2s ease; }
-.cmaps-airesnote-erase i { flex: 0 0 auto; font-size: 11px; color: inherit; }
+.cmaps-airesnote-erase i { flex: 0 0 auto; font-size: 12px; color: inherit; }
 .cmaps-airesnote-erase:hover { color: var(--accent); border-style: solid;
   border-color: color-mix(in srgb, var(--accent) 52%, transparent);
   background: color-mix(in srgb, var(--accent) 10%, transparent); }
@@ -1031,10 +1030,10 @@ a.cmap-pens-total:focus-visible { outline: 2px solid var(--accent); outline-offs
 .cmaps-sansnote-copy { display: inline-flex; align-items: center; gap: 4px; flex: 0 0 auto;
   padding: 4px 11px; border-radius: 999px; appearance: none; cursor: pointer;
   background: none; border: 1px dashed color-mix(in srgb, var(--accent2) 48%, transparent);
-  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .04em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .04em; text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 72%, transparent);
   transition: background .2s ease, border-color .2s ease, color .2s ease; }
-.cmaps-sansnote-copy > i { flex: 0 0 auto; font-size: 11px; color: var(--accent2); }
+.cmaps-sansnote-copy > i { flex: 0 0 auto; font-size: 12px; color: var(--accent2); }
 .cmaps-sansnote-copy:hover { color: var(--text); border-style: solid;
   border-color: var(--accent2); background: color-mix(in srgb, var(--accent2) 14%, transparent); }
 .cmaps-sansnote-copy.is-ok { border-style: solid; border-color: var(--accent2);
@@ -1079,7 +1078,7 @@ a.cmap-pens-total:focus-visible { outline: 2px solid var(--accent); outline-offs
   appearance: none; cursor: pointer; text-align: start;
   border: 1px dashed color-mix(in srgb, var(--accent2) 44%, transparent);
   background: color-mix(in srgb, var(--accent2) 8%, transparent);
-  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .04em;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .04em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 72%, transparent);
   transition: background .2s ease, border-color .2s ease, color .2s ease; }
@@ -1098,7 +1097,7 @@ a.cmap-pens-total:focus-visible { outline: 2px solid var(--accent); outline-offs
 .cmaps-aires-mene > b { flex: 0 0 auto; font-family: var(--font-body); font-size: 12px;
   font-weight: 600; letter-spacing: 0; unicode-bidi: isolate; color: var(--accent); }
 .cmaps-aires-mene > em { flex: 0 0 auto; font-style: normal; font-family: var(--font-body);
-  font-size: 9.5px; letter-spacing: 0; unicode-bidi: isolate;
+  font-size: 12px; letter-spacing: 0; unicode-bidi: isolate;
   color: color-mix(in srgb, var(--text) 46%, transparent); }
 .cmaps-aires-mene.is-none { border-style: solid; cursor: default;
   border-color: color-mix(in srgb, var(--text) 16%, transparent);
@@ -1119,10 +1118,10 @@ a.cmap-pens-total:focus-visible { outline: 2px solid var(--accent); outline-offs
 .cmaps-aires-sort { display: inline-flex; align-items: center; gap: 4px; flex: 0 0 auto;
   padding: 4px 11px; border-radius: 999px; appearance: none; cursor: pointer;
   background: none; border: 1px solid color-mix(in srgb, var(--text) 20%, transparent);
-  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .04em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .04em; text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 68%, transparent);
   transition: background .2s ease, border-color .2s ease, color .2s ease; }
-.cmaps-aires-sort > i { flex: 0 0 auto; font-size: 11px; color: var(--accent2); }
+.cmaps-aires-sort > i { flex: 0 0 auto; font-size: 12px; color: var(--accent2); }
 .cmaps-aires-sort:hover { color: var(--text);
   border-color: color-mix(in srgb, var(--accent2) 54%, transparent);
   background: color-mix(in srgb, var(--accent2) 12%, transparent); }
@@ -1138,16 +1137,16 @@ a.cmap-pens-total:focus-visible { outline: 2px solid var(--accent); outline-offs
 .cmaps-aires-never { display: inline-flex; align-items: center; gap: 4px; flex: 0 0 auto;
   padding: 4px 11px; border-radius: 999px; appearance: none;
   background: none; border: 1px dashed color-mix(in srgb, var(--accent2) 48%, transparent);
-  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .04em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .04em; text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 70%, transparent);
   transition: background .2s ease, border-color .2s ease, color .2s ease; }
 button.cmaps-aires-never { cursor: pointer; }
-.cmaps-aires-never > i { flex: 0 0 auto; font-size: 11px; color: var(--accent2); }
-.cmaps-aires-never > b { flex: 0 0 auto; font-family: var(--font-body); font-size: 11px;
+.cmaps-aires-never > i { flex: 0 0 auto; font-size: 12px; color: var(--accent2); }
+.cmaps-aires-never > b { flex: 0 0 auto; font-family: var(--font-body); font-size: 12px;
   font-weight: 600; letter-spacing: 0; unicode-bidi: isolate;
   color: color-mix(in srgb, var(--text) 82%, transparent); }
 .cmaps-aires-never > em { flex: 0 0 auto; font-style: normal; font-family: var(--font-body);
-  font-size: 9.5px; letter-spacing: 0; unicode-bidi: isolate;
+  font-size: 12px; letter-spacing: 0; unicode-bidi: isolate;
   color: color-mix(in srgb, var(--text) 46%, transparent); }
 button.cmaps-aires-never:hover { color: var(--text); border-style: solid;
   border-color: var(--accent2); background: color-mix(in srgb, var(--accent2) 14%, transparent); }
@@ -1167,10 +1166,10 @@ button.cmaps-aires-never:focus-visible { outline: 2px solid var(--accent); outli
 .cmaps-aires-erase { display: inline-flex; align-items: center; gap: 4px; flex: 0 0 auto;
   padding: 4px 10px; border-radius: 999px; appearance: none; cursor: pointer;
   background: none; border: 1px dashed color-mix(in srgb, var(--text) 18%, transparent);
-  font-family: var(--font-label); font-size: 9px; letter-spacing: .04em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .04em; text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 52%, transparent);
   transition: background .2s ease, border-color .2s ease, color .2s ease; }
-.cmaps-aires-erase > i { flex: 0 0 auto; font-size: 11px; }
+.cmaps-aires-erase > i { flex: 0 0 auto; font-size: 12px; }
 .cmaps-aires-erase:hover { color: var(--text); border-style: solid;
   border-color: color-mix(in srgb, var(--text) 34%, transparent);
   background: color-mix(in srgb, var(--text) 6%, transparent); }
@@ -1188,15 +1187,15 @@ button.cmaps-aires-never:focus-visible { outline: 2px solid var(--accent); outli
 .cmaps-aires-tours { display: inline-flex; align-items: center; gap: 4px; flex-wrap: wrap;
   flex: 0 0 auto; max-width: 100%; padding: 4px 11px; border-radius: 999px;
   background: none; border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
-  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .04em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .04em; text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 66%, transparent); }
-.cmaps-aires-tours > i { flex: 0 0 auto; font-size: 11px; color: var(--accent2); }
-.cmaps-aires-tours > b { flex: 0 0 auto; font-family: var(--font-body); font-size: 11px;
+.cmaps-aires-tours > i { flex: 0 0 auto; font-size: 12px; color: var(--accent2); }
+.cmaps-aires-tours > b { flex: 0 0 auto; font-family: var(--font-body); font-size: 12px;
   font-weight: 600; letter-spacing: 0; unicode-bidi: isolate; color: var(--accent); }
 .cmaps-aires-tours-label { flex: 0 1 auto; min-width: 0; overflow: hidden;
   text-overflow: ellipsis; white-space: nowrap; }
 .cmaps-aires-tours-last { flex: 0 0 auto; font-style: normal; font-family: var(--font-body);
-  font-size: 9px; letter-spacing: 0; text-transform: none; white-space: nowrap;
+  font-size: 12px; letter-spacing: 0; text-transform: none; white-space: nowrap;
   color: color-mix(in srgb, var(--text) 50%, transparent); }
 [dir="rtl"] .cmaps-aires-tours { letter-spacing: 0; }
 
@@ -1207,10 +1206,10 @@ button.cmaps-aires-never:focus-visible { outline: 2px solid var(--accent); outli
   flex: 0 0 auto; max-width: 100%; padding: 3px 10px; border-radius: 999px;
   border: 1px dotted color-mix(in srgb, var(--accent2) 42%, transparent);
   background: color-mix(in srgb, var(--accent2) 7%, transparent);
-  font-family: var(--font-label); font-size: 9px; letter-spacing: .04em;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .04em;
   text-transform: uppercase; color: color-mix(in srgb, var(--text) 66%, transparent); }
-.cmaps-aires-missing > i { flex: 0 0 auto; font-size: 10px; color: var(--accent2); }
-.cmaps-aires-missing > b { flex: 0 0 auto; font-family: var(--font-body); font-size: 11px;
+.cmaps-aires-missing > i { flex: 0 0 auto; font-size: 12px; color: var(--accent2); }
+.cmaps-aires-missing > b { flex: 0 0 auto; font-family: var(--font-body); font-size: 12px;
   font-weight: 600; letter-spacing: 0; unicode-bidi: isolate; color: var(--accent2); }
 .cmaps-aires-missing-label { flex: 0 1 auto; min-width: 0; overflow: hidden;
   text-overflow: ellipsis; white-space: nowrap; }
@@ -1225,15 +1224,15 @@ button.cmaps-aires-never:focus-visible { outline: 2px solid var(--accent); outli
   flex: 0 0 auto; max-width: 100%; padding: 4px 11px; border-radius: 999px;
   border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
   background: color-mix(in srgb, var(--accent) 10%, transparent);
-  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .04em;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .04em;
   text-transform: uppercase; color: color-mix(in srgb, var(--text) 70%, transparent); }
-.cmaps-aires-aenvoyer-count > i { flex: 0 0 auto; font-size: 11px; color: var(--accent); }
-.cmaps-aires-aenvoyer-count > b { flex: 0 0 auto; font-family: var(--font-body); font-size: 11px;
+.cmaps-aires-aenvoyer-count > i { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
+.cmaps-aires-aenvoyer-count > b { flex: 0 0 auto; font-family: var(--font-body); font-size: 12px;
   font-weight: 600; letter-spacing: 0; unicode-bidi: isolate; color: var(--accent); }
 .cmaps-aires-aenvoyer-label { flex: 0 1 auto; min-width: 0; overflow: hidden;
   text-overflow: ellipsis; white-space: nowrap; }
 .cmaps-aires-aenvoyer-count > em { flex: 0 0 auto; font-style: normal;
-  font-family: var(--font-body); font-size: 9px; letter-spacing: 0;
+  font-family: var(--font-body); font-size: 12px; letter-spacing: 0;
   unicode-bidi: isolate; color: color-mix(in srgb, var(--text) 50%, transparent); }
 [dir="rtl"] .cmaps-aires-aenvoyer-count { letter-spacing: 0; }
 
@@ -1243,10 +1242,10 @@ button.cmaps-aires-never:focus-visible { outline: 2px solid var(--accent); outli
   flex: 0 0 auto; padding: 4px 9px; border-radius: 999px; appearance: none;
   cursor: pointer; background: none; white-space: nowrap;
   border: 1px dashed color-mix(in srgb, var(--text) 18%, transparent);
-  font-family: var(--font-label); font-size: 9px; letter-spacing: .04em;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .04em;
   text-transform: uppercase; color: color-mix(in srgb, var(--text) 52%, transparent);
   transition: background .2s ease, border-color .2s ease, color .2s ease; }
-.cmaps-aires-tours-erase > i { flex: 0 0 auto; font-size: 11px; }
+.cmaps-aires-tours-erase > i { flex: 0 0 auto; font-size: 12px; }
 .cmaps-aires-tours-erase:hover { color: var(--text); border-style: solid;
   border-color: color-mix(in srgb, var(--text) 34%, transparent);
   background: color-mix(in srgb, var(--text) 6%, transparent); }
@@ -1263,15 +1262,15 @@ button.cmaps-aires-never:focus-visible { outline: 2px solid var(--accent); outli
 .cmaps-aires-seules { display: inline-flex; align-items: center; gap: 4px; flex-wrap: wrap;
   flex: 0 0 auto; max-width: 100%; padding: 4px 11px; border-radius: 999px;
   background: none; border: 1px dotted color-mix(in srgb, var(--accent2) 42%, transparent);
-  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .04em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .04em; text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 66%, transparent); }
-.cmaps-aires-seules > i { flex: 0 0 auto; font-size: 11px; color: var(--accent2); }
-.cmaps-aires-seules > b { flex: 0 0 auto; font-family: var(--font-body); font-size: 11px;
+.cmaps-aires-seules > i { flex: 0 0 auto; font-size: 12px; color: var(--accent2); }
+.cmaps-aires-seules > b { flex: 0 0 auto; font-family: var(--font-body); font-size: 12px;
   font-weight: 600; letter-spacing: 0; unicode-bidi: isolate; color: var(--accent2); }
 .cmaps-aires-seules-label { flex: 0 1 auto; min-width: 0; overflow: hidden;
   text-overflow: ellipsis; white-space: nowrap; }
 .cmaps-aires-seules-last { flex: 0 0 auto; font-style: normal; font-family: var(--font-body);
-  font-size: 9px; letter-spacing: 0; text-transform: none; white-space: nowrap;
+  font-size: 12px; letter-spacing: 0; text-transform: none; white-space: nowrap;
   color: color-mix(in srgb, var(--text) 50%, transparent); }
 [dir="rtl"] .cmaps-aires-seules { letter-spacing: 0; }
 
@@ -1281,10 +1280,10 @@ button.cmaps-aires-never:focus-visible { outline: 2px solid var(--accent); outli
   flex: 0 0 auto; padding: 4px 9px; border-radius: 999px; appearance: none;
   cursor: pointer; background: none; white-space: nowrap;
   border: 1px dashed color-mix(in srgb, var(--text) 18%, transparent);
-  font-family: var(--font-label); font-size: 9px; letter-spacing: .04em;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .04em;
   text-transform: uppercase; color: color-mix(in srgb, var(--text) 52%, transparent);
   transition: background .2s ease, border-color .2s ease, color .2s ease; }
-.cmaps-aires-seules-erase > i { flex: 0 0 auto; font-size: 11px; }
+.cmaps-aires-seules-erase > i { flex: 0 0 auto; font-size: 12px; }
 .cmaps-aires-seules-erase:hover { color: var(--text); border-style: solid;
   border-color: color-mix(in srgb, var(--accent2) 52%, transparent);
   background: color-mix(in srgb, var(--accent2) 12%, transparent); }
@@ -1315,14 +1314,14 @@ button.cmaps-aires-never:focus-visible { outline: 2px solid var(--accent); outli
   max-width: 100%; padding: 2px 4px 2px 7px; border: 0; border-radius: 999px;
   background: none; cursor: pointer; color: inherit;
   transition: background .2s ease; }
-.cmaps-aire-pick > i { flex: 0 0 auto; font-size: 11px; color: var(--accent2); }
+.cmaps-aire-pick > i { flex: 0 0 auto; font-size: 12px; color: var(--accent2); }
 .cmaps-aire-chip-name { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis;
-  white-space: nowrap; font-family: var(--font-label); font-size: 9px; letter-spacing: .05em;
+  white-space: nowrap; font-family: var(--font-label); font-size: 12px; letter-spacing: .05em;
   text-transform: uppercase; color: color-mix(in srgb, var(--text) 76%, transparent); }
-.cmaps-aire-chip b { flex: 0 0 auto; font-family: var(--font-body); font-size: 11.5px;
+.cmaps-aire-chip b { flex: 0 0 auto; font-family: var(--font-body); font-size: 12px;
   font-weight: 600; letter-spacing: 0; unicode-bidi: isolate; color: var(--accent2); }
 .cmaps-aire-chip em { flex: 0 0 auto; font-style: normal; font-family: var(--font-body);
-  font-size: 9px; letter-spacing: 0; text-transform: none;
+  font-size: 12px; letter-spacing: 0; text-transform: none;
   color: color-mix(in srgb, var(--text) 56%, transparent); }
 /* Le jour de la dernière copie, posé sur la pastille elle-même : il dit
    quand l'aire est partie la dernière fois, au lieu de laisser ce rappel au
@@ -1333,7 +1332,7 @@ button.cmaps-aires-never:focus-visible { outline: 2px solid var(--accent); outli
   white-space: nowrap; appearance: none; background: transparent;
   border: 0; border-inline-start: 1px dotted color-mix(in srgb, var(--text) 24%, transparent);
   cursor: pointer;
-  font-family: var(--font-body); font-size: 8.5px; letter-spacing: 0;
+  font-family: var(--font-body); font-size: 12px; letter-spacing: 0;
   unicode-bidi: isolate;
   color: color-mix(in srgb, var(--text) 50%, transparent);
   transition: color .2s ease; }
@@ -1341,17 +1340,17 @@ button.cmaps-aires-never:focus-visible { outline: 2px solid var(--accent); outli
   color: color-mix(in srgb, var(--accent) 88%, var(--text)); }
 /* La flèche de la porte ne paraît qu'au survol ou au clavier : la pastille
    garde sa ligne calme tant qu'on ne la presse pas. */
-.cmaps-aire-date-go { font-size: 8px; opacity: 0; transition: opacity .18s ease; }
+.cmaps-aire-date-go { font-size: 12px; opacity: 0; transition: opacity .18s ease; }
 .cmaps-aire-date:hover .cmaps-aire-date-go,
 .cmaps-aire-date:focus-visible .cmaps-aire-date-go { opacity: .75; }
-.cmaps-aire-date > i { flex: 0 0 auto; font-size: 8px;
+.cmaps-aire-date > i { flex: 0 0 auto; font-size: 12px;
   color: color-mix(in srgb, var(--accent2) 70%, var(--text)); }
 .cmaps-aire-chip.is-on .cmaps-aire-date { color: color-mix(in srgb, var(--text) 74%, transparent); }
 
 /* La part du pays lu dans les fiches de l'aire, posée au bout de la
    pastille : le pays se lit dans son voisinage, aire par aire. */
 .cmaps-aire-country { flex: 0 0 auto; padding: 1px 5px; border-radius: 999px;
-  font-family: var(--font-body); font-size: 9px; letter-spacing: 0;
+  font-family: var(--font-body); font-size: 12px; letter-spacing: 0;
   unicode-bidi: isolate; white-space: nowrap;
   background: color-mix(in srgb, var(--accent2) 14%, transparent);
   color: color-mix(in srgb, var(--accent2) 86%, var(--text)); }
@@ -1360,12 +1359,12 @@ button.cmaps-aires-never:focus-visible { outline: 2px solid var(--accent); outli
    à côté du poids de l'aire — le geste garde sa prise sur ce qui reste. */
 .cmaps-aire-never { display: inline-flex; align-items: center; gap: 2px;
   flex: 0 0 auto; padding: 1px 5px; border-radius: 999px;
-  font-family: var(--font-body); font-size: 9px; letter-spacing: 0;
+  font-family: var(--font-body); font-size: 12px; letter-spacing: 0;
   unicode-bidi: isolate; white-space: nowrap;
   border: 1px dotted color-mix(in srgb, var(--accent2) 48%, transparent);
   background: color-mix(in srgb, var(--accent2) 9%, transparent);
   color: color-mix(in srgb, var(--accent2) 88%, var(--text)); }
-.cmaps-aire-never > i { flex: 0 0 auto; font-size: 9px; }
+.cmaps-aire-never > i { flex: 0 0 auto; font-size: 12px; }
 [dir="rtl"] .cmaps-aire-never { letter-spacing: 0; }
 
 /* La petite barre de part est un geste : le rond qui la porte se presse, et
@@ -1408,17 +1407,17 @@ button.cmaps-aires-never:focus-visible { outline: 2px solid var(--accent); outli
 .cmaps-aire-chip.is-moved {
   border-color: color-mix(in srgb, var(--accent) 66%, transparent);
   box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 24%, transparent); }
-.cmaps-aire-moved { flex: 0 0 auto; font-size: 9px; color: var(--accent); }
+.cmaps-aire-moved { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
 /* L'aire complète : le trait s'affermit et la coche se pose à côté du compte,
    exactement comme sur la pastille de sa rangée dans une page de pays — les
    deux rangées se lisent alors de la même façon. */
 .cmaps-aire-chip.is-complete { border-style: solid;
   border-color: color-mix(in srgb, var(--accent2) 58%, transparent); }
 .cmaps-aire-complete { display: inline-flex; align-items: center; gap: 3px;
-  flex: 0 0 auto; font-family: var(--font-label); font-size: 7.5px;
+  flex: 0 0 auto; font-family: var(--font-label); font-size: 12px;
   letter-spacing: .06em; text-transform: uppercase;
   color: color-mix(in srgb, var(--accent2) 84%, var(--text)); }
-.cmaps-aire-complete > i { flex: 0 0 auto; font-size: 9px; color: var(--accent2); }
+.cmaps-aire-complete > i { flex: 0 0 auto; font-size: 12px; color: var(--accent2); }
 /* La coche elle-même est un geste : un clic resserre la carte sur cette
    seule aire complète, un second appui rend les aires retenues. */
 button.cmaps-aire-complete { appearance: none; cursor: pointer;
@@ -1441,7 +1440,7 @@ button.cmaps-aire-complete[aria-pressed="true"] {
   flex: 0 0 auto; width: 17px; height: 17px; border-radius: 50%; text-decoration: none;
   color: color-mix(in srgb, var(--accent) 78%, var(--text));
   transition: background .2s ease, color .2s ease; }
-.cmaps-aire-map i { font-size: 11px; }
+.cmaps-aire-map i { font-size: 12px; }
 .cmaps-aire-map:hover { color: var(--accent);
   background: color-mix(in srgb, var(--accent) 20%, transparent); }
 .cmaps-aire-map:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
@@ -1452,7 +1451,7 @@ button.cmaps-aire-complete[aria-pressed="true"] {
   flex: 0 0 auto; width: 17px; height: 17px; padding: 0; border: 0; border-radius: 50%;
   background: transparent; cursor: pointer; color: color-mix(in srgb, var(--text) 44%, transparent);
   transition: background .2s ease, color .2s ease; }
-.cmaps-aire-wipe i { font-size: 11px; }
+.cmaps-aire-wipe i { font-size: 12px; }
 .cmaps-aire-wipe:hover { color: var(--accent); background: color-mix(in srgb, var(--accent) 18%, transparent); }
 .cmaps-aire-wipe:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 
@@ -1463,11 +1462,11 @@ button.cmaps-aire-complete[aria-pressed="true"] {
   flex: 0 0 auto; padding: 1px 5px; border-radius: 999px; appearance: none;
   cursor: pointer; background: transparent; white-space: nowrap;
   border: 1px dashed color-mix(in srgb, var(--accent2) 34%, transparent);
-  font-family: var(--font-label); font-size: 7.5px; letter-spacing: .04em;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .04em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 54%, transparent);
   transition: background .2s ease, border-color .2s ease, color .2s ease; }
-.cmaps-aire-alone > i { flex: 0 0 auto; font-size: 9px; color: var(--accent2); }
+.cmaps-aire-alone > i { flex: 0 0 auto; font-size: 12px; color: var(--accent2); }
 .cmaps-aire-alone > span { flex: 0 1 auto; min-width: 0; overflow: hidden;
   text-overflow: ellipsis; }
 .cmaps-aire-alone:hover { color: var(--text); border-style: solid;
@@ -1507,8 +1506,8 @@ button.cmaps-aire-complete[aria-pressed="true"] {
   outline: 2px solid var(--accent); outline-offset: 1px; }
 /* La petite loupe du geste : elle dit que la pastille cadre la carte. */
 .cmaps-aire-home-go { flex: 0 0 auto; margin-inline-start: 1px;
-  font-size: 10px; color: color-mix(in srgb, var(--accent) 72%, var(--text)); }
-.cmaps-aire-home-static > i:first-child { flex: 0 0 auto; font-size: 11px;
+  font-size: 12px; color: color-mix(in srgb, var(--accent) 72%, var(--text)); }
+.cmaps-aire-home-static > i:first-child { flex: 0 0 auto; font-size: 12px;
   color: var(--accent2); }
 
 /* La ligne qui dit où le pays se tient dans le monde, quand sa propre aire
@@ -1518,9 +1517,9 @@ button.cmaps-aire-complete[aria-pressed="true"] {
   flex: 1 1 220px; min-width: 0; padding: 4px 10px; border-radius: 11px;
   background: color-mix(in srgb, var(--accent) 9%, transparent);
   border: 1px dashed color-mix(in srgb, var(--accent) 34%, transparent);
-  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .03em;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .03em;
   line-height: 1.5; text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 72%, transparent); }
-.cmaps-aires-homeout > i { flex: 0 0 auto; margin-top: 1px; font-size: 10px;
+.cmaps-aires-homeout > i { flex: 0 0 auto; margin-top: 1px; font-size: 12px;
   color: var(--accent); }
 [dir="rtl"] .cmaps-aires-homeout { letter-spacing: 0; }

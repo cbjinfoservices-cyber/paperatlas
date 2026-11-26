@@ -51,7 +51,7 @@
 
 .gui-n {
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .18em;
   color: var(--accent2);
 }
@@ -171,7 +171,7 @@
 
 .gui-aside-mark + .gui-aside-mark { margin-inline-start: -5px; }
 
-.gui-aside-mark i { font-size: 11.5px; line-height: 1; color: inherit; }
+.gui-aside-mark i { font-size: 12px; line-height: 1; color: inherit; }
 
 .gui-aside-txt { min-width: 0; }
 
@@ -231,7 +231,7 @@
   .gui-aside-link { gap: 6px; font-size: 12px; }
   .gui-aside-marks { margin-top: 0; }
   .gui-aside-mark { width: 18px; height: 18px; }
-  .gui-aside-mark i { font-size: 10.5px; }
+  .gui-aside-mark i { font-size: 12px; }
   .gui-aside-mark + .gui-aside-mark { margin-inline-start: -4px; }
   /* La phrase prend la place qui reste sur sa ligne : la flèche et le mot ne
      peuvent donc plus tomber au hasard à côté d'elle. */
@@ -319,7 +319,7 @@
 
 .gui-step-n {
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .16em;
   color: var(--accent);
 }

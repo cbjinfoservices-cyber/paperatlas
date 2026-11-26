@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "PaperAtlas",
+    "slug": "paperatlas",
+    "version": "1.0.2",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "bundleIdentifier": "net.paperatlas.mobile",
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "net.paperatlas.mobile",
+      "versionCode": 2,
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "platforms": ["android", "ios"],
+    "plugins": ["expo-secure-store"],
+    "extra": {
+      "eas": {
+        "projectId": "834aa6d3-5178-4c2a-b671-fd458adc6cd0"
+      }
+    }
+  }
+}

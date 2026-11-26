@@ -1,24 +1,12 @@
 import { deviseCode } from '@/lib/pays';
+import { CURRENCY_CHANGES, roundedLocalAmount } from '../../supabase/functions/_shared/billingPricing';
 
 /**
- * The price of the paid plan where the board began, in Algerian dinars. Every
+ * The monthly price of the paid plan where the board began, in Algerian dinars. Every
  * other country reads it converted, so the tariff keeps a single source of
  * truth instead of a grid of figures nobody would remember to update.
  */
-export const PRIX_PREMIUM_DZD = 3500;
-
-type Change = {
-  /** What one Algerian dinar is worth in this money. */
-  parDinar: number;
-  /** The step the converted price settles on, so it reads like a price. */
-  pas: number;
-  /**
-   * The share of the reference price a market actually pays, so a country whose
-   * money is far from the dinar is not asked the same effort as the home market.
-   * 1 means « the plain rate ».
-   */
-  coef: number;
-};
+export const PRIX_PREMIUM_DZD = 1500;
 
 /**
  * Indicative rates of one Algerian dinar, in the money of each country the
@@ -28,30 +16,6 @@ type Change = {
  * Egypt, Syria or Sudan pay a fraction of the Algerian figure, the Gulf pays it
  * in full.
  */
-const CHANGES: Record<string, Change> = {
-  DZD: { parDinar: 1, pas: 100, coef: 1 },
-  SAR: { parDinar: 0.028, pas: 5, coef: 1 },
-  BHD: { parDinar: 0.00281, pas: 1, coef: 1 },
-  KMF: { parDinar: 3.4, pas: 100, coef: 0.5 },
-  DJF: { parDinar: 1.33, pas: 50, coef: 0.7 },
-  EGP: { parDinar: 0.358, pas: 25, coef: 0.45 },
-  AED: { parDinar: 0.0274, pas: 5, coef: 1 },
-  IQD: { parDinar: 9.78, pas: 500, coef: 0.7 },
-  JOD: { parDinar: 0.00529, pas: 1, coef: 1 },
-  KWD: { parDinar: 0.00229, pas: 1, coef: 1 },
-  LBP: { parDinar: 668, pas: 25000, coef: 0.6 },
-  LYD: { parDinar: 0.0362, pas: 1, coef: 1 },
-  MAD: { parDinar: 0.0739, pas: 10, coef: 1 },
-  MRU: { parDinar: 0.297, pas: 10, coef: 0.5 },
-  OMR: { parDinar: 0.00287, pas: 1, coef: 1 },
-  QAR: { parDinar: 0.0272, pas: 5, coef: 1 },
-  SOS: { parDinar: 4.26, pas: 100, coef: 0.4 },
-  SDG: { parDinar: 4.48, pas: 100, coef: 0.4 },
-  SYP: { parDinar: 97, pas: 500, coef: 0.35 },
-  TND: { parDinar: 0.0235, pas: 5, coef: 0.8 },
-  YER: { parDinar: 1.87, pas: 100, coef: 0.35 },
-};
-
 /**
  * The corridor a coefficient is kept in. A market may pay a share of the
  * reference price, never a token of it nor more than the home market: a
@@ -82,12 +46,7 @@ export function formaterMontant(valeur: number, pays?: string | null): string {
  * equal the difference of the two figures printed on the card.
  */
 export function montantArrondiDzd(montantDzd: number, pays?: string | null): number {
-  const change = CHANGES[deviseCode(pays)];
-  if (!montantDzd) return 0;
-  if (!change) return montantDzd;
-  const coef = borner(change.coef);
-  const brut = montantDzd * change.parDinar * coef;
-  return Math.max(change.pas, Math.round(brut / change.pas) * change.pas);
+  return roundedLocalAmount(montantDzd, deviseCode(pays));
 }
 
 /** A coefficient brought back inside the corridor the board allows. */
@@ -97,7 +56,7 @@ function borner(coef: number): number {
 
 /** The coefficient written for a market, before the corridor is applied. */
 export function coefficientDeclare(pays?: string | null): number {
-  return CHANGES[deviseCode(pays)]?.coef ?? 1;
+  return CURRENCY_CHANGES[deviseCode(pays)]?.coef ?? 1;
 }
 
 /** The share of the reference price a country pays: 1 when nothing is adjusted. */
@@ -145,13 +104,13 @@ export type PrixLocal = {
 
 /**
  * A dinar amount read in the money of one country, with its origin kept:
- * « 1 250 EGP » and « 3 500 DZD » side by side. The figure is rounded to the
+ * « 1 250 EGP » and « 1 500 DZD » side by side. The figure is rounded to the
  * step of that money, so a subscription never reads « 1 253,48 EGP ». A country
  * whose money has no rate keeps the dinar rather than showing an invented one.
  */
 export function prixLocal(montantDzd: number, pays?: string | null): PrixLocal {
   const code = deviseCode(pays);
-  const change = CHANGES[code];
+  const change = CURRENCY_CHANGES[code];
   const declare = change?.coef ?? 1;
   const coef = borner(declare);
   const hors = declare < COEF_MIN || declare > COEF_MAX;
@@ -168,7 +127,7 @@ export function prixLocal(montantDzd: number, pays?: string | null): PrixLocal {
 }
 
 /**
- * A dinar amount read in the money of one country: « 3 500 DZD », « 1 250 EGP »,
+ * A dinar amount read in the money of one country: « 1 500 DZD », « 1 250 EGP »,
  * « 8 KWD ». The same engine as `prixLocal`, for the places that only need the
  * figure and no origin line.
  */
@@ -177,31 +136,29 @@ export function prixEnDevise(montantDzd: number, pays?: string | null): string {
 }
 
 /**
- * Annual billing keeps twelve months on the calendar and charges eleven: the
- * last month of the year is offered to whoever pays for the whole year. Read
- * once here, so the card, the table, the detail panel and the exported file
- * can never tell three different stories about the same offer.
+ * Annual billing discounts the twelve-month price by 20%. Read once here, so
+ * the card, the table, the detail panel and the exported file agree.
  */
-export const MOIS_FACTURES_ANNUEL = 11;
+export const COEFFICIENT_ANNUEL = 0.8;
 
-/** Twelve months on the calendar, the offer included, read in one country. */
+/** Twelve months with the annual discount, read in one country's currency. */
 export function prixAnnuelLocal(montantDzd: number, pays?: string | null): PrixLocal {
-  return prixLocal(montantDzd * MOIS_FACTURES_ANNUEL, pays);
+  return prixLocal(montantDzd * 12 * COEFFICIENT_ANNUEL, pays);
 }
 
-/** The same year at the plain rate, so a reader can see what the offer saves. */
+/** The same year at the plain rate, so a reader can see what the discount saves. */
 export function prixAnnuelPleinLocal(montantDzd: number, pays?: string | null): PrixLocal {
   return prixLocal(montantDzd * 12, pays);
 }
 
 /**
- * What the year really costs in the reference money: eleven months at the
- * market's own coefficient, read in dinars rather than in its local money. Two
+ * What the discounted year costs in the reference money after the market's
+ * coefficient is applied, read in dinars rather than in its local money. Two
  * markets can then be added up — the same reasoning as the annual saving, so a
  * total never mixes currencies.
  */
 export function prixAnnuelDzd(montantDzd: number, pays?: string | null): number {
-  return Math.round(montantDzd * MOIS_FACTURES_ANNUEL * coefficientDePays(pays));
+  return Math.round(montantDzd * 12 * COEFFICIENT_ANNUEL * coefficientDePays(pays));
 }
 
 export type TarifMarche = {
@@ -210,7 +167,7 @@ export type TarifMarche = {
   /** What Premium reads there, money included: « 575 EGP ». */
   montant: string;
   /**
-   * The same plan over twelve months, the offered month already taken off, read
+   * The same plan over twelve months, the annual discount already applied, read
    * in the same money — for the markets that ask to be billed once a year
    * instead of month by month.
    */
@@ -222,7 +179,7 @@ export type TarifMarche = {
   /**
    * What the whole year saves against the reference price, in dinars: twelve
    * months read at the plain reference rate, minus what the market really pays
-   * for the same twelve months (eleven months at its own coefficient). Every
+   * for the same twelve months after the annual discount. Every
    * market answers the same question in the same money, so the sheet can rank
    * them — a figure read in the market's own money never could.
    */
@@ -255,19 +212,17 @@ export type TarifMarche = {
 export function tarifsParMarche(montantDzd: number, codes: readonly string[]): TarifMarche[] {
   return codes.map((code) => {
     const prix = prixLocal(montantDzd, code);
-    /* Twelve months at the plain rate, minus the eleven months the market
-       really pays, at its own coefficient. The offered month stays in the
-       figure, so a market with no discount still shows its one free month. */
+    /* Compare twelve months at the plain rate with the discounted annual
+       price, after applying the market's own coefficient. */
     const economieAnnuelleDzd = Math.round(
-      montantDzd * 12 - montantDzd * MOIS_FACTURES_ANNUEL * prix.coef,
+      montantDzd * 12 - montantDzd * 12 * COEFFICIENT_ANNUEL * prix.coef,
     );
     const economieAnnuelle = `${grouper(economieAnnuelleDzd)} DZD`;
     return {
       code,
       montant: prix.montant,
-      /* Eleven months charged for twelve, through the same engine and the same
-         coefficient, so an annual figure can never drift from the monthly one
-         above it. The plain year stays beside it for the detail panel. */
+      /* The discounted year uses the same engine and coefficient as the
+         monthly price, so the two figures cannot drift. */
       montantAnnuel: prixAnnuelLocal(montantDzd, code).montant,
       montantAnnuelPlein: prixAnnuelPleinLocal(montantDzd, code).montant,
       coef: prix.coef,

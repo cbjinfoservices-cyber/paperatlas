@@ -5,7 +5,7 @@
 
 /* ============ CONSOLE · SUIVI — LES DEUX PORTES DES PREUVES ============ */
 /* Sous le compteur des preuves, deux portes côte à côte : l'écran de
-   l'expéditeur, et Resend — le domaine et la clé se règlent là-bas. Le
+   l'expéditeur, et Brevo — le domaine et la clé se règlent là-bas. Le
    compteur dit où l'on en est ; les portes, où aller. */
 
 .suivi-preuves-col {
@@ -41,7 +41,7 @@
   border: 1px dashed color-mix(in srgb, var(--accent) 26%, transparent);
   background: color-mix(in srgb, var(--accent) 6%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   font-weight: 600;
   line-height: 1.7;
   letter-spacing: .02em;
@@ -50,7 +50,7 @@
   color: color-mix(in srgb, var(--accent) 88%, var(--text));
   transition: background .16s ease, border-color .16s ease;
 }
-.suivi-preuves-door i { font-size: 11px; }
+.suivi-preuves-door i { font-size: 12px; }
 
 .suivi-preuves-door:hover,
 .suivi-preuves-door:focus-visible {
@@ -65,7 +65,7 @@
 
 [dir='rtl'] .suivi-preuves-door {
   letter-spacing: 0;
-  font-size: 10.5px;
+  font-size: 12px;
 }
 
 /* Le petit repère « déjà ouverte », porté par les deux portes quand la carte de
@@ -81,22 +81,22 @@
   border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
   background: color-mix(in srgb, var(--accent) 17%, transparent);
   font-family: var(--font-label);
-  font-size: 8.5px;
+  font-size: 12px;
   line-height: 1.7;
   letter-spacing: .02em;
   white-space: nowrap;
   color: color-mix(in srgb, var(--accent) 95%, var(--text));
 }
-.suivi-door-seen i { font-size: 9px; }
+.suivi-door-seen i { font-size: 12px; }
 
 [dir='rtl'] .suivi-door-seen {
   letter-spacing: 0;
-  font-size: 9.5px;
+  font-size: 12px;
 }
 
 /* La même paire de portes, sous la ligne qui les ouvre : dans le rappel des
    chantiers comme sur la ligne du module, elle garde le même air et le même
-   ordre — expéditeur d'abord, Resend ensuite. */
+   ordre — expéditeur d'abord, Brevo ensuite. */
 .suivi-mail-doors {
   margin-block: 2px;
   align-self: start;
@@ -130,7 +130,7 @@
   opacity: .72;
   transition: opacity .16s ease, background .16s ease;
 }
-.suivi-door-seen-clear i { font-size: 9px; }
+.suivi-door-seen-clear i { font-size: 12px; }
 
 .suivi-door-seen-clear:hover,
 .suivi-door-seen-clear:focus-visible {
@@ -154,7 +154,7 @@
   border: 1px dashed color-mix(in srgb, var(--text) 20%, transparent);
   background: color-mix(in srgb, var(--text) 4%, transparent);
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 12px;
   line-height: 1.6;
   letter-spacing: .02em;
   font-variant-numeric: tabular-nums;
@@ -162,14 +162,14 @@
 }
 .suivi-door-cleared i {
   flex: none;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.6;
   color: color-mix(in srgb, var(--accent) 74%, var(--text));
 }
 
 [dir='rtl'] .suivi-door-cleared {
   letter-spacing: 0;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 /* ============ CONSOLE · SUIVI — LE REPÈRE DES MODULES À PORTE ========== */
@@ -197,7 +197,7 @@
   color: color-mix(in srgb, var(--accent) 92%, var(--text));
   cursor: help;
 }
-.suivi-mod-flag i { font-size: 10px; }
+.suivi-mod-flag i { font-size: 12px; }
 
 .suivi-mod-name {
   display: grid;
@@ -216,7 +216,7 @@
   border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
   background: color-mix(in srgb, var(--accent) 9%, transparent);
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   line-height: 1.6;
   letter-spacing: .02em;
@@ -225,7 +225,7 @@
   color: color-mix(in srgb, var(--accent) 92%, var(--text));
   transition: background .16s ease, border-color .16s ease;
 }
-.suivi-mod-go i { font-size: 11px; }
+.suivi-mod-go i { font-size: 12px; }
 .suivi-mod-go i:last-child { opacity: .72; }
 
 .suivi-mod-go:hover,
@@ -240,7 +240,7 @@
 
 [dir='rtl'] .suivi-mod-go {
   letter-spacing: 0;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 /* ===== CONSOLE · SUIVI — LES PORTES DE « CE QU'IL RESTE À FAIRE » ===== */
@@ -277,7 +277,7 @@
   border: 1px dashed color-mix(in srgb, var(--accent) 30%, transparent);
   background: color-mix(in srgb, var(--accent) 6%, transparent);
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   line-height: 1.6;
   letter-spacing: .02em;
@@ -287,7 +287,7 @@
   color: color-mix(in srgb, var(--accent) 88%, var(--text));
   transition: background .16s ease, border-color .16s ease;
 }
-.suivi-reste-jeton i { font-size: 11px; }
+.suivi-reste-jeton i { font-size: 12px; }
 
 .suivi-reste-jeton:hover,
 .suivi-reste-jeton:focus-visible {
@@ -308,7 +308,7 @@
 
 [dir='rtl'] .suivi-reste-jeton {
   letter-spacing: 0;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 /* Ce que la porte d'une ligne est devenue : empruntée un jour précis, ou
@@ -324,14 +324,14 @@
   border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
   background: color-mix(in srgb, var(--text) 4%, transparent);
   font-family: var(--font-label);
-  font-size: 8.5px;
+  font-size: 12px;
   line-height: 1.7;
   letter-spacing: .02em;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 62%, transparent);
 }
-.suivi-reste-etat i { font-size: 9px; }
+.suivi-reste-etat i { font-size: 12px; }
 .suivi-reste-etat[data-etat='vu'] {
   border-style: solid;
   border-color: color-mix(in srgb, var(--accent) 40%, transparent);
@@ -341,7 +341,7 @@
 
 [dir='rtl'] .suivi-reste-etat {
   letter-spacing: 0;
-  font-size: 9.5px;
+  font-size: 12px;
 }
 
 /* La petite gomme du repère « déjà empruntée » : elle n'oublie que la visite de
@@ -362,7 +362,7 @@
   opacity: .72;
   transition: opacity .16s ease, background .16s ease;
 }
-.suivi-reste-etat-clear i { font-size: 8.5px; }
+.suivi-reste-etat-clear i { font-size: 12px; }
 
 .suivi-reste-etat-clear:hover,
 .suivi-reste-etat-clear:focus-visible {
@@ -385,7 +385,7 @@
   border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
   background: color-mix(in srgb, var(--text) 3%, transparent);
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   line-height: 1.6;
   letter-spacing: .02em;
@@ -394,7 +394,7 @@
   cursor: pointer;
   transition: background .16s ease, border-color .16s ease, color .16s ease;
 }
-.suivi-reste-copie i { font-size: 11px; }
+.suivi-reste-copie i { font-size: 12px; }
 .suivi-reste-copie:hover,
 .suivi-reste-copie:focus-visible {
   border-color: color-mix(in srgb, var(--accent) 44%, transparent);
@@ -413,7 +413,7 @@
 
 [dir='rtl'] .suivi-reste-copie {
   letter-spacing: 0;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 /* Ce que la copie vient de faire, dit sous la liste : une ligne calme, qui
@@ -426,7 +426,7 @@
   padding: 4px 8px;
   border-radius: 7px;
   font-family: var(--font-label);
-  font-size: 10.5px;
+  font-size: 12px;
   line-height: 1.5;
 }
 .suivi-reste-copie-flash i {
@@ -446,7 +446,7 @@
 }
 
 [dir='rtl'] .suivi-reste-copie-flash {
-  font-size: 11px;
+  font-size: 12px;
 }
 
 /* Le second jeton, « déjà empruntées » : même famille que celui des portes
@@ -484,10 +484,10 @@
   align-items: baseline;
   gap: 4px 10px;
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.5;
   font-variant-numeric: tabular-nums;
-  color: color-mix(in srgb, var(--text) 55%, transparent);
+  color: color-mix(in srgb, var(--text) 66%, transparent);
   cursor: help;
 }
 
@@ -501,7 +501,7 @@
   background: color-mix(in srgb, var(--text) 4%, transparent);
   color: color-mix(in srgb, var(--text) 66%, transparent);
 }
-.suivi-reste-oublis-compte i { font-size: 11px; }
+.suivi-reste-oublis-compte i { font-size: 12px; }
 
 .suivi-reste-oublis[data-etat='vu'] .suivi-reste-oublis-compte {
   border-style: solid;
@@ -511,16 +511,16 @@
 }
 
 .suivi-reste-oublis-jour {
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .01em;
 }
 
 [dir='rtl'] .suivi-reste-oublis {
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0;
 }
 [dir='rtl'] .suivi-reste-oublis-jour {
-  font-size: 10.5px;
+  font-size: 12px;
 }
 
 /* Où les oublis se sont concentrés : le carnet rangé par chantier du plan,
@@ -533,13 +533,13 @@
   align-items: baseline;
   gap: 3px 8px;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.5;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 50%, transparent);
 }
 .suivi-reste-oublis-chantiers > i {
-  font-size: 10.5px;
+  font-size: 12px;
   opacity: .7;
 }
 .suivi-reste-oublis-chantiers-lbl {
@@ -586,14 +586,14 @@
   align-items: baseline;
   gap: 5px;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.5;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--accent) 88%, var(--text));
 }
 .suivi-reste-oublis-focus > i {
   flex: none;
-  font-size: 10.5px;
+  font-size: 12px;
   opacity: .8;
 }
 .suivi-reste-oublis-focus span {
@@ -615,7 +615,7 @@
   opacity: .76;
   transition: opacity .16s ease, background .16s ease;
 }
-.suivi-reste-oublis-focus-clear i { font-size: 10px; }
+.suivi-reste-oublis-focus-clear i { font-size: 12px; }
 .suivi-reste-oublis-focus-clear:hover,
 .suivi-reste-oublis-focus-clear:focus-visible {
   opacity: 1;
@@ -626,7 +626,7 @@
   outline-offset: 1px;
 }
 [dir='rtl'] .suivi-reste-oublis-focus {
-  font-size: 10.5px;
+  font-size: 12px;
 }
 .suivi-reste-oublis-chantier[data-fort='yes'] {
   border-style: solid;
@@ -635,7 +635,7 @@
   color: color-mix(in srgb, var(--accent) 88%, var(--text));
 }
 [dir='rtl'] .suivi-reste-oublis-chantiers {
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: 0;
 }
 [dir='rtl'] .suivi-reste-oublis-chantier {
@@ -653,7 +653,7 @@
   border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
   background: color-mix(in srgb, var(--text) 3%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   font-weight: 600;
   line-height: 1.6;
   letter-spacing: .02em;
@@ -662,7 +662,7 @@
   cursor: pointer;
   transition: background .16s ease, border-color .16s ease, color .16s ease;
 }
-.suivi-reste-oublis-csv i { font-size: 10.5px; }
+.suivi-reste-oublis-csv i { font-size: 12px; }
 
 .suivi-reste-oublis-csv:hover,
 .suivi-reste-oublis-csv:focus-visible {
@@ -690,7 +690,7 @@
   opacity: .78;
   transition: opacity .16s ease, background .16s ease, color .16s ease;
 }
-.suivi-reste-oublis-clear i { font-size: 10px; }
+.suivi-reste-oublis-clear i { font-size: 12px; }
 
 .suivi-reste-oublis-clear:hover,
 .suivi-reste-oublis-clear:focus-visible {
@@ -705,7 +705,7 @@
 
 [dir='rtl'] .suivi-reste-oublis-csv {
   letter-spacing: 0;
-  font-size: 10.5px;
+  font-size: 12px;
 }
 
 /* Le carnet, geste par geste : sous le compte, chaque oubli se lit sur sa
@@ -725,13 +725,13 @@
   flex-wrap: wrap;
   gap: 4px;
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 11px;
   line-height: 1.5;
   letter-spacing: .02em;
   color: color-mix(in srgb, var(--text) 42%, transparent);
 }
 .suivi-reste-oublis-journal-lbl > i {
-  font-size: 10px;
+  font-size: 11px;
   opacity: .8;
 }
 
@@ -755,7 +755,7 @@
   cursor: pointer;
   transition: background .16s ease, border-color .16s ease, color .16s ease;
 }
-.suivi-reste-oublis-journal-tri i { font-size: 10px; }
+.suivi-reste-oublis-journal-tri i { font-size: 12px; }
 
 .suivi-reste-oublis-journal-tri:hover,
 .suivi-reste-oublis-journal-tri:focus-visible {
@@ -794,7 +794,7 @@
   opacity: .78;
   transition: opacity .16s ease, background .16s ease;
 }
-.suivi-reste-oublis-journal-tri-clear i { font-size: 10px; }
+.suivi-reste-oublis-journal-tri-clear i { font-size: 12px; }
 
 .suivi-reste-oublis-journal-tri-clear:hover,
 .suivi-reste-oublis-journal-tri-clear:focus-visible {
@@ -823,14 +823,14 @@
   border: 1px dashed color-mix(in srgb, var(--text) 13%, transparent);
   background: color-mix(in srgb, var(--text) 2%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.6;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 58%, transparent);
 }
 .suivi-reste-oublis-geste > i {
   flex: none;
-  font-size: 10px;
+  font-size: 12px;
   opacity: .68;
 }
 
@@ -908,7 +908,7 @@
   transition: opacity .16s ease, background .16s ease, color .16s ease;
 }
 .suivi-reste-oublis-geste-clear i {
-  font-size: 9.5px;
+  font-size: 12px;
 }
 
 .suivi-reste-oublis-geste-clear:hover,
@@ -925,7 +925,7 @@
 [dir='rtl'] .suivi-reste-oublis-journal-lbl,
 [dir='rtl'] .suivi-reste-oublis-geste {
   letter-spacing: 0;
-  font-size: 10.5px;
+  font-size: 11px;
 }
 
 /* Les portes d'un chantier déjà empruntées, sous sa ligne : un compte calme,
@@ -936,14 +936,14 @@
   align-items: center;
   gap: 4px;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.5;
   letter-spacing: .02em;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 58%, transparent);
   cursor: help;
 }
-.suivi-part-vues i { flex: none; font-size: 10.5px; }
+.suivi-part-vues i { flex: none; font-size: 12px; }
 
 .suivi-part-vues[data-etat='vu'] {
   color: color-mix(in srgb, var(--accent) 90%, var(--text));
@@ -951,7 +951,7 @@
 
 [dir='rtl'] .suivi-part-vues {
   letter-spacing: 0;
-  font-size: 10.5px;
+  font-size: 12px;
 }
 
 /* La petite gomme du rappel d'un chantier : elle ne rend que les visites des
@@ -973,7 +973,7 @@
   opacity: .72;
   transition: opacity .16s ease, background .16s ease;
 }
-.suivi-part-vues-clear i { font-size: 8.5px; }
+.suivi-part-vues-clear i { font-size: 12px; }
 
 .suivi-part-vues-clear:hover,
 .suivi-part-vues-clear:focus-visible {
@@ -997,7 +997,7 @@
   align-items: baseline;
   gap: 3px 7px;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.5;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 46%, transparent);
@@ -1020,7 +1020,7 @@
   cursor: pointer;
   transition: background .16s ease, border-color .16s ease, color .16s ease;
 }
-.suivi-reste-oublis-semaine-jeton i { font-size: 10.5px; }
+.suivi-reste-oublis-semaine-jeton i { font-size: 12px; }
 
 .suivi-reste-oublis-semaine-jeton:hover,
 .suivi-reste-oublis-semaine-jeton:focus-visible {
@@ -1042,24 +1042,24 @@
 }
 
 .suivi-reste-oublis-semaine-note {
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: .01em;
   color: color-mix(in srgb, var(--text) 40%, transparent);
 }
 
 .suivi-reste-oublis-semaine-on {
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: .01em;
   color: color-mix(in srgb, var(--accent) 86%, var(--text));
 }
 
 [dir='rtl'] .suivi-reste-oublis-semaine {
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: 0;
 }
 [dir='rtl'] .suivi-reste-oublis-semaine-note,
 [dir='rtl'] .suivi-reste-oublis-semaine-on {
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0;
 }
 
@@ -1073,14 +1073,14 @@
   align-items: baseline;
   gap: 5px;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.5;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 48%, transparent);
 }
 .suivi-reste-oublis-jetons > i {
   flex: none;
-  font-size: 10.5px;
+  font-size: 12px;
   opacity: .74;
 }
 .suivi-reste-oublis-jetons[data-on='yes'] {
@@ -1106,7 +1106,7 @@
   opacity: .78;
   transition: opacity .16s ease, background .16s ease;
 }
-.suivi-reste-oublis-jetons-clear i { font-size: 10px; }
+.suivi-reste-oublis-jetons-clear i { font-size: 12px; }
 
 .suivi-reste-oublis-jetons-clear:hover,
 .suivi-reste-oublis-jetons-clear:focus-visible {
@@ -1119,7 +1119,7 @@
 }
 
 [dir='rtl'] .suivi-reste-oublis-jetons {
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: 0;
 }
 
@@ -1174,7 +1174,7 @@
 }
 
 [dir='rtl'] .suivi-reste-oublis-journal-lbl-btn {
-  font-size: 10.5px;
+  font-size: 11px;
   letter-spacing: 0;
 }
 
@@ -1206,7 +1206,7 @@
   border: 1px dotted color-mix(in srgb, var(--text) 15%, transparent);
   background: color-mix(in srgb, var(--text) 2%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.6;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 58%, transparent);
@@ -1214,7 +1214,7 @@
 }
 .suivi-reste-oublis-ecran > i {
   flex: none;
-  font-size: 10px;
+  font-size: 12px;
   opacity: .68;
 }
 
@@ -1292,7 +1292,7 @@
   transition: opacity .16s ease, background .16s ease, color .16s ease;
 }
 .suivi-reste-oublis-ecran-clear i {
-  font-size: 9.5px;
+  font-size: 12px;
 }
 
 .suivi-reste-oublis-ecran-clear:hover,
@@ -1308,7 +1308,7 @@
 
 [dir='rtl'] .suivi-reste-oublis-ecran {
   letter-spacing: 0;
-  font-size: 10.5px;
+  font-size: 12px;
 }
 
 /* Le jeton de relecture du dépli : il ne garde que les écrans qui tiennent
@@ -1322,7 +1322,7 @@
   align-items: baseline;
   gap: 3px 7px;
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 12px;
   line-height: 1.5;
   letter-spacing: .02em;
   font-variant-numeric: tabular-nums;
@@ -1346,7 +1346,7 @@
   cursor: pointer;
   transition: background .16s ease, border-color .16s ease, color .16s ease;
 }
-.suivi-reste-oublis-ecrans-jeton-btn i { font-size: 10px; }
+.suivi-reste-oublis-ecrans-jeton-btn i { font-size: 12px; }
 
 .suivi-reste-oublis-ecrans-jeton-btn:hover,
 .suivi-reste-oublis-ecrans-jeton-btn:focus-visible {
@@ -1368,16 +1368,16 @@
 }
 
 .suivi-reste-oublis-ecrans-jeton-on {
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: .01em;
   color: color-mix(in srgb, var(--accent) 86%, var(--text));
 }
 
 [dir='rtl'] .suivi-reste-oublis-ecrans-jeton {
   letter-spacing: 0;
-  font-size: 10px;
+  font-size: 12px;
 }
 [dir='rtl'] .suivi-reste-oublis-ecrans-jeton-on {
   letter-spacing: 0;
-  font-size: 10px;
+  font-size: 12px;
 }

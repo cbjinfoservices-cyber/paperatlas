@@ -249,7 +249,7 @@ main .dir-countline .arrival-brief {
 
 main .dir-countline .week-pulse { margin-inline-start: 4px; gap: 8px; }
 main .dir-countline .week-pulse-bars { height: 20px; }
-main .dir-countline .week-pulse-cap { font-size: 9px; }
+main .dir-countline .week-pulse-cap { font-size: 11px; }
 
 /* Les décennies : leur barre devient un simple segment de la ligne, ses puces
    glissent sur une seule rangée au lieu de s'empiler. */
@@ -264,7 +264,7 @@ main .dir-countline .genre-tally {
   background: none;
 }
 
-main .dir-countline .genre-tally-lab { flex: 0 0 auto; font-size: 8.5px; }
+main .dir-countline .genre-tally-lab { flex: 0 0 auto; font-size: 11px; }
 
 main .dir-countline .genre-tally-list {
   flex: 1 1 auto;
@@ -285,7 +285,7 @@ main .dir-countline .genre-tally-chip {
 }
 
 main .dir-countline .genre-tally-chip.has-parts { padding: 3px 8px 4px; }
-main .dir-countline .genre-tally-parts { font-size: 8.5px; gap: 0 6px; }
+main .dir-countline .genre-tally-parts { font-size: 11px; gap: 0 6px; }
 
 /* Le périmètre : ses puces et sa petite porte de partage, sans encadré. */
 main .dir-countline .dir-scope {
@@ -513,7 +513,7 @@ main .dir-countline .dir-scope-copy { margin-inline-start: 4px; padding: 3px 9px
   }
 
   main .board-stick .board-nudge-n {
-    font-size: 10.5px;
+    font-size: 11px;
     font-weight: 700;
     font-variant-numeric: tabular-nums;
   }
@@ -614,7 +614,7 @@ main .board-countline .arrival-brief {
 
 main .board-countline .week-pulse { margin-inline-start: 4px; gap: 8px; }
 main .board-countline .week-pulse-bars { height: 20px; }
-main .board-countline .week-pulse-cap { font-size: 9px; }
+main .board-countline .week-pulse-cap { font-size: 11px; }
 
 /* L'étendue : deux chiffres seulement, le pays et la division, sans encadré. */
 .board-spread {
@@ -717,7 +717,7 @@ main .board-countline .cand-week-counts .cand-fresh {
 
 main .board-countline .cand-week-counts .week-pulse { margin-inline-start: 2px; gap: 8px; }
 main .board-countline .cand-week-counts .week-pulse-bars { height: 20px; }
-main .board-countline .cand-week-counts .week-pulse-cap { font-size: 9px; }
+main .board-countline .cand-week-counts .week-pulse-cap { font-size: 11px; }
 
 @media (max-width: 780px) {
   main .board-countline .arrival-brief { flex: 1 1 100%; }

@@ -16,4 +16,6 @@
   <url><loc>https://paperatlas.net/plan-du-site</loc><priority>0.5</priority></url>
   <url><loc>https://paperatlas.net/mentions-legales</loc><priority>0.3</priority></url>
   <url><loc>https://paperatlas.net/confidentialite</loc><priority>0.3</priority></url>
+  <url><loc>https://paperatlas.net/cgu</loc><priority>0.3</priority></url>
+  <url><loc>https://paperatlas.net/cgv</loc><priority>0.3</priority></url>
 </urlset>

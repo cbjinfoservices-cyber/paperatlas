@@ -6,7 +6,7 @@
 .cand-name { margin: 0; font-size: 15.5px; line-height: 1.35; overflow-wrap: anywhere; }
 /* A profile younger than a month: a quiet outline chip, never a loud sticker. */
 .cand-new { flex: 0 0 auto; padding: 2px 8px; border-radius: 999px;
-  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
   color: var(--accent); white-space: nowrap;
   background: color-mix(in srgb, var(--accent) 14%, transparent);
   border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent); }

@@ -12,7 +12,7 @@
   background: color-mix(in srgb, var(--accent) 11%, transparent);
   color: var(--accent2);
   font-family: var(--font-label);
-  font-size: 10.5px;
+  font-size: 11px;
   letter-spacing: .06em;
   white-space: nowrap;
 }

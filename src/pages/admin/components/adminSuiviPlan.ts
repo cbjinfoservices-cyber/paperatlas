@@ -111,7 +111,7 @@ export const SUIVI_MODULE_RESTE: Record<string, string> = {
   'Base de données, RLS, stockage':
     'Repasser les politiques RLS table par table, et les buckets de stockage.',
   'E-mails transactionnels au nom de PaperAtlas':
-    'Clé RESEND_API_KEY et domaine RESEND_FROM_DOMAIN dans Supabase, puis domaine vérifié chez Resend : la console lit désormais cet état au lieu de le supposer.',
+    'Clé BREVO_API_KEY et domaine MAIL_FROM_DOMAIN dans Supabase, puis domaine vérifié chez Brevo : la console lit désormais cet état au lieu de le supposer.',
   'Paiements et abonnements en ligne':
     'Brancher le prestataire de paiement, puis la facture, la relance d’échéance et la résiliation.',
   'Contenus arabe et anglais, mentions légales':
@@ -152,7 +152,7 @@ export const SUIVI_CHANTIERS: SuiviChantier[] = [
        e-mails » des Paramètres porte l'état réel et le bouton de test. */
     phases: [5],
     reste:
-      'Resend : la clé, le domaine vérifié, puis les trois tests réels — confirmation, mot de passe, rappel B2B.',
+      'Brevo : la clé, le domaine vérifié, puis les trois tests réels — confirmation, mot de passe, rappel B2B.',
     lien: '/admin?section=params#expediteur',
     ecran: 'Paramètres › Expéditeur des e-mails',
   },
@@ -495,7 +495,7 @@ export const SUIVI_RESTE: SuiviLivrable[] = [
   { texte: 'Compteur des accusés en attente posé dans l’en-tête de la console, visible depuis tous les onglets, et rappel au-delà de 24 heures', fait: true },
   { texte: 'Les accusés en retard portent leur repère dans la file, et la carte nomme le plus ancien dépôt encore sans accusé', fait: true },
   { texte: 'Le CSV des visites rendues porte une ligne de la part que les écrans du lot réuni de l’année fermée et du trimestre en cours représentent dans tout le carnet', fait: true },
-  { texte: 'Le domaine d’envoi interrogé chez Resend depuis la console : vérifié, en attente ou introuvable, avec le jour de la vérification', fait: true },
+  { texte: 'Le domaine d’envoi interrogé chez Brevo depuis la console : vérifié, en attente ou introuvable, avec le jour de la vérification', fait: true },
   { texte: 'Compteur des accusés de réception dans la console — envoyés, en attente, partis aujourd’hui —, puis file des renvois avec leur bouton', fait: true },
   { texte: 'Le survol du jeton « année fermée et trimestre en cours » nomme le délai médian de chaque fenêtre, côte à côte', fait: true },
   { texte: 'Le survol du jeton « mois dernier et trimestre en cours » nomme le délai médian de chaque fenêtre, côte à côte', fait: true },
@@ -675,8 +675,8 @@ export const SUIVI_RESTE: SuiviLivrable[] = [
   { texte: 'Bloc de copie unique des cinq valeurs du SMTP, avec son lien direct vers Authentication', fait: true },
   { texte: 'Modèles d’authentification relus en arabe sur téléphone : sens de lecture des blocs isolé', fait: true },
   { texte: 'Rappel B2B ajouté à la liste de contrôle, avec son test dédié', fait: true },
-  { texte: 'Clé RESEND_API_KEY et domaine RESEND_FROM_DOMAIN ajoutés dans Supabase', fait: false, lien: '/admin?section=params#expediteur', ecran: 'Paramètres › Expéditeur des e-mails' },
-  { texte: 'Domaine vérifié chez Resend, puis test réel reçu', fait: false, lien: '/admin?section=params#expediteur', ecran: 'Paramètres › Expéditeur des e-mails' },
+  { texte: 'Clé BREVO_API_KEY et domaine MAIL_FROM_DOMAIN ajoutés dans Supabase', fait: false, lien: '/admin?section=params#expediteur', ecran: 'Paramètres › Expéditeur des e-mails' },
+  { texte: 'Domaine vérifié chez Brevo, puis test réel reçu', fait: false, lien: '/admin?section=params#expediteur', ecran: 'Paramètres › Expéditeur des e-mails' },
   { texte: 'Écran « Paiements » : abonnements non encaissables signalés', fait: true },
   { texte: 'Écran « Paiements » : filtre par motif, encaissement posé sur la fiche', fait: true },
   { texte: 'Écran « Paiements » : export CSV du tableau, motif filtré dans le nom du fichier', fait: true },
@@ -1064,8 +1064,8 @@ export const SUIVI_PHASES: SuiviPhase[] = [
       { texte: 'Bloc de copie unique des cinq valeurs du SMTP, et lien direct vers l’écran Authentication', fait: true },
       { texte: 'Modèles d’authentification relus en arabe sur téléphone, sens de lecture des blocs isolé', fait: true },
       { texte: 'Rappel B2B dans la liste de contrôle, avec son test dédié', fait: true },
-      { texte: 'Domaine d’envoi vérifié chez Resend depuis la console, et non plus supposé sur les seuls secrets', fait: true },
-      { texte: 'Clé et domaine ajoutés dans Supabase, domaine vérifié chez Resend', fait: false },
+      { texte: 'Domaine d’envoi vérifié chez Brevo depuis la console, et non plus supposé sur les seuls secrets', fait: true },
+      { texte: 'Clé et domaine ajoutés dans Supabase, domaine vérifié chez Brevo', fait: false },
     ],
   },
   {
@@ -1137,7 +1137,7 @@ export const SUIVI_BLOCAGES: SuiviBlocage[] = [
   {
     titre: 'Domaine d’envoi',
     texte:
-      'Resend n’a encore ni clé ni domaine vérifié côté Supabase : les confirmations restent bloquées. La console lit désormais l’état réel du domaine chez Resend (« Vérifier chez Resend »), et la procédure est décrite pas à pas au §10 du plan.',
+      'Brevo n’a encore ni clé ni domaine vérifié côté Supabase : les confirmations restent bloquées. La console lit désormais l’état réel du domaine chez Brevo (« Vérifier chez Brevo »), et la procédure est décrite pas à pas au §10 du plan.',
     etat: 'attente',
   },
   {

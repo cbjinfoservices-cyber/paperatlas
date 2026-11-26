@@ -41,7 +41,7 @@
   text-decoration: none;
   color: var(--muted);
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .1em;
   text-transform: uppercase;
   transition: color .2s ease;
@@ -60,18 +60,18 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 80%, transparent);
 }
 
 [dir='rtl'] .dir-trail-link,
-[dir='rtl'] .dir-trail-here { letter-spacing: 0; font-size: 11px; }
+[dir='rtl'] .dir-trail-here { letter-spacing: 0; font-size: 12px; }
 
 @media (max-width: 700px) {
   .dir-trail-link,
-  .dir-trail-here { font-size: 9px; letter-spacing: .06em; }
+  .dir-trail-here { font-size: 12px; letter-spacing: .06em; }
   [dir='rtl'] .dir-trail-link,
-  [dir='rtl'] .dir-trail-here { font-size: 10.5px; }
+  [dir='rtl'] .dir-trail-here { font-size: 12px; }
 }

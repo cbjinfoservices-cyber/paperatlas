@@ -15,7 +15,7 @@
 .mine-flag-rubrique { color: var(--accent2);
   border: 1px solid color-mix(in srgb, var(--accent) 46%, transparent);
   background: color-mix(in srgb, var(--accent) 12%, transparent); }
-.mine-flag-rubrique i { font-size: 11px; color: var(--accent); }
+.mine-flag-rubrique i { font-size: 12px; color: var(--accent); }
 /* Le repère est aussi une porte : il ouvre la modification du dépôt, le
    curseur déjà posé dans le champ de la rubrique — la série se corrige
 d'une ligne à l'autre sans repasser par le tableau. */
@@ -23,7 +23,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   cursor: pointer;
   text-align: start;
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: .1em;
   text-transform: uppercase;
   transition: background .18s ease, border-color .18s ease, color .18s ease;
@@ -39,7 +39,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
 .mine-alert-rubrique { border-style: solid;
   border-color: color-mix(in srgb, var(--accent) 40%, transparent); }
 .mine-rubrique-hint { display: block; margin-top: 6px; line-height: 1.5;
-  font-size: 11.5px; color: var(--accent2); }
+  font-size: 12px; color: var(--accent2); }
 [dir="rtl"] .mine-flag-rubrique { letter-spacing: 0; }
 
 /* La liste des rubriques de la bonne famille, dépliée sous la ligne : le
@@ -62,7 +62,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   margin: 0;
   min-width: 0;
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .08em;
   text-transform: uppercase;
   line-height: 1.5;
@@ -105,7 +105,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   color: var(--text);
   font: inherit;
   font-family: var(--font-label);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.35;
   white-space: nowrap;
   cursor: pointer;
@@ -121,7 +121,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
 .mine-rubrique-pick-note {
   margin: 0;
   min-width: 0;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--text) 62%, transparent);
   overflow-wrap: break-word;
@@ -134,7 +134,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   padding: 0 4px;
   border-radius: 999px;
   background: color-mix(in srgb, var(--accent) 18%, transparent);
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   letter-spacing: .02em;
@@ -159,7 +159,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   gap: 6px;
   margin: 0;
   min-width: 0;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--text) 70%, transparent);
   overflow-wrap: break-word;
@@ -178,7 +178,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   gap: 6px;
   margin: 0;
   min-width: 0;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--text) 78%, transparent);
   overflow-wrap: break-word;
@@ -209,7 +209,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   border-radius: 12px;
   background: color-mix(in srgb, var(--accent) 6%, transparent);
   font-family: var(--font-label);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--text) 80%, transparent);
 }
@@ -235,7 +235,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
   border-radius: 999px;
   background: color-mix(in srgb, var(--surface) 70%, transparent);
-  font-size: 10px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 72%, transparent);
@@ -279,7 +279,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   background: color-mix(in srgb, var(--surface) 80%, transparent);
   color: var(--accent2);
   font-family: var(--font-label);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.4;
   text-align: start;
   white-space: normal;
@@ -325,7 +325,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
 .mine-rub-filter-fix-last i { font-size: 12px; }
 /* Ce que la croix aura remonté une fois la série terminée : un petit compte
    dans la porte, lisible avant le geste. */
-.mine-rub-filter-fix-last b { font-size: 9.5px; font-weight: 600; line-height: 1; }
+.mine-rub-filter-fix-last b { font-size: 12px; font-weight: 600; line-height: 1; }
 .mine-rub-filter-fix-last:hover {
   border-color: color-mix(in srgb, var(--accent) 70%, transparent);
   background: color-mix(in srgb, var(--accent) 16%, transparent);
@@ -339,7 +339,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   padding: 0 7px;
   border-radius: 999px;
   background: color-mix(in srgb, var(--accent) 14%, transparent);
-  font-size: 10px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   line-height: 1.7;
   color: color-mix(in srgb, var(--text) 76%, transparent);
@@ -355,7 +355,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 10.5px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--text) 64%, transparent);
 }
 .mine-rub-filter-fix-main:hover > .mine-rub-filter-fix-name {
@@ -372,7 +372,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   margin: 4px 0 0;
   padding: 0 0 0 12px;
   font-family: var(--font-label);
-  font-size: 10.5px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--text) 62%, transparent);
 }
@@ -392,7 +392,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   cursor: pointer;
   transition: color .18s ease;
 }
-.mine-rub-filter-end-name > i { flex: 0 0 auto; font-size: 11px; color: var(--accent); }
+.mine-rub-filter-end-name > i { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
 .mine-rub-filter-end-name > span { flex: 0 0 auto; }
 .mine-rub-filter-end-name > b {
   min-width: 0;
@@ -412,7 +412,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   min-width: 0;
   margin: 0;
 }
-.mine-rub-filter-end-intact > i { flex: 0 0 auto; font-size: 11px; color: color-mix(in srgb, var(--text) 44%, transparent); }
+.mine-rub-filter-end-intact > i { flex: 0 0 auto; font-size: 12px; color: color-mix(in srgb, var(--text) 44%, transparent); }
 .mine-rub-filter-end-intact > span { min-width: 0; overflow-wrap: break-word; }
 .mine-rub-filter-end-intact.is-end { color: color-mix(in srgb, var(--accent2) 82%, transparent); }
 .mine-rub-filter-end-family {
@@ -423,12 +423,12 @@ d'une ligne à l'autre sans repasser par le tableau. */
   border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
   border-radius: 999px;
   background: color-mix(in srgb, var(--surface) 72%, transparent);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.7;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 66%, transparent);
 }
-.mine-rub-filter-end-family i { flex: 0 0 auto; font-size: 10px; color: var(--accent); }
+.mine-rub-filter-end-family i { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
 .mine-rub-filter-end-family b {
   font-variant-numeric: tabular-nums;
   font-weight: 600;
@@ -448,7 +448,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   border-radius: 999px;
   background: color-mix(in srgb, var(--accent) 8%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.7;
   text-align: start;
   color: color-mix(in srgb, var(--text) 70%, transparent);
@@ -466,17 +466,17 @@ d'une ligne à l'autre sans repasser par le tableau. */
 .mine-rub-filter-end-from:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .mine-rub-filter-end-from-door {
   flex: 0 0 auto;
-  font-size: 9px;
+  font-size: 12px;
   color: var(--accent);
   opacity: .55;
   transition: opacity .18s ease, transform .18s ease;
 }
 .mine-rub-filter-end-from:hover .mine-rub-filter-end-from-door { opacity: 1; transform: translateX(1px); }
-.mine-rub-filter-end-from i { flex: 0 0 auto; font-size: 10px; color: var(--accent); }
+.mine-rub-filter-end-from i { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
 .mine-rub-filter-end-from span { min-width: 0; overflow-wrap: break-word; }
 .mine-rub-filter-end-from b {
   flex: 0 0 auto;
-  font-size: 9.5px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   font-weight: 600;
   color: var(--accent2);
@@ -487,7 +487,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   flex: 0 0 auto;
   padding-inline-start: 6px;
   border-inline-start: 1px dotted color-mix(in srgb, var(--accent) 42%, transparent);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.5;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 52%, transparent);
@@ -501,13 +501,13 @@ d'une ligne à l'autre sans repasser par le tableau. */
   flex: 0 0 auto;
   padding-inline-start: 6px;
   border-inline-start: 1px dotted color-mix(in srgb, var(--accent) 30%, transparent);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.5;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 46%, transparent);
 }
-.mine-rub-filter-end-from-left i { font-size: 9px; color: color-mix(in srgb, var(--accent) 62%, transparent); }
+.mine-rub-filter-end-from-left i { font-size: 12px; color: color-mix(in srgb, var(--accent) 62%, transparent); }
 .mine-rub-filter-end-from-left b { font-weight: 600; color: color-mix(in srgb, var(--text) 62%, transparent); }
 /* Les valeurs d'origine que le nouveau resserrement laisse encore hors de
    l'écran : un compte de rubriques, distinct des dépôts écartés à côté. */
@@ -518,13 +518,13 @@ d'une ligne à l'autre sans repasser par le tableau. */
   flex: 0 0 auto;
   padding-inline-start: 6px;
   border-inline-start: 1px dotted color-mix(in srgb, var(--accent) 30%, transparent);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.5;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 50%, transparent);
 }
-.mine-rub-filter-end-from-still i { font-size: 9px; color: color-mix(in srgb, var(--accent) 66%, transparent); }
+.mine-rub-filter-end-from-still i { font-size: 12px; color: color-mix(in srgb, var(--accent) 66%, transparent); }
 /* La valeur d'origine restée hors écran la plus lourde : son nom et son
    compte, à côté du nombre de valeurs écartées. */
 .mine-rub-filter-end-from-heavy {
@@ -534,13 +534,13 @@ d'une ligne à l'autre sans repasser par le tableau. */
   flex: 0 0 auto;
   padding-inline-start: 6px;
   border-inline-start: 1px dotted color-mix(in srgb, var(--accent) 30%, transparent);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.5;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 62%, transparent);
 }
-.mine-rub-filter-end-from-heavy i { font-size: 9px; color: color-mix(in srgb, var(--accent) 80%, transparent); }
+.mine-rub-filter-end-from-heavy i { font-size: 12px; color: color-mix(in srgb, var(--accent) 80%, transparent); }
 /* La même valeur, devenue porte : un clic ramène ses dépôts à l'écran, la
    liste resserrée sur elle seule. */
 .mine-rub-filter-end-from-heavy-door {
@@ -565,7 +565,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   color: var(--accent2);
 }
 .mine-rub-filter-end-from-heavy-door-i {
-  font-size: 9px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--accent) 54%, transparent);
   transition: color .18s ease, transform .18s ease;
 }
@@ -591,7 +591,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   border-radius: 999px;
   background: color-mix(in srgb, var(--surface) 86%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.7;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 58%, transparent);
@@ -611,7 +611,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   color: var(--accent2);
 }
 .mine-rub-filter-end-from-aside-door:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.mine-rub-filter-end-from-aside-door i { flex: 0 0 auto; font-size: 9px; color: var(--accent); }
+.mine-rub-filter-end-from-aside-door i { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
 .mine-rub-filter-end-from-aside-door span {
   min-width: 0;
   overflow: hidden;
@@ -629,7 +629,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   flex: 0 0 auto;
   padding-inline-start: 6px;
   border-inline-start: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.5;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 54%, transparent);
@@ -655,7 +655,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   background: color-mix(in srgb, var(--surface) 78%, transparent);
   color: var(--accent2);
   font-family: var(--font-label);
-  font-size: 10.5px;
+  font-size: 12px;
   line-height: 1.4;
   white-space: nowrap;
   cursor: pointer;
@@ -702,11 +702,11 @@ d'une ligne à l'autre sans repasser par le tableau. */
   border-radius: 999px;
   background: color-mix(in srgb, var(--surface) 74%, transparent);
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--text) 66%, transparent);
 }
-.mine-rubrique-restore > i { flex: 0 0 auto; font-size: 11px; color: color-mix(in srgb, var(--text) 46%, transparent); }
+.mine-rubrique-restore > i { flex: 0 0 auto; font-size: 12px; color: color-mix(in srgb, var(--text) 46%, transparent); }
 .mine-rubrique-restore-txt { min-width: 0; overflow-wrap: break-word; }
 /* Ce que la porte du rappel rendra à l'écran, famille par famille : deux
    petits comptes, l'un après l'autre, avant le geste. */
@@ -726,12 +726,12 @@ d'une ligne à l'autre sans repasser par le tableau. */
   border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
   border-radius: 999px;
   background: color-mix(in srgb, var(--surface) 72%, transparent);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.7;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 68%, transparent);
 }
-.mine-rubrique-restore-family i { flex: 0 0 auto; font-size: 10px; color: var(--accent); }
+.mine-rubrique-restore-family i { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
 .mine-rubrique-restore-family b {
   font-variant-numeric: tabular-nums;
   font-weight: 600;
@@ -747,14 +747,14 @@ d'une ligne à l'autre sans repasser par le tableau. */
   background: none;
   color: var(--accent2);
   font: inherit;
-  font-size: 10px;
+  font-size: 12px;
   white-space: nowrap;
   cursor: pointer;
   text-decoration: underline;
   text-underline-offset: 2px;
   transition: color .18s ease;
 }
-.mine-rubrique-restore-door i { font-size: 11px; }
+.mine-rubrique-restore-door i { font-size: 12px; }
 .mine-rubrique-restore-door:hover { color: var(--accent); }
 .mine-rubrique-restore-door:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 /* La croix du rappel : elle oublie le dernier effacement et retire sa porte,
@@ -774,7 +774,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   cursor: pointer;
   transition: border-color .18s ease, background .18s ease, color .18s ease;
 }
-.mine-rubrique-restore-forget i { font-size: 10px; }
+.mine-rubrique-restore-forget i { font-size: 12px; }
 .mine-rubrique-restore-forget:hover {
   border-color: color-mix(in srgb, var(--text) 40%, transparent);
   background: color-mix(in srgb, var(--text) 10%, transparent);
@@ -797,7 +797,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
   background: color-mix(in srgb, var(--surface) 72%, transparent);
   font: inherit;
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.7;
   cursor: pointer;
   transition: border-color .18s ease, background .18s ease, color .18s ease;
@@ -824,13 +824,13 @@ d'une ligne à l'autre sans repasser par le tableau. */
   margin: 2px 0 0;
   padding: 0 2px;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.6;
   color: color-mix(in srgb, var(--text) 62%, transparent);
 }
 .mine-rubrique-restore-undoback > i {
   flex: 0 0 auto;
-  font-size: 10px;
+  font-size: 12px;
   color: var(--accent);
 }
 .mine-rubrique-restore-undoback > span { min-width: 0; overflow-wrap: break-word; }
@@ -844,11 +844,11 @@ d'une ligne à l'autre sans repasser par le tableau. */
   margin: 4px 0 0;
   padding: 0 2px;
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--text) 58%, transparent);
 }
-.mine-rubrique-undo-count i { flex: 0 0 auto; font-size: 11px; color: var(--accent); }
+.mine-rubrique-undo-count i { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
 .mine-rubrique-undo-count span { min-width: 0; overflow-wrap: break-word; }
 /* Combien de temps l'effacement est resté oublié avant d'être défait : posé
    à côté du jour du geste, derrière un filet discret. */
@@ -856,7 +856,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   flex: 0 0 auto;
   padding-inline-start: 6px;
   border-inline-start: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.5;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 52%, transparent);
@@ -870,13 +870,13 @@ d'une ligne à l'autre sans repasser par le tableau. */
   flex: 0 0 auto;
   padding-inline-start: 6px;
   border-inline-start: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.5;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--accent2) 72%, transparent);
 }
-.mine-rubrique-undo-avg i { font-size: 9px; color: var(--accent); }
+.mine-rubrique-undo-avg i { font-size: 12px; color: var(--accent); }
 /* Le geste resté le plus longtemps oublié, à côté de la moyenne : le pire
    écart se lit sans quitter le compte. */
 .mine-rubrique-undo-max {
@@ -886,13 +886,13 @@ d'une ligne à l'autre sans repasser par le tableau. */
   flex: 0 0 auto;
   padding-inline-start: 6px;
   border-inline-start: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.5;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--accent2) 58%, transparent);
 }
-.mine-rubrique-undo-max i { font-size: 9px; color: color-mix(in srgb, var(--accent) 72%, transparent); }
+.mine-rubrique-undo-max i { font-size: 12px; color: color-mix(in srgb, var(--accent) 72%, transparent); }
 /* La valeur médiane du temps oublié : entre la moyenne et le pire geste,
    elle se lit dans la même écriture que les deux autres. */
 .mine-rubrique-undo-med {
@@ -902,13 +902,13 @@ d'une ligne à l'autre sans repasser par le tableau. */
   flex: 0 0 auto;
   padding-inline-start: 6px;
   border-inline-start: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.5;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--accent2) 64%, transparent);
 }
-.mine-rubrique-undo-med i { font-size: 9px; color: color-mix(in srgb, var(--accent) 84%, transparent); }
+.mine-rubrique-undo-med i { font-size: 12px; color: color-mix(in srgb, var(--accent) 84%, transparent); }
 /* L'écart entre la médiane et la moyenne : le signe dit de quel côté la
    série penche, le chiffre dit de combien. */
 .mine-rubrique-undo-gap {
@@ -918,13 +918,13 @@ d'une ligne à l'autre sans repasser par le tableau. */
   flex: 0 0 auto;
   padding-inline-start: 6px;
   border-inline-start: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.5;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--accent2) 66%, transparent);
 }
-.mine-rubrique-undo-gap i { font-size: 9px; color: var(--accent); }
+.mine-rubrique-undo-gap i { font-size: 12px; color: var(--accent); }
 .mine-rubrique-undo-gap.is-down { color: color-mix(in srgb, var(--text) 48%, transparent); }
 .mine-rubrique-undo-gap.is-down i { color: color-mix(in srgb, var(--accent) 58%, transparent); }
 /* Le geste qui tire la série : nommé avec sa durée dès que l'écart dépasse
@@ -936,15 +936,15 @@ d'une ligne à l'autre sans repasser par le tableau. */
   flex: 0 0 auto;
   padding-inline-start: 6px;
   border-inline-start: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.5;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--accent2) 78%, transparent);
 }
-.mine-rubrique-undo-pull i { font-size: 9px; color: var(--accent); }
+.mine-rubrique-undo-pull i { font-size: 12px; color: var(--accent); }
 .mine-rubrique-undo-pull-dir {
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: .02em;
   color: color-mix(in srgb, var(--text) 46%, transparent);
 }
@@ -967,13 +967,13 @@ d'une ligne à l'autre sans repasser par le tableau. */
   border-radius: 999px;
   background: transparent;
   font: inherit;
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.6;
   white-space: nowrap;
   color: color-mix(in srgb, var(--accent) 88%, transparent);
   cursor: pointer;
 }
-.mine-rubrique-undo-pull-door i { flex: 0 0 auto; font-size: 9px; }
+.mine-rubrique-undo-pull-door i { flex: 0 0 auto; font-size: 12px; }
 .mine-rubrique-undo-pull-door:hover {
   border-style: solid;
   border-color: var(--accent);
@@ -992,10 +992,10 @@ d'une ligne à l'autre sans repasser par le tableau. */
   border-radius: 999px;
   background: color-mix(in srgb, var(--accent) 16%, transparent);
   font-variant-numeric: tabular-nums;
-  font-size: 9px;
+  font-size: 12px;
   color: var(--accent2);
 }
-.mine-rubrique-undo-pull-door-n i { font-size: 8px; }
+.mine-rubrique-undo-pull-door-n i { font-size: 12px; }
 [dir="rtl"] .mine-rubrique-undo-pull-door i:last-child { transform: scaleX(-1); }
 /* La petite gomme du compte : elle le remet à zéro et efface le jour du
    dernier geste, sans toucher au rappel du dernier effacement. */
@@ -1014,7 +1014,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   cursor: pointer;
   transition: border-color .18s ease, background .18s ease, color .18s ease;
 }
-.mine-rubrique-undo-reset i { font-size: 10px; }
+.mine-rubrique-undo-reset i { font-size: 12px; }
 .mine-rubrique-undo-reset:hover {
   border-color: color-mix(in srgb, var(--text) 40%, transparent);
   background: color-mix(in srgb, var(--text) 10%, transparent);
@@ -1034,7 +1034,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   border-radius: 999px;
   background: color-mix(in srgb, var(--surface) 80%, transparent);
   font: inherit;
-  font-size: 10px;
+  font-size: 12px;
   white-space: nowrap;
   color: var(--accent2);
   cursor: pointer;
@@ -1057,12 +1057,12 @@ d'une ligne à l'autre sans repasser par le tableau. */
   border: 1px dashed color-mix(in srgb, var(--accent) 46%, transparent);
   border-radius: 999px;
   background: color-mix(in srgb, var(--accent) 9%, transparent);
-  font-size: 10px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
   color: var(--accent2);
 }
-.mine-rub-filter-hors i { flex: 0 0 auto; font-size: 11px; color: var(--accent); }
+.mine-rub-filter-hors i { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
 [dir="rtl"] .mine-rub-filter { letter-spacing: 0; }
 [dir="rtl"] .mine-rubrique-pick-head { letter-spacing: 0; text-transform: none; }
 [dir="rtl"] .mine-rubrique-opt { letter-spacing: 0; }
@@ -1123,7 +1123,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   background: color-mix(in srgb, var(--surface) 80%, transparent);
   color: var(--accent2);
   font-family: var(--font-label);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.4;
   white-space: nowrap;
   cursor: pointer;
@@ -1155,13 +1155,13 @@ d'une ligne à l'autre sans repasser par le tableau. */
   gap: 4px;
   padding-inline-start: 10px;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.5;
   letter-spacing: .04em;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 58%, transparent);
 }
-.mine-rubrique-orig-count i { flex: 0 0 auto; font-size: 10px; color: var(--accent); }
+.mine-rubrique-orig-count i { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
 /* Les valeurs d'origine qui reviennent dans les deux familles : une ligne à
    part, sous les portes de famille, chacune avec ses deux comptes. */
 .mine-rubrique-shared {
@@ -1177,11 +1177,11 @@ d'une ligne à l'autre sans repasser par le tableau. */
   border-radius: 10px;
   background: color-mix(in srgb, var(--surface) 72%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--text) 62%, transparent);
 }
-.mine-rubrique-shared > i { flex: 0 0 auto; font-size: 10px; color: var(--accent); }
+.mine-rubrique-shared > i { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
 .mine-rubrique-shared > span { min-width: 0; overflow-wrap: break-word; }
 .mine-rubrique-shared-list {
   display: flex;
@@ -1199,7 +1199,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   border-radius: 999px;
   background: color-mix(in srgb, var(--surface) 84%, transparent);
   font-family: inherit;
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.7;
   color: inherit;
   white-space: nowrap;
@@ -1220,7 +1220,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
 .mine-rubrique-shared-value:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .mine-rubrique-shared-door {
   flex: 0 0 auto;
-  font-size: 9px;
+  font-size: 12px;
   color: var(--accent);
   opacity: .5;
   transition: opacity .18s ease, transform .18s ease;
@@ -1234,7 +1234,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 58%, transparent);
 }
-.mine-rubrique-shared-side i { flex: 0 0 auto; font-size: 9px; color: var(--accent); }
+.mine-rubrique-shared-side i { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
 /* Le total des deux familles réunies, posé après les deux comptes. */
 .mine-rubrique-shared-total {
   display: inline-flex;
@@ -1246,7 +1246,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 48%, transparent);
 }
-.mine-rubrique-shared-total i { flex: 0 0 auto; font-size: 8px; color: color-mix(in srgb, var(--accent) 60%, transparent); }
+.mine-rubrique-shared-total i { flex: 0 0 auto; font-size: 12px; color: color-mix(in srgb, var(--accent) 60%, transparent); }
 .mine-rubrique-shared-total b { font-weight: 600; color: var(--accent2); }
 /* Le jeton de la valeur et le bouton qui copie son total se tiennent
    ensemble, sans que le second entre dans la porte du premier. */
@@ -1267,14 +1267,14 @@ d'une ligne à l'autre sans repasser par le tableau. */
   border-radius: 999px;
   background: none;
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 12px;
   line-height: 1.7;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 50%, transparent);
   cursor: pointer;
   transition: border-color .18s ease, background .18s ease, color .18s ease;
 }
-.mine-rubrique-shared-copy i { flex: 0 0 auto; font-size: 9px; color: color-mix(in srgb, var(--accent) 66%, transparent); }
+.mine-rubrique-shared-copy i { flex: 0 0 auto; font-size: 12px; color: color-mix(in srgb, var(--accent) 66%, transparent); }
 .mine-rubrique-shared-copy:hover {
   border-style: solid;
   border-color: var(--accent);
@@ -1329,7 +1329,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   margin-inline-start: 2px;
   padding-inline-start: 3px;
   border-inline-start: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
-  font-size: 8.5px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 46%, transparent);
@@ -1360,7 +1360,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
 }
 .mine-rubrique-shared-sep i {
   flex: 0 0 auto;
-  font-size: 10px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--text) 42%, transparent);
 }
 .mine-rubrique-shared-sep-opt {
@@ -1374,7 +1374,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   border-radius: 999px;
   background: none;
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1;
   color: color-mix(in srgb, var(--text) 52%, transparent);
   cursor: pointer;
@@ -1406,7 +1406,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
 }
 .mine-rubrique-shared-langs > i {
   flex: 0 0 auto;
-  font-size: 10px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--accent) 64%, transparent);
 }
 .mine-rubrique-shared-langs-opt {
@@ -1420,7 +1420,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   border-radius: 999px;
   background: none;
   font-family: var(--font-label);
-  font-size: 8.5px;
+  font-size: 12px;
   letter-spacing: .04em;
   line-height: 1;
   color: color-mix(in srgb, var(--text) 52%, transparent);
@@ -1462,7 +1462,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   cursor: pointer;
   transition: border-color .18s ease, background .18s ease, color .18s ease;
 }
-.mine-rubrique-shared-copy-erase i { font-size: 9px; }
+.mine-rubrique-shared-copy-erase i { font-size: 12px; }
 .mine-rubrique-shared-copy-erase:hover {
   border-color: var(--accent);
   background: color-mix(in srgb, var(--accent) 12%, transparent);
@@ -1480,13 +1480,13 @@ d'une ligne à l'autre sans repasser par le tableau. */
   min-width: 0;
   padding: 1px 0;
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 12px;
   line-height: 1.6;
   color: color-mix(in srgb, var(--text) 46%, transparent);
 }
 .mine-rubrique-shared-preview i {
   flex: 0 0 auto;
-  font-size: 9px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--accent) 60%, transparent);
 }
 .mine-rubrique-shared-preview-label {
@@ -1508,7 +1508,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   flex: 0 0 auto;
   padding-inline-start: 6px;
   border-inline-start: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
-  font-size: 8.5px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
   letter-spacing: .02em;
@@ -1528,7 +1528,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
 }
 .mine-rubrique-shared-limit > i {
   flex: 0 0 auto;
-  font-size: 10px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--text) 42%, transparent);
 }
 .mine-rubrique-shared-limit-opt {
@@ -1542,7 +1542,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   border-radius: 999px;
   background: none;
   font-family: var(--font-label);
-  font-size: 8.5px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   line-height: 1;
   color: color-mix(in srgb, var(--text) 52%, transparent);
@@ -1569,11 +1569,11 @@ d'une ligne à l'autre sans repasser par le tableau. */
   flex: 0 0 auto;
   padding-inline-start: 6px;
   border-inline-start: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
-  font-size: 8.5px;
+  font-size: 12px;
   white-space: nowrap;
   letter-spacing: .02em;
 }
-.mine-rubrique-shared-preview-fit i { flex: 0 0 auto; font-size: 9px; }
+.mine-rubrique-shared-preview-fit i { flex: 0 0 auto; font-size: 12px; }
 .mine-rubrique-shared-preview-fit.is-fits {
   color: color-mix(in srgb, var(--accent) 78%, transparent);
 }
@@ -1599,13 +1599,13 @@ d'une ligne à l'autre sans repasser par le tableau. */
   cursor: pointer;
   transition: border-color .18s ease, background .18s ease, color .18s ease;
 }
-.mine-rubrique-shared-preview-fold i { font-size: 9px; }
+.mine-rubrique-shared-preview-fold i { font-size: 12px; }
 /* Ce que le repli retire à la ligne, en caractères : le chiffre se lit sur la
    porte elle-même, avant le clic. */
 .mine-rubrique-shared-preview-fold-gain {
   flex: 0 0 auto;
   font-family: var(--font-label);
-  font-size: 8px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   line-height: 1;
   white-space: nowrap;
@@ -1636,7 +1636,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   padding: 0 5px;
   border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
   border-radius: 999px;
-  font-size: 8.5px;
+  font-size: 12px;
   line-height: 1.6;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 46%, transparent);
@@ -1664,7 +1664,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   margin-inline-start: 3px;
   padding: 0 4px;
   border-radius: 999px;
-  font-size: 8.5px;
+  font-size: 12px;
   white-space: nowrap;
   background: color-mix(in srgb, var(--accent) 13%, transparent);
   color: color-mix(in srgb, var(--accent2) 82%, transparent);
@@ -1682,14 +1682,14 @@ d'une ligne à l'autre sans repasser par le tableau. */
   border-radius: 999px;
   background: none;
   font-family: var(--font-label);
-  font-size: 8.5px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   line-height: 1;
   color: color-mix(in srgb, var(--accent) 82%, transparent);
   cursor: pointer;
   transition: border-color .18s ease, background .18s ease, color .18s ease;
 }
-.mine-rubrique-shared-limit-next i { flex: 0 0 auto; font-size: 9px; }
+.mine-rubrique-shared-limit-next i { flex: 0 0 auto; font-size: 12px; }
 .mine-rubrique-shared-limit-next b { font-weight: 600; }
 .mine-rubrique-shared-limit-next:hover {
   border-style: solid;
@@ -1710,13 +1710,13 @@ d'une ligne à l'autre sans repasser par le tableau. */
   padding: 0 3px;
   border: 1px dotted color-mix(in srgb, var(--accent) 32%, transparent);
   border-radius: 999px;
-  font-size: 8px;
+  font-size: 12px;
   line-height: 1.5;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--accent) 74%, transparent);
 }
-.mine-rubrique-shared-copy-lastlimit i { font-size: 8px; }
+.mine-rubrique-shared-copy-lastlimit i { font-size: 12px; }
 /* Le récapitulatif sous le relevé : le nombre de valeurs, la longueur de la
    ligne et les deux comptes de copies, dans une seule ligne calme — et la
    même phrase copiable d’un geste. */
@@ -1731,13 +1731,13 @@ d'une ligne à l'autre sans repasser par le tableau. */
   padding-top: 4px;
   border-top: 1px dotted color-mix(in srgb, var(--text) 16%, transparent);
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--text) 52%, transparent);
 }
 .mine-rubrique-shared-recap > i {
   flex: 0 0 auto;
-  font-size: 9px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--accent) 60%, transparent);
 }
 .mine-rubrique-shared-recap-label {
@@ -1759,7 +1759,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
 }
 .mine-rubrique-shared-recap-part i {
   flex: 0 0 auto;
-  font-size: 8px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--accent) 54%, transparent);
 }
 .mine-rubrique-shared-recap-copy {
@@ -1795,7 +1795,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   color: color-mix(in srgb, var(--text) 52%, transparent);
   cursor: pointer;
 }
-.mine-rubrique-shared-folds-erase i { font-size: 9px; }
+.mine-rubrique-shared-folds-erase i { font-size: 12px; }
 /* Le petit compte de la gomme des replis : combien de fois elle a servi, et
    le jour du dernier geste — discret, il reste lisible une fois la gomme
    disparue, quand plus aucun repli n'est tenu. */
@@ -1808,11 +1808,11 @@ d'une ligne à l'autre sans repasser par le tableau. */
   padding: 0 4px;
   border: 1px dotted color-mix(in srgb, var(--text) 22%, transparent);
   border-radius: 999px;
-  font-size: 9px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 50%, transparent);
 }
-.mine-rubrique-shared-folds-erase-count i { font-size: 8.5px; }
+.mine-rubrique-shared-folds-erase-count i { font-size: 12px; }
 /* Ce que la gomme des replis rendra à l’écran, famille de valeurs par famille :
    un rappel discret, posé juste avant elle, avec ses deux comptes. */
 .mine-rubrique-shared-folds-back {
@@ -1822,7 +1822,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   gap: 3px;
   flex: 0 0 auto;
   margin-inline-start: 2px;
-  font-size: 9px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 54%, transparent);
 }
@@ -1838,7 +1838,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   padding-inline-start: 4px;
   border-inline-start: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
 }
-.mine-rubrique-shared-folds-back i { font-size: 9px; opacity: 0.8; }
+.mine-rubrique-shared-folds-back i { font-size: 12px; opacity: 0.8; }
 .mine-rubrique-shared-folds-erase:hover {
   border-style: solid;
   border-color: var(--accent);
@@ -1863,7 +1863,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
 }
 .mine-rubrique-shared-foldat > i {
   flex: 0 0 auto;
-  font-size: 10px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--accent) 58%, transparent);
 }
 .mine-rubrique-shared-foldat-opt {
@@ -1877,7 +1877,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   border-radius: 999px;
   background: none;
   font-family: var(--font-label);
-  font-size: 8.5px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   line-height: 1;
   color: color-mix(in srgb, var(--text) 52%, transparent);
@@ -1910,7 +1910,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   border-radius: 999px;
   background: color-mix(in srgb, var(--surface) 80%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.7;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
@@ -1918,7 +1918,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   cursor: pointer;
   transition: border-color .18s ease, background .18s ease;
 }
-.mine-rubrique-shared-more i { flex: 0 0 auto; font-size: 9px; color: var(--accent); }
+.mine-rubrique-shared-more i { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
 .mine-rubrique-shared-more:hover {
   border-style: solid;
   border-color: var(--accent);
@@ -1937,14 +1937,14 @@ d'une ligne à l'autre sans repasser par le tableau. */
   border-radius: 999px;
   background: none;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.7;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 56%, transparent);
   cursor: pointer;
   transition: border-color .18s ease, background .18s ease, color .18s ease;
 }
-.mine-rubrique-shared-fold i { flex: 0 0 auto; font-size: 10px; color: color-mix(in srgb, var(--accent) 66%, transparent); }
+.mine-rubrique-shared-fold i { flex: 0 0 auto; font-size: 12px; color: color-mix(in srgb, var(--accent) 66%, transparent); }
 .mine-rubrique-shared-fold b {
   font-weight: 600;
   font-variant-numeric: tabular-nums;
@@ -1956,7 +1956,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   flex: 0 0 auto;
   padding-inline-start: 4px;
   border-inline-start: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
-  font-size: 9px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 54%, transparent);
 }
@@ -1982,12 +1982,12 @@ d'une ligne à l'autre sans repasser par le tableau. */
   padding: 0 3px;
   border: 1px dashed color-mix(in srgb, var(--accent) 44%, transparent);
   border-radius: 999px;
-  font-size: 8px;
+  font-size: 12px;
   line-height: 1.5;
   white-space: nowrap;
   color: color-mix(in srgb, var(--accent) 82%, transparent);
 }
-.mine-rubrique-shared-copy-kept i { font-size: 8px; }
+.mine-rubrique-shared-copy-kept i { font-size: 12px; }
 [dir="rtl"] .mine-rubrique-shared { letter-spacing: 0; }
 /* La porte « autres rubriques » de chaque famille : le même resserrement que
    la ligne de la fin, ouvert depuis le rappel hors type. */
@@ -2003,14 +2003,14 @@ d'une ligne à l'autre sans repasser par le tableau. */
   border-radius: 999px;
   background: color-mix(in srgb, var(--surface) 76%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.6;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 66%, transparent);
   cursor: pointer;
   transition: border-color .18s ease, background .18s ease, color .18s ease;
 }
-.mine-rubrique-orig-rest i { flex: 0 0 auto; font-size: 10px; color: var(--accent); }
+.mine-rubrique-orig-rest i { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
 .mine-rubrique-orig-rest:hover,
 .mine-rubrique-orig-rest.is-on {
   border-color: var(--accent);
@@ -2028,12 +2028,12 @@ d'une ligne à l'autre sans repasser par le tableau. */
   padding: 0 6px;
   border-radius: 999px;
   background: color-mix(in srgb, var(--accent) 14%, transparent);
-  font-size: 9px;
+  font-size: 12px;
   line-height: 1.7;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 74%, transparent);
 }
-.mine-rubrique-orig-rest-n i { flex: 0 0 auto; font-size: 9px; color: var(--accent); }
+.mine-rubrique-orig-rest-n i { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
 .mine-rubrique-orig-rest-n b { font-weight: 600; color: var(--accent2); }
 /* Ce que la porte « autres rubriques » écarte : la valeur la plus habitée de
    la famille et son compte, à côté des dépôts qu'elle garde. */
@@ -2044,7 +2044,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   min-width: 0;
   padding-inline-start: 6px;
   border-inline-start: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
-  font-size: 9px;
+  font-size: 12px;
   line-height: 1.6;
   white-space: nowrap;
   overflow: hidden;
@@ -2065,14 +2065,14 @@ d'une ligne à l'autre sans repasser par le tableau. */
   flex: 0 0 auto;
   padding-inline-start: 6px;
   border-inline-start: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.4;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 52%, transparent);
 }
 .mine-rubrique-orig-rest-still i {
   flex: 0 0 auto;
-  font-size: 9px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--accent) 64%, transparent);
 }
 .mine-rubrique-orig-rest:hover .mine-rubrique-orig-rest-still,
@@ -2089,7 +2089,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   min-width: 0;
   max-width: 190px;
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.4;
   color: color-mix(in srgb, var(--text) 66%, transparent);
   overflow-wrap: break-word;
@@ -2097,7 +2097,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
 .mine-rubrique-family-orig i {
   flex: 0 0 auto;
   margin-top: 1px;
-  font-size: 10px;
+  font-size: 12px;
   color: var(--accent);
 }
 .mine-rubrique-family-orig span { min-width: 0; }
@@ -2123,7 +2123,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   color: color-mix(in srgb, var(--text) 76%, transparent);
   font: inherit;
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.5;
   text-align: start;
   cursor: pointer;
@@ -2162,7 +2162,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   background: color-mix(in srgb, var(--surface) 80%, transparent);
   color: var(--accent2);
   font-family: var(--font-label);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.4;
   text-align: start;
   cursor: pointer;
@@ -2188,7 +2188,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   padding-inline-start: 4px;
   min-width: 0;
   max-width: 100%;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--text) 68%, transparent);
   overflow-wrap: break-word;
@@ -2280,7 +2280,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  font-size: 11.5px;
+  font-size: 12px;
   white-space: nowrap;
 }
 .mine-draft-clear i { font-size: 13px; }
@@ -2296,7 +2296,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   align-items: flex-start;
   gap: 6px;
   margin: 2px 0 0;
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--text) 80%, transparent);
   overflow-wrap: break-word;
@@ -2357,7 +2357,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   border-radius: 999px;
   border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
   background: color-mix(in srgb, var(--accent) 7%, transparent);
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.4;
   color: color-mix(in srgb, var(--text) 78%, transparent);
 }
@@ -2374,7 +2374,7 @@ d'une ligne à l'autre sans repasser par le tableau. */
   background: color-mix(in srgb, var(--surface) 80%, transparent);
   color: var(--text);
   font-family: var(--font-label);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.35;
   text-decoration: none;
   cursor: pointer;
@@ -2406,7 +2406,7 @@ a.mine-cand:focus-visible { outline: 2px solid var(--accent); outline-offset: 2p
   background: color-mix(in srgb, var(--accent) 9%, transparent);
   color: var(--accent2);
   font-family: var(--font-label);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.35;
   text-decoration: none;
   cursor: pointer;
@@ -2502,7 +2502,7 @@ a.mine-cand:focus-visible { outline: 2px solid var(--accent); outline-offset: 2p
   background: color-mix(in srgb, var(--accent) 8%, transparent);
   color: var(--accent2);
   font-family: var(--font-label);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.3;
   white-space: nowrap;
   cursor: pointer;
@@ -2550,7 +2550,7 @@ a.mine-cand:focus-visible { outline: 2px solid var(--accent); outline-offset: 2p
   background: none;
   color: var(--muted);
   font: inherit;
-  font-size: 11.5px;
+  font-size: 12px;
   white-space: nowrap;
   cursor: pointer;
   text-decoration: underline;
@@ -2577,12 +2577,12 @@ a.mine-cand:focus-visible { outline: 2px solid var(--accent); outline-offset: 2p
   border-radius: 999px;
   background: color-mix(in srgb, var(--surface) 70%, transparent);
   font-family: var(--font-label);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.35;
   color: color-mix(in srgb, var(--text) 74%, transparent);
 }
 .mine-cand-reply i { flex: 0 0 auto; font-size: 12px; color: color-mix(in srgb, var(--accent) 80%, transparent); }
-.mine-cand-reply b { font-size: 11.5px; font-variant-numeric: tabular-nums; color: var(--text); }
+.mine-cand-reply b { font-size: 12px; font-variant-numeric: tabular-nums; color: var(--text); }
 .mine-cand-reply-label { overflow-wrap: break-word; }
 
 /* ============ SALAIRE JAMAIS PRÉCISÉ ============ */
@@ -2598,7 +2598,7 @@ a.mine-cand:focus-visible { outline: 2px solid var(--accent); outline-offset: 2p
   color: color-mix(in srgb, var(--text) 78%, transparent);
   transition: background .18s ease, border-color .18s ease, color .18s ease;
 }
-.mine-flag-salary i { font-size: 11px; color: color-mix(in srgb, var(--text) 52%, transparent); }
+.mine-flag-salary i { font-size: 12px; color: color-mix(in srgb, var(--text) 52%, transparent); }
 .mine-flag-salary:hover {
   border-color: color-mix(in srgb, var(--accent) 54%, transparent);
   background: color-mix(in srgb, var(--accent) 9%, transparent);
@@ -2630,7 +2630,7 @@ a.mine-cand:focus-visible { outline: 2px solid var(--accent); outline-offset: 2p
   background: color-mix(in srgb, var(--accent) 11%, transparent);
   transition: background .18s ease, border-color .18s ease;
 }
-.mine-flag-bare i { font-size: 11px; color: var(--accent); }
+.mine-flag-bare i { font-size: 12px; color: var(--accent); }
 .mine-flag-bare:hover {
   background: color-mix(in srgb, var(--accent) 18%, transparent);
   border-color: color-mix(in srgb, var(--accent) 68%, transparent);
@@ -2690,7 +2690,7 @@ a.mine-cand:focus-visible { outline: 2px solid var(--accent); outline-offset: 2p
   border: 1px dashed color-mix(in srgb, var(--accent) 38%, transparent);
   border-radius: 11px;
   background: color-mix(in srgb, var(--accent) 7%, transparent);
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.55;
   color: color-mix(in srgb, var(--text) 82%, transparent);
   overflow-wrap: break-word;

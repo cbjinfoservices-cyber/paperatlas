@@ -1,6 +1,6 @@
 import type { Lang } from './dict';
 
-export type SeoPage = 'home' | 'annuaire' | 'annonces' | 'emplois' | 'entreprise' | 'auteur' | 'deposer' | 'b2b' | 'marche' | 'guichets' | 'compte' | 'offres' | 'suivi' | 'legal' | 'privacy' | 'sitemap' | 'world';
+export type SeoPage = 'home' | 'annuaire' | 'annonces' | 'emplois' | 'entreprise' | 'auteur' | 'deposer' | 'b2b' | 'marche' | 'guichets' | 'compte' | 'offres' | 'suivi' | 'legal' | 'privacy' | 'cgu' | 'cgv' | 'sitemap' | 'world';
 
 type Entry = {
   title: string;
@@ -82,6 +82,40 @@ export const seoMeta: Record<SeoPage, Record<Lang, Entry>> = {
       title: 'Privacy policy | PaperAtlas',
       description: 'The data PaperAtlas keeps, why and for how long, who receives it, and how to exercise your rights of access, correction or erasure.',
       keywords: 'PaperAtlas privacy, personal data, rights, cookies, retention',
+    },
+  },
+  cgu: {
+    fr: {
+      title: 'Conditions d’utilisation | PaperAtlas',
+      description: 'Les règles d’accès à PaperAtlas, de publication des contenus par les membres et de mise en relation entre structures et ateliers.',
+      keywords: 'conditions d’utilisation PaperAtlas, CGU, règles, membres, publication',
+    },
+    ar: {
+      title: 'شروط الاستخدام | PaperAtlas',
+      description: 'قواعد الدخول إلى PaperAtlas ونشر الأعضاء لمحتواهم والتواصل بين الجهات والورشات.',
+      keywords: 'شروط الاستخدام PaperAtlas, الأعضاء, النشر, قواعد',
+    },
+    en: {
+      title: 'Terms of use | PaperAtlas',
+      description: 'The rules for access to PaperAtlas, publishing content by members, and connections between studios and workshops.',
+      keywords: 'PaperAtlas terms of use, members, publishing rules, connections',
+    },
+  },
+  cgv: {
+    fr: {
+      title: 'Conditions de vente | PaperAtlas',
+      description: 'Essai de quatorze jours, prix selon le pays, renouvellement, paiement Stripe ou PayPal, résiliation et remboursement pendant l’essai.',
+      keywords: 'conditions de vente PaperAtlas, CGV, abonnement, essai, remboursement',
+    },
+    ar: {
+      title: 'شروط البيع | PaperAtlas',
+      description: 'تجربة أربعة عشر يومًا، وأسعار حسب البلد، والتجديد، والدفع عبر Stripe أو PayPal، والإلغاء والاسترداد خلال التجربة.',
+      keywords: 'شروط البيع PaperAtlas, الاشتراك, التجربة, الاسترداد',
+    },
+    en: {
+      title: 'Terms of sale | PaperAtlas',
+      description: 'A fourteen-day trial, prices by country, renewal, payment by Stripe or PayPal, cancellation and refunds during the trial.',
+      keywords: 'PaperAtlas terms of sale, subscription, trial, refund',
     },
   },
   suivi: {
@@ -291,17 +325,17 @@ export const seoMeta: Record<SeoPage, Record<Lang, Entry>> = {
   offres: {
     fr: {
       title: 'Formules & tarifs : Annuaire, Premium | PaperAtlas',
-      description: 'Trois formules comparées : annuaire gratuit, Premium à 3 500 DZD par mois lu dans la monnaie du pays, Institutions sur devis. Prix, inclusions et FAQ.',
+      description: 'Trois formules comparées : annuaire gratuit, Premium à 1 500 DZD par mois lu dans la monnaie du pays, Institutions sur devis. Prix, inclusions et FAQ.',
       keywords: 'formules et tarifs PaperAtlas, tarif annuaire imprimerie, abonnement Premium, devis institutions',
     },
     ar: {
       title: 'الصيغ والأسعار: الدليل وبريميوم | PaperAtlas',
-      description: 'ثلاث صيغ مقارنة: دليل مجاني، بريميوم بـ٣ ٥٠٠ دج شهريًا بعملة بلدك، والهيئات حسب الطلب. الأسعار والمشمولات وأسئلة الأسعار.',
+      description: 'ثلاث صيغ مقارنة: دليل مجاني، بريميوم بـ١ ٥٠٠ دج شهريًا بعملة بلدك، والهيئات حسب الطلب. الأسعار والمشمولات وأسئلة الأسعار.',
       keywords: 'أسعار دليل المطابع, الصيغ والأسعار, اشتراك بريميوم, PaperAtlas',
     },
     en: {
       title: 'Plans & pricing: directory and Premium | PaperAtlas',
-      description: 'Three plans side by side: free directory, Premium at 3 500 DZD per month read in your country’s currency, Institutions on quote. Prices, inclusions and FAQ.',
+      description: 'Three plans side by side: free directory, Premium at 1 500 DZD per month read in your country’s currency, Institutions on quote. Prices, inclusions and FAQ.',
       keywords: 'printer directory pricing, Premium subscription, institutions quote, PaperAtlas',
     },
   },

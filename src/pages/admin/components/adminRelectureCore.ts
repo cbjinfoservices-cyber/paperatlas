@@ -106,7 +106,7 @@ export const RELECTURE_LIGNES: RelectureLigne[] = [
     page: 'Formules et tarifs',
     path: '/offres',
     textes: 'dict.offres.ts',
-    vigilance: '3 500 DZD, « sur devis », six lignes du comparatif',
+    vigilance: '1 500 DZD, « sur devis », six lignes du comparatif',
   },
   {
     n: 13,

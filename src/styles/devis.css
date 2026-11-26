@@ -26,7 +26,7 @@
 .dv-field { display: grid; gap: 6px; min-width: 0; }
 .dv-label {
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--muted);
@@ -36,7 +36,7 @@
   align-items: flex-start;
   gap: 6px;
   margin: 0;
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.5;
   color: var(--muted);
 }
@@ -91,7 +91,7 @@
 .dv-plan-txt em {
   font-style: normal;
   font-family: var(--font-heading);
-  font-size: 11.5px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   color: var(--muted);
   overflow: hidden;
@@ -181,7 +181,7 @@
 .dv-bill-btn em {
   font-style: normal;
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: .02em;
   color: color-mix(in srgb, var(--accent) 76%, var(--muted));
 }
@@ -213,7 +213,7 @@
 }
 .dv-total-stamp {
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--accent2);
@@ -235,7 +235,7 @@
   color: var(--text);
 }
 .dv-total-per { font-size: 12.5px; color: var(--muted); }
-.dv-total-origine { margin: 0; font-size: 11.5px; color: var(--muted); }
+.dv-total-origine { margin: 0; font-size: 12px; color: var(--muted); }
 .dv-total-origine b { font-variant-numeric: tabular-nums; color: color-mix(in srgb, var(--text) 76%, transparent); }
 
 .dv-lines {
@@ -268,7 +268,7 @@
 .dv-lines dt em {
   font-style: normal;
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: .04em;
   color: var(--muted);
 }
@@ -283,7 +283,7 @@
 .dv-lines dd .dv-line-was {
   display: block;
   font-family: var(--font-body);
-  font-size: 10.5px;
+  font-size: 12px;
   text-align: end;
   color: var(--muted);
   text-decoration: line-through;
@@ -304,7 +304,7 @@
   align-items: flex-start;
   gap: 6px;
   margin: 0;
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.5;
   color: var(--muted);
 }
@@ -325,7 +325,7 @@
 .dv-form-stamp {
   margin: 0;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--accent2);
@@ -350,7 +350,7 @@
   line-height: 1.4;
   color: color-mix(in srgb, var(--text) 74%, transparent);
 }
-.dv-fld label em { font-style: normal; font-family: var(--font-label); font-size: 9.5px; color: var(--muted); }
+.dv-fld label em { font-style: normal; font-family: var(--font-label); font-size: 11px; color: var(--muted); }
 .dv-fld input,
 .dv-fld textarea {
   width: 100%;
@@ -437,7 +437,7 @@
 }
 .dv-done > i { font-size: 24px; color: var(--accent); }
 .dv-done-text { margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--text); }
-.dv-done-ref { margin: 0; font-family: var(--font-label); font-size: 11.5px; color: var(--muted); }
+.dv-done-ref { margin: 0; font-family: var(--font-label); font-size: 12px; color: var(--muted); }
 .dv-done-ref strong {
   font-family: var(--font-heading);
   font-size: 13px;
@@ -483,7 +483,7 @@
   border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
   background: color-mix(in srgb, var(--surface) 88%, transparent);
   font-family: var(--font-label);
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: .04em;
   color: var(--muted);
   white-space: nowrap;
@@ -524,14 +524,14 @@
   border: 1px solid color-mix(in srgb, var(--accent2) 46%, transparent);
   background: transparent;
   font: inherit;
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .05em;
   line-height: 1.6;
   color: color-mix(in srgb, var(--accent2) 86%, var(--text));
   white-space: nowrap;
   cursor: pointer;
 }
-.dvl-count-restore i { font-size: 10.5px; color: inherit; }
+.dvl-count-restore i { font-size: 12px; color: inherit; }
 .dvl-count-restore:hover {
   background: color-mix(in srgb, var(--accent2) 16%, transparent);
   border-color: var(--accent2);
@@ -574,7 +574,7 @@
 .dvl-summary-stamp {
   margin: 0;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .11em;
   text-transform: uppercase;
   color: var(--muted);
@@ -602,7 +602,7 @@
   margin: 7px 0 0;
   padding-top: 6px;
   border-top: 1px dashed color-mix(in srgb, var(--text) 12%, transparent);
-  font-size: 10.5px;
+  font-size: 12px;
   line-height: 1.4;
   color: var(--muted);
 }
@@ -640,7 +640,7 @@
    plus discret que la phrase, mais lisible, et il ne casse jamais la ligne. */
 .dvl-marks-restored-on {
   font-family: var(--font-label);
-  font-size: 11px;
+  font-size: 12px;
   font-style: normal;
   letter-spacing: .01em;
   white-space: nowrap;
@@ -663,7 +663,7 @@
   background: transparent;
   font: inherit;
   font-family: var(--font-label);
-  font-size: 11px;
+  font-size: 12px;
   font-style: normal;
   letter-spacing: .01em;
   line-height: 1.7;
@@ -672,7 +672,7 @@
   color: color-mix(in srgb, var(--text) 58%, transparent);
   transition: color .18s ease, background .18s ease;
 }
-.dvl-marks-restored-btn i { font-size: 11px; color: inherit; }
+.dvl-marks-restored-btn i { font-size: 12px; color: inherit; }
 .dvl-marks-restored-btn:hover {
   color: var(--accent2);
   background: color-mix(in srgb, var(--accent2) 12%, transparent);
@@ -703,14 +703,14 @@
   border: 1px dashed color-mix(in srgb, var(--text) 26%, transparent);
   background: transparent;
   font: inherit;
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: .05em;
   line-height: 1.6;
   color: color-mix(in srgb, var(--text) 66%, transparent);
   cursor: pointer;
   transition: background .18s ease, border-color .18s ease, color .18s ease;
 }
-.dvl-mark-more i { font-size: 10.5px; color: inherit; }
+.dvl-mark-more i { font-size: 12px; color: inherit; }
 .dvl-mark-more:hover {
   background: color-mix(in srgb, var(--accent2) 14%, transparent);
   border-color: var(--accent2);
@@ -817,7 +817,7 @@ button.dvl-summary-cell:focus-visible { outline: 2px solid var(--accent); outlin
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-size: 10.5px;
+  font-size: 11px;
   line-height: 1.35;
   color: var(--muted);
 }
@@ -852,7 +852,7 @@ a.dvl-summary-cell:focus-visible { outline: 2px solid var(--accent); outline-off
   position: absolute;
   top: 5px;
   inset-inline-end: 6px;
-  font-size: 11px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--text) 40%, transparent);
 }
 a.dvl-summary-cell:hover .dvl-summary-arrow {
@@ -877,7 +877,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   background: color-mix(in srgb, var(--surface) 92%, transparent);
   color: var(--muted);
   font: inherit;
-  font-size: 11.5px;
+  font-size: 12px;
   white-space: nowrap;
   cursor: pointer;
   transition: border-color .18s ease, background .18s ease, color .18s ease;
@@ -885,7 +885,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
 .dvl-filter-btn i { font-size: 12px; color: inherit; }
 .dvl-filter-btn b {
   font-family: var(--font-heading);
-  font-size: 11.5px;
+  font-size: 12px;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 62%, transparent);
@@ -945,7 +945,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   padding: 1px 7px;
   border-radius: 999px;
   font-family: var(--font-label);
-  font-size: 10.5px;
+  font-size: 12px;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   letter-spacing: .02em;
@@ -956,7 +956,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
 .dir-export-n em {
   font-style: normal;
   font-weight: 400;
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: .02em;
   opacity: .85;
   color: inherit;
@@ -1079,7 +1079,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   flex: 1 1 240px;
   min-width: 0;
   margin: 0;
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--text) 78%, transparent);
 }
@@ -1093,7 +1093,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   background: var(--accent2);
   color: var(--bg);
   font: inherit;
-  font-size: 11.5px;
+  font-size: 12px;
   font-weight: 600;
   white-space: nowrap;
   cursor: pointer;
@@ -1108,7 +1108,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   align-items: flex-start;
   gap: 5px;
   margin: 0 0 12px;
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--accent) 78%, var(--text));
 }
@@ -1129,13 +1129,13 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border: 1px dashed color-mix(in srgb, var(--accent2) 42%, transparent);
   background: color-mix(in srgb, var(--accent2) 8%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .05em;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--accent2) 82%, var(--text));
   white-space: nowrap;
 }
-.dvl-shared i { font-size: 11px; color: inherit; }
+.dvl-shared i { font-size: 12px; color: inherit; }
 /* Le petit « oublier » de la pastille : il n'efface que ce dossier-là. */
 .dvl-shared-x {
   display: inline-flex;
@@ -1147,14 +1147,14 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border-radius: 999px;
   background: transparent;
   font-family: var(--font-body);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.4;
   color: color-mix(in srgb, var(--text) 62%, transparent);
   white-space: nowrap;
   cursor: pointer;
   transition: background .18s ease, color .18s ease;
 }
-.dvl-shared-x i { font-size: 10px; color: inherit; }
+.dvl-shared-x i { font-size: 12px; color: inherit; }
 .dvl-shared-x:hover {
   background: color-mix(in srgb, var(--accent2) 16%, transparent);
   color: var(--accent2);
@@ -1173,14 +1173,14 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border: 1px dashed color-mix(in srgb, var(--accent2) 44%, transparent);
   background: transparent;
   font: inherit;
-  font-size: 10.5px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--accent2) 84%, var(--text));
   white-space: nowrap;
   cursor: pointer;
   transition: background .18s ease, border-color .18s ease, color .18s ease;
 }
-.dvl-restore i { font-size: 11px; color: inherit; }
+.dvl-restore i { font-size: 12px; color: inherit; }
 .dvl-restore:hover {
   background: color-mix(in srgb, var(--accent2) 14%, transparent);
   border-color: var(--accent2);
@@ -1206,7 +1206,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border: 1px dashed color-mix(in srgb, var(--accent2) 45%, transparent);
   background: color-mix(in srgb, var(--accent2) 7%, var(--surface));
   font-family: var(--font-label);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.45;
   color: color-mix(in srgb, var(--accent2) 85%, var(--text));
 }
@@ -1263,30 +1263,30 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   line-height: 1.3;
   color: var(--text);
 }
-.dvl-bulk-txt span { font-size: 11px; line-height: 1.45; color: var(--muted); }
+.dvl-bulk-txt span { font-size: 12px; line-height: 1.45; color: var(--muted); }
 /* Le compteur « jamais repris » a ouvert cette barre : la ligne dit de quoi
    elle parle, pour que les cases cochées ne soient jamais un mystère. */
 .dvl-bulk-txt .dvl-bulk-never {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-size: 10.5px;
+  font-size: 12px;
   line-height: 1.4;
   color: color-mix(in srgb, var(--accent2) 82%, var(--text));
 }
-.dvl-bulk-txt .dvl-bulk-never i { font-size: 11px; color: inherit; flex: 0 0 auto; }
+.dvl-bulk-txt .dvl-bulk-never i { font-size: 12px; color: inherit; flex: 0 0 auto; }
 .dvl-bulk-all {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 11.5px;
+  font-size: 12px;
   color: var(--muted);
   white-space: nowrap;
   cursor: pointer;
 }
 .dvl-bulk-count {
   font-family: var(--font-label);
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: .04em;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 62%, transparent);
@@ -1323,7 +1323,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
 }
 .dvl-bulk-trace-note {
   margin: 0;
-  font-size: 10.5px;
+  font-size: 12px;
   line-height: 1.45;
   color: var(--muted);
 }
@@ -1358,7 +1358,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border-radius: 9px;
   border: 1px dashed color-mix(in srgb, var(--accent2) 44%, transparent);
   background: color-mix(in srgb, var(--accent2) 7%, transparent);
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--accent2) 72%, var(--text));
   text-decoration: none;
@@ -1482,11 +1482,11 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   align-items: center;
   gap: 3px;
   font-family: var(--font-label);
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: .06em;
   color: var(--muted);
 }
-.dvl-ref i { font-size: 11px; color: inherit; }
+.dvl-ref i { font-size: 12px; color: inherit; }
 /* l’état et le partage se lisent sur une seule ligne, qui se replie au besoin */
 .dvl-tags {
   display: flex;
@@ -1515,13 +1515,13 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   gap: 4px;
   margin-top: 2px;
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: .05em;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 58%, transparent);
   white-space: nowrap;
 }
-.dvl-opened-on i { font-size: 11px; color: color-mix(in srgb, var(--accent2) 70%, transparent); }
+.dvl-opened-on i { font-size: 12px; color: color-mix(in srgb, var(--accent2) 70%, transparent); }
 .dvl-tags .dvl-opened-on { margin-top: 0; }
 [dir="rtl"] .dvl-opened-on { letter-spacing: 0; }
 .dvl-badge {
@@ -1532,7 +1532,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
   background: color-mix(in srgb, var(--text) 6%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .06em;
   text-transform: uppercase;
   color: var(--muted);
@@ -1567,7 +1567,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
 .dvl-plan em {
   font-style: normal;
   font-family: var(--font-body);
-  font-size: 11.5px;
+  font-size: 12px;
   font-weight: 400;
   color: var(--muted);
 }
@@ -1576,7 +1576,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   flex-wrap: wrap;
   gap: 4px 12px;
   margin: 2px 0 0;
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.5;
   color: var(--muted);
 }
@@ -1595,7 +1595,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border: 1px dashed color-mix(in srgb, var(--accent) 34%, transparent);
   background: color-mix(in srgb, var(--accent) 8%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   font-style: normal;
   line-height: 1.6;
   letter-spacing: .03em;
@@ -1603,7 +1603,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   white-space: nowrap;
   color: color-mix(in srgb, var(--accent) 82%, var(--text));
 }
-.dvl-rythme-herite i { font-size: 10px; color: inherit; }
+.dvl-rythme-herite i { font-size: 12px; color: inherit; }
 [dir="rtl"] .dvl-rythme-herite { letter-spacing: 0; }
 /* Le jeton « héritée · 6 mois » est une porte : un clic ouvre la liste réduite
    aux dossiers écrits sur cette durée-là. Le trait pointillé se referme au
@@ -1663,7 +1663,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
 }
 .dvl-amount span {
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--muted);
@@ -1679,7 +1679,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
 }
 .dvl-amount em {
   font-style: normal;
-  font-size: 10.5px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   color: var(--muted);
   white-space: nowrap;
@@ -1698,7 +1698,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   align-items: flex-start;
   gap: 5px;
   margin: 0;
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.5;
   color: var(--muted);
 }
@@ -1724,7 +1724,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   background: transparent;
   color: var(--accent2);
   font: inherit;
-  font-size: 11.5px;
+  font-size: 12px;
   white-space: nowrap;
   cursor: pointer;
   transition: background .18s ease, border-color .18s ease;
@@ -1762,7 +1762,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   align-items: flex-start;
   gap: 5px;
   margin: 0;
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.5;
   color: var(--muted);
 }
@@ -1900,7 +1900,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   gap: 5px;
   margin: 0;
   min-width: 0;
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.5;
   color: var(--muted);
 }
@@ -1913,7 +1913,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   gap: 5px;
   margin: 0;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .11em;
   text-transform: uppercase;
   color: var(--muted);
@@ -1933,14 +1933,14 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border-radius: 999px;
   border: 1px solid color-mix(in srgb, var(--accent) 38%, transparent);
   background: color-mix(in srgb, var(--accent) 12%, transparent);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.6;
   letter-spacing: normal;
   text-transform: none;
   color: var(--accent2);
   white-space: nowrap;
 }
-.dvl-last-relance i { font-size: 11px; color: inherit; }
+.dvl-last-relance i { font-size: 12px; color: inherit; }
 /* Le compte des dossiers de la bande qui n'ont pas écrit leur durée : une
    pastille discrète, du côté du texte, pour qu'un ancien dossier se repère
    d'un seul regard. */
@@ -1953,14 +1953,14 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border: 1px dashed color-mix(in srgb, var(--text) 26%, transparent);
   background: color-mix(in srgb, var(--text) 5%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.6;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 72%, transparent);
   white-space: nowrap;
 }
 .dvl-last-noduree i {
-  font-size: 11px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--accent2) 60%, var(--muted));
 }
 /* Le compteur « sans durée » est une porte : même gélule, mais le trait se
@@ -1991,7 +1991,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
   background: color-mix(in srgb, var(--accent) 9%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.6;
   letter-spacing: .04em;
   font-variant-numeric: tabular-nums;
@@ -1999,7 +1999,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   white-space: nowrap;
 }
 .dvl-last-rhydiff i {
-  font-size: 10px;
+  font-size: 12px;
   color: inherit;
 }
 /* Le compteur des durées héritées est une porte : le trait plein se referme au
@@ -2031,7 +2031,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
   background: transparent;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.6;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 66%, transparent);
@@ -2040,7 +2040,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   transition: border-color .18s ease, background .18s ease, color .18s ease;
 }
 .dvl-last-noduree-copy i {
-  font-size: 10px;
+  font-size: 12px;
   color: inherit;
 }
 .dvl-last-noduree-copy:hover {
@@ -2100,7 +2100,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border-radius: 999px;
   white-space: nowrap;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.5;
   letter-spacing: normal;
   text-transform: none;
@@ -2108,7 +2108,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   background: color-mix(in srgb, var(--accent) 12%, transparent);
   border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
 }
-.dvl-last-stamp-rhy i { font-size: 10px; color: inherit; }
+.dvl-last-stamp-rhy i { font-size: 12px; color: inherit; }
 /* Une durée absente sur un ancien dossier n'est pas un blanc : la pastille le
    dit, en pointillé et dans l'encre du texte, sans rien inventer. */
 .dvl-last-stamp-rhy.is-missing {
@@ -2122,7 +2122,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
 }
 [dir="rtl"] .dvl-last-stamp-rhy { letter-spacing: 0; }
 @media (max-width: 400px) {
-  .dvl-last-stamp-rhy { font-size: 9px; padding: 1px 7px; }
+  .dvl-last-stamp-rhy { font-size: 12px; padding: 1px 7px; }
 }
 /* Le rappel des dossiers déjà confiés à un collègue, posé à côté du dernier
    devis : la bande et la liste comptent la même chose, sans ouvrir de feuille. */
@@ -2135,13 +2135,13 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border: 1px dashed color-mix(in srgb, var(--accent2) 42%, transparent);
   background: color-mix(in srgb, var(--accent2) 8%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .05em;
   font-variant-numeric: tabular-nums;
   color: var(--accent2);
   white-space: nowrap;
 }
-.dvl-last-shared i { font-size: 11px; color: inherit; }
+.dvl-last-shared i { font-size: 12px; color: inherit; }
 /* Le rappel des dossiers rendus, dans la bande des Offres : la même pastille
    que celle des partages, mais du côté du retour — le nombre, puis la date du
    dernier rétablissement. */
@@ -2154,13 +2154,13 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border: 1px dotted color-mix(in srgb, var(--accent2) 52%, transparent);
   background: color-mix(in srgb, var(--accent2) 9%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .05em;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--accent2) 88%, var(--text));
   white-space: nowrap;
 }
-.dvl-last-restored i { font-size: 11px; color: inherit; }
+.dvl-last-restored i { font-size: 12px; color: inherit; }
 /* La pastille des retours est une porte : même gélule, mais un trait qui se
    referme au survol, pour que le clic s'annonce. */
 .dvl-last-restored-filter {
@@ -2186,13 +2186,13 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
   background: color-mix(in srgb, var(--text) 5%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .05em;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 72%, transparent);
   white-space: nowrap;
 }
-.dvl-last-addressed i { font-size: 11px; color: inherit; }
+.dvl-last-addressed i { font-size: 12px; color: inherit; }
 /* La troisième pastille est une porte, comme celle des retours : même gélule,
    mais le trait se referme et le fond s'éclaire au survol, et la date du
    dernier dossier adressé s'ajoute au compteur. */
@@ -2235,13 +2235,13 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border: 1px dashed color-mix(in srgb, var(--text) 26%, transparent);
   background: color-mix(in srgb, var(--text) 5%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .05em;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 66%, transparent);
   white-space: nowrap;
 }
-.dvl-last-forgot > i { font-size: 11px; color: inherit; }
+.dvl-last-forgot > i { font-size: 12px; color: inherit; }
 .dvl-last-restore {
   display: inline-flex;
   align-items: center;
@@ -2251,7 +2251,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border: 1px solid color-mix(in srgb, var(--accent2) 46%, transparent);
   background: transparent;
   font: inherit;
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .05em;
   line-height: 1.6;
   color: color-mix(in srgb, var(--accent2) 86%, var(--text));
@@ -2259,7 +2259,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   cursor: pointer;
   transition: background .18s ease, border-color .18s ease, color .18s ease;
 }
-.dvl-last-restore i { font-size: 10.5px; color: inherit; }
+.dvl-last-restore i { font-size: 12px; color: inherit; }
 .dvl-last-restore:hover {
   background: color-mix(in srgb, var(--accent2) 16%, transparent);
   border-color: var(--accent2);
@@ -2338,7 +2338,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border-style: dashed;
   border-color: color-mix(in srgb, var(--accent2) 34%, transparent);
   font-family: var(--font-label);
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: .04em;
   line-height: 1.6;
   color: color-mix(in srgb, var(--accent2) 84%, var(--text));
@@ -2396,14 +2396,14 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border-radius: 999px;
   background: transparent;
   font: inherit;
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: .04em;
   line-height: 1.6;
   color: color-mix(in srgb, var(--accent2) 78%, var(--text));
   cursor: pointer;
   transition: background .18s ease, color .18s ease;
 }
-.dvl-count-restored-fold i { font-size: 10.5px; color: inherit; }
+.dvl-count-restored-fold i { font-size: 12px; color: inherit; }
 .dvl-count-restored-fold:hover {
   background: color-mix(in srgb, var(--accent2) 16%, transparent);
   color: var(--accent2);
@@ -2420,14 +2420,14 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border-radius: 999px;
   background: transparent;
   font: inherit;
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: .04em;
   line-height: 1.7;
   color: color-mix(in srgb, var(--accent2) 80%, var(--text));
   cursor: pointer;
   transition: background .18s ease, border-color .18s ease, color .18s ease;
 }
-.dvl-count-restored-copy i { font-size: 10.5px; color: inherit; }
+.dvl-count-restored-copy i { font-size: 12px; color: inherit; }
 .dvl-count-restored-copy:hover {
   background: color-mix(in srgb, var(--accent2) 16%, transparent);
   border-color: var(--accent2);
@@ -2458,14 +2458,14 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border-radius: 999px;
   background: transparent;
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: .04em;
   line-height: 1.6;
   color: color-mix(in srgb, var(--text) 46%, transparent);
   cursor: pointer;
   transition: background .18s ease, color .18s ease;
 }
-.dvl-mark-copy i { font-size: 10px; color: inherit; }
+.dvl-mark-copy i { font-size: 12px; color: inherit; }
 .dvl-mark-copy:hover {
   background: color-mix(in srgb, var(--accent2) 14%, transparent);
   color: var(--accent2);
@@ -2501,7 +2501,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   white-space: nowrap;
 }
 .dvl-last-forgot-head > i {
-  font-size: 11px;
+  font-size: 12px;
   color: inherit;
 }
 .dvl-last-mark-rows {
@@ -2517,13 +2517,13 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   display: inline-flex;
   align-items: baseline;
   gap: 4px;
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: .04em;
   color: color-mix(in srgb, var(--text) 58%, transparent);
   white-space: nowrap;
 }
 .dvl-last-mark b {
-  font-size: 9.5px;
+  font-size: 12px;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 80%, transparent);
@@ -2561,7 +2561,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border-color: color-mix(in srgb, var(--accent2) 38%, transparent);
   color: var(--accent2);
 }
-.dvl-last-group i { font-size: 11.5px; color: inherit; }
+.dvl-last-group i { font-size: 12px; color: inherit; }
 /* La lecture « déjà partagés » se copie depuis la bande : un trait pointillé,
    comme la pastille qu'elle emmène. */
 .dvl-last-link.dvl-last-shared-copy {
@@ -2659,7 +2659,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border-radius: 999px;
   border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
   color: var(--accent2);
-  font-size: 11.5px;
+  font-size: 12px;
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
@@ -2733,7 +2733,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   line-height: 1.3;
   color: var(--text);
 }
-.dvl-last-bulk-txt span { font-size: 10.5px; line-height: 1.45; color: var(--muted); }
+.dvl-last-bulk-txt span { font-size: 12px; line-height: 1.45; color: var(--muted); }
 /* A recap already sent for these very files: said in the accent of the note, a
    step above the sentence it follows. */
 .dvl-last-bulk-txt .dvl-last-bulk-when {
@@ -2741,11 +2741,11 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   align-items: center;
   gap: 4px;
   margin-top: 2px;
-  font-size: 10.5px;
+  font-size: 12px;
   line-height: 1.4;
   color: color-mix(in srgb, var(--accent2) 80%, var(--text));
 }
-.dvl-last-bulk-txt .dvl-last-bulk-when i { font-size: 11px; color: inherit; flex: 0 0 auto; }
+.dvl-last-bulk-txt .dvl-last-bulk-when i { font-size: 12px; color: inherit; flex: 0 0 auto; }
 /* Un retard que personne n’a jamais rassemblé : plus fort que la ligne du
    dernier envoi, parce qu’il reste quelque chose à faire. */
 .dvl-last-bulk-txt .dvl-last-bulk-when.dvl-last-bulk-never {
@@ -2776,7 +2776,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   gap: 4px;
   width: fit-content;
   margin-top: 3px;
-  font-size: 10.5px;
+  font-size: 12px;
   line-height: 1.4;
   color: color-mix(in srgb, var(--accent2) 86%, var(--text));
   text-decoration: none;
@@ -2784,8 +2784,8 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   cursor: pointer;
   transition: color .18s ease, border-color .18s ease;
 }
-.dvl-last-bulk-txt .dvl-last-bulk-more i { font-size: 11px; color: inherit; flex: 0 0 auto; }
-.dvl-last-bulk-txt .dvl-last-bulk-more span { font-size: 10.5px; color: inherit; }
+.dvl-last-bulk-txt .dvl-last-bulk-more i { font-size: 12px; color: inherit; flex: 0 0 auto; }
+.dvl-last-bulk-txt .dvl-last-bulk-more span { font-size: 12px; color: inherit; }
 .dvl-last-bulk-txt .dvl-last-bulk-more:hover {
   color: var(--accent2);
   border-bottom-color: var(--accent2);
@@ -2808,13 +2808,13 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border-bottom: 1px dashed color-mix(in srgb, var(--accent2) 45%, transparent);
   border-radius: 0;
   font-family: var(--font-label);
-  font-size: 10.5px;
+  font-size: 12px;
   line-height: 1.4;
   color: color-mix(in srgb, var(--accent2) 86%, var(--text));
   cursor: pointer;
 }
-.dvl-last-bulk-txt .dvl-last-bulk-share i { font-size: 11px; color: inherit; flex: 0 0 auto; }
-.dvl-last-bulk-txt .dvl-last-bulk-share span { font-size: 10.5px; color: inherit; }
+.dvl-last-bulk-txt .dvl-last-bulk-share i { font-size: 12px; color: inherit; flex: 0 0 auto; }
+.dvl-last-bulk-txt .dvl-last-bulk-share span { font-size: 12px; color: inherit; }
 .dvl-last-bulk-txt .dvl-last-bulk-share:hover {
   color: var(--accent2);
   border-bottom-color: var(--accent2);
@@ -2837,7 +2837,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   background: var(--accent2);
   color: var(--bg);
   font: inherit;
-  font-size: 11.5px;
+  font-size: 12px;
   font-weight: 600;
   white-space: nowrap;
   cursor: pointer;
@@ -2853,7 +2853,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   align-items: flex-start;
   gap: 5px;
   margin: 0;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.5;
   color: var(--muted);
 }
@@ -2875,7 +2875,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   .dvl-filterbar > .ghost-btn { margin-inline-start: 0; }
   .dvl-filterbar-tools { margin-inline-start: 0; width: 100%; }
   .dvl-forget-yes { width: 100%; justify-content: center; }
-  .dvl-filter-btn { padding: 5px 9px; font-size: 11px; }
+  .dvl-filter-btn { padding: 5px 9px; font-size: 12px; }
   /* La pastille des dossiers rendus emporte son lien : sur un écran étroit elle
      s'ouvre en deux temps plutôt que de dépasser le cadre. */
   .dvl-count-restored { max-width: 100%; white-space: normal; }
@@ -2883,10 +2883,10 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   .dvl-summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
   .dvl-summary-cell { padding: 6px 7px; }
   .dvl-summary-n { font-size: 18px; }
-  .dvl-summary-l { font-size: 10px; }
+  .dvl-summary-l { font-size: 11px; }
   .dvl-last { padding: 8px 10px; }
   .dvl-last-hit { flex: 1 1 100%; }
-  .dvl-last-chip { padding: 3px 8px; font-size: 10.5px; }
+  .dvl-last-chip { padding: 3px 8px; font-size: 11px; }
   .dvl-last-none .dvl-last-link { margin-inline-start: 0; }
   .dvl-last-actions { margin-inline-start: 0; width: 100%; justify-content: space-between; }
   .dvl-last-bulk-send { width: 100%; justify-content: center; }
@@ -2930,7 +2930,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border-inline-start: 1px dashed color-mix(in srgb, var(--text) 24%, transparent);
   font-style: normal;
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .03em;
   line-height: 1.5;
   font-variant-numeric: tabular-nums;
@@ -2952,7 +2952,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   outline-offset: 2px;
   border-radius: 3px;
 }
-.dvl-count-dormant-oldest i { font-size: 11px; line-height: 1; opacity: .75; }
+.dvl-count-dormant-oldest i { font-size: 12px; line-height: 1; opacity: .75; }
 
 /* La ligne des dossiers qui dorment, dans la Synthèse à l'écran : elle est
    aussi une porte — un clic ouvre la liste réduite à ces seuls dossiers, et
@@ -2986,13 +2986,13 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   padding-inline-start: 6px;
   border-inline-start: 1px dashed color-mix(in srgb, var(--text) 24%, transparent);
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .03em;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
   color: color-mix(in srgb, var(--accent2) 62%, var(--text));
 }
-.dvl-summary-dormant-confirmed i { font-size: 10px; line-height: 1; opacity: .85; }
+.dvl-summary-dormant-confirmed i { font-size: 12px; line-height: 1; opacity: .85; }
 .dvl-summary-dormant .dvl-summary-go {
   margin-inline-start: auto;
   opacity: .55;
@@ -3012,7 +3012,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border-radius: 999px;
   background: transparent;
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.4;
   color: color-mix(in srgb, var(--text) 62%, transparent);
   cursor: pointer;
@@ -3028,7 +3028,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border-style: solid;
   border-color: color-mix(in srgb, var(--accent2) 52%, transparent);
 }
-.dvl-summary-dormant-copy i { font-size: 11px; line-height: 1; }
+.dvl-summary-dormant-copy i { font-size: 12px; line-height: 1; }
 
 /* Le lien des endormis de la bande garde la discrétion de celui des adressés. */
 .dvl-last-link.dvl-last-dormant-copy { border-style: dashed; }
@@ -3088,7 +3088,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border: 1px dashed color-mix(in srgb, var(--text) 26%, transparent);
   background: color-mix(in srgb, var(--text) 5%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .05em;
   line-height: 1.5;
   font-variant-numeric: tabular-nums;
@@ -3097,7 +3097,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   cursor: pointer;
   transition: background .18s ease, border-color .18s ease, color .18s ease;
 }
-.dvl-last-pill-copy i { font-size: 11px; color: inherit; }
+.dvl-last-pill-copy i { font-size: 12px; color: inherit; }
 .dvl-last-pill-copy:hover {
   border-color: color-mix(in srgb, var(--accent2) 56%, transparent);
   background: color-mix(in srgb, var(--accent2) 12%, transparent);
@@ -3143,7 +3143,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   outline-offset: 2px;
 }
 .dvl-summary-dormant-confirmed-go {
-  font-size: 9px;
+  font-size: 12px;
   line-height: 1;
   opacity: .65;
   transition: transform .16s ease, opacity .16s ease;
@@ -3175,13 +3175,13 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border: 1px dashed color-mix(in srgb, var(--text) 26%, transparent);
   background: transparent;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .05em;
   color: color-mix(in srgb, var(--text) 66%, transparent);
   cursor: pointer;
   transition: border-color .18s ease, color .18s ease, background .18s ease;
 }
-.dvl-summary-copy i { font-size: 11px; line-height: 1; }
+.dvl-summary-copy i { font-size: 12px; line-height: 1; }
 .dvl-summary-copy:hover {
   border-style: solid;
   border-color: color-mix(in srgb, var(--text) 48%, transparent);
@@ -3203,7 +3203,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   padding-inline-start: 6px;
   border-inline-start: 1px dashed color-mix(in srgb, var(--text) 24%, transparent);
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .03em;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
@@ -3228,7 +3228,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   padding-inline-start: 6px;
   border-inline-start: 1px dashed color-mix(in srgb, var(--text) 24%, transparent);
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .03em;
   line-height: 1.5;
   font-variant-numeric: tabular-nums;
@@ -3297,7 +3297,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border-radius: 999px;
   background: color-mix(in srgb, var(--accent2) 13%, transparent);
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .03em;
   line-height: 1.6;
   font-variant-numeric: tabular-nums;
@@ -3318,7 +3318,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   padding-inline-start: 6px;
   border-inline-start: 1px dashed color-mix(in srgb, var(--accent2) 26%, transparent);
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .03em;
   line-height: 1.5;
   font-variant-numeric: tabular-nums;
@@ -3364,7 +3364,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border-radius: 999px;
   background: color-mix(in srgb, var(--text) 9%, transparent);
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .03em;
   line-height: 1.6;
   font-variant-numeric: tabular-nums;
@@ -3385,11 +3385,11 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   padding-inline-start: 6px;
   border-inline-start: 1px dashed color-mix(in srgb, var(--text) 24%, transparent);
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.6;
   color: color-mix(in srgb, var(--text) 62%, transparent);
 }
-.dvl-summary-dormant-markets > i { font-size: 10px; line-height: 1; opacity: .8; }
+.dvl-summary-dormant-markets > i { font-size: 12px; line-height: 1; opacity: .8; }
 .dvl-summary-dormant-markets em {
   font-style: normal;
   padding: 1px 6px;
@@ -3413,11 +3413,11 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   padding-inline-start: 6px;
   border-inline-start: 1px dashed color-mix(in srgb, var(--text) 24%, transparent);
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.6;
   color: color-mix(in srgb, var(--text) 62%, transparent);
 }
-.dvl-summary-dormant-devises > i { font-size: 10px; line-height: 1; opacity: .8; }
+.dvl-summary-dormant-devises > i { font-size: 12px; line-height: 1; opacity: .8; }
 /* La part déjà prête de chaque marché, sous la ligne des endormis confirmés :
    la même famille de jetons, teintée comme la pastille dont elle parle. */
 .dvl-summary-dormant-confirmed-devises {
@@ -3439,7 +3439,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border-inline-start: 0;
   padding-block-start: 2px;
 }
-.dvl-last-devise-split .dvl-summary-dormant-devise { font-size: 9px; }
+.dvl-last-devise-split .dvl-summary-dormant-devise { font-size: 12px; }
 
 /* Le nombre de marchés que mêle la pastille des endormis de l'en-tête : un jeton
    de la même famille que la part voisine, mais en pointillé — il annonce une
@@ -3451,7 +3451,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border: 1px dashed color-mix(in srgb, var(--text) 24%, transparent);
   border-radius: 999px;
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: .03em;
   line-height: 1.6;
   white-space: nowrap;
@@ -3512,7 +3512,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border: 0;
   border-radius: 4px;
   background: none;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1;
   color: color-mix(in srgb, var(--text) 42%, transparent);
   cursor: pointer;
@@ -3520,7 +3520,7 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
 }
 .dvl-devise-copy:hover { color: color-mix(in srgb, var(--accent2) 80%, var(--text)); background: color-mix(in srgb, var(--accent2) 14%, transparent); }
 .dvl-devise-copy.is-ok { color: color-mix(in srgb, var(--accent2) 90%, var(--text)); }
-.dvl-devise-copy > i { font-size: 10px; line-height: 1; }
+.dvl-devise-copy > i { font-size: 12px; line-height: 1; }
 
 /* L’ordre des jetons : par montant, ou par délai moyen croissant. Un seul
    bouton, qui annonce l’ordre où le lecteur se trouve. */
@@ -3533,13 +3533,13 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border-radius: 999px;
   background: none;
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 12px;
   line-height: 1.6;
   color: color-mix(in srgb, var(--text) 60%, transparent);
   cursor: pointer;
   transition: color .15s ease, border-color .15s ease, background .15s ease;
 }
-.dvl-devise-sort > i { font-size: 9px; line-height: 1; }
+.dvl-devise-sort > i { font-size: 12px; line-height: 1; }
 .dvl-devise-sort:hover {
   color: color-mix(in srgb, var(--accent2) 80%, var(--text));
   border-color: color-mix(in srgb, var(--accent2) 40%, transparent);
@@ -3564,13 +3564,13 @@ a.dvl-summary-cell:hover .dvl-summary-arrow {
   border-radius: 999px;
   background: none;
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 12px;
   line-height: 1.6;
   color: color-mix(in srgb, var(--text) 60%, transparent);
   cursor: pointer;
   transition: color .15s ease, border-color .15s ease, background .15s ease;
 }
-.dvl-devise-copy-all > i { font-size: 9px; line-height: 1; }
+.dvl-devise-copy-all > i { font-size: 12px; line-height: 1; }
 .dvl-devise-copy-all:hover {
   color: color-mix(in srgb, var(--accent2) 80%, var(--text));
   border-color: color-mix(in srgb, var(--accent2) 40%, transparent);

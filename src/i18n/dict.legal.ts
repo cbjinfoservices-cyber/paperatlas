@@ -72,6 +72,70 @@ const fr: Dict = {
 
   'foot.legalMentions': 'Mentions légales',
   'foot.legalPrivacy': 'Confidentialité',
+  'foot.cgu': 'Conditions d’utilisation',
+  'foot.cgv': 'Conditions de vente',
+
+  'lg.u.title': 'Conditions générales d’utilisation',
+  'lg.u.lede':
+    'Les règles d’accès au site, de publication des contenus et de mise en relation entre les membres de PaperAtlas.',
+  'lg.u.updated': 'Mise à jour le 25 novembre 2026',
+  'lg.u.note':
+    'Ces conditions s’appliquent à toute visite du site et à tout compte créé. Pour toute question : contact@paperatlas.net.',
+  'lg.u.s1t': 'Objet et acceptation',
+  'lg.u.s1b':
+    'Les présentes conditions régissent l’utilisation du site PaperAtlas, édité par CBJ-INFOSERVICES, EURL. La navigation sur le site, la création d’un compte ou le dépôt d’un contenu valent acceptation de ces conditions.',
+  'lg.u.s2t': 'Comptes',
+  'lg.u.s2b':
+    'Un compte est personnel et engage la structure qu’il représente. Les informations fournies doivent être exactes et tenues à jour. Le titulaire protège ses identifiants et signale sans délai tout usage non autorisé à contact@paperatlas.net.',
+  'lg.u.s3t': 'Contenus publiés par les membres',
+  'lg.u.s3b':
+    'Chaque fiche, annonce, offre d’emploi, demande ou message est publié sous la responsabilité de son auteur. Les dépôts sont relus avant publication. Le membre garantit détenir les droits sur les textes, images et logos qu’il transmet, et accorde à PaperAtlas le droit de les afficher dans le cadre du service.',
+  'lg.u.s4t': 'Mise en relation',
+  'lg.u.s4b':
+    'PaperAtlas met en relation des structures et des ateliers. Les contrats, devis et commandes conclus entre membres relèvent de leurs seules relations : la plateforme n’en est pas partie et n’intervient pas dans leur exécution. Un prix affiché reste une estimation jusqu’à confirmation par un référent.',
+  'lg.u.s5t': 'Usages interdits',
+  'lg.u.s5b':
+    'Sont interdits : publier un contenu illicite, trompeur ou portant atteinte aux droits d’autrui ; usurper l’identité d’une structure ; collecter les données des membres à des fins commerciales non prévues par le service ; envoyer des messages automatisés ou du spam ; tenter de contourner les mesures de sécurité du site.',
+  'lg.u.s6t': 'Modération',
+  'lg.u.s6b':
+    'PaperAtlas peut retirer un contenu, suspendre ou fermer un compte qui ne respecte pas ces conditions, après information du membre lorsque c’est possible. Un signalement se fait à contact@paperatlas.net.',
+  'lg.u.s7t': 'Données personnelles',
+  'lg.u.s7b':
+    'Le traitement des données personnelles est décrit dans la politique de confidentialité, à laquelle ces conditions renvoient.',
+  'lg.u.s8t': 'Disponibilité et droit applicable',
+  'lg.u.s8b':
+    'Le service est fourni en l’état, sans garantie d’une disponibilité ininterrompue. Les présentes conditions sont soumises au droit algérien ; à défaut de solution amiable, les juridictions compétentes sont celles du siège de l’éditeur.',
+
+  'lg.v.title': 'Conditions générales de vente',
+  'lg.v.lede':
+    'Les abonnements payants de PaperAtlas : essai, prix, renouvellement, paiement, résiliation et remboursement.',
+  'lg.v.updated': 'Mise à jour le 25 novembre 2026',
+  'lg.v.note':
+    'Ces conditions s’ajoutent aux conditions générales d’utilisation pour tout abonnement souscrit depuis le site.',
+  'lg.v.s1t': 'Objet',
+  'lg.v.s1b':
+    'Les présentes conditions s’appliquent aux abonnements payants proposés sur la page Offres de PaperAtlas. Elles sont acceptées au moment de la souscription.',
+  'lg.v.s2t': 'Prix et devise',
+  'lg.v.s2b':
+    'Le prix dépend du pays déclaré dans le compte et de la durée choisie. Il est calculé par le serveur à partir de la grille tarifaire en vigueur, et s’affiche avant tout engagement. Le montant débité est celui confirmé au moment du paiement, dans la devise du prestataire de paiement.',
+  'lg.v.s3t': 'Essai gratuit',
+  'lg.v.s3b':
+    'Chaque compte bénéficie d’un seul essai de quatorze jours. Le moyen de paiement est demandé avant le début de l’essai : le premier débit intervient à la fin de l’essai, sauf résiliation préalable.',
+  'lg.v.s4t': 'Durée et renouvellement',
+  'lg.v.s4b':
+    'L’abonnement est souscrit pour une durée d’un, trois, six ou douze mois. Il se renouvelle automatiquement, pour la même durée, à chaque échéance, tant qu’il n’a pas été résilié.',
+  'lg.v.s5t': 'Paiement',
+  'lg.v.s5b':
+    'Le paiement est traité par Stripe, ou par PayPal lorsque la devise choisie est prise en charge par PayPal pour les abonnements récurrents. PaperAtlas ne conserve ni le numéro de carte ni les identifiants de paiement ; ils sont gérés par le prestataire.',
+  'lg.v.s6t': 'Résiliation',
+  'lg.v.s6b':
+    'Le membre peut résilier depuis son espace compte à tout moment. La résiliation prend effet à la fin de la période en cours : l’accès reste ouvert jusqu’à cette date, et aucun renouvellement n’est effectué ensuite.',
+  'lg.v.s7t': 'Remboursement',
+  'lg.v.s7b':
+    'Toute demande de remboursement faite pendant la période d’essai est remboursée intégralement. Une fois le premier paiement effectué, aucun remboursement n’est dû, y compris au prorata d’une période entamée.',
+  'lg.v.s8t': 'Droit applicable et contact',
+  'lg.v.s8b':
+    'Les présentes conditions sont soumises au droit algérien. Pour toute question sur une facture ou un abonnement : contact@paperatlas.net.',
 };
 
 const ar: Dict = {
@@ -142,6 +206,50 @@ const ar: Dict = {
 
   'foot.legalMentions': 'المعلومات القانونية',
   'foot.legalPrivacy': 'الخصوصية',
+  'foot.cgu': 'شروط الاستخدام',
+  'foot.cgv': 'شروط البيع',
+
+  'lg.u.title': 'الشروط العامة للاستخدام',
+  'lg.u.lede': 'قواعد الدخول إلى الموقع ونشر المحتوى والتواصل بين أعضاء PaperAtlas.',
+  'lg.u.updated': 'آخر تحديث في 25 نوفمبر 2026',
+  'lg.u.note': 'تسري هذه الشروط على كل زيارة للموقع وكل حساب يُنشأ فيه. للاستفسار: contact@paperatlas.net.',
+  'lg.u.s1t': 'الموضوع والقبول',
+  'lg.u.s1b': 'تنظّم هذه الشروط استخدام موقع PaperAtlas، الذي تنشره CBJ-INFOSERVICES، EURL. تصفح الموقع أو إنشاء حساب أو نشر محتوى يعني قبول هذه الشروط.',
+  'lg.u.s2t': 'الحسابات',
+  'lg.u.s2b': 'الحساب شخصي ويلزم الجهة التي يمثّلها. يجب أن تكون المعلومات المقدَّمة دقيقة ومحدَّثة. يحمي صاحب الحساب بيانات دخوله، ويبلغ فورًا عن أي استخدام غير مصرّح به عبر contact@paperatlas.net.',
+  'lg.u.s3t': 'المحتوى الذي ينشره الأعضاء',
+  'lg.u.s3b': 'كل بطاقة أو إعلان أو عرض عمل أو طلب أو رسالة يُنشر تحت مسؤولية صاحبه، ويخضع للمراجعة قبل النشر. يضمن العضو امتلاكه حقوق النصوص والصور والشعارات التي يرفعها، ويمنح PaperAtlas حق عرضها في إطار الخدمة.',
+  'lg.u.s4t': 'الربط بين الأطراف',
+  'lg.u.s4b': 'تربط PaperAtlas بين الجهات والورشات. العقود وعروض الأسعار والطلبات المبرمة بين الأعضاء تخضع لعلاقتهم وحدها؛ فالمنصة ليست طرفًا فيها ولا تتدخل في تنفيذها. السعر المعروض تقدير حتى يؤكده مسؤول.',
+  'lg.u.s5t': 'الاستخدامات الممنوعة',
+  'lg.u.s5b': 'يُمنع: نشر محتوى غير قانوني أو مضلِّل أو يمسّ حقوق الغير؛ انتحال هوية جهة؛ جمع بيانات الأعضاء لأغراض تجارية غير مرتبطة بالخدمة؛ إرسال رسائل آلية أو مزعجة؛ محاولة تجاوز إجراءات أمان الموقع.',
+  'lg.u.s6t': 'الإشراف',
+  'lg.u.s6b': 'يحق لـ PaperAtlas سحب أي محتوى، أو تعليق حساب أو إغلاقه إذا خالف هذه الشروط، مع إعلام العضو متى أمكن. يُرسل البلاغ إلى contact@paperatlas.net.',
+  'lg.u.s7t': 'البيانات الشخصية',
+  'lg.u.s7b': 'تُوصف معالجة البيانات الشخصية في سياسة الخصوصية، التي تُحيل إليها هذه الشروط.',
+  'lg.u.s8t': 'التوفر والقانون المطبّق',
+  'lg.u.s8b': 'تُقدَّم الخدمة كما هي، دون ضمان توفّر متواصل للموقع. تخضع هذه الشروط للقانون الجزائري؛ وعند تعذّر الحل الودّي تكون المحاكم المختصة هي محاكم مقر الناشر.',
+
+  'lg.v.title': 'الشروط العامة للبيع',
+  'lg.v.lede': 'اشتراكات PaperAtlas المدفوعة: التجربة والأسعار والتجديد والدفع والإلغاء والاسترداد.',
+  'lg.v.updated': 'آخر تحديث في 25 نوفمبر 2026',
+  'lg.v.note': 'تُضاف هذه الشروط إلى الشروط العامة للاستخدام لكل اشتراك يُبرم من الموقع.',
+  'lg.v.s1t': 'الموضوع',
+  'lg.v.s1b': 'تسري هذه الشروط على الاشتراكات المدفوعة المعروضة في صفحة العروض، وتُقبل عند الاشتراك.',
+  'lg.v.s2t': 'السعر والعملة',
+  'lg.v.s2b': 'يتوقف السعر على البلد المصرَّح به في الحساب والمدة المختارة. يحسبه الخادم استنادًا إلى جدول الأسعار المعمول به، ويظهر قبل أي التزام. المبلغ المخصوم هو ما يُؤكَّد عند الدفع، بعملة مزوّد الدفع.',
+  'lg.v.s3t': 'التجربة المجانية',
+  'lg.v.s3b': 'يستفيد كل حساب من تجربة واحدة مدتها أربعة عشر يومًا. يُطلب وسيلة الدفع قبل بدء التجربة، ولا يحدث الخصم الأول إلا في نهايتها، ما لم يُلغَ الاشتراك قبل ذلك.',
+  'lg.v.s4t': 'المدة والتجديد',
+  'lg.v.s4b': 'يُكتتب الاشتراك لمدة شهر أو ثلاثة أو ستة أو اثني عشر شهرًا، ويتجدد تلقائيًا لنفس المدة عند كل استحقاق، ما لم يُلغَ.',
+  'lg.v.s5t': 'الدفع',
+  'lg.v.s5b': 'تتولى Stripe معالجة الدفع، أو PayPal عندما تكون العملة المختارة مدعومة من PayPal للاشتراكات المتكررة. لا تحتفظ PaperAtlas برقم البطاقة ولا ببيانات الدفع؛ يتولاها مزوّد الدفع.',
+  'lg.v.s6t': 'الإلغاء',
+  'lg.v.s6b': 'يمكن للعضو إلغاء الاشتراك في أي وقت من فضاء حسابه. يسري الإلغاء بنهاية الفترة الجارية: يبقى الوصول مفتوحًا حتى ذلك التاريخ، ولا يجري أي تجديد بعده.',
+  'lg.v.s7t': 'الاسترداد',
+  'lg.v.s7b': 'كل طلب استرداد خلال فترة التجربة يُسترد كاملًا. وبعد إجراء أول دفعة، لا يُستحق أي استرداد، بما في ذلك الاسترداد النسبي لفترة بدأت.',
+  'lg.v.s8t': 'القانون المطبّق والتواصل',
+  'lg.v.s8b': 'تخضع هذه الشروط للقانون الجزائري. لأي سؤال حول فاتورة أو اشتراك: contact@paperatlas.net.',
 };
 
 const en: Dict = {
@@ -212,6 +320,50 @@ const en: Dict = {
 
   'foot.legalMentions': 'Legal notice',
   'foot.legalPrivacy': 'Privacy',
+  'foot.cgu': 'Terms of use',
+  'foot.cgv': 'Terms of sale',
+
+  'lg.u.title': 'Terms of use',
+  'lg.u.lede': 'The rules for access to the site, publishing content and contact between PaperAtlas members.',
+  'lg.u.updated': 'Updated on 25 November 2026',
+  'lg.u.note': 'These terms apply to every visit to the site and every account created. For any question: contact@paperatlas.net.',
+  'lg.u.s1t': 'Purpose and acceptance',
+  'lg.u.s1b': 'These terms govern the use of the PaperAtlas site, published by CBJ-INFOSERVICES, EURL. Browsing the site, creating an account or posting content means accepting these terms.',
+  'lg.u.s2t': 'Accounts',
+  'lg.u.s2b': 'An account is personal and binds the organisation it represents. The information provided must be accurate and kept up to date. The holder protects their credentials and reports any unauthorised use without delay to contact@paperatlas.net.',
+  'lg.u.s3t': 'Content published by members',
+  'lg.u.s3b': 'Each listing, advert, job offer, request or message is published under its author’s responsibility and is reviewed before publication. Members warrant that they hold the rights to the texts, images and logos they submit, and grant PaperAtlas the right to display them as part of the service.',
+  'lg.u.s4t': 'Connections between members',
+  'lg.u.s4b': 'PaperAtlas connects studios and workshops. Contracts, quotes and orders concluded between members are matters solely between them: the platform is not a party to them and does not intervene in their performance. A displayed price remains an estimate until a referent confirms it.',
+  'lg.u.s5t': 'Prohibited uses',
+  'lg.u.s5b': 'The following are prohibited: publishing unlawful, misleading content or content infringing others’ rights; impersonating an organisation; collecting members’ data for commercial purposes not provided by the service; sending automated or unsolicited messages; attempting to circumvent the site’s security measures.',
+  'lg.u.s6t': 'Moderation',
+  'lg.u.s6b': 'PaperAtlas may remove content, or suspend or close an account that breaches these terms, informing the member where possible. Reports go to contact@paperatlas.net.',
+  'lg.u.s7t': 'Personal data',
+  'lg.u.s7b': 'The processing of personal data is described in the privacy policy, to which these terms refer.',
+  'lg.u.s8t': 'Availability and governing law',
+  'lg.u.s8b': 'The service is provided as is, without a guarantee of uninterrupted availability. These terms are governed by Algerian law; failing an amicable settlement, the competent courts are those of the publisher’s registered office.',
+
+  'lg.v.title': 'Terms of sale',
+  'lg.v.lede': 'PaperAtlas paid subscriptions: trial, prices, renewal, payment, cancellation and refunds.',
+  'lg.v.updated': 'Updated on 25 November 2026',
+  'lg.v.note': 'These terms supplement the terms of use for any subscription taken out on the site.',
+  'lg.v.s1t': 'Purpose',
+  'lg.v.s1b': 'These terms apply to the paid subscriptions offered on the PaperAtlas Offers page. They are accepted when subscribing.',
+  'lg.v.s2t': 'Prices and currency',
+  'lg.v.s2b': 'The price depends on the country declared in the account and the term chosen. It is calculated by the server from the tariff table in force and is shown before any commitment. The amount debited is the one confirmed at payment, in the currency of the payment provider.',
+  'lg.v.s3t': 'Free trial',
+  'lg.v.s3b': 'Each account is entitled to one fourteen-day trial. The payment method is requested before the trial starts: the first charge takes place at the end of the trial, unless the subscription is cancelled beforehand.',
+  'lg.v.s4t': 'Term and renewal',
+  'lg.v.s4b': 'The subscription is taken out for one, three, six or twelve months. It renews automatically, for the same term, at each due date, until it is cancelled.',
+  'lg.v.s5t': 'Payment',
+  'lg.v.s5b': 'Payment is processed by Stripe, or by PayPal when the chosen currency is supported by PayPal for recurring subscriptions. PaperAtlas does not store card numbers or payment credentials; these are handled by the provider.',
+  'lg.v.s6t': 'Cancellation',
+  'lg.v.s6b': 'The member may cancel from their account area at any time. Cancellation takes effect at the end of the current period: access remains open until that date, and no renewal is made afterwards.',
+  'lg.v.s7t': 'Refunds',
+  'lg.v.s7b': 'Any refund request made during the trial period is refunded in full. Once the first payment has been made, no refund is due, including a pro-rata refund for a period already begun.',
+  'lg.v.s8t': 'Governing law and contact',
+  'lg.v.s8b': 'These terms are governed by Algerian law. For any question about an invoice or a subscription: contact@paperatlas.net.',
 };
 
 export const legalDict: Record<'fr' | 'ar' | 'en', Dict> = { fr, ar, en };

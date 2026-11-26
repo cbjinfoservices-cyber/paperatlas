@@ -38,7 +38,7 @@
 .mail-guide-sub {
   margin: 0;
   max-width: 74ch;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.55;
   color: color-mix(in srgb, var(--text) 58%, transparent);
 }
@@ -51,7 +51,7 @@
   border-radius: 999px;
   border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .05em;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
@@ -97,7 +97,7 @@
   border-radius: 999px;
   border: 1px solid color-mix(in srgb, var(--text) 20%, transparent);
   font-family: var(--font-heading);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 58%, transparent);
@@ -136,7 +136,7 @@
   padding: 0 7px;
   border-radius: 999px;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .05em;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 52%, transparent);
@@ -149,7 +149,7 @@
 
 .mail-step-txt {
   margin: 0;
-  font-size: 11.2px;
+  font-size: 12px;
   line-height: 1.55;
   color: color-mix(in srgb, var(--text) 66%, transparent);
 }
@@ -169,7 +169,7 @@
   border-radius: 5px;
   background: color-mix(in srgb, var(--text) 8%, transparent);
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.6;
   color: color-mix(in srgb, var(--text) 80%, transparent);
   overflow-wrap: anywhere;
@@ -183,7 +183,7 @@
   border-radius: 999px;
   border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
   background: color-mix(in srgb, var(--accent) 8%, transparent);
-  font-size: 10.5px;
+  font-size: 12px;
   font-weight: 600;
   line-height: 1.45;
   text-decoration: none;
@@ -191,7 +191,7 @@
   color: color-mix(in srgb, var(--accent) 92%, var(--text));
   transition: background .16s ease, border-color .16s ease;
 }
-.mail-step-link i { font-size: 11px; }
+.mail-step-link i { font-size: 12px; }
 .mail-step-link:hover {
   background: color-mix(in srgb, var(--accent) 16%, transparent);
   border-color: color-mix(in srgb, var(--accent) 46%, transparent);
@@ -206,7 +206,7 @@
   display: flex;
   align-items: flex-start;
   gap: 6px;
-  font-size: 10.8px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--text) 54%, transparent);
 }
@@ -228,7 +228,7 @@
   border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
   background: color-mix(in srgb, var(--accent) 11%, transparent);
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .04em;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
@@ -236,7 +236,7 @@
 }
 .mail-step-date i { font-size: 12px; }
 
-[dir='rtl'] .mail-step-date { letter-spacing: 0; font-size: 11px; }
+[dir='rtl'] .mail-step-date { letter-spacing: 0; font-size: 12px; }
 
 /* L'âge de la preuve, à côté de son jour : « il y a 12 jours » se lit sans
    compter. Il reste plus calme que la date — c'est une mesure, pas un fait. */
@@ -249,7 +249,7 @@
   border: 1px dashed color-mix(in srgb, var(--text) 20%, transparent);
   background: color-mix(in srgb, var(--text) 5%, transparent);
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .04em;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
@@ -257,7 +257,7 @@
 }
 .mail-step-age i { font-size: 12px; }
 
-[dir='rtl'] .mail-step-age { letter-spacing: 0; font-size: 11px; }
+[dir='rtl'] .mail-step-age { letter-spacing: 0; font-size: 12px; }
 
 /* L'étape que le compteur de la carte a demandée : elle s'allume et le guide
    la rejoint, pour qu'on ne relise pas les quatre pour retrouver celle qui
@@ -281,7 +281,7 @@
   border: 1px solid color-mix(in srgb, var(--accent) 46%, transparent);
   background: color-mix(in srgb, var(--accent) 16%, transparent);
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.7;
   letter-spacing: .05em;
   white-space: nowrap;
@@ -289,7 +289,7 @@
   animation: mail-step-call 1.4s ease-out 1;
 }
 
-[dir='rtl'] .mail-step-next { letter-spacing: 0; font-size: 11px; }
+[dir='rtl'] .mail-step-next { letter-spacing: 0; font-size: 12px; }
 
 @keyframes mail-step-call {
   0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 42%, transparent); }
@@ -307,7 +307,7 @@
   border-radius: 8px;
   border: 1px dashed color-mix(in srgb, var(--accent) 32%, transparent);
   background: color-mix(in srgb, var(--accent) 6%, transparent);
-  font-size: 10.8px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--text) 68%, transparent);
 }
@@ -333,7 +333,7 @@
   border-radius: 8px;
   border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
   background: color-mix(in srgb, var(--accent) 9%, transparent);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   line-height: 1.4;
   text-decoration: none;
@@ -365,7 +365,7 @@
     gap: 8px;
     padding: 8px 9px;
   }
-  .mail-step-n { width: 20px; height: 20px; font-size: 10.5px; }
+  .mail-step-n { width: 20px; height: 20px; font-size: 12px; }
   .mail-step-state { margin-inline-start: 0; }
 }
 
@@ -394,7 +394,7 @@
   pointer-events: none;
 }
 
-.mail-test-dot i { font-size: 9px; }
+.mail-test-dot i { font-size: 12px; }
 
 @keyframes mail-test-dot {
   0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 38%, transparent); }
@@ -439,7 +439,7 @@
   border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
   background: color-mix(in srgb, var(--text) 4%, transparent);
   font-family: var(--font-label);
-  font-size: 10.5px;
+  font-size: 12px;
   line-height: 1.5;
   font-weight: 600;
   cursor: pointer;
@@ -505,7 +505,7 @@
   gap: 5px;
   padding: 5px 9px;
   border-radius: 7px;
-  font-size: 10.8px;
+  font-size: 12px;
   line-height: 1.5;
 }
 .auth-smtp-flash i {
@@ -531,7 +531,7 @@
   align-items: center;
   gap: 5px;
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .06em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 58%, transparent);
@@ -556,7 +556,7 @@
 }
 
 .auth-smtp-row dt {
-  font-size: 11px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--text) 54%, transparent);
 }
 
@@ -576,7 +576,7 @@
   border-radius: 5px;
   background: color-mix(in srgb, var(--text) 7%, transparent);
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 10.5px;
+  font-size: 12px;
   line-height: 1.7;
   color: color-mix(in srgb, var(--text) 84%, transparent);
   overflow-wrap: anywhere;
@@ -639,7 +639,7 @@
   border-radius: 999px;
   background: transparent;
   font-family: var(--font-label);
-  font-size: 10.5px;
+  font-size: 12px;
   font-weight: 600;
   white-space: nowrap;
   cursor: pointer;
@@ -658,7 +658,7 @@
 
 .auth-models-sub {
   margin: 0;
-  font-size: 10.8px;
+  font-size: 12px;
   line-height: 1.55;
   color: color-mix(in srgb, var(--text) 56%, transparent);
 }
@@ -673,7 +673,7 @@
 .auth-model-label {
   flex: none;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: .05em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 46%, transparent);
@@ -701,7 +701,7 @@
   border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
   background: color-mix(in srgb, var(--surface) 70%, transparent);
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.6;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
@@ -731,7 +731,7 @@
   align-items: center;
   gap: 5px;
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .06em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 58%, transparent);
@@ -761,14 +761,14 @@
 
 .auth-preview-label {
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: .05em;
   text-transform: uppercase;
   white-space: nowrap;
   color: color-mix(in srgb, var(--text) 44%, transparent);
 }
 
-[dir='rtl'] .auth-preview-label { letter-spacing: 0; font-size: 10.5px; }
+[dir='rtl'] .auth-preview-label { letter-spacing: 0; font-size: 11px; }
 
 /* Les trois largeurs de téléphone, côte à côte : un appui pose la largeur sur
    le cadre, un second la change. Le bouton retenu se lit enfoncé. */
@@ -789,7 +789,7 @@
   border-radius: 999px;
   background: transparent;
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.6;
   letter-spacing: .02em;
   font-variant-numeric: tabular-nums;
@@ -800,7 +800,7 @@
 }
 
 .auth-preview-size small {
-  font-size: 8.5px;
+  font-size: 12px;
   letter-spacing: .02em;
   opacity: .8;
 }
@@ -827,7 +827,7 @@
 
 .auth-preview-sub {
   margin: 0;
-  font-size: 10.8px;
+  font-size: 12px;
   line-height: 1.55;
   color: color-mix(in srgb, var(--text) 56%, transparent);
 }
@@ -869,7 +869,7 @@
   border-radius: 8px;
   border: 1px dashed color-mix(in srgb, var(--accent) 24%, transparent);
   background: color-mix(in srgb, var(--accent) 6%, transparent);
-  font-size: 10.8px;
+  font-size: 12px;
   line-height: 1.5;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 68%, transparent);
@@ -915,7 +915,7 @@
   gap: 5px;
   padding: 4px 8px;
   border-radius: 7px;
-  font-size: 10.5px;
+  font-size: 12px;
   line-height: 1.5;
 }
 .auth-preview-tally-flash i {
@@ -943,7 +943,7 @@
   align-items: baseline;
   gap: 4px;
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.5;
   letter-spacing: .02em;
   font-variant-numeric: tabular-nums;
@@ -951,7 +951,7 @@
 }
 .auth-preview-tally-last i {
   flex: none;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--accent) 72%, var(--text));
 }
@@ -961,7 +961,7 @@
 
 [dir='rtl'] .auth-preview-tally-last {
   letter-spacing: 0;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .auth-preview-tally-label {
@@ -969,7 +969,7 @@
   align-items: center;
   gap: 5px;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: .05em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 50%, transparent);
@@ -979,7 +979,7 @@
   color: color-mix(in srgb, var(--accent) 68%, var(--text));
 }
 
-[dir='rtl'] .auth-preview-tally-label { letter-spacing: 0; font-size: 10.5px; }
+[dir='rtl'] .auth-preview-tally-label { letter-spacing: 0; font-size: 11px; }
 
 .auth-preview-tally-row {
   display: grid;
@@ -1021,7 +1021,7 @@
   align-items: baseline;
   gap: 1px;
   font-family: var(--font-label);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: .02em;
   font-variant-numeric: tabular-nums;
@@ -1029,7 +1029,7 @@
   color: color-mix(in srgb, var(--text) 78%, transparent);
 }
 .auth-preview-tally-h small {
-  font-size: 8.5px;
+  font-size: 12px;
   font-weight: 400;
   opacity: .8;
 }
@@ -1041,14 +1041,14 @@
   display: inline-flex;
   align-items: baseline;
   gap: 3px;
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.45;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 58%, transparent);
 }
 .auth-preview-tally-rest i {
   flex: none;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.45;
   color: color-mix(in srgb, var(--accent) 80%, var(--text));
 }
@@ -1058,7 +1058,7 @@
 
 [dir='rtl'] .auth-preview-tally-h,
 [dir='rtl'] .auth-preview-tally-rest { letter-spacing: 0; }
-[dir='rtl'] .auth-preview-tally-rest { font-size: 10.5px; }
+[dir='rtl'] .auth-preview-tally-rest { font-size: 12px; }
 
 @media (max-width: 560px) {
   .auth-preview-tally-row { grid-template-columns: minmax(0, 1fr); }

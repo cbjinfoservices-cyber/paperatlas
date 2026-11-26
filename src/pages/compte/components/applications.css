@@ -14,7 +14,7 @@
 .capp-head-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
 .capp-n { display: inline-flex; align-items: center; justify-content: center; min-width: 18px; height: 18px;
   padding: 0 5px; margin-inline-start: 2px; border-radius: 999px;
-  font-family: var(--font-label); font-size: 10px; letter-spacing: .02em;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .02em;
   background: color-mix(in srgb, var(--text) 12%, transparent); color: var(--muted); }
 .capp-tabs .is-on .capp-n { background: color-mix(in srgb, var(--bg) 24%, transparent); color: var(--bg); }
 
@@ -40,7 +40,7 @@
 .capp-search-clear i { font-size: 14px; }
 .capp-search-clear:hover { color: var(--text); background: color-mix(in srgb, var(--text) 10%, transparent); }
 .capp-chip { display: inline-flex; align-items: center; gap: 7px; padding: 7px 13px; border-radius: 999px;
-  font-family: var(--font-label); font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
   color: var(--muted); background: transparent; cursor: pointer; white-space: nowrap;
   border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
   transition: color .18s ease, background .18s ease, border-color .18s ease; }
@@ -60,7 +60,7 @@
 
 /* ============ ACTIVE FILTER COUNTER (HEADER) ============ */
 .capp-active { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 8px 0 0;
-  font-family: var(--font-label); font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .1em; text-transform: uppercase;
   color: var(--accent2); }
 .capp-active > i { font-size: 13px; color: var(--accent); }
 .capp-active strong { font-weight: 700; color: var(--text); }
@@ -90,7 +90,7 @@
   border-inline-start: 2px solid color-mix(in srgb, var(--accent) 60%, transparent);
   background: color-mix(in srgb, var(--accent) 7%, transparent); }
 .capp-note > i { font-size: 14px; color: var(--accent); margin-top: 1px; flex: 0 0 auto; }
-.capp-note strong { font-family: var(--font-label); font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase;
+.capp-note strong { font-family: var(--font-label); font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
   color: var(--accent2); }
 
 /* Ce qui est déjà parti au candidat, sur une candidature reçue : une ligne de
@@ -101,10 +101,10 @@
   background: color-mix(in srgb, var(--surface) 92%, transparent); }
 .capp-sent > i { flex: 0 0 auto; margin-top: 1px; font-size: 14px; color: var(--accent); }
 .capp-sent > span { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; min-width: 0; }
-.capp-sent strong { font-family: var(--font-label); font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase;
+.capp-sent strong { font-family: var(--font-label); font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
   color: var(--accent2); }
 .capp-sent-item { display: inline-flex; align-items: center; gap: 4px; min-width: 0; white-space: nowrap; }
-.capp-sent-item i { font-size: 11px; color: color-mix(in srgb, var(--text) 46%, transparent); }
+.capp-sent-item i { font-size: 12px; color: color-mix(in srgb, var(--text) 46%, transparent); }
 .capp-sent-item b { font-weight: 600; font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 88%, transparent); }
 [dir="rtl"] .capp-sent strong { letter-spacing: 0; text-transform: none; }
@@ -135,12 +135,12 @@
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent); }
 .capp-note-field::placeholder { color: color-mix(in srgb, var(--muted) 88%, transparent); }
 .capp-note-count { margin: 0; display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
-  font-family: var(--font-label); font-size: 10px; letter-spacing: .08em; color: var(--muted); }
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .08em; color: var(--muted); }
 /* The counter is two numbers around a slash: kept in one left-to-right run so a
    right-to-left page can never read « 400 / 0 ». */
 .capp-note-num { direction: ltr; unicode-bidi: isolate; }
 [dir="rtl"] .capp-note-count { letter-spacing: 0; }
-.capp-note-hint { letter-spacing: 0; text-transform: none; font-family: var(--font-body); font-size: 11.5px; }
+.capp-note-hint { letter-spacing: 0; text-transform: none; font-family: var(--font-body); font-size: 12px; }
 .capp-modal-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; padding-top: 4px; }
 .capp-modal-actions .ghost-btn { padding: 9px 16px; font-size: 13px; }
 
@@ -157,12 +157,12 @@
 .capp-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
 .capp-title { margin: 0; flex: 1 1 220px; min-width: 0; font-size: 16px; font-weight: 600;
   letter-spacing: -.02em; line-height: 1.32; overflow-wrap: anywhere; }
-.capp-date { font-family: var(--font-label); font-size: 10px; letter-spacing: .06em; text-transform: uppercase;
+.capp-date { font-family: var(--font-label); font-size: 12px; letter-spacing: .06em; text-transform: uppercase;
   color: var(--muted); white-space: nowrap; }
 
 /* How long a received dossier has been sitting: quiet under a week, marked after. */
 .capp-age { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 999px;
-  white-space: nowrap; font-family: var(--font-label); font-size: 9.5px; letter-spacing: .07em;
+  white-space: nowrap; font-family: var(--font-label); font-size: 12px; letter-spacing: .07em;
   text-transform: uppercase; color: var(--muted);
   border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
   transition: color .18s ease, border-color .18s ease, background .18s ease; }
@@ -185,9 +185,9 @@
   border-radius: 999px; white-space: nowrap; box-sizing: border-box; max-width: 100%;
   border: 1px dashed color-mix(in srgb, var(--text) 24%, transparent);
   background: color-mix(in srgb, var(--surface) 74%, transparent);
-  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .06em;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .06em;
   text-transform: uppercase; color: color-mix(in srgb, var(--text) 70%, transparent); }
-.capp-relance i { flex: 0 0 auto; font-size: 11px; color: var(--accent); }
+.capp-relance i { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
 [dir="rtl"] .capp-relance { letter-spacing: 0; text-transform: none; }
 [dir="rtl"] .capp-relance i { transform: scaleX(-1); }
 /* Une relance récente se replie d'un clic : le jeton devient une porte, la date
@@ -195,7 +195,7 @@
 .capp-relance.is-door {
   font: inherit;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .06em;
   text-transform: uppercase;
   cursor: pointer;
@@ -211,7 +211,7 @@
   border-style: solid;
   letter-spacing: .04em;
 }
-.capp-relance-caret { flex: 0 0 auto; font-size: 11px; color: color-mix(in srgb, var(--text) 52%, transparent); }
+.capp-relance-caret { flex: 0 0 auto; font-size: 12px; color: color-mix(in srgb, var(--text) 52%, transparent); }
 [dir="rtl"] .capp-relance.is-door { letter-spacing: 0; text-transform: none; }
 
 /* Le compte de ces dossiers, au-dessus de la liste : une ligne calme, qui
@@ -244,7 +244,7 @@
 .capp-silent-sort > i { flex: 0 0 auto; font-size: 14px; color: var(--accent); }
 .capp-silent-sort > span { flex: 1 1 220px; min-width: 0; overflow-wrap: break-word; }
 .capp-silent-sort-clear { display: inline-flex; align-items: center; gap: 4px; flex: 0 0 auto;
-  padding: 0; border: 0; background: none; color: var(--muted); font: inherit; font-size: 11.5px;
+  padding: 0; border: 0; background: none; color: var(--muted); font: inherit; font-size: 12px;
   white-space: nowrap; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
 .capp-silent-sort-clear:hover { color: var(--accent); }
 .capp-silent-sort-clear i { font-size: 12px; }
@@ -254,7 +254,7 @@
   padding: 5px 11px; border-radius: 999px; cursor: pointer; white-space: nowrap;
   border: 1px solid color-mix(in srgb, var(--accent) 44%, transparent);
   background: color-mix(in srgb, var(--accent) 10%, transparent);
-  color: var(--accent2); font-family: var(--font-label); font-size: 11px; line-height: 1.3;
+  color: var(--accent2); font-family: var(--font-label); font-size: 12px; line-height: 1.3;
   transition: background .18s ease, border-color .18s ease; }
 .capp-silent-sort-write i { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
 .capp-silent-sort-write:hover:not(:disabled) {
@@ -271,7 +271,7 @@
   border-radius: 999px;
   background: color-mix(in srgb, var(--accent) 22%, transparent);
   color: color-mix(in srgb, var(--accent2) 82%, var(--text));
-  font-size: 9.5px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: .02em;
   line-height: 1.6;
@@ -291,18 +291,18 @@
   background: color-mix(in srgb, var(--surface) 70%, transparent);
   color: color-mix(in srgb, var(--accent2) 78%, var(--text));
   font-family: var(--font-label);
-  font-size: 10.5px;
+  font-size: 12px;
   line-height: 1.5;
   white-space: nowrap;
 }
-.capp-silent-sort-relance i { flex: 0 0 auto; font-size: 11px; color: var(--accent); }
+.capp-silent-sort-relance i { flex: 0 0 auto; font-size: 12px; color: var(--accent); }
 [dir="rtl"] .capp-silent-sort-relance { letter-spacing: 0; }
 [dir="rtl"] .capp-silent-sort-relance i { transform: scaleX(-1); }
 [dir="rtl"] .capp-silent-sort-write { letter-spacing: 0; }
 [dir="rtl"] .capp-silent-sort-write i { transform: scaleX(-1); }
 
 .capp-badge { padding: 4px 10px; border-radius: 999px; white-space: nowrap;
-  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
   border: 1px solid transparent; }
 .capp-badge[data-state="envoyee"] { color: var(--muted); background: transparent;
   border-color: color-mix(in srgb, var(--text) 24%, transparent); border-style: dashed; }
@@ -344,7 +344,7 @@
 
 /* Role badge at the top of the account card. */
 .acct-role { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 999px;
-  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .1em; text-transform: uppercase;
   color: var(--accent2); background: color-mix(in srgb, var(--accent) 13%, transparent);
   border: 1px solid color-mix(in srgb, var(--accent) 32%, transparent); white-space: nowrap; }
 .acct-role i { font-size: 12px; color: var(--accent); }
@@ -354,7 +354,7 @@
   background: color-mix(in srgb, var(--accent) 11%, transparent);
   border: 1px dashed color-mix(in srgb, var(--accent) 42%, transparent); }
 .cand-block-head { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px;
-  font-family: var(--font-label); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent2); }
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent2); }
 .cand-block-head i { font-size: 13px; color: var(--accent); }
 .cand-block-head em { font-style: normal; text-transform: none; letter-spacing: 0; font-family: var(--font-body);
   font-size: 12px; color: var(--muted); }
@@ -364,7 +364,7 @@
    attendent encore, et depuis quand la plus ancienne patiente. */
 .capp-ack { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
 .capp-ack-cell { display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; border-radius: 999px;
-  white-space: nowrap; font-size: 11.5px; line-height: 1.35; color: var(--muted);
+  white-space: nowrap; font-size: 12px; line-height: 1.35; color: var(--muted);
   box-sizing: border-box; max-width: 100%;
   background: color-mix(in srgb, var(--surface) 88%, transparent);
   border: 1px solid color-mix(in srgb, var(--text) 14%, transparent); }
@@ -376,7 +376,7 @@
 .capp-ack-cell[data-wait="yes"] { border-style: dashed;
   border-color: color-mix(in srgb, var(--accent2) 42%, transparent); }
 .capp-ack-cell[data-wait="yes"] > i { color: var(--accent2); }
-.capp-ack-oldest { display: inline-flex; align-items: center; gap: 5px; min-width: 0; font-size: 11.5px;
+.capp-ack-oldest { display: inline-flex; align-items: center; gap: 5px; min-width: 0; font-size: 12px;
   line-height: 1.4; color: var(--accent2); }
 .capp-ack-oldest > i { font-size: 12px; color: var(--accent); flex: 0 0 auto; }
 

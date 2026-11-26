@@ -32,7 +32,7 @@
 
 /* Le retour depuis la fiche d'une plume : discret, sous ses langues. */
 .dir-bridge-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px;
-  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .06em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .06em; text-transform: uppercase;
   color: var(--accent); text-decoration: none; }
 .dir-bridge-link i { font-size: 12px; }
 .dir-bridge-link:hover { color: var(--accent2); }

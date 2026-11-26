@@ -14,7 +14,7 @@
 /* Name + « Nouveau » badge: same quiet chip as the list cards. */
 .cprof-name-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; min-width: 0; }
 .cprof-new { flex: 0 0 auto; padding: 3px 9px; border-radius: 999px;
-  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
   color: var(--accent); white-space: nowrap;
   background: color-mix(in srgb, var(--accent) 14%, transparent);
   border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent); }
@@ -46,7 +46,7 @@
 /* La distance manque au texte tant que la position n'est pas connue : le geste
    qui la donne se range à côté du partage, sans prendre la ligne entière. */
 .cprof-share .board-trip-go { flex: 0 0 auto; }
-.cprof-share-hint { min-width: 0; font-size: 11.5px; line-height: 1.5; color: var(--muted); }
+.cprof-share-hint { min-width: 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
 @media (max-width: 640px) {
   .cprof-share .ad-btn { flex: 1 1 auto; justify-content: center; }
   .cprof-share .board-trip-go { flex: 1 1 auto; justify-content: center; }
@@ -139,7 +139,7 @@
 .cprof-facts { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 24px; }
 .cprof-facts > div { display: grid; gap: 3px; min-width: 0; padding-top: 10px;
   border-top: 1px solid color-mix(in srgb, var(--text) 10%, transparent); }
-.cprof-facts dt { font-family: var(--font-label); font-size: 10px; letter-spacing: .12em;
+.cprof-facts dt { font-family: var(--font-label); font-size: 12px; letter-spacing: .12em;
   text-transform: uppercase; color: var(--muted); }
 .cprof-facts dd { margin: 0; font-size: 15px; line-height: 1.45; overflow-wrap: anywhere; }
 

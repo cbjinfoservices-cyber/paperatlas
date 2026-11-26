@@ -1924,6 +1924,11 @@ Deno.serve(async (req) => {
 
     return json({ error: 'unknown-action' }, 400);
   } catch (err) {
-    return json({ error: 'server', detail: err instanceof Error ? err.message : 'unknown' }, 500);
+    console.error('[demandes-b2b]', err);
+    const detail =
+      err !== null && typeof err === 'object' && 'message' in err && typeof err.message === 'string'
+        ? err.message
+        : 'unknown';
+    return json({ error: 'server', detail }, 500);
   }
 });

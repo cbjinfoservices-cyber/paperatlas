@@ -182,7 +182,7 @@ export default function AdminParametres({ data, onReload }: Props) {
      lise pas comme s'il venait d'être relu. */
   const [lecture, setLecture] = useState<string | null>(() => readDerniereLecture());
 
-  /* L'état du domaine tel que Resend le voit : la seule réponse qui engage.
+  /* L'état du domaine tel que Brevo le voit : la seule réponse qui engage.
    * Un domaine écrit dans les secrets n'est pas un domaine vérifié, et la
    * carte ne doit pas confondre les deux. */
   type EtatDomaine = {
@@ -305,7 +305,7 @@ export default function AdminParametres({ data, onReload }: Props) {
     void lireExpediteur();
   }, [lireExpediteur]);
 
-  /* La vérification se demande à Resend, jamais aux secrets : on lit l'état
+  /* La vérification se demande à Brevo, jamais aux secrets : on lit l'état
    * du domaine que les envois utilisent déjà. */
   const verifierDomaine = useCallback(async () => {
     setDomaineBusy(true);
@@ -430,7 +430,7 @@ export default function AdminParametres({ data, onReload }: Props) {
     }
   };
 
-  /* Les mots du domaine, lus sur la réponse de Resend : vérifié, en attente,
+  /* Les mots du domaine, lus sur la réponse de Brevo : vérifié, en attente,
    * introuvable, ou rien à interroger. */
   const domaineTone = domaine?.verified ? 'ok' : domaine?.checked ? 'warn' : 'soft';
   const domaineMots = !domaine
@@ -873,7 +873,7 @@ export default function AdminParametres({ data, onReload }: Props) {
               ></i>
               <span className="whitespace-nowrap">{t('ad.p.mail.check')}</span>
             </button>
-            {/* La vérification du domaine, demandée à Resend lui-même : le
+            {/* La vérification du domaine, demandée à Brevo lui-même : le
                 seul geste qui dit si les accusés peuvent vraiment partir. */}
             <button
               type="button"
@@ -1046,7 +1046,7 @@ export default function AdminParametres({ data, onReload }: Props) {
           <div className="admin-tools">
             {/* La porte de l'envoi, posée en tête de la carte des accusés :
                 un accusé ne part que si l'expéditeur est configuré et si le
-                domaine est vérifié chez Resend. La pastille le dit, et le clic
+                domaine est vérifié chez Brevo. La pastille le dit, et le clic
                 relance la vérification sans remonter à la carte voisine. */}
             <button
               type="button"
@@ -1149,7 +1149,7 @@ export default function AdminParametres({ data, onReload }: Props) {
         </div>
 
         {/* La porte de l'envoi, dite en clair sous les compteurs : tant que
-            l'expéditeur ou le domaine n'est pas vérifié chez Resend, les
+            l'expéditeur ou le domaine n'est pas vérifié chez Brevo, les
             accusés ne peuvent pas vraiment partir — la carte le dit plutôt
             que de laisser croire à un renvoi silencieux. */}
         {expediteur && !(expediteur.configured && domaine?.verified) && (

@@ -7,7 +7,7 @@
 .trade-missing-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
 .trade-missing-title { display: inline-flex; align-items: center; gap: 6px; margin: 0;
   min-width: 0; flex: 1 1 260px;
-  font-family: var(--font-label); font-size: 10px; font-weight: 600;
+  font-family: var(--font-label); font-size: 12px; font-weight: 600;
   letter-spacing: .07em; text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 72%, transparent); }
 .trade-missing-title > i { flex: 0 0 auto; font-size: 13px;
@@ -16,7 +16,7 @@
 .trade-missing-title b { flex: 0 0 auto; font-family: var(--font-body); font-size: 12px;
   letter-spacing: 0; unicode-bidi: isolate; color: var(--accent2); }
 .trade-missing-title em { flex: 0 0 auto; font-style: normal; font-family: var(--font-body);
-  font-size: 10px; letter-spacing: 0; unicode-bidi: isolate;
+  font-size: 12px; letter-spacing: 0; unicode-bidi: isolate;
   color: color-mix(in srgb, var(--text) 46%, transparent); }
 [dir="rtl"] .trade-missing-title { letter-spacing: 0; }
 
@@ -26,10 +26,10 @@
   padding: 4px 11px; border-radius: 999px; appearance: none; cursor: pointer;
   background: transparent; white-space: nowrap;
   border: 1px dashed color-mix(in srgb, var(--text) 22%, transparent);
-  font-family: var(--font-label); font-size: 9px; letter-spacing: .05em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .05em; text-transform: uppercase;
   color: var(--muted);
   transition: background .2s ease, border-color .2s ease, color .2s ease; }
-.trade-missing-copy > i { flex: 0 0 auto; font-size: 11px; color: var(--accent2); }
+.trade-missing-copy > i { flex: 0 0 auto; font-size: 12px; color: var(--accent2); }
 .trade-missing-copy > span { flex: 0 1 auto; min-width: 0; overflow: hidden;
   text-overflow: ellipsis; }
 /* Les deux gestes de copie, l'un sous l'autre : la liste d'abord, puis les
@@ -59,9 +59,9 @@
   background: color-mix(in srgb, var(--text) 5%, transparent);
   border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
   transition: border-color .2s ease, background .2s ease, color .2s ease; }
-.trade-missing-door > i { flex: 0 0 auto; font-size: 10px; color: var(--accent2); }
+.trade-missing-door > i { flex: 0 0 auto; font-size: 12px; color: var(--accent2); }
 .trade-missing-door > i:last-child { color: var(--accent); opacity: .78; }
-.trade-missing-name { flex: 0 1 auto; min-width: 0; font-size: 11px; line-height: 1.5;
+.trade-missing-name { flex: 0 1 auto; min-width: 0; font-size: 12px; line-height: 1.5;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .trade-missing-door:hover { color: var(--text); border-color: color-mix(in srgb, var(--accent) 52%, transparent);
   background: color-mix(in srgb, var(--accent) 12%, transparent); }
@@ -70,7 +70,7 @@
 /* Le métier tenu partout : la ligne s'apaise et le dit, au lieu de laisser
    croire que la liste est vide par accident. */
 .trade-missing-none { display: flex; align-items: flex-start; gap: 6px; margin: 0; min-width: 0;
-  font-size: 11.5px; line-height: 1.55; color: color-mix(in srgb, var(--text) 60%, transparent); }
+  font-size: 12px; line-height: 1.55; color: color-mix(in srgb, var(--text) 60%, transparent); }
 .trade-missing-none i { flex: 0 0 auto; margin-top: 2px; font-size: 12px;
   color: color-mix(in srgb, var(--accent) 74%, var(--text)); }
 .trade-missing-none span { flex: 1 1 auto; min-width: 0; }
@@ -82,17 +82,17 @@
 .trade-missing--neigh { margin-top: 10px; padding-top: 11px;
   border-top-style: dotted;
   border-top-color: color-mix(in srgb, var(--text) 12%, transparent); }
-.trade-neigh-title { text-transform: none; letter-spacing: .01em; font-size: 11px; }
+.trade-neigh-title { text-transform: none; letter-spacing: .01em; font-size: 12px; }
 .trade-neigh-title > i { color: color-mix(in srgb, var(--accent) 74%, var(--text)); }
 .trade-neigh-region { flex: 0 1 auto; min-width: 0; font-family: var(--font-label);
-  font-size: 9px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
   color: color-mix(in srgb, var(--accent2) 78%, var(--text)); }
 [dir="rtl"] .trade-neigh-region { letter-spacing: 0; }
 
 /* La phrase du voisinage : ce que le manque représente à l'échelle de l'aire,
    dite une fois, puis les portes des pays. */
 .trade-neigh-lead { display: flex; align-items: flex-start; gap: 6px; margin: 0; min-width: 0;
-  font-size: 11.5px; line-height: 1.55;
+  font-size: 12px; line-height: 1.55;
   color: color-mix(in srgb, var(--text) 66%, transparent); }
 .trade-neigh-lead > i { flex: 0 0 auto; margin-top: 2px; font-size: 12px;
   color: color-mix(in srgb, var(--accent2) 78%, var(--text)); }
@@ -102,10 +102,10 @@
    pays, pour situer le manque du métier avant d'ouvrir sa page. */
 .trade-missing-fams { display: inline-flex; align-items: center; gap: 2px; flex: 0 0 auto;
   padding: 0 5px; border-radius: 999px;
-  font-family: var(--font-body); font-size: 9.5px; line-height: 1.5;
+  font-family: var(--font-body); font-size: 12px; line-height: 1.5;
   color: color-mix(in srgb, var(--text) 56%, transparent);
   background: color-mix(in srgb, var(--text) 8%, transparent); }
-.trade-missing-fams i { font-size: 8.5px; color: color-mix(in srgb, var(--accent2) 74%, var(--text)); }
+.trade-missing-fams i { font-size: 12px; color: color-mix(in srgb, var(--accent2) 74%, var(--text)); }
 
 /* ============ LES AIRES DU MONDE SANS LE MÉTIER ============ */
 /* Sous les voisins, le manque change d'échelle : combien d'aires du monde
@@ -136,14 +136,14 @@ a.trade-missing-regions-head:hover { border-style: solid;
   color: color-mix(in srgb, var(--accent2) 82%, var(--text)); }
 .trade-missing-regions-arrow { color: var(--accent); opacity: .8; }
 .trade-missing-regions-label { flex: 0 0 auto; max-width: 100%;
-  font-family: var(--font-label); font-size: 9.5px; font-weight: 600;
+  font-family: var(--font-label); font-size: 11px; font-weight: 600;
   letter-spacing: .06em; text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 68%, transparent); }
 [dir="rtl"] .trade-missing-regions-label { letter-spacing: 0; }
 .trade-missing-regions b { flex: 0 0 auto; font-family: var(--font-body); font-size: 12px;
   letter-spacing: 0; color: var(--accent2); }
 .trade-missing-regions-total { flex: 0 0 auto; font-style: normal;
-  font-family: var(--font-body); font-size: 10px; letter-spacing: 0;
+  font-family: var(--font-body); font-size: 12px; letter-spacing: 0;
   color: color-mix(in srgb, var(--text) 46%, transparent); }
 /* Les aires nommées une par une, avec le nombre de fiches qu'elles tiennent
    toutes familles confondues et celui des pays qui y manquent : le compte se
@@ -152,7 +152,7 @@ a.trade-missing-regions-head:hover { border-style: solid;
 .trade-missing-regions-list { display: flex; flex-wrap: wrap; gap: 4px; flex: 1 1 200px; min-width: 0; }
 .trade-missing-region { display: inline-flex; align-items: center; gap: 4px; min-width: 0;
   max-width: 100%; padding: 1px 7px; border-radius: 999px;
-  font-size: 10.5px; line-height: 1.6; text-decoration: none; cursor: pointer;
+  font-size: 12px; line-height: 1.6; text-decoration: none; cursor: pointer;
   color: color-mix(in srgb, var(--text) 72%, transparent);
   background: color-mix(in srgb, var(--text) 6%, transparent);
   border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
@@ -166,25 +166,25 @@ a.trade-missing-regions-head:hover { border-style: solid;
 .trade-missing-region-map { color: color-mix(in srgb, var(--accent) 78%, var(--text));
   opacity: .78; }
 .trade-missing-region:hover .trade-missing-region-map { opacity: 1; }
-.trade-missing-region > i { flex: 0 0 auto; font-size: 10px;
+.trade-missing-region > i { flex: 0 0 auto; font-size: 12px;
   color: color-mix(in srgb, var(--accent2) 82%, var(--text)); }
 .trade-missing-region-name { flex: 0 1 auto; min-width: 0; overflow: hidden;
   text-overflow: ellipsis; white-space: nowrap; }
 /* Les fiches tenues par l'aire, puis leur unité : le chiffre se lit d'abord,
    le mot le nomme sans alourdir la pastille. */
 .trade-missing-region b { flex: 0 0 auto; font-family: var(--font-body);
-  font-size: 10.5px; font-weight: 600; letter-spacing: 0;
+  font-size: 12px; font-weight: 600; letter-spacing: 0;
   unicode-bidi: isolate; color: var(--accent2); }
 .trade-missing-region-unit { flex: 0 1 auto; min-width: 0; overflow: hidden;
   text-overflow: ellipsis; white-space: nowrap;
-  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .04em;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .04em;
   text-transform: uppercase; color: color-mix(in srgb, var(--text) 48%, transparent); }
 [dir="rtl"] .trade-missing-region-unit { letter-spacing: 0; }
 /* Les pays manquants de l'aire, au bout : un petit compte qui tranche. */
 .trade-missing-region em { flex: 0 0 auto; font-style: normal;
   display: inline-flex; align-items: center; justify-content: center; min-width: 15px;
   padding: 0 4px; border-radius: 999px;
-  font-family: var(--font-body); font-size: 9px; font-weight: 600;
+  font-family: var(--font-body); font-size: 12px; font-weight: 600;
   color: color-mix(in srgb, var(--text) 62%, transparent);
   background: color-mix(in srgb, var(--text) 9%, transparent); }
 /* Le métier tenu dans toutes les aires : le compteur s'apaise au lieu de

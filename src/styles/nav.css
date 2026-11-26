@@ -44,7 +44,7 @@
   line-height: 1.08; }
 .nav-logo-partner-txt b { font-family: var(--font-heading); font-size: 12.5px; font-weight: 650;
   letter-spacing: .01em; color: var(--text); white-space: nowrap; }
-.nav-logo-partner-txt small { font-family: var(--font-label); font-size: 9px; font-weight: 600;
+.nav-logo-partner-txt small { font-family: var(--font-label); font-size: 12px; font-weight: 600;
   letter-spacing: .12em; text-transform: uppercase; white-space: nowrap;
   color: color-mix(in srgb, var(--text) 58%, transparent); }
 @media (prefers-reduced-motion: reduce) {
@@ -60,7 +60,7 @@
 @media (max-width: 1180px) {
   .nav-logo-partner { padding-inline-start: 9px; gap: 6px; }
   .nav-logo-partner-mark { width: 26px; height: 26px; border-radius: 8px; }
-  .nav-logo-partner-txt b { font-size: 11.5px; }
+  .nav-logo-partner-txt b { font-size: 12px; }
 }
 @media (max-width: 560px) {
   .nav-logo-partner-txt { display: none; }
@@ -82,12 +82,12 @@
   [dir="rtl"] .nav-logo { gap: 9px; }
   [dir="rtl"] .nav-logo-partner { margin-inline-start: 0; padding-inline-start: 9px; gap: 6px; }
   [dir="rtl"] .nav-logo-partner-mark { width: 26px; height: 26px; border-radius: 8px; }
-  [dir="rtl"] .nav-logo-partner-txt b { font-size: 11.5px; }
+  [dir="rtl"] .nav-logo-partner-txt b { font-size: 12px; }
   [dir="rtl"] .nav-logo-txt { max-width: 104px; }
 }
 @media (min-width: 1024px) and (max-width: 1199px) {
   [dir="rtl"] .nav-logo-txt { max-width: 84px; }
-  [dir="rtl"] .nav-logo-partner-txt b { font-size: 11px; }
+  [dir="rtl"] .nav-logo-partner-txt b { font-size: 12px; }
 }
 
 /* Entre 561 et 1023 px, la rangée a laissé la place au menu : les deux marques
@@ -96,7 +96,7 @@
 @media (min-width: 561px) and (max-width: 1023px) {
   [dir="rtl"] .nav-logo { gap: 8px; }
   [dir="rtl"] .nav-logo-partner { margin-inline-start: 0; padding-inline-start: 8px; gap: 5px; }
-  [dir="rtl"] .nav-logo-partner-txt b { font-size: 11px; }
+  [dir="rtl"] .nav-logo-partner-txt b { font-size: 12px; }
   [dir="rtl"] .nav-logo-txt { max-width: 76px; }
 }
 
@@ -145,11 +145,11 @@
 .nav-link-tick { display: inline-flex; align-items: center; gap: 4px; flex: none;
   padding: 1px 7px 1px 5px; border-radius: 999px;
   background: color-mix(in srgb, var(--accent) 18%, transparent);
-  color: var(--accent); font-family: var(--font-label); font-size: 9px;
+  color: var(--accent); font-family: var(--font-label); font-size: 12px;
   line-height: 1.35; letter-spacing: .04em; white-space: nowrap;
   animation: nav-dot-in .26s cubic-bezier(.2,.7,.2,1) both; }
-.nav-link-tick i { font-size: 10px; line-height: 1; color: var(--accent); }
-[dir="rtl"] .nav-link-tick { letter-spacing: 0; font-size: 10.5px; }
+.nav-link-tick i { font-size: 12px; line-height: 1; color: var(--accent); }
+[dir="rtl"] .nav-link-tick { letter-spacing: 0; font-size: 12px; }
 @media (prefers-reduced-motion: reduce) {
   .nav-link-tick { animation: none; }
 }
@@ -166,7 +166,7 @@
 .nav-burger-count { position: absolute; top: 1px; inset-inline-end: 0; display: inline-flex;
   align-items: center; justify-content: center; min-width: 17px; height: 17px; padding: 0 4px;
   border-radius: 999px; background: var(--accent); color: var(--bg);
-  font-family: var(--font-label); font-size: 9px; line-height: 1; letter-spacing: 0;
+  font-family: var(--font-label); font-size: 11px; line-height: 1; letter-spacing: 0;
   animation: nav-dot-in .26s cubic-bezier(.2,.7,.2,1) both; }
 /* Before the first section is entered there is nothing to count: the badge
    steps back to the plain dot « Plus » already uses, so the burger never shows
@@ -251,10 +251,10 @@
    which of the two doors it answered. */
 .nav-mobile-tick--named { width: auto; height: auto; min-height: 18px; gap: 4px;
   padding: 2px 8px 2px 6px; border-radius: 999px; font-family: var(--font-label);
-  font-size: 9.5px; line-height: 1.3; letter-spacing: .04em; white-space: nowrap;
+  font-size: 12px; line-height: 1.3; letter-spacing: .04em; white-space: nowrap;
   color: var(--accent); }
-.nav-mobile-tick--named i { font-size: 11px; }
-[dir="rtl"] .nav-mobile-tick--named { letter-spacing: 0; font-size: 10.5px; }
+.nav-mobile-tick--named i { font-size: 12px; }
+[dir="rtl"] .nav-mobile-tick--named { letter-spacing: 0; font-size: 12px; }
 .nav-mobile a.nav-mobile-item:hover .nav-mobile-txt small { color: color-mix(in srgb, var(--accent) 82%, transparent); }
 /* The page you are already standing on, said plainly in the sheet too. */
 .nav-mobile > a.is-current { color: var(--accent); font-weight: 600; }
@@ -285,7 +285,7 @@
 .nav-new-count { display: inline-flex; align-items: center; justify-content: center;
   min-width: 17px; height: 17px; padding: 0 5px; border-radius: 999px;
   background: var(--accent); color: var(--bg);
-  font-family: var(--font-label); font-size: 9.5px; line-height: 1; letter-spacing: 0; }
+  font-family: var(--font-label); font-size: 11px; line-height: 1; letter-spacing: 0; }
 /* Seven public links now: the row tightens before it ever pushes the account
    block out of the bar. */
 @media (max-width: 1440px) { .nav-links { gap: 14px; } .nav-links a { font-size: 12.5px; } }
@@ -356,7 +356,7 @@
 .nav-more-count { display: inline-flex; align-items: center; justify-content: center; flex: none;
   min-width: 16px; height: 16px; padding: 0 4px; margin-inline-start: 2px; border-radius: 999px;
   background: color-mix(in srgb, var(--accent) 20%, transparent); color: var(--accent);
-  font-family: var(--font-label); font-size: 9.5px; line-height: 1; letter-spacing: 0;
+  font-family: var(--font-label); font-size: 11px; line-height: 1; letter-spacing: 0;
   animation: nav-dot-in .26s cubic-bezier(.2,.7,.2,1) both; }
 .nav-more-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; border-radius: 4px; }
 .nav-more-menu { position: absolute; top: calc(100% + 16px); inset-inline-start: -14px; z-index: 60;
@@ -400,10 +400,10 @@
   box-shadow: 0 12px 16px -12px color-mix(in srgb, #000 74%, transparent);
 }
 /* The panel headings: one group for this page, one for the rest of the network. */
-.nav-more-head { margin: 0; padding: 8px 11px 5px; font-family: var(--font-label); font-size: 10px;
+.nav-more-head { margin: 0; padding: 8px 11px 5px; font-family: var(--font-label); font-size: 12px;
   letter-spacing: .12em; text-transform: uppercase; color: color-mix(in srgb, var(--text) 48%, transparent);
   display: flex; align-items: center; gap: 7px; }
-[dir="rtl"] .nav-more-head { letter-spacing: 0; text-transform: none; font-size: 11px; }
+[dir="rtl"] .nav-more-head { letter-spacing: 0; text-transform: none; font-size: 12px; }
 /* Une rubrique du panneau et ses portes, dans un même bloc : le compte de
    l'intitulé se relève sur ce bloc, pas sur le panneau entier — il dit ce que
    la rubrique tient, et rien d'autre. La grille garde le pas du menu. */
@@ -417,7 +417,7 @@
   padding: 2px 5px;
   border-radius: 999px;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 11px;
   font-weight: 600;
   line-height: 1;
   letter-spacing: 0;
@@ -426,7 +426,7 @@
   color: color-mix(in srgb, var(--accent) 78%, var(--text) 22%);
   background: color-mix(in srgb, var(--accent) 12%, transparent);
 }
-[dir="rtl"] .nav-grp-count { font-size: 10px; }
+[dir="rtl"] .nav-grp-count { font-size: 11px; }
 /* L'intitulé de la feuille qui porte un compte devient une rangée : le mot
    d'abord, le chiffre ensuite, du côté où la lecture commence. La pastille ne
    se comprime pas et ne passe pas à la ligne — le chiffre se lit d'un bloc,
@@ -469,7 +469,7 @@
   /* Le mot commence du côté où la lecture commence : à droite en arabe. */
   text-align: start;
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 400;
   line-height: 1.3;
   letter-spacing: .18em;
@@ -477,7 +477,7 @@
   color: color-mix(in srgb, var(--text) 42%, transparent);
 }
 [dir="rtl"] .nav-more-seam {
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0;
   /* L'arabe se lit un cran plus haut que le latin à taille égale, et sans
      capitales pour le porter : le mot gagne un peu d'interligne. */
@@ -499,7 +499,7 @@
   padding: 0;
   text-align: start;
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 400;
   line-height: 1.3;
   letter-spacing: .18em;
@@ -507,7 +507,7 @@
   color: color-mix(in srgb, var(--text) 42%, transparent);
 }
 [dir="rtl"] .nav-door-seam {
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0;
   line-height: 1.45;
   text-transform: none;
@@ -554,9 +554,9 @@
 .nav-door-seam--sheet {
   margin: 6px 0 2px;
   margin-inline-start: 34px;
-  font-size: 9.5px;
+  font-size: 12px;
 }
-[dir="rtl"] .nav-door-seam--sheet { font-size: 10.5px; }
+[dir="rtl"] .nav-door-seam--sheet { font-size: 12px; }
 /* ── Le mot de couture et les huit types, panneau compact en arabe ──────────
    À 1024 px, le panneau ne fait plus que 372 px de large, et l'arabe allonge
    chaque pastille d'un cran. Les huit types dépliés mangent donc la hauteur,
@@ -613,9 +613,9 @@
    track that fills with the sections already read, and the count beside it. */
 .nav-more-progress { display: grid; grid-template-columns: 1fr auto; align-items: center;
   gap: 6px 8px; padding: 7px 11px 9px; }
-.nav-more-progress-lbl { font-family: var(--font-label); font-size: 9.5px; letter-spacing: .12em;
+.nav-more-progress-lbl { font-family: var(--font-label); font-size: 11px; letter-spacing: .12em;
   text-transform: uppercase; color: color-mix(in srgb, var(--text) 48%, transparent); }
-.nav-more-progress-num { font-family: var(--font-label); font-size: 10px; letter-spacing: .04em;
+.nav-more-progress-num { font-family: var(--font-label); font-size: 12px; letter-spacing: .04em;
   color: var(--accent); }
 .nav-more-progress-track { display: block; height: 3px; border-radius: 999px; overflow: hidden;
   background: color-mix(in srgb, var(--text) 16%, transparent);
@@ -633,7 +633,7 @@
 .nav-more-reset { grid-column: 1 / -1; display: inline-flex; align-items: center; gap: 6px;
   justify-self: start; margin-top: 6px; padding: 4px 8px 4px 6px; border: 0; border-radius: 8px;
   background: none; color: color-mix(in srgb, var(--text) 76%, transparent);
-  font: inherit; font-family: var(--font-label); font-size: 10.5px; letter-spacing: .05em;
+  font: inherit; font-family: var(--font-label); font-size: 12px; letter-spacing: .05em;
   line-height: 1.2; white-space: nowrap; cursor: pointer;
   transition: background .18s ease, color .18s ease; }
 .nav-more-reset i { font-size: 13px; line-height: 1; }
@@ -647,27 +647,27 @@
 .nav-more-done { grid-column: 1 / -1; display: inline-flex; align-items: center; gap: 5px;
   justify-self: start; margin: 2px 0 0; padding: 3px 9px 3px 7px; border-radius: 999px;
   background: color-mix(in srgb, var(--accent) 18%, transparent);
-  color: var(--accent); font-family: var(--font-label); font-size: 9.5px;
+  color: var(--accent); font-family: var(--font-label); font-size: 12px;
   letter-spacing: .05em; line-height: 1.2; white-space: nowrap;
   animation: nav-dot-in .26s cubic-bezier(.2,.7,.2,1) both; }
 .nav-more-done i { font-size: 12px; line-height: 1; }
-[dir="rtl"] .nav-more-done { letter-spacing: 0; font-size: 11px; }
+[dir="rtl"] .nav-more-done { letter-spacing: 0; font-size: 12px; }
 /* The places of the row read beside the chapter: they are not beats of the
    film, so they get their own quiet line — never mixed into the 3/3. */
 .nav-more-places { grid-column: 1 / -1; display: inline-flex; align-items: center;
-  gap: 5px; margin: 2px 0 0; font-family: var(--font-label); font-size: 9.5px;
+  gap: 5px; margin: 2px 0 0; font-family: var(--font-label); font-size: 12px;
   line-height: 1.35; letter-spacing: .04em;
   color: color-mix(in srgb, var(--text) 52%, transparent); }
 .nav-more-places i { font-size: 12px; line-height: 1;
   color: color-mix(in srgb, var(--accent) 82%, transparent); }
-[dir="rtl"] .nav-more-places { letter-spacing: 0; font-size: 11px; }
+[dir="rtl"] .nav-more-places { letter-spacing: 0; font-size: 12px; }
 /* The confirmation and its « Annuler » share one line, so the panel never jumps
    when the way back appears or folds. */
 .nav-more-reset-undo { grid-column: 1 / -1; display: flex; align-items: center;
   gap: 8px; flex-wrap: wrap; margin-top: 1px; }
 .nav-more-reset-undo:not(:has(button)) { margin-top: 0; }
 .nav-more-reset-note { min-height: 0; margin: 0;
-  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .05em;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .05em;
   color: color-mix(in srgb, var(--accent) 86%, transparent); }
 .nav-more-reset-note:empty { display: none; }
 /* A mis-click is not a lost chapter: the way back stays open five seconds, and
@@ -675,7 +675,7 @@
 .nav-more-reset-back { position: relative; display: inline-flex; align-items: center; gap: 5px;
   padding: 3px 9px 4px 7px; border: 1px solid color-mix(in srgb, var(--accent) 46%, transparent);
   border-radius: 999px; background: color-mix(in srgb, var(--accent) 10%, transparent);
-  color: var(--accent); font: inherit; font-family: var(--font-label); font-size: 9.5px;
+  color: var(--accent); font: inherit; font-family: var(--font-label); font-size: 12px;
   letter-spacing: .05em; line-height: 1.2; white-space: nowrap; cursor: pointer;
   overflow: hidden; transition: background .18s ease, border-color .18s ease; }
 .nav-more-reset-back i { font-size: 12px; line-height: 1; }
@@ -712,9 +712,9 @@
 /* The named tick reaches the panel doors too. It keeps the same pill as in the
    phone sheet, and the row may wrap rather than pushing it out of the menu. */
 .nav-links .nav-more-item { flex-wrap: wrap; }
-.nav-links .nav-more-item .nav-mobile-tick--named { margin-top: 1px; font-size: 9px;
+.nav-links .nav-more-item .nav-mobile-tick--named { margin-top: 1px; font-size: 12px;
   padding: 1px 7px 1px 5px; }
-.nav-links .nav-more-item .nav-mobile-tick--named i { margin-top: 0; font-size: 10px; }
+.nav-links .nav-more-item .nav-mobile-tick--named i { margin-top: 0; font-size: 12px; }
 /* The section already under the eyes: the panel door carries the same mark as
    a door in the row, so « Devis » or « Suivi » never read as an invitation. */
 .nav-links .nav-more-item.is-current { background: color-mix(in srgb, var(--accent) 14%, transparent);
@@ -749,7 +749,7 @@
   border-bottom: 1px solid color-mix(in srgb, var(--text) 11%, transparent); margin-bottom: 4px; }
 .nav-acct-head b { font-size: 13.5px; font-weight: 600; letter-spacing: -.01em; overflow: hidden;
   text-overflow: ellipsis; white-space: nowrap; }
-.nav-acct-head small { font-family: var(--font-label); font-size: 10.5px; letter-spacing: .04em; overflow: hidden;
+.nav-acct-head small { font-family: var(--font-label); font-size: 12px; letter-spacing: .04em; overflow: hidden;
   text-overflow: ellipsis; white-space: nowrap; color: color-mix(in srgb, var(--text) 55%, transparent); }
 .nav-acct-menu a, .nav-acct-out { display: flex; align-items: center; gap: 10px; padding: 9px 11px;
   border-radius: 10px; border: 0; background: none; text-decoration: none; color: var(--text);
@@ -763,7 +763,7 @@
 .nav-acct-count { margin-inline-start: auto; display: inline-flex; align-items: center; justify-content: center;
   min-width: 19px; height: 19px; padding: 0 5px; border-radius: 999px;
   background: color-mix(in srgb, var(--accent) 20%, transparent); color: var(--accent);
-  font-family: var(--font-label); font-size: 10px; line-height: 1; letter-spacing: 0; }
+  font-family: var(--font-label); font-size: 11px; line-height: 1; letter-spacing: 0; }
 .nav-acct-count:empty { display: none; }
 /* The door we are already standing behind: tinted, accented, never a dead
    invitation to open the page you are on. */
@@ -805,13 +805,13 @@
 .nav-links .nav-more-late-txt { display: flex; flex-direction: column; gap: 2px;
   min-width: 0; }
 .nav-links .nav-more-late-txt > span { font-size: 13.5px; line-height: 1.32; }
-.nav-links .nav-more-late-txt small { font-size: 11px; line-height: 1.36;
+.nav-links .nav-more-late-txt small { font-size: 12px; line-height: 1.36;
   letter-spacing: .02em; color: color-mix(in srgb, var(--text) 48%, transparent);
   transition: color .18s ease; }
 .nav-links .nav-more-late:hover .nav-more-late-txt small {
   color: color-mix(in srgb, var(--accent) 70%, transparent); }
 [dir="rtl"] .nav-links .nav-more-late-txt > span { font-size: 13px; line-height: 1.34; }
-[dir="rtl"] .nav-links .nav-more-late-txt small { letter-spacing: 0; font-size: 11px; line-height: 1.4; }
+[dir="rtl"] .nav-links .nav-more-late-txt small { letter-spacing: 0; font-size: 12px; line-height: 1.4; }
 /* The age in days, right after the date: « depuis 6 jours » answers the
    question the date alone leaves open, without a calendar. */
 .nav-more-late-days { color: color-mix(in srgb, var(--accent) 78%, transparent); }
@@ -822,7 +822,7 @@
   margin-top: -10px; margin-inline-start: 26px; padding: 5px 8px 5px 4px;
   border-radius: 9px; text-decoration: none;
   color: color-mix(in srgb, var(--accent) 84%, var(--text));
-  font-family: var(--font-label); font-size: 10.5px; line-height: 1.35;
+  font-family: var(--font-label); font-size: 12px; line-height: 1.35;
   letter-spacing: .03em; transition: background .18s ease, color .18s ease; }
 .nav-mobile a.nav-mobile-late i { font-size: 12.5px; line-height: 1;
   color: color-mix(in srgb, var(--accent) 90%, transparent); }
@@ -830,15 +830,15 @@
 .nav-mobile a.nav-mobile-late:hover { background: color-mix(in srgb, var(--accent) 13%, transparent);
   color: var(--accent); }
 .nav-mobile a.nav-mobile-late:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
-[dir="rtl"] .nav-mobile a.nav-mobile-late { letter-spacing: 0; font-size: 11.5px; }
+[dir="rtl"] .nav-mobile a.nav-mobile-late { letter-spacing: 0; font-size: 12px; }
 /* Same second line on the phone: which day the oldest waiting request dates
    from, under the same sentence as in the panel. */
 .nav-mobile-late-txt { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
-.nav-mobile-late-txt small { font-size: 9.5px; line-height: 1.3; letter-spacing: .03em;
+.nav-mobile-late-txt small { font-size: 12px; line-height: 1.3; letter-spacing: .03em;
   color: color-mix(in srgb, var(--text) 48%, transparent); transition: color .18s ease; }
 .nav-mobile a.nav-mobile-late:hover .nav-mobile-late-txt small {
   color: color-mix(in srgb, var(--accent) 70%, transparent); }
-[dir="rtl"] .nav-mobile-late-txt small { letter-spacing: 0; font-size: 10.5px; }
+[dir="rtl"] .nav-mobile-late-txt small { letter-spacing: 0; font-size: 12px; }
 .nav-mobile-late-days { color: color-mix(in srgb, var(--accent) 78%, transparent); }
 
 /* ── Waiting is not urgency ─────────────────────────────────────────────────
@@ -863,7 +863,7 @@
   justify-content: center; width: 12px; height: 12px; margin-inline-end: 4px;
   font-style: normal; vertical-align: -1px;
   color: color-mix(in srgb, var(--accent) 70%, transparent); }
-.nav-late-recall-src i { font-size: 11px; line-height: 1; }
+.nav-late-recall-src i { font-size: 12px; line-height: 1; }
 
 /* ── Hushing the reminder for the day ──────────────────────────────────────
    The reminder can be silenced until tomorrow, from the panel as well as from
@@ -873,16 +873,16 @@
   margin: 2px 0 4px; padding: 3px 10px 3px 8px; border-radius: 999px;
   border: 1px dashed color-mix(in srgb, var(--text) 24%, transparent);
   background: transparent; cursor: pointer;
-  font-family: var(--font-label); font-size: 9.5px; line-height: 1.3;
+  font-family: var(--font-label); font-size: 12px; line-height: 1.3;
   letter-spacing: .03em; white-space: nowrap;
   color: color-mix(in srgb, var(--text) 56%, transparent);
   transition: color .18s ease, border-color .18s ease, background .18s ease; }
-.nav-late-mute i { font-size: 11px; line-height: 1; }
+.nav-late-mute i { font-size: 12px; line-height: 1; }
 .nav-late-mute:hover { color: var(--accent);
   border-color: color-mix(in srgb, var(--accent) 46%, transparent);
   background: color-mix(in srgb, var(--accent) 8%, transparent); }
 .nav-late-mute:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
-[dir="rtl"] .nav-late-mute { letter-spacing: 0; font-size: 10.5px; }
+[dir="rtl"] .nav-late-mute { letter-spacing: 0; font-size: 12px; }
 /* The panel indents it under the door it belongs to; the sheet lines it up with
    the sub-entry above, so the two surfaces read the same. */
 .nav-late-mute--panel { margin-inline-start: 27px; }
@@ -893,16 +893,16 @@
 .nav-late-mute-wrap--panel { margin-inline-start: 27px; }
 .nav-late-mute-wrap--sheet { margin: -8px 0 6px; margin-inline-start: 26px; }
 .nav-late-mute-note { display: inline-flex; align-items: baseline; gap: 5px;
-  margin: 0; font-family: var(--font-label); font-size: 9.5px; line-height: 1.35;
+  margin: 0; font-family: var(--font-label); font-size: 12px; line-height: 1.35;
   letter-spacing: .03em; font-style: italic;
   color: color-mix(in srgb, var(--text) 50%, transparent); }
-.nav-late-mute-note i { font-size: 11px; font-style: normal;
+.nav-late-mute-note i { font-size: 12px; font-style: normal;
   color: color-mix(in srgb, var(--accent) 78%, transparent); }
 .nav-late-mute-since { color: color-mix(in srgb, var(--text) 40%, transparent); }
 .nav-late-mute-undo { display: inline-flex; align-items: center; gap: 4px;
   margin: 0; padding: 1px 7px 2px; border-radius: 999px; cursor: pointer;
   border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
-  background: transparent; font-family: var(--font-label); font-size: 9px;
+  background: transparent; font-family: var(--font-label); font-size: 12px;
   letter-spacing: .04em; white-space: nowrap;
   color: color-mix(in srgb, var(--accent) 82%, var(--text));
   transition: background .18s ease, border-color .18s ease; }
@@ -910,7 +910,7 @@
   border-color: color-mix(in srgb, var(--accent) 56%, transparent); }
 .nav-late-mute-undo:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 [dir="rtl"] .nav-late-mute-note,
-[dir="rtl"] .nav-late-mute-undo { letter-spacing: 0; font-size: 10.5px; }
+[dir="rtl"] .nav-late-mute-undo { letter-spacing: 0; font-size: 12px; }
 /* While the silence holds, the reminder keeps its door but lowers its voice:
    the count stays, the accent steps back. */
 .nav-links .nav-more-late.is-muted,
@@ -929,8 +929,8 @@
 .nav-mobile a.nav-mobile-tick-host { display: inline-flex; align-items: center;
   gap: 8px; flex-wrap: wrap; }
 .nav-mobile a.nav-mobile-tick-host .nav-link-tick { margin-inline-start: 0;
-  font-size: 10px; padding: 2px 8px 2px 6px; }
-.nav-mobile a.nav-mobile-tick-host .nav-link-tick i { font-size: 11px; }
+  font-size: 12px; padding: 2px 8px 2px 6px; }
+.nav-mobile a.nav-mobile-tick-host .nav-link-tick i { font-size: 12px; }
 
 /* ── The chapter, on the phone ─────────────────────────────────────────────
    The count, the line that fills, and the way back — the same housekeeping the
@@ -944,13 +944,13 @@
 /* La feuille du téléphone découpe ses portes comme le panneau : un intitulé
    court, puis les portes du même propos. */
 .nav-mobile-group { margin: 4px 0 -6px; padding: 0 2px;
-  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .12em;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .12em;
   text-transform: uppercase; color: color-mix(in srgb, var(--text) 46%, transparent); }
-[dir="rtl"] .nav-mobile-group { letter-spacing: 0; text-transform: none; font-size: 11px; }
-.nav-mobile-chapter-lbl { font-family: var(--font-label); font-size: 9.5px;
+[dir="rtl"] .nav-mobile-group { letter-spacing: 0; text-transform: none; font-size: 12px; }
+.nav-mobile-chapter-lbl { font-family: var(--font-label); font-size: 11px;
   letter-spacing: .12em; text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 48%, transparent); }
-.nav-mobile-chapter-num { font-family: var(--font-label); font-size: 10.5px;
+.nav-mobile-chapter-num { font-family: var(--font-label); font-size: 12px;
   letter-spacing: .04em; color: var(--accent); }
 .nav-mobile-chapter-track { display: block; height: 3px; border-radius: 999px;
   overflow: hidden; background: color-mix(in srgb, var(--text) 16%, transparent); }
@@ -959,22 +959,22 @@
 /* The places read, on the phone too: the same quiet line as in the panel, and
    the same reset clears them in the same gesture. */
 .nav-mobile-places { display: inline-flex; align-items: center; gap: 5px; margin: 0;
-  font-family: var(--font-label); font-size: 10px; line-height: 1.35;
+  font-family: var(--font-label); font-size: 12px; line-height: 1.35;
   letter-spacing: .04em; color: color-mix(in srgb, var(--text) 52%, transparent); }
 .nav-mobile-places i { font-size: 12px; line-height: 1; color: var(--accent); }
-[dir="rtl"] .nav-mobile-places { letter-spacing: 0; font-size: 11px; }
+[dir="rtl"] .nav-mobile-places { letter-spacing: 0; font-size: 12px; }
 /* The whole chapter walked: the same accented pill as in the panel. */
 .nav-mobile-done { display: inline-flex; align-items: center; gap: 5px;
   align-self: flex-start; margin: 0; padding: 3px 9px 3px 7px; border-radius: 999px;
   background: color-mix(in srgb, var(--accent) 18%, transparent); color: var(--accent);
-  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .05em;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .05em;
   line-height: 1.2; white-space: nowrap;
   animation: nav-dot-in .26s cubic-bezier(.2,.7,.2,1) both; }
 .nav-mobile-done i { font-size: 12px; line-height: 1; }
 .nav-mobile-reset { align-self: flex-start; display: inline-flex; align-items: center;
   gap: 6px; margin-top: 1px; padding: 4px 9px 4px 6px; border: 0; border-radius: 8px;
   background: none; color: color-mix(in srgb, var(--text) 74%, transparent);
-  font: inherit; font-family: var(--font-label); font-size: 10.5px; letter-spacing: .05em;
+  font: inherit; font-family: var(--font-label); font-size: 12px; letter-spacing: .05em;
   line-height: 1.3; white-space: nowrap; cursor: pointer;
   transition: background .18s ease, color .18s ease; }
 .nav-mobile-reset i { font-size: 13px; line-height: 1; }
@@ -984,14 +984,14 @@
 /* The confirmation and its « Annuler » share one line: the block never jumps
    when the way back arrives, nor when it folds away five seconds later. */
 .nav-mobile-reset-undo { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.nav-mobile-reset-note { margin: 0; font-family: var(--font-label); font-size: 10px;
+.nav-mobile-reset-note { margin: 0; font-family: var(--font-label); font-size: 12px;
   letter-spacing: .05em; color: color-mix(in srgb, var(--accent) 86%, transparent); }
 .nav-mobile-reset-note:empty { display: none; }
 .nav-mobile-reset-back { position: relative; display: inline-flex; align-items: center;
   gap: 5px; padding: 3px 9px 4px 7px;
   border: 1px solid color-mix(in srgb, var(--accent) 46%, transparent);
   border-radius: 999px; background: color-mix(in srgb, var(--accent) 10%, transparent);
-  color: var(--accent); font: inherit; font-family: var(--font-label); font-size: 10px;
+  color: var(--accent); font: inherit; font-family: var(--font-label); font-size: 12px;
   letter-spacing: .05em; line-height: 1.2; white-space: nowrap; cursor: pointer;
   overflow: hidden; transition: background .18s ease, border-color .18s ease; }
 .nav-mobile-reset-back i { font-size: 12px; line-height: 1; }
@@ -1103,7 +1103,7 @@
   .nav { gap: 8px; }
   .nav-right { gap: 6px; }
   .lang-switch { padding: 2px; }
-  .lang-switch button { min-width: 26px; padding: 3px 7px; font-size: 10px; }
+  .lang-switch button { min-width: 26px; padding: 3px 7px; font-size: 12px; }
   .nav-account.is-plain { padding: 7px 10px; font-size: 12.5px; }
 }
 @media (max-width: 430px) {
@@ -1136,14 +1136,14 @@
   padding: 4px 9px 5px 4px; border-radius: 8px;
   text-decoration: none; white-space: normal;
   color: color-mix(in srgb, var(--text) 58%, transparent);
-  font-family: var(--font-label); font-size: 10.5px; line-height: 1.3;
+  font-family: var(--font-label); font-size: 12px; line-height: 1.3;
   letter-spacing: .03em;
   transition: background .18s ease, color .18s ease; }
 .nav-links a.nav-more-sub::after { display: none; }
 .nav-links a.nav-more-sub i { font-size: 12.5px; line-height: 1; margin-top: 0; flex: none;
   color: color-mix(in srgb, var(--accent) 78%, transparent);
   transition: color .18s ease; }
-.nav-links a.nav-more-sub small { font-size: 9.5px; line-height: 1.3;
+.nav-links a.nav-more-sub small { font-size: 12px; line-height: 1.3;
   letter-spacing: .03em; white-space: normal;
   color: color-mix(in srgb, var(--text) 44%, transparent);
   transition: color .18s ease; }
@@ -1154,8 +1154,8 @@
 .nav-links a.nav-more-sub:focus-visible { outline: 2px solid var(--accent); outline-offset: -1px; }
 [dir="rtl"] .nav-links a.nav-more-sub,
 [dir="rtl"] .nav-links a.nav-more-sub small { letter-spacing: 0; }
-[dir="rtl"] .nav-links a.nav-more-sub { font-size: 11.5px; }
-[dir="rtl"] .nav-links a.nav-more-sub small { font-size: 10.5px; }
+[dir="rtl"] .nav-links a.nav-more-sub { font-size: 12px; }
+[dir="rtl"] .nav-links a.nav-more-sub small { font-size: 12px; }
 
 /* Le compte d'ateliers, écrit une seule fois et lu partout de la même façon :
    une petite pastille au bout du libellé, dans la porte elle-même. Le chiffre
@@ -1168,14 +1168,14 @@
   border-radius: 999px;
   background: color-mix(in srgb, var(--accent) 15%, transparent);
   color: color-mix(in srgb, var(--accent) 90%, var(--text));
-  font-family: var(--font-label); font-size: 9.5px; font-weight: 500;
+  font-family: var(--font-label); font-size: 11px; font-weight: 500;
   line-height: 1; letter-spacing: 0;
   transition: background .18s ease, color .18s ease; }
 .nav-links a.nav-more-sub:hover .nav-sub-count {
   background: color-mix(in srgb, var(--accent) 28%, transparent);
   color: var(--accent); }
 .nav-mobile a.nav-mobile-sub .nav-sub-count {
-  min-width: 19px; height: 17px; font-size: 10.5px; }
+  min-width: 19px; height: 17px; font-size: 11px; }
 
 /* La pastille « Lu » n'est plus un simple repère : quand un lieu vient d'être
    lu, elle prend la place du second accès et ouvre elle-même l'annuaire déjà
@@ -1190,12 +1190,12 @@
   text-decoration: none; white-space: nowrap;
   background: color-mix(in srgb, var(--accent) 18%, transparent);
   color: var(--accent);
-  font-family: var(--font-label); font-size: 10px; line-height: 1.3;
+  font-family: var(--font-label); font-size: 12px; line-height: 1.3;
   letter-spacing: .04em;
   animation: nav-dot-in .26s cubic-bezier(.2,.7,.2,1) both;
   transition: background .18s ease, color .18s ease; }
 .nav-links a.nav-more-read::after { display: none; }
-.nav-links a.nav-more-read i { font-size: 11px; line-height: 1; flex: none; margin-top: 0;
+.nav-links a.nav-more-read i { font-size: 12px; line-height: 1; flex: none; margin-top: 0;
   color: var(--accent); }
 .nav-links a.nav-more-read span { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .nav-links a.nav-more-read i:last-child { opacity: .7;
@@ -1204,7 +1204,7 @@
   color: var(--accent); }
 .nav-links a.nav-more-read:hover i:last-child { opacity: 1; transform: translateX(2px); }
 .nav-links a.nav-more-read:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
-[dir="rtl"] .nav-links a.nav-more-read { letter-spacing: 0; font-size: 11px; }
+[dir="rtl"] .nav-links a.nav-more-read { letter-spacing: 0; font-size: 12px; }
 @media (prefers-reduced-motion: reduce) {
   .nav-links a.nav-more-read { animation: none; }
 }
@@ -1219,7 +1219,7 @@
   transition: background .18s ease, color .18s ease; }
 .nav-mobile a.nav-mobile-sub i { font-size: 13.5px; line-height: 1; flex: none;
   color: color-mix(in srgb, var(--accent) 82%, transparent); }
-.nav-mobile a.nav-mobile-sub small { font-family: var(--font-label); font-size: 10px;
+.nav-mobile a.nav-mobile-sub small { font-family: var(--font-label); font-size: 12px;
   line-height: 1.3; letter-spacing: .03em;
   color: color-mix(in srgb, var(--text) 44%, transparent); }
 .nav-mobile a.nav-mobile-sub:hover { background: color-mix(in srgb, var(--accent) 13%, transparent);
@@ -1352,7 +1352,7 @@
   border-radius: 999px;
   background: color-mix(in srgb, var(--accent) 16%, transparent);
   color: color-mix(in srgb, var(--accent) 92%, var(--text));
-  font-family: var(--font-label); font-size: 10px; font-weight: 500;
+  font-family: var(--font-label); font-size: 11px; font-weight: 500;
   line-height: 1; letter-spacing: 0;
   transition: background .2s ease, color .2s ease; }
 .nav-links > a.nav-fac:hover .nav-fac-count,
@@ -1360,10 +1360,10 @@
   background: color-mix(in srgb, var(--accent) 28%, transparent);
   color: var(--accent); }
 @media (max-width: 1460px) {
-  .nav-fac-count { min-width: 16px; height: 15px; font-size: 9.5px; padding: 0 4px; }
+  .nav-fac-count { min-width: 16px; height: 15px; font-size: 11px; padding: 0 4px; }
 }
 @media (max-width: 1460px) {
-  .nav-links > a.nav-fac { font-size: 11px; padding-block: 2px; padding-inline: 6px 8px; }
+  .nav-links > a.nav-fac { font-size: 12px; padding-block: 2px; padding-inline: 6px 8px; }
   .nav-links > a.nav-fac > i { font-size: 12px; }
 }
 
@@ -1387,7 +1387,7 @@
    tout reprend ses cotes. */
 @media (min-width: 1300px) and (max-width: 1439px) {
   .nav-links { gap: 10px; }
-  .nav-links > a.nav-fac { padding-inline: 5px 7px; font-size: 11.5px; }
+  .nav-links > a.nav-fac { padding-inline: 5px 7px; font-size: 12px; }
   .nav-links > a.nav-fac > i { font-size: 12px; }
 }
 
@@ -1421,10 +1421,10 @@
     gap: 3px;
     padding-inline: 4px 6px;
   }
-  .nav-links > a.nav-fac > i { font-size: 11.5px; }
+  .nav-links > a.nav-fac > i { font-size: 12px; }
   .nav-fac-count {
     min-width: 14px; height: 14px; padding: 0 3px;
-    margin-inline-start: 0; font-size: 9px;
+    margin-inline-start: 0; font-size: 11px;
   }
 }
 
@@ -1444,19 +1444,19 @@
   [dir="rtl"] .nav-links { gap: 6px; }
   [dir="rtl"] .nav-links > a { gap: 4px; }
   [dir="rtl"] .nav-links a,
-  [dir="rtl"] .nav-more-btn { font-size: 11.5px; }
+  [dir="rtl"] .nav-more-btn { font-size: 12px; }
   [dir="rtl"] .nav-links > a > i,
   [dir="rtl"] .nav-more-btn i { font-size: 12.5px; }
   [dir="rtl"] .nav-right { gap: 7px; }
   [dir="rtl"] .nav-links > a.nav-fac {
     gap: 3px;
     padding-inline: 4px 5px;
-    font-size: 11px;
+    font-size: 12px;
   }
-  [dir="rtl"] .nav-links > a.nav-fac > i { font-size: 11px; }
+  [dir="rtl"] .nav-links > a.nav-fac > i { font-size: 12px; }
   [dir="rtl"] .nav-fac-count {
     min-width: 14px; height: 14px; padding: 0 3px;
-    margin-inline-start: 0; font-size: 9px;
+    margin-inline-start: 0; font-size: 11px;
   }
 }
 
@@ -1470,7 +1470,7 @@
 @media (min-width: 1300px) and (max-width: 1379px) {
   [dir="rtl"] .nav-links { gap: 5px; }
   [dir="rtl"] .nav-links a,
-  [dir="rtl"] .nav-more-btn { font-size: 11px; }
+  [dir="rtl"] .nav-more-btn { font-size: 12px; }
   [dir="rtl"] .nav-links > a > i,
   [dir="rtl"] .nav-more-btn i { font-size: 12px; }
   [dir="rtl"] .nav-links > a.nav-fac { padding-inline: 3px 4px; }
@@ -1682,7 +1682,7 @@
      la ligne du pied qui décide — et sa hauteur est relevée pour le voile. */
   white-space: nowrap;
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 50%, transparent);
@@ -1692,11 +1692,11 @@
   line-height: 1;
   color: color-mix(in srgb, var(--accent) 74%, var(--text));
 }
-[dir="rtl"] .nav-more-foot-lang { letter-spacing: 0; text-transform: none; font-size: 11px; }
+[dir="rtl"] .nav-more-foot-lang { letter-spacing: 0; text-transform: none; font-size: 12px; }
 /* La bascule de langue garde son galbe de barre, un cran plus serrée : elle se
    lit comme un rappel, à côté du mot qui la nomme. */
 .nav-more-foot .lang-switch.is-compact { margin-top: 0; align-self: center; padding: 2px; }
-.nav-more-foot .lang-switch.is-compact button { padding: 3px 7px; min-width: 26px; font-size: 10px; }
+.nav-more-foot .lang-switch.is-compact button { padding: 3px 7px; min-width: 26px; font-size: 12px; }
 .nav-more-foot-out {
   display: inline-flex;
   align-items: center;
@@ -1709,7 +1709,7 @@
   cursor: pointer;
   font: inherit;
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .04em;
   line-height: 1.3;
   white-space: nowrap;
@@ -1725,7 +1725,7 @@
 }
 .nav-more-foot-out:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 .nav-more-foot-out[disabled] { opacity: .55; cursor: wait; }
-[dir="rtl"] .nav-more-foot-out { letter-spacing: 0; font-size: 11px; }
+[dir="rtl"] .nav-more-foot-out { letter-spacing: 0; font-size: 12px; }
 /* ── La ligne de langue du panneau, relue en arabe ─────────────────────────
    Le panneau ne prend pas la largeur de l'écran : 400 px, ramenés à 372 px
    sous 1460 px — donc une seule et même largeur dès 1024 px, celle où il
@@ -1740,20 +1740,20 @@
    la ligne tient d'un seul tenant — donc le plancher ne prend jamais une
    seconde ligne sous laquelle le voile et la flèche viendraient se poser. */
 [dir="rtl"] .nav-more-foot { column-gap: 6px; }
-[dir="rtl"] .nav-more-foot-lang { gap: 4px; font-size: 10.5px; }
+[dir="rtl"] .nav-more-foot-lang { gap: 4px; font-size: 12px; }
 [dir="rtl"] .nav-more-foot-lang i { font-size: 12px; }
 [dir="rtl"] .nav-more-foot .lang-switch.is-compact { gap: 2px; padding: 2px; }
 [dir="rtl"] .nav-more-foot .lang-switch.is-compact button {
   min-width: 22px;
   padding: 3px 5px;
-  font-size: 9.5px;
+  font-size: 12px;
 }
 [dir="rtl"] .nav-more-foot-out {
   gap: 4px;
   padding: 4px 7px 4px 6px;
-  font-size: 10px;
+  font-size: 12px;
 }
-[dir="rtl"] .nav-more-foot-out i { font-size: 11.5px; }
+[dir="rtl"] .nav-more-foot-out i { font-size: 12px; }
 /* ── Le pied à deux lignes, en anglais ────────────────────────────────────
    « Language · FR ع EN · Sign out » tient sur une ligne en français, et
    déborde en anglais : les deux libellés y sont plus longs à corps égal. La
@@ -1888,7 +1888,7 @@
 }
 .nav-more-cue-n {
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 12px;
   font-weight: 600;
   line-height: 1;
   letter-spacing: 0;
@@ -1922,7 +1922,7 @@
   gap: 8px;
   margin: 7px 8px 2px;
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 12px;
   line-height: 1.3;
   letter-spacing: .14em;
   text-transform: uppercase;
@@ -1939,7 +1939,7 @@
 }
 .nav-more-end i {
   flex: none;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1;
   color: color-mix(in srgb, var(--accent) 62%, transparent);
 }
@@ -1947,7 +1947,7 @@
 [dir="rtl"] .nav-more-end {
   letter-spacing: 0;
   text-transform: none;
-  font-size: 10.5px;
+  font-size: 12px;
 }
 /* ── Le mot du repère, dit une seule fois ──────────────────────────────────
    Le repère visible est une marque pour l'œil : une phrase qui paraîtrait à
@@ -1993,7 +1993,7 @@
 .nav-door-toggle--count { width: auto; gap: 4px; padding: 0 5px; }
 .nav-door-toggle-n {
   flex: none;
-  font-family: var(--font-label); font-size: 10px; font-weight: 500;
+  font-family: var(--font-label); font-size: 12px; font-weight: 500;
   line-height: 1; letter-spacing: 0; color: inherit;
 }
 /* Les pastilles de la suite : un cran plus petites que les portes, décalées
@@ -2014,7 +2014,7 @@
 .nav-links a.nav-door-chip > i,
 .nav-mobile a.nav-door-chip > i { font-size: 11.5px; line-height: 1;
   color: color-mix(in srgb, var(--accent) 74%, var(--text)); }
-.nav-door-chip-n { font-size: 9.5px; font-weight: 500; line-height: 1;
+.nav-door-chip-n { font-size: 11px; font-weight: 500; line-height: 1;
   color: color-mix(in srgb, var(--text) 46%, transparent); }
 .nav-links a.nav-door-chip:hover,
 .nav-mobile a.nav-door-chip:hover { color: var(--accent);
@@ -2038,7 +2038,7 @@
   border: 1px dashed color-mix(in srgb, var(--text) 20%, transparent);
   background: transparent; color: color-mix(in srgb, var(--text) 48%, transparent);
   transition: color .18s ease, border-color .18s ease, background .18s ease; }
-.nav-door-more i { font-size: 11px; line-height: 1; }
+.nav-door-more i { font-size: 12px; line-height: 1; }
 .nav-door-more:hover,
 .nav-door-more.is-open { color: var(--accent); border-style: solid;
   border-color: color-mix(in srgb, var(--accent) 46%, transparent);
@@ -2053,12 +2053,12 @@
   flex: 1 1 100%; min-width: 0;
   padding: 1px 11px 6px; padding-inline-start: 30px; }
 .nav-door-sort-lab { margin-inline-end: 2px; white-space: nowrap;
-  font-family: var(--font-label); font-size: 9px; letter-spacing: .1em;
+  font-family: var(--font-label); font-size: 11px; letter-spacing: .1em;
   text-transform: uppercase; color: color-mix(in srgb, var(--text) 46%, transparent); }
 .nav-door-sort button { padding: 2px 9px; border-radius: 999px; cursor: pointer;
   border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
   background: transparent; font: inherit; font-family: var(--font-label);
-  font-size: 10.5px; font-weight: 500; line-height: 1.4; letter-spacing: .02em;
+  font-size: 12px; font-weight: 500; line-height: 1.4; letter-spacing: .02em;
   white-space: nowrap; color: color-mix(in srgb, var(--text) 66%, transparent);
   transition: color .18s ease, border-color .18s ease, background .18s ease; }
 .nav-door-sort button:hover { color: var(--accent);
@@ -2079,7 +2079,7 @@
   background: transparent; color: color-mix(in srgb, var(--text) 54%, transparent);
   transition: color .18s ease, border-color .18s ease, background .18s ease, opacity .18s ease;
 }
-.nav-door-sort-clear i { font-size: 11px; line-height: 1; }
+.nav-door-sort-clear i { font-size: 12px; line-height: 1; }
 .nav-door-sort-clear:hover { color: var(--accent);
   border-color: color-mix(in srgb, var(--accent) 48%, transparent);
   background: color-mix(in srgb, var(--accent) 13%, transparent); }
@@ -2095,12 +2095,12 @@
 .nav-doorlist--sheet .nav-door-sort button { font-size: 12px; padding: 4px 11px; }
 [dir="rtl"] .nav-door-sort-lab,
 [dir="rtl"] .nav-door-sort button { letter-spacing: 0; }
-[dir="rtl"] .nav-door-sort-lab { text-transform: none; font-size: 10px; }
+[dir="rtl"] .nav-door-sort-lab { text-transform: none; font-size: 11px; }
 
 /* Le compteur de régions, dans la pastille du pays : « Algérie 41 · 12 rég. ».
    Il ne prend pas la couleur du compte de fiches — c'est un second repère,
    pas un second chiffre à additionner. */
-.nav-door-chip-reg { font-family: var(--font-label); font-size: 9px; line-height: 1;
+.nav-door-chip-reg { font-family: var(--font-label); font-size: 11px; line-height: 1;
   white-space: nowrap; font-weight: 400;
   color: color-mix(in srgb, var(--text) 40%, transparent); }
 .nav-links a.nav-door-chip:hover .nav-door-chip-reg,
@@ -2114,12 +2114,12 @@
   border-top: 1px dashed color-mix(in srgb, var(--text) 14%, transparent); }
 .nav-door-countries-lab { display: inline-flex; align-items: center; gap: 5px;
   margin-inline-end: 3px; white-space: nowrap;
-  font-family: var(--font-label); font-size: 9px; letter-spacing: .1em;
+  font-family: var(--font-label); font-size: 11px; letter-spacing: .1em;
   text-transform: uppercase; color: color-mix(in srgb, var(--text) 52%, transparent); }
 .nav-door-countries-lab i { font-size: 12px; line-height: 1; color: var(--accent); }
 .nav-links a.nav-door-chip.is-country,
 .nav-mobile a.nav-door-chip.is-country { border-radius: 999px; }
-[dir="rtl"] .nav-door-countries-lab { letter-spacing: 0; font-size: 10px; }
+[dir="rtl"] .nav-door-countries-lab { letter-spacing: 0; font-size: 11px; }
 .nav-links a.nav-door-chip:focus-visible,
 .nav-mobile a.nav-door-chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 /* Dans la feuille du téléphone, la suite se lit au doigt : un cran plus grand,
@@ -2231,12 +2231,12 @@
 .nav-door-clear:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 /* Aucun type, aucun pays ne répond : la phrase le dit, au lieu d'un vide. */
 .nav-door-empty { display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
-  margin: 2px 11px 9px; font-family: var(--font-label); font-size: 10.5px;
+  margin: 2px 11px 9px; font-family: var(--font-label); font-size: 12px;
   line-height: 1.4; letter-spacing: .02em; font-style: italic;
   color: color-mix(in srgb, var(--text) 52%, transparent); }
 .nav-door-empty i { font-size: 12px; line-height: 1; font-style: normal;
   color: color-mix(in srgb, var(--accent) 72%, transparent); }
-[dir="rtl"] .nav-door-empty { letter-spacing: 0; font-size: 11.5px; }
+[dir="rtl"] .nav-door-empty { letter-spacing: 0; font-size: 12px; }
 /* Dans la feuille du téléphone le champ suit les portes : même galbe, un cran
    plus grand pour rester tapable. */
 .nav-doorlist--sheet .nav-door-search { margin: 0 0 2px; padding: 8px 11px 8px 10px; }
@@ -2268,11 +2268,11 @@
   [dir="rtl"] .nav-links > a.nav-fac {
     gap: 3px;
     padding-inline: 4px 6px;
-    font-size: 11px;
+    font-size: 12px;
   }
-  [dir="rtl"] .nav-links > a.nav-fac > i { font-size: 11.5px; }
+  [dir="rtl"] .nav-links > a.nav-fac > i { font-size: 12px; }
   [dir="rtl"] .nav-fac-count {
     min-width: 15px; height: 15px; padding: 0 4px;
-    margin-inline-start: 0; font-size: 9px;
+    margin-inline-start: 0; font-size: 11px;
   }
 }

@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-mail-relay
+  namespace: paperatlas-dz
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: auth-mail-relay
+  template:
+    metadata:
+      labels:
+        app: auth-mail-relay
+    spec:
+      containers:
+        - name: relay
+          image: paperatlas-auth-mail-relay:2
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 2525
+              hostPort: 2525
+              protocol: TCP
+          env:
+            - name: SMTP_USERNAME
+              value: paperatlas-auth
+            - name: SMTP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: auth-mail-relay
+                  key: smtp-password
+            - name: BREVO_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: auth-mail-relay
+                  key: brevo-api-key
+          volumeMounts:
+            - name: tls
+              mountPath: /tls
+              readOnly: true
+          readinessProbe:
+            tcpSocket:
+              port: 2525
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 2525
+            periodSeconds: 30
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+      volumes:
+        - name: tls
+          secret:
+            secretName: paperatlas-net-tls

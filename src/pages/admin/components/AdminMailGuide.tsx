@@ -63,7 +63,7 @@ type Etape = {
  * La carte ne devine rien. Chaque étape se juge sur un fait lisible côté
  * serveur — la clé est-elle posée, le domaine est-il nommé —, et la dernière
  * ne se juge que sur un message réellement reçu : c'est le seul geste qui
- * prouve que le domaine est vérifié chez Resend. Ce message porte son jour :
+ * prouve que le domaine est vérifié chez Brevo. Ce message porte son jour :
  * une preuve datée se relit, une preuve nue ne dit pas si elle tient encore.
  */
 export default function AdminMailGuide({
@@ -118,14 +118,14 @@ export default function AdminMailGuide({
       fait: cle,
       titre: t('ad.p.mail.g1Title'),
       texte: t('ad.p.mail.g1Text'),
-      lien: { href: 'https://resend.com/api-keys', label: t('ad.p.mail.g1Link') },
+      lien: { href: 'https://app.brevo.com/settings/keys/api', label: t('ad.p.mail.g1Link') },
     },
     {
       n: 2,
       fait: cle,
       titre: t('ad.p.mail.g2Title'),
       texte: t('ad.p.mail.g2Text'),
-      secret: 'RESEND_API_KEY',
+      secret: 'BREVO_API_KEY',
       lien: {
         href: 'https://supabase.com/dashboard/project/_/settings/functions',
         label: t('ad.p.mail.g2Link'),
@@ -136,8 +136,8 @@ export default function AdminMailGuide({
       fait: domaine,
       titre: t('ad.p.mail.g3Title'),
       texte: t('ad.p.mail.g3Text'),
-      secret: 'RESEND_FROM_DOMAIN',
-      lien: { href: 'https://resend.com/domains', label: t('ad.p.mail.g3Link') },
+      secret: 'MAIL_FROM_DOMAIN',
+      lien: { href: 'https://app.brevo.com/', label: t('ad.p.mail.g3Link') },
     },
     {
       n: 4,

@@ -223,10 +223,10 @@ export function planEnTexte(chantier: string | null = null, lang: Lang = 'fr'): 
   lignes.push('');
   lignes.push('Expéditeur des e-mails');
   lignes.push(
-    `  Clé      ${colonne('RESEND_API_KEY', 24)}: ${expediteur.cle ? 'posée' : 'à poser'}`,
+    `  Clé      ${colonne('BREVO_API_KEY', 24)}: ${expediteur.cle ? 'posée' : 'à poser'}`,
   );
   lignes.push(
-    `  Domaine  ${colonne('RESEND_FROM_DOMAIN', 24)}: ${
+    `  Domaine  ${colonne('MAIL_FROM_DOMAIN', 24)}: ${
       expediteur.domaine ? 'vérifié et nommé' : 'à vérifier puis à nommer'
     }`,
   );
@@ -356,10 +356,10 @@ function planChantierEnTexte(chantier: SuiviChantier, lang: Lang): string {
     lignes.push(REGLE);
     lignes.push('Expéditeur des e-mails');
     lignes.push(
-      `  Clé      ${colonne('RESEND_API_KEY', 24)}: ${expediteur.cle ? 'posée' : 'à poser'}`,
+      `  Clé      ${colonne('BREVO_API_KEY', 24)}: ${expediteur.cle ? 'posée' : 'à poser'}`,
     );
     lignes.push(
-      `  Domaine  ${colonne('RESEND_FROM_DOMAIN', 24)}: ${
+      `  Domaine  ${colonne('MAIL_FROM_DOMAIN', 24)}: ${
         expediteur.domaine ? 'vérifié et nommé' : 'à vérifier puis à nommer'
       }`,
     );
@@ -5295,7 +5295,7 @@ function ageEnMots(jours: number, lang: Lang = 'fr'): string {
  * dire « posée » quand le plan dit encore « à poser ».
  */
 function etatExpediteur(): { cle: boolean; domaine: boolean } {
-  const cle = SUIVI_RESTE.find((item) => item.texte.includes('RESEND_API_KEY'));
+  const cle = SUIVI_RESTE.find((item) => item.texte.includes('BREVO_API_KEY'));
   const domaine = SUIVI_RESTE.find((item) => item.texte.includes('Domaine vérifié'));
   return { cle: Boolean(cle?.fait), domaine: Boolean(domaine?.fait) };
 }
@@ -5308,9 +5308,9 @@ function etatExpediteur(): { cle: boolean; domaine: boolean } {
  * fait. Quand les trois sont tenus, elle ne propose rien et le dit.
  */
 function prochaineEtapeExpediteur(exp: { cle: boolean; domaine: boolean }): string {
-  if (!exp.cle) return 'poser la clé RESEND_API_KEY dans les secrets Supabase';
+  if (!exp.cle) return 'poser la clé BREVO_API_KEY dans les secrets Supabase';
   if (!exp.domaine) {
-    return 'vérifier le domaine chez Resend, puis le nommer dans RESEND_FROM_DOMAIN';
+    return 'vérifier le domaine chez Brevo, puis le nommer dans MAIL_FROM_DOMAIN';
   }
   const preuve = readPreuve();
   if (!preuve) return 'envoyer un test et le recevoir — le domaine n’est pas encore prouvé';

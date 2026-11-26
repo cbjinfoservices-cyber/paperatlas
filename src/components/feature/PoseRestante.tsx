@@ -1,6 +1,7 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLang } from '@/i18n/LangProvider';
-import { restePoseFichier } from '@/pages/admin/components/adminPariteCore';
+import type { RestePose } from '@/pages/admin/components/adminPariteCore';
 
 type Props = {
   /** Le fichier de textes que l'écran traverse. */
@@ -33,7 +34,21 @@ export default function PoseRestante({
   vers,
 }: Props) {
   const { t } = useLang();
-  const reste = restePoseFichier(fichier, prefixes);
+  const [reste, setReste] = useState<RestePose | null>(null);
+  const famille = prefixes.join('|');
+
+  useEffect(() => {
+    let actif = true;
+    // Chargé à part : la table de parité pèse plus que le reste du site, et
+    // ce repère n'a pas besoin de bloquer l'écran qui l'accueille.
+    import('@/pages/admin/components/adminPariteCore').then(({ restePoseFichier }) => {
+      if (actif) setReste(restePoseFichier(fichier, famille ? famille.split('|') : []));
+    });
+    return () => {
+      actif = false;
+    };
+  }, [fichier, famille]);
+
   if (!reste || reste.reste === 0) return null;
 
   const hint = t('parPose.hint')

@@ -6,7 +6,7 @@
 .msg-side-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .msg-side-top .pro-h { display: inline-flex; align-items: center; gap: 8px; margin: 0; }
 .msg-badge { display: inline-flex; align-items: center; justify-content: center; min-width: 20px; height: 20px; padding: 0 6px;
-  border-radius: 999px; background: var(--accent); color: var(--bg); font-family: var(--font-label); font-size: 10px; letter-spacing: 0; }
+  border-radius: 999px; background: var(--accent); color: var(--bg); font-family: var(--font-label); font-size: 11px; letter-spacing: 0; }
 /* Le compteur des fils qui dorment : une lune et un chiffre, à côté du
    compteur de non-lus. Le seuil est le même que la pastille de rythme. */
 .msg-badge--sleep { gap: 4px; color: var(--accent2);
@@ -28,7 +28,7 @@
   background: none; color: var(--text); font: inherit; font-size: 12.5px; }
 .msg-inbox-search input::placeholder { color: color-mix(in srgb, var(--text) 46%, transparent); }
 .msg-inbox-search input::-webkit-search-cancel-button { display: none; }
-.msg-inbox-search-count { flex: 0 0 auto; font-family: var(--font-label); font-size: 10px; letter-spacing: .04em;
+.msg-inbox-search-count { flex: 0 0 auto; font-family: var(--font-label); font-size: 12px; letter-spacing: .04em;
   font-variant-numeric: tabular-nums; white-space: nowrap;
   color: color-mix(in srgb, var(--accent2) 80%, var(--text)); }
 .msg-inbox-search-clear { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center;
@@ -44,7 +44,7 @@
   background: color-mix(in srgb, var(--surface) 80%, transparent); }
 .msg-sort-btn { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border: 0;
   border-radius: 999px; background: none; cursor: pointer;
-  font-family: var(--font-label); font-size: 10.5px; letter-spacing: .04em;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .04em;
   color: color-mix(in srgb, var(--text) 58%, transparent);
   transition: background .18s ease, color .18s ease; }
 .msg-sort-btn i { font-size: 12px; }
@@ -57,12 +57,12 @@
 .msg-sort-count { display: inline-flex; align-items: center; justify-content: center;
   min-width: 16px; height: 16px; padding: 0 4px; border-radius: 999px;
   background: var(--accent); color: var(--bg);
-  font-family: var(--font-label); font-size: 9.5px; font-weight: 400; line-height: 1;
+  font-family: var(--font-label); font-size: 12px; font-weight: 400; line-height: 1;
   letter-spacing: 0; font-variant-numeric: tabular-nums; }
 .msg-sort-btn[data-on='yes'] .msg-sort-count { background: color-mix(in srgb, var(--accent) 34%, transparent);
   color: var(--accent2); }
 .msg-sort-btn:disabled .msg-sort-count { display: none; }
-.msg-sort-hint { margin: 0; font-size: 10.5px; line-height: 1.45;
+.msg-sort-hint { margin: 0; font-size: 12px; line-height: 1.45;
   color: color-mix(in srgb, var(--text) 52%, transparent); }
 .msg-side-note { display: inline-flex; align-items: center; justify-self: start; gap: 8px; margin: 0;
   padding: 8px 13px; border-radius: 999px; font-size: 13px; color: color-mix(in srgb, var(--text) 85%, transparent);
@@ -76,13 +76,13 @@
   background: color-mix(in srgb, var(--accent) 8%, transparent);
   border: 1px dashed color-mix(in srgb, var(--accent) 40%, transparent); }
 .msg-aire-tray-pill { display: inline-flex; align-items: center; gap: 5px; min-width: 0;
-  font-family: var(--font-label); font-size: 10.5px; letter-spacing: .04em;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .04em;
   color: var(--accent2); white-space: nowrap; }
 .msg-aire-tray-pill i { font-size: 12px; }
-.msg-aire-tray-pill b { font-family: var(--font-body); font-size: 10px; font-weight: 600;
+.msg-aire-tray-pill b { font-family: var(--font-body); font-size: 12px; font-weight: 600;
   padding: 0 5px; border-radius: 999px; letter-spacing: 0;
   background: color-mix(in srgb, var(--accent) 22%, transparent); }
-.msg-aire-tray-pill span { font-family: var(--font-body); font-size: 10px; letter-spacing: 0;
+.msg-aire-tray-pill span { font-family: var(--font-body); font-size: 12px; letter-spacing: 0;
   color: color-mix(in srgb, var(--text) 56%, transparent); }
 /* La pastille de l'aire retenue se presse : elle copie les fils de cette aire
    et leurs interlocuteurs, et son compte reste lisible dans le bouton. */
@@ -93,21 +93,21 @@ button.msg-aire-tray-pill:focus-visible { color: var(--text); }
 button.msg-aire-tray-pill:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px;
   border-radius: 6px; }
 button.msg-aire-tray-pill.is-ok { color: var(--accent2); }
-.msg-aire-tray .link-btn { font-size: 10.5px; cursor: pointer; }
+.msg-aire-tray .link-btn { font-size: 12px; cursor: pointer; }
 /* Le nom d'une aire, une fois, au-dessus de ses fils : l'ordre « par aire »
    range la liste comme les aires du monde, sans retirer une ligne. */
 .msg-threads > li.msg-aire-group { display: flex; grid-column: 1 / -1; align-items: center; gap: 6px;
   margin: 8px 0 2px; padding: 4px 9px; border-radius: 9px;
   background: color-mix(in srgb, var(--accent) 8%, transparent);
   border-inline-start: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
-  font-family: var(--font-label); font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .1em; text-transform: uppercase;
   color: var(--accent2); }
 .msg-threads > li.msg-aire-group:first-child { margin-top: 0; }
 .msg-aire-group i { flex: 0 0 auto; font-size: 12px; }
 .msg-aire-group b { font-weight: 600; min-width: 0; overflow: hidden; text-overflow: ellipsis;
   white-space: nowrap; }
 .msg-aire-group span { margin-inline-start: auto; font-family: var(--font-body);
-  font-size: 10px; letter-spacing: 0; white-space: nowrap;
+  font-size: 12px; letter-spacing: 0; white-space: nowrap;
   color: color-mix(in srgb, var(--text) 52%, transparent); }
 [dir="rtl"] .msg-aire-group { letter-spacing: 0; }
 [dir="rtl"] .msg-aire-tray-pill { letter-spacing: 0; }
@@ -124,7 +124,7 @@ button.msg-aire-tray-pill.is-ok { color: var(--accent2); }
 /* Le geste clavier de la liste, écrit une fois au-dessus d'elle : le même
    rappel que sous les recherches par nom du reste du site. */
 .msg-keyhint { display: flex; align-items: flex-start; gap: 6px; margin: 0;
-  font-size: 11.5px; line-height: 1.5;
+  font-size: 12px; line-height: 1.5;
   color: color-mix(in srgb, var(--text) 52%, transparent); }
 .msg-keyhint i { flex: 0 0 auto; margin-top: 2px; font-size: 13px; color: var(--accent); }
 /* Le fil mis en avant prend le liseré d'accent, sans effacer celui du fil
@@ -149,8 +149,8 @@ button.msg-aire-tray-pill.is-ok { color: var(--accent2); }
 .msg-thread-body { display: grid; gap: 2px; min-width: 0; }
 .msg-thread-top { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
 .msg-thread-top b { font-size: 13.5px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.msg-thread-top time { font-size: 11px; color: var(--muted); white-space: nowrap; }
-.msg-thread-tag { display: inline-flex; align-items: center; gap: 4px; font-size: 10.5px; color: var(--accent2);
+.msg-thread-top time { font-size: 12px; color: var(--muted); white-space: nowrap; }
+.msg-thread-tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; color: var(--accent2);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 /* Deux natures, deux lectures : un fil de candidature porte l’encre de l’accent
    et sa mallette, un fil libre reste en retrait, avec sa bulle. La nuance est
@@ -166,7 +166,7 @@ button.msg-aire-tray-pill.is-ok { color: var(--accent2); }
   padding-inline-start: 46px; min-width: 0; }
 .msg-thread-aire { display: inline-flex; align-items: center; gap: 4px; max-width: 100%;
   padding: 1px 0; border: 0; background: none; cursor: pointer;
-  font-family: var(--font-label); font-size: 10.5px; letter-spacing: .04em;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .04em;
   color: color-mix(in srgb, var(--text) 58%, transparent);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   transition: color .18s ease; }
@@ -175,7 +175,7 @@ button.msg-aire-tray-pill.is-ok { color: var(--accent2); }
 /* L'aire sur laquelle la boîte est resserrée garde l'encre de l'accent, et son
    petit filtre reste visible : la ligne dit d'où l'on regarde. */
 .msg-thread-aire.is-on { color: var(--accent2); }
-.msg-thread-aire-go { flex: 0 0 auto; font-size: 10px !important; color: var(--accent2) !important;
+.msg-thread-aire-go { flex: 0 0 auto; font-size: 12px !important; color: var(--accent2) !important;
   opacity: 0; transition: opacity .18s ease; }
 .msg-thread-aire:hover .msg-thread-aire-go,
 .msg-thread-aire:focus-visible .msg-thread-aire-go,
@@ -183,14 +183,14 @@ button.msg-aire-tray-pill.is-ok { color: var(--accent2); }
 /* Le geste de copie, dans le pas de la liste : il ne prend pas la ligne du
    nom, et son compte se réduit au chiffre pour ne pas écraser l'aperçu. */
 .msg-thread-copy .pro-aire-row { margin-top: 0; gap: 3px 5px; }
-.msg-thread-copy .pro-aire-copy { padding: 2px 8px; gap: 4px; font-size: 8.5px; }
-.msg-thread-copy .pro-aire-copy i { font-size: 10px; }
-.msg-thread-copy .pro-aire-count { padding: 2px 6px; gap: 3px; font-size: 8px; }
+.msg-thread-copy .pro-aire-copy { padding: 2px 8px; gap: 4px; font-size: 12px; }
+.msg-thread-copy .pro-aire-copy i { font-size: 12px; }
+.msg-thread-copy .pro-aire-count { padding: 2px 6px; gap: 3px; font-size: 12px; }
 .msg-thread-copy .pro-aire-count-lab,
 .msg-thread-copy .pro-aire-count-last { display: none; }
-.msg-thread-aire i { flex: 0 0 auto; font-size: 11px; color: var(--accent2); opacity: .8; }
+.msg-thread-aire i { flex: 0 0 auto; font-size: 12px; color: var(--accent2); opacity: .8; }
 .msg-thread-aire em { flex: 0 0 auto; font-style: normal; font-family: var(--font-body);
-  font-size: 10px; letter-spacing: 0;
+  font-size: 12px; letter-spacing: 0;
   color: color-mix(in srgb, var(--text) 46%, transparent); }
 .msg-thread-aire em::before { content: '·'; margin-inline-end: 4px; opacity: .7; }
 .msg-thread.is-on .msg-thread-aire { color: color-mix(in srgb, var(--text) 72%, transparent); }
@@ -199,9 +199,9 @@ button.msg-aire-tray-pill.is-ok { color: var(--accent2); }
    se repèrent sans avoir à les ouvrir. Volontairement plus discret que le
    texte du message — c'est une mesure, pas une parole. */
 .msg-thread-pace { display: inline-flex; align-items: center; gap: 4px; margin-top: 1px;
-  font-family: var(--font-label); font-size: 10.5px; letter-spacing: .04em;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .04em;
   color: color-mix(in srgb, var(--text) 54%, transparent); white-space: nowrap; }
-.msg-thread-pace i { font-size: 11px; color: var(--accent2); opacity: .75; }
+.msg-thread-pace i { font-size: 12px; color: var(--accent2); opacity: .75; }
 /* Un fil qui met un jour ou plus à répondre se signale d'un ton plus ferme :
    c'est celui qu'on voulait repérer d'un coup d'œil. */
 .msg-thread-pace[data-slow='yes'] { color: color-mix(in srgb, var(--accent2) 82%, var(--text)); }
@@ -259,9 +259,9 @@ button.msg-aire-tray-pill.is-ok { color: var(--accent2); }
   gap: 4px 8px; min-width: 0; max-width: 100%; }
 .msg-head-aire .pro-aire-row { margin-top: 1px; gap: 4px 6px; min-width: 0; }
 .msg-head-aire .pro-aire-copy { margin-top: 0; padding: 3px 9px;
-  font-size: 8.5px; }
-.msg-head-aire .pro-aire-count { padding: 2px 7px; font-size: 8px; }
-.msg-head-aire .pro-aire-count-erase { padding: 2px 6px; font-size: 8px; }
+  font-size: 12px; }
+.msg-head-aire .pro-aire-count { padding: 2px 7px; font-size: 12px; }
+.msg-head-aire .pro-aire-count-erase { padding: 2px 6px; font-size: 12px; }
 .msg-head-id b { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   font-size: 15px; }
 .msg-head-seal { flex: 0 0 auto; display: block; width: 22px; height: 22px; border-radius: 7px;
@@ -288,7 +288,7 @@ a.msg-head-sub:hover { color: var(--accent); }
   padding: 2px 9px; border-radius: 999px;
   border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
   background: color-mix(in srgb, var(--surface) 70%, transparent);
-  font-family: var(--font-label); font-size: 10.5px; letter-spacing: .05em;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .05em;
   line-height: 1.7; white-space: nowrap;
   color: color-mix(in srgb, var(--text) 66%, transparent);
 }
@@ -320,11 +320,11 @@ a.msg-head-sub:hover { color: var(--accent); }
    d’une candidature, combien sont libres. */
 .msg-kinds { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; }
 .msg-kind { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px;
-  border-radius: 999px; font-size: 11px; line-height: 1.5; white-space: nowrap;
+  border-radius: 999px; font-size: 12px; line-height: 1.5; white-space: nowrap;
   border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
   color: color-mix(in srgb, var(--text) 68%, transparent); }
 .msg-kind i { font-size: 12px; }
-.msg-kind b { font-family: var(--font-label); font-size: 11px; font-weight: 400;
+.msg-kind b { font-family: var(--font-label); font-size: 12px; font-weight: 400;
   color: var(--text); }
 .msg-kind.is-app { border-color: color-mix(in srgb, var(--accent) 34%, transparent);
   background: color-mix(in srgb, var(--accent) 9%, transparent); color: var(--accent2); }
@@ -344,7 +344,7 @@ a.msg-head-sub:hover { color: var(--accent); }
   font-variant-numeric: tabular-nums; letter-spacing: .04em;
   color: color-mix(in srgb, var(--text) 48%, transparent);
 }
-.msg-pill--span i { font-size: 11px; opacity: .65; }
+.msg-pill--span i { font-size: 12px; opacity: .65; }
 /* Le délai moyen de réponse se tient juste après la durée de l'échange : même
    famille d'information, mais un cadre à peine plus marqué — c'est un rythme,
    pas seulement un intervalle. */
@@ -354,7 +354,7 @@ a.msg-head-sub:hover { color: var(--accent); }
   color: color-mix(in srgb, var(--text) 72%, transparent);
   font-variant-numeric: tabular-nums;
 }
-.msg-pill--reply i { font-size: 11px; color: var(--accent2); opacity: .8; }
+.msg-pill--reply i { font-size: 12px; color: var(--accent2); opacity: .8; }
 /* Une conversation qui met un jour ou plus à répondre porte la lune, comme
    dans la liste : l'en-tête du fil ouvert ne raconte pas un autre rythme. */
 .msg-pill--reply.is-sleep {
@@ -376,7 +376,7 @@ a.msg-head-sub:hover { color: var(--accent); }
   background: none; color: var(--text); font: inherit; font-size: 12.5px; }
 .msg-find-input::placeholder { color: color-mix(in srgb, var(--text) 46%, transparent); }
 .msg-find-input::-webkit-search-cancel-button { display: none; }
-.msg-find-count { flex: 0 0 auto; font-family: var(--font-label); font-size: 10.5px; letter-spacing: .04em;
+.msg-find-count { flex: 0 0 auto; font-family: var(--font-label); font-size: 12px; letter-spacing: .04em;
   font-variant-numeric: tabular-nums; white-space: nowrap;
   color: color-mix(in srgb, var(--accent2) 80%, var(--text)); }
 .msg-find-clear { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center;
@@ -396,7 +396,7 @@ a.msg-head-sub:hover { color: var(--accent); }
 .msg-stream { display: grid; align-content: start; gap: 12px; padding: 18px 16px; overflow-y: auto; }
 .msg-day { display: grid; gap: 8px; }
 .msg-day-label { justify-self: center; padding: 4px 10px; border-radius: 999px; font-family: var(--font-label);
-  font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+  font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
   background: color-mix(in srgb, var(--text) 14%, transparent); }
 .msg-bubble-row { display: flex; justify-content: flex-start; }
 .msg-bubble-row.is-mine { justify-content: flex-end; }
@@ -407,7 +407,7 @@ a.msg-head-sub:hover { color: var(--accent); }
 .msg-bubble-row.is-mine .msg-bubble { border-radius: 16px 16px 4px 16px; background: color-mix(in srgb, var(--accent) 30%, transparent);
   border-color: color-mix(in srgb, var(--accent) 52%, transparent); }
 .msg-bubble p { margin: 0; font-size: 14px; line-height: 1.55; white-space: pre-wrap; overflow-wrap: anywhere; }
-.msg-bubble time { display: block; margin-top: 5px; font-size: 10.5px; color: var(--muted); text-align: end; }
+.msg-bubble time { display: block; margin-top: 5px; font-size: 12px; color: var(--muted); text-align: end; }
 .msg-composer { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 10px; align-items: end;
   padding: 12px 14px; border-top: 1px solid color-mix(in srgb, var(--text) 13%, transparent); }
 .msg-input { width: 100%; box-sizing: border-box; padding: 10px 12px; border-radius: 12px; font: inherit; font-size: 14px;
@@ -425,7 +425,7 @@ a.msg-head-sub:hover { color: var(--accent); }
   border-color: color-mix(in srgb, var(--accent) 52%, transparent); }
 .msg-side .board-error p,
 .msg-pane .board-error p { color: color-mix(in srgb, var(--text) 90%, transparent); }
-.msg-hint { grid-column: 1 / -1; margin: 0; font-size: 11px; color: var(--muted); }
+.msg-hint { grid-column: 1 / -1; margin: 0; font-size: 12px; color: var(--muted); }
 .msg-pane-empty { display: grid; gap: 10px; justify-items: center; align-content: center; text-align: center; padding: 40px 24px;
   min-height: 560px; border-radius: 18px;
   background: color-mix(in srgb, var(--surface) 94%, transparent);
@@ -437,7 +437,7 @@ a.msg-head-sub:hover { color: var(--accent); }
 .msg-gate > i { font-size: 26px; color: var(--accent); }
 
 .msg-new { display: grid; gap: 10px; }
-.msg-new-title { display: flex; align-items: center; gap: 8px; margin: 0; font-family: var(--font-label); font-size: 11px;
+.msg-new-title { display: flex; align-items: center; gap: 8px; margin: 0; font-family: var(--font-label); font-size: 12px;
   letter-spacing: .12em; text-transform: uppercase; color: var(--accent2); }
 .msg-search input { font-size: 13px; }
 .msg-members { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; max-height: 420px; overflow-y: auto; }
@@ -446,7 +446,7 @@ a.msg-head-sub:hover { color: var(--accent); }
 .msg-members li:hover { background: color-mix(in srgb, var(--accent) 8%, transparent); }
 .msg-member-id { display: grid; gap: 1px; min-width: 0; }
 .msg-member-id b { font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.msg-member-id small { font-size: 11px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.msg-member-id small { font-size: 12px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 @media (max-width: 960px) {
   .msg-layout { grid-template-columns: 1fr; min-height: 0; }

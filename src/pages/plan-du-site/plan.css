@@ -28,9 +28,9 @@
   border-top: 1px dashed color-mix(in srgb, var(--text) 14%, transparent); }
 .plan-world-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 8px; margin: 0; }
 .plan-world-head > i { font-size: 14px; color: var(--accent); }
-.plan-world-lab { font-family: var(--font-label); font-size: 10px; letter-spacing: .12em;
+.plan-world-lab { font-family: var(--font-label); font-size: 11px; letter-spacing: .12em;
   text-transform: uppercase; color: var(--accent2); }
-.plan-world-hint { flex: 1 1 260px; min-width: 0; font-size: 11.5px; line-height: 1.5;
+.plan-world-hint { flex: 1 1 260px; min-width: 0; font-size: 12px; line-height: 1.5;
   color: color-mix(in srgb, var(--text) 60%, transparent); }
 [dir="rtl"] .plan-world-lab { letter-spacing: 0; text-transform: none; font-size: 11.5px; }
 
@@ -55,7 +55,7 @@
 .plan-door--fam { border-style: solid;
   border-color: color-mix(in srgb, var(--text) 15%, transparent);
   background: color-mix(in srgb, var(--surface) 92%, transparent); }
-.plan-door-n { flex: 0 0 auto; font-family: var(--font-body); font-size: 10.5px; font-weight: 600;
+.plan-door-n { flex: 0 0 auto; font-family: var(--font-body); font-size: 12px; font-weight: 600;
   line-height: 1.5; color: var(--accent2); }
 
 [dir="rtl"] .plan-door-arrow { transform: scaleX(-1); }
@@ -73,7 +73,7 @@
 .plan-fam-name { font-family: var(--font-heading); font-size: 17px; font-weight: 600;
   letter-spacing: -.01em; color: var(--text); text-decoration: none; }
 .plan-fam-name:hover { color: var(--accent); }
-.plan-fam-num { font-family: var(--font-label); font-size: 9px; letter-spacing: .07em;
+.plan-fam-num { font-family: var(--font-label); font-size: 12px; letter-spacing: .07em;
   text-transform: uppercase; color: var(--muted); white-space: nowrap; }
 
 .plan-fam-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 5px; }
@@ -82,16 +82,16 @@
   background: color-mix(in srgb, var(--text) 6%, transparent);
   border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
   color: color-mix(in srgb, var(--text) 80%, transparent);
-  text-decoration: none; font-size: 11.5px; line-height: 1.5;
+  text-decoration: none; font-size: 12px; line-height: 1.5;
   transition: border-color .2s ease, color .2s ease, background .2s ease; }
 .plan-country span, .plan-country { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.plan-country b { flex: 0 0 auto; font-family: var(--font-body); font-size: 11px; font-weight: 600; color: var(--accent2); }
+.plan-country b { flex: 0 0 auto; font-family: var(--font-body); font-size: 12px; font-weight: 600; color: var(--accent2); }
 .plan-country:hover { border-color: color-mix(in srgb, var(--accent) 52%, transparent);
   background: color-mix(in srgb, var(--accent) 13%, transparent); color: var(--text); }
 .plan-country:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 .plan-fam-more { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap;
-  font-family: var(--font-label); font-size: 9.5px; letter-spacing: .06em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .06em; text-transform: uppercase;
   color: var(--accent); text-decoration: none; }
 .plan-fam-more i { font-size: 13px; }
 .plan-fam-more:hover { color: var(--accent2); }
@@ -103,10 +103,10 @@
 .plan-fiche-block { display: grid; gap: 6px; padding-top: 9px;
   border-top: 1px dashed color-mix(in srgb, var(--text) 14%, transparent); }
 .plan-fiche-lab { display: inline-flex; align-items: center; gap: 6px;
-  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .08em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
   color: var(--muted); }
 .plan-fiche-lab i { font-size: 11px; color: var(--accent); }
-.plan-fiche-lab b { font-family: var(--font-body); font-size: 10.5px; font-weight: 600;
+.plan-fiche-lab b { font-family: var(--font-body); font-size: 11px; font-weight: 600;
   letter-spacing: 0; color: var(--accent2); }
 .plan-fiches { list-style: none; margin: 0; padding: 0;
   display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3px 8px; }
@@ -123,10 +123,10 @@
 
 .plan-fiche { display: flex; align-items: baseline; gap: 6px; min-width: 0;
   padding: 2px 7px; border-radius: 7px; text-decoration: none;
-  color: color-mix(in srgb, var(--text) 82%, transparent); font-size: 11.5px; line-height: 1.6;
+  color: color-mix(in srgb, var(--text) 82%, transparent); font-size: 12px; line-height: 1.6;
   transition: color .18s ease, background .18s ease; }
 .plan-fiche span { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.plan-fiche em { flex: 0 0 auto; max-width: 46%; font-style: normal; font-size: 9.5px;
+.plan-fiche em { flex: 0 0 auto; max-width: 46%; font-style: normal; font-size: 12px;
   color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .plan-fiche:hover { color: var(--text); background: color-mix(in srgb, var(--accent) 12%, transparent); }
 .plan-fiche:hover em { color: var(--accent2); }
@@ -158,7 +158,7 @@
    clavier — la recherche s'ouvre des deux façons. */
 .plan-search-key { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center;
   min-width: 20px; height: 20px; padding: 0 5px; border-radius: 6px; cursor: pointer;
-  font-family: var(--font-label); font-size: 11px; line-height: 1; letter-spacing: 0;
+  font-family: var(--font-label); font-size: 12px; line-height: 1; letter-spacing: 0;
   color: color-mix(in srgb, var(--text) 62%, transparent);
   background: color-mix(in srgb, var(--text) 7%, transparent);
   border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
@@ -176,9 +176,9 @@
   background: color-mix(in srgb, var(--surface) 92%, transparent);
   border: 1px solid color-mix(in srgb, var(--text) 14%, transparent); }
 .plan-search-count { display: inline-flex; align-items: center; gap: 5px; margin: 0;
-  font-family: var(--font-label); font-size: 8.5px; letter-spacing: .07em; text-transform: uppercase;
+  font-family: var(--font-label); font-size: 12px; letter-spacing: .07em; text-transform: uppercase;
   color: var(--muted); }
-.plan-search-count i { font-size: 11px; color: var(--accent); }
+.plan-search-count i { font-size: 12px; color: var(--accent); }
 .plan-search-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
 .plan-search-hit { display: flex; align-items: baseline; gap: 8px; min-width: 0;
   padding: 5px 8px; border-radius: 9px; text-decoration: none; color: var(--text);
@@ -191,15 +191,15 @@
 .plan-search-name { flex: 0 1 auto; min-width: 0; font-size: 12.5px; font-weight: 600;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .plan-search-meta { display: inline-flex; align-items: baseline; gap: 4px; flex: 1 1 auto; min-width: 0;
-  font-size: 10px; color: var(--muted);
+  font-size: 12px; color: var(--muted);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.plan-search-meta i { font-size: 10px; color: var(--accent2); }
+.plan-search-meta i { font-size: 12px; color: var(--accent2); }
 .plan-search-meta em { font-style: normal; color: color-mix(in srgb, var(--text) 30%, transparent); }
 .plan-search-go { flex: 0 0 auto; font-size: 13px; color: var(--accent); }
 .plan-search-none { display: inline-flex; align-items: center; gap: 6px; margin: 0; padding: 3px 2px;
   font-size: 12px; color: var(--muted); }
 .plan-search-none i { font-size: 13px; color: var(--accent2); }
-.plan-search-hint { margin: 0; font-size: 10.5px; color: color-mix(in srgb, var(--text) 58%, transparent); }
+.plan-search-hint { margin: 0; font-size: 12px; color: color-mix(in srgb, var(--text) 58%, transparent); }
 [dir="rtl"] .plan-search-count { letter-spacing: 0; }
 
 @media (max-width: 560px) {

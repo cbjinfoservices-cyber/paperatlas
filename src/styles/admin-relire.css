@@ -20,7 +20,7 @@
   border-radius: 999px;
   background: color-mix(in srgb, var(--accent) 20%, transparent);
   font-family: var(--font-label, inherit);
-  font-size: 9.5px;
+  font-size: 12px;
   font-weight: 700;
   line-height: 1.5;
   letter-spacing: .08em;
@@ -37,7 +37,7 @@
 
 .admin-relire-num em {
   font-style: normal;
-  font-size: 9.5px;
+  font-size: 12px;
   font-weight: 500;
   opacity: .6;
 }
@@ -69,7 +69,7 @@
    pastille ne se confonde pas avec celles des deux langues. */
 .admin-relire-tag {
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 11px;
   font-weight: 600;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -137,7 +137,7 @@
   align-items: baseline;
   gap: 3px;
   font-family: var(--font-label, inherit);
-  font-size: 10px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   letter-spacing: .02em;
   white-space: nowrap;
@@ -212,7 +212,7 @@
   justify-content: space-between;
   gap: 8px;
   font-family: var(--font-label, inherit);
-  font-size: 9.4px;
+  font-size: 12px;
   letter-spacing: .06em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 52%, transparent);
@@ -220,7 +220,7 @@
 
 .admin-relire-mini-head b {
   flex: none;
-  font-size: 10px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   letter-spacing: .02em;
   color: color-mix(in srgb, var(--accent) 84%, var(--text));
@@ -241,7 +241,7 @@
   border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
   background: color-mix(in srgb, var(--surface) 55%, transparent);
   font-family: var(--font-label, inherit);
-  font-size: 9px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--text) 56%, transparent);
   text-decoration: none;
@@ -307,7 +307,7 @@
   border: 1px solid color-mix(in srgb, var(--accent) 46%, transparent);
   background: color-mix(in srgb, var(--accent) 14%, transparent);
   font-family: var(--font-label, inherit);
-  font-size: 9.6px;
+  font-size: 12px;
   letter-spacing: .04em;
   color: color-mix(in srgb, var(--accent) 92%, var(--text));
   cursor: pointer;
@@ -327,7 +327,7 @@
 
 .admin-relire-mini-do i {
   flex: none;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 /* La note du geste : elle dit ce qui vient d'être fermé, puis s'efface. */
@@ -339,14 +339,14 @@
   border-radius: 6px;
   background: color-mix(in srgb, var(--accent) 10%, transparent);
   font-family: var(--font-label, inherit);
-  font-size: 9.4px;
+  font-size: 12px;
   letter-spacing: .03em;
   color: color-mix(in srgb, var(--accent) 88%, var(--text));
 }
 
 .admin-relire-mini-flash i {
   flex: none;
-  font-size: 11px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--accent) 82%, var(--text));
 }
 
@@ -357,7 +357,7 @@
   padding-top: 5px;
   border-top: 1px dashed color-mix(in srgb, var(--text) 14%, transparent);
   font-family: var(--font-label, inherit);
-  font-size: 9.6px;
+  font-size: 12px;
   letter-spacing: .04em;
   color: color-mix(in srgb, var(--text) 62%, transparent);
 }
@@ -380,7 +380,7 @@
   border-radius: 6px;
   background: color-mix(in srgb, var(--text) 4%, transparent);
   font-family: var(--font-label, inherit);
-  font-size: 9.6px;
+  font-size: 12px;
   line-height: 1.4;
   letter-spacing: .02em;
   color: color-mix(in srgb, var(--text) 60%, transparent);
@@ -390,7 +390,7 @@
 .admin-relire-mini-say i {
   flex: none;
   margin-top: 1px;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.2;
   color: color-mix(in srgb, var(--text) 46%, transparent);
 }
@@ -406,7 +406,7 @@
 
 [dir='rtl'] .admin-relire-mini-say {
   letter-spacing: 0;
-  font-size: 10.6px;
+  font-size: 12px;
 }
 
 /* Les rangs encore ouverts, nommés en fin de carte — l'arabe puis l'anglais.
@@ -419,7 +419,7 @@
   padding-top: 5px;
   border-top: 1px dashed color-mix(in srgb, var(--text) 14%, transparent);
   font-family: var(--font-label, inherit);
-  font-size: 9.6px;
+  font-size: 12px;
   line-height: 1.45;
   letter-spacing: .03em;
   color: color-mix(in srgb, var(--text) 66%, transparent);
@@ -436,7 +436,7 @@
   flex: none;
   padding: 0 4px;
   border-radius: 3px;
-  font-size: 8.6px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: .06em;
   color: color-mix(in srgb, var(--bg) 88%, transparent);
@@ -450,7 +450,7 @@
 
 [dir='rtl'] .admin-relire-mini-remains {
   letter-spacing: 0;
-  font-size: 10.6px;
+  font-size: 12px;
 }
 
 [dir='rtl'] .admin-relire-mini {
@@ -460,7 +460,7 @@
 [dir='rtl'] .admin-relire-mini-head,
 [dir='rtl'] .admin-relire-mini-foot {
   letter-spacing: 0;
-  font-size: 10.4px;
+  font-size: 12px;
 }
 
 @media (max-width: 640px) {

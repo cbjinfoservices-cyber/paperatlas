@@ -44,6 +44,7 @@ import { othersLine, othersWhere } from '@/lib/typeOthers';
 import DirectoryTools, { RADII, SORT_LABEL, type SortKey } from './components/DirectoryTools';
 import AuthorTools, { AUTHOR_SORTS, AUTHOR_SORT_LABEL, type AuthorSort } from './components/AuthorTools';
 import BizCard from './components/BizCard';
+import PremiumDirectory from './components/PremiumDirectory';
 import AuthorCard from './components/AuthorCard';
 import DirectoryMap from './components/DirectoryMap';
 import CountryMaps from './components/CountryMaps';
@@ -84,6 +85,7 @@ export default function Annuaire() {
   const slugTrade = tradeDeSlug(slug ?? '');
   const slugPaysCode = paysDeSlug(payslug ?? '');
   const [activePin, setActivePin] = useState<string | null>(null);
+  const [publicBusinessCount, setPublicBusinessCount] = useState(0);
   const [recall, setRecall] = useState('');
   const restored = useRef(false);
   const auteurRestored = useRef(false);
@@ -1618,7 +1620,18 @@ export default function Annuaire() {
 
 
 
-          {list.length === 0 ? (
+          {mode === 'entreprises' && view === 'list' && (
+            <PremiumDirectory
+              country={pays}
+              region={wilaya}
+              trade={trade}
+              query={q}
+              onCountChange={setPublicBusinessCount}
+            />
+          )}
+
+          {list.length === 0
+          && !(mode === 'entreprises' && view === 'list' && publicBusinessCount > 0) ? (
             <div className={`dir-empty${facEmpty ? ' dir-empty--fac' : ''}`}>
               <i className={facEmpty ? 'ri-scissors-cut-line' : 'ri-file-search-line'} aria-hidden="true"></i>
               {facEmpty ? (

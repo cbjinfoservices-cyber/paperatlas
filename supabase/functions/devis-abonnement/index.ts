@@ -1043,6 +1043,11 @@ Deno.serve(async (req) => {
 
     return json({ ok: true, reference: quote.reference, emailed });
   } catch (err) {
-    return json({ error: 'server', detail: err instanceof Error ? err.message : 'unknown' }, 500);
+    console.error('[devis-abonnement]', err);
+    const detail =
+      err !== null && typeof err === 'object' && 'message' in err && typeof err.message === 'string'
+        ? err.message
+        : 'unknown';
+    return json({ error: 'server', detail }, 500);
   }
 });

@@ -33,7 +33,7 @@
   border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
   background: color-mix(in srgb, var(--surface) 34%, transparent);
   font-family: var(--font-label, inherit);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: .02em;
   color: color-mix(in srgb, var(--text) 62%, transparent);
 }
@@ -103,7 +103,7 @@
   border: 1px dashed color-mix(in srgb, var(--text) 18%, transparent);
   border-radius: 12px;
   font-family: var(--font-label, inherit);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: .02em;
   color: color-mix(in srgb, var(--text) 60%, transparent);
 }
@@ -196,7 +196,7 @@
   border-radius: 12px;
   background: color-mix(in srgb, var(--surface) 30%, transparent);
   font-family: var(--font-label, inherit);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: .02em;
   color: color-mix(in srgb, var(--text) 58%, transparent);
 }
@@ -284,7 +284,7 @@
   border: 1px dashed color-mix(in srgb, var(--accent) 36%, transparent);
   border-radius: 999px;
   background: color-mix(in srgb, var(--accent) 6%, transparent);
-  font-size: 11px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--accent) 86%, var(--text));
 }
@@ -380,7 +380,7 @@
 }
 
 .pay-memo-delta i {
-  font-size: 11px;
+  font-size: 12px;
   color: inherit;
 }
 
@@ -437,7 +437,7 @@
 }
 
 .pay-memo-rows i {
-  font-size: 11px;
+  font-size: 12px;
   color: inherit;
 }
 
@@ -464,7 +464,7 @@
   padding: 6px 0 0;
   border-top: 1px dashed color-mix(in srgb, var(--text) 14%, transparent);
   font-family: var(--font-label, inherit);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: .02em;
   color: color-mix(in srgb, var(--text) 58%, transparent);
 }
@@ -499,7 +499,7 @@
 }
 
 .pay-hist-trend i {
-  font-size: 11px;
+  font-size: 12px;
   color: inherit;
 }
 
@@ -534,7 +534,7 @@
   border-radius: 12px;
   background: color-mix(in srgb, var(--accent2, var(--accent)) 7%, transparent);
   font-family: var(--font-label, inherit);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: .02em;
   color: color-mix(in srgb, var(--text) 66%, transparent);
 }
@@ -707,7 +707,7 @@
 
 .pay-hist-row .pay-hist-move i {
   margin-inline-start: 0;
-  font-size: 11px;
+  font-size: 12px;
   opacity: .9;
 }
 
@@ -741,7 +741,7 @@
 
 .pay-hist-row .pay-hist-opposite i {
   margin-inline-start: 0;
-  font-size: 11px;
+  font-size: 12px;
   opacity: .9;
 }
 
@@ -766,7 +766,7 @@
 }
 
 .pay-hist-row .pay-hist-amount i {
-  font-size: 11px;
+  font-size: 12px;
   opacity: .9;
 }
 
@@ -788,7 +788,7 @@
 
 .pay-hist-row .pay-hist-peak i {
   margin-inline-start: 0;
-  font-size: 11px;
+  font-size: 12px;
   opacity: 1;
 }
 
@@ -807,7 +807,7 @@
 }
 
 .pay-hist-peak-note i {
-  font-size: 11px;
+  font-size: 12px;
   color: inherit;
 }
 
@@ -843,7 +843,7 @@ button.pay-hist-peak-note[data-done='yes'] {
   padding: 7px 0 0;
   border-top: 1px dashed color-mix(in srgb, var(--text) 14%, transparent);
   font-family: var(--font-label, inherit);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: .02em;
   color: color-mix(in srgb, var(--text) 58%, transparent);
 }
@@ -943,7 +943,7 @@ button.pay-hist-peak-note[data-done='yes'] {
 }
 
 .pay-cmp-field > span {
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: .03em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 46%, transparent);
@@ -957,7 +957,7 @@ button.pay-hist-peak-note[data-done='yes'] {
   border-radius: 8px;
   background: color-mix(in srgb, var(--surface) 60%, transparent);
   font-family: inherit;
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: inherit;
   color: color-mix(in srgb, var(--text) 82%, transparent);
   cursor: pointer;
@@ -1216,7 +1216,7 @@ span.pay-cmp-parties-token {
 }
 
 .pay-hist-shown-clear i {
-  font-size: 11px;
+  font-size: 12px;
   color: inherit;
 }
 
@@ -1358,7 +1358,7 @@ span.pay-cmp-parties-token {
 }
 
 .pay-cmp-narrow-clear i {
-  font-size: 11px;
+  font-size: 12px;
   color: inherit;
 }
 
@@ -1380,7 +1380,7 @@ span.pay-cmp-parties-token {
 }
 
 .pay-cmp-narrow-export i {
-  font-size: 11px;
+  font-size: 12px;
   color: inherit;
 }
 
@@ -1436,7 +1436,7 @@ span.pay-cmp-parties-token {
 
 .pay-cmp-arrivals li > i {
   flex: none;
-  font-size: 11px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--text) 40%, transparent);
 }
 
@@ -1457,7 +1457,7 @@ span.pay-cmp-parties-token {
 .pay-cmp-arrival-name em {
   font-style: normal;
   opacity: .7;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .pay-cmp-arrival-amount {
@@ -1600,7 +1600,7 @@ span.pay-cmp-parties-token {
   border: 1px dashed color-mix(in srgb, var(--text) 18%, transparent);
   border-radius: 999px;
   font-family: var(--font-label, inherit);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: .02em;
   color: color-mix(in srgb, var(--text) 60%, transparent);
 }
@@ -1723,7 +1723,7 @@ span.pay-cmp-parties-token {
   padding: 0;
   list-style: none;
   font-family: var(--font-label, inherit);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: .02em;
 }
 
@@ -1792,7 +1792,7 @@ span.pay-cmp-parties-token {
   gap: 4px 10px;
   margin: 2px 0 0;
   font-family: var(--font-label, inherit);
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: .02em;
   color: color-mix(in srgb, var(--text) 52%, transparent);
 }

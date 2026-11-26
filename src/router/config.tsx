@@ -1,33 +1,41 @@
 import type { RouteObject } from "react-router-dom";
+import { lazy } from "react";
 import NotFound from "../pages/NotFound";
 import Home from "../pages/home/page";
-import Annuaire from "../pages/annuaire/page";
-import EntrepriseProfile from "../pages/entreprise/page";
-import AuteurProfile from "../pages/auteur/page";
-import Annonces from "../pages/annonces/page";
-import AnnonceDetail from "../pages/annonces/detail/page";
-import Emplois from "../pages/emplois/page";
-import EmploiDetail from "../pages/emplois/detail/page";
-import Deposer from "../pages/deposer/page";
-import Compte from "../pages/compte/page";
-import Inscription from "../pages/compte/inscription/page";
-import CandidatInscription from "../pages/compte/inscription/candidat/page";
-import ProfilCandidat from "../pages/compte/profil-candidat/page";
-import Connexion from "../pages/compte/connexion/page";
-import Messages from "../pages/messages/page";
-import CandidatProfile from "../pages/candidats/page";
-import CandidatsListe from "../pages/candidats/liste/page";
-import DemandeB2b from "../pages/demande-b2b/page";
-import DemandeMarche from "../pages/demande-marche/page";
-import Demandes from "../pages/demandes/page";
-import Offres from "../pages/offres/page";
-import Devis from "../pages/devis/page";
-import Suivi from "../pages/suivi/page";
-import MentionsLegales from "../pages/legal/mentions/page";
-import Confidentialite from "../pages/legal/confidentialite/page";
-import Admin from "../pages/admin/page";
-import PlanDuSite from "../pages/plan-du-site/page";
-import ArabeWorld from "../pages/arabe-world/page";
+
+/* Chaque page est chargée à la demande : seule la page d'accueil, premier
+   écran des visiteurs, reste dans le bundle initial. */
+const Annuaire = lazy(() => import("../pages/annuaire/page"));
+const BusinessProfilePage = lazy(() => import("../pages/annuaire/BusinessProfilePage"));
+const EntrepriseProfile = lazy(() => import("../pages/entreprise/page"));
+const AuteurProfile = lazy(() => import("../pages/auteur/page"));
+const Annonces = lazy(() => import("../pages/annonces/page"));
+const AnnonceDetail = lazy(() => import("../pages/annonces/detail/page"));
+const Emplois = lazy(() => import("../pages/emplois/page"));
+const EmploiDetail = lazy(() => import("../pages/emplois/detail/page"));
+const Deposer = lazy(() => import("../pages/deposer/page"));
+const Compte = lazy(() => import("../pages/compte/page"));
+const Inscription = lazy(() => import("../pages/compte/inscription/page"));
+const CandidatInscription = lazy(() => import("../pages/compte/inscription/candidat/page"));
+const ProfilCandidat = lazy(() => import("../pages/compte/profil-candidat/page"));
+const Connexion = lazy(() => import("../pages/compte/connexion/page"));
+const MotDePasse = lazy(() => import("../pages/compte/mot-de-passe/page"));
+const Messages = lazy(() => import("../pages/messages/page"));
+const CandidatProfile = lazy(() => import("../pages/candidats/page"));
+const CandidatsListe = lazy(() => import("../pages/candidats/liste/page"));
+const DemandeB2b = lazy(() => import("../pages/demande-b2b/page"));
+const DemandeMarche = lazy(() => import("../pages/demande-marche/page"));
+const Demandes = lazy(() => import("../pages/demandes/page"));
+const Offres = lazy(() => import("../pages/offres/page"));
+const Devis = lazy(() => import("../pages/devis/page"));
+const Suivi = lazy(() => import("../pages/suivi/page"));
+const MentionsLegales = lazy(() => import("../pages/legal/mentions/page"));
+const Confidentialite = lazy(() => import("../pages/legal/confidentialite/page"));
+const Cgu = lazy(() => import("../pages/legal/cgu/page"));
+const Cgv = lazy(() => import("../pages/legal/cgv/page"));
+const Admin = lazy(() => import("../pages/admin/page"));
+const PlanDuSite = lazy(() => import("../pages/plan-du-site/page"));
+const ArabeWorld = lazy(() => import("../pages/arabe-world/page"));
 
 const routes: RouteObject[] = [
   {
@@ -37,6 +45,10 @@ const routes: RouteObject[] = [
   {
     path: "/annuaire",
     element: <Annuaire />,
+  },
+  {
+    path: "/annuaire/entreprise/:id",
+    element: <BusinessProfilePage />,
   },
   {
     /* Une page par type d'établissement, avec sa propre adresse :
@@ -115,6 +127,14 @@ const routes: RouteObject[] = [
     element: <Confidentialite />,
   },
   {
+    path: "/cgu",
+    element: <Cgu />,
+  },
+  {
+    path: "/cgv",
+    element: <Cgv />,
+  },
+  {
     /* La seconde marque du réseau, expliquée en une page : d'où viennent les
        deux noms de la maison, et pourquoi le site se lit en trois langues. */
     path: "/arabe-world",
@@ -152,6 +172,10 @@ const routes: RouteObject[] = [
   {
     path: "/compte/connexion",
     element: <Connexion />,
+  },
+  {
+    path: "/compte/mot-de-passe",
+    element: <MotDePasse />,
   },
   {
     path: "/messages",

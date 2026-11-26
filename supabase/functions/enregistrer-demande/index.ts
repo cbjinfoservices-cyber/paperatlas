@@ -71,6 +71,11 @@ Deno.serve(async (req) => {
     body = {};
   }
 
+  /* Champ piège rempli : c'est un robot. Réponse « ok » sans rien écrire. */
+  if (clean(body.company_alt, 200) || clean(body.website_alt, 200)) {
+    return json({ ok: true, notified: false });
+  }
+
   const type = TYPES.has(clean(body.type, 20)) ? clean(body.type, 20) : 'contact';
   const nom = clean(body.nom, 120);
   const email = clean(body.email, 160).toLowerCase();

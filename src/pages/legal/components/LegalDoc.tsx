@@ -7,10 +7,29 @@ import { useScrollRestore } from '@/hooks/useScrollRestore';
 import PoseRestante from '@/components/feature/PoseRestante';
 import '@/styles/legal.css';
 
-type Props = { kind: 'mentions' | 'confidentialite' };
+export type LegalKind = 'mentions' | 'confidentialite' | 'cgu' | 'cgv';
+
+type LegalDocConfig = {
+  prefix: string;
+  updatedKey: string;
+  count: number;
+  path: string;
+  seo: 'legal' | 'privacy' | 'cgu' | 'cgv';
+  icon: string;
+  labelKey: string;
+};
+
+const DOCS: Record<LegalKind, LegalDocConfig> = {
+  mentions: { prefix: 'lg.m', updatedKey: 'lg.updated', count: 7, path: '/mentions-legales', seo: 'legal', icon: 'ri-shield-keyhole-line', labelKey: 'foot.legalMentions' },
+  confidentialite: { prefix: 'lg.c', updatedKey: 'lg.updated', count: 8, path: '/confidentialite', seo: 'privacy', icon: 'ri-file-text-line', labelKey: 'foot.legalPrivacy' },
+  cgu: { prefix: 'lg.u', updatedKey: 'lg.u.updated', count: 8, path: '/cgu', seo: 'cgu', icon: 'ri-file-list-3-line', labelKey: 'foot.cgu' },
+  cgv: { prefix: 'lg.v', updatedKey: 'lg.v.updated', count: 8, path: '/cgv', seo: 'cgv', icon: 'ri-price-tag-3-line', labelKey: 'foot.cgv' },
+};
+
+const ORDER: LegalKind[] = ['mentions', 'confidentialite', 'cgu', 'cgv'];
 
 /**
- * Les deux pages légales, sur la même trame : un en-tête, les articles
+ * Les pages légales, sur la même trame : un en-tête, les articles
  * numérotés, puis la façon de nous écrire.
  *
  * Le texte vient du dictionnaire, dans la langue de lecture — les mentions
@@ -18,16 +37,12 @@ type Props = { kind: 'mentions' | 'confidentialite' };
  * travail. Les seuls champs laissés ouverts sont ceux qui dépendent de la
  * structure qui édite le site : ils sont signalés en haut de page.
  */
-export default function LegalDoc({ kind }: Props) {
+export default function LegalDoc({ kind }: { kind: LegalKind }) {
   const { t } = useLang();
-  const mentions = kind === 'mentions';
-  const prefix = mentions ? 'lg.m' : 'lg.c';
-  const path = mentions ? '/mentions-legales' : '/confidentialite';
-  const other = mentions ? '/confidentialite' : '/mentions-legales';
-  const otherLabel = mentions ? t('foot.legalPrivacy') : t('foot.legalMentions');
-  const count = mentions ? 7 : 8;
+  const { prefix, updatedKey, count, path, seo, icon } = DOCS[kind];
+  const siblings = ORDER.filter((key) => key !== kind);
 
-  useSeo({ page: mentions ? 'legal' : 'privacy', path });
+  useSeo({ page: seo, path });
   useReveal();
   useScrollRestore(path);
 
@@ -47,7 +62,7 @@ export default function LegalDoc({ kind }: Props) {
           <p className="lede">{t(`${prefix}.lede`)}</p>
           <p className="legal-updated">
             <i className="ri-calendar-check-line" aria-hidden="true"></i>
-            {t('lg.updated')}
+            {t(updatedKey)}
           </p>
           {/* Le repère de pose des deux pages légales : les seules clés `lg.`
               de dict.legal.ts, que cet écran traverse vraiment. Une fois tout
@@ -94,11 +109,13 @@ export default function LegalDoc({ kind }: Props) {
               </div>
               <div className="legal-side">
                 <p className="legal-side-lbl">{t('lg.siblings')}</p>
-                <Link to={other} className="legal-side-link">
-                  <i className={mentions ? 'ri-shield-keyhole-line' : 'ri-file-text-line'} aria-hidden="true"></i>
-                  <span>{otherLabel}</span>
-                  <i className="ri-arrow-right-line" aria-hidden="true"></i>
-                </Link>
+                {siblings.map((key) => (
+                  <Link key={key} to={DOCS[key].path} className="legal-side-link">
+                    <i className={DOCS[key].icon} aria-hidden="true"></i>
+                    <span>{t(DOCS[key].labelKey)}</span>
+                    <i className="ri-arrow-right-line" aria-hidden="true"></i>
+                  </Link>
+                ))}
                 <Link to="/" className="legal-side-back">
                   <i className="ri-arrow-left-line" aria-hidden="true"></i>
                   <span>{t('lg.back')}</span>

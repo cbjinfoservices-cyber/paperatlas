@@ -54,6 +54,8 @@ const MAIN_LINKS: Array<{ to: string; key: string; icon: string }> = [
   { to: '/suivi', key: 'siteMap.track', icon: 'ri-truck-line' },
   { to: '/mentions-legales', key: 'siteMap.legal', icon: 'ri-file-text-line' },
   { to: '/confidentialite', key: 'siteMap.privacy', icon: 'ri-shield-keyhole-line' },
+  { to: '/cgu', key: 'siteMap.terms', icon: 'ri-file-list-3-line' },
+  { to: '/cgv', key: 'siteMap.sales', icon: 'ri-price-tag-3-line' },
 ];
 
 /**

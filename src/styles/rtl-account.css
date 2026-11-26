@@ -141,7 +141,7 @@
 [dir="rtl"] .capp-n,
 [dir="rtl"] .capp-note-num { direction: ltr; unicode-bidi: isolate; letter-spacing: 0; }
 [dir="rtl"] .capp-n,
-[dir="rtl"] .msg-badge { font-size: 10.5px; }
+[dir="rtl"] .msg-badge { font-size: 11px; }
 
 /* 17. The conversation bubbles: the tail turns with the reading direction, so
    the other speaker still answers from the start of the line. */

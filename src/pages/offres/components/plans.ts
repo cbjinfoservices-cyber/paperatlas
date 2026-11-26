@@ -4,9 +4,10 @@
  *
  *  The price stays written once, in dinars, per month: each length multiplies
  *  it, and the reader sees the result in the money of the country on screen.
- *  Long lengths pay a little less per month — the year offers its last month. */
+ *  Longer commitments pay less per month through explicit term discounts. */
 
 import {
+  COEFFICIENT_ANNUEL,
   PRIX_PREMIUM_DZD,
   formaterMontant,
   montantArrondiDzd,
@@ -14,6 +15,9 @@ import {
   prixLocal,
   type PrixLocal,
 } from '@/lib/tarif';
+
+const REMISE_TRIMESTRIELLE = 0.1;
+const REMISE_SEMESTRIELLE = 0.15;
 
 export type PlanId = 'mensuel' | 'trimestriel' | 'semestre' | 'annee';
 
@@ -57,7 +61,7 @@ export const plans: Plan[] = [
     id: 'trimestriel',
     name: 'off.m2t',
     mois: 3,
-    montantDzd: PRIX_PREMIUM_DZD * 3,
+    montantDzd: Math.round(PRIX_PREMIUM_DZD * 3 * (1 - REMISE_TRIMESTRIELLE)),
     per: 'off.m2per',
     includes: ['off.m2i1', 'off.m2i2', 'off.m2i3'],
     diff: 'off.m2d',
@@ -70,7 +74,7 @@ export const plans: Plan[] = [
     id: 'semestre',
     name: 'off.m3t',
     mois: 6,
-    montantDzd: 19250,
+    montantDzd: Math.round(PRIX_PREMIUM_DZD * 6 * (1 - REMISE_SEMESTRIELLE)),
     per: 'off.m3per',
     includes: ['off.m3i1', 'off.m3i2', 'off.m3i3'],
     diff: 'off.m3d',
@@ -83,7 +87,7 @@ export const plans: Plan[] = [
     id: 'annee',
     name: 'off.m4t',
     mois: 12,
-    montantDzd: PRIX_PREMIUM_DZD * 11,
+    montantDzd: Math.round(PRIX_PREMIUM_DZD * 12 * COEFFICIENT_ANNUEL),
     per: 'off.m4per',
     includes: ['off.m4i1', 'off.m4i2', 'off.m4i3'],
     diff: 'off.m4d',

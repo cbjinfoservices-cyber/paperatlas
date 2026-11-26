@@ -4,9 +4,9 @@ import { useLang } from '@/i18n/LangProvider';
 import { clearExpediteurVu, readExpediteurVu } from './adminMailMemory';
 import './admin-suivi-mail.css';
 
-/** Chez Resend, l'écran des domaines : c'est là que le domaine d'envoi se
+/** Chez Brevo, l'écran des domaines : c'est là que le domaine d'envoi se
  *  vérifie, et que la clé se reprend quand il faut la recopier. */
-export const RESEND_URL = 'https://resend.com/domains';
+export const BREVO_URL = 'https://app.brevo.com/';
 
 /** Une porte ouverte par le plan : son adresse, et le nom de l'écran. */
 export type SuiviPorte = { lien: string; ecran: string };
@@ -168,7 +168,7 @@ export default function AdminSuiviDoors({
         <span className="suivi-door-cell">
           <a
             className="suivi-preuves-door"
-            href={RESEND_URL}
+            href={BREVO_URL}
             target="_blank"
             rel="noopener noreferrer"
             title={t('ad.suivi.resendGoHint')}

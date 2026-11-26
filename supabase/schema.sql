@@ -53,6 +53,84 @@ create table if not exists public.paperatlas_membres (
   updated_at timestamptz not null default now()
 );
 
+create table if not exists public.paperatlas_entreprises (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null unique references auth.users(id) on delete cascade,
+  nom text not null,
+  metier text not null,
+  pays text not null default 'DZ',
+  wilaya text not null,
+  commune text,
+  description text,
+  telephone_public text,
+  email_public text,
+  site_web text,
+  publie boolean not null default false,
+  mise_en_avant_jusqu_a timestamptz,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+create index if not exists paperatlas_entreprises_public_idx
+  on public.paperatlas_entreprises (publie, mise_en_avant_jusqu_a desc, created_at desc);
+
+create table if not exists public.paperatlas_abonnements_paiement (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references auth.users(id) on delete cascade,
+  prestataire text not null check (prestataire in ('stripe', 'paypal')),
+  formule text not null check (formule in ('mensuel', 'trimestriel', 'semestre', 'annee')),
+  statut text not null default 'pending'
+    check (statut in ('pending', 'trialing', 'active', 'past_due', 'canceled', 'unpaid', 'incomplete')),
+  devise text not null,
+  montant numeric(14, 3) not null check (montant > 0),
+  prestataire_client_id text,
+  prestataire_abonnement_id text unique,
+  session_paiement_id text,
+  checkout_url text,
+  checkout_expire_a timestamptz,
+  essai_jours_choisis integer not null default 0 check (essai_jours_choisis between 0 and 90),
+  essai_debut timestamptz,
+  essai_fin timestamptz,
+  periode_debut timestamptz,
+  periode_fin timestamptz,
+  annulation_fin_periode boolean not null default false,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+create index if not exists paperatlas_abonnements_paiement_user_idx
+  on public.paperatlas_abonnements_paiement (user_id, created_at desc);
+create unique index if not exists paperatlas_abonnements_essai_unique_idx
+  on public.paperatlas_abonnements_paiement (user_id)
+  where essai_debut is not null;
+create unique index if not exists paperatlas_abonnements_pending_unique_idx
+  on public.paperatlas_abonnements_paiement (user_id)
+  where statut = 'pending';
+
+create or replace function public.proteger_mise_en_avant_entreprise()
+returns trigger
+language plpgsql
+as $$
+begin
+  if auth.role() is distinct from 'service_role' then
+    if tg_op = 'INSERT' and new.mise_en_avant_jusqu_a is not null then
+      raise exception 'La mise en avant est gérée par le service d’abonnement.';
+    end if;
+    if tg_op = 'UPDATE'
+      and new.mise_en_avant_jusqu_a is distinct from old.mise_en_avant_jusqu_a then
+      raise exception 'La mise en avant est gérée par le service d’abonnement.';
+    end if;
+  end if;
+  return new;
+end;
+$$;
+
+drop trigger if exists paperatlas_entreprises_proteger_mise_en_avant
+  on public.paperatlas_entreprises;
+create trigger paperatlas_entreprises_proteger_mise_en_avant
+  before insert or update on public.paperatlas_entreprises
+  for each row execute function public.proteger_mise_en_avant_entreprise();
+
 create table if not exists public.paperatlas_annonces (
   id uuid primary key default gen_random_uuid(),
   user_id uuid references auth.users(id) on delete set null,
@@ -68,9 +146,12 @@ create table if not exists public.paperatlas_annonces (
   telephone text,
   description text,
   statut text not null default 'en_attente',
+  motif text,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
+
+alter table public.paperatlas_annonces add column if not exists motif text;
 
 create index if not exists paperatlas_annonces_statut_idx
   on public.paperatlas_annonces (statut, created_at desc);
@@ -216,12 +297,24 @@ create table if not exists public.paperatlas_devis_abonnement (
   message text,
   source text,
   lang text default 'fr',
+  statut text not null default 'recu',
   statut_notifie text default 'recu',
+  statut_notifie_at timestamptz,
+  email_envoye boolean not null default false,
   recap_sent_at timestamptz,
+  recap_groupe_at timestamptz,
   relance_sent_at timestamptz,
+  relance_envoyee_at timestamptz,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
+
+alter table public.paperatlas_devis_abonnement
+  add column if not exists statut text not null default 'recu',
+  add column if not exists statut_notifie_at timestamptz,
+  add column if not exists email_envoye boolean not null default false,
+  add column if not exists recap_groupe_at timestamptz,
+  add column if not exists relance_envoyee_at timestamptz;
 
 create table if not exists public.paperatlas_formules_journal (
   id uuid primary key default gen_random_uuid(),
@@ -231,7 +324,17 @@ create table if not exists public.paperatlas_formules_journal (
   formule_avant text,
   formule_apres text,
   rythme text,
+  change_at timestamptz not null default now(),
   created_at timestamptz not null default now()
+);
+
+alter table public.paperatlas_formules_journal
+  add column if not exists change_at timestamptz not null default now();
+
+create table if not exists public.preferences_affichage (
+  user_id uuid primary key references auth.users(id) on delete cascade,
+  donnees jsonb not null default '{}'::jsonb,
+  updated_at timestamptz not null default now()
 );
 
 create table if not exists public.abonnements (
@@ -286,6 +389,7 @@ where formule is not null
 group by formule;
 
 grant select on public.paperatlas_formules_tally to anon, authenticated;
+grant select on public.paperatlas_annonces to anon, authenticated;
 
 -- ============================================================================
 -- 3. FONCTIONS RPC (rattachement d'une fiche d'auteur)
@@ -358,6 +462,8 @@ grant execute on function public.detacher_auteur() to authenticated;
 
 alter table public.paperatlas_comptes enable row level security;
 alter table public.paperatlas_membres enable row level security;
+alter table public.paperatlas_entreprises enable row level security;
+alter table public.paperatlas_abonnements_paiement enable row level security;
 alter table public.paperatlas_annonces enable row level security;
 alter table public.paperatlas_candidatures enable row level security;
 alter table public.paperatlas_candidature_vues enable row level security;
@@ -368,6 +474,7 @@ alter table public.paperatlas_demandes_b2b enable row level security;
 alter table public.paperatlas_b2b_objectif_historique enable row level security;
 alter table public.paperatlas_devis_abonnement enable row level security;
 alter table public.paperatlas_formules_journal enable row level security;
+alter table public.preferences_affichage enable row level security;
 alter table public.abonnements enable row level security;
 alter table public.parametres_app enable row level security;
 alter table public.demandes_formulaires enable row level security;
@@ -390,6 +497,28 @@ create policy "membres_own_write" on public.paperatlas_membres
   for all to authenticated
   using (auth.uid() = id)
   with check (auth.uid() = id);
+
+drop policy if exists "entreprises_directory_read" on public.paperatlas_entreprises;
+create policy "entreprises_directory_read" on public.paperatlas_entreprises
+  for select to anon, authenticated
+  using (publie or auth.uid() = user_id);
+
+drop policy if exists "entreprises_own_write" on public.paperatlas_entreprises;
+create policy "entreprises_own_write" on public.paperatlas_entreprises
+  for all to authenticated
+  using (auth.uid() = user_id)
+  with check (auth.uid() = user_id);
+
+grant select on public.paperatlas_entreprises to anon, authenticated;
+grant insert, update, delete on public.paperatlas_entreprises to authenticated;
+
+drop policy if exists "abonnements_paiement_own_read" on public.paperatlas_abonnements_paiement;
+create policy "abonnements_paiement_own_read" on public.paperatlas_abonnements_paiement
+  for select to authenticated
+  using (auth.uid() = user_id);
+
+revoke insert, update, delete on public.paperatlas_abonnements_paiement from anon, authenticated;
+grant select on public.paperatlas_abonnements_paiement to authenticated;
 
 -- paperatlas_annonces : annonces publiées visibles par tous ; l'auteur voit/gère les siennes
 drop policy if exists "annonces_public_read" on public.paperatlas_annonces;
@@ -474,6 +603,41 @@ create policy "formules_journal_own" on public.paperatlas_formules_journal
   for all to authenticated
   using (auth.uid() = compte_id)
   with check (auth.uid() = compte_id);
+
+-- preferences_affichage : une ligne par membre, lue et écrite par lui seul
+drop policy if exists "preferences_affichage_own" on public.preferences_affichage;
+create policy "preferences_affichage_own" on public.preferences_affichage
+  for all to authenticated
+  using (auth.uid() = user_id)
+  with check (auth.uid() = user_id);
+
+-- Droits de table : les règles RLS ci-dessus filtrent ensuite les lignes.
+-- Les colonnes modifiables sont limitées pour ne pas laisser changer un rôle
+-- ou un participant.
+grant select, insert on public.paperatlas_comptes to authenticated;
+grant update (nom, organisme, metier, wilaya, pays, telephone, formule, titre, bio, cv_path, updated_at)
+  on public.paperatlas_comptes to authenticated;
+drop policy if exists "comptes_insert_role_restreint" on public.paperatlas_comptes;
+create policy "comptes_insert_role_restreint" on public.paperatlas_comptes
+  as restrictive for insert to authenticated
+  with check (role in ('pro', 'candidat'));
+grant select on public.paperatlas_membres to anon, authenticated;
+grant insert, update on public.paperatlas_membres to authenticated;
+grant select, insert on public.paperatlas_candidatures to authenticated;
+grant update (statut, note_employeur, updated_at) on public.paperatlas_candidatures to authenticated;
+grant select, insert on public.paperatlas_candidature_vues to authenticated;
+grant update (seen_at) on public.paperatlas_candidature_vues to authenticated;
+grant select, insert on public.paperatlas_conversations to authenticated;
+grant update (lu_a, lu_b, last_message, last_at, origine) on public.paperatlas_conversations to authenticated;
+grant select, insert on public.paperatlas_messages to authenticated;
+grant select, insert on public.paperatlas_formules_journal to authenticated;
+grant select, insert, update on public.preferences_affichage to authenticated;
+
+-- Les Edge Functions ont besoin de droits de table, meme avec BYPASSRLS.
+grant select, update on public.paperatlas_comptes to service_role;
+grant select, insert on public.paperatlas_b2b_objectif_historique to service_role;
+grant select, insert, update on public.paperatlas_demandes_b2b,
+  public.paperatlas_devis_abonnement to service_role;
 
 -- ============================================================================
 -- 5. STORAGE BUCKETS (privés)

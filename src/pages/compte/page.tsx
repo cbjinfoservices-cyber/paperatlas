@@ -1,5 +1,5 @@
 import { useEffect, useState, type FormEvent } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { Nav, Footer } from '@/pages/home/components/SiteChrome';
 import { useLang } from '@/i18n/LangProvider';
 import { localeFor } from '@/i18n/localize';
@@ -14,6 +14,8 @@ import MyListings from '@/pages/compte/components/MyListings';
 import MyApplications from '@/pages/compte/components/MyApplications';
 import MyB2bRequests from '@/pages/compte/components/MyB2bRequests';
 import MyDevisAbonnement from '@/pages/compte/components/MyDevisAbonnement';
+import BusinessListingManager from '@/pages/compte/components/BusinessListingManager';
+import BillingSubscription from '@/pages/compte/components/BillingSubscription';
 import DossierLinks from '@/pages/compte/components/DossierLinks';
 import AuthorLinker from '@/pages/compte/components/AuthorLinker';
 import AireCopyProfile from '@/components/feature/AireCopyProfile';
@@ -25,6 +27,8 @@ import PlanPills from '@/pages/offres/components/PlanPills';
 import DevisAbonnement from '@/components/feature/DevisAbonnement';
 import { planById, planCardHref, isPlanId, prixPlan, type PlanId } from '@/pages/offres/components/plans';
 import { isAdminEmail } from '@/pages/admin/components/adminTypes';
+import { peekJournalFilter, peekJournalMonth } from '@/lib/journalFilter';
+import './dashboard.css';
 
 const METIERS = ['imprimerie', 'edition', 'librairie', 'faconnage', 'agence', 'auteur', 'fournisseur', 'admin'];
 
@@ -32,6 +36,35 @@ export default function Compte() {
   const { t, lang } = useLang();
   const { session, user, compte, loading, compteError, saveCompte, signOut } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const isEstablishment = Boolean(compte && compte.role !== 'candidat');
+  const SettingsContainer = isEstablishment ? 'details' : 'div';
+  const navigationSearch = new URLSearchParams(location.search);
+  navigationSearch.set('lang', lang);
+  const [quoteOpened, setQuoteOpened] = useState(false);
+  const [journalRequested] = useState(() =>
+    Boolean(new URLSearchParams(location.search).get('journal')
+      || new URLSearchParams(location.search).get('jm')
+      || peekJournalFilter() || peekJournalMonth()),
+  );
+
+  // Existing deep links must also reveal panels that start collapsed.
+  useEffect(() => {
+    if (!isEstablishment) return;
+    const params = new URLSearchParams(location.search);
+    const targetId = location.hash.slice(1)
+      || (params.has('journal') || params.has('jm') ? 'journal-formules' : '');
+    if (!targetId) return;
+    const target = document.getElementById(targetId);
+    let opened = false;
+    for (let node = target; node; node = node.parentElement) {
+      if (node instanceof HTMLDetailsElement && !node.open) {
+        node.open = true;
+        opened = true;
+      }
+    }
+    if (opened) target?.scrollIntoView({ block: 'start' });
+  }, [isEstablishment, location.hash, location.search]);
 
   /* The country picks the regions offered right below it; the profile loads
      after the first render, so the state follows the row once it arrives. */
@@ -44,6 +77,7 @@ export default function Compte() {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState('');
+  const [listingRevision, setListingRevision] = useState(0);
   /** Bumped by the twelve-month counter, so the box opens on that exact cut. */
   const [gapJump, setGapJump] = useState(0);
   /** Asked by the correction chip: the box opens on that month's corrections. */
@@ -100,6 +134,7 @@ export default function Compte() {
   const [formule, setFormule] = useState<PlanId>(() => (isPlanId(storedPlan) ? storedPlan : 'mensuel'));
   const [planSaving, setPlanSaving] = useState(false);
   const [planSaved, setPlanSaved] = useState(false);
+  const [planError, setPlanError] = useState('');
   /** Bumped after a move, so the journal reads the new line back. */
   const [journalKey, setJournalKey] = useState(0);
 
@@ -154,6 +189,7 @@ export default function Compte() {
     const before = formule;
     setFormule(id);
     setPlanSaved(false);
+    setPlanError('');
     setPlanSaving(true);
     const ok = await saveCompte({ formule: id });
     setPlanSaving(false);
@@ -177,7 +213,8 @@ export default function Compte() {
         if (!journalError) setJournalKey((n) => n + 1);
       }
     } else {
-      setError(t('acct.errSave'));
+      setFormule(before);
+      setPlanError(t('acct.errSave'));
     }
   };
 
@@ -204,24 +241,143 @@ export default function Compte() {
 
   if (!session) return <Navigate to="/compte/connexion" replace />;
 
+  /* The admin address lands straight on the console after sign-in. */
+  if (isAdminEmail(user?.email || compte?.email)) return <Navigate to="/admin" replace />;
+
+  const planChoice = (
+    <div className="of-plan-change">
+      <div className="of-plan-change-head">
+        {!isEstablishment && <h3>{t('ofp.change')}</h3>}
+        {planSaving && (
+          <span className="of-plan-change-state" role="status">
+            <i className="ri-loader-4-line is-spin" aria-hidden="true"></i>
+            {t('acct.saving')}
+          </span>
+        )}
+        {!planSaving && planSaved && (
+          <span className="of-plan-change-state is-done" role="status">
+            <i className="ri-check-line" aria-hidden="true"></i>
+            {t('acct.saved')}
+          </span>
+        )}
+      </div>
+      <PlanPills
+        name="formule-choice"
+        value={formule}
+        disabled={planSaving}
+        pays={pays}
+        label={t('ofp.pickOn')}
+        hint={t('ofp.changeHint')}
+        onChange={(id) => void pickPlan(id)}
+      />
+      {planError && <p className="form-msg err" role="alert">{planError}</p>}
+    </div>
+  );
+
+  const planControls = (
+    <>
+      {chosenPlan && (isEstablishment ? (
+        <div className="acct-plan-summary">
+          <span className="acct-dashboard-icon" aria-hidden="true"><i className={chosenPlan.icon}></i></span>
+          <div>
+            <span className="acct-dashboard-label">{t('acct.dashboard.selectedPlan')}</span>
+            <strong>{t(chosenPlan.name)}</strong>
+            <span>{prixPlan(chosenPlan, pays, t)} {t(chosenPlan.per)}</span>
+          </div>
+          <Link to={planCardHref(formule, pays)} className="ghost-link">
+            {t('ofp.viewCard')}
+            <i className="ri-arrow-right-line" aria-hidden="true"></i>
+          </Link>
+        </div>
+      ) : (
+        <div className="of-plan-banner of-plan-banner--recall">
+          <span className="of-plan-banner-icon" aria-hidden="true"><i className={chosenPlan.icon}></i></span>
+          <div className="of-plan-banner-main">
+            <span className="of-plan-banner-badge">{t('ofb.badge')}</span>
+            <p className="of-plan-banner-title">
+              {t('ofb.yourPlan')} <strong>{t(chosenPlan.name)}</strong>
+              <span className="of-plan-banner-price">— {prixPlan(chosenPlan, pays, t)} {t(chosenPlan.per)}</span>
+              <span className="of-plan-banner-duree" title={t('ofb.dureeTip')}>
+                <i className="ri-calendar-check-line" aria-hidden="true"></i>
+                {chosenPlan.mois === 1 ? t('ofb.duree1') : t('ofb.dureeN').replace('{n}', String(chosenPlan.mois))}
+              </span>
+            </p>
+            <p className="of-plan-banner-hint">{t('ofb.hint')}</p>
+          </div>
+          <div className="of-plan-banner-actions">
+            <Link to={planCardHref(formule, pays)} className="of-plan-banner-link">
+              <span className="whitespace-nowrap">{t('ofp.viewCard')}</span>
+              <i className="ri-arrow-right-line" aria-hidden="true"></i>
+            </Link>
+          </div>
+        </div>
+      ))}
+      {isEstablishment ? (
+        <details className="acct-dashboard-disclosure">
+          <summary>
+            <i className="ri-calendar-line" aria-hidden="true"></i>
+            <span>{t('ofp.change')}</span>
+            <i className="ri-arrow-down-s-line acct-disclosure-chevron" aria-hidden="true"></i>
+          </summary>
+          {planChoice}
+        </details>
+      ) : planChoice}
+    </>
+  );
+
   return (
     <>
       <Nav variant="page" />
-      <main className="page-main" id="main-content" tabIndex={-1}>
+      <main className={`page-main${isEstablishment ? ' acct-dashboard' : ''}`} id="main-content" tabIndex={-1}>
         <section className="dir-hero">
-          <p className="stamp">{t('acct.stamp')}</p>
+          <p className="stamp">{t(isEstablishment ? 'acct.dashboard.title' : 'acct.stamp')}</p>
           {/* Le même cachet qu'à l'entrée du site, posé à côté du nom du
               membre : on sait chez qui on est avant de lire la salutation. */}
           <div className="acct-hero-name">
             <BrandSeal className="acct-hero-seal" />
-            <h1 className="page-h1">{`${t('acct.hello')} ${compte?.nom || email || ''}`}</h1>
+            <h1 className="page-h1">
+              {isEstablishment ? compte?.organisme || compte?.nom || email : `${t('acct.hello')} ${compte?.nom || email || ''}`}
+            </h1>
           </div>
-          <p className="lede">{t('acct.sub')}</p>
+          <p className="lede">{t(isEstablishment ? 'acct.dashboard.intro' : 'acct.sub')}</p>
+          {isEstablishment && (
+            <div className="acct-dashboard-actions">
+              <Link to="/messages" className="ghost-btn">
+                <i className="ri-message-3-line" aria-hidden="true"></i>
+                {t('acct.msgOpen')}
+              </Link>
+              <Link to="/deposer" className="cta">
+                {t('acct.toDeposit')}
+                <i className="ri-add-line" aria-hidden="true"></i>
+              </Link>
+            </div>
+          )}
         </section>
 
         <section className="dir-body">
-          {compte && compte.role !== 'candidat' && (
+          {isEstablishment && (
+            <nav className="acct-dashboard-nav" aria-label={t('acct.dashboard.navigation')}>
+              {[
+                ['acct-summary', 'ri-dashboard-line', 'acct.dashboard.overview'],
+                ['account-establishment', 'ri-building-4-line', 'acct.dashboard.establishment'],
+                ['account-activity', 'ri-inbox-archive-line', 'acct.dashboard.activity'],
+                ['account-subscription', 'ri-bank-card-line', 'acct.dashboard.subscription'],
+                ['account-settings', 'ri-settings-3-line', 'acct.dashboard.settings'],
+              ].map(([id, icon, label]) => (
+                <Link
+                  key={id}
+                  to={{ pathname: location.pathname, search: `?${navigationSearch}`, hash: `#${id}` }}
+                  aria-current={location.hash === `#${id}` || (!location.hash && id === 'acct-summary') ? 'location' : undefined}
+                >
+                  <i className={icon} aria-hidden="true"></i>
+                  {t(label)}
+                </Link>
+              ))}
+            </nav>
+          )}
+          {isEstablishment && (
             <B2bSummary
+              compact
               enabled={Boolean(session)}
               onOpenGap={() => setGapJump((n) => n + 1)}
               /* A new object on every click, so the box reacts even when the
@@ -271,7 +427,142 @@ export default function Compte() {
               }
             />
           )}
-          <div className="auth-grid">
+          {isEstablishment && compte && (
+            <>
+              <details className="pro-card acct-dashboard-disclosure acct-establishment" id="account-establishment">
+                <summary>
+                  <span className="acct-dashboard-icon" aria-hidden="true"><i className="ri-building-4-line"></i></span>
+                  <span>
+                    <strong>{t('acct.dashboard.establishment')}</strong>
+                    <small>{t('acct.dashboard.establishmentHint')}</small>
+                  </span>
+                  <i className="ri-arrow-down-s-line acct-disclosure-chevron" aria-hidden="true"></i>
+                </summary>
+                <BusinessListingManager onSaved={() => setListingRevision((revision) => revision + 1)} />
+              </details>
+
+              <section className="acct-dashboard-group" id="account-activity" aria-labelledby="account-activity-title">
+                <header className="acct-dashboard-section-head">
+                  <div>
+                    <h2 id="account-activity-title">{t('acct.dashboard.activity')}</h2>
+                    <p>{t('acct.dashboard.activityHint')}</p>
+                  </div>
+                  <Link to="/demande-b2b" className="ghost-link">
+                    {t('nav.b2b')}
+                    <i className="ri-arrow-right-line" aria-hidden="true"></i>
+                  </Link>
+                </header>
+                <MyB2bRequests
+                  openGapAll={gapJump}
+                  openCleared={clearedJump}
+                  openRework={reworkJump}
+                  openStale={staleJump}
+                  openUndoc={undocJump}
+                  openSlow={slowJump}
+                  openBelow={belowJump}
+                  openLateAsk={lateJump}
+                  openLateOldestAsk={lateOldestJump}
+                  openWeekAsk={weekJump}
+                  openNeverAsk={neverJump}
+                  focusAsk={focusJump}
+                  neverFocusAsk={neverFocusJump}
+                  openWaitAsk={waitTableJump}
+                  openMonthAsk={waitMonthJump}
+                  openGoalAsk={goalJump}
+                />
+                <details className="pro-card acct-dashboard-disclosure">
+                  <summary>
+                    <i className="ri-megaphone-line" aria-hidden="true"></i>
+                    <span>{t('acct.mine.title')}</span>
+                    <i className="ri-arrow-down-s-line acct-disclosure-chevron" aria-hidden="true"></i>
+                  </summary>
+                  <MyListings />
+                </details>
+                <details className="pro-card acct-dashboard-disclosure">
+                  <summary>
+                    <i className="ri-briefcase-line" aria-hidden="true"></i>
+                    <span>{t('acct.appl.title')}</span>
+                    <i className="ri-arrow-down-s-line acct-disclosure-chevron" aria-hidden="true"></i>
+                  </summary>
+                  <MyApplications />
+                </details>
+              </section>
+
+              <section className="acct-dashboard-group" id="account-subscription" aria-labelledby="account-subscription-title">
+                <header className="acct-dashboard-section-head">
+                  <div>
+                    <h2 id="account-subscription-title">{t('acct.dashboard.subscription')}</h2>
+                    <p>{t('acct.dashboard.subscriptionHint')}</p>
+                  </div>
+                </header>
+                <div className="pro-card acct-subscription-panel">
+                  {planControls}
+                  <BillingSubscription planId={formule} pays={pays} listingRevision={listingRevision} />
+                  <details
+                    className="acct-dashboard-disclosure"
+                    id="devis-abonnement"
+                    onToggle={(event) => {
+                      if (event.currentTarget.open) setQuoteOpened(true);
+                    }}
+                  >
+                    <summary>
+                      <i className="ri-file-add-line" aria-hidden="true"></i>
+                      <span>{t('dv.acctTitle')}</span>
+                      <i className="ri-arrow-down-s-line acct-disclosure-chevron" aria-hidden="true"></i>
+                    </summary>
+                    <p className="auth-note">{t('dv.acctSub')}</p>
+                    {quoteOpened && <DevisAbonnement
+                      source="compte"
+                      formuleInitiale={formule}
+                      nom={compte.nom ?? ''}
+                      email={email}
+                      org={compte.organisme ?? ''}
+                    />}
+                  </details>
+                  <details className="acct-dashboard-disclosure">
+                    <summary>
+                      <i className="ri-file-list-3-line" aria-hidden="true"></i>
+                      <span>{t('dv.listTitle')}</span>
+                      <i className="ri-arrow-down-s-line acct-disclosure-chevron" aria-hidden="true"></i>
+                    </summary>
+                    <MyDevisAbonnement />
+                  </details>
+                  <details className="acct-dashboard-disclosure" open={journalRequested}>
+                    <summary>
+                      <i className="ri-history-line" aria-hidden="true"></i>
+                      <span>{t('ofj.title')}</span>
+                      <i className="ri-arrow-down-s-line acct-disclosure-chevron" aria-hidden="true"></i>
+                    </summary>
+                    <PlanJournal refreshKey={journalKey} />
+                  </details>
+                  <details className="acct-dashboard-disclosure">
+                    <summary>
+                      <i className="ri-pie-chart-line" aria-hidden="true"></i>
+                      <span>{t('ofp.tallyTitle')}</span>
+                      <i className="ri-arrow-down-s-line acct-disclosure-chevron" aria-hidden="true"></i>
+                    </summary>
+                    <PlanTally mine={formule} />
+                  </details>
+                </div>
+              </section>
+            </>
+          )}
+
+          <SettingsContainer
+            className={isEstablishment ? 'pro-card acct-dashboard-disclosure acct-settings' : undefined}
+            id={isEstablishment ? 'account-settings' : undefined}
+          >
+            {isEstablishment && (
+              <summary>
+                <span className="acct-dashboard-icon" aria-hidden="true"><i className="ri-settings-3-line"></i></span>
+                <span>
+                  <strong>{t('acct.dashboard.settings')}</strong>
+                  <small>{t('acct.dashboard.settingsHint')}</small>
+                </span>
+                <i className="ri-arrow-down-s-line acct-disclosure-chevron" aria-hidden="true"></i>
+              </summary>
+            )}
+            <div className="auth-grid">
             {!compte ? (
               <div className="form-card auth-card">
                 <p className="acct-loading">
@@ -311,66 +602,7 @@ export default function Compte() {
                   </div>
                 </div>
 
-                {chosenPlan && (
-                  <div className="of-plan-banner of-plan-banner--recall">
-                    <span className="of-plan-banner-icon" aria-hidden="true">
-                      <i className={chosenPlan.icon}></i>
-                    </span>
-                    <div className="of-plan-banner-main">
-                      <span className="of-plan-banner-badge">{t('ofb.badge')}</span>
-                      <p className="of-plan-banner-title">
-                        {t('ofb.yourPlan')} <strong>{t(chosenPlan.name)}</strong>
-                        <span className="of-plan-banner-price">
-                          — {prixPlan(chosenPlan, pays, t)} {t(chosenPlan.per)}
-                        </span>
-                        {/* La durée retenue, posée juste à côté du montant :
-                            le récapitulatif dit d'un coup d'œil quelle
-                            longueur est payée, et non seulement laquelle a
-                            été choisie. */}
-                        <span className="of-plan-banner-duree" title={t('ofb.dureeTip')}>
-                          <i className="ri-calendar-check-line" aria-hidden="true"></i>
-                          {chosenPlan.mois === 1
-                            ? t('ofb.duree1')
-                            : t('ofb.dureeN').replace('{n}', String(chosenPlan.mois))}
-                        </span>
-                      </p>
-                      <p className="of-plan-banner-hint">{t('ofb.hint')}</p>
-                    </div>
-                    <div className="of-plan-banner-actions">
-                      <Link to={planCardHref(formule, pays)} className="of-plan-banner-link">
-                        <span className="whitespace-nowrap">{t('ofp.viewCard')}</span>
-                        <i className="ri-arrow-right-line" aria-hidden="true"></i>
-                      </Link>
-                    </div>
-                  </div>
-                )}
-
-                <div className="of-plan-change">
-                  <div className="of-plan-change-head">
-                    <h3>{t('ofp.change')}</h3>
-                    {planSaving && (
-                      <span className="of-plan-change-state">
-                        <i className="ri-loader-4-line is-spin" aria-hidden="true"></i>
-                        {t('acct.saving')}
-                      </span>
-                    )}
-                    {!planSaving && planSaved && (
-                      <span className="of-plan-change-state is-done">
-                        <i className="ri-check-line" aria-hidden="true"></i>
-                        {t('acct.saved')}
-                      </span>
-                    )}
-                  </div>
-                  <PlanPills
-                    name="formule-choice"
-                    value={formule}
-                    disabled={planSaving}
-                    pays={pays}
-                    label={t('ofp.pickOn')}
-                    hint={t('ofp.changeHint')}
-                    onChange={(id) => void pickPlan(id)}
-                  />
-                </div>
+                {!isEstablishment && planControls}
 
                 <div className="form-grid">
                   <div className="fld">
@@ -476,9 +708,8 @@ export default function Compte() {
             )}
 
             <aside className="auth-side">
-              <PlanTally mine={formule} />
-
-              <PlanJournal refreshKey={journalKey} />
+              {!isEstablishment && <PlanTally mine={formule} />}
+              {!isEstablishment && <PlanJournal refreshKey={journalKey} />}
 
               <section className="pro-card">
                 <h2 className="pro-h">{t('acct.au.card')}</h2>
@@ -525,47 +756,9 @@ export default function Compte() {
                 </Link>
               </section>
             </aside>
-          </div>
-
-          {compte?.role !== 'candidat' && compte && (
-            <section className="pro-card" id="devis-abonnement">
-              <h2 className="pro-h">{t('dv.acctTitle')}</h2>
-              <p className="auth-note">{t('dv.acctSub')}</p>
-              <DevisAbonnement
-                source="compte"
-                formuleInitiale={formule}
-                nom={compte.nom ?? ''}
-                email={email}
-                org={compte.organisme ?? ''}
-              />
-            </section>
-          )}
-
-          <MyApplications />
-          {compte?.role !== 'candidat' && (
-            <MyB2bRequests
-              openGapAll={gapJump}
-              openCleared={clearedJump}
-              openRework={reworkJump}
-              openStale={staleJump}
-              openUndoc={undocJump}
-              openSlow={slowJump}
-              openBelow={belowJump}
-              openLateAsk={lateJump}
-              openLateOldestAsk={lateOldestJump}
-              openWeekAsk={weekJump}
-              openNeverAsk={neverJump}
-              focusAsk={focusJump}
-              neverFocusAsk={neverFocusJump}
-              openWaitAsk={waitTableJump}
-              openMonthAsk={waitMonthJump}
-              openGoalAsk={goalJump}
-            />
-          )}
-          {/* The quotes already sent sit right next to the B2B requests: the
-              member finds what left, for how much, and where it stands. */}
-          {compte?.role !== 'candidat' && <MyDevisAbonnement />}
-          {compte?.role !== 'candidat' && <MyListings />}
+            </div>
+          </SettingsContainer>
+          {!isEstablishment && <MyApplications />}
         </section>
       </main>
       <Footer />

@@ -1,0 +1,17 @@
+{
+  "name": "paperatlas-auth-mail-relay",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "mailparser": "3.15.0",
+    "smtp-server": "3.21.7"
+  },
+  "devDependencies": {
+    "nodemailer": "10.6.1"
+  }
+}

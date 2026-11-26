@@ -38,7 +38,7 @@ main .fresh-toggle > i { font-size: 14px; }
 main .fresh-toggle .fresh-count {
   min-width: 18px;
   height: 18px;
-  font-size: 10.5px;
+  font-size: 12px;
 }
 
 main .fresh-hint { font-size: 12px; line-height: 1.45; }
@@ -52,7 +52,7 @@ main .dir-typepages {
 }
 
 main .dir-tp { padding: 5px 10px; font-size: 12.5px; }
-main .dir-tp-count { font-size: 10px; }
+main .dir-tp-count { font-size: 12px; }
 
 main .pays-tally {
   padding: 7px 9px;
@@ -87,7 +87,7 @@ main .dir-genblocks { gap: 18px; }
   main .fresh-row { gap: 5px 6px; }
   main .fresh-toggle { padding: 6px 10px; font-size: 12px; }
   main .dir-via-emblem { width: 24px; height: 24px; }
-  main .dir-via-link { font-size: 11.5px; padding: 4px 8px; }
+  main .dir-via-link { font-size: 12px; padding: 4px 8px; }
 }
 
 /* ============ LE RAPPEL DE PASSAGE « ARABE WORLD » ============ */
@@ -125,7 +125,7 @@ main .dir-via-txt {
 
 main .dir-via-lab {
   font-family: var(--font-label);
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: .1em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -160,7 +160,7 @@ main .dir-via-fam {
   max-width: 100%;
   padding: 4px 9px;
   border-radius: 999px;
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.35;
   font-weight: 550;
   text-decoration: none;
@@ -290,7 +290,7 @@ main .dir-via-x:focus-visible { outline: 2px solid var(--accent); outline-offset
   }
 
   main .dir-via-fam {
-    font-size: 11px;
+    font-size: 12px;
     padding: 4px 8px;
     white-space: normal;
   }
@@ -298,7 +298,7 @@ main .dir-via-x:focus-visible { outline: 2px solid var(--accent); outline-offset
   main .dir-via-link {
     justify-self: start;
     padding: 4px 8px;
-    font-size: 11.5px;
+    font-size: 12px;
   }
 
   main .dir-via-x {
@@ -385,7 +385,7 @@ main .board-stick > .filters.is-slim .near-btn { height: 45px; }
   border-radius: 999px;
   background: var(--accent);
   color: var(--bg);
-  font-size: 10.5px;
+  font-size: 12px;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
@@ -477,7 +477,7 @@ main .board-stick > .filters.is-slim .near-btn { height: 45px; }
   background: transparent;
   color: color-mix(in srgb, var(--text) 80%, transparent);
   font-family: var(--font-label);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: .04em;
   cursor: pointer;
   transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
@@ -494,7 +494,7 @@ main .board-stick > .filters.is-slim .near-btn { height: 45px; }
 
 .filters-panel-foot-hint {
   font-family: var(--font-label);
-  font-size: 10.5px;
+  font-size: 12px;
   line-height: 1.45;
   color: color-mix(in srgb, var(--text) 58%, transparent);
 }
@@ -620,7 +620,7 @@ main .board-stick > .filters.is-slim > .filters-count { flex: 0 0 auto; }
   margin: 0 0 1px;
   padding: 0 2px;
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--muted);

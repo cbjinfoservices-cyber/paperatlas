@@ -14,7 +14,7 @@
   padding: 2px 2px 6px;
   border-bottom: 1px dashed color-mix(in srgb, var(--text) 12%, transparent);
   font-family: var(--font-label, inherit);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 52%, transparent);
@@ -33,7 +33,7 @@
   border-radius: 999px;
   background: none;
   font-family: var(--font-label, inherit);
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: .06em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 62%, transparent);
@@ -70,7 +70,7 @@
   padding-inline-start: 6px;
   margin-inline-start: 2px;
   border-inline-start: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0;
   text-transform: none;
   color: color-mix(in srgb, var(--text) 62%, transparent);
@@ -121,7 +121,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0;
   text-transform: none;
   color: color-mix(in srgb, var(--text) 62%, transparent);
@@ -147,7 +147,7 @@
   border-radius: 4px;
   background: color-mix(in srgb, var(--accent) 10%, transparent);
   font-family: var(--font-label, inherit);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1;
   letter-spacing: .02em;
   color: color-mix(in srgb, var(--accent) 86%, var(--text));
@@ -206,7 +206,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0;
   text-transform: none;
   color: color-mix(in srgb, var(--text) 62%, transparent);
@@ -227,7 +227,7 @@
   padding-inline-start: 6px;
   margin-inline-start: 1px;
   border-inline-start: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: 0;
   text-transform: none;
   font-variant-numeric: tabular-nums;
@@ -254,7 +254,7 @@
   border-radius: 999px;
   background: none;
   font-family: var(--font-label, inherit);
-  font-size: 9.5px;
+  font-size: 12px;
   line-height: 1.2;
   letter-spacing: 0;
   text-transform: none;
@@ -274,7 +274,7 @@
 }
 
 .admin-revue-resume-since i {
-  font-size: 10px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--accent) 62%, transparent);
 }
 
@@ -289,7 +289,7 @@
 }
 
 .admin-inbox-note-sort i {
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .admin-inbox-note-sort-who {
@@ -300,7 +300,7 @@
   padding-inline-start: 5px;
   margin-inline-start: 1px;
   border-inline-start: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0;
   color: color-mix(in srgb, var(--text) 62%, transparent);
 }
@@ -329,7 +329,7 @@
 }
 
 .admin-inbox-note-sort-back {
-  font-size: 10px;
+  font-size: 12px;
   opacity: 0;
   transition: opacity .15s ease;
 }
@@ -391,7 +391,7 @@
   border-radius: 999px;
   background: none;
   font-family: var(--font-label, inherit);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .04em;
   color: color-mix(in srgb, var(--text) 58%, transparent);
   cursor: pointer;
@@ -399,7 +399,7 @@
 }
 
 .admin-inbox-note-clear i {
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .admin-inbox-note-clear:hover,
@@ -428,7 +428,7 @@
    quand rien n'est ouvert, et s'allume dès qu'un fil peut être refermé. */
 .admin-inbox-esc {
   gap: 4px;
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .04em;
   color: color-mix(in srgb, var(--text) 46%, transparent);
   opacity: .62;
@@ -454,7 +454,7 @@
   margin-inline-start: auto;
   padding-inline-start: 8px;
   font-family: var(--font-label, inherit);
-  font-size: 9.5px;
+  font-size: 12px;
   letter-spacing: .04em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 46%, transparent);
@@ -475,7 +475,7 @@
   border-radius: 8px;
   background: none;
   font-family: var(--font-label, inherit);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .06em;
   text-transform: uppercase;
   text-align: start;
@@ -616,7 +616,7 @@
 .admin-revue-visite-key {
   display: block;
   font-family: var(--font-label, inherit);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 50%, transparent);
@@ -638,7 +638,7 @@
   align-items: center;
   gap: 5px;
   font-family: var(--font-label, inherit);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .08em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--text) 52%, transparent);
@@ -679,7 +679,7 @@
   padding-inline-start: 6px;
   margin-inline-start: 1px;
   border-inline-start: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0;
   text-transform: none;
   color: color-mix(in srgb, var(--text) 64%, transparent);
@@ -723,7 +723,7 @@
 }
 
 .admin-journal-thread i:first-child {
-  font-size: 11px;
+  font-size: 12px;
   color: color-mix(in srgb, var(--accent) 62%, transparent);
 }
 

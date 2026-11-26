@@ -6,6 +6,7 @@ export default function Chapter() {
   return (
     <section
       className="chapter"
+      data-video="/media/daf8d51d-8ca4-47e5-a4ec-910091133420_scrub.mp4"
       data-label="Une commande, de la presse à la palette"
       style={{ ['--beat-count' as string]: 5 }}
     >

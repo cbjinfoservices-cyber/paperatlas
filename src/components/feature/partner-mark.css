@@ -41,7 +41,7 @@
 
 .partner-mark-txt small {
   font-family: var(--font-label);
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: .12em;
   text-transform: uppercase;
@@ -52,7 +52,7 @@
 /* En arabe, le lettrage ne prend ni approche positive ni capitales :
    l'emblème passe à droite, le nom se lit de droite à gauche. */
 [dir="rtl"] .partner-mark-txt b { letter-spacing: 0; }
-[dir="rtl"] .partner-mark-txt small { letter-spacing: 0; text-transform: none; font-size: 10px; }
+[dir="rtl"] .partner-mark-txt small { letter-spacing: 0; text-transform: none; font-size: 12px; }
 
 /* Le survol du lien qui porte la marque : un léger pivot, comme le cachet. */
 a:hover > .partner-mark .partner-mark-img,
@@ -70,7 +70,7 @@ a:focus-visible > .partner-mark .partner-mark-img {
   border-radius: 20px;
 }
 .partner-mark--hero .partner-mark-txt b { font-size: clamp(21px, 2.4vw, 27px); }
-.partner-mark--hero .partner-mark-txt small { font-size: 10.5px; }
+.partner-mark--hero .partner-mark-txt small { font-size: 12px; }
 [dir="rtl"] .partner-mark--hero .partner-mark-txt small { font-size: 12px; }
 
 @media (prefers-reduced-motion: reduce) {
