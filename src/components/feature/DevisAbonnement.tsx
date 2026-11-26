@@ -10,6 +10,7 @@ import {
   SITES_MAX,
 } from '@/lib/devis';
 import { supabase } from '@/lib/supabase';
+import ConsentLegal, { consentementComplet, consentementDepuis } from '@/components/feature/ConsentLegal';
 import { usePrixPays } from '@/hooks/usePrixPays';
 import { plans, prixPlan, type PlanId } from '@/pages/offres/components/plans';
 import '@/styles/devis.css';
@@ -101,6 +102,12 @@ export default function DevisAbonnement({ formuleInitiale = 'mensuel', nom = '',
       setFormError(t('dv.errName'));
       return;
     }
+    const consentement = consentementDepuis(data);
+    if (!consentementComplet(consentement)) {
+      setStatus('err');
+      setFormError(t('consent.err'));
+      return;
+    }
 
     setStatus('sending');
     setFormError('');
@@ -115,6 +122,7 @@ export default function DevisAbonnement({ formuleInitiale = 'mensuel', nom = '',
       lang,
       nom: nomValue,
       email: emailValue,
+      consentement,
       telephone: String(data.get('telephone') || ''),
       organisation: String(data.get('organisation') || ''),
       formule: nomFormule,
@@ -437,6 +445,7 @@ export default function DevisAbonnement({ formuleInitiale = 'mensuel', nom = '',
               ></textarea>
             </div>
 
+            <ConsentLegal idPrefix="dv" />
             <button type="submit" className="dv-send" disabled={status === 'sending'}>
               <span className="whitespace-nowrap">
                 {status === 'sending' ? t('dv.sending') : t('dv.send')}

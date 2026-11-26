@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLang } from '@/i18n/LangProvider';
 import { supabase } from '@/lib/supabase';
+import ConsentLegal, { consentementComplet, consentementDepuis } from '@/components/feature/ConsentLegal';
 
 /* Les sujets possibles, dans l'ordre où ils sont proposés. L'identifiant sert
    dans l'adresse — /?sujet=devis#contact — et la clé donne le libellé traduit
@@ -51,6 +52,8 @@ export default function ContactPanel() {
     if (!name || !String(data.get('email') || '').trim()) {
       setStatus('err'); setFormError(t('cf.errName')); return;
     }
+    const consentement = consentementDepuis(data);
+    if (!consentementComplet(consentement)) { setStatus('err'); setFormError(t('consent.err')); return; }
     setStatus('sending'); setFormError('');
     const chosen = String(data.get('sujet') || '').trim();
     /* Le compteur de la console range par identifiant, jamais par libellé :
@@ -64,6 +67,7 @@ export default function ContactPanel() {
           nom: name,
           email: String(data.get('email') || ''),
           sujet: chosenId,
+          consentement,
           profil: String(data.get('profil') || ''),
           organisation: String(data.get('organisation') || ''),
           message,
@@ -171,6 +175,7 @@ export default function ContactPanel() {
               <label htmlFor="cf-msg">{t('cf.msg')} ({count}/500)</label>
               <textarea id="cf-msg" name="message" maxLength={500} onChange={(e) => setCount(e.target.value.length)} placeholder={t('cf.msgPh')} />
             </div>
+            <ConsentLegal idPrefix="cf" />
             <button type="submit" className="cta ct-submit" disabled={status === 'sending'}>
               {status === 'sending' ? t('cf.sending') : t('cf.send')} <i className="ri-arrow-right-line"></i>
             </button>

@@ -11,6 +11,7 @@ import { motDivision } from '@/lib/division';
 import { regionsWith } from '@/lib/regions';
 import PaysSelect from '@/components/feature/PaysSelect';
 import PasswordField from '@/components/feature/PasswordField';
+import ConsentLegal, { consentementComplet, consentementDepuis } from '@/components/feature/ConsentLegal';
 import { authErrorKey } from '@/pages/compte/components/authErrors';
 import AuthBrand from '@/pages/compte/components/AuthBrand';
 
@@ -66,7 +67,7 @@ export default function CandidatInscription() {
     const email = String(data.get('email') || '').trim();
     const password = String(data.get('password') || '');
     const confirm = String(data.get('confirm') || '');
-    const accepted = data.get('accept') !== null;
+    const consentement = consentementDepuis(data);
 
     const fail = (key: string) => {
       setStatus('error');
@@ -77,7 +78,7 @@ export default function CandidatInscription() {
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return fail('acct.errEmail');
     if (password.length < 8) return fail('acct.errPwdShort');
     if (password !== confirm) return fail('acct.errPwdMatch');
-    if (!accepted) return fail('acct.errAccept');
+    if (!consentementComplet(consentement)) return fail('consent.err');
 
     setStatus('sending');
     setFormError('');
@@ -98,6 +99,7 @@ export default function CandidatInscription() {
             telephone: String(data.get('telephone') || '').trim() || null,
             bio: String(data.get('bio') || '').trim() || null,
             langue: lang,
+            consentement: { ...consentement, version: '2026-11', accepte_le: new Date().toISOString() },
           },
         },
       });
@@ -255,10 +257,7 @@ export default function CandidatInscription() {
                   <i className="ri-file-pdf-2-line" aria-hidden="true"></i> {t('cand.cvLater')}
                 </p>
 
-                <label className="auth-check" htmlFor="cd-accept">
-                  <input id="cd-accept" type="checkbox" name="accept" required />
-                  <span>{t('cand.accept')}</span>
-                </label>
+                <ConsentLegal idPrefix="cd" />
 
                 <button type="submit" className="cta" disabled={status === 'sending'}>
                   {status === 'sending' ? t('cand.submitting') : t('cand.submit')}

@@ -10,6 +10,7 @@ import { motDivision } from '@/lib/division';
 import { regionsWith } from '@/lib/regions';
 import PaysSelect from '@/components/feature/PaysSelect';
 import PasswordField from '@/components/feature/PasswordField';
+import ConsentLegal, { consentementComplet, consentementDepuis } from '@/components/feature/ConsentLegal';
 import AuthSide from '@/pages/compte/components/AuthSide';
 import AuthBrand from '@/pages/compte/components/AuthBrand';
 import { authErrorKey } from '@/pages/compte/components/authErrors';
@@ -66,7 +67,7 @@ export default function Inscription() {
     const email = String(data.get('email') || '').trim();
     const password = String(data.get('password') || '');
     const confirm = String(data.get('confirm') || '');
-    const accepted = data.get('accept') !== null;
+    const consentement = consentementDepuis(data);
 
     const fail = (key: string) => {
       setStatus('error');
@@ -77,7 +78,7 @@ export default function Inscription() {
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return fail('acct.errEmail');
     if (password.length < 8) return fail('acct.errPwdShort');
     if (password !== confirm) return fail('acct.errPwdMatch');
-    if (!accepted) return fail('acct.errAccept');
+    if (!consentementComplet(consentement)) return fail('consent.err');
 
     setStatus('sending');
     setFormError('');
@@ -96,6 +97,7 @@ export default function Inscription() {
             pays: String(data.get('pays') || '').trim() || PAYS_DEFAUT,
             telephone: String(data.get('telephone') || '').trim() || null,
             langue: lang,
+            consentement: { ...consentement, version: '2026-11', accepte_le: new Date().toISOString() },
             /* The plan picked on a card travels with the account, so « Mon
                compte » can name it once the address is confirmed. */
             ...(chosenPlan ? { formule: chosenPlan.id } : {}),
@@ -308,10 +310,7 @@ export default function Inscription() {
                   </div>
                 </div>
 
-                <label className="auth-check" htmlFor="up-accept">
-                  <input id="up-accept" type="checkbox" name="accept" required />
-                  <span>{t('acct.accept')}</span>
-                </label>
+                <ConsentLegal idPrefix="up" />
 
                 <button type="submit" className="cta" disabled={status === 'sending'}>
                   {status === 'sending' ? t('acct.submitting') : t('acct.submit')}

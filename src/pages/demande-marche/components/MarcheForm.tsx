@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useLang } from '@/i18n/LangProvider';
 import { useAuth } from '@/auth/AuthProvider';
 import { sendB2bRequest, type B2bIssue, type B2bTarget } from '@/lib/b2b';
+import ConsentLegal, { consentementComplet, consentementDepuis } from '@/components/feature/ConsentLegal';
 import {
   PIECE_MAX_BYTES,
   isPdfFile,
@@ -117,6 +118,13 @@ export default function MarcheForm({ selected, reference, onSent, onReset }: Pro
       return;
     }
 
+    const consentement = consentementDepuis(data);
+    if (!consentementComplet(consentement)) {
+      setStatus('err');
+      setFormError(t('consent.err'));
+      return;
+    }
+
     /* Une pièce refusée arrête le dépôt : mieux vaut le dire que de laisser
        partir un dossier amputé de son cahier des charges. */
     const wrongPiece = [cdcFile, bordereauFile].find(
@@ -171,6 +179,7 @@ export default function MarcheForm({ selected, reference, onSent, onReset }: Pro
       message,
       pieceCdcPath: cdcPath || undefined,
       pieceBordereauPath: bordereauPath || undefined,
+      consentement,
     });
 
     if (result.ok) {
@@ -351,6 +360,7 @@ export default function MarcheForm({ selected, reference, onSent, onReset }: Pro
           {session ? t('b2b.accountNote') : t('b2b.guestNote')}
         </p>
 
+        <ConsentLegal idPrefix="mar" />
         <button type="submit" className="cta b2b-submit" disabled={status === 'sending'}>
           {status === 'sending' ? t('b2b.sending') : t('mar.send')}
           <i className="ri-send-plane-line" aria-hidden="true"></i>

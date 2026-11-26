@@ -5,6 +5,7 @@ import { useAuth } from '@/auth/AuthProvider';
 import { supabase } from '@/lib/supabase';
 import { openConversation } from '@/lib/messaging';
 import { exempleTelephone, indicatifDe } from '@/lib/pays';
+import ConsentLegal, { consentementComplet, consentementDepuis } from '@/components/feature/ConsentLegal';
 import './apply-dialog.css';
 
 type Props = {
@@ -67,6 +68,10 @@ export default function ApplyDialog({
     }
     if (body.length > 500) {
       setError(t('appl.errLong'));
+      return;
+    }
+    if (!consentementComplet(consentementDepuis(new FormData(event.currentTarget)))) {
+      setError(t('consent.err'));
       return;
     }
 
@@ -249,6 +254,7 @@ export default function ApplyDialog({
               </div>
             </div>
 
+            <ConsentLegal idPrefix="ap" />
             <div className="acct-actions">
               <button type="submit" className="cta" disabled={sending}>
                 {sending ? t('appl.sending') : t('appl.submit')}

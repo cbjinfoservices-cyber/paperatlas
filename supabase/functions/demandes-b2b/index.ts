@@ -1,5 +1,6 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 import { getMailConfig, sendMailMessage, siteUrl } from '../_shared/mail.ts';
+import { consentementAccepte, journaliserConsentement } from '../_shared/consentement.ts';
 
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') || '';
 const ANON_KEY = Deno.env.get('SUPABASE_ANON_KEY') || '';
@@ -701,6 +702,7 @@ async function submit(body: Body, userId: string | null) {
   if (!nom || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !message) {
     return json({ error: 'invalid' }, 400);
   }
+  if (!consentementAccepte(body.consentement)) return json({ error: 'consent' }, 400);
   if (targets.length === 0) return json({ error: 'no-target' }, 400);
   if (targets.length > 6) return json({ error: 'too-many' }, 400);
 
@@ -737,6 +739,7 @@ async function submit(body: Body, userId: string | null) {
   const admin = createClient(SUPABASE_URL, SERVICE_KEY);
   const { error } = await admin.from('paperatlas_demandes_b2b').insert(rows);
   if (error) return json({ error: 'insert', detail: error.message }, 500);
+  await journaliserConsentement(admin, { email, formulaire: 'demandes-b2b', userId });
 
   /* The inbox is already served, so a mail problem never fails the request. */
   const who: Requester = {

@@ -7,6 +7,7 @@ import DepositDraftNote from '@/pages/deposer/components/DepositDraftNote';
 import DepositPreview from '@/pages/deposer/components/DepositPreview';
 import DepositRubriqueLine from '@/pages/deposer/components/DepositRubriqueLine';
 import DepositFeedback from '@/pages/deposer/components/DepositFeedback';
+import ConsentLegal from '@/components/feature/ConsentLegal';
 
 type Props = {
   /** L'onglet ouvert : le panneau reste monté pour ne rien perdre d'un onglet à l'autre. */
@@ -140,6 +141,7 @@ export default function OffreForm({ hidden, familyTotal = 0 }: Props) {
           onUse={f.setTitre}
         />
 
+        <ConsentLegal idPrefix="of" />
         <button type="submit" className="cta" disabled={f.status === 'sending'}>
           {f.status === 'sending' ? t('dep.sending') : t('dep.off.send')}
           <i className="ri-arrow-right-line" aria-hidden="true"></i>

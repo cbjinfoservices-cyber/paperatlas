@@ -1,5 +1,6 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 import { getMailConfig, sendMailMessage } from '../_shared/mail.ts';
+import { consentementAccepte, journaliserConsentement } from '../_shared/consentement.ts';
 
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') || '';
 const SERVICE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || '';
@@ -84,6 +85,7 @@ Deno.serve(async (req) => {
   if (!nom || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
     return json({ error: 'invalid' }, 400);
   }
+  if (!consentementAccepte(body.consentement)) return json({ error: 'consent' }, 400);
 
   const champs =
     type === 'devis'
@@ -115,6 +117,7 @@ Deno.serve(async (req) => {
     traitee: false,
   });
   if (error) return json({ error: error.message }, 500);
+  await journaliserConsentement(admin, { email, formulaire: `enregistrer-demande:${type}` });
 
   /* La ligne est écrite : la demande n'est jamais perdue. La notification est
      un confort — un échec d'envoi ne fait pas échouer le formulaire. */

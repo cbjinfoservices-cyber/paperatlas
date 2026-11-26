@@ -7,6 +7,7 @@ import { annonces } from '@/mocks/annonces';
 import { emplois } from '@/mocks/emplois';
 import { paysDevine } from '@/lib/pays';
 import { regionsWith } from '@/lib/regions';
+import { consentementComplet, consentementDepuis } from '@/components/feature/ConsentLegal';
 
 /** Ce que l'on dépose. Les deux formulaires partagent les mêmes colonnes,
  *  mais chacun ne propose que les rubriques de sa propre famille. */
@@ -131,6 +132,11 @@ export function useDepositForm(kind: DepositKind) {
     if (description.length > 500) {
       setStatus('err');
       setFormError(t('dep.errLong'));
+      return;
+    }
+    if (!consentementComplet(consentementDepuis(data))) {
+      setStatus('err');
+      setFormError(t('consent.err'));
       return;
     }
 

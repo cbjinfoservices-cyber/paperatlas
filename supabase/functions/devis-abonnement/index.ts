@@ -1,5 +1,6 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 import { getMailConfig, sendMailMessage, siteUrl } from '../_shared/mail.ts';
+import { consentementAccepte, journaliserConsentement } from '../_shared/consentement.ts';
 
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') || '';
 const ANON_KEY = Deno.env.get('SUPABASE_ANON_KEY') || '';
@@ -994,6 +995,7 @@ Deno.serve(async (req) => {
     }
 
     if (action !== 'submit') return json({ error: 'unknown-action' }, 400);
+    if (!consentementAccepte(body.consentement)) return json({ error: 'consent' }, 400);
 
     const quote = readQuote(body);
     if (!quote) return json({ error: 'invalid' }, 400);
@@ -1024,6 +1026,7 @@ Deno.serve(async (req) => {
     });
 
     if (error) return json({ error: 'insert', detail: error.message }, 500);
+    await journaliserConsentement(admin, { email: quote.email, formulaire: 'devis-abonnement', userId });
 
     let emailed = false;
     try {

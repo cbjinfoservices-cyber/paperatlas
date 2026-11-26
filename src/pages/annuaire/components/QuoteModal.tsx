@@ -6,6 +6,7 @@ import { saveDossier } from '@/hooks/useDossiers';
 import { nomRegion } from '@/lib/regionLabels';
 import { nomCommune } from '@/lib/communeLabels';
 import { supabase } from '@/lib/supabase';
+import ConsentLegal, { consentementComplet, consentementDepuis } from '@/components/feature/ConsentLegal';
 import type { Entreprise } from '@/mocks/entreprises';
 
 type Props = {
@@ -70,6 +71,12 @@ export default function QuoteModal({ items, reference: referenceProp, onClose }:
       setFormError(t('cf.errName'));
       return;
     }
+    const consentement = consentementDepuis(data);
+    if (!consentementComplet(consentement)) {
+      setStatus('err');
+      setFormError(t('consent.err'));
+      return;
+    }
 
     setStatus('sending');
     setFormError('');
@@ -80,6 +87,7 @@ export default function QuoteModal({ items, reference: referenceProp, onClose }:
           type: 'devis',
           nom: nameValue,
           email: emailValue,
+          consentement,
           telephone: String(data.get('telephone') || ''),
           champs: {
             reference,
@@ -250,6 +258,7 @@ export default function QuoteModal({ items, reference: referenceProp, onClose }:
                 placeholder={t('quote.msgPh')}
               ></textarea>
             </div>
+            <ConsentLegal idPrefix="ql" />
             <button type="submit" className="cta" disabled={status === 'sending'}>
               {status === 'sending' ? t('quote.sending') : t('quote.send')}
               <i className="ri-send-plane-line" aria-hidden="true"></i>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useLang } from '@/i18n/LangProvider';
 import { useAuth } from '@/auth/AuthProvider';
 import { sendB2bRequest, type B2bIssue, type B2bTarget } from '@/lib/b2b';
+import ConsentLegal, { consentementComplet, consentementDepuis } from '@/components/feature/ConsentLegal';
 
 type Props = {
   selected: B2bTarget[];
@@ -85,6 +86,12 @@ export default function RequestForm({ selected, reference, onSent, onReset }: Pr
       setFormError(t('b2b.errLong'));
       return;
     }
+    const consentement = consentementDepuis(data);
+    if (!consentementComplet(consentement)) {
+      setStatus('err');
+      setFormError(t('consent.err'));
+      return;
+    }
 
     setStatus('sending');
     setFormError('');
@@ -100,6 +107,7 @@ export default function RequestForm({ selected, reference, onSent, onReset }: Pr
       delai: String(data.get('delai') || '').trim(),
       budget: String(data.get('budget') || '').trim(),
       message,
+      consentement,
     });
 
     if (result.ok) {
@@ -229,8 +237,8 @@ export default function RequestForm({ selected, reference, onSent, onReset }: Pr
           {session ? t('b2b.accountNote') : t('b2b.guestNote')}
         </p>
 
+        <ConsentLegal idPrefix="rq" />
         <button type="submit" className="cta b2b-submit" disabled={status === 'sending'}>
-          {status === 'sending' ? t('b2b.sending') : t('b2b.send')}
           <i className="ri-send-plane-line" aria-hidden="true"></i>
         </button>
 

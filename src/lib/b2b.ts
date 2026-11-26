@@ -139,6 +139,8 @@ export type B2bPayload = {
   /** The two PDFs already deposited, named by their storage path. */
   pieceCdcPath?: string;
   pieceBordereauPath?: string;
+  /** Acceptation CGV et RGPD, vérifiée côté serveur. */
+  consentement?: { cgv: boolean; rgpd: boolean };
 };
 
 /** A request filed through the tender page, not through the print-run one. */
