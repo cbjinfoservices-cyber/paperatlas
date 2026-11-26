@@ -1708,17 +1708,6 @@ export default function Annuaire() {
                 )}
                 <span className="map-hint"><i className="ri-cursor-line" aria-hidden="true"></i>{t('dir.mapHint')}</span>
               </div>
-              <div className="map-side">
-                <CountryMapAreas pays={pays} trade={trade} />
-                <PaysTally
-                  className="is-map"
-                  counts={tally}
-                  total={tallyTotal}
-                  active={pays}
-                  onPick={(code) => setFilter('pays', code)}
-                />
-                <MapLegend items={wilayaCounts} total={bizList.length} active={wilaya} pays={pays} onPick={(w) => setFilter('wilaya', w)} />
-              </div>
               {activeBiz && (
                 <Link to={`/entreprise/${activeBiz.id}`} className="map-card">
                   <img src={activeBiz.photos[0]} alt={activeBiz.name} title={`${activeBiz.name} ${nomRegion(activeBiz.wilaya, lang)}`} width={1200} height={900} />
@@ -1730,6 +1719,17 @@ export default function Annuaire() {
                   <i className="ri-arrow-right-line map-card-arrow" aria-hidden="true"></i>
                 </Link>
               )}
+              <div className="map-side">
+                <CountryMapAreas pays={pays} trade={trade} />
+                <PaysTally
+                  className="is-map"
+                  counts={tally}
+                  total={tallyTotal}
+                  active={pays}
+                  onPick={(code) => setFilter('pays', code)}
+                />
+                <MapLegend items={wilayaCounts} total={bizList.length} active={wilaya} pays={pays} onPick={(w) => setFilter('wilaya', w)} />
+              </div>
             </div>
             <CountryMaps
               pins={pins}
