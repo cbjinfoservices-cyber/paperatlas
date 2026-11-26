@@ -4,6 +4,7 @@
   border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--line));
   border-radius: var(--radius-lg, 18px);
   background: color-mix(in srgb, var(--accent) 4%, var(--paper, #fff));
+  color: #1c1a18;
 }
 
 .premium-directory-heading {
@@ -45,7 +46,7 @@
   border: 1px solid var(--line);
   border-radius: 14px;
   background: var(--surface, #fff);
-  color: inherit;
+  color: var(--text);
   text-decoration: none;
   transition: border-color 160ms ease, transform 160ms ease;
 }
