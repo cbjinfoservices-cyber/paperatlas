@@ -1595,11 +1595,11 @@ export default function Annuaire() {
               )}
             </span>
             <div className="dir-meta-right">
-              <span className="dir-trust-line">
-                {mode === 'auteurs'
-                  ? <><i className="ri-bookmark-line" aria-hidden="true"></i>{t('dir.compareHint')}</>
-                  : <><i className="ri-shield-check-line" aria-hidden="true"></i>{t('dir.trust')}</>}
-              </span>
+              {mode === 'auteurs' && (
+                <span className="dir-trust-line">
+                  <i className="ri-bookmark-line" aria-hidden="true"></i>{t('dir.compareHint')}
+                </span>
+              )}
               <ShareView />
               <MyDossiers />
               <ExportMenu
