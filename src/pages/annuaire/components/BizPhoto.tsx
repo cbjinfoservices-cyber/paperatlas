@@ -7,16 +7,16 @@ type Props = {
   className?: string;
 };
 
-const IMAGE_GENERIQUE = '/media/type-fournisseurs.png';
+const IMAGE_GENERIQUE = '/media/type-fournisseurs.jpg';
 
 /* Visuel de repli selon le métier, quand la fiche n'a pas de photo. */
 const IMAGE_PAR_METIER: Partial<Record<Trade, string>> = {
-  impression: '/media/type-impression.png',
-  edition: '/media/type-edition.png',
-  librairie: '/media/type-librairie.png',
-  faconnage: '/media/type-faconnage.png',
-  communication: '/media/type-communication.png',
-  fournisseurs: '/media/type-fournisseurs.png',
+  impression: '/media/type-impression.jpg',
+  edition: '/media/type-edition.jpg',
+  librairie: '/media/type-librairie.jpg',
+  faconnage: '/media/type-faconnage.jpg',
+  communication: '/media/type-communication.jpg',
+  fournisseurs: '/media/type-fournisseurs.jpg',
 };
 
 export default function BizPhoto({ item, alt, title, className }: Props) {
